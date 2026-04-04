@@ -1,0 +1,75 @@
+---
+title: "Configuration"
+description: "`kscli` resolves settings in this order: **CLI flags** > **environment variables** > **config file** > **defaults**."
+---
+
+## Environment variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `KSCLI_BASE_URL` | API base URL | `https://api-staging.knowledgestack.ai` |
+| `KSCLI_FORMAT` | Default output format | `table` |
+| `KSCLI_VERIFY_SSL` | Enable SSL verification | `true` |
+| `KSCLI_CA_BUNDLE` | Path to CA certificate bundle | System default |
+| `KSCLI_CONFIG` | Config file path | `~/.config/kscli/config.json` |
+| `KSCLI_CREDENTIALS_PATH` | Credentials file path | `/tmp/kscli/.credentials` |
+
+## Config file
+
+The config file lives at `~/.config/kscli/config.json` by default. It stores your preferred settings:
+
+```json
+{
+  "base_url": "https://api.knowledgestack.ai",
+  "format": "table",
+  "verify_ssl": true
+}
+```
+
+## Environment presets
+
+Quickly switch between environments:
+
+```bash
+# Local development (http://localhost:8000)
+kscli settings environment local
+
+# Production
+kscli settings environment prod
+```
+
+View your current configuration:
+
+```bash
+kscli settings show
+```
+
+## Global options
+
+These options can appear anywhere in the command line:
+
+| Option | Short | Description |
+|--------|-------|-------------|
+| `--format <fmt>` | `-f` | Output format: `table`, `json`, `yaml`, `id-only`, `tree` |
+| `--no-header` | `-H` | Suppress table headers |
+| `--base-url <url>` | | Override API URL for this command |
+
+## Authentication
+
+Credentials are stored at `/tmp/kscli/.credentials` by default. The CLI uses API key authentication:
+
+```bash
+# Login with API key
+kscli login --api-key sk-user-your-key-here
+
+# Or paste interactively
+kscli login
+
+# Check current identity
+kscli whoami
+
+# Clear credentials
+kscli logout
+```
+
+API keys are user-scoped and can be created from the Knowledge Stack web app under **My Account > API Keys**.

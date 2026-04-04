@@ -1,0 +1,131 @@
+---
+title: "Workflows (ABCD System)"
+---
+
+## Overview
+
+The Knowledge Stack workflow system lets you build automated ETL processes that use AI to extract, process, and output content. Each workflow is defined by four parameters -- called **ABCD** -- that control what data goes in, how it is processed, and where results are written.
+
+## ABCD Parameters
+
+Every workflow is configured with these four parameters:
+
+| Parameter | Role | What You Provide | Description |
+|---|---|---|---|
+| **A -- Sources** | Input data | Folders or documents (1-20) | The content your workflow reads from |
+| **B -- Instructions** | Processing rules | Folders or documents (1-20) | Documents that describe how to process the data |
+| **C -- Outputs** | Destination | Folders only (1-20) | Where the workflow writes its results |
+| **D -- Template** | Output format | A single document version (optional) | A template that defines the structure of the output |
+
+### Parameter Rules
+
+- Each parameter's items must be **strictly disjoint** -- no item can appear in more than one group
+- No item can be an ancestor or descendant of another item within or across groups
+- You need `read` access for A, B, and D parameters, and `write` access for C
+
+## Creating a Workflow
+
+### Define a Workflow
+
+```
+POST /v1/workflow-definitions
+```
+
+Provide a name, description, runner configuration, and your ABCD parameters. The system validates all parameters when you save the definition.
+
+### Workflow Definitions API
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/v1/workflow-definitions` | Create a new workflow |
+| `GET` | `/v1/workflow-definitions` | List all workflows |
+| `GET` | `/v1/workflow-definitions/{id}` | Get a specific workflow |
+| `PUT` | `/v1/workflow-definitions/{id}` | Update a workflow |
+| `DELETE` | `/v1/workflow-definitions/{id}` | Delete a workflow and all its runs |
+
+## Running a Workflow
+
+### Invoke a Workflow
+
+```
+POST /v1/workflow-definitions/{id}/invoke
+```
+
+When you invoke a workflow:
+
+1. The system validates all ABCD parameters (paths exist, permissions are correct, source folders contain documents)
+2. A workflow run is created with status `PENDING`
+3. A scoped JWT is minted for the runner
+4. The runner is notified to begin execution
+
+Only **one run** can be active (`RUNNING`) per workflow definition at a time. Additional invocations are queued as `PENDING` and dispatched automatically when the active run completes.
+
+### Run Status
+
+| Status | Description |
+|---|---|
+| `PENDING` | Queued, waiting for a slot |
+| `RUNNING` | Currently executing |
+| `COMPLETED` | Finished successfully |
+| `FAILED` | Finished with an error |
+
+### Workflow Runs API
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/v1/workflow-definitions/{id}/runs` | List runs for a workflow |
+| `GET` | `/v1/workflow-runs/{id}` | Get a specific run |
+| `DELETE` | `/v1/workflow-runs/{id}` | Delete a run (not while running) |
+| `POST` | `/v1/workflow-runs/{id}/callback` | Runner callback endpoint |
+
+### Idempotency
+
+You can include an `Idempotency-Key` header when invoking a workflow. If a run with the same key already exists in `PENDING` or `RUNNING` state, the API returns `200 OK` with the existing run instead of creating a duplicate.
+
+## Self-Hosted Runners
+
+For the current version, workflows use **self-hosted runners**. When you create a workflow definition, you configure a runner URL where the workflow engine sends execution requests.
+
+### How Runners Work
+
+1. Knowledge Stack POSTs the ABCD parameters and a scoped JWT to your runner URL
+2. Your runner processes the data according to the instructions
+3. When finished, your runner calls back to Knowledge Stack with the result
+
+### Runner Security
+
+- **Scoped JWT**: Runners receive a purpose-built token that is bound to the specific run, with a TTL matching the maximum run duration
+- **SSRF prevention**: Runner URLs are validated against blocked IP ranges (private networks, loopback). HTTPS is enforced in production.
+- **Timeout protection**: A background process monitors for stuck runs and automatically fails them after the configured timeout plus a grace period
+
+### Callback Endpoint
+
+Your runner reports completion via:
+
+```
+POST /v1/workflow-runs/{run_id}/callback
+```
+
+The callback token is validated to ensure it matches the specific run.
+
+## Scheduling Workflows
+
+Knowledge Stack does not include a built-in scheduler. You can trigger workflows on a schedule using any external scheduler (cron, cloud schedulers, CI/CD pipelines):
+
+```bash
+# Example: Run every weekday at 9am
+0 9 * * MON-FRI curl -X POST \
+  https://your-instance.com/v1/workflow-definitions/{id}/invoke \
+  -H "Authorization: Bearer sk-user-..."
+```
+
+## Authorization
+
+| Operation | Who Can Do It |
+|---|---|
+| Create a workflow | Owners and admins |
+| View workflows | Anyone with read access to the workflow's path |
+| Update a workflow | Anyone with write access, or owners/admins |
+| Delete a workflow | Owners and admins only |
+| Invoke a workflow | Anyone with read access to the workflow and appropriate access to all ABCD paths |
+| Delete a run | The user who created it, or owners/admins. Running workflows cannot be deleted. |

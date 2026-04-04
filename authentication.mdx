@@ -1,0 +1,92 @@
+---
+title: "Authentication"
+description: "Knowledge Stack supports multiple ways to authenticate your users: email/password, Google SSO, and tenant-specific OpenID Connect providers."
+---
+
+## Authentication methods
+
+| Method | Description |
+|--------|-------------|
+| **Email/password** | Users sign up with an email address and password. |
+| **Google SSO** | Sign in with a Google account using OAuth2. |
+| **Tenant SSO** | Connect your own OpenID Connect identity provider for single sign-on. |
+
+## How sessions work
+
+When a user signs in, Knowledge Stack issues a session token as an `httpOnly` cookie called `ks_uat`. This cookie is automatically sent with every subsequent API request — no need to manage tokens manually.
+
+- The session cookie is secure and not accessible to client-side JavaScript.
+- Sessions are scoped to a specific tenant. To switch tenants, refresh the token via the `/auth/uat` endpoint.
+
+## Email/password authentication
+
+### Sign-up flow
+
+1. **Verify email** — Call `POST /auth/pw/email_verification` with the user's email. They'll receive a verification token.
+2. **Create account** — Call `POST /auth/pw/user` with the verification token and their chosen password.
+
+### Sign-in
+
+```bash
+curl -X POST https://your-instance.example.com/api/v1/auth/pw/signin \
+  -H "Content-Type: application/json" \
+  -d '{"email": "user@example.com", "password": "their-password"}'
+```
+
+On success, the response sets the `ks_uat` session cookie. Include this cookie in all subsequent requests.
+
+### Password reset
+
+Two flows are available:
+
+- **Authenticated reset** — A signed-in user calls `POST /auth/pw/reset` with their current and new password.
+- **Forgot password** — Call `POST /auth/pw/send_reset_email`, then `POST /auth/pw/reset_with_token` with the emailed token.
+
+## SSO (Google and Tenant providers)
+
+Knowledge Stack implements the [Authorization Code with PKCE](https://auth0.com/docs/get-started/authentication-and-authorization-flow/authorization-code-flow-with-pkce) flow for SSO.
+
+### SSO flow
+
+1. **Initiate** — Call `POST /auth/sso/initiate` with the provider type. The response includes an authorization URL.
+2. **Redirect** — Redirect the user to the authorization URL. They authenticate with their identity provider.
+3. **Callback** — The provider redirects back to your application. The callback endpoint (`GET /auth/sso/oauth2/callback`) exchanges the authorization code for a session and sets the `ks_uat` cookie.
+
+OAuth state and PKCE parameters are handled securely via encrypted cookies — your application never needs to manage these values directly.
+
+## Tenant switching
+
+A user can belong to multiple tenants. To switch the active tenant:
+
+```bash
+curl -X POST https://your-instance.example.com/api/v1/auth/uat \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"tenant_id": "target-tenant-id"}'
+```
+
+This issues a new session cookie scoped to the specified tenant.
+
+## Signing out
+
+```bash
+curl -X POST https://your-instance.example.com/api/v1/auth/signout \
+  -b cookies.txt
+```
+
+Clears the session cookie and ends the session.
+
+## API reference
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/auth/pw/email_verification` | POST | Send email verification token |
+| `/auth/pw/user` | POST | Create account from verification token |
+| `/auth/pw/signin` | POST | Sign in with email and password |
+| `/auth/pw/send_reset_email` | POST | Send password reset email |
+| `/auth/pw/reset` | POST | Reset password (signed in) |
+| `/auth/pw/reset_with_token` | POST | Reset password with emailed token |
+| `/auth/sso/initiate` | POST | Start SSO flow |
+| `/auth/sso/oauth2/callback` | GET | OAuth2 callback |
+| `/auth/uat` | POST | Refresh or switch tenant |
+| `/auth/signout` | POST | Sign out |

@@ -1,0 +1,128 @@
+---
+title: "Database Cache Prewarming"
+---
+
+## Overview
+
+Knowledge Stack uses PostgreSQL's `pg_prewarm` extension to load frequently accessed tables and indexes into memory when the database starts. This eliminates cold-start latency and ensures fast query performance from the moment your instance is ready.
+
+The most performance-critical operations -- chunk retrieval, vector search, and folder/document listing -- all benefit from prewarming.
+
+## What Gets Prewarmed
+
+The following data is loaded into PostgreSQL's shared buffers, ordered by access frequency:
+
+| Priority | Data | Why It Matters |
+|----------|------|---------------|
+| 1 | **Path hierarchy** (table + indexes) | Powers all folder and document navigation |
+| 2 | **Embedding indexes** | Enables fast vector similarity search |
+| 3 | **Chunk metadata** | Needed for every content retrieval operation |
+| 4 | **Chunk content** | Contains the actual text returned to users |
+| 5 | **Document metadata** | Used in document listings and search results |
+| 6 | **Folder metadata** | Used in folder navigation |
+| 7 | **Document versions** | Accessed alongside documents for version info |
+| 8 | **Sections** | Used for navigating within documents |
+
+## Running the Prewarm
+
+To manually trigger cache prewarming, run the following SQL:
+
+```sql
+SELECT * FROM knowledgestack.prewarm_cache();
+```
+
+This returns a table showing each object and the number of 8KB pages loaded into memory:
+
+```
+                          object_name                          | pages_loaded
+---------------------------------------------------------------+--------------
+ knowledgestack.path_part (table)                              |         1234
+ knowledgestack.pk_path_part                                   |          567
+ ...
+```
+
+### Automatic Prewarming on Startup
+
+To prewarm automatically when your database starts, add the following to your database initialization script:
+
+```sql
+SELECT knowledgestack.prewarm_cache();
+```
+
+### Docker Compose Integration
+
+If you run PostgreSQL via Docker Compose, you can add an init script:
+
+**docker-compose.yml**:
+
+```yaml
+services:
+  postgres:
+    image: timescale/timescaledb-ha:pg18
+    volumes:
+      - ./init-db.sh:/docker-entrypoint-initdb.d/99-prewarm.sh
+```
+
+**init-db.sh**:
+
+```bash
+#!/bin/bash
+set -e
+
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+    SELECT knowledgestack.prewarm_cache();
+EOSQL
+```
+
+## Performance Considerations
+
+### Memory Impact
+
+- Each page loaded is 8KB
+- Prewarming uses PostgreSQL's `shared_buffers` setting
+- If `shared_buffers` is too small, prewarming may evict other cached data
+- **Recommendation**: Set `shared_buffers` to at least 256MB. A common guideline is 25% of total system RAM.
+
+### When to Prewarm
+
+- **After a cold start**: The most important time to prewarm -- restores fast query performance immediately
+- **After database migrations**: When new data structures or indexes are created
+- **On a schedule**: Periodically (e.g., nightly) if your workload frequently evicts cached data
+
+### Monitoring Cache Usage
+
+To see how much space your tables and indexes occupy:
+
+```sql
+SELECT
+    schemaname,
+    tablename,
+    pg_size_pretty(pg_total_relation_size(schemaname||'.'||tablename)) as total_size,
+    pg_size_pretty(pg_table_size(schemaname||'.'||tablename)) as table_size,
+    pg_size_pretty(pg_indexes_size(schemaname||'.'||tablename)) as index_size
+FROM pg_tables
+WHERE schemaname = 'knowledgestack'
+ORDER BY pg_total_relation_size(schemaname||'.'||tablename) DESC;
+```
+
+## Troubleshooting
+
+### "function knowledgestack.prewarm_cache() does not exist"
+
+The prewarm function is created by a database migration. Ensure all migrations have been applied to your database.
+
+### "extension pg_prewarm does not exist"
+
+The `pg_prewarm` extension should be created automatically by the migration. You can verify it exists:
+
+```sql
+SELECT * FROM pg_extension WHERE extname = 'pg_prewarm';
+```
+
+### "permission denied for function pg_prewarm"
+
+Your database user needs superuser privileges or the `pg_read_all_data` role to execute `pg_prewarm`.
+
+## Further Reading
+
+- [PostgreSQL pg_prewarm Documentation](https://www.postgresql.org/docs/current/pgprewarm.html)

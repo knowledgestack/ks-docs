@@ -1,0 +1,70 @@
+---
+title: "Model Compatibility"
+description: "Knowledge Stack is designed to work with multiple LLM providers through a unified proxy layer. This page explains how the system handles differences between model providers to ensure reliable agent..."
+---
+
+---
+
+## Supported Model Architecture
+
+The agent accesses language models through a **LiteLLM proxy**, which provides a unified OpenAI-compatible API across multiple LLM providers. This means you can switch between different models by changing a single configuration value.
+
+```
+Your chosen model (Claude, GPT-4, Qwen, etc.)
+  -> LiteLLM Proxy (unified API)
+    -> Agent Framework
+      -> Knowledge Stack Agent
+```
+
+---
+
+## How Provider Differences Are Handled
+
+Different LLM providers have varying behaviors around features like "thinking" tokens, tool calling formats, and response structures. Knowledge Stack includes a compatibility layer that handles these differences automatically.
+
+### Thinking Token Compatibility
+
+Some models (like certain Qwen models via OpenRouter) produce "thinking" or "reasoning" tokens during processing. These tokens show the model's internal reasoning but can cause compatibility issues:
+
+- **Problem:** Some providers generate thinking tokens but reject them when sent back in follow-up requests
+- **Solution:** The system is configured to not echo thinking tokens back to the provider, preventing this class of errors entirely
+
+### Malformed Tool Call Handling
+
+Occasionally, a model may produce a malformed tool call (for example, a tool call with an empty name). Rather than crashing the entire agent run:
+
+- Malformed tool calls are automatically stripped from the response
+- The agent framework's built-in retry mechanism gives the model another chance to respond correctly
+- This is bounded by configurable retry limits to prevent infinite loops
+
+### HTTP Error Recovery
+
+If the model provider returns an HTTP 400 error (bad request) due to incompatible message history:
+
+- The system automatically strips problematic content from the conversation history
+- The request is retried once with the cleaned history
+- If the retry also fails, the error is surfaced gracefully
+
+---
+
+## Graceful Degradation
+
+Instead of crashing on provider issues, the system degrades gracefully:
+
+1. Problematic responses are sanitized and retried
+2. Retries are bounded (default: 3 output retries, 50 model requests maximum)
+3. If all retries are exhausted, the agent run ends with an error message rather than an unhandled crash
+4. The user always sees a response in their thread -- even if it is just "Something went wrong. Please try again."
+
+---
+
+## Configuration
+
+| Setting | Default | Description |
+|---------|---------|-------------|
+| Model identifier | `openai/agent-general-purpose` | The LiteLLM model alias to use |
+| LiteLLM proxy URL | `http://localhost:4000` | URL of the LiteLLM proxy server |
+| Output retries | 3 | Maximum retries when the model produces unusable output |
+| Model request limit | 50 | Maximum total LLM requests per agent run |
+
+To switch models, update the model identifier in your configuration. The LiteLLM proxy handles routing to the correct provider.

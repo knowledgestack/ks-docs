@@ -1,0 +1,58 @@
+---
+title: "PDF Watermark Removal"
+description: "The ingestion pipeline automatically removes watermarks from PDFs before conversion. Watermarks degrade OCR quality and pollute extracted text, so stripping them early improves downstream chunking ..."
+---
+
+## When It Runs
+
+Watermark removal runs during the document preparation step. If watermarks are detected, the cleaned PDF is uploaded to storage alongside the original; otherwise the original passes through unchanged.
+
+Two complementary strategies are applied sequentially -- if either detects watermarks, the cleaned document is used for subsequent processing.
+
+## Strategy 1: Annotation Watermarks
+
+Some PDF producers (especially office-suite "confidential" or "draft" stamp features) add watermarks as annotation overlays on top of page content. The PDF specification defines a dedicated watermark annotation subtype for this purpose.
+
+**How it works:** The system scans each page for annotations marked as watermarks and removes them. Because these are explicitly declared as watermarks by the producing application, no heuristics are needed -- the annotation type is a definitive signal.
+
+**Limitation:** Many real-world watermarks are not implemented as annotations. Text-based watermarks embedded directly in the page content (common in documents from Chinese recruitment platforms, for example) are invisible to this strategy, which is why Strategy 2 exists.
+
+## Strategy 2: Content-Stream Watermarks
+
+This strategy targets watermarks embedded directly in the PDF page content as rotated, semi-transparent text. These are common in documents where the watermark was "baked in" during PDF generation rather than added as an overlay.
+
+### Detection Heuristics
+
+A text group on the page is classified as a watermark when **both** conditions are met:
+
+| Condition | Threshold |
+|-----------|-----------|
+| **Rotated text** | Rotation angle between 25 and 75 degrees |
+| **Semi-transparent** | Fill opacity below approximately 29% |
+
+Both conditions must be satisfied simultaneously. This means:
+
+- Rotated but fully opaque text (e.g., decorative headings) is left untouched
+- Horizontal but transparent text (e.g., background labels) is left untouched
+- Only text that is both significantly rotated AND significantly transparent is removed
+
+### How It Works
+
+1. Each page's content stream is normalized into a single, well-formed structure
+2. Text groups (graphics-state blocks) are analyzed for rotation angle and transparency level
+3. Groups matching both criteria are removed from the content stream
+4. The modified page content is written back
+
+### Why This Approach?
+
+The system operates on raw PDF drawing operations (rotation matrices and transparency settings) rather than trying to match specific watermark text. This makes it:
+
+- **Encoding-independent** -- works regardless of font, language, or text encoding
+- **Low false-positive risk** -- the combination of non-trivial rotation AND significant transparency is highly specific to watermarks; normal document text is almost always horizontal and fully opaque
+- **Non-destructive** -- only the identified watermark elements are removed; all other page content is preserved
+
+## Safety
+
+- **False-positive risk is low**: Normal document text is horizontal (0 degrees) and opaque. The dual-condition requirement (rotated + transparent) is highly specific to watermarks.
+- **Clean removal**: Watermark text groups are self-contained in the PDF structure, so removing them does not affect surrounding content.
+- **Original preserved**: The original uploaded PDF is always kept in storage. The cleaned version is stored separately.

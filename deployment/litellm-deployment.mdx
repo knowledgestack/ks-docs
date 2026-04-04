@@ -1,0 +1,126 @@
+---
+title: "LiteLLM Deployment"
+---
+
+## Overview
+
+LiteLLM acts as a centralized LLM and embedding gateway for Knowledge Stack. All AI-powered features route through LiteLLM, which provides per-tenant API key management, spend tracking, and model aliasing.
+
+For an overview of what LiteLLM does and why it is used, see [LLM Gateway (LiteLLM)](/infrastructure/litellm).
+
+## Architecture
+
+All LLM and embedding traffic from the API, Worker, and Agent services routes through the LiteLLM proxy:
+
+```
++----------+  +----------+  +----------+
+|   API    |  |  Worker  |  |  Agent   |
++----+-----+  +----+-----+  +----+-----+
+     |             |              |
+     +-------------+--------------+
+                   |
+            +------v------+
+            |   LiteLLM   | :4000
+            |   Proxy     |
+            +------+------+
+                   |
+          +--------+
+          v        v
+      OpenAI   PostgreSQL
+```
+
+## Prerequisites
+
+LiteLLM requires its own PostgreSQL database:
+
+```sql
+CREATE DATABASE litellm;
+```
+
+## Deployment Steps
+
+### 1. Configure Secrets
+
+Create a secrets configuration with the following values:
+
+| Secret | Description |
+|--------|-------------|
+| `master-key` | LiteLLM admin master key (you generate this) |
+| `db-host` | PostgreSQL host |
+| `db-username` | Database username |
+| `db-password` | Database password |
+| `LLM_PROVIDER_OPENAI_API_KEY` | Your OpenAI API key (or other provider key) |
+
+### 2. Configure Model Routing
+
+Set up model aliases that map logical names to provider models:
+
+| Logical Model | Description |
+|---|---|
+| `general-purpose` | General-purpose LLM tasks |
+| `ingestion-chunk-enrichment` | Document processing enrichment |
+| `text-embedding-3-small` | Vector embeddings |
+| `agent-general-purpose` | AI assistant conversations |
+
+### 3. Deploy LiteLLM
+
+#### Docker Compose
+
+Add LiteLLM to your Docker Compose stack:
+
+```yaml
+litellm:
+  image: ghcr.io/berriai/litellm-database:latest
+  ports:
+    - "4000:4000"
+  environment:
+    - LITELLM_MASTER_KEY=your-master-key
+    - DATABASE_URL=postgresql://user:pass@postgres:5432/litellm
+  depends_on:
+    - postgres
+```
+
+#### Kubernetes (Helm)
+
+For Kubernetes deployments, use the official `litellm-helm` chart. Configure model routing in your Helm values file, with API keys referenced from environment variables resolved at runtime.
+
+### 4. Configure Knowledge Stack Services
+
+Point your Knowledge Stack services to the LiteLLM proxy:
+
+| Service | Environment Variable | Value |
+|---------|---------------------|-------|
+| All services | `LITELLM_PROXY_URL` | `http://litellm:4000` |
+| API | `GP_LLM_API_URL` | `http://litellm:4000/v1` |
+| API | `GP_LLM_MODEL` | `openai/general-purpose` |
+| API | `EMBEDDING_API_BASE_URL` | `http://litellm:4000/v1` |
+| Worker | `EMBEDDING_API_BASE_URL` | `http://litellm:4000/v1` |
+| Worker | `ENRICHMENT_LLM_API_BASE_URL` | `http://litellm:4000/v1` |
+| Worker | `ENRICHMENT_MODEL` | `openai/ingestion-chunk-enrichment` |
+| Agent | `GP_LLM_API_URL` | `http://litellm:4000/v1` |
+| Agent | `GP_LLM_MODEL` | `openai/agent-general-purpose` |
+
+### 5. Verify the Deployment
+
+Check that LiteLLM is running and healthy:
+
+```bash
+# Docker
+curl http://localhost:4000/health/liveliness
+
+# Kubernetes
+kubectl exec -n your-namespace deploy/litellm -- \
+  python -c "import urllib.request; print(urllib.request.urlopen('http://localhost:4000/health/liveliness').read())"
+```
+
+## Upgrading
+
+To upgrade LiteLLM, update the image version and redeploy. The upgrade is idempotent -- re-running the deployment with the same or new configuration is safe.
+
+If you update secrets, redeploy both LiteLLM and the dependent services.
+
+## Important Notes
+
+- The LiteLLM master key must match the `LITELLM_MASTER_KEY` configured on the API service
+- LiteLLM listens on port 4000 and should only be accessible within your cluster (no public ingress)
+- Only the API service provisions teams and keys; Worker and Agent services use per-tenant keys at runtime

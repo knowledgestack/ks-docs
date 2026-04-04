@@ -1,0 +1,61 @@
+---
+title: "Quality Assurance"
+description: "Knowledge Stack includes an evaluation framework that tests the AI agent's ability to correctly answer questions using your knowledge base. This ensures the agent produces accurate, well-cited resp..."
+---
+
+---
+
+## How It Works
+
+The evaluation system runs predefined prompts through the agent and scores the output using both deterministic checks and optional LLM-based judging.
+
+Each evaluation case specifies:
+- **An input question** (what the user asks)
+- **Expected behavior** (which tools should be used, what keywords should appear in the answer, whether citations are expected)
+- **Optionally, a reference answer** for LLM-based quality scoring
+
+---
+
+## Evaluation Criteria
+
+### Deterministic Checks
+
+These checks produce pass/fail results:
+
+| Check | Passes When |
+|-------|-------------|
+| No error | The agent completed without errors |
+| Tools used | The expected tools were called (e.g., `search_knowledge` for a search question) |
+| Tools not used | Certain tools were correctly avoided |
+| Answer keywords | Required keywords appear in the response (case-insensitive) |
+| Answer exclusions | Forbidden terms do not appear in the response |
+| Citations present | The response includes citations when expected |
+
+### LLM Judge (Optional)
+
+When a reference answer is provided and a judge model is configured, an LLM evaluates the response for correctness and completeness on a 0.0-1.0 scale. Judge failures are logged but do not fail the evaluation.
+
+---
+
+## Evaluation Categories
+
+Evaluations cover a range of agent behaviors:
+
+| Category | What Is Tested |
+|----------|---------------|
+| Navigation | Can the agent browse folders and find content by name? |
+| Search | Does the agent use the right search tool (semantic vs keyword) for different queries? |
+| Reading | Can the agent read documents and sections, handling both small and large content? |
+| Context expansion | Does the agent expand context around search results when needed? |
+| Citation accuracy | Are citations present and pointing to the correct source content? |
+| Multi-step reasoning | Can the agent chain multiple tool calls to answer complex questions? |
+
+---
+
+## Observability
+
+When an observability platform (Langfuse) is configured, evaluation results are synced as dataset experiments with per-item traces and scores. This provides:
+
+- Historical tracking of agent quality over time
+- Per-query traces showing exactly what the agent did
+- Score trends across model changes or prompt updates

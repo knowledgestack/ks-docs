@@ -1,0 +1,260 @@
+---
+title: "Command Reference"
+description: "Complete reference for all `kscli` commands. Every resource follows the pattern `kscli <resource> <verb>`."
+---
+
+## Authentication
+
+| Command | Description |
+|---------|-------------|
+| `kscli login --api-key <key>` | Authenticate with an API key |
+| `kscli logout` | Clear stored credentials |
+| `kscli whoami` | Show current user identity |
+
+## Settings
+
+| Command | Description |
+|---------|-------------|
+| `kscli settings show` | Print current configuration |
+| `kscli settings environment local` | Switch to local development API |
+| `kscli settings environment prod` | Switch to production API |
+
+---
+
+## Folders
+
+Manage the folder hierarchy in your knowledge base.
+
+| Command | Description |
+|---------|-------------|
+| `kscli folders list` | List folders |
+| `kscli folders describe <id>` | Get folder details |
+| `kscli folders create` | Create a folder |
+| `kscli folders update <id>` | Update folder name or parent |
+| `kscli folders delete <id>` | Delete a folder |
+| `kscli folders bulk-ingest <path>` | Upload a local directory tree |
+
+### `folders list`
+
+| Option | Description |
+|--------|-------------|
+| `--parent-path-part-id` | Parent folder to list under |
+| `--folder-id` | Folder to list (use with `--show-content`) |
+| `--show-content` | Include documents alongside folders |
+| `--max-depth` | Limit tree traversal depth |
+| `--sort-order` | `LOGICAL`, `NAME`, `UPDATED_AT`, `CREATED_AT` |
+| `--with-tags` | Include tags in response |
+| `--limit`, `--offset` | Pagination |
+
+### `folders bulk-ingest`
+
+| Option | Description |
+|--------|-------------|
+| `--folder-id` or `--path-part-id` | Target parent folder (one required) |
+| `--extensions` | File extensions to include (default: `.pdf,.docx`) |
+| `--dry-run` | Preview without uploading |
+
+---
+
+## Documents
+
+Manage documents in your knowledge base.
+
+| Command | Description |
+|---------|-------------|
+| `kscli documents list` | List documents |
+| `kscli documents describe <id>` | Get document details |
+| `kscli documents create` | Create document metadata |
+| `kscli documents update <id>` | Update document |
+| `kscli documents delete <id>` | Delete document |
+| `kscli documents ingest` | Upload file and start processing |
+
+### `documents ingest`
+
+| Option | Description |
+|--------|-------------|
+| `--file` | Path to the file to upload (required) |
+| `--path-part-id` | Parent folder path part ID (required) |
+| `--name` | Custom document name (defaults to filename) |
+
+---
+
+## Document Versions
+
+Manage versions of documents.
+
+| Command | Description |
+|---------|-------------|
+| `kscli document-versions list` | List versions of a document |
+| `kscli document-versions describe <id>` | Get version details |
+| `kscli document-versions contents <id>` | View document structure |
+| `kscli document-versions create` | Create a new version |
+| `kscli document-versions update <id>` | Update version metadata |
+| `kscli document-versions delete <id>` | Delete a version |
+| `kscli document-versions clear-contents <id>` | Remove all content under a version |
+
+### `document-versions contents`
+
+| Option | Description |
+|--------|-------------|
+| `--show-content` | Include chunk text inline |
+| `--sections-only` | Show sections without chunks |
+
+Works great with `--format tree` for a hierarchical view.
+
+---
+
+## Sections
+
+Manage sections within document versions.
+
+| Command | Description |
+|---------|-------------|
+| `kscli sections describe <id>` | Get section details |
+| `kscli sections create` | Create a section |
+| `kscli sections update <id>` | Rename, reorder, or change page number |
+| `kscli sections delete <id>` | Delete a section |
+
+---
+
+## Chunks
+
+Manage content chunks — the atomic units of your knowledge base.
+
+| Command | Description |
+|---------|-------------|
+| `kscli chunks describe <id>` | Get chunk details |
+| `kscli chunks create` | Create a chunk |
+| `kscli chunks update <id>` | Update chunk metadata |
+| `kscli chunks update-content <id>` | Update chunk text content |
+| `kscli chunks delete <id>` | Delete a chunk |
+| `kscli chunks get-bulk` | Fetch up to 200 chunks by ID |
+| `kscli chunks version-chunk-ids <id>` | List all chunk IDs in a version |
+| `kscli chunks search` | Search across chunks |
+
+### `chunks search`
+
+| Option | Description |
+|--------|-------------|
+| `--query` | Search query (required) |
+| `--limit` | Number of results (default: 10) |
+| `--search-type` | `dense_only` (semantic) or `full_text` (keyword) |
+| `--parent-path-ids` | Scope to specific folders |
+| `--tag-ids` | Filter by tags (AND logic) |
+| `--chunk-types` | Filter by `TEXT`, `TABLE`, `IMAGE`, `UNKNOWN` |
+| `--score-threshold` | Minimum relevance score |
+| `--active-version-only` | Search only active document versions |
+
+---
+
+## Tags
+
+Organize content with tags.
+
+| Command | Description |
+|---------|-------------|
+| `kscli tags list` | List all tags |
+| `kscli tags describe <id>` | Get tag details |
+| `kscli tags create` | Create a tag |
+| `kscli tags update <id>` | Update tag |
+| `kscli tags delete <id>` | Delete a tag |
+| `kscli tags attach <id>` | Attach tag to a folder, document, or chunk |
+| `kscli tags detach <id>` | Remove tag from content |
+
+---
+
+## Workflows
+
+Monitor and manage document processing workflows.
+
+| Command | Description |
+|---------|-------------|
+| `kscli workflows list` | List all workflows |
+| `kscli workflows describe <id>` | Get workflow details with live status |
+| `kscli workflows cancel <id>` | Cancel a running workflow |
+| `kscli workflows rerun <id>` | Re-run a workflow |
+
+---
+
+## Threads
+
+Manage conversation threads.
+
+| Command | Description |
+|---------|-------------|
+| `kscli threads list` | List threads |
+| `kscli threads describe <id>` | Get thread details |
+| `kscli threads create` | Create a thread |
+| `kscli threads update <id>` | Update thread title or parent |
+| `kscli threads delete <id>` | Delete a thread |
+
+## Thread Messages
+
+Manage messages within threads.
+
+| Command | Description |
+|---------|-------------|
+| `kscli thread-messages list` | List messages in a thread |
+| `kscli thread-messages describe <id>` | Get message details |
+| `kscli thread-messages create` | Add a message to a thread |
+
+---
+
+## Tenants
+
+Multi-tenant management (requires admin or owner role).
+
+| Command | Description |
+|---------|-------------|
+| `kscli tenants list` | List tenants |
+| `kscli tenants describe <id>` | Get tenant details |
+| `kscli tenants update <id>` | Update tenant settings |
+| `kscli tenants delete <id>` | Delete tenant (owner only) |
+| `kscli tenants list-users <id>` | List users in a tenant |
+
+## Users
+
+| Command | Description |
+|---------|-------------|
+| `kscli users update` | Update current user preferences |
+
+## Permissions
+
+Manage path-based permissions for users.
+
+| Command | Description |
+|---------|-------------|
+| `kscli permissions list` | List permissions |
+| `kscli permissions create` | Grant a permission |
+| `kscli permissions update <id>` | Change permission level |
+| `kscli permissions delete <id>` | Revoke a permission |
+
+## Invites
+
+| Command | Description |
+|---------|-------------|
+| `kscli invites list` | List pending invites |
+| `kscli invites create` | Send an invite |
+| `kscli invites delete <id>` | Cancel an invite |
+| `kscli invites accept <id>` | Accept an invite |
+
+---
+
+## Chunk Lineages
+
+Track derivation relationships between chunks.
+
+| Command | Description |
+|---------|-------------|
+| `kscli chunk-lineages describe <id>` | View lineage graph |
+| `kscli chunk-lineages create` | Link parent to child chunk |
+| `kscli chunk-lineages delete` | Remove a lineage link |
+
+## Path Parts
+
+Low-level path hierarchy access.
+
+| Command | Description |
+|---------|-------------|
+| `kscli path-parts list` | List path parts |
+| `kscli path-parts describe <id>` | Get path part details |

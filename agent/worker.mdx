@@ -1,0 +1,155 @@
+---
+title: "Agent Architecture"
+description: "The agent is a separate worker process that handles AI-powered chat interactions. When you send a message in a thread, this worker picks up the task, runs the AI agent, streams output back to your ..."
+---
+
+---
+
+## What the Agent Does
+
+The agent worker handles everything involved in generating a response to your message:
+
+1. **Authenticates** -- obtains credentials to act on your behalf, ensuring all knowledge base access respects your permissions
+2. **Loads context** -- fetches your conversation history to understand follow-up questions
+3. **Runs the AI agent** -- the LLM decides which tools to use, retrieves information, and generates a response
+4. **Streams in real-time** -- as the agent thinks and writes, events are published to your browser immediately
+5. **Saves the response** -- the complete message with citations is persisted to the database
+6. **Closes the stream** -- sends completion signals so your browser knows the response is finished
+
+---
+
+## Agent Capabilities
+
+The AI agent is built on a framework that manages:
+
+- **LLM communication** -- handles model requests, response parsing, and retries
+- **Streaming** -- provides real-time event iteration as the model generates output
+- **Conversation history** -- maintains context across messages in a thread
+- **Tool execution** -- the agentic loop where the LLM decides to call tools, receives results, and continues reasoning
+- **Structured output** -- validates agent responses
+
+Everything outside the LLM interaction -- workflow orchestration, streaming delivery, message persistence, authentication -- is handled by the platform.
+
+---
+
+## Request Processing
+
+When a message arrives, the worker executes this flow:
+
+1. **Initialize** -- prepare the agent and generate a unique message ID
+2. **Authenticate** -- obtain a token to access the API on behalf of the user
+3. **Load context** -- fetch the user's message and recent conversation history (up to 10 messages)
+4. **Open the stream** -- publish a `message_start` event
+5. **Run the agent** -- the AI agent processes the request with streaming:
+   - Each text token is published as a `text_delta` event
+   - Each tool call and result is published as a `step` event
+   - The agent sends heartbeats every 10 seconds to prove it is still working
+6. **Process citations** -- resolve inline chunk references into structured citation objects
+7. **Save the message** -- persist the complete response with citations and tool steps
+8. **Close the stream** -- publish `message_end` and `done` events; clear the streaming flag
+
+This entire flow runs inside a durable workflow, so if the worker crashes at any point, the work is rescheduled to another worker. See [Reliability and Durability](/agent/temporal-deep-dive) for details.
+
+---
+
+## Streaming Protocol
+
+The agent publishes events that follow an industry-standard streaming protocol:
+
+### Event Lifecycle
+
+```
+message_start -> text_start -> text_delta* -> text_end -> (citations)? -> message_end -> done
+```
+
+With tool calls interleaved as step events:
+
+```
+message_start -> text_start -> text_delta* -> text_end
+             -> step(call) -> step(result)
+             -> text_start -> text_delta* -> text_end
+             -> message_end -> done
+```
+
+| Event | Description |
+|-------|-------------|
+| `message_start` | New assistant message beginning |
+| `text_start` | Opens a text content block |
+| `text_delta` | Incremental text fragment |
+| `text_end` | Closes the text block |
+| `step` | Tool call or result snapshot |
+| `citations` | Final citations list |
+| `message_end` | Response complete |
+| `done` | Stream finished |
+
+### Reconnection
+
+If a client disconnects and reconnects:
+
+- If the message is still streaming, the client resumes from where it left off with missed events replayed
+- If the message is no longer streaming, the client receives a `message_not_streaming` event and can fetch the complete message via REST
+
+---
+
+## Conversation History
+
+The agent loads your recent conversation history to understand context for follow-up questions.
+
+| Message Role | How It Is Used |
+|---|---|
+| Your messages | Provided as conversation context |
+| Agent responses | Provided as conversation context |
+| System messages | Handled through agent instructions (not included in history) |
+
+History is loaded with a configurable depth (default: 10 messages) and converted into a format the AI framework understands. The agent sees your questions and its previous answers, enabling natural multi-turn conversations.
+
+---
+
+## API Endpoints
+
+### Send a Message
+
+`POST /v1/threads/{thread_id}/user_message`
+
+Sends your message and starts the agent. Returns `202 Accepted` immediately with a `workflow_id`.
+
+- Returns `409 Conflict` if the agent is already processing a message on this thread
+
+**Request:**
+```json
+{
+  "input_text": "What is the retention policy?"
+}
+```
+
+**Response (202):**
+```json
+{
+  "workflow_id": "agent-{thread_id}"
+}
+```
+
+### Stream the Response
+
+`GET /v1/threads/{thread_id}/stream`
+
+Opens an SSE connection to receive real-time agent output.
+
+**Query parameters:**
+
+| Param | Type | Description |
+|-------|------|-------------|
+| `last_message_id` | UUID (optional) | Message ID to resume from |
+| `last_entry_id` | string (optional) | Stream entry ID to resume from |
+
+---
+
+## Security Model
+
+The agent operates under **your permissions**. When the worker processes your message:
+
+1. It obtains a token scoped to your user identity and tenant
+2. All knowledge base access goes through the API's authorization layer
+3. The agent can only see and search content you have permission to access
+
+This means the agent respects the same access controls as the rest of the platform -- it cannot access documents in folders you do not have permission to view.

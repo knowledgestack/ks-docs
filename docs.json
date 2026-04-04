@@ -1,0 +1,125 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Knowledge Stack",
+  "description": "Documentation for Knowledge Stack — the foundational data layer for enterprise AI.",
+  "colors": {
+    "primary": "#0ea5e9",
+    "light": "#38bdf8",
+    "dark": "#0284c7"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": ["introduction", "quickstart", "architecture"]
+          },
+          {
+            "group": "Concepts",
+            "pages": [
+              "path-system",
+              "pdo-traversal",
+              "authentication",
+              "authorization",
+              "threads",
+              "semantic-search"
+            ]
+          },
+          {
+            "group": "Ingestion Pipeline",
+            "pages": [
+              "ingestion/index",
+              "ingestion/temporal-workflow",
+              "ingestion/chunk-handling",
+              "ingestion/s3-storage",
+              "ingestion/routing",
+              "ingestion/pdf-watermark",
+              "ingestion/excel-pipeline",
+              "ingestion/docling-pdf"
+            ]
+          },
+          {
+            "group": "Agent",
+            "pages": [
+              "agent/index",
+              "agent/temporal-deep-dive",
+              "agent/worker",
+              "agent/tools",
+              "agent/evals",
+              "agent/resilient-model"
+            ]
+          },
+          {
+            "group": "Infrastructure",
+            "pages": [
+              "infrastructure/index",
+              "infrastructure/database-prewarming",
+              "infrastructure/notifications",
+              "infrastructure/qdrant",
+              "infrastructure/litellm",
+              "infrastructure/cicd"
+            ]
+          },
+          {
+            "group": "Design",
+            "pages": [
+              "design/index",
+              "design/billing-quotas",
+              "design/workflows",
+              "design/prompt-management",
+              "design/nanobot-fleet",
+              "design/design-decisions"
+            ]
+          },
+          {
+            "group": "Operations",
+            "pages": [
+              {
+                "group": "CLI",
+                "pages": ["cli/index", "cli/commands", "cli/configuration"]
+              },
+              {
+                "group": "Deployment",
+                "pages": [
+                  "deployment/index",
+                  "deployment/docker",
+                  "deployment/litellm-deployment"
+                ]
+              },
+              {
+                "group": "Testing",
+                "pages": ["testing/index"]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "openapi": "openapi.yaml"
+      }
+    ]
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Website",
+        "href": "https://www.knowledgestack.ai"
+      }
+    ],
+    "primary": {
+      "type": "github",
+      "href": "https://github.com/knowledgestack/ks-docs"
+    }
+  },
+  "footer": {
+    "socials": {
+      "github": "https://github.com/knowledgestack",
+      "x": "https://x.com/knowledgestack"
+    }
+  }
+}

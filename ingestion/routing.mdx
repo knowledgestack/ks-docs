@@ -1,0 +1,143 @@
+---
+title: "Pipeline Routing"
+description: "The ingestion pipeline routes documents through different processing paths based on two inputs: **document type** and **ingestion mode**."
+---
+
+## Routing Parameters
+
+| Parameter | Values | Description |
+|-----------|--------|-------------|
+| Document type | `PDF`, `DOCX`, `PLAINTEXT`, `IMAGE`, `XLSX`, `CSV`, `PPTX` | Detected from file extension at upload time |
+| Ingestion mode | `standard` (default), `high_accuracy`, `single_chunk` | Controls conversion backend and chunking granularity |
+
+These parameters are set when you call `POST /v1/documents/ingest` or `POST /v1/documents/{id}/ingest`.
+
+### Smart Defaults
+
+When you omit the ingestion mode, the system picks the best default for your file type:
+
+| Document Type | Default Mode |
+|--------------|-------------|
+| PDF | `high_accuracy` |
+| IMAGE, CSV | `single_chunk` |
+| All others | `standard` |
+
+## Routing Decision Tree
+
+```
+                   Ingestion starts
+                          |
+            +-------------v--------------+
+            | ingestion_mode ==          |
+            | high_accuracy?             |
+            +------+---------------+-----+
+                   | yes           | no
+                   v               v
+          High-Accuracy     +------------------+
+          Path              | ingestion_mode   |
+                            | == single_chunk? |
+                            +---+----------+---+
+                                | yes      | no
+                                v          v
+                        +----------+  +-----------+
+                        | doc_type?|  | doc_type  |
+                        +--+--+--+-+  | == XLSX?  |
+                       /   |     \    +--+-----+--+
+                 IMAGE  CSV/TXT  PDF     | yes | no
+                   |      |       |      v     v
+                 Simple  Text   PDF   XLSX  Standard
+                 Image   Path   SC    Path  Path
+                 Path          Path
+```
+
+## Processing Paths
+
+### 1. High-Accuracy Path
+
+**Best for:** PDFs and images where maximum extraction quality is needed.
+
+**What happens:**
+
+1. **Preparation** -- Download source, remove watermarks (PDF)
+2. **High-accuracy conversion** -- Advanced extraction using a secondary engine that produces detailed content lists, images, and markdown
+3. **Smart chunking** -- Walks through extracted content, builds section hierarchy, creates text/image/table chunks with token-based merging
+
+**Chunking behavior:** Text items accumulate across heading boundaries until the token limit (default 512) is reached or a visual item (image/table) interrupts. Headings update section routing but do not force chunk boundaries.
+
+### 2. Single-Chunk Path -- Simple Image
+
+**Best for:** Standalone images (photos, screenshots, diagrams).
+
+The uploaded image becomes a single IMAGE chunk directly. No preparation, conversion, or chunking is needed.
+
+### 3. Single-Chunk Path -- Text-Based (CSV / Plain Text)
+
+**Best for:** CSV files and plain text documents you want treated as a single unit.
+
+1. **Preparation** -- Download source file
+2. **Single chunk creation** -- CSV files become a single TABLE chunk (with a head+tail preview of the data); plain text files become a single TEXT chunk with full content
+
+### 4. Single-Chunk Path -- PDF
+
+**Best for:** Short PDFs you want treated as a single retrievable unit (e.g., a one-page form or receipt).
+
+1. **Preparation** -- Extract page screenshots and text
+2. **Single chunk creation** -- Creates one chunk from page screenshots and extracted text
+
+### 5. Excel Path
+
+**Best for:** `.xlsx` and `.xlsm` spreadsheet files.
+
+1. **Preparation** -- Download source file
+2. **Excel conversion** -- Parse workbook structure (sheets, cells, formulas, dependencies) into structured JSON
+3. **Excel chunking** -- Create one section per sheet, with table and text chunks preserving spreadsheet structure
+
+See [Excel Pipeline](/ingestion/excel-pipeline) for full details.
+
+### 6. Standard Path (Default)
+
+**Best for:** PDFs, DOCX, PPTX, and plain text under standard processing.
+
+1. **Preparation** -- Download source, remove watermarks (PDF)
+2. **Conversion** -- Vision-language model pipeline: OCR, table detection, image extraction, structured JSON output
+3. **Chunking** -- Hybrid chunking with interleaved text, table, and image chunks in document order
+
+## Common Tail Steps
+
+After the format-specific processing, all paths converge to the same finishing steps:
+
+| Step | Purpose |
+|------|---------|
+| Vector cleanup | Remove stale vectors from prior failed runs |
+| Enrichment | Generate LLM descriptions for images and summaries for tables |
+| Embedding | Generate vector embeddings and store in the vector database |
+| Statistics | Calculate token counts, section and chunk statistics |
+| Version activation | For version upgrades: switch the active version |
+| Completion | Mark the pipeline as completed |
+
+## Validation Rules
+
+These rules are checked before the workflow starts:
+
+| Rule | Error |
+|------|-------|
+| Explicit chunk type requires `single_chunk` mode | 400 |
+| Secondary taxonomy requires IMAGE chunk type | 400 |
+| Chunk type cannot be overridden for CSV/plain text | 400 |
+| Each ingestion mode only supports specific document types | 400 |
+| Custom page DPI only applies to PDFs | 400 |
+
+## Configuration
+
+Key pipeline settings:
+
+```yaml
+chunking:
+  max_tokens: 512          # Token limit per chunk (all paths)
+  overlap_tokens: 64       # Standard path only
+
+high_accuracy:
+  formula_enable: false
+  table_enable: true
+  document_timeout: 720    # Seconds for conversion
+```

@@ -1,0 +1,95 @@
+# Billing and Quotas
+
+## Overview
+
+Knowledge Stack uses a quota system to manage resource usage at the tenant level. Quotas enforce limits on how much each tenant can consume, while the billing system manages quotas based on subscriptions and payments.
+
+The system uses a monthly subscription model with a free usage tier.
+
+## Quotas
+
+Quotas are enforced per tenant. When a quota is checked, the system verifies that you have remaining capacity before proceeding. If the limit is reached, the request returns a `403 Insufficient Quota` error with the name of the exceeded quota.
+
+### Available Quotas
+
+| Quota | Default | Description |
+|-------|---------|-------------|
+| `max_processed_pages` | 1,000 | Maximum number of pages that can be ingested across all documents |
+| `max_tenant_users` | 1 | Maximum number of users in the tenant |
+| `agent_capacity_units` | 5 | Maximum LLM spend for AI assistant usage |
+
+### How Quotas Are Checked
+
+- **Page processing**: Checked during document ingestion, once the page count is known
+- **Tenant users**: Checked when a new user accepts an invite (pending invites do not count)
+- **Agent capacity**: Tracked via the LLM gateway on a per-tenant basis
+
+### Important Notes
+
+- Page usage is cumulative. If you upload and then delete a document, those pages still count toward your quota for the current period.
+- Each new user added to your subscription also adds 1,000 pages of processing quota.
+
+## Quota API
+
+### View Your Quotas
+
+Your current quota limits are included in the tenant response:
+
+```
+GET /v1/tenants/{tenant_id}
+```
+
+### View Current Usage
+
+To see how much of each quota you have consumed:
+
+```
+GET /v1/tenants/{tenant_id}/usage
+```
+
+This returns:
+- Current agent spend (from LLM usage tracking)
+- Number of active users
+- Total pages processed this period
+
+## Billing
+
+Billing is tied to your subscription. Each tenant is billed based on the number of users and any additional quota purchases.
+
+### Managing Your Subscription
+
+#### Update User Count
+
+```
+PATCH /v1/tenants/{tenant_id}/billing/users
+```
+
+```json
+{
+  "num_users": 5
+}
+```
+
+- **Increasing users**: You are billed immediately for the additional users
+- **Decreasing users**: The quota increase from existing users is kept, but your current user count must be lower than the new limit. The reduced count applies to the next billing cycle.
+
+#### Purchase Additional Page Quota
+
+```
+POST /v1/tenants/{tenant_id}/billing/quotas
+```
+
+```json
+{
+  "add_thousand_processed_pages": 2
+}
+```
+
+This is a one-time purchase that immediately adds to your page processing quota. You are charged immediately upon purchase.
+
+### Billing Configuration
+
+If you are self-hosting Knowledge Stack, you can control billing behavior with the `STRIPE_API_KEY` configuration:
+
+- Set to a valid Stripe key to enable real billing
+- Set to `DISABLED` to skip billing and manage quotas directly through the admin API

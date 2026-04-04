@@ -1,0 +1,82 @@
+# Authorization
+
+Knowledge Stack uses a two-tier authorization model: **roles** determine what a user can do, and **path permissions** determine where they can do it.
+
+## Roles
+
+Every user in a tenant has one of three roles:
+
+| Role | Description |
+|------|-------------|
+| **Owner** | Full access to everything. Can manage the tenant itself (billing, deletion). One per tenant. |
+| **Admin** | Full access to all content and settings. Cannot delete the tenant. |
+| **User** | Access is restricted to paths they've been explicitly granted permission to. |
+
+Owners and Admins have unrestricted access to all content — no path permission checks apply. The User role is where path permissions come into play.
+
+## Path permissions
+
+Path permissions control which parts of the knowledge base a User can access. Permissions are granted on specific paths and automatically apply to everything underneath.
+
+### How it works
+
+When you grant a User read access to `/shared/engineering`, they can read:
+- `/shared/engineering`
+- `/shared/engineering/design-doc`
+- `/shared/engineering/design-doc/v1/introduction`
+- Everything else under `/shared/engineering`
+
+### Capabilities
+
+| Capability | What it allows |
+|-----------|---------------|
+| **Read-only** | View and list resources at and below the granted path |
+| **Read-write** | Everything in read-only, plus create, update, and delete |
+
+### Personal workspace
+
+Every user automatically has read-write access to their own workspace at `/users/{user_id}`. This is where their threads, personal documents, and other user-specific content lives.
+
+## Permission examples
+
+Given these permissions for a user:
+- Read-only on `/shared`
+- Read-write on `/shared/output`
+- Read-write on `/users/abc`
+
+Here's what they can do:
+
+| Path | Can read? | Can write? | Why |
+|------|-----------|------------|-----|
+| `/shared` | Yes | No | Matches read-only grant |
+| `/shared/reports/q1` | Yes | No | Falls under read-only grant on `/shared` |
+| `/shared/output/file` | Yes | Yes | Falls under read-write grant on `/shared/output` |
+| `/private/doc` | No | No | No grant covers this path |
+
+## How authorization works for different operations
+
+| Operation | What's checked |
+|-----------|---------------|
+| **Get a resource** | Can the user read this path? |
+| **List resources** | Results are filtered to only include paths the user can access. |
+| **Create a resource** | Can the user write to the parent path? |
+| **Move a resource** | Can the user write to both the source and destination paths? |
+| **Search** | Results are automatically filtered to paths the user can read. |
+| **Manage tags, permissions, tenants** | Requires Admin or Owner role. |
+
+## Managing permissions
+
+Admins and Owners can manage User permissions through the permissions API.
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/user-permissions` | List a user's permissions |
+| POST | `/user-permissions` | Grant a new permission |
+| PATCH | `/user-permissions/{id}` | Update a permission's capability |
+| DELETE | `/user-permissions/{id}` | Revoke a permission |
+
+### Limits and validation
+
+- Each user can have a maximum of **50 path permissions**.
+- Redundant permissions are rejected. For example, if a user already has read-write on `/a`, granting read-only on `/a/b` is unnecessary (the broader permission already covers it).
+- Permissions can be escalated. For example, if a user has read-only on `/a`, you can grant read-write on `/a/b` to give them write access to a specific subtree.

@@ -1,0 +1,74 @@
+# Architecture
+
+A high-level overview of how Knowledge Stack is designed.
+
+## System components
+
+Knowledge Stack is composed of three main services that work together:
+
+```
+┌─────────────┐     ┌──────────────┐     ┌──────────────┐
+│   API        │────▶│  Database     │◀────│   Worker     │
+│  (REST)      │     │ (PostgreSQL)  │     │ (Background) │
+└──────┬───────┘     └──────────────┘     └──────┬───────┘
+       │                                         │
+       │              ┌──────────────┐           │
+       └─────────────▶│ Object Store │◀──────────┘
+                      │    (S3)      │
+                      └──────────────┘
+```
+
+### API server
+
+The public-facing REST API handles all client interactions — authentication, document management, search, threads, and permissions. It exposes a versioned API (`/v1/...`) with interactive documentation at `/api/docs`.
+
+### Background worker
+
+A durable workflow engine processes long-running tasks like document ingestion. When you upload a document, the API queues a workflow that handles conversion, content extraction, chunking, and embedding generation. Workflows are fault-tolerant and automatically retry on failure.
+
+### Database
+
+PostgreSQL with vector search extensions. Stores all structured data (users, tenants, documents, permissions) and vector embeddings for semantic search. Every table is scoped by tenant for data isolation.
+
+### Object storage
+
+S3-compatible storage for raw document files and extracted assets (images, tables). The API and worker both read and write to object storage during ingestion and retrieval.
+
+## Request lifecycle
+
+When you make an API call, the request flows through these layers:
+
+1. **Authentication** — Your session cookie is validated and your identity (user, tenant, role) is established.
+2. **Authorization** — Your role and path permissions are checked against the requested resource.
+3. **Business logic** — The operation is performed (creating a folder, running a search, sending a message).
+4. **Database** — Data is read from or written to the database.
+5. **Response** — Results are serialized and returned as JSON.
+
+## Multi-tenancy
+
+Every record in Knowledge Stack is scoped to a tenant. This means:
+
+- **Data isolation** — Tenants cannot access each other's data. Every database query is filtered by tenant.
+- **Independent roles** — A user can have different roles in different tenants.
+- **Scalability** — The tenant-scoped design supports horizontal scaling as your data grows.
+
+## Document ingestion pipeline
+
+When you upload a document, it goes through a multi-step pipeline:
+
+1. **Upload** — The file is stored in object storage and a document record is created.
+2. **Conversion** — The document is converted to a structured format (text, tables, images).
+3. **Chunking** — Content is split into searchable chunks with metadata (bounding boxes, source locations).
+4. **Embedding** — Each chunk is converted to a vector embedding for semantic search.
+5. **Indexing** — Embeddings are indexed for fast similarity search.
+
+This pipeline runs in the background worker and is fully durable — if any step fails, it retries automatically without losing progress.
+
+## Key design decisions
+
+| Decision | Why |
+|----------|-----|
+| **Path-based organization** | Documents, folders, and content are organized in a Unix-like hierarchy. This makes navigation intuitive and enables path-based permissions. [Learn more](/path-system) |
+| **Composite keys** | Every record uses a compound key (tenant + ID) for built-in tenant isolation and efficient data access patterns. |
+| **Content-addressable storage** | Document chunks use hash-based deduplication, so identical content is stored only once. |
+| **Durable workflows** | Document processing uses a fault-tolerant workflow engine that survives restarts and retries failed steps. |

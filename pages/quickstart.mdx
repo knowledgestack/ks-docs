@@ -1,0 +1,192 @@
+# Quickstart
+
+Get up and running with Knowledge Stack in minutes.
+
+## Using the API
+
+### 1. Sign in and get your session token
+
+All API requests are authenticated via a session cookie (`ks_uat`). Start by signing in:
+
+```bash
+curl -X POST https://your-instance.example.com/api/v1/auth/pw/signin \
+  -H "Content-Type: application/json" \
+  -d '{"email": "you@example.com", "password": "your-password"}' \
+  -c cookies.txt
+```
+
+This stores your session cookie in `cookies.txt` for subsequent requests.
+
+### 2. Upload a document
+
+Create a folder and upload your first document:
+
+```bash
+# Create a folder
+curl -X POST https://your-instance.example.com/api/v1/folders \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"name": "my-project", "parent_path_part_id": null}'
+
+# Upload a document into the folder
+curl -X POST https://your-instance.example.com/api/v1/documents \
+  -H "Content-Type: multipart/form-data" \
+  -b cookies.txt \
+  -F "file=@report.pdf" \
+  -F "parent_path_part_id=<folder-path-part-id>"
+```
+
+Once uploaded, Knowledge Stack automatically processes your document — converting, chunking, and embedding it for search.
+
+### 3. Search your documents
+
+```bash
+curl -X POST https://your-instance.example.com/api/v1/chunks/search \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"query": "What were the key findings?", "top_k": 5}'
+```
+
+You'll get back the most relevant chunks from your documents, ranked by similarity score.
+
+### 4. Start a conversation
+
+```bash
+# Create a thread
+curl -X POST https://your-instance.example.com/api/v1/threads \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"title": "Project discussion"}'
+
+# Send a message
+curl -X POST https://your-instance.example.com/api/v1/threads/<thread-id>/messages \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"role": "USER", "content": "Summarize the uploaded report"}'
+```
+
+## Using the SDKs
+
+Knowledge Stack provides official SDKs for Python and TypeScript.
+
+### Python
+
+```bash
+pip install ksapi
+```
+
+```python
+from ksapi import KSApi
+
+client = KSApi(base_url="https://your-instance.example.com/api/v1")
+client.auth.signin(email="you@example.com", password="your-password")
+
+# Search documents
+results = client.chunks.search(query="key findings", top_k=5)
+for chunk in results:
+    print(f"[{chunk.score:.2f}] {chunk.content}")
+```
+
+### TypeScript
+
+```bash
+npm install @knowledge-stack/ksapi
+```
+
+```typescript
+import { KSApi } from '@knowledge-stack/ksapi';
+
+const client = new KSApi({ baseUrl: 'https://your-instance.example.com/api/v1' });
+await client.auth.signin({ email: 'you@example.com', password: 'your-password' });
+
+// Search documents
+const results = await client.chunks.search({ query: 'key findings', topK: 5 });
+results.forEach(chunk => console.log(`[${chunk.score}] ${chunk.content}`));
+```
+
+## Interactive API docs
+
+Every Knowledge Stack instance includes an interactive API explorer at `/api/docs`. Use it to browse all available endpoints, see request/response schemas, and try out API calls directly from your browser.
+
+---
+
+## Self-hosted setup
+
+If you're running Knowledge Stack locally or on your own infrastructure, follow these steps.
+
+### Prerequisites
+
+- Python 3.12+
+- [uv](https://docs.astral.sh/uv/) (Python package manager)
+- Docker & Docker Compose
+- [mkcert](https://github.com/FiloSottile/mkcert) (for local HTTPS certificates)
+
+### 1. Install dependencies
+
+```bash
+make install-dev
+```
+
+### 2. Configure secrets
+
+```bash
+cp .env.secrets.example .env.secrets
+```
+
+Fill in your API keys. At minimum, you need `OPENAI_API_KEY` and `JWT_SECRET_KEY`. See `.env.secrets.example` for the full list.
+
+### 3. Generate TLS certificates
+
+```bash
+make certificates
+```
+
+One-time setup for local HTTPS.
+
+### 4. Start the infrastructure
+
+```bash
+make dev-stack
+```
+
+This starts the database, workflow engine, object storage, and HTTPS proxy.
+
+### 5. Initialize the database
+
+```bash
+make seed
+```
+
+Applies all database migrations and loads sample data.
+
+### 6. Start the API server
+
+```bash
+make dev-api
+```
+
+Your API is now running at:
+- `http://localhost:8000` (direct)
+- `https://localhost:18000` (via HTTPS proxy)
+- `https://localhost:18000/api/docs` (interactive docs)
+
+### 7. Start the ingestion worker (optional)
+
+```bash
+make dev-worker
+```
+
+Required for document processing. Without it, uploads will be queued but not processed.
+
+### Common commands
+
+| Command | Purpose |
+|---------|---------|
+| `make test` | Run integration tests |
+| `make lint` | Check code style |
+| `make fix` | Auto-fix style issues |
+| `make typecheck` | Run type checker |
+| `make migrate-up` | Apply pending database migrations |
+| `make apispec` | Regenerate OpenAPI specification |
+| `make sdk-api-ts` | Generate TypeScript SDK |
+| `make sdk-api-python` | Generate Python SDK |

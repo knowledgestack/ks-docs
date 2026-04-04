@@ -1,0 +1,77 @@
+# Document Storage
+
+The ingestion pipeline stores all document assets in S3-compatible object storage. This page covers the storage layout and how your documents are organized.
+
+## Tenant Isolation
+
+Each tenant has its own storage bucket, named by the tenant's unique ID. This per-tenant isolation ensures:
+
+- Clean data separation between tenants
+- Simple bulk deletion when a tenant is removed
+- Independent access control at the bucket level
+
+## Storage Layout
+
+All storage paths use a flat structure based on the document and version IDs, deliberately independent of your folder hierarchy. This means moving a document between folders never requires changing storage paths.
+
+```
+{tenant_id}/
+  documents/{document_id}/{document_version_id}/
+    source.{pdf,docx,pptx,md,txt}       # Original uploaded file
+    cleaned_source.pdf                    # Watermark-removed PDF (if applicable)
+    standard_pipeline.json                # Structured conversion output
+    page_screenshots/                     # Full-page screenshots (WEBP)
+      p1.webp                            #   Page 1
+      p2.webp                            #   Page 2
+      ...
+    images/                              # Extracted image crops (WEBP)
+      0.webp
+      1.webp
+      ...
+    tables/                              # Extracted table screenshots (WEBP)
+      0.webp
+      1.webp
+      ...
+```
+
+## What Gets Stored
+
+### Source files
+
+Your original uploaded document is stored as-is under the `source.*` key, preserving the original file extension.
+
+### Cleaned PDFs
+
+If your PDF contains watermarks, the preparation step produces a cleaned version at `cleaned_source.pdf`. The original source is preserved. See [PDF Watermark Removal](/ingestion/pdf-watermark) for details.
+
+### Conversion output
+
+The document conversion step produces a structured JSON representation of your document's content, stored as `standard_pipeline.json`. This intermediate format is used by the chunking step.
+
+### Visual assets
+
+All visual assets are stored as **WEBP** images (quality 85, DPI 144):
+
+| Asset Type | Path Pattern | Description |
+|-----------|---------|--------|
+| Page screenshots | `page_screenshots/p{N}.webp` | Full-page renders, 1-indexed |
+| Images | `images/{N}.webp` | Extracted image crops from the document |
+| Tables | `tables/{N}.webp` | Screenshots of detected tables |
+
+Page screenshots capture each page of the document as a high-quality image. Image and table crops are extracted from the page images based on detected bounding boxes during conversion.
+
+## Storage Operations
+
+The platform supports these storage operations:
+
+| Operation | Description |
+|-----------|-------------|
+| Upload | Store raw bytes at a given path |
+| Download | Retrieve object content |
+| List | List objects by path prefix |
+| Delete | Batch delete objects |
+| Presigned URLs | Generate time-limited download links |
+
+## URI Format
+
+All internal storage references use the `s3://{bucket}/{key}` URI format, making it easy to locate any stored asset.

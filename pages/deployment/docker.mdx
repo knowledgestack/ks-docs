@@ -1,0 +1,87 @@
+# Docker Deployment
+
+## Overview
+
+This guide covers deploying Knowledge Stack using Docker in a self-hosted environment. All Knowledge Stack services are available as Docker images that you can pull from the container registry.
+
+## Prerequisites
+
+- Docker and Docker Compose installed
+- Access to the Knowledge Stack container images
+- A configured LLM provider (e.g., OpenAI API key)
+
+## Required Images
+
+A complete Knowledge Stack deployment uses the following images:
+
+| Image | Description |
+|-------|-------------|
+| **API** | The main Knowledge Stack API server |
+| **Worker** | Document ingestion and processing worker |
+| **Agent** | AI assistant worker |
+| **Frontend** | Web application |
+| **PostgreSQL** | Database (TimescaleDB recommended) |
+| **Temporal** | Workflow orchestration |
+| **MinIO** | S3-compatible object storage |
+| **LiteLLM** | LLM gateway proxy |
+| **Qdrant** | Vector search engine |
+| **Redis** | Real-time notifications and streaming |
+| **Nginx** | Reverse proxy and TLS termination |
+
+## Deployment Steps
+
+### 1. Prepare Your Environment
+
+Set up your environment configuration files with the appropriate values for your deployment:
+
+- Database connection strings
+- API keys for your LLM provider
+- JWT secret keys
+- S3/MinIO credentials
+
+### 2. Pull Container Images
+
+Pull all required images for your target version. Each release is tagged with a version number (e.g., `v1.67.0`).
+
+### 3. Start the Stack
+
+Start the production stack with your version tags:
+
+```bash
+BE_VERSION_TAG=v1.67.0 FE_VERSION_TAG=v1.0.0 docker compose up -d
+```
+
+### 4. Run Database Migrations
+
+After the database is running, apply migrations to set up the schema:
+
+```bash
+# Run via the API container
+docker compose exec api alembic upgrade head
+```
+
+### 5. Verify the Deployment
+
+- Check that all containers are running: `docker compose ps`
+- Verify the API health endpoint: `curl http://localhost:8000/health`
+- Access the API documentation at `/api/docs`
+
+## Upgrading
+
+To upgrade to a new version:
+
+1. Pull the new images with the updated version tag
+2. Stop the running stack
+3. Start the stack with the new version tags
+4. Run any pending database migrations
+
+## Air-Gapped Deployments
+
+For environments without internet access, you can transfer images between registries:
+
+1. Pull images from the primary registry on a connected machine
+2. Tag images for your local registry
+3. Push images to your local registry
+4. Deploy from your local registry
+
+Consult your infrastructure team for specific registry configuration.

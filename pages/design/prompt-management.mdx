@@ -1,0 +1,73 @@
+# Prompt Management
+
+## Overview
+
+Knowledge Stack manages all LLM prompts through a centralized configuration system. Prompts are defined in YAML files, validated at startup, and accessed by key at runtime. This approach makes prompts easy to review, modify, and maintain without changing application code.
+
+## How Prompts Work
+
+### YAML-Based Prompt Definitions
+
+All prompts are defined in YAML configuration files. Each prompt has a unique ID, the prompt text, and an optional flag for language awareness:
+
+```yaml
+- id: image_description
+  language_aware: true
+  prompt: |
+    Describe the contents of this image in detail.
+    Focus on any text, diagrams, or data visualizations.
+
+- id: table_extraction
+  language_aware: false
+  prompt: |
+    Extract the table data from this HTML content.
+    Return structured output.
+```
+
+### Prompt Registry
+
+At startup, Knowledge Stack loads and validates all prompts into an in-memory registry. This ensures:
+
+- All required prompts are present before the system starts accepting requests
+- Duplicate prompt IDs are caught immediately
+- Invalid YAML is rejected at startup, not at runtime
+
+Services access prompts by their ID through the registry, which returns the fully resolved prompt text.
+
+### Format Placeholders
+
+Prompts can contain placeholders using Python's `str.format()` syntax (e.g., `{table_html}`, `{document_title}`). These are resolved at runtime when the prompt is used, allowing prompts to be reused across different contexts.
+
+## Multi-Language Support
+
+Knowledge Stack supports multi-language deployments. Prompts can be marked as `language_aware: true` to automatically adapt their output language based on a deployment-wide setting.
+
+### How It Works
+
+- **Language-aware prompts** (e.g., image descriptions, summaries) automatically receive a language suffix when the deployment language is set to a non-English value
+- **Non-language-aware prompts** (e.g., HTML extraction, structural analysis) always produce consistent output regardless of the deployment language
+
+This distinction is important: some prompts must always produce structured English output for downstream processing, while user-facing prompts should match the target language.
+
+### Configuration
+
+| Setting | Environment Variable | Default | Description |
+|---|---|---|---|
+| Language | `KS_LANGUAGE` | `en` | Target output language (`en` or `zh`) |
+| Prompt file | `PROMPT_YAML` | Service-specific | Path to the prompts YAML file |
+
+## Customizing Prompts
+
+To customize prompts for your deployment:
+
+1. **Locate the prompts YAML file** for the service you want to customize
+2. **Edit the prompt text** -- change wording, add instructions, or adjust formatting
+3. **Restart the service** -- prompts are loaded at startup and cached for the lifetime of the process
+4. **Verify at startup** -- the system validates all required prompts are present. If a required prompt is missing, the service will fail to start with a clear error message.
+
+### Adding a New Prompt
+
+1. Add an entry to the service's prompts YAML with a unique `id` and the `prompt` text
+2. Optionally set `language_aware: true` if the prompt produces user-facing content
+3. Reference the prompt by its ID in your code
+4. If the prompt is essential for the service to function, register it as a required prompt so startup validation catches missing entries

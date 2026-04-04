@@ -1,0 +1,178 @@
+# Reliability and Durability
+
+The agent system is built on a **durable execution platform** that guarantees your agent runs complete reliably, even in the face of infrastructure failures like network outages, server crashes, or process restarts.
+
+---
+
+## What Durable Execution Means for You
+
+When you send a message to the agent, the system guarantees:
+
+1. **Your request will be processed** -- even if the server handling your request crashes, the work is automatically picked up by another server.
+2. **No duplicate responses** -- each message gets exactly one agent response, even if retries are needed internally.
+3. **Automatic recovery** -- transient failures (network blips, provider timeouts) are retried automatically with exponential backoff.
+4. **Observable progress** -- you can see exactly what the agent is doing in real-time via the streaming connection.
+
+---
+
+## How It Works
+
+The agent system separates **orchestration** (managing the workflow) from **execution** (running the agent logic) and **streaming** (delivering results to you):
+
+```
+                                    +---------------------------+
+                                    |   Orchestration Service   |
+                                    |   (manages workflow       |
+                                    |    state and retries)     |
+                                    +----------+----------------+
+                                               | dispatches task
+                                               v
+You --Send Message----> API ------> Start Workflow
+                                               |
+You --Open Stream-----> API <------- Agent Worker
+          (SSE)          ^              |
+                         |              | processes request,
+                         +--------------+ publishes events
+                           via event     |
+                           stream        +- saves response
+```
+
+1. **The API starts a workflow** -- your message is recorded and a durable workflow begins. The API returns `202 Accepted` immediately.
+2. **The orchestration service dispatches to a worker** -- a healthy worker picks up the task.
+3. **The worker runs the agent** -- fetches your history, runs the AI agent with streaming, and publishes events.
+4. **You receive the stream** -- your browser subscribes to the event stream and receives updates in real-time.
+5. **The response is saved** -- after streaming completes, the worker persists the full message.
+
+### Why Not Stream Through the Orchestration Service?
+
+The orchestration layer is designed for durable state management, not real-time streaming. Sending every text token through it would add unnecessary latency and overhead. Instead, streaming goes through a lightweight event stream (Redis) while the orchestration layer handles the durable parts: starting the run, retrying on failure, and ensuring exactly-once execution.
+
+---
+
+## Concurrency and Idempotency
+
+Each conversation thread can have at most one active agent run at a time. This is enforced through a unique workflow identifier per thread:
+
+- **One run per thread**: Concurrent requests on the same thread are detected and rejected with `409 Conflict`
+- **Re-run after completion**: After a run finishes, the same thread can start a new run
+- **No duplicate processing**: If you accidentally send the same message twice, only one workflow runs
+
+---
+
+## Retry and Timeout Configuration
+
+### Automatic Retries
+
+If the agent activity fails due to a transient error, it is automatically retried:
+
+| Setting | Value |
+|---------|-------|
+| Initial retry delay | 2 seconds |
+| Backoff multiplier | 2x |
+| Maximum delay | 30 seconds |
+| Maximum attempts | 2 |
+
+### Timeouts
+
+| Timeout | Value | Purpose |
+|---------|-------|---------|
+| Activity timeout | 5 minutes | Maximum time for a single agent run attempt |
+| Heartbeat timeout | 60 seconds | Maximum gap between progress signals |
+| Heartbeat frequency | 10 seconds | How often the agent reports it is still working |
+
+If the agent stops sending heartbeats (e.g., the worker crashes), the system detects the failure within 60 seconds and reschedules to another worker -- much faster than waiting for the full 5-minute timeout.
+
+---
+
+## Streaming Infrastructure
+
+### Event Protocol
+
+Events follow a standard streaming protocol. You receive them as Server-Sent Events (SSE):
+
+```
+message_start -> text_start -> text_delta* -> text_end
+             -> (citations)? -> message_end -> done
+             (with optional step events interspersed)
+```
+
+| Event | Description |
+|-------|-------------|
+| `message_start` | New assistant message beginning |
+| `text_start` | Opens a text content block |
+| `text_delta` | Incremental text fragment (repeats for each token) |
+| `text_end` | Closes the text block |
+| `step` | Tool call or result snapshot |
+| `citations` | Final citations list |
+| `message_end` | Message complete |
+| `done` | Terminal event -- close the connection |
+
+### Reconnection Support
+
+If your connection drops during streaming:
+
+1. Reconnect with `last_message_id` and `last_entry_id` from the last event you received
+2. The system checks if the message is still streaming
+3. If yes: you resume from where you left off, with missed events replayed
+4. If no: you receive a `message_not_streaming` event and can fetch the complete message via REST
+
+### Event Durability
+
+Events are stored in an append-only stream (Redis Streams) rather than fire-and-forget pub/sub. This means:
+
+- Events are retained for approximately 30 minutes
+- Multiple clients can watch the same thread simultaneously
+- Replay is supported for reconnecting clients
+
+---
+
+## Complete Request Lifecycle
+
+### Step 1: Create a Thread
+
+```
+POST /v1/threads
+{ "title": "My Question" }
+-> 201 Created { "id": "thread-uuid", ... }
+```
+
+### Step 2: Open the Stream (can happen before Step 3)
+
+```
+GET /v1/threads/{thread_id}/stream
+-> SSE connection opens, waiting for events
+```
+
+### Step 3: Send a Message
+
+```
+POST /v1/threads/{thread_id}/user_message
+{ "input_text": "What is our retention policy?" }
+-> 202 Accepted { "workflow_id": "agent-{thread_id}" }
+```
+
+### Step 4: Receive Streaming Events
+
+```
+event: message_start
+data: {"id":"msg-uuid","seq":"1706000000000-0","ts":"..."}
+
+event: text_delta
+data: {"id":"msg-uuid","part_id":"part-uuid","delta":"Based on ","seq":"...","ts":"..."}
+
+event: text_delta
+data: {"id":"msg-uuid","part_id":"part-uuid","delta":"your documents, ","seq":"...","ts":"..."}
+
+event: message_end
+data: {"id":"msg-uuid","seq":"...","ts":"..."}
+
+data: [DONE]
+```
+
+### Step 5: Message Persisted
+
+The complete message is now available via REST:
+
+```
+GET /v1/threads/{thread_id}/messages
+```

@@ -1,0 +1,31 @@
+export default {
+  index: "Introduction",
+  quickstart: "Quickstart",
+  architecture: "Architecture",
+  "--- Concepts": {
+    type: "separator",
+    title: "Concepts",
+  },
+  "path-system": "Path System",
+  "pdo-traversal": "Path Traversal",
+  authentication: "Authentication",
+  authorization: "Authorization",
+  threads: "Threads",
+  "semantic-search": "Semantic Search",
+  "--- Systems": {
+    type: "separator",
+    title: "Systems",
+  },
+  ingestion: "Ingestion Pipeline",
+  agent: "Agent",
+  infrastructure: "Infrastructure",
+  design: "Design Docs",
+  "--- Reference": {
+    type: "separator",
+    title: "Reference",
+  },
+  "api-reference": "API Reference",
+  cli: "CLI Tool",
+  testing: "Testing",
+  deployment: "Deployment",
+};

@@ -1,0 +1,93 @@
+# Content Traversal API
+
+## Overview
+
+Knowledge Stack organizes all content -- folders, documents, versions, sections, and chunks -- in a unified tree hierarchy. The content traversal API lets you navigate this tree with a single, flexible endpoint that works at any level of the hierarchy.
+
+Instead of using separate endpoints for listing documents in a folder, versions of a document, or sections in a version, you use a single traversal function that starts from any point in the tree and returns its children.
+
+## How It Works
+
+Every item in Knowledge Stack has a **path part** -- a node in the content tree. The tree structure looks like this:
+
+```
+Folder
+  -> Document
+    -> Document Version
+      -> Section (optional)
+        -> Chunk
+  -> Thread
+    -> Thread Message
+```
+
+The traversal API starts from any node and walks down the tree, returning the children you are interested in.
+
+## Common Use Cases
+
+| What You Want | Starting Point | Depth | Type Filter |
+|---|---|---|---|
+| List documents in a folder | Folder | 1 | `DOCUMENT` |
+| List documents and subfolders | Folder | 1 | `DOCUMENT`, `FOLDER` |
+| Find all documents recursively | Folder | unlimited | `DOCUMENT` |
+| List versions of a document | Document | 1 | `DOCUMENT_VERSION` |
+| List sections in a version | Document version | 1 | `SECTION` |
+| Find all chunks under a folder | Folder | unlimited | `CHUNK` |
+| List thread messages | Thread | 1 | `THREAD_MESSAGE` |
+| List all direct children | Any node | 1 | (none) |
+
+## Parameters
+
+### Depth
+
+Controls how deep to traverse:
+
+| Value | Behavior |
+|---|---|
+| `1` | Direct children only (most common) |
+| `-1` | Traverse all the way to leaf nodes (capped at 30 levels) |
+| `N` | Traverse up to N levels deep (capped at 30) |
+
+### Type Filter
+
+Filters the returned results by content type. Intermediate nodes are traversed but excluded from results unless their type matches the filter. For example, when searching for chunks under a folder, the system traverses through documents, versions, and sections but only returns chunks.
+
+### Ordering
+
+Results can be ordered in four ways:
+
+| Order | Description |
+|---|---|
+| `NAME` | Alphabetical by name (default) |
+| `LOGICAL` | User-defined ordering (drag-and-drop position) |
+| `UPDATED_AT` | Most recently updated first |
+| `CREATED_AT` | Oldest first |
+
+### Include Parent
+
+When enabled, the starting node is included in the results alongside its children. This is useful for:
+- Building breadcrumbs (showing the current folder name alongside its children)
+- Serializing a subtree as a self-contained structure
+- Loading parent metadata in a single request
+
+### Traverse Until Types
+
+Stops traversal at specific content types while still including them in results. For example, you can traverse folders but stop at documents -- the documents are returned, but their versions, sections, and chunks are not traversed.
+
+### Pagination
+
+For large result sets, use pagination with `offset` and `limit` parameters. Without pagination, results are capped at 250 items. The response includes a `total` count so you can determine if more results are available.
+
+## Limits
+
+| Limit | Value |
+|---|---|
+| Maximum traversal depth | 30 levels |
+| Maximum unpaginated results | 250 items |
+
+## Edge Cases
+
+| Scenario | Behavior |
+|---|---|
+| Starting node does not exist | Returns a 404 error |
+| Starting node has no children | Returns an empty list (not an error) |
+| Results exceed 250 items | Returns the first 250 with the total count. Use pagination to retrieve more. |

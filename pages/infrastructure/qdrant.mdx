@@ -1,0 +1,102 @@
+# Vector Search with Qdrant
+
+## Overview
+
+Knowledge Stack uses [Qdrant](https://qdrant.tech/) as its dedicated vector search engine. When you upload documents, Knowledge Stack splits them into chunks, generates vector embeddings, and stores them in Qdrant. This powers semantic search -- finding content by meaning rather than exact keyword matches.
+
+### How It Works
+
+1. **Documents are ingested** through the standard upload pipeline
+2. **Chunks are embedded** -- each chunk of text is converted into a 1536-dimensional vector using OpenAI's `text-embedding-3-small` model
+3. **Vectors are stored in Qdrant** along with metadata (tenant, tags, folder path, version status)
+4. **Search queries** are also embedded, and Qdrant finds the most semantically similar chunks
+
+PostgreSQL remains the source of truth for all data. Qdrant is a derived search index that is kept in sync automatically.
+
+## Search Capabilities
+
+### Semantic Search
+
+Search your knowledge base by meaning:
+
+```
+POST /v1/search
+```
+
+The search API accepts a natural-language query and returns the most relevant content chunks, ranked by semantic similarity.
+
+### Metadata Filtering
+
+You can narrow search results using metadata filters, all applied at the vector search level for maximum performance:
+
+| Filter | Description |
+|---|---|
+| **Folder scope** | Search within a specific folder and all its subfolders |
+| **Document scope** | Search within a specific document |
+| **Tags** | Filter by one or more tags (inherited from parent folders) |
+| **Content type** | Filter by chunk type: text, table, or image |
+| **Time range** | Filter by when content was ingested |
+| **Active version only** | Search only the current version of documents (default) |
+
+### Path-Based Scoping
+
+Every chunk stores its full ancestor path -- from the root folder down to the chunk itself. This means you can scope searches to any level of the hierarchy:
+
+```
+/shared/engineering/api-spec.pdf/v1/Chapter 1/chunk_42
+```
+
+- Search within `/shared/engineering/` to find all chunks under the engineering folder
+- Search within a specific document to limit results to that document
+- Search within a specific version to compare across versions
+
+### Tag Inheritance
+
+Tags are inherited down the content hierarchy. If you tag a folder, all documents and chunks within that folder are automatically included when you search by that tag. This makes it easy to organize and search large knowledge bases.
+
+## Multi-Tenant Isolation
+
+Knowledge Stack ensures complete data isolation between tenants:
+
+- Every search query is automatically scoped to your tenant
+- Per-tenant search indexes provide optimal performance
+- No cross-tenant data leakage is possible at the vector search level
+
+## Data Consistency
+
+The system is eventually consistent. When you make changes in Knowledge Stack (move folders, update tags, upload new versions), the search index updates automatically:
+
+- **Simple changes** (deletions, version switches) are applied immediately
+- **Complex changes** (folder moves, tag updates across many documents) are processed asynchronously and converge quickly
+- **A reconciliation process** runs periodically to detect and fix any drift between the database and the search index
+
+### Version Management
+
+When you set a new active version for a document, the search index automatically:
+1. Deactivates all chunks from the previous version
+2. Activates chunks from the new version
+
+By default, searches only return results from active versions.
+
+## Self-Hosted Deployment
+
+If you are self-hosting Knowledge Stack, you need to run a Qdrant instance. The minimum required version is **v1.16.3**.
+
+### Docker Compose
+
+```yaml
+qdrant:
+  image: qdrant/qdrant:v1.16.3
+  ports:
+    - "6333:6333"   # REST API
+    - "6334:6334"   # gRPC
+  volumes:
+    - qdrant_storage:/qdrant/storage
+```
+
+### Configuration
+
+| Setting | Default | Environment Variable | Description |
+|---|---|---|---|
+| Qdrant URL | `http://localhost:6333` | `QDRANT_URL` | Qdrant server address |
+| Qdrant API Key | (none) | `QDRANT_API_KEY` | API key for authenticated access |

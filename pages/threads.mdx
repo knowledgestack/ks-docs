@@ -1,0 +1,138 @@
+# Threads
+
+Threads let users have conversations with an AI assistant, grounded in the documents in your knowledge base.
+
+## Overview
+
+A thread is a conversation container that holds an ordered sequence of messages. You can use threads for general Q&A, document-specific discussions, or branching side conversations.
+
+Threads and messages are part of the [path system](/path-system), so they integrate naturally with the rest of your knowledge base — including permissions, navigation, and organization.
+
+## Thread types
+
+### Conversation threads
+
+General-purpose threads for open-ended conversations. These live in a user's personal workspace:
+
+```
+/users/{user_id}/threads/{thread_id}
+```
+
+The first time a user creates a thread, their threads folder is automatically set up.
+
+### Asset-specific threads
+
+Threads anchored to a specific document or section. Use these when you want the conversation to be "about" a particular piece of content:
+
+```
+# Thread about a document
+/users/{user_id}/documents/{doc_name}/{thread_id}
+
+# Thread about a specific section
+/users/{user_id}/documents/{doc_name}/v1/{section_name}/{thread_id}
+```
+
+### Subthreads
+
+Any thread can have subthreads — useful for sidebar conversations, brainstorming, or exploring a tangent without cluttering the main thread.
+
+## Working with threads
+
+### Create a thread
+
+```bash
+curl -X POST https://your-instance.example.com/api/v1/threads \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"title": "Q3 planning discussion"}'
+```
+
+### List threads
+
+```bash
+curl https://your-instance.example.com/api/v1/threads \
+  -b cookies.txt
+```
+
+By default, this returns the user's conversation threads.
+
+### Update a thread
+
+```bash
+curl -X PATCH https://your-instance.example.com/api/v1/threads/{thread_id} \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"title": "Updated title"}'
+```
+
+### Delete a thread
+
+```bash
+curl -X DELETE https://your-instance.example.com/api/v1/threads/{thread_id} \
+  -b cookies.txt
+```
+
+Only conversation threads can be deleted, and only by the user who created them.
+
+## Working with messages
+
+Messages are **append-only** — once sent, they cannot be edited or deleted. Each message has a role (`USER`, `ASSISTANT`, or `SYSTEM`) and structured content.
+
+### Send a message
+
+```bash
+curl -X POST https://your-instance.example.com/api/v1/threads/{thread_id}/messages \
+  -H "Content-Type: application/json" \
+  -b cookies.txt \
+  -d '{"role": "USER", "content": "What were the key decisions from last quarter?"}'
+```
+
+### Get a specific message
+
+```bash
+curl https://your-instance.example.com/api/v1/threads/{thread_id}/messages/{message_id} \
+  -b cookies.txt
+```
+
+### List messages
+
+Messages support two pagination modes:
+
+**Cursor-based (recommended for chat UIs)** — Use `before` (a timestamp) and `limit` to page through messages. Stable even when new messages arrive during pagination.
+
+```bash
+# Most recent 25 messages
+curl "https://your-instance.example.com/api/v1/threads/{thread_id}/messages?limit=25" \
+  -b cookies.txt
+
+# Older messages (scroll up)
+curl "https://your-instance.example.com/api/v1/threads/{thread_id}/messages?limit=25&before=2026-02-07T10:30:00Z" \
+  -b cookies.txt
+```
+
+**Offset-based** — Use `offset` and `limit` for simple pagination.
+
+```bash
+curl "https://your-instance.example.com/api/v1/threads/{thread_id}/messages?offset=0&limit=25" \
+  -b cookies.txt
+```
+
+## API reference
+
+### Thread endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/threads` | Create a thread |
+| GET | `/threads` | List threads |
+| GET | `/threads/{id}` | Get a thread |
+| PATCH | `/threads/{id}` | Update a thread |
+| DELETE | `/threads/{id}` | Delete a thread |
+
+### Message endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/threads/{id}/messages` | Send a message |
+| GET | `/threads/{id}/messages` | List messages |
+| GET | `/threads/{id}/messages/{mid}` | Get a message |

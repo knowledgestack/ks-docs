@@ -1,0 +1,148 @@
+# Chunk Handling
+
+This page describes how documents are broken into chunks, how chunks are ordered and batched, and how they are enriched before embedding. For the broader pipeline structure, see the [Workflow Pipeline](/ingestion/temporal-workflow) page.
+
+## Overview
+
+When a document version is ready for embedding, its chunks go through these steps:
+
+1. **Retrieved and ordered** by their position in the document hierarchy
+2. **Split into batches** of up to 200 chunks
+3. **Enriched** with section headings, overlap context, and (for tables) summaries
+4. **Embedded** using the configured embedding model
+5. **Upserted** into the vector database with metadata
+
+The enrichment step is the core concern of this page. It ensures the embedding model receives meaningful context beyond raw chunk content, improving retrieval quality for queries that span section boundaries.
+
+## Chunk Ordering
+
+Chunks are retrieved and ordered by their hierarchical path in the document. This path encodes the full structure: root > document > version > section > chunk.
+
+**Within a section**, chunks are always in correct document order. Chunk identifiers are timestamp-ordered, so sorting them lexicographically matches the order they were created (and thus the order they appear in the source document).
+
+**Across sections**, ordering is lexicographic by section name, not by document position. This is safe because overlap context (used to give the embedding model surrounding context) is only computed within the same section -- never across section boundaries.
+
+## Batch Splitting
+
+The embedding step divides the ordered chunk list into batches (default: 200 chunks per batch). Each batch is processed by an independent parallel worker.
+
+### Handling Batch Boundaries
+
+When a batch boundary falls in the middle of a section, chunks on either side need overlap context from chunks in the adjacent batch. To handle this:
+
+- Each batch receives a reference to the last chunk of the preceding batch and the first chunk of the following batch
+- These "boundary chunks" are fetched alongside the core batch chunks
+- Boundary chunks are used **only** for computing overlap context -- they are not re-embedded by the batch that fetches them
+
+This ensures correct overlap computation even when a section spans multiple batches.
+
+## Embedding Text Enrichment
+
+Before being sent to the embedding model, each chunk's raw content is enriched with additional context. The enrichment strategy depends on the chunk type.
+
+### Section Headings
+
+For all chunk types, section headings are extracted from the chunk's position in the hierarchy. If a chunk lives under "Architecture > Subsystem", the heading prefix becomes:
+
+```
+Section: Architecture > Subsystem
+```
+
+Chunks directly under the document version (not inside any section) receive no heading prefix.
+
+### Text Chunks
+
+Text chunks receive the richest enrichment:
+
+- **Heading prefix** (if inside a section)
+- **Overlap before**: trailing tokens from the previous text chunk in the same section, prefixed with `[...]`
+- **Main content**: the chunk's own text
+- **Overlap after**: leading tokens from the next text chunk in the same section, suffixed with `[...]`
+
+The overlap token count is configurable (default: 64 tokens).
+
+### Table Chunks
+
+Table chunks receive:
+
+- **Heading prefix** (if inside a section)
+- **Main content**: the chunk's HTML table content
+- **Summary**: an LLM-generated summary appended after the content
+
+Table chunks do not participate in overlap context -- they are excluded from the overlap computation.
+
+### Image Chunks
+
+Image chunks receive:
+
+- **Heading prefix** (if inside a section)
+- **Main content**: the LLM-generated description of the image
+
+Image chunks do not participate in overlap context.
+
+## Overlap Context
+
+Overlap context gives the embedding model a sense of what comes before and after each chunk, improving retrieval for queries that match content near chunk boundaries.
+
+### How It Works
+
+1. **Grouping**: Chunks are grouped by their parent section. Only text chunks participate; table and image chunks are excluded.
+2. **Sorting**: Within each group, chunks are sorted by document order.
+3. **Extraction**: For each pair of adjacent text chunks, the preceding chunk contributes its trailing tokens as "overlap before" and the following chunk contributes its leading tokens as "overlap after".
+4. **Single-chunk sections**: If a section has only one text chunk, no overlap is produced.
+
+### Token Budget
+
+Overlap tokens are counted using a tokenizer compatible with the embedding model. The token count applies symmetrically to both before and after context.
+
+## Sub-Batching and Token Limits
+
+After enrichment, the enriched texts may exceed the embedding model's token limit when combined. The system groups enriched texts into sub-batches that respect two limits:
+
+| Limit | Purpose |
+|-------|---------|
+| Maximum tokens per batch | Total tokens across all texts in the batch (model-dependent) |
+| Maximum batch size | Total number of items in the batch (API endpoint limit) |
+
+A new sub-batch is started whenever adding the next chunk would exceed either limit. Individual texts that exceed the batch token limit are truncated to fit (a safety measure -- well-configured chunking should not produce texts this large).
+
+## Visual Chunk Lifecycle
+
+Table and image chunks go through a specific lifecycle:
+
+1. **Chunking** -- created with placeholder content ("SUMMARY PENDING")
+2. **Enrichment** -- LLM generates descriptions or summaries, replacing the placeholder
+3. **Embedding** -- the enriched content is embedded with section context
+
+## Content Deduplication
+
+Multiple chunks can share the same underlying content record. A copy-on-write pattern ensures:
+
+- Identical content is never duplicated within a tenant
+- Concurrent enrichment activities never conflict
+- Shared content records are never mutated in place
+
+## Vector Storage
+
+Each upserted vector point contains:
+
+| Field | Description |
+|-------|-------------|
+| **Dense vector** | From the embedding model |
+| **Sparse vector** | BM25 keyword index using the chunk's raw content (not the enriched text) |
+| **Metadata** | Tenant ID, chunk type, version status, path hierarchy, inherited tags, timestamps |
+
+The enriched embedding text is **not** stored in the vector database. Enrichment exists solely to improve embedding quality at index time. At retrieval time, only the raw content and metadata are returned.
+
+## Version Management
+
+Before a new version's chunks are embedded, all existing vectors for the previous version are marked as inactive. This ensures search results reflect only the latest version while old vectors remain available for historical queries if needed.
+
+## Design Decisions
+
+| Decision | Rationale |
+|---|---|
+| Overlap only within the same section | Sections represent semantically distinct units; cross-section overlap would add noise |
+| Boundary chunks fetched but not embedded | Avoids duplicate embeddings while preserving overlap at batch edges |
+| Enriched text not stored in vectors | Keeps vector payloads lean; enrichment is an index-time optimization |
+| Sparse vectors use raw content | BM25 keyword matching benefits from exact content, not heading/overlap augmentation |

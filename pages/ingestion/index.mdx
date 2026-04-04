@@ -1,0 +1,93 @@
+# Ingestion Pipeline
+
+Convert documents into indexable chunks with queryable metadata and vector embeddings.
+
+## Pipeline Stages
+
+When you upload a document, it goes through these stages:
+
+| Step | Purpose |
+|------|---------|
+| 1. Preparation | Fetch metadata, download source, remove PDF watermarks |
+| 2. Conversion | Convert document to structured format, extract visual assets |
+| 3. Chunking | Break content into sections and chunks following the document's hierarchy |
+| 3.5. Enrichment | Generate descriptions for images and summaries for tables using an LLM |
+| 4. Embedding | Generate vector embeddings for semantic search |
+
+## Supported Formats
+
+PDF, DOCX, PPTX, XLSX, Markdown, and plain text. Maximum file size: 100 MB. Maximum pages: 150.
+
+## Architecture
+
+- **Durable workflows** -- each ingestion job runs as a durable workflow with per-step timeouts and automatic retries, so your documents are processed reliably even if infrastructure hiccups occur.
+- **S3-compatible storage** -- source documents and converted assets are stored in S3-compatible object storage, with per-tenant isolation.
+- **Intelligent conversion** -- documents are converted using a vision-language model pipeline for high-fidelity extraction of text, tables, and images.
+
+## Scalable Processing
+
+Activities are dispatched to specialized task queues, allowing different stages to scale independently:
+
+| Queue | Purpose |
+|-------|---------|
+| Document ingestion | Preparation, chunking, and orchestration |
+| Document conversion | Non-PDF conversion |
+| PDF conversion | PDF conversion (VLM, resource-heavy) |
+| Enrichment | Image and table enrichment via LLM |
+| Embedding | Embedding generation and vector upsert |
+| Vector operations | Vector database maintenance |
+
+## Error Handling
+
+Errors are classified as retryable or permanent:
+
+- **Retryable** (auto-retry with backoff): Rate limits (429), bad gateway (502), service unavailable (503), network errors
+- **Non-retryable** (fail immediately): Bad request (400), unauthorized (401), forbidden (403), not found (404), server error (500)
+
+Each step has up to 3 automatic retries with exponential backoff (starting at 5 seconds, up to 60 seconds).
+
+## Processing Timeouts
+
+| Step | Timeout |
+|------|---------|
+| Document Preparation | 60 seconds |
+| Document Conversion | Up to 2 hours |
+| Chunking | 10 minutes |
+| Chunk Enrichment | 2 minutes per chunk |
+| Embedding | 2 minutes per batch |
+
+Overall workflow execution timeout: 30 minutes.
+
+## How to Ingest a Document
+
+### Upload and ingest
+
+`POST /v1/documents/ingest` (multipart form data)
+
+1. The file format and size are validated
+2. The source file is uploaded to storage
+3. Document and version records are created
+4. The ingestion workflow starts automatically
+5. You receive a `workflow_id`, `document_id`, and `document_version_id`
+
+### Re-embed a folder
+
+`POST /v1/folders/{folder_id}?action=reembed` triggers re-embedding of all documents in a folder and its subfolders. Use this when you need to regenerate embeddings (for example, after switching embedding models).
+
+### Manage workflows
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/v1/workflows` | List all workflows |
+| GET | `/v1/workflows/{id}` | Get workflow details with live status |
+| POST | `/v1/workflows/{id}?action=cancel` | Cancel a running workflow (OWNER/ADMIN only) |
+| POST | `/v1/workflows/{id}?action=rerun` | Re-run a workflow (OWNER/ADMIN only) |
+
+## Reliability
+
+All pipeline operations are designed to be safely retried:
+
+- **Chunking**: Existing content is cleared before re-creating, ensuring a clean slate on retry
+- **Storage uploads**: Overwrites existing objects at the same paths
+- **Content deduplication**: Identical content is never duplicated within a tenant
+- **Metadata updates**: Safely overwrite existing values

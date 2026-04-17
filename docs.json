@@ -19,6 +19,15 @@
             "pages": ["introduction", "quickstart", "architecture"]
           },
           {
+            "group": "SDKs & MCP",
+            "pages": [
+              "sdks/overview",
+              "sdks/mcp-server",
+              "sdks/python",
+              "sdks/typescript"
+            ]
+          },
+          {
             "group": "Concepts",
             "pages": [
               "path-system",
@@ -114,12 +123,23 @@
     "primary": {
       "type": "github",
       "href": "https://github.com/knowledgestack/ks-docs"
-    }
+    },
+    "secondary": [
+      {
+        "label": "Discord",
+        "href": "https://discord.gg/McHmxUeS"
+      },
+      {
+        "label": "Cookbook",
+        "href": "https://github.com/knowledgestack/ks-cookbook"
+      }
+    ]
   },
   "footer": {
     "socials": {
       "github": "https://github.com/knowledgestack",
-      "x": "https://x.com/knowledgestack"
+      "x": "https://x.com/knowledgestack",
+      "discord": "https://discord.gg/McHmxUeS"
     }
   }
 }

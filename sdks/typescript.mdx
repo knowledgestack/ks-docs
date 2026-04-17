@@ -1,0 +1,95 @@
+---
+title: "TypeScript SDK (@knowledge-stack/ksapi)"
+description: "Install, authenticate, and make your first API call from Node, Bun, Deno, Workers, or the browser."
+---
+
+[![npm](https://img.shields.io/npm/v/@knowledge-stack/ksapi)](https://www.npmjs.com/package/@knowledge-stack/ksapi) [![GitHub](https://img.shields.io/badge/GitHub-ks--sdk--ts-181717?logo=github)](https://github.com/knowledgestack/ks-sdk-ts)
+
+## Install
+
+<CodeGroup>
+
+```bash npm
+npm install @knowledge-stack/ksapi
+```
+
+```bash pnpm
+pnpm add @knowledge-stack/ksapi
+```
+
+```bash yarn
+yarn add @knowledge-stack/ksapi
+```
+
+```bash bun
+bun add @knowledge-stack/ksapi
+```
+
+</CodeGroup>
+
+Works in Node.js ≥ 18, Bun, Deno, Cloudflare Workers, and modern browsers.
+
+## Authenticate
+
+<Steps>
+  <Step title="Sign up">
+    Create an account at [app.knowledgestack.ai](https://app.knowledgestack.ai).
+  </Step>
+  <Step title="Issue an API key">
+    From the dashboard, create an API key scoped to your user. It looks like `sk-user-...`.
+  </Step>
+  <Step title="Add it to .env">
+    ```env
+    KS_API_KEY=sk-user-...
+    KS_BASE_URL=https://api.knowledgestack.ai   # optional
+    ```
+  </Step>
+</Steps>
+
+## First call
+
+```ts
+import { Configuration, FoldersApi } from "@knowledge-stack/ksapi";
+
+const config = new Configuration({
+  basePath: process.env.KS_BASE_URL ?? "https://api.knowledgestack.ai",
+  accessToken: process.env.KS_API_KEY,
+});
+
+const folders = new FoldersApi(config);
+const { data } = await folders.listFolders();
+console.log(data);
+```
+
+## Read a document
+
+```ts
+import { DocumentsApi, PathPartsApi } from "@knowledge-stack/ksapi";
+
+const pathParts = new PathPartsApi(config);
+const documents = new DocumentsApi(config);
+
+const hits = await pathParts.findPathParts({ query: "credit policy" });
+const docId = hits.data[0].pathPartId;
+
+const doc = await documents.readDocument({ pathPartId: docId });
+console.log(doc.data);
+```
+
+## Per-request auth (multi-tenant proxies)
+
+```ts
+await folders.listFolders({}, {
+  headers: { Authorization: `Bearer ${perRequestKey}` },
+});
+```
+
+## Building an agent?
+
+<Warning>
+For agent / RAG workflows, use the [MCP server](/mcp/overview) instead. It plugs into every major agent framework without writing glue code.
+</Warning>
+
+## Reference
+
+The full auto-generated API reference lives in the [ks-sdk-ts repo](https://github.com/knowledgestack/ks-sdk-ts/tree/main/docs). It's also mirrored under `sdks/_generated-ts/` in this docs repo, refreshed nightly.

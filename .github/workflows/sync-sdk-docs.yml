@@ -1,0 +1,61 @@
+name: Sync SDK docs
+
+on:
+  schedule:
+    - cron: "0 6 * * *"          # daily at 06:00 UTC
+  workflow_dispatch:
+  repository_dispatch:
+    types: [sdk-release]          # SDK repos can ping us on release
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Clone ks-sdk-python
+        run: git clone --depth 1 https://github.com/knowledgestack/ks-sdk-python.git /tmp/ks-sdk-python
+
+      - name: Clone ks-sdk-ts
+        run: git clone --depth 1 https://github.com/knowledgestack/ks-sdk-ts.git /tmp/ks-sdk-ts
+
+      - name: Sync Python SDK content
+        run: |
+          rm -rf sdks/_generated-python
+          mkdir -p sdks/_generated-python
+          if [ -d /tmp/ks-sdk-python/docs ]; then
+            cp -R /tmp/ks-sdk-python/docs/* sdks/_generated-python/ || true
+          fi
+          cp /tmp/ks-sdk-python/README.md sdks/_generated-python/README.md
+          grep -E '^version' /tmp/ks-sdk-python/pyproject.toml | head -1 > sdks/_generated-python/VERSION
+          (cd /tmp/ks-sdk-python && git rev-parse HEAD) > sdks/_generated-python/COMMIT
+
+      - name: Sync TypeScript SDK content
+        run: |
+          rm -rf sdks/_generated-ts
+          mkdir -p sdks/_generated-ts
+          if [ -d /tmp/ks-sdk-ts/docs ]; then
+            cp -R /tmp/ks-sdk-ts/docs/* sdks/_generated-ts/ || true
+          fi
+          cp /tmp/ks-sdk-ts/README.md sdks/_generated-ts/README.md
+          grep -E '"version"' /tmp/ks-sdk-ts/package.json | head -1 > sdks/_generated-ts/VERSION
+          (cd /tmp/ks-sdk-ts && git rev-parse HEAD) > sdks/_generated-ts/COMMIT
+
+      - name: Commit changes (if any)
+        run: |
+          git config user.name  "ks-docs-sync[bot]"
+          git config user.email "ks-docs-sync@knowledgestack.ai"
+          if [ -n "$(git status --porcelain sdks/_generated-python sdks/_generated-ts)" ]; then
+            git add sdks/_generated-python sdks/_generated-ts
+            git commit -m "chore(sync): pull latest SDK docs ($(date -u +%Y-%m-%d))"
+            git push
+          else
+            echo "No changes — SDK docs already up to date."
+          fi

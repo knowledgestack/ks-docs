@@ -1,0 +1,99 @@
+---
+title: "MCP server"
+description: "Knowledge Stack's Model Context Protocol server — the recommended path for agent and RAG workflows."
+---
+
+[![GitHub](https://img.shields.io/badge/GitHub-ks--mcp-181717?logo=github)](https://github.com/knowledgestack/ks-mcp) [![PyPI](https://img.shields.io/pypi/v/knowledgestack-mcp)](https://pypi.org/project/knowledgestack-mcp/)
+
+`knowledgestack-mcp` is a read-side [MCP](https://modelcontextprotocol.io/) server. It exposes ten tools for searching, listing, and reading documents in your tenant. Plug it into any MCP-speaking client — LangChain, LangGraph, CrewAI, Temporal, OpenAI Agents SDK, pydantic-ai, Claude Desktop, Cursor — without framework-specific glue.
+
+## Install & run
+
+<CodeGroup>
+
+```bash stdio
+uvx knowledgestack-mcp
+```
+
+```bash http
+uvx knowledgestack-mcp --http --port 8765
+```
+
+```bash pip
+pip install knowledgestack-mcp
+knowledgestack-mcp --help
+```
+
+</CodeGroup>
+
+## Configure
+
+```bash
+export KS_API_KEY="sk-user-..."
+export KS_BASE_URL="https://api.knowledgestack.ai"   # optional
+```
+
+## Plug into your agent framework
+
+<CodeGroup>
+
+```python pydantic-ai
+from pydantic_ai import Agent
+from pydantic_ai.mcp import MCPServerStdio
+
+mcp = MCPServerStdio(
+    command="uvx",
+    args=["knowledgestack-mcp"],
+    env={"KS_API_KEY": os.environ["KS_API_KEY"]},
+)
+agent = Agent(model="openai:gpt-4o", mcp_servers=[mcp], output_type=MyOutput)
+```
+
+```python langchain
+from langchain_mcp_adapters.client import MultiServerMCPClient
+
+client = MultiServerMCPClient({
+    "knowledgestack": {
+        "command": "uvx",
+        "args": ["knowledgestack-mcp"],
+        "env": {"KS_API_KEY": os.environ["KS_API_KEY"]},
+        "transport": "stdio",
+    }
+})
+tools = await client.get_tools()
+```
+
+```json claude-desktop
+{
+  "mcpServers": {
+    "knowledgestack": {
+      "command": "uvx",
+      "args": ["knowledgestack-mcp"],
+      "env": { "KS_API_KEY": "sk-user-..." }
+    }
+  }
+}
+```
+
+</CodeGroup>
+
+## Tools (v1, read-only)
+
+| Tool | Purpose |
+|---|---|
+| `list_contents` | children of a folder |
+| `find` | fuzzy name search |
+| `get_info` | metadata + ancestry breadcrumb |
+| `read` | full text of a path-part with `[chunk:<uuid>]` markers |
+| `read_around` | chunks before/after an anchor |
+| `view_chunk_image` | image-chunk bytes |
+| `search_knowledge` | dense-vector semantic search |
+| `search_keyword` | BM25 keyword search |
+| `get_organization_info` | tenant metadata |
+| `get_current_datetime` | UTC + tenant-local datetime |
+
+Writes are intentionally not exposed in v1.
+
+## Cookbook
+
+32 production-style flagships using this MCP server across banking, legal, healthcare, insurance, real estate, sales, HR, engineering, government, pharma, and energy: [knowledgestack/ks-cookbook](https://github.com/knowledgestack/ks-cookbook).

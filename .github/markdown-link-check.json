@@ -1,0 +1,25 @@
+{
+  "ignorePatterns": [
+    { "pattern": "^http://localhost" },
+    { "pattern": "^https://api\\.knowledgestack\\.ai" },
+    { "pattern": "^https://app\\.knowledgestack\\.ai" },
+    { "pattern": "^https://www\\.npmjs\\.com/" },
+    { "pattern": "^https://pypi\\.org/" }
+  ],
+  "replacementPatterns": [
+    {
+      "pattern": "^/",
+      "replacement": "https://docs.knowledgestack.ai/"
+    }
+  ],
+  "httpHeaders": [
+    {
+      "urls": ["https://github.com/", "https://docs.github.com/"],
+      "headers": { "Accept": "text/html" }
+    }
+  ],
+  "retryOn429": true,
+  "retryCount": 3,
+  "fallbackRetryDelay": "30s",
+  "aliveStatusCodes": [200, 206, 301, 302, 303, 307, 308, 403, 429]
+}

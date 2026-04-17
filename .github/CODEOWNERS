@@ -1,0 +1,4 @@
+# Every PR auto-requests review from @knowledgestack/ks-admins.
+# Branch protection on `main` requires code-owner approval.
+
+*       @knowledgestack/ks-admins

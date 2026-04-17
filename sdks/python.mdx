@@ -1,0 +1,84 @@
+---
+title: "Python SDK (ksapi)"
+description: "Install, authenticate, and make your first API call in under five minutes."
+---
+
+[![PyPI](https://img.shields.io/pypi/v/ksapi)](https://pypi.org/project/ksapi/) [![GitHub](https://img.shields.io/badge/GitHub-ks--sdk--python-181717?logo=github)](https://github.com/knowledgestack/ks-sdk-python)
+
+## Install
+
+<CodeGroup>
+
+```bash pip
+pip install ksapi
+```
+
+```bash uv
+uv pip install ksapi
+```
+
+```bash poetry
+poetry add ksapi
+```
+
+</CodeGroup>
+
+Requires Python ≥ 3.9.
+
+## Authenticate
+
+<Steps>
+  <Step title="Sign up">
+    Create an account at [app.knowledgestack.ai](https://app.knowledgestack.ai).
+  </Step>
+  <Step title="Issue an API key">
+    From the dashboard, create an API key scoped to your user. It looks like `sk-user-...`.
+  </Step>
+  <Step title="Export it">
+    ```bash
+    export KS_API_KEY="sk-user-..."
+    export KS_BASE_URL="https://api.knowledgestack.ai"   # optional; prod is default
+    ```
+  </Step>
+</Steps>
+
+## First call
+
+```python
+import os
+import ksapi
+from ksapi.api.folders_api import FoldersApi
+
+config = ksapi.Configuration(
+    host=os.environ.get("KS_BASE_URL", "https://api.knowledgestack.ai"),
+    access_token=os.environ["KS_API_KEY"],
+)
+
+with ksapi.ApiClient(config) as client:
+    folders = FoldersApi(client)
+    for folder in folders.list_folders():
+        print(folder.id, folder.name)
+```
+
+## Read a document
+
+```python
+from ksapi.api.path_parts_api import PathPartsApi
+from ksapi.api.documents_api import DocumentsApi
+
+with ksapi.ApiClient(config) as client:
+    hits = PathPartsApi(client).find_path_parts(query="credit policy")
+    doc_id = hits[0].path_part_id
+    doc = DocumentsApi(client).read_document(path_part_id=doc_id)
+    print(doc.text)
+```
+
+## Building an agent?
+
+<Warning>
+For agent / RAG workflows, use the [MCP server](/mcp/overview) instead. It plugs into every major agent framework without writing glue code.
+</Warning>
+
+## Reference
+
+The full auto-generated API reference lives in the [ks-sdk-python repo](https://github.com/knowledgestack/ks-sdk-python/tree/main/docs). It's also mirrored under `sdks/_generated-python/` in this docs repo, refreshed nightly.

@@ -1,0 +1,34 @@
+---
+title: "SDKs"
+description: "Official client libraries for the Knowledge Stack API — Python and TypeScript."
+---
+
+Knowledge Stack ships two official SDKs:
+
+<CardGroup cols={2}>
+  <Card title="Python — ksapi" icon="python" href="/sdks/python">
+    `pip install ksapi` — [GitHub](https://github.com/knowledgestack/ks-sdk-python) · [PyPI](https://pypi.org/project/ksapi/)
+  </Card>
+  <Card title="TypeScript — @knowledge-stack/ksapi" icon="js" href="/sdks/typescript">
+    `npm install @knowledge-stack/ksapi` — [GitHub](https://github.com/knowledgestack/ks-sdk-ts) · [npm](https://www.npmjs.com/package/@knowledge-stack/ksapi)
+  </Card>
+</CardGroup>
+
+## When to use an SDK vs. the MCP server
+
+<Tip>
+**Building an agent?** Use the MCP server ([ks-mcp](https://github.com/knowledgestack/ks-mcp)) — it plugs into LangChain, LangGraph, CrewAI, Temporal, the OpenAI Agents SDK, Claude Desktop, and Cursor with no glue code. The SDKs are for **admin / write operations** and **infrastructure tooling** (ingestion pipelines, schedulers, tenant management, CI scripts).
+</Tip>
+
+## Auto-generation
+
+Both SDKs are generated from the Knowledge Stack OpenAPI specification via [OpenAPI Generator](https://openapi-generator.tech). The Mintlify pages under `/sdks/python` and `/sdks/typescript` are hand-written; the generated reference docs are synced nightly into `sdks/_generated-python/` and `sdks/_generated-ts/`.
+
+## Versioning
+
+SDK versions follow the Knowledge Stack API version. At any time:
+
+- Python: [PyPI `ksapi`](https://pypi.org/project/ksapi/)
+- TypeScript: [npm `@knowledge-stack/ksapi`](https://www.npmjs.com/package/@knowledge-stack/ksapi)
+
+Breaking API changes bump the major version in lockstep across both SDKs.

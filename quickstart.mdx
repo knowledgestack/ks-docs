@@ -1,193 +1,312 @@
 ---
 title: "Quickstart"
-description: "Get up and running with Knowledge Stack in minutes."
+description: "Ingest a document and run a semantic search in five minutes — pick CLI, Python, TypeScript, or curl."
 ---
 
-## Using the API
+This is the fastest path from a fresh account to a working ingest-and-search loop. Every step shows the same call in four flavors so you can use whatever fits your stack.
 
-### 1. Sign in and get your session token
+<Info>
+Prefer to read the contracts first? Browse the [API Reference](/api-reference) — it's generated from the same `openapi.yaml` that powers the SDKs.
+</Info>
 
-All API requests are authenticated via a session cookie (`ks_uat`). Start by signing in:
+## 1. Install your client
 
-```bash
-curl -X POST https://your-instance.example.com/api/v1/auth/pw/signin \
-  -H "Content-Type: application/json" \
-  -d '{"email": "you@example.com", "password": "your-password"}' \
-  -c cookies.txt
+<CodeGroup>
+```bash kscli
+uv tool install kscli
+kscli --version
 ```
 
-This stores your session cookie in `cookies.txt` for subsequent requests.
-
-### 2. Upload a document
-
-Create a folder and upload your first document:
-
-```bash
-# Create a folder
-curl -X POST https://your-instance.example.com/api/v1/folders \
-  -H "Content-Type: application/json" \
-  -b cookies.txt \
-  -d '{"name": "my-project", "parent_path_part_id": null}'
-
-# Upload a document into the folder
-curl -X POST https://your-instance.example.com/api/v1/documents \
-  -H "Content-Type: multipart/form-data" \
-  -b cookies.txt \
-  -F "file=@report.pdf" \
-  -F "parent_path_part_id=<folder-path-part-id>"
-```
-
-Once uploaded, Knowledge Stack automatically processes your document — converting, chunking, and embedding it for search.
-
-### 3. Search your documents
-
-```bash
-curl -X POST https://your-instance.example.com/api/v1/chunks/search \
-  -H "Content-Type: application/json" \
-  -b cookies.txt \
-  -d '{"query": "What were the key findings?", "top_k": 5}'
-```
-
-You'll get back the most relevant chunks from your documents, ranked by similarity score.
-
-### 4. Start a conversation
-
-```bash
-# Create a thread
-curl -X POST https://your-instance.example.com/api/v1/threads \
-  -H "Content-Type: application/json" \
-  -b cookies.txt \
-  -d '{"title": "Project discussion"}'
-
-# Send a message
-curl -X POST https://your-instance.example.com/api/v1/threads/<thread-id>/messages \
-  -H "Content-Type: application/json" \
-  -b cookies.txt \
-  -d '{"role": "USER", "content": "Summarize the uploaded report"}'
-```
-
-## Using the SDKs
-
-Knowledge Stack provides official SDKs for Python and TypeScript.
-
-### Python
-
-```bash
+```bash Python
 pip install ksapi
+# or: uv add ksapi
 ```
 
-```python
-from ksapi import KSApi
-
-client = KSApi(base_url="https://your-instance.example.com/api/v1")
-client.auth.signin(email="you@example.com", password="your-password")
-
-# Search documents
-results = client.chunks.search(query="key findings", top_k=5)
-for chunk in results:
-    print(f"[{chunk.score:.2f}] {chunk.content}")
-```
-
-### TypeScript
-
-```bash
+```bash TypeScript
 npm install @knowledge-stack/ksapi
+# or: pnpm add @knowledge-stack/ksapi
 ```
 
-```typescript
-import { KSApi } from '@knowledge-stack/ksapi';
+```bash curl
+# nothing to install — just curl + an API key
+```
+</CodeGroup>
 
-const client = new KSApi({ baseUrl: 'https://your-instance.example.com/api/v1' });
-await client.auth.signin({ email: 'you@example.com', password: 'your-password' });
+## 2. Get an API key
 
-// Search documents
-const results = await client.chunks.search({ query: 'key findings', topK: 5 });
-results.forEach(chunk => console.log(`[${chunk.score}] ${chunk.content}`));
+<Steps>
+  <Step title="Open the dashboard">
+    Sign in at [app.knowledgestack.ai](https://app.knowledgestack.ai). Use email/password or Google SSO.
+  </Step>
+  <Step title="Create the key">
+    Avatar → **My Account** → **API Keys** → **Create API key**. Keys start with `sk-user-` and are shown exactly once — copy immediately.
+  </Step>
+  <Step title="Save it where your client expects it">
+    <CodeGroup>
+    ```bash kscli
+    kscli login --api-key sk-user-xxxxxxxxxxxxxxxx
+    kscli whoami
+    ```
+
+    ```bash Python / TypeScript / curl
+    export KS_API_KEY=sk-user-xxxxxxxxxxxxxxxx
+    export KS_BASE_URL=https://api.knowledgestack.ai
+    ```
+    </CodeGroup>
+  </Step>
+</Steps>
+
+<Note>
+Self-hosting? See [Self-hosted setup](#self-hosted-setup) below — `KS_BASE_URL` becomes `https://localhost:18000` and signin uses `/v1/auth/pw/signin` with a session cookie instead of a bearer token.
+</Note>
+
+## 3. Create a folder
+
+Folders organize your corpus and scope every later operation. They live at `POST /v1/folders` ([API ref](/api-reference#tag/folders)).
+
+<CodeGroup>
+```bash kscli
+kscli folders create --name "Quickstart"
+kscli folders list --format yaml   # grab the path_part_id
 ```
 
-## Interactive API docs
+```python Python
+folder = ks.folders.create(name="Quickstart")
+print(folder.id, folder.path_part_id)
+```
 
-Every Knowledge Stack instance includes an interactive API explorer at `/api/docs`. Use it to browse all available endpoints, see request/response schemas, and try out API calls directly from your browser.
+```typescript TypeScript
+const folder = await ks.folders.create({ name: "Quickstart" });
+console.log(folder.id, folder.pathPartId);
+```
+
+```bash curl
+curl -X POST $KS_BASE_URL/v1/folders \
+  -H "Authorization: Bearer $KS_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Quickstart"}'
+```
+</CodeGroup>
+
+<Warning>
+Every folder has **two** UUIDs: `id` (the record) and `path_part_id` (its position in the tree). Use `path_part_id` whenever you need a *parent* — ingesting a document, creating a subfolder, or scoping a search.
+</Warning>
+
+## 4. Ingest a document
+
+`POST /v1/documents/ingest` is multipart — it accepts the file and returns a workflow ID. The Temporal worker converts, chunks, and embeds in the background.
+
+<CodeGroup>
+```bash kscli
+kscli documents ingest \
+  --file ./report.pdf \
+  --path-part-id <folder-path-part-id> \
+  --name "Q4 Report"
+```
+
+```python Python
+with open("report.pdf", "rb") as f:
+    doc = ks.documents.ingest(
+        file=f,
+        parent_path_part_id="<folder-path-part-id>",
+        name="Q4 Report",
+    )
+print(doc.id, doc.workflow_id)
+```
+
+```typescript TypeScript
+import fs from "node:fs";
+
+const doc = await ks.documents.ingest({
+  file: fs.createReadStream("report.pdf"),
+  parentPathPartId: "<folder-path-part-id>",
+  name: "Q4 Report",
+});
+console.log(doc.id, doc.workflowId);
+```
+
+```bash curl
+curl -X POST $KS_BASE_URL/v1/documents/ingest \
+  -H "Authorization: Bearer $KS_API_KEY" \
+  -F "file=@report.pdf" \
+  -F "parent_path_part_id=<folder-path-part-id>" \
+  -F "name=Q4 Report"
+```
+</CodeGroup>
+
+Watch the workflow finish:
+
+<CodeGroup>
+```bash kscli
+kscli workflows list --limit 5
+kscli workflows describe <workflow-id>
+```
+
+```python Python
+wf = ks.workflows.describe(workflow_id=doc.workflow_id)
+print(wf.status)  # RUNNING → COMPLETED
+```
+</CodeGroup>
+
+## 5. Run a semantic search
+
+Once status is `COMPLETED`, chunks are searchable via `POST /v1/chunks/search`. Default mode is dense vector similarity; pass `search_type=hybrid` for vector + BM25 reranked.
+
+<CodeGroup>
+```bash kscli
+kscli chunks search \
+  --query "what drove revenue growth" \
+  --parent-path-ids <folder-path-part-id> \
+  --limit 5
+```
+
+```python Python
+hits = ks.chunks.search(
+    query="what drove revenue growth",
+    parent_path_ids=["<folder-path-part-id>"],
+    top_k=5,
+)
+for h in hits:
+    print(f"[{h.score:.2f}] {h.content[:160]}")
+```
+
+```typescript TypeScript
+const hits = await ks.chunks.search({
+  query: "what drove revenue growth",
+  parentPathIds: ["<folder-path-part-id>"],
+  topK: 5,
+});
+hits.forEach((h) => console.log(`[${h.score.toFixed(2)}] ${h.content.slice(0, 160)}`));
+```
+
+```bash curl
+curl -X POST $KS_BASE_URL/v1/chunks/search \
+  -H "Authorization: Bearer $KS_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "what drove revenue growth",
+    "parent_path_ids": ["<folder-path-part-id>"],
+    "top_k": 5
+  }'
+```
+</CodeGroup>
+
+## 6. Chat with streaming citations
+
+Threads (`/v1/threads`) are stateful conversations grounded in your documents. Messages stream back as Server-Sent Events with inline citations to the chunks that produced each answer.
+
+<CodeGroup>
+```bash kscli
+kscli threads create --title "Earnings deep-dive"
+kscli threads chat <thread-id> --message "Summarize the report" --stream
+```
+
+```python Python
+thread = ks.threads.create(title="Earnings deep-dive")
+for event in ks.threads.stream(
+    thread_id=thread.id,
+    message="Summarize the report",
+):
+    if event.type == "message_delta":
+        print(event.text, end="", flush=True)
+    elif event.type == "citation":
+        print(f"\n  ↳ {event.chunk_id}")
+```
+
+```typescript TypeScript
+const thread = await ks.threads.create({ title: "Earnings deep-dive" });
+for await (const ev of ks.threads.stream({
+  threadId: thread.id,
+  message: "Summarize the report",
+})) {
+  if (ev.type === "message_delta") process.stdout.write(ev.text);
+  if (ev.type === "citation") console.log(`\n  ↳ ${ev.chunkId}`);
+}
+```
+
+```bash curl
+THREAD=$(curl -s -X POST $KS_BASE_URL/v1/threads \
+  -H "Authorization: Bearer $KS_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Earnings deep-dive"}' | jq -r .id)
+
+curl -N -X POST $KS_BASE_URL/v1/threads/$THREAD/stream \
+  -H "Authorization: Bearer $KS_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Summarize the report"}'
+```
+</CodeGroup>
+
+## Where to next
+
+<CardGroup cols={2}>
+  <Card title="Cookbook recipes" icon="book-open" href="https://github.com/knowledgestack/ks-cookbook">
+    Runnable end-to-end examples — RAG, citations, evals, agent workflows.
+  </Card>
+  <Card title="kscli reference" icon="terminal" href="/cli">
+    Every command, output format, and scripting trick.
+  </Card>
+  <Card title="Python SDK" icon="python" href="/sdks/python">
+    Generated from the OpenAPI spec — fully typed, async-ready.
+  </Card>
+  <Card title="TypeScript SDK" icon="js" href="/sdks/typescript">
+    Tree-shakeable client for browsers and Node.
+  </Card>
+  <Card title="MCP server" icon="plug" href="/sdks/mcp-server">
+    Drop into LangGraph, Claude Desktop, Cursor, OpenAI Agents.
+  </Card>
+  <Card title="Architecture" icon="diagram-project" href="/architecture">
+    How ingestion, search, and threads fit together.
+  </Card>
+</CardGroup>
 
 ---
 
 ## Self-hosted setup
 
-If you're running Knowledge Stack locally or on your own infrastructure, follow these steps.
+Running Knowledge Stack on your own hardware? You'll need Python 3.12+, [uv](https://docs.astral.sh/uv/), Docker + Compose, and [mkcert](https://github.com/FiloSottile/mkcert) for local HTTPS.
 
-### Prerequisites
+<Steps>
+  <Step title="Install dev deps">
+    ```bash
+    make install-dev
+    ```
+  </Step>
+  <Step title="Configure secrets">
+    ```bash
+    cp .env.secrets.example .env.secrets
+    ```
+    At minimum: `OPENAI_API_KEY`, `JWT_SECRET_KEY`. See `.env.secrets.example` for the full list.
+  </Step>
+  <Step title="Generate TLS certs">
+    ```bash
+    make certificates
+    ```
+  </Step>
+  <Step title="Start the stack">
+    ```bash
+    make dev-stack   # Postgres, Temporal, MinIO, Nginx
+    make seed        # apply migrations + sample data
+    make dev-api     # API on :8000 / https on :18000
+    make dev-worker  # required for ingestion
+    ```
+  </Step>
+  <Step title="Point your client at it">
+    ```bash
+    export KS_BASE_URL=https://localhost:18000
+    kscli --base-url https://localhost:18000 folders list
+    ```
+    Interactive docs: [https://localhost:18000/api/docs](https://localhost:18000/api/docs)
+  </Step>
+</Steps>
 
-- Python 3.12+
-- [uv](https://docs.astral.sh/uv/) (Python package manager)
-- Docker & Docker Compose
-- [mkcert](https://github.com/FiloSottile/mkcert) (for local HTTPS certificates)
-
-### 1. Install dependencies
-
-```bash
-make install-dev
-```
-
-### 2. Configure secrets
-
-```bash
-cp .env.secrets.example .env.secrets
-```
-
-Fill in your API keys. At minimum, you need `OPENAI_API_KEY` and `JWT_SECRET_KEY`. See `.env.secrets.example` for the full list.
-
-### 3. Generate TLS certificates
-
-```bash
-make certificates
-```
-
-One-time setup for local HTTPS.
-
-### 4. Start the infrastructure
-
-```bash
-make dev-stack
-```
-
-This starts the database, workflow engine, object storage, and HTTPS proxy.
-
-### 5. Initialize the database
-
-```bash
-make seed
-```
-
-Applies all database migrations and loads sample data.
-
-### 6. Start the API server
-
-```bash
-make dev-api
-```
-
-Your API is now running at:
-- `http://localhost:8000` (direct)
-- `https://localhost:18000` (via HTTPS proxy)
-- `https://localhost:18000/api/docs` (interactive docs)
-
-### 7. Start the ingestion worker (optional)
-
-```bash
-make dev-worker
-```
-
-Required for document processing. Without it, uploads will be queued but not processed.
-
-### Common commands
+### Common make targets
 
 | Command | Purpose |
-|---------|---------|
+|---|---|
 | `make test` | Run integration tests |
-| `make lint` | Check code style |
-| `make fix` | Auto-fix style issues |
-| `make typecheck` | Run type checker |
-| `make migrate-up` | Apply pending database migrations |
-| `make apispec` | Regenerate OpenAPI specification |
-| `make sdk-api-ts` | Generate TypeScript SDK |
-| `make sdk-api-python` | Generate Python SDK |
+| `make e2e-api` + `make e2e-test` | End-to-end suite |
+| `make lint` / `make fix` / `make typecheck` | Code style + types |
+| `make migration` / `make migrate-up` / `make migrate-down` | DB migrations |
+| `make apispec` | Regenerate `openapi.yaml` |
+| `make sdk-api-python` / `make sdk-api-ts` | Regenerate SDK clients |

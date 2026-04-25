@@ -132,10 +132,15 @@
       }
     ],
     "primary": {
-      "type": "github",
-      "href": "https://github.com/knowledgestack/ks-docs"
+      "type": "button",
+      "label": "Book a demo",
+      "href": "https://www.knowledgestack.ai/demo"
     },
     "secondary": [
+      {
+        "label": "GitHub",
+        "href": "https://github.com/knowledgestack/ks-docs"
+      },
       {
         "label": "Discord",
         "href": "https://discord.gg/McHmxUeS"

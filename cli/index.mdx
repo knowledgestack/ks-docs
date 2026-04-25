@@ -1,169 +1,246 @@
 ---
-title: "CLI Tool"
-description: "`kscli` is the official command-line interface for Knowledge Stack. It gives you full access to the platform from your terminal — manage folders, upload documents, search your knowledge base, monit..."
+title: "kscli"
+description: "The Knowledge Stack command line — ingest documents, run semantic search, and manage folders without leaving your terminal."
 ---
 
-## Installation
+{/*
+  Hero media: clickable poster linking to the demo page.
+  Swap for the <video> block below once the Remotion MP4 is uploaded to
+  GitHub's user-attachments CDN (see ks-cli/.github/UPLOAD_DEMO_VIDEO.md).
+*/}
+<Frame caption="▶ Watch the 45-second demo — from uv tool install to semantic search">
+  <a href="https://docs.knowledgestack.ai/kscli/demo">
+    <img
+      src="https://docs.knowledgestack.ai/assets/kscli/hero-poster.png"
+      alt="kscli 45-second demo — click to play"
+    />
+  </a>
+</Frame>
 
-Install via `uv` (recommended):
+{/*
+  Once the MP4 exists at a github.com/user-attachments/assets/<uuid> URL,
+  replace the <Frame> above with this:
+
+  <Frame>
+    <video
+      src="https://github.com/user-attachments/assets/PASTE-UUID-HERE"
+      controls
+      muted
+      playsInline
+      poster="https://docs.knowledgestack.ai/assets/kscli/hero-poster.png"
+      style={{ width: "100%", borderRadius: "12px" }}
+    />
+  </Frame>
+*/}
+
+`kscli` is the official command-line interface for Knowledge Stack. It wraps the auto-generated `ksapi` Python SDK with a **resource-first** routing pattern (`kscli <resource> <verb>`, e.g. `kscli folders list`, `kscli documents ingest`) and a Click-based UX designed for humans *and* scripts.
 
 ```bash
 uv tool install kscli
-```
-
-Or via `pip`:
-
-```bash
-pip install kscli
-```
-
-**Requirements:** Python 3.12+
-
-## Quick start
-
-### 1. Get an API key
-
-Create an API key from the Knowledge Stack web app: **My Account > API Keys**.
-
-### 2. Authenticate
-
-```bash
-kscli login --api-key sk-user-your-key-here
-```
-
-Or run `kscli login` and paste the key when prompted.
-
-### 3. Verify
-
-```bash
-kscli whoami
-```
-
-### 4. Start using it
-
-```bash
-# List your folders
-kscli folders list
-
-# Upload a document
+kscli login --api-key sk-user-...
 kscli documents ingest --file report.pdf --path-part-id <folder-path-part-id>
-
-# Search your knowledge base
-kscli chunks search --query "quarterly revenue analysis"
-
-# View document structure
-kscli document-versions contents <version-id> --format tree
+kscli chunks search --query "quarterly revenue" --parent-path-ids <folder-path-part-id>
 ```
+
+## Start here
+
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/cli/quickstart">
+    Zero to first semantic search in under two minutes. Includes dashboard screenshots for API key creation.
+  </Card>
+  <Card title="Authentication" icon="key" href="/cli/authentication">
+    How to create an API key, how `kscli login` stores it, TLS, and exit codes.
+  </Card>
+  <Card title="Commands" icon="terminal" href="/cli/commands">
+    Full reference for every resource group and verb — folders, documents, chunks, tags, workflows, threads, and more.
+  </Card>
+  <Card title="Recipes" icon="book" href="/cli/recipes">
+    Bulk ingest, shell scripts, CI pipelines, pipe-into-jq tricks, multi-environment setups.
+  </Card>
+</CardGroup>
+
+## Install
+
+Requires **Python 3.12+** and [uv](https://docs.astral.sh/uv/).
+
+<Tabs>
+  <Tab title="uv (recommended)">
+    ```bash
+    uv tool install kscli
+    kscli --version
+    ```
+
+    `uv tool install` builds an isolated venv and puts `kscli` on your `PATH`. Upgrade later with `uv tool upgrade kscli`.
+  </Tab>
+  <Tab title="pipx">
+    ```bash
+    pipx install kscli
+    ```
+  </Tab>
+  <Tab title="pip">
+    ```bash
+    pip install kscli
+    ```
+  </Tab>
+  <Tab title="From source">
+    ```bash
+    git clone https://github.com/knowledgestack/ks-cli.git
+    cd ks-cli
+    uv sync --all-extras --group dev
+    ```
+  </Tab>
+</Tabs>
+
+## Get an API key in 60 seconds
+
+<Steps>
+  <Step title="Open the dashboard">
+    Go to [app.knowledgestack.ai](https://app.knowledgestack.ai) and sign in. New users can sign up with email/password or Google SSO.
+  </Step>
+  <Step title="Open My Account → API Keys">
+    Click your avatar (top-right) → **My Account** → **API Keys** tab.
+  </Step>
+  <Step title="Create and copy the key">
+    Click **Create API key**, give it a descriptive label (e.g. `kscli on my laptop`), and **copy the key immediately** — it is shown exactly once. Keys begin with `sk-user-`.
+  </Step>
+  <Step title="Log in from the terminal">
+    ```bash
+    kscli login --api-key sk-user-xxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    ```
+
+    `kscli` validates the key by calling `/users/me`, stores it at `/tmp/kscli/.credentials` with mode `0600`, and records the resolved base URL in `~/.config/kscli/config.json`.
+  </Step>
+  <Step title="Verify">
+    ```bash
+    kscli whoami
+    ```
+  </Step>
+</Steps>
+
+<Note>
+Revoke a key at any time from the same dashboard page. See [Authentication](/cli/authentication) for the full auth model and TLS options.
+</Note>
+
+## Two-minute quickstart
+
+```bash
+# 1. Find the folder you want to drop documents into
+kscli folders list --format tree
+
+# 2. Grab a folder's path_part_id (not its id — they are different UUIDs)
+kscli folders describe <folder-id> --format yaml
+
+# 3. Create a subfolder to keep things tidy (optional)
+kscli folders create --name "Q4 Reports" --parent-path-part-id <parent-path-part-id>
+
+# 4. Ingest a PDF. The server chunks, embeds, and indexes in the background.
+kscli documents ingest \
+    --file ~/Downloads/q4-2025.pdf \
+    --path-part-id <folder-path-part-id> \
+    --name "Q4 2025 earnings"
+
+# 5. Watch the ingestion workflow
+kscli workflows list --limit 5
+
+# 6. Run semantic search scoped to that folder
+kscli chunks search \
+    --query "what drove revenue growth in Q4" \
+    --parent-path-ids <folder-path-part-id> \
+    --limit 5
+```
+
+<Card title="Full walkthrough →" icon="arrow-right" href="/cli/quickstart">
+  Step-by-step quickstart with embedded screencasts for each step.
+</Card>
 
 ## Key features
 
-- **Resource-first commands** — every resource (`folders`, `documents`, `chunks`, etc.) has consistent verbs: `list`, `describe`, `create`, `update`, `delete`
-- **Multiple output formats** — table (default), JSON, YAML, tree view, or ID-only (for scripting)
-- **Bulk operations** — upload entire directory trees with `kscli folders bulk-ingest`
-- **Semantic search** — search by meaning with `kscli chunks search`
-- **Workflow monitoring** — track document processing with `kscli workflows list`
-- **Scriptable** — use `--format json` or `--format id-only` for piping into other tools
+- **Resource-first commands** — every resource (`folders`, `documents`, `chunks`, `tags`, `workflows`, ...) has consistent verbs: `list`, `describe`, `create`, `update`, `delete`
+- **Multiple output formats** — `table` (default), `json`, `yaml`, `tree`, `id-only`
+- **Bulk operations** — `kscli folders bulk-ingest ./dir --folder-id <id>` uploads entire directory trees in one shot
+- **Semantic + full-text search** — `kscli chunks search --search-type dense_only|full_text`
+- **Workflow monitoring** — track ingestion with `kscli workflows list`, `describe`, `cancel`, `rerun`
+- **Scriptable** — pipe `--format id-only` into `xargs`, pipe `--format json` into `jq`
 
 ## Output formats
-
-Control output with `--format` (or `-f`):
 
 | Format | Description | Use case |
 |--------|-------------|----------|
 | `table` | Rich formatted table | Interactive use (default) |
 | `json` | Pretty-printed JSON | Scripting, API debugging |
-| `yaml` | YAML output | Configuration, readability |
+| `yaml` | YAML output | Eyeballing config, readability |
 | `id-only` | One ID per line | Piping into other commands |
-| `tree` | Hierarchical tree view | Viewing folder/document structure |
+| `tree` | Hierarchical tree view | Viewing folder / document structure |
 
-Suppress table headers with `--no-header` (or `-H`).
-
-## Examples
-
-### Browse and search
+Suppress table headers with `--no-header` (or `-H`). Set a persistent default with the `KSCLI_FORMAT` env var.
 
 ```bash
-# List root folders
-kscli folders list
+# Delete every empty folder under a parent
+kscli folders list --parent-path-part-id <id> -f id-only | \
+  xargs -I {} kscli folders delete {}
 
-# List contents of a specific folder (folders + documents)
-kscli folders list --folder-id <id> --show-content
-
-# View folder as a tree
-kscli folders list --folder-id <id> --show-content --format tree
-
-# Search by name
-kscli documents list --parent-path-part-id <folder-id>
-
-# Semantic search across all content
-kscli chunks search --query "how does authentication work"
-
-# Keyword search scoped to a folder
-kscli chunks search --query "ERROR-4021" --search-type full_text --parent-path-ids <folder-id>
+# Pretty-print the first search hit
+kscli chunks search -q "latency SLO" -f json | jq '.[0]'
 ```
 
-### Upload and process
+## PathPart vs domain ID
+
+<Warning>
+Every folder has **two** UUIDs:
+
+- **`id`** — the folder's record ID. Use with `describe`, `update`, `delete`.
+- **`path_part_id`** — its position in the folder tree. Use with anything that needs a *parent* — creating a child folder, ingesting a document under the folder, scoping a search.
 
 ```bash
-# Upload a single document
-kscli documents ingest --file presentation.pptx --path-part-id <folder-path-part-id>
-
-# Bulk upload a directory
-kscli folders bulk-ingest ./reports --folder-id <folder-id> --extensions .pdf,.docx
-
-# Preview a bulk upload (dry run)
-kscli folders bulk-ingest ./reports --folder-id <folder-id> --dry-run
-
-# Monitor processing
-kscli workflows list
-kscli workflows describe <workflow-id>
+kscli folders describe  <folder_id>                          # id
+kscli folders create    --parent-path-part-id <path_part_id> # path_part_id
+kscli documents ingest  --path-part-id <path_part_id>        # path_part_id
+kscli chunks search     --parent-path-ids <path_part_id>     # path_part_id
 ```
 
-### Manage content
+`kscli folders describe ... --format yaml` prints both so you can copy the right one.
+</Warning>
+
+## Configuration
+
+Resolution order: **CLI flags > environment variables > config file > defaults**.
+
+| Env var | Description | Default |
+|---|---|---|
+| `KSCLI_BASE_URL` | API base URL | `https://api-staging.knowledgestack.ai` |
+| `KSCLI_FORMAT` | Default output format | `table` |
+| `KSCLI_VERIFY_SSL` | Enable TLS verification | `true` |
+| `KSCLI_CA_BUNDLE` | Custom CA certificate bundle | certifi / system default |
+| `KSCLI_CONFIG` | Config file path | `~/.config/kscli/config.json` |
+| `KSCLI_CREDENTIALS_PATH` | Credentials directory | `/tmp/kscli` |
+
+Point at a different environment for a single command:
 
 ```bash
-# Create a folder
-kscli folders create --name "Q4 Reports" --parent-path-part-id <parent-id>
-
-# View document versions
-kscli document-versions list --document-id <doc-id>
-
-# View document structure (sections and chunks)
-kscli document-versions contents <version-id> --format tree
-
-# View with inline content
-kscli document-versions contents <version-id> --show-content
-
-# Tag a document
-kscli tags create --name "Important" --color FF0000
-kscli tags attach <tag-id> --path-part-id <document-path-part-id>
+kscli --base-url http://localhost:8000 folders list
 ```
 
-### Conversations
+Full reference: [Configuration](/cli/configuration).
 
-```bash
-# Create a thread
-kscli threads create --title "Research discussion"
+## Where to next
 
-# List your threads
-kscli threads list
-
-# Add a message
-kscli thread-messages create --thread-id <id> --content "What are the key findings?" --role USER
-```
-
-### Administration
-
-```bash
-# List tenant members
-kscli tenants list-users <tenant-id>
-
-# Invite a user
-kscli invites create --email user@example.com --role USER
-
-# Grant folder access
-kscli permissions create --user-id <uid> --path-part-id <folder-id> --capability READ_WRITE
-
-# Cancel a stuck workflow
-kscli workflows cancel <workflow-id>
-```
+<CardGroup cols={2}>
+  <Card title="Quickstart →" icon="rocket" href="/cli/quickstart">
+    Step-by-step with screenshots
+  </Card>
+  <Card title="Authentication →" icon="key" href="/cli/authentication">
+    API keys, credential storage, TLS
+  </Card>
+  <Card title="Commands →" icon="terminal" href="/cli/commands">
+    Every resource and verb
+  </Card>
+  <Card title="Configuration →" icon="gear" href="/cli/configuration">
+    Env vars and precedence
+  </Card>
+  <Card title="Recipes →" icon="book" href="/cli/recipes">
+    Bulk ingest, CI, scripting tricks
+  </Card>
+  <Card title="GitHub →" icon="github" href="https://github.com/knowledgestack/ks-cli">
+    Source, issues, releases
+  </Card>
+</CardGroup>

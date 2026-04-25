@@ -1,94 +1,155 @@
 ---
 title: "Ingestion Pipeline"
-description: "Convert documents into indexable chunks with queryable metadata and vector embeddings."
+description: "How Knowledge Stack turns an uploaded file into searchable, embedded, citation-ready chunks."
 ---
 
-## Pipeline Stages
+When you `POST /v1/documents/ingest`, Knowledge Stack starts a durable Temporal workflow that prepares, converts, chunks, enriches, and embeds the file. The endpoint returns immediately with a `workflow_id` you can poll. Files become searchable as soon as the workflow completes.
 
-When you upload a document, it goes through these stages:
+<Info>
+Looking for the request/response schema? See [`/v1/documents/ingest`](/api-reference#tag/documents/POST/v1/documents/ingest) in the API Reference.
+</Info>
 
-| Step | Purpose |
-|------|---------|
-| 1. Preparation | Fetch metadata, download source, remove PDF watermarks |
-| 2. Conversion | Convert document to structured format, extract visual assets |
-| 3. Chunking | Break content into sections and chunks following the document's hierarchy |
-| 3.5. Enrichment | Generate descriptions for images and summaries for tables using an LLM |
-| 4. Embedding | Generate vector embeddings for semantic search |
+## Ingest a document
 
-## Supported Formats
+<CodeGroup>
+```bash kscli
+kscli documents ingest \
+  --file ./report.pdf \
+  --path-part-id <folder-path-part-id> \
+  --name "Q4 Report"
+```
 
-PDF, DOCX, PPTX, XLSX, Markdown, and plain text. Maximum file size: 100 MB. Maximum pages: 150.
+```python Python
+with open("report.pdf", "rb") as f:
+    doc = ks.documents.ingest(
+        file=f,
+        parent_path_part_id="<folder-path-part-id>",
+        name="Q4 Report",
+    )
+print(doc.workflow_id)
+```
 
-## Architecture
+```typescript TypeScript
+const doc = await ks.documents.ingest({
+  file: fs.createReadStream("report.pdf"),
+  parentPathPartId: "<folder-path-part-id>",
+  name: "Q4 Report",
+});
+console.log(doc.workflowId);
+```
 
-- **Durable workflows** -- each ingestion job runs as a durable workflow with per-step timeouts and automatic retries, so your documents are processed reliably even if infrastructure hiccups occur.
-- **S3-compatible storage** -- source documents and converted assets are stored in S3-compatible object storage, with per-tenant isolation.
-- **Intelligent conversion** -- documents are converted using a vision-language model pipeline for high-fidelity extraction of text, tables, and images.
+```bash curl
+curl -X POST $KS_BASE_URL/v1/documents/ingest \
+  -H "Authorization: Bearer $KS_API_KEY" \
+  -F "file=@report.pdf" \
+  -F "parent_path_part_id=<folder-path-part-id>" \
+  -F "name=Q4 Report"
+```
+</CodeGroup>
 
-## Scalable Processing
+Response (truncated):
 
-Activities are dispatched to specialized task queues, allowing different stages to scale independently:
+```json
+{
+  "document_id": "01J...",
+  "document_version_id": "01J...",
+  "workflow_id": "ingest-01J...",
+  "status": "QUEUED"
+}
+```
 
-| Queue | Purpose |
-|-------|---------|
-| Document ingestion | Preparation, chunking, and orchestration |
-| Document conversion | Non-PDF conversion |
-| PDF conversion | PDF conversion (VLM, resource-heavy) |
-| Enrichment | Image and table enrichment via LLM |
-| Embedding | Embedding generation and vector upsert |
-| Vector operations | Vector database maintenance |
+## Pipeline stages
 
-## Error Handling
+| Step | What happens | Deep dive |
+|---|---|---|
+| **1. Preparation** | Validate format/size, persist source file to S3, create `Document` + `DocumentVersion` rows, dewatermark PDFs. | [PDF watermark](/ingestion/pdf-watermark), [S3 storage](/ingestion/s3-storage) |
+| **2. Conversion** | Route to a converter based on MIME type (Docling for PDFs, Excel pipeline for XLSX, etc.) and extract text + visual assets. | [Routing](/ingestion/routing), [Docling PDF](/ingestion/docling-pdf), [Excel](/ingestion/excel-pipeline) |
+| **3. Chunking** | Walk the document hierarchy, emit `Section` and `Chunk` rows with bounding boxes, page numbers, and roles. | [Chunk handling](/ingestion/chunk-handling) |
+| **3.5. Enrichment** | Generate captions for images and structured summaries for tables via an LLM. | [Chunk handling](/ingestion/chunk-handling) |
+| **4. Embedding** | Embed each chunk and upsert vectors into Qdrant; mark the workflow `COMPLETED`. | [Qdrant](/infrastructure/qdrant), [Temporal workflow](/ingestion/temporal-workflow) |
 
-Errors are classified as retryable or permanent:
+## Supported formats
 
-- **Retryable** (auto-retry with backoff): Rate limits (429), bad gateway (502), service unavailable (503), network errors
-- **Non-retryable** (fail immediately): Bad request (400), unauthorized (401), forbidden (403), not found (404), server error (500)
+PDF, DOCX, PPTX, XLSX, Markdown, plaintext. Hard limits: **100 MB** per file, **150 pages** per document.
 
-Each step has up to 3 automatic retries with exponential backoff (starting at 5 seconds, up to 60 seconds).
+## Watch a workflow
 
-## Processing Timeouts
-
-| Step | Timeout |
-|------|---------|
-| Document Preparation | 60 seconds |
-| Document Conversion | Up to 2 hours |
-| Chunking | 10 minutes |
-| Chunk Enrichment | 2 minutes per chunk |
-| Embedding | 2 minutes per batch |
-
-Overall workflow execution timeout: 30 minutes.
-
-## How to Ingest a Document
-
-### Upload and ingest
-
-`POST /v1/documents/ingest` (multipart form data)
-
-1. The file format and size are validated
-2. The source file is uploaded to storage
-3. Document and version records are created
-4. The ingestion workflow starts automatically
-5. You receive a `workflow_id`, `document_id`, and `document_version_id`
-
-### Re-embed a folder
-
-`POST /v1/folders/{folder_id}?action=reembed` triggers re-embedding of all documents in a folder and its subfolders. Use this when you need to regenerate embeddings (for example, after switching embedding models).
-
-### Manage workflows
+Each ingest returns a `workflow_id`. Poll it via `/v1/workflows`:
 
 | Method | Path | Description |
-|--------|------|-------------|
-| GET | `/v1/workflows` | List all workflows |
-| GET | `/v1/workflows/{id}` | Get workflow details with live status |
-| POST | `/v1/workflows/{id}?action=cancel` | Cancel a running workflow (OWNER/ADMIN only) |
-| POST | `/v1/workflows/{id}?action=rerun` | Re-run a workflow (OWNER/ADMIN only) |
+|---|---|---|
+| GET | `/v1/workflows` | List recent workflows for your tenant |
+| GET | `/v1/workflows/{id}` | Live status, per-activity timing, error traces |
+| POST | `/v1/workflows/{id}?action=cancel` | Cancel (OWNER / ADMIN only) |
+| POST | `/v1/workflows/{id}?action=rerun` | Rerun from scratch (OWNER / ADMIN only) |
 
-## Reliability
+<CodeGroup>
+```bash kscli
+kscli workflows list --limit 5
+kscli workflows describe <workflow-id>
+```
 
-All pipeline operations are designed to be safely retried:
+```python Python
+wf = ks.workflows.describe(workflow_id="ingest-01J...")
+print(wf.status, wf.current_activity)
+```
+</CodeGroup>
 
-- **Chunking**: Existing content is cleared before re-creating, ensuring a clean slate on retry
-- **Storage uploads**: Overwrites existing objects at the same paths
-- **Content deduplication**: Identical content is never duplicated within a tenant
-- **Metadata updates**: Safely overwrite existing values
+## Reliability model
+
+- **Durable** — each step runs as a Temporal activity with timeout + retry policy. The workflow survives worker crashes and infrastructure restarts.
+- **Idempotent** — chunking clears prior content before re-creating; storage uploads overwrite at the same paths; identical content is deduplicated per-tenant.
+- **Observable** — every step emits structured logs, metrics, and a span tree visible in the Temporal UI.
+
+### Retry classification
+
+| Class | Examples | Behavior |
+|---|---|---|
+| **Retryable** | 429, 502, 503, network errors | Up to 3 retries with exponential backoff (5s → 60s) |
+| **Non-retryable** | 400, 401, 403, 404, 500 | Fail immediately; surface error on the workflow |
+
+### Per-step timeouts
+
+| Step | Timeout |
+|---|---|
+| Preparation | 60s |
+| Conversion | up to 2h |
+| Chunking | 10m |
+| Enrichment | 2m / chunk |
+| Embedding | 2m / batch |
+| **Workflow total** | **30m** |
+
+## Specialized task queues
+
+Each stage is dispatched to its own queue so heavy work doesn't block lighter work:
+
+| Queue | Purpose |
+|---|---|
+| `document-ingestion` | Preparation, chunking, orchestration |
+| `document-conversion` | DOCX / PPTX / XLSX / MD conversion |
+| `pdf-conversion` | VLM-backed PDF conversion (GPU-heavy) |
+| `enrichment` | Image captions + table summaries |
+| `embedding` | Embedding generation + Qdrant upsert |
+| `vector-ops` | Reindex, re-embed, vector maintenance |
+
+## Re-embedding a folder
+
+Switching embedding models? Trigger a folder-wide re-embed:
+
+```bash
+curl -X POST $KS_BASE_URL/v1/folders/<folder_id>?action=reembed \
+  -H "Authorization: Bearer $KS_API_KEY"
+```
+
+Recursive — applies to every document under the folder's subtree.
+
+## Recipes
+
+<CardGroup cols={2}>
+  <Card title="Bulk ingest from S3" icon="cloud-arrow-up" href="https://github.com/knowledgestack/ks-cookbook/tree/main/recipes/bulk-ingest-s3">
+    Stream a whole bucket through `/documents/ingest` with backpressure.
+  </Card>
+  <Card title="CI ingest pipeline" icon="github" href="https://github.com/knowledgestack/ks-cookbook/tree/main/recipes/ci-ingest">
+    Re-ingest changed docs on every PR using `kscli`.
+  </Card>
+</CardGroup>

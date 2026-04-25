@@ -4,9 +4,9 @@
   "name": "Knowledge Stack",
   "description": "Documentation for Knowledge Stack — the foundational data layer for enterprise AI.",
   "colors": {
-    "primary": "#0ea5e9",
-    "light": "#38bdf8",
-    "dark": "#0284c7"
+    "primary": "#16a34a",
+    "light": "#4ade80",
+    "dark": "#15803d"
   },
   "background": {
     "decoration": "gradient",

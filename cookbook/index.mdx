@@ -1,0 +1,79 @@
+---
+title: "Cookbook"
+description: "Runnable, end-to-end recipes for Knowledge Stack — clone, set an API key, run."
+---
+
+The [`ks-cookbook`](https://github.com/knowledgestack/ks-cookbook) repository is a curated collection of self-contained recipes that show Knowledge Stack solving real problems. Each recipe is a single folder with a `README.md`, a `requirements.txt` (or `package.json`), and a script you can run end-to-end.
+
+<Card title="github.com/knowledgestack/ks-cookbook" icon="github" href="https://github.com/knowledgestack/ks-cookbook">
+  Browse, fork, and contribute recipes.
+</Card>
+
+## Run any recipe in 60 seconds
+
+<Steps>
+  <Step title="Clone">
+    ```bash
+    git clone https://github.com/knowledgestack/ks-cookbook.git
+    cd ks-cookbook
+    ```
+  </Step>
+  <Step title="Set credentials">
+    ```bash
+    export KS_API_KEY=sk-user-...
+    export KS_BASE_URL=https://api.knowledgestack.ai
+    ```
+  </Step>
+  <Step title="Pick a recipe and run it">
+    ```bash
+    cd recipes/rag-with-citations
+    uv sync
+    uv run main.py --query "what changed in Q4?"
+    ```
+  </Step>
+</Steps>
+
+## Featured recipes
+
+<CardGroup cols={2}>
+  <Card title="RAG with citations" icon="quote-left" href="https://github.com/knowledgestack/ks-cookbook/tree/main/recipes/rag-with-citations">
+    Chunk search → LLM answer with grounded inline citations to the source PDFs.
+  </Card>
+  <Card title="Bulk ingest from S3" icon="cloud-arrow-up" href="https://github.com/knowledgestack/ks-cookbook/tree/main/recipes/bulk-ingest-s3">
+    Stream a whole bucket through `/v1/documents/ingest` with backpressure and workflow tracking.
+  </Card>
+  <Card title="Hybrid search evals" icon="chart-line" href="https://github.com/knowledgestack/ks-cookbook/tree/main/recipes/hybrid-search-evals">
+    Compare dense vs. full-text vs. hybrid on your corpus with a reproducible eval harness.
+  </Card>
+  <Card title="LangGraph agent" icon="diagram-project" href="https://github.com/knowledgestack/ks-cookbook/tree/main/recipes/langgraph-agent">
+    Multi-tool agent that uses the MCP server to search, summarize, and tag documents.
+  </Card>
+  <Card title="Streaming chat UI" icon="comments" href="https://github.com/knowledgestack/ks-cookbook/tree/main/recipes/streaming-chat-ui">
+    Next.js + assistant-ui front end consuming `/v1/threads/{id}/stream` (SSE).
+  </Card>
+  <Card title="CI ingest pipeline" icon="github-actions" href="https://github.com/knowledgestack/ks-cookbook/tree/main/recipes/ci-ingest">
+    GitHub Action that re-ingests changed docs on every PR using `kscli`.
+  </Card>
+</CardGroup>
+
+## Recipe layout
+
+Every recipe follows the same shape so you can read one and know them all:
+
+```
+recipes/<name>/
+├── README.md          # what this shows, prerequisites, run instructions
+├── pyproject.toml     # or package.json
+├── main.py            # or index.ts — the entrypoint
+├── data/              # tiny seed data (or a downloader)
+└── tests/             # optional pytest / vitest assertions
+```
+
+## Contributing a recipe
+
+We accept PRs against the [cookbook repo](https://github.com/knowledgestack/ks-cookbook). A good recipe:
+
+- runs end-to-end with `KS_API_KEY` + `KS_BASE_URL` and nothing else,
+- uses the published `ksapi` / `@knowledge-stack/ksapi` SDK or `kscli`,
+- ships a tiny seed dataset (no large binaries),
+- documents the *why* in the `README.md`, not just the *how*.

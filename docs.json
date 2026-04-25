@@ -16,7 +16,7 @@
         "groups": [
           {
             "group": "Get Started",
-            "pages": ["introduction", "quickstart", "architecture"]
+            "pages": ["introduction", "installation", "quickstart", "architecture"]
           },
           {
             "group": "SDKs & MCP",
@@ -26,6 +26,10 @@
               "sdks/python",
               "sdks/typescript"
             ]
+          },
+          {
+            "group": "Cookbook",
+            "pages": ["cookbook/index"]
           },
           {
             "group": "Concepts",
@@ -88,8 +92,15 @@
             "group": "Operations",
             "pages": [
               {
-                "group": "CLI",
-                "pages": ["cli/index", "cli/commands", "cli/configuration"]
+                "group": "CLI (kscli)",
+                "pages": [
+                  "cli/index",
+                  "cli/quickstart",
+                  "cli/authentication",
+                  "cli/commands",
+                  "cli/configuration",
+                  "cli/recipes"
+                ]
               },
               {
                 "group": "Deployment",

@@ -1,0 +1,146 @@
+---
+title: "Installation"
+description: "Install the CLI, the Python SDK, the TypeScript SDK, or the MCP server."
+---
+
+Knowledge Stack itself is a hosted (or self-hosted) service. What you install locally is one of four clients that talk to it — pick the one that matches your workflow.
+
+<CardGroup cols={2}>
+  <Card title="kscli" icon="terminal" href="/cli">
+    Best for: terminal users, scripts, CI, bulk ingest.
+  </Card>
+  <Card title="Python SDK — ksapi" icon="python" href="/sdks/python">
+    Best for: data pipelines, notebooks, ingestion workers.
+  </Card>
+  <Card title="TypeScript SDK" icon="js" href="/sdks/typescript">
+    Best for: Next.js / Node / Bun / browser apps.
+  </Card>
+  <Card title="MCP server — ks-mcp" icon="plug" href="/sdks/mcp-server">
+    Best for: agents — LangGraph, OpenAI Agents, Claude Desktop, Cursor.
+  </Card>
+</CardGroup>
+
+## CLI — `kscli`
+
+Requires **Python 3.12+** and [uv](https://docs.astral.sh/uv/).
+
+<Tabs>
+  <Tab title="uv (recommended)">
+    ```bash
+    uv tool install kscli
+    kscli --version
+    ```
+    Upgrade later with `uv tool upgrade kscli`.
+  </Tab>
+  <Tab title="pipx">
+    ```bash
+    pipx install kscli
+    ```
+  </Tab>
+  <Tab title="pip">
+    ```bash
+    pip install kscli
+    ```
+  </Tab>
+  <Tab title="From source">
+    ```bash
+    git clone https://github.com/knowledgestack/ks-cli.git
+    cd ks-cli
+    uv sync --all-extras --group dev
+    ```
+  </Tab>
+</Tabs>
+
+## Python SDK — `ksapi`
+
+Requires **Python 3.10+**. Generated from `openapi.yaml` — fully typed, sync + async clients.
+
+<CodeGroup>
+```bash pip
+pip install ksapi
+```
+
+```bash uv
+uv add ksapi
+```
+
+```bash poetry
+poetry add ksapi
+```
+</CodeGroup>
+
+```python
+from ksapi import KSApi
+
+ks = KSApi(api_key="sk-user-...", base_url="https://api.knowledgestack.ai")
+print(ks.users.me())
+```
+
+## TypeScript SDK — `@knowledge-stack/ksapi`
+
+Works in Node 18+, Bun, Deno, and modern browsers. Tree-shakeable.
+
+<CodeGroup>
+```bash npm
+npm install @knowledge-stack/ksapi
+```
+
+```bash pnpm
+pnpm add @knowledge-stack/ksapi
+```
+
+```bash yarn
+yarn add @knowledge-stack/ksapi
+```
+
+```bash bun
+bun add @knowledge-stack/ksapi
+```
+</CodeGroup>
+
+```typescript
+import { KSApi } from "@knowledge-stack/ksapi";
+
+const ks = new KSApi({
+  apiKey: process.env.KS_API_KEY,
+  baseUrl: "https://api.knowledgestack.ai",
+});
+console.log(await ks.users.me());
+```
+
+## MCP server — `ks-mcp`
+
+Lets any MCP-compatible agent host (Claude Desktop, Cursor, LangGraph, OpenAI Agents) call Knowledge Stack as tools.
+
+```bash
+uv tool install ks-mcp
+```
+
+Then register it with your host — see the [MCP server guide](/sdks/mcp-server) for `claude_desktop_config.json`, Cursor, and LangGraph snippets.
+
+## Verify your install
+
+<CodeGroup>
+```bash kscli
+kscli login --api-key sk-user-...
+kscli whoami
+```
+
+```python Python
+from ksapi import KSApi
+ks = KSApi(api_key="sk-user-...")
+print(ks.users.me())
+```
+
+```typescript TypeScript
+import { KSApi } from "@knowledge-stack/ksapi";
+const ks = new KSApi({ apiKey: process.env.KS_API_KEY });
+console.log(await ks.users.me());
+```
+</CodeGroup>
+
+If `users.me` returns your user object, you're ready for the [Quickstart](/quickstart).
+
+## Self-hosting the server
+
+Running Knowledge Stack itself (not just a client) on your own hardware is covered in the [Quickstart's self-hosted setup](/quickstart#self-hosted-setup) and the [Deployment](/deployment) section.

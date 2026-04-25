@@ -134,7 +134,7 @@
     "primary": {
       "type": "button",
       "label": "Book a demo",
-      "href": "https://www.knowledgestack.ai/demo"
+      "href": "https://www.knowledgestack.ai/book-demo"
     },
     "secondary": [
       {

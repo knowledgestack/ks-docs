@@ -1,32 +1,133 @@
 ---
 title: "Knowledge Stack"
-description: "Build AI-powered document workflows with a single API."
+description: "The foundational data layer for enterprise AI — ingest, organize, search, and chat over your documents through one API."
 ---
 
-## What is Knowledge Stack?
+Knowledge Stack turns a pile of documents into an AI-ready knowledge base. Drop in PDFs, DOCX, PPTX, Markdown, or plaintext and you get back a hierarchical, multi-tenant, permission-aware corpus with semantic search, streaming chat, and workflow-driven ingestion — all behind a single REST API.
 
-Knowledge Stack is an API-first platform that lets you **ingest**, **organize**, **search**, and **converse** over your documents. Upload files, and Knowledge Stack automatically structures them into a searchable knowledge base with built-in AI capabilities — all accessible through a REST API.
+<CardGroup cols={2}>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    Make your first ingest + search call in under five minutes — curl, Python, TypeScript, or `kscli`.
+  </Card>
+  <Card title="Install the CLI" icon="terminal" href="/cli">
+    `uv tool install kscli` — ingest folders, run searches, and watch workflows from your terminal.
+  </Card>
+  <Card title="Python & TypeScript SDKs" icon="code" href="/sdks/overview">
+    `pip install ksapi` · `npm install @knowledge-stack/ksapi` — fully typed, generated from the OpenAPI spec.
+  </Card>
+  <Card title="MCP server" icon="plug" href="/sdks/mcp-server">
+    Drop Knowledge Stack into LangGraph, Claude Desktop, Cursor, or any MCP-compatible agent host.
+  </Card>
+  <Card title="Cookbook" icon="book-open" href="https://github.com/knowledgestack/ks-cookbook">
+    Runnable end-to-end recipes — RAG, citations, bulk ingest, evals, agent workflows.
+  </Card>
+  <Card title="API Reference" icon="square-terminal" href="/api-reference">
+    Every endpoint, request, and response — generated from `openapi.yaml`.
+  </Card>
+</CardGroup>
 
-### What you can build
+## Install in 30 seconds
 
-- **AI-powered search** — Let your users search across thousands of documents using natural language. Knowledge Stack handles chunking, embedding, and retrieval so you don't have to.
-- **Document Q&A** — Build conversational interfaces that answer questions grounded in your documents. Stream AI responses in real-time with full source attribution.
-- **Knowledge bases** — Organize documents into a hierarchical folder structure with versioning, sections, and fine-grained access control.
-- **Multi-tenant applications** — Each tenant gets isolated data, roles, and permissions out of the box. Build SaaS products without managing authorization yourself.
+<CodeGroup>
+```bash CLI
+uv tool install kscli
+kscli login --api-key sk-user-...
+```
 
-### Core capabilities
+```bash Python
+pip install ksapi
+```
 
-| Capability | What it does |
-|-----------|-------------|
-| **Document ingestion** | Upload PDFs, DOCX, PPTX, Markdown, and plain text. Files are automatically converted, chunked, and embedded for search. |
-| **Hierarchical organization** | A Unix-inspired path system where folders, documents, versions, sections, and chunks form a navigable tree. |
-| **Semantic search** | Vector similarity search with metadata filters and authorization-aware scoping — users only see results they have access to. |
-| **Conversational threads** | Chat threads with streaming responses, subthreads, and document-anchored conversations. |
-| **Roles & permissions** | Three roles (Owner, Admin, User) with path-level permission grants for fine-grained access control. |
-| **SSO & OAuth2** | Google SSO, tenant-specific OpenID Connect, and email/password authentication. |
+```bash TypeScript
+npm install @knowledge-stack/ksapi
+```
 
-## Next steps
+```bash MCP
+uv tool install ks-mcp
+```
+</CodeGroup>
 
-- [Quickstart](/quickstart) — Make your first API call in minutes
-- [Architecture](/architecture) — Understand how the system is designed
-- [API Reference](/api-reference) — Interactive API explorer
+## Your first call
+
+Ingest a document and run a semantic search. Pick your tool — every example targets the same endpoints.
+
+<CodeGroup>
+```bash kscli
+kscli documents ingest --file report.pdf --path-part-id <folder-path-part-id>
+kscli chunks search --query "key findings" --limit 5
+```
+
+```python Python
+from ksapi import KSApi
+
+ks = KSApi(api_key="sk-user-...")
+ks.documents.ingest(file=open("report.pdf", "rb"), parent_path_part_id="...")
+hits = ks.chunks.search(query="key findings", top_k=5)
+for h in hits:
+    print(f"[{h.score:.2f}] {h.content[:120]}")
+```
+
+```typescript TypeScript
+import { KSApi } from "@knowledge-stack/ksapi";
+
+const ks = new KSApi({ apiKey: "sk-user-..." });
+await ks.documents.ingest({
+  file: fs.createReadStream("report.pdf"),
+  parentPathPartId: "...",
+});
+const hits = await ks.chunks.search({ query: "key findings", topK: 5 });
+hits.forEach((h) => console.log(`[${h.score.toFixed(2)}] ${h.content.slice(0, 120)}`));
+```
+
+```bash curl
+curl -X POST https://api.knowledgestack.ai/v1/documents/ingest \
+  -H "Authorization: Bearer sk-user-..." \
+  -F "file=@report.pdf" \
+  -F "parent_path_part_id=<folder-path-part-id>"
+
+curl -X POST https://api.knowledgestack.ai/v1/chunks/search \
+  -H "Authorization: Bearer sk-user-..." \
+  -H "Content-Type: application/json" \
+  -d '{"query": "key findings", "top_k": 5}'
+```
+</CodeGroup>
+
+## What you can build
+
+| Use case | Building blocks |
+|---|---|
+| **AI search across thousands of documents** | `/v1/documents/ingest` → `/v1/chunks/search` (dense, full-text, or hybrid) |
+| **Document Q&A with cited answers** | `/v1/threads` + `/v1/threads/{id}/stream` (SSE, document-anchored) |
+| **Multi-tenant SaaS knowledge bases** | Tenant isolation, three roles (Owner / Admin / User), path-level grants |
+| **Internal RAG agents** | MCP server plus `ks-cookbook` recipes for LangGraph, OpenAI Agents, CrewAI |
+| **Bulk ingestion pipelines** | `kscli folders bulk-ingest` + Temporal-backed background workflows |
+
+## How the system fits together
+
+<Frame>
+```
+┌──────────┐   upload   ┌──────────────┐   chunks    ┌────────────┐
+│  Client  │ ─────────► │  /documents  │ ──────────► │  Temporal  │
+└──────────┘            └──────────────┘             │  worker    │
+      ▲                                              └─────┬──────┘
+      │ search / chat / stream                             │ embed
+      │                                                    ▼
+┌──────────────┐    rank/filter    ┌──────────────┐  ┌──────────┐
+│  /chunks/    │ ◄──────────────── │   Postgres   │  │  Qdrant  │
+│   search     │                   │  (metadata)  │  │ (vectors)│
+└──────────────┘                   └──────────────┘  └──────────┘
+```
+</Frame>
+
+Read the full picture in [Architecture](/architecture). Key concepts: the [path system](/path-system) (everything is a node in a Unix-style tree), [authentication](/authentication) (cookie or API key), and [authorization](/authorization) (path-level grants).
+
+## Where to next
+
+<CardGroup cols={3}>
+  <Card title="Quickstart" icon="play" href="/quickstart">First ingest + search</Card>
+  <Card title="Architecture" icon="diagram-project" href="/architecture">System overview</Card>
+  <Card title="Path system" icon="folder-tree" href="/path-system">How content is organized</Card>
+  <Card title="Ingestion pipeline" icon="conveyor-belt" href="/ingestion">Conversion, chunking, embedding</Card>
+  <Card title="Semantic search" icon="magnifying-glass" href="/semantic-search">Dense, full-text, hybrid</Card>
+  <Card title="Threads & streaming" icon="comments" href="/threads">Chat with citations</Card>
+</CardGroup>

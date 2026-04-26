@@ -3,34 +3,41 @@ title: "Knowledge Stack"
 description: "The foundational data layer for enterprise AI — ingest, organize, search, and chat over your documents through one API."
 ---
 
-<Frame>
-  <img src="/logo/knowledge-stack.png" alt="Knowledge Stack — build production-ready AI agents in under 1 hour" />
-</Frame>
+<div align="center">
+  <img src="/logo/knowledge-stack.png" alt="Knowledge Stack" width="360" style={{ borderRadius: "12px", margin: "0 auto" }} />
+</div>
 
-Knowledge Stack turns a pile of documents into an AI-ready knowledge base. Drop in PDFs, DOCX, PPTX, Markdown, or plaintext and you get back a hierarchical, multi-tenant, permission-aware corpus with semantic search, streaming chat, and workflow-driven ingestion — all behind a single REST API.
-
-<Card title="Book a demo" icon="calendar" href="https://www.knowledgestack.ai/book-demo">
-  See Knowledge Stack on your own corpus — 30 minutes with an engineer.
-</Card>
+**Build production-ready AI agents in under 1 hour.** Knowledge Stack turns a pile of documents into an AI-ready knowledge base — drop in PDFs, DOCX, PPTX, Markdown, or plaintext and get back a hierarchical, multi-tenant, permission-aware corpus with semantic search, streaming chat, and workflow-driven ingestion behind a single REST API.
 
 <CardGroup cols={2}>
-  <Card title="Quickstart" icon="rocket" href="/quickstart">
-    Make your first ingest + search call in under five minutes — curl, Python, TypeScript, or `kscli`.
+  <Card title="Book a demo" icon="calendar" href="https://www.knowledgestack.ai/book-demo">
+    See Knowledge Stack on your own corpus — 30 minutes with an engineer.
   </Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    First ingest + search call in under five minutes.
+  </Card>
+</CardGroup>
+
+## Pick your client
+
+<CardGroup cols={3}>
   <Card title="Install the CLI" icon="terminal" href="/cli">
-    `uv tool install kscli` — ingest folders, run searches, and watch workflows from your terminal.
+    `uv tool install kscli` — ingest, search, watch workflows from the terminal.
   </Card>
   <Card title="Python & TypeScript SDKs" icon="code" href="/sdks/overview">
-    `pip install ksapi` · `npm install @knowledge-stack/ksapi` — fully typed, generated from the OpenAPI spec.
+    `pip install ksapi` · `npm install @knowledge-stack/ksapi` — fully typed.
   </Card>
   <Card title="MCP server" icon="plug" href="/sdks/mcp-server">
-    Drop Knowledge Stack into LangGraph, Claude Desktop, Cursor, or any MCP-compatible agent host.
+    Drop into LangGraph, Claude Desktop, Cursor, or any MCP-compatible host.
   </Card>
   <Card title="Cookbook" icon="book-open" href="https://github.com/knowledgestack/ks-cookbook">
-    Runnable end-to-end recipes — RAG, citations, bulk ingest, evals, agent workflows.
+    Runnable recipes — RAG, citations, bulk ingest, evals, agent workflows.
   </Card>
   <Card title="API Reference" icon="square-terminal" href="/api-reference">
     Every endpoint, request, and response — generated from `openapi.yaml`.
+  </Card>
+  <Card title="Architecture" icon="diagram-project" href="/architecture">
+    How ingestion, search, threads, and Temporal fit together.
   </Card>
 </CardGroup>
 

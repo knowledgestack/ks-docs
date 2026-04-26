@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.0
 info:
   title: Knowledge Stack API
   description: Knowledge Stack backend API for authentication and knowledge management
@@ -714,6 +714,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PaginatedResponse_TenantResponse_'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/tenants/me:
+    get:
+      tags:
+      - tenants
+      summary: Get Current Tenant Handler
+      description: 'Return the tenant associated with the current identity.
+
+
+        Accepts both JWT cookie and API-key Bearer auth. Used by external agents
+
+        (via the cookbook MCP server) to discover their tenant''s name, language,
+
+        and timezone without knowing their tenant UUID upfront.'
+      operationId: get_current_tenant
+      parameters:
+      - name: authorization
+        in: header
+        required: false
+        schema:
+          type: string
+          nullable: true
+          title: Authorization
+      - name: ks_uat
+        in: cookie
+        required: false
+        schema:
+          type: string
+          nullable: true
+          title: Ks Uat
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantResponse'
         '422':
           description: Validation Error
           content:
@@ -3214,14 +3256,13 @@ paths:
       tags:
       - chunks
       summary: Search Chunks Handler
-      description: 'Search over chunks using dense vector similarity or BM25 full-text.
+      description: 'Search over chunks using dense vector, BM25 full-text, or hybrid
+        retrieval.
 
 
-        Combines vector/keyword search with path-based authorization
+        Combines search with path-based authorization and optional metadata filters.
 
-        and optional metadata filters. Uses Qdrant for search and
-
-        hydrates results from Postgres.'
+        Uses Qdrant for retrieval and hydrates the matched chunks from Postgres.'
       operationId: search_chunks
       parameters:
       - name: authorization
@@ -4103,11 +4144,20 @@ paths:
     post:
       tags:
       - path-parts
-      summary: Bulk Add Path Part Tags Handler
-      description: "Bulk add tags to a path part.\n\nIdempotent \u2014 already-attached\
-        \ tags are skipped.\nReturns 400 if any tag_id doesn't exist (FK violation).\n\
-        Requires write permission on the target path part."
-      operationId: bulk_add_path_part_tags
+      summary: Set Path Part Tags Handler
+      description: 'Set tags on a path part, replacing any existing tags.
+
+
+        The provided tag_ids become the complete tag set for the path part.
+
+        Tags not in the list are removed; missing tags are added.
+
+        An empty list clears all tags.
+
+        Returns 400 if any tag_id doesn''t exist (FK violation).
+
+        Requires write permission on the target path part.'
+      operationId: set_path_part_tags
       parameters:
       - name: path_part_id
         in: path
@@ -4137,7 +4187,7 @@ paths:
             schema:
               $ref: '#/components/schemas/BulkTagRequest'
       responses:
-        '201':
+        '200':
           description: Successful Response
           content:
             application/json:
@@ -6891,13 +6941,13 @@ components:
           type: array
           maxItems: 10
           title: Tag Ids
-          description: List of tag IDs to add/remove
+          description: List of tag IDs to set/remove
       additionalProperties: false
       type: object
       required:
       - tag_ids
       title: BulkTagRequest
-      description: Request to bulk add or remove tags from a path part.
+      description: Request to set or remove tags on a path part.
     ChunkBulkResponse:
       properties:
         id:
@@ -7502,8 +7552,25 @@ components:
           description: Search query text
         search_type:
           $ref: '#/components/schemas/SearchType'
-          description: 'Search type: dense_only (semantic) or full_text (BM25 keyword)'
+          description: 'Search type: dense_only (semantic) or full_text (BM25 keyword),
+            or hybrid (weighted dense+BM25)'
           default: dense_only
+        hybrid_profile:
+          $ref: '#/components/schemas/HybridSearchProfile'
+          description: 'Hybrid weighting preset: hybrid, dense, or sparse'
+          default: hybrid
+        dense_weight:
+          type: number
+          nullable: true
+          title: Dense Weight
+          description: Optional explicit weight for the dense branch. Must be provided
+            together with sparse_weight and overrides hybrid_profile.
+        sparse_weight:
+          type: number
+          nullable: true
+          title: Sparse Weight
+          description: Optional explicit weight for the sparse branch. Must be provided
+            together with dense_weight and overrides hybrid_profile.
         parent_path_ids:
           items:
             type: string
@@ -7565,7 +7632,8 @@ components:
       required:
       - query
       title: ChunkSearchRequest
-      description: Request body for chunk search (dense vector or full-text BM25).
+      description: Request body for chunk search (dense vector, full-text BM25, or
+        hybrid).
     ChunkType:
       type: string
       enum:
@@ -8885,6 +8953,14 @@ components:
       required:
       - database_ts
       title: HealthCheckResponse
+    HybridSearchProfile:
+      type: string
+      enum:
+      - hybrid
+      - dense
+      - sparse
+      title: HybridSearchProfile
+      description: Supported hybrid search weighting presets.
     IdpConfig:
       properties:
         provider:
@@ -10387,7 +10463,7 @@ components:
         score:
           type: number
           title: Score
-          description: Cosine similarity score (1 - cosine_distance)
+          description: Search ranking score returned by Qdrant
       additionalProperties: false
       type: object
       required:
@@ -10405,7 +10481,7 @@ components:
       - updated_at
       - score
       title: ScoredChunkResponse
-      description: Chunk response with similarity score.
+      description: Chunk response with search ranking score.
     SearchSortOrder:
       type: string
       enum:
@@ -10419,6 +10495,7 @@ components:
       enum:
       - dense_only
       - full_text
+      - hybrid
       title: SearchType
       description: Search type for chunk search.
     SearchablePartType:

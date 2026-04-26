@@ -1,18 +1,18 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "maple",
   "name": "Knowledge Stack",
   "description": "Documentation for Knowledge Stack — the foundational data layer for enterprise AI.",
   "colors": {
-    "primary": "#16a34a",
+    "primary": "#22c55e",
     "light": "#4ade80",
-    "dark": "#15803d"
+    "dark": "#16a34a"
   },
   "background": {
-    "decoration": "gradient",
+    "decoration": "grid",
     "color": {
-      "light": "#f1faf2",
-      "dark": "#0b1410"
+      "light": "#f4fbf6",
+      "dark": "#070f0a"
     }
   },
   "favicon": "/favicon.svg",

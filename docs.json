@@ -16,6 +16,10 @@
     }
   },
   "favicon": "/favicon.svg",
+  "logo": {
+    "light": "/logo/knowledge-stack.png",
+    "dark": "/logo/knowledge-stack.png"
+  },
   "navigation": {
     "tabs": [
       {

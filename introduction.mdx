@@ -106,6 +106,20 @@ curl -X POST https://api.knowledgestack.ai/v1/chunks/search \
 | **Internal RAG agents** | MCP server plus `ks-cookbook` recipes for LangGraph, OpenAI Agents, CrewAI |
 | **Bulk ingestion pipelines** | `kscli folders bulk-ingest` + Temporal-backed background workflows |
 
+## See it in action
+
+Knowledge Stack ships a reference workspace UI so your team (and your customers) can ingest, search, and chat without writing a single line of frontend code.
+
+<Frame caption="The Knowledge Stack workspace — chat history, project file tree, search, and a single composer for ingest + chat.">
+  <img src="/images/workspace-home.png" alt="Knowledge Stack workspace home with sidebar of chats and files" />
+</Frame>
+
+<Frame caption="Every assistant response carries grounded numeric citations that link back to the exact source chunk and page.">
+  <img src="/images/citations-in-chat.png" alt="Knowledge Stack chat showing inline citations on each fact in a SCADA report summary" />
+</Frame>
+
+Built-in **citations** are a core primitive — not a bolt-on. See the [Citations guide](/citations) for the SSE event shape, how to render badges, and how to resolve a citation back to its bounding box on the PDF.
+
 ## How the system fits together
 
 <Frame>

@@ -46,6 +46,7 @@
               "authentication",
               "authorization",
               "threads",
+              "citations",
               "semantic-search"
             ]
           },

@@ -1,0 +1,129 @@
+---
+title: "Citations"
+description: "Every answer Knowledge Stack generates is anchored to the exact chunks that produced it — so users (and developers) can trust what the model says."
+---
+
+When you ask a question in a thread, the model doesn't just write back prose — it returns a stream of inline citations. Each citation points to a specific `chunk_id` (with a character offset and length), so the UI can underline the cited span, link to the source document, and let users click through to the original PDF page.
+
+<Frame caption="A workspace chat answer with grounded numeric citations next to every fact.">
+  <img src="/images/citations-in-chat.png" alt="Knowledge Stack chat showing numbered inline citations on every claim" />
+</Frame>
+
+## Why this matters
+
+| Without citations | With citations |
+|---|---|
+| Users can't tell hallucination from truth | Every claim is traceable to a source chunk |
+| Compliance / legal / medical use cases are blocked | Auditors can replay the evidence trail |
+| Devs can't debug bad answers | You can inspect exactly which chunks the model saw |
+
+## How they're produced
+
+`POST /v1/threads/{thread_id}/stream` returns Server-Sent Events. Two event types matter:
+
+- **`message_delta`** — incremental text the model is typing.
+- **`citation`** — a structured pointer: `{chunk_id, start_char, length, quote}`.
+
+Citations stream in alongside the text. Render the prose, attach citations to the spans they cover.
+
+## Stream and render citations
+
+<CodeGroup>
+```python Python
+thread = ks.threads.create(title="Q4 deep-dive")
+
+for ev in ks.threads.stream(thread_id=thread.id, message="What drove revenue?"):
+    if ev.type == "message_delta":
+        print(ev.text, end="", flush=True)
+    elif ev.type == "citation":
+        # ev.chunk_id, ev.start_char, ev.length, ev.quote
+        print(f"\n  ↳ [{ev.chunk_id}] {ev.quote!r}")
+```
+
+```typescript TypeScript
+const thread = await ks.threads.create({ title: "Q4 deep-dive" });
+
+for await (const ev of ks.threads.stream({
+  threadId: thread.id,
+  message: "What drove revenue?",
+})) {
+  if (ev.type === "message_delta") process.stdout.write(ev.text);
+  if (ev.type === "citation") {
+    console.log(`\n  ↳ [${ev.chunkId}] ${JSON.stringify(ev.quote)}`);
+  }
+}
+```
+
+```bash curl
+curl -N -X POST $KS_BASE_URL/v1/threads/$THREAD/stream \
+  -H "Authorization: Bearer $KS_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"message": "What drove revenue?"}'
+# event: message_delta
+# data: {"text": "Revenue grew 18% in Q4..."}
+# event: citation
+# data: {"chunk_id": "01J...", "start_char": 0, "length": 21, "quote": "Revenue grew 18% in Q4"}
+```
+</CodeGroup>
+
+## The citation envelope
+
+```json
+{
+  "chunk_id": "01J7X...",
+  "start_char": 0,
+  "length": 21,
+  "quote": "Revenue grew 18% in Q4"
+}
+```
+
+| Field | What it means |
+|---|---|
+| `chunk_id` | The chunk that grounded this span. Resolve via `GET /v1/chunks/{chunk_id}`. |
+| `start_char` / `length` | Character range inside the assistant message — use it to underline / superscript. |
+| `quote` | The exact text from the source that supports the claim. |
+
+## Resolve a citation to its source
+
+Once you have a `chunk_id`, you can fetch the chunk plus its parent document and page:
+
+<CodeGroup>
+```python Python
+chunk = ks.chunks.get(chunk_id="01J7X...")
+print(chunk.document_id, chunk.page_number, chunk.bbox)
+print(chunk.content)
+```
+
+```typescript TypeScript
+const chunk = await ks.chunks.get({ chunkId: "01J7X..." });
+console.log(chunk.documentId, chunk.pageNumber, chunk.bbox);
+```
+</CodeGroup>
+
+The `bbox` (bounding box) lets you highlight the exact region on the rendered PDF page, so a user clicking a citation jumps not only to the right page but to the right paragraph.
+
+## What the end user sees
+
+In the Knowledge Stack chat workspace, citations render as small numbered badges next to every factual claim. Click a badge → side panel opens to the source chunk → click the chunk → the PDF opens at the highlighted region.
+
+<Frame caption="The same workspace home where users start every conversation that produces these citations.">
+  <img src="/images/workspace-home.png" alt="Knowledge Stack workspace home with chat history, file tree, and search" />
+</Frame>
+
+## Design tips
+
+- **Don't drop citations** — if the model returns a claim with no citation, treat it as low-confidence. Surface it in the UI.
+- **Render citations as you stream** — don't buffer the whole message. Users gain trust when they see the citation appear *with* the claim.
+- **Keep the quote short** — `quote` is meant for tooltips and underlines, not for the citation panel. For the panel, fetch the full chunk via `/v1/chunks/{chunk_id}`.
+- **Respect authorization** — citations only ever point to chunks the requesting user is authorized to read; no extra filtering needed on your side.
+
+## Recipes
+
+<CardGroup cols={2}>
+  <Card title="RAG with citations" icon="quote-left" href="https://github.com/knowledgestack/ks-cookbook/tree/main/recipes/rag-with-citations">
+    Full example: stream answers, render citations, link back to source PDFs.
+  </Card>
+  <Card title="Streaming chat UI" icon="comments" href="https://github.com/knowledgestack/ks-cookbook/tree/main/recipes/streaming-chat-ui">
+    Next.js + assistant-ui front end consuming `/threads/{id}/stream`.
+  </Card>
+</CardGroup>

@@ -27,7 +27,7 @@
         "groups": [
           {
             "group": "Get Started",
-            "pages": ["introduction", "installation", "quickstart", "architecture"]
+            "pages": ["introduction", "why", "showcase", "installation", "quickstart", "architecture"]
           },
           {
             "group": "SDKs & MCP",

@@ -1,0 +1,99 @@
+---
+title: "Watch Knowledge Stack"
+description: "Short product walkthroughs — ingestion, agent integration, citations, and the workspace UI."
+---
+
+Five short videos. Each one is under three minutes and shows a single capability end-to-end on real data. No slides.
+
+<Tip>
+  Want a guided walkthrough on **your own corpus**? [Book a 30-minute demo](https://www.knowledgestack.ai/book-demo) with a founding engineer.
+</Tip>
+
+## 90-second product tour
+
+The fastest way to understand what Knowledge Stack does — ingest a folder of PDFs, run a permission-scoped search, ask a question, and follow a citation back to the source page.
+
+<Frame caption="90-second product tour — ingest, search, chat, cite.">
+  <iframe
+    src="https://www.loom.com/embed/PLACEHOLDER_TOUR_ID"
+    frameBorder="0"
+    allowFullScreen
+    style={{ width: "100%", aspectRatio: "16 / 9", borderRadius: "12px" }}
+  />
+</Frame>
+
+## Ingestion pipeline in action
+
+Watch a 200-page report flow through the Temporal-backed ingestion worker — conversion, chunking, embedding, and the resulting tree of `PathPart` nodes you can search against.
+
+<Frame caption="Bulk ingest with kscli, watching the Temporal worker in real time.">
+  <iframe
+    src="https://www.loom.com/embed/PLACEHOLDER_INGESTION_ID"
+    frameBorder="0"
+    allowFullScreen
+    style={{ width: "100%", aspectRatio: "16 / 9", borderRadius: "12px" }}
+  />
+</Frame>
+
+Read the deep dive: [Ingestion Pipeline](/ingestion) · [Temporal workflow](/ingestion/temporal-workflow) · [Chunk handling](/ingestion/chunk-handling).
+
+## Plug into your agent framework
+
+Same MCP server, three different hosts — LangGraph, the OpenAI Agents SDK, and Claude Desktop — each running a permission-scoped retrieval call against the same Knowledge Stack tenant.
+
+<Frame caption="MCP server connected to LangGraph, OpenAI Agents SDK, and Claude Desktop.">
+  <iframe
+    src="https://www.loom.com/embed/PLACEHOLDER_MCP_ID"
+    frameBorder="0"
+    allowFullScreen
+    style={{ width: "100%", aspectRatio: "16 / 9", borderRadius: "12px" }}
+  />
+</Frame>
+
+More patterns: [MCP server](/sdks/mcp-server) · [Cookbook flagships](https://github.com/knowledgestack/ks-cookbook).
+
+## Citations that survive an audit
+
+Every assistant claim links back to a chunk UUID, a page number, and a bounding box. Click a citation, jump to the highlighted region of the original PDF.
+
+<Frame caption="Inline citations, hover previews, and PDF deep-linking.">
+  <iframe
+    src="https://www.loom.com/embed/PLACEHOLDER_CITATIONS_ID"
+    frameBorder="0"
+    allowFullScreen
+    style={{ width: "100%", aspectRatio: "16 / 9", borderRadius: "12px" }}
+  />
+</Frame>
+
+How it works: [Citations](/citations) · [Threads & streaming](/threads).
+
+## Permission-aware retrieval
+
+Two users. Same query. Different results — by construction, not by post-filtering. We show how path-level grants flow through search and chat.
+
+<Frame caption="Two users, same agent code, different permission-scoped results.">
+  <iframe
+    src="https://www.loom.com/embed/PLACEHOLDER_RBAC_ID"
+    frameBorder="0"
+    allowFullScreen
+    style={{ width: "100%", aspectRatio: "16 / 9", borderRadius: "12px" }}
+  />
+</Frame>
+
+Concept docs: [Path system](/path-system) · [Authorization](/authorization).
+
+---
+
+## Where to next
+
+<CardGroup cols={3}>
+  <Card title="Why Knowledge Stack" icon="sparkles" href="/why">
+    Positioning, differentiators, and where we fit in your stack.
+  </Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">
+    First ingest + search call in under five minutes.
+  </Card>
+  <Card title="Book a demo" icon="calendar" href="https://www.knowledgestack.ai/book-demo">
+    30 minutes with a founding engineer on your own data.
+  </Card>
+</CardGroup>

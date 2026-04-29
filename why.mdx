@@ -1,0 +1,93 @@
+---
+title: "Why Knowledge Stack"
+description: "Focus on agents. We handle document intelligence — ingestion, permissions, versioning, and citation tracking behind a stable MCP surface."
+---
+
+> **Focus on agents. We handle document intelligence.**
+
+Knowledge Stack is the document intelligence layer behind your agents — ingestion, chunking, permissions, versioning, and citation tracking — exposed through a stable MCP surface that plugs into LangChain, LangGraph, CrewAI, Temporal, the OpenAI Agents SDK, pydantic-ai, Claude Desktop, and Cursor.
+
+Build enterprise RAG and agent pipelines in **minutes instead of weeks**.
+
+<CardGroup cols={2}>
+  <Card title="Watch the 90-second tour" icon="play" href="/showcase">
+    Five short videos covering ingestion, agents, citations, and RBAC.
+  </Card>
+  <Card title="Book a demo" icon="calendar" href="https://www.knowledgestack.ai/book-demo">
+    30 minutes on your own corpus with a founding engineer.
+  </Card>
+</CardGroup>
+
+## What we are
+
+- A **developer acceleration layer** for enterprise RAG + agent pipelines.
+- An **MCP-native** retrieval surface that works with every major agent framework.
+- A **permission-aware** document store with **citation-grounded reads**.
+- Framework-agnostic — bring your own model, your own orchestration, your own UI.
+
+## What we are not
+
+- Not an agent framework — use LangChain, LangGraph, CrewAI, or Temporal on top.
+- Not a model provider — bring your own OpenAI / Anthropic / open-source model.
+- Not a generic document store — we are specifically built for agent retrieval with permissions and citations.
+- Not a fine-tuning platform.
+
+## Differentiators
+
+<CardGroup cols={2}>
+  <Card title="Permission-aware retrieval" icon="shield-halved">
+    The same agent code returns different results per user — by construction, not by post-filtering. See [Authorization](/authorization).
+  </Card>
+  <Card title="Chunk-level citations" icon="quote-right">
+    Every claim traces to a chunk UUID, page, and bounding box. Verifiable by auditors. See [Citations](/citations).
+  </Card>
+  <Card title="Version-aware reads" icon="clock-rotate-left">
+    Answer as of any point in time. Revisions, rollback, and time-travel queries are first-class.
+  </Card>
+  <Card title="MCP-native" icon="plug">
+    Portable across every major agent framework without glue code. See [MCP server](/sdks/mcp-server).
+  </Card>
+  <Card title="Production pattern library" icon="books">
+    32 flagship demos across 10+ regulated verticals in [ks-cookbook](https://github.com/knowledgestack/ks-cookbook).
+  </Card>
+  <Card title="Stable, typed surface" icon="code">
+    First-party Python + TypeScript SDKs generated from one OpenAPI spec. See [SDKs](/sdks/overview).
+  </Card>
+</CardGroup>
+
+## Who it's for
+
+Teams building internal AI agents on **large document collections** where **permissions, citations, and structured outputs matter**. Especially:
+
+- **Banking & insurance** — policy and claim Q&A with audit trails.
+- **Healthcare & pharma** — protocol search with versioning and PHI-aware access.
+- **Legal & accounting** — contract and filings retrieval with citation-grounded answers.
+- **Energy & government** — regulated documents with strict role-based scoping.
+
+## How it fits with your stack
+
+| You're already using | How Knowledge Stack plugs in |
+|---|---|
+| **LangChain / LangGraph** | `langchain-mcp-adapters` against our MCP server. See [`flagships/csv_enrichment`](https://github.com/knowledgestack/ks-cookbook/tree/main/flagships/csv_enrichment). |
+| **CrewAI** | Shared retrieval tool across the crew. |
+| **Temporal** | Call the MCP server from activities for durable agent workflows. |
+| **OpenAI Agents SDK** | First-party MCP support — point at `uvx knowledgestack-mcp`. |
+| **pydantic-ai** | Most cookbook flagships use this — native MCP plus schema-enforced output. |
+| **Claude Desktop / Cursor** | Add us as an MCP server — permission-scoped retrieval for your assistant. |
+| **Building from scratch** | Start with [ks-cookbook](https://github.com/knowledgestack/ks-cookbook) — pick the flagship matching your vertical. |
+
+## The pitch, by role
+
+**Platform engineer** — You're already building ingestion pipelines, permission filtering, chunk storage, version tracking, and citation verification. Knowledge Stack does all of that behind an MCP surface. Your agent framework doesn't change. Your team focuses on agent logic.
+
+**ML / AI engineer** — Skip the glue. Our MCP server plugs into LangChain, LangGraph, CrewAI, and the OpenAI Agents SDK. Chunk-level citations and structured output come for free. 32 production-grade flagships show the patterns.
+
+**VP / director** — Enterprise RAG usually takes 6-12 months to ship safely. Knowledge Stack collapses that to weeks. Permission-aware retrieval, audit-ready citations, pattern library across 10+ regulated verticals. Your team ships the agent; we handle the document layer.
+
+---
+
+<CardGroup cols={3}>
+  <Card title="Architecture" icon="diagram-project" href="/architecture">How it all fits together</Card>
+  <Card title="Quickstart" icon="rocket" href="/quickstart">First call in 5 minutes</Card>
+  <Card title="Cookbook" icon="book-open" href="https://github.com/knowledgestack/ks-cookbook">32 flagship recipes</Card>
+</CardGroup>

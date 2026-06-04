@@ -1,0 +1,252 @@
+# ksapi.ThreadMessagesApi
+
+All URIs are relative to *http://localhost:8000*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**create_thread_message**](ThreadMessagesApi.md#create_thread_message) | **POST** /v1/threads/{thread_id}/messages | Create Thread Message Handler
+[**get_thread_message**](ThreadMessagesApi.md#get_thread_message) | **GET** /v1/threads/{thread_id}/messages/{message_id} | Get Thread Message Handler
+[**list_thread_messages**](ThreadMessagesApi.md#list_thread_messages) | **GET** /v1/threads/{thread_id}/messages | List Thread Messages Handler
+
+
+# **create_thread_message**
+> ThreadMessageResponse create_thread_message(thread_id, create_thread_message_request, authorization=authorization, ks_uat=ks_uat)
+
+Create Thread Message Handler
+
+Create a new message in a thread.
+
+### Example
+
+
+```python
+import ksapi
+from ksapi.models.create_thread_message_request import CreateThreadMessageRequest
+from ksapi.models.thread_message_response import ThreadMessageResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.ThreadMessagesApi(api_client)
+    thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    create_thread_message_request = ksapi.CreateThreadMessageRequest() # CreateThreadMessageRequest | 
+    authorization = 'authorization_example' # str |  (optional)
+    ks_uat = 'ks_uat_example' # str |  (optional)
+
+    try:
+        # Create Thread Message Handler
+        api_response = api_instance.create_thread_message(thread_id, create_thread_message_request, authorization=authorization, ks_uat=ks_uat)
+        print("The response of ThreadMessagesApi->create_thread_message:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ThreadMessagesApi->create_thread_message: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **thread_id** | **UUID**|  | 
+ **create_thread_message_request** | [**CreateThreadMessageRequest**](CreateThreadMessageRequest.md)|  | 
+ **authorization** | **str**|  | [optional] 
+ **ks_uat** | **str**|  | [optional] 
+
+### Return type
+
+[**ThreadMessageResponse**](ThreadMessageResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_thread_message**
+> ThreadMessageResponse get_thread_message(thread_id, message_id, with_details=with_details, authorization=authorization, ks_uat=ks_uat)
+
+Get Thread Message Handler
+
+Get a specific message by its ID.
+
+Use `with_details=false` to exclude execution step data and reduce payload size.
+
+### Example
+
+
+```python
+import ksapi
+from ksapi.models.thread_message_response import ThreadMessageResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.ThreadMessagesApi(api_client)
+    thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    message_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    with_details = True # bool | Include execution steps in response (default true) (optional) (default to True)
+    authorization = 'authorization_example' # str |  (optional)
+    ks_uat = 'ks_uat_example' # str |  (optional)
+
+    try:
+        # Get Thread Message Handler
+        api_response = api_instance.get_thread_message(thread_id, message_id, with_details=with_details, authorization=authorization, ks_uat=ks_uat)
+        print("The response of ThreadMessagesApi->get_thread_message:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ThreadMessagesApi->get_thread_message: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **thread_id** | **UUID**|  | 
+ **message_id** | **UUID**|  | 
+ **with_details** | **bool**| Include execution steps in response (default true) | [optional] [default to True]
+ **authorization** | **str**|  | [optional] 
+ **ks_uat** | **str**|  | [optional] 
+
+### Return type
+
+[**ThreadMessageResponse**](ThreadMessageResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_thread_messages**
+> PaginatedResponseThreadMessageResponse list_thread_messages(thread_id, before=before, with_details=with_details, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+
+List Thread Messages Handler
+
+List messages in a thread, ordered by created_at descending.
+
+Supports cursor-based pagination via `before` parameter and
+standard offset-based pagination via `limit`/`offset`.
+
+Use `with_details=false` to exclude execution step data and reduce payload size.
+
+### Example
+
+
+```python
+import ksapi
+from ksapi.models.paginated_response_thread_message_response import PaginatedResponseThreadMessageResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.ThreadMessagesApi(api_client)
+    thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    before = '2013-10-20T19:20:30+01:00' # datetime | Cursor for keyset pagination: only return messages with created_at < this value (optional)
+    with_details = True # bool | Include execution steps in response (default true) (optional) (default to True)
+    limit = 20 # int | Number of items per page (optional) (default to 20)
+    offset = 0 # int | Number of items to skip (optional) (default to 0)
+    authorization = 'authorization_example' # str |  (optional)
+    ks_uat = 'ks_uat_example' # str |  (optional)
+
+    try:
+        # List Thread Messages Handler
+        api_response = api_instance.list_thread_messages(thread_id, before=before, with_details=with_details, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        print("The response of ThreadMessagesApi->list_thread_messages:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling ThreadMessagesApi->list_thread_messages: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **thread_id** | **UUID**|  | 
+ **before** | **datetime**| Cursor for keyset pagination: only return messages with created_at &lt; this value | [optional] 
+ **with_details** | **bool**| Include execution steps in response (default true) | [optional] [default to True]
+ **limit** | **int**| Number of items per page | [optional] [default to 20]
+ **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **authorization** | **str**|  | [optional] 
+ **ks_uat** | **str**|  | [optional] 
+
+### Return type
+
+[**PaginatedResponseThreadMessageResponse**](PaginatedResponseThreadMessageResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+

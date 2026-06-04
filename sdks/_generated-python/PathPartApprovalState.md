@@ -1,0 +1,15 @@
+# PathPartApprovalState
+
+Approval state on any path_part.  The PG enum ``path_part_approval_state`` carries a legacy ``'rejected'`` value that is intentionally NOT mapped here. It survives in the database as a noop — never written, never read. Loading a row whose column holds ``'rejected'`` will fail to decode; prod is empty of such rows.
+
+## Enum
+
+* `NOT_REQUIRED` (value: `'not_required'`)
+
+* `PENDING` (value: `'pending'`)
+
+* `APPROVED` (value: `'approved'`)
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

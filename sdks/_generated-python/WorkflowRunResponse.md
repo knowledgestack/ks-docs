@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **run_thread_id** | **UUID** | The run&#39;s primary chat thread (1:1). NULL while NOT_STARTED; set by Start. The FE opens the run by opening this thread. | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
+**permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; null on mutation responses. | [optional] 
 
 ## Example
 

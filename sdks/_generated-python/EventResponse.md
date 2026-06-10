@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ts** | **datetime** |  | 
 **actor_user_id** | **UUID** |  | 
 **payload** | **Dict[str, object]** |  | 
+**actor** | [**UserInfo**](UserInfo.md) |  | [optional] 
 
 ## Example
 

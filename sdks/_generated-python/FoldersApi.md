@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 
 # **create_folder**
-> FolderResponse create_folder(create_folder_request, authorization=authorization, ks_uat=ks_uat)
+> FolderResponse create_folder(create_folder_request)
 
 Create Folder Handler
 
@@ -26,6 +26,8 @@ It is automatically added to the end of the parent's children list.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -40,18 +42,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FoldersApi(api_client)
     create_folder_request = ksapi.CreateFolderRequest() # CreateFolderRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Create Folder Handler
-        api_response = api_instance.create_folder(create_folder_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.create_folder(create_folder_request)
         print("The response of FoldersApi->create_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -66,8 +81,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_folder_request** | [**CreateFolderRequest**](CreateFolderRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -75,7 +88,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -92,17 +105,16 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_folder**
-> delete_folder(folder_id, authorization=authorization, ks_uat=ks_uat)
+> delete_folder(folder_id)
 
 Delete Folder Handler
 
-Delete a folder and all its contents.
-
-WARNING: This cascades to all children due to parent_id ON DELETE CASCADE.
-The root folder cannot be deleted.
+Move a folder and all its contents to trash.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -115,18 +127,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FoldersApi(api_client)
     folder_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Delete Folder Handler
-        api_instance.delete_folder(folder_id, authorization=authorization, ks_uat=ks_uat)
+        api_instance.delete_folder(folder_id)
     except Exception as e:
         print("Exception when calling FoldersApi->delete_folder: %s\n" % e)
 ```
@@ -139,8 +164,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -148,7 +171,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -165,7 +188,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **folder_action**
-> FolderActionResponse folder_action(folder_id, action, authorization=authorization, ks_uat=ks_uat)
+> FolderActionResponse folder_action(folder_id, action)
 
 Folder Action Handler
 
@@ -176,6 +199,8 @@ Currently supports:
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -190,6 +215,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -197,12 +237,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.FoldersApi(api_client)
     folder_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     action = ksapi.FolderAction() # FolderAction | Action to perform
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Folder Action Handler
-        api_response = api_instance.folder_action(folder_id, action, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.folder_action(folder_id, action)
         print("The response of FoldersApi->folder_action:\n")
         pprint(api_response)
     except Exception as e:
@@ -218,8 +256,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **UUID**|  | 
  **action** | [**FolderAction**](.md)| Action to perform | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -227,7 +263,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -244,12 +280,14 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_folder**
-> FolderResponse get_folder(folder_id, with_tags=with_tags, authorization=authorization, ks_uat=ks_uat)
+> FolderResponse get_folder(folder_id, with_tags=with_tags)
 
 Get Folder Handler
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -263,6 +301,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -270,12 +323,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.FoldersApi(api_client)
     folder_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     with_tags = False # bool | Include tags in the response (default: false) (optional) (default to False)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Folder Handler
-        api_response = api_instance.get_folder(folder_id, with_tags=with_tags, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_folder(folder_id, with_tags=with_tags)
         print("The response of FoldersApi->get_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -291,8 +342,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **UUID**|  | 
  **with_tags** | **bool**| Include tags in the response (default: false) | [optional] [default to False]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -300,7 +349,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -317,7 +366,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_folder_contents**
-> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator list_folder_contents(folder_id, max_depth=max_depth, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator list_folder_contents(folder_id, max_depth=max_depth, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset)
 
 List Folder Contents Handler
 
@@ -333,10 +382,12 @@ For generic path traversal of folders only, use GET /path-parts.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
-from ksapi.models.paginated_response_annotated_union_folder_response_document_response_workflow_definition_response_workflow_run_response_discriminator import PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator
+from ksapi.models.paginated_response_annotated_union_folder_response_document_response_workflow_definition_response_workflow_run_response_data_source_response_data_source_table_response_discriminator import PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator
 from ksapi.models.path_order import PathOrder
 from ksapi.rest import ApiException
 from pprint import pprint
@@ -347,6 +398,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -358,12 +424,10 @@ with ksapi.ApiClient(configuration) as api_client:
     with_tags = False # bool | Include tag IDs for each item (default: false) (optional) (default to False)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List Folder Contents Handler
-        api_response = api_instance.list_folder_contents(folder_id, max_depth=max_depth, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_folder_contents(folder_id, max_depth=max_depth, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset)
         print("The response of FoldersApi->list_folder_contents:\n")
         pprint(api_response)
     except Exception as e:
@@ -383,16 +447,14 @@ Name | Type | Description  | Notes
  **with_tags** | **bool**| Include tag IDs for each item (default: false) | [optional] [default to False]
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
-[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator.md)
+[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -409,7 +471,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_folders**
-> PaginatedResponseFolderResponse list_folders(parent_path_part_id=parent_path_part_id, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponseFolderResponse list_folders(parent_path_part_id=parent_path_part_id, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset)
 
 List Folders Handler
 
@@ -423,6 +485,8 @@ user's personal folder (/users/{user_id}) displayed as "Private".
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -437,6 +501,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -447,12 +526,10 @@ with ksapi.ApiClient(configuration) as api_client:
     with_tags = False # bool | Include tags in the response (default: false) (optional) (default to False)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List Folders Handler
-        api_response = api_instance.list_folders(parent_path_part_id=parent_path_part_id, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_folders(parent_path_part_id=parent_path_part_id, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset)
         print("The response of FoldersApi->list_folders:\n")
         pprint(api_response)
     except Exception as e:
@@ -471,8 +548,6 @@ Name | Type | Description  | Notes
  **with_tags** | **bool**| Include tags in the response (default: false) | [optional] [default to False]
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -480,7 +555,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -497,7 +572,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **search_items**
-> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator search_items(name_like, sort_order=sort_order, part_type=part_type, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator search_items(name_like, sort_order=sort_order, part_type=part_type, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset)
 
 Search Items Handler
 
@@ -511,10 +586,12 @@ searched. Otherwise, all accessible items across the tenant are searched.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
-from ksapi.models.paginated_response_annotated_union_folder_response_document_response_workflow_definition_response_workflow_run_response_discriminator import PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator
+from ksapi.models.paginated_response_annotated_union_folder_response_document_response_workflow_definition_response_workflow_run_response_data_source_response_data_source_table_response_discriminator import PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator
 from ksapi.models.search_sort_order import SearchSortOrder
 from ksapi.models.searchable_part_type import SearchablePartType
 from ksapi.rest import ApiException
@@ -526,6 +603,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -538,12 +630,10 @@ with ksapi.ApiClient(configuration) as api_client:
     parent_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope search to descendants of this folder's path part (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Search Items Handler
-        api_response = api_instance.search_items(name_like, sort_order=sort_order, part_type=part_type, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.search_items(name_like, sort_order=sort_order, part_type=part_type, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset)
         print("The response of FoldersApi->search_items:\n")
         pprint(api_response)
     except Exception as e:
@@ -564,16 +654,14 @@ Name | Type | Description  | Notes
  **parent_path_part_id** | **UUID**| Scope search to descendants of this folder&#39;s path part | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
-[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator.md)
+[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -590,7 +678,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_folder**
-> FolderResponse update_folder(folder_id, update_folder_request, authorization=authorization, ks_uat=ks_uat)
+> FolderResponse update_folder(folder_id, update_folder_request)
 
 Update Folder Handler
 
@@ -604,6 +692,8 @@ Any combination can be sent in a single request.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -618,6 +708,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -625,12 +730,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.FoldersApi(api_client)
     folder_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     update_folder_request = ksapi.UpdateFolderRequest() # UpdateFolderRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Update Folder Handler
-        api_response = api_instance.update_folder(folder_id, update_folder_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.update_folder(folder_id, update_folder_request)
         print("The response of FoldersApi->update_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -646,8 +749,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **folder_id** | **UUID**|  | 
  **update_folder_request** | [**UpdateFolderRequest**](UpdateFolderRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -655,7 +756,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

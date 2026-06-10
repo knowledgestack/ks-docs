@@ -21,6 +21,10 @@
 
 * `WORKFLOW_RUN` (value: `'WORKFLOW_RUN'`)
 
+* `DATA_SOURCE` (value: `'DATA_SOURCE'`)
+
+* `DATA_SOURCE_TABLE` (value: `'DATA_SOURCE_TABLE'`)
+
 * `IMAGE` (value: `'image'`)
 
 * `MEMORY` (value: `'memory'`)

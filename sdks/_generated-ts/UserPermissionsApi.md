@@ -13,7 +13,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## createUserPermission
 
-> PermissionResponse createUserPermission(createPermissionRequest, authorization, ksUat)
+> PermissionResponse createUserPermission(createPermissionRequest)
 
 Create User Permission Handler
 
@@ -30,15 +30,17 @@ import type { CreateUserPermissionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new UserPermissionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UserPermissionsApi(config);
 
   const body = {
     // CreatePermissionRequest
     createPermissionRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateUserPermissionRequest;
 
   try {
@@ -59,8 +61,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **createPermissionRequest** | [CreatePermissionRequest](CreatePermissionRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -68,7 +68,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -87,7 +87,7 @@ No authorization required
 
 ## deleteUserPermission
 
-> deleteUserPermission(permissionId, tenantId, authorization, ksUat)
+> deleteUserPermission(permissionId, tenantId)
 
 Delete User Permission Handler
 
@@ -104,17 +104,19 @@ import type { DeleteUserPermissionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new UserPermissionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UserPermissionsApi(config);
 
   const body = {
     // string
     permissionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | Tenant ID the permission belongs to
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteUserPermissionRequest;
 
   try {
@@ -136,8 +138,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **permissionId** | `string` |  | [Defaults to `undefined`] |
 | **tenantId** | `string` | Tenant ID the permission belongs to | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -145,7 +145,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -164,7 +164,7 @@ No authorization required
 
 ## listUserPermissions
 
-> PaginatedResponsePermissionResponse listUserPermissions(tenantId, userId, limit, offset, authorization, ksUat)
+> PaginatedResponsePermissionResponse listUserPermissions(tenantId, userId, limit, offset)
 
 List User Permissions Handler
 
@@ -181,7 +181,13 @@ import type { ListUserPermissionsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new UserPermissionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UserPermissionsApi(config);
 
   const body = {
     // string | Tenant ID to list permissions for
@@ -192,10 +198,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListUserPermissionsRequest;
 
   try {
@@ -219,8 +221,6 @@ example().catch(console.error);
 | **userId** | `string` | User ID to list permissions for | [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -228,7 +228,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -247,7 +247,7 @@ No authorization required
 
 ## updateUserPermission
 
-> PermissionResponse updateUserPermission(permissionId, tenantId, updatePermissionRequest, authorization, ksUat)
+> PermissionResponse updateUserPermission(permissionId, tenantId, updatePermissionRequest)
 
 Update User Permission Handler
 
@@ -264,7 +264,13 @@ import type { UpdateUserPermissionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new UserPermissionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UserPermissionsApi(config);
 
   const body = {
     // string
@@ -273,10 +279,6 @@ async function example() {
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdatePermissionRequest
     updatePermissionRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateUserPermissionRequest;
 
   try {
@@ -299,8 +301,6 @@ example().catch(console.error);
 | **permissionId** | `string` |  | [Defaults to `undefined`] |
 | **tenantId** | `string` | Tenant ID the permission belongs to | [Defaults to `undefined`] |
 | **updatePermissionRequest** | [UpdatePermissionRequest](UpdatePermissionRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -308,7 +308,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

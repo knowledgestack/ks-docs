@@ -14,7 +14,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## createTag
 
-> TagResponse createTag(createTagRequest, authorization, ksUat)
+> TagResponse createTag(createTagRequest)
 
 Create Tag Handler
 
@@ -31,15 +31,17 @@ import type { CreateTagOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TagsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TagsApi(config);
 
   const body = {
     // CreateTagRequest
     createTagRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateTagOperationRequest;
 
   try {
@@ -60,8 +62,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **createTagRequest** | [CreateTagRequest](CreateTagRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -69,7 +69,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -88,7 +88,7 @@ No authorization required
 
 ## deleteTag
 
-> deleteTag(tagId, authorization, ksUat)
+> deleteTag(tagId)
 
 Delete Tag Handler
 
@@ -105,15 +105,17 @@ import type { DeleteTagRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TagsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TagsApi(config);
 
   const body = {
     // string
     tagId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteTagRequest;
 
   try {
@@ -134,8 +136,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **tagId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -143,7 +143,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -162,7 +162,7 @@ No authorization required
 
 ## getTag
 
-> TagResponse getTag(tagId, authorization, ksUat)
+> TagResponse getTag(tagId)
 
 Get Tag Handler
 
@@ -179,15 +179,17 @@ import type { GetTagRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TagsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TagsApi(config);
 
   const body = {
     // string
     tagId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetTagRequest;
 
   try {
@@ -208,8 +210,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **tagId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -217,7 +217,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -236,7 +236,7 @@ No authorization required
 
 ## listTags
 
-> PaginatedResponseTagResponse listTags(limit, offset, authorization, ksUat)
+> PaginatedResponseTagResponse listTags(limit, offset)
 
 List Tags Handler
 
@@ -253,17 +253,19 @@ import type { ListTagsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TagsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TagsApi(config);
 
   const body = {
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListTagsRequest;
 
   try {
@@ -285,8 +287,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -294,7 +294,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -313,7 +313,7 @@ No authorization required
 
 ## updateTag
 
-> TagResponse updateTag(tagId, updateTagRequest, authorization, ksUat)
+> TagResponse updateTag(tagId, updateTagRequest)
 
 Update Tag Handler
 
@@ -330,17 +330,19 @@ import type { UpdateTagOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TagsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TagsApi(config);
 
   const body = {
     // string
     tagId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdateTagRequest
     updateTagRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateTagOperationRequest;
 
   try {
@@ -362,8 +364,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **tagId** | `string` |  | [Defaults to `undefined`] |
 | **updateTagRequest** | [UpdateTagRequest](UpdateTagRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -371,7 +371,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -30,6 +30,7 @@ Name | Type
 `runThreadId` | string
 `createdAt` | Date
 `updatedAt` | Date
+`permissions` | [ItemPermissions](ItemPermissions.md)
 
 ## Example
 
@@ -61,6 +62,7 @@ const example = {
   "runThreadId": null,
   "createdAt": null,
   "updatedAt": null,
+  "permissions": null,
 } satisfies WorkflowRunResponse
 
 console.log(example)

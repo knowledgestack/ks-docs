@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **get_me**
-> UserResponse get_me(authorization=authorization, ks_uat=ks_uat)
+> UserResponse get_me()
 
 Get Me Handler
 
@@ -23,6 +23,8 @@ Returns the authenticated user's profile along with their current tenant ID
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -36,17 +38,30 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Me Handler
-        api_response = api_instance.get_me(authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_me()
         print("The response of UsersApi->get_me:\n")
         pprint(api_response)
     except Exception as e:
@@ -57,11 +72,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -69,7 +80,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -81,12 +92,11 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **skip_onboarding**
-> UserResponse skip_onboarding(authorization=authorization, ks_uat=ks_uat)
+> UserResponse skip_onboarding()
 
 Skip Onboarding Handler
 
@@ -98,6 +108,8 @@ it is NULL).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -111,17 +123,30 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Skip Onboarding Handler
-        api_response = api_instance.skip_onboarding(authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.skip_onboarding()
         print("The response of UsersApi->skip_onboarding:\n")
         pprint(api_response)
     except Exception as e:
@@ -132,11 +157,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -144,7 +165,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -156,12 +177,11 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_me**
-> UserResponse update_me(update_user_request, authorization=authorization, ks_uat=ks_uat)
+> UserResponse update_me(update_user_request)
 
 Update Me Handler
 
@@ -171,6 +191,8 @@ When updating default_tenant_id, the user must belong to the specified tenant.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -185,18 +207,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
     update_user_request = ksapi.UpdateUserRequest() # UpdateUserRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Update Me Handler
-        api_response = api_instance.update_me(update_user_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.update_me(update_user_request)
         print("The response of UsersApi->update_me:\n")
         pprint(api_response)
     except Exception as e:
@@ -211,8 +246,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **update_user_request** | [**UpdateUserRequest**](UpdateUserRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -220,7 +253,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -237,7 +270,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_onboarding_company**
-> UserResponse update_onboarding_company(onboarding_company_request, authorization=authorization, ks_uat=ks_uat)
+> UserResponse update_onboarding_company(onboarding_company_request)
 
 Update Onboarding Company Handler
 
@@ -254,6 +287,8 @@ returns 409. Post-onboarding edits go through PATCH /v1/tenants/{id}.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -268,18 +303,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
     onboarding_company_request = ksapi.OnboardingCompanyRequest() # OnboardingCompanyRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Update Onboarding Company Handler
-        api_response = api_instance.update_onboarding_company(onboarding_company_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.update_onboarding_company(onboarding_company_request)
         print("The response of UsersApi->update_onboarding_company:\n")
         pprint(api_response)
     except Exception as e:
@@ -294,8 +342,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **onboarding_company_request** | [**OnboardingCompanyRequest**](OnboardingCompanyRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -303,7 +349,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -320,7 +366,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_onboarding_profile**
-> UserResponse update_onboarding_profile(onboarding_profile_request, authorization=authorization, ks_uat=ks_uat)
+> UserResponse update_onboarding_profile(onboarding_profile_request)
 
 Update Onboarding Profile Handler
 
@@ -334,6 +380,8 @@ a future per-membership profile endpoint (job_title).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -348,18 +396,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
     onboarding_profile_request = ksapi.OnboardingProfileRequest() # OnboardingProfileRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Update Onboarding Profile Handler
-        api_response = api_instance.update_onboarding_profile(onboarding_profile_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.update_onboarding_profile(onboarding_profile_request)
         print("The response of UsersApi->update_onboarding_profile:\n")
         pprint(api_response)
     except Exception as e:
@@ -374,8 +435,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **onboarding_profile_request** | [**OnboardingProfileRequest**](OnboardingProfileRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -383,7 +442,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **path_part_id** | **UUID** |  | 
 **capability** | [**PermissionCapability**](PermissionCapability.md) |  | 
+**can_approve** | **bool** |  | [optional] [default to False]
 
 ## Example
 

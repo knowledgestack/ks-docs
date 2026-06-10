@@ -12,12 +12,14 @@ Method | HTTP request | Description
 
 
 # **append_workflow_memory_chunk**
-> MemoryChunkResponse append_workflow_memory_chunk(definition_id, append_memory_chunk_request, authorization=authorization, ks_uat=ks_uat)
+> MemoryChunkResponse append_workflow_memory_chunk(definition_id, append_memory_chunk_request)
 
 Append Workflow Memory Chunk Handler
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -32,6 +34,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -39,12 +56,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.WorkflowMemoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     append_memory_chunk_request = ksapi.AppendMemoryChunkRequest() # AppendMemoryChunkRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Append Workflow Memory Chunk Handler
-        api_response = api_instance.append_workflow_memory_chunk(definition_id, append_memory_chunk_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.append_workflow_memory_chunk(definition_id, append_memory_chunk_request)
         print("The response of WorkflowMemoryApi->append_workflow_memory_chunk:\n")
         pprint(api_response)
     except Exception as e:
@@ -60,8 +75,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **definition_id** | **UUID**|  | 
  **append_memory_chunk_request** | [**AppendMemoryChunkRequest**](AppendMemoryChunkRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -69,7 +82,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -86,12 +99,14 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **edit_workflow_memory_chunk**
-> MemoryChunkResponse edit_workflow_memory_chunk(definition_id, chunk_id, edit_memory_chunk_request, authorization=authorization, ks_uat=ks_uat)
+> MemoryChunkResponse edit_workflow_memory_chunk(definition_id, chunk_id, edit_memory_chunk_request)
 
 Edit Workflow Memory Chunk Handler
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -106,6 +121,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -114,12 +144,10 @@ with ksapi.ApiClient(configuration) as api_client:
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     edit_memory_chunk_request = ksapi.EditMemoryChunkRequest() # EditMemoryChunkRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Edit Workflow Memory Chunk Handler
-        api_response = api_instance.edit_workflow_memory_chunk(definition_id, chunk_id, edit_memory_chunk_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.edit_workflow_memory_chunk(definition_id, chunk_id, edit_memory_chunk_request)
         print("The response of WorkflowMemoryApi->edit_workflow_memory_chunk:\n")
         pprint(api_response)
     except Exception as e:
@@ -136,8 +164,6 @@ Name | Type | Description  | Notes
  **definition_id** | **UUID**|  | 
  **chunk_id** | **UUID**|  | 
  **edit_memory_chunk_request** | [**EditMemoryChunkRequest**](EditMemoryChunkRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -145,7 +171,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -162,12 +188,14 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **forget_workflow_memory_chunk**
-> forget_workflow_memory_chunk(definition_id, chunk_id, authorization=authorization, ks_uat=ks_uat)
+> forget_workflow_memory_chunk(definition_id, chunk_id)
 
 Forget Workflow Memory Chunk Handler
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -180,6 +208,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -187,12 +230,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.WorkflowMemoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Forget Workflow Memory Chunk Handler
-        api_instance.forget_workflow_memory_chunk(definition_id, chunk_id, authorization=authorization, ks_uat=ks_uat)
+        api_instance.forget_workflow_memory_chunk(definition_id, chunk_id)
     except Exception as e:
         print("Exception when calling WorkflowMemoryApi->forget_workflow_memory_chunk: %s\n" % e)
 ```
@@ -206,8 +247,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **definition_id** | **UUID**|  | 
  **chunk_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -215,7 +254,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -232,12 +271,14 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_workflow_memory_chunk**
-> MemoryChunkResponse get_workflow_memory_chunk(definition_id, chunk_id, authorization=authorization, ks_uat=ks_uat)
+> MemoryChunkResponse get_workflow_memory_chunk(definition_id, chunk_id)
 
 Get Workflow Memory Chunk Handler
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -251,6 +292,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -258,12 +314,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.WorkflowMemoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Workflow Memory Chunk Handler
-        api_response = api_instance.get_workflow_memory_chunk(definition_id, chunk_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_workflow_memory_chunk(definition_id, chunk_id)
         print("The response of WorkflowMemoryApi->get_workflow_memory_chunk:\n")
         pprint(api_response)
     except Exception as e:
@@ -279,8 +333,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **definition_id** | **UUID**|  | 
  **chunk_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -288,7 +340,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -305,12 +357,14 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_workflow_memory_chunks**
-> PaginatedResponseMemoryChunkResponse list_workflow_memory_chunks(definition_id, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponseMemoryChunkResponse list_workflow_memory_chunks(definition_id, limit=limit, offset=offset)
 
 List Workflow Memory Chunks Handler
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -324,6 +378,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -332,12 +401,10 @@ with ksapi.ApiClient(configuration) as api_client:
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List Workflow Memory Chunks Handler
-        api_response = api_instance.list_workflow_memory_chunks(definition_id, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_workflow_memory_chunks(definition_id, limit=limit, offset=offset)
         print("The response of WorkflowMemoryApi->list_workflow_memory_chunks:\n")
         pprint(api_response)
     except Exception as e:
@@ -354,8 +421,6 @@ Name | Type | Description  | Notes
  **definition_id** | **UUID**|  | 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -363,7 +428,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

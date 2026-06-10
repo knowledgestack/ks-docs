@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **create_section**
-> SectionResponse create_section(create_section_request, authorization=authorization, ks_uat=ks_uat)
+> SectionResponse create_section(create_section_request)
 
 Create Section Handler
 
@@ -26,6 +26,8 @@ to the end of the sibling list.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -40,18 +42,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SectionsApi(api_client)
     create_section_request = ksapi.CreateSectionRequest() # CreateSectionRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Create Section Handler
-        api_response = api_instance.create_section(create_section_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.create_section(create_section_request)
         print("The response of SectionsApi->create_section:\n")
         pprint(api_response)
     except Exception as e:
@@ -66,8 +81,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_section_request** | [**CreateSectionRequest**](CreateSectionRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -75,7 +88,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -92,7 +105,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_section**
-> delete_section(section_id, authorization=authorization, ks_uat=ks_uat)
+> delete_section(section_id)
 
 Delete Section Handler
 
@@ -102,6 +115,8 @@ WARNING: This cascades to all child sections due to parent_id ON DELETE CASCADE.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -114,18 +129,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SectionsApi(api_client)
     section_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Delete Section Handler
-        api_instance.delete_section(section_id, authorization=authorization, ks_uat=ks_uat)
+        api_instance.delete_section(section_id)
     except Exception as e:
         print("Exception when calling SectionsApi->delete_section: %s\n" % e)
 ```
@@ -138,8 +166,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **section_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -147,7 +173,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -164,7 +190,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **dissolve_section**
-> DissolveSectionResponse dissolve_section(section_id, authorization=authorization, ks_uat=ks_uat)
+> DissolveSectionResponse dissolve_section(section_id)
 
 Dissolve Section Handler
 
@@ -176,6 +202,8 @@ The section itself is then deleted.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -189,18 +217,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SectionsApi(api_client)
     section_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Dissolve Section Handler
-        api_response = api_instance.dissolve_section(section_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.dissolve_section(section_id)
         print("The response of SectionsApi->dissolve_section:\n")
         pprint(api_response)
     except Exception as e:
@@ -215,8 +256,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **section_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -224,7 +263,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -241,7 +280,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_section**
-> SectionResponse get_section(section_id, authorization=authorization, ks_uat=ks_uat)
+> SectionResponse get_section(section_id)
 
 Get Section Handler
 
@@ -249,6 +288,8 @@ Get a section by its ID.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -262,18 +303,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SectionsApi(api_client)
     section_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Section Handler
-        api_response = api_instance.get_section(section_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_section(section_id)
         print("The response of SectionsApi->get_section:\n")
         pprint(api_response)
     except Exception as e:
@@ -288,8 +342,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **section_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -297,7 +349,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -314,7 +366,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_sections_bulk**
-> List[SectionResponse] get_sections_bulk(section_ids=section_ids, authorization=authorization, ks_uat=ks_uat)
+> List[SectionResponse] get_sections_bulk(section_ids=section_ids)
 
 Get Sections Bulk Handler
 
@@ -325,6 +377,8 @@ skipped. Limited to 200 IDs per call.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -338,18 +392,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SectionsApi(api_client)
     section_ids = None # List[UUID] | Section IDs to fetch (max 200) (optional)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Sections Bulk Handler
-        api_response = api_instance.get_sections_bulk(section_ids=section_ids, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_sections_bulk(section_ids=section_ids)
         print("The response of SectionsApi->get_sections_bulk:\n")
         pprint(api_response)
     except Exception as e:
@@ -364,8 +431,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **section_ids** | [**List[UUID]**](UUID.md)| Section IDs to fetch (max 200) | [optional] 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -373,7 +438,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -390,7 +455,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_section**
-> SectionResponse update_section(section_id, update_section_request, authorization=authorization, ks_uat=ks_uat)
+> SectionResponse update_section(section_id, update_section_request)
 
 Update Section Handler
 
@@ -405,6 +470,8 @@ path_part.name will be automatically normalized by a database trigger.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -419,6 +486,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -426,12 +508,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.SectionsApi(api_client)
     section_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     update_section_request = ksapi.UpdateSectionRequest() # UpdateSectionRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Update Section Handler
-        api_response = api_instance.update_section(section_id, update_section_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.update_section(section_id, update_section_request)
         print("The response of SectionsApi->update_section:\n")
         pprint(api_response)
     except Exception as e:
@@ -447,8 +527,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **section_id** | **UUID**|  | 
  **update_section_request** | [**UpdateSectionRequest**](UpdateSectionRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -456,7 +534,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

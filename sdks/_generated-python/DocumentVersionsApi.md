@@ -8,14 +8,16 @@ Method | HTTP request | Description
 [**create_document_version**](DocumentVersionsApi.md#create_document_version) | **POST** /v1/documents/{document_id}/versions | Create Document Version Handler
 [**delete_document_version**](DocumentVersionsApi.md#delete_document_version) | **DELETE** /v1/document_versions/{version_id} | Delete Document Version Handler
 [**document_version_action**](DocumentVersionsApi.md#document_version_action) | **POST** /v1/document_versions/{version_id} | Document Version Action Handler
+[**download_document_version**](DocumentVersionsApi.md#download_document_version) | **POST** /v1/document_versions/{version_id}/download | Download Document Version Handler
 [**get_document_version**](DocumentVersionsApi.md#get_document_version) | **GET** /v1/document_versions/{version_id} | Get Document Version Handler
 [**get_document_version_contents**](DocumentVersionsApi.md#get_document_version_contents) | **GET** /v1/document_versions/{version_id}/contents | Get Document Version Contents Handler
+[**get_document_version_diff**](DocumentVersionsApi.md#get_document_version_diff) | **GET** /v1/document_versions/{version_id}/diff | Get Document Version Diff Handler
 [**list_document_versions**](DocumentVersionsApi.md#list_document_versions) | **GET** /v1/document_versions | List Document Versions Handler
 [**update_document_version_metadata**](DocumentVersionsApi.md#update_document_version_metadata) | **PATCH** /v1/document_versions/{version_id}/metadata | Update Document Version Metadata Handler
 
 
 # **clear_document_version_contents**
-> ClearVersionContentsResponse clear_document_version_contents(version_id, authorization=authorization, ks_uat=ks_uat)
+> ClearVersionContentsResponse clear_document_version_contents(version_id)
 
 Clear Document Version Contents Handler
 
@@ -27,6 +29,8 @@ for idempotent re-processing.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -40,18 +44,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Clear Document Version Contents Handler
-        api_response = api_instance.clear_document_version_contents(version_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.clear_document_version_contents(version_id)
         print("The response of DocumentVersionsApi->clear_document_version_contents:\n")
         pprint(api_response)
     except Exception as e:
@@ -66,8 +83,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **version_id** | **UUID**| DocumentVersion ID | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -75,7 +90,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -92,7 +107,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_document_version**
-> DocumentVersionResponse create_document_version(document_id, authorization=authorization, ks_uat=ks_uat)
+> DocumentVersionResponse create_document_version(document_id)
 
 Create Document Version Handler
 
@@ -102,6 +117,8 @@ The version number is automatically incremented from the highest existing versio
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -115,18 +132,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     document_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Document ID
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Create Document Version Handler
-        api_response = api_instance.create_document_version(document_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.create_document_version(document_id)
         print("The response of DocumentVersionsApi->create_document_version:\n")
         pprint(api_response)
     except Exception as e:
@@ -141,8 +171,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **document_id** | **UUID**| Document ID | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -150,7 +178,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -167,7 +195,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_document_version**
-> delete_document_version(version_id, authorization=authorization, ks_uat=ks_uat)
+> delete_document_version(version_id)
 
 Delete Document Version Handler
 
@@ -177,6 +205,8 @@ Cannot delete the active version of a document.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -189,18 +219,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Delete Document Version Handler
-        api_instance.delete_document_version(version_id, authorization=authorization, ks_uat=ks_uat)
+        api_instance.delete_document_version(version_id)
     except Exception as e:
         print("Exception when calling DocumentVersionsApi->delete_document_version: %s\n" % e)
 ```
@@ -213,8 +256,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **version_id** | **UUID**| DocumentVersion ID | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -222,7 +263,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -239,7 +280,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **document_version_action**
-> DocumentVersionActionResponse document_version_action(version_id, action, authorization=authorization, ks_uat=ks_uat)
+> DocumentVersionActionResponse document_version_action(version_id, action)
 
 Document Version Action Handler
 
@@ -250,6 +291,8 @@ Supported actions:
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -264,6 +307,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -271,12 +329,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
     action = ksapi.DocumentVersionAction() # DocumentVersionAction | Action to perform
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Document Version Action Handler
-        api_response = api_instance.document_version_action(version_id, action, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.document_version_action(version_id, action)
         print("The response of DocumentVersionsApi->document_version_action:\n")
         pprint(api_response)
     except Exception as e:
@@ -292,8 +348,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **version_id** | **UUID**| DocumentVersion ID | 
  **action** | [**DocumentVersionAction**](.md)| Action to perform | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -301,7 +355,99 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **download_document_version**
+> DocumentDownloadResponse download_document_version(version_id, artifact=artifact)
+
+Download Document Version Handler
+
+Issue a short-lived, audited download link for a specific version.
+
+Records a ``document.downloaded`` audit event anchored to the document so
+the customer audit log captures who downloaded which version and when.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.document_download_response import DocumentDownloadResponse
+from ksapi.models.download_artifact import DownloadArtifact
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DocumentVersionsApi(api_client)
+    version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
+    artifact = ksapi.DownloadArtifact() # DownloadArtifact | Artifact to download: source or fast_plaintext (optional)
+
+    try:
+        # Download Document Version Handler
+        api_response = api_instance.download_document_version(version_id, artifact=artifact)
+        print("The response of DocumentVersionsApi->download_document_version:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentVersionsApi->download_document_version: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **version_id** | **UUID**| DocumentVersion ID | 
+ **artifact** | [**DownloadArtifact**](.md)| Artifact to download: source or fast_plaintext | [optional] 
+
+### Return type
+
+[**DocumentDownloadResponse**](DocumentDownloadResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -318,12 +464,14 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_document_version**
-> DocumentVersionResponse get_document_version(version_id, include_page_screenshots=include_page_screenshots, authorization=authorization, ks_uat=ks_uat)
+> DocumentVersionResponse get_document_version(version_id, include_page_screenshots=include_page_screenshots)
 
 Get Document Version Handler
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -337,6 +485,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -344,12 +507,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
     include_page_screenshots = False # bool | When true, populate page_screenshot_urls with presigned URLs for every per-page WEBP screenshot the ingestion pipeline produced. Off by default to keep typical responses small. (optional) (default to False)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Document Version Handler
-        api_response = api_instance.get_document_version(version_id, include_page_screenshots=include_page_screenshots, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_document_version(version_id, include_page_screenshots=include_page_screenshots)
         print("The response of DocumentVersionsApi->get_document_version:\n")
         pprint(api_response)
     except Exception as e:
@@ -365,8 +526,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **version_id** | **UUID**| DocumentVersion ID | 
  **include_page_screenshots** | **bool**| When true, populate page_screenshot_urls with presigned URLs for every per-page WEBP screenshot the ingestion pipeline produced. Off by default to keep typical responses small. | [optional] [default to False]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -374,7 +533,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -391,7 +550,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_document_version_contents**
-> PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator get_document_version_contents(version_id, section_id=section_id, content_type=content_type, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator get_document_version_contents(version_id, section_id=section_id, content_type=content_type, limit=limit, offset=offset)
 
 Get Document Version Contents Handler
 
@@ -405,6 +564,8 @@ chunk-only pagination where offset/limit apply only to chunks).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -419,6 +580,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -429,12 +605,10 @@ with ksapi.ApiClient(configuration) as api_client:
     content_type = ksapi.DocumentVersionContentTypeFilter() # DocumentVersionContentTypeFilter | Filter by content type: SECTION or CHUNK. Omit to return both types. (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Document Version Contents Handler
-        api_response = api_instance.get_document_version_contents(version_id, section_id=section_id, content_type=content_type, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_document_version_contents(version_id, section_id=section_id, content_type=content_type, limit=limit, offset=offset)
         print("The response of DocumentVersionsApi->get_document_version_contents:\n")
         pprint(api_response)
     except Exception as e:
@@ -453,8 +627,6 @@ Name | Type | Description  | Notes
  **content_type** | [**DocumentVersionContentTypeFilter**](.md)| Filter by content type: SECTION or CHUNK. Omit to return both types. | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -462,7 +634,100 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_document_version_diff**
+> VersionDiffResponse get_document_version_diff(version_id, from_version_id=from_version_id)
+
+Get Document Version Diff Handler
+
+Side-by-side diff of a version against a previous one of the same document.
+
+Diffs the two versions' plaintext on the fly (no stored diff), so any pair of
+versions can be compared. ``from_version_id`` defaults to the immediate
+predecessor; the first version diffs against empty (all additions). Requires
+read permission on the document.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.version_diff_response import VersionDiffResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DocumentVersionsApi(api_client)
+    version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | The new (right) version ID
+    from_version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | The old (left) version; defaults to the predecessor (optional)
+
+    try:
+        # Get Document Version Diff Handler
+        api_response = api_instance.get_document_version_diff(version_id, from_version_id=from_version_id)
+        print("The response of DocumentVersionsApi->get_document_version_diff:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentVersionsApi->get_document_version_diff: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **version_id** | **UUID**| The new (right) version ID | 
+ **from_version_id** | **UUID**| The old (left) version; defaults to the predecessor | [optional] 
+
+### Return type
+
+[**VersionDiffResponse**](VersionDiffResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -479,7 +744,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_document_versions**
-> PaginatedResponseDocumentVersionResponse list_document_versions(document_id, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponseDocumentVersionResponse list_document_versions(document_id, limit=limit, offset=offset)
 
 List Document Versions Handler
 
@@ -489,6 +754,8 @@ Returns versions ordered by version number ascending (v0, v1, v2...).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -502,6 +769,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -510,12 +792,10 @@ with ksapi.ApiClient(configuration) as api_client:
     document_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Document ID to list versions for
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List Document Versions Handler
-        api_response = api_instance.list_document_versions(document_id, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_document_versions(document_id, limit=limit, offset=offset)
         print("The response of DocumentVersionsApi->list_document_versions:\n")
         pprint(api_response)
     except Exception as e:
@@ -532,8 +812,6 @@ Name | Type | Description  | Notes
  **document_id** | **UUID**| Document ID to list versions for | 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -541,7 +819,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -558,7 +836,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_document_version_metadata**
-> DocumentVersionResponse update_document_version_metadata(version_id, document_version_metadata_update, authorization=authorization, ks_uat=ks_uat)
+> DocumentVersionResponse update_document_version_metadata(version_id, document_version_metadata_update)
 
 Update Document Version Metadata Handler
 
@@ -569,6 +847,8 @@ fields not present in the request are preserved.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -583,6 +863,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -590,12 +885,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
     document_version_metadata_update = ksapi.DocumentVersionMetadataUpdate() # DocumentVersionMetadataUpdate | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Update Document Version Metadata Handler
-        api_response = api_instance.update_document_version_metadata(version_id, document_version_metadata_update, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.update_document_version_metadata(version_id, document_version_metadata_update)
         print("The response of DocumentVersionsApi->update_document_version_metadata:\n")
         pprint(api_response)
     except Exception as e:
@@ -611,8 +904,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **version_id** | **UUID**| DocumentVersion ID | 
  **document_version_metadata_update** | [**DocumentVersionMetadataUpdate**](DocumentVersionMetadataUpdate.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -620,7 +911,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

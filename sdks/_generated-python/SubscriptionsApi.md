@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **change_tenant_subscription**
-> SubmitSubscriptionResponse change_tenant_subscription(tenant_id, change_subscription_request, idempotency_key=idempotency_key, authorization=authorization, ks_uat=ks_uat)
+> SubmitSubscriptionResponse change_tenant_subscription(tenant_id, change_subscription_request, idempotency_key=idempotency_key)
 
 Change Tenant Subscription Handler
 
@@ -45,6 +45,8 @@ identifiers, tokens, or other sensitive material as the
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -59,6 +61,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -67,12 +84,10 @@ with ksapi.ApiClient(configuration) as api_client:
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     change_subscription_request = ksapi.ChangeSubscriptionRequest() # ChangeSubscriptionRequest | 
     idempotency_key = 'idempotency_key_example' # str |  (optional)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Change Tenant Subscription Handler
-        api_response = api_instance.change_tenant_subscription(tenant_id, change_subscription_request, idempotency_key=idempotency_key, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.change_tenant_subscription(tenant_id, change_subscription_request, idempotency_key=idempotency_key)
         print("The response of SubscriptionsApi->change_tenant_subscription:\n")
         pprint(api_response)
     except Exception as e:
@@ -89,8 +104,6 @@ Name | Type | Description  | Notes
  **tenant_id** | **UUID**|  | 
  **change_subscription_request** | [**ChangeSubscriptionRequest**](ChangeSubscriptionRequest.md)|  | 
  **idempotency_key** | **str**|  | [optional] 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -98,7 +111,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -115,7 +128,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_tenant_subscription**
-> SubscriptionPlanResponse get_tenant_subscription(tenant_id, authorization=authorization, ks_uat=ks_uat)
+> SubscriptionPlanResponse get_tenant_subscription(tenant_id)
 
 Get Tenant Subscription Handler
 
@@ -133,6 +146,8 @@ to outsiders.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -146,18 +161,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SubscriptionsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Tenant Subscription Handler
-        api_response = api_instance.get_tenant_subscription(tenant_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_tenant_subscription(tenant_id)
         print("The response of SubscriptionsApi->get_tenant_subscription:\n")
         pprint(api_response)
     except Exception as e:
@@ -172,8 +200,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tenant_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -181,7 +207,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

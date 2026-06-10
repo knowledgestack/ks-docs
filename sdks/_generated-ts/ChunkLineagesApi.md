@@ -12,7 +12,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## createChunkLineage
 
-> Array&lt;ChunkLineageResponse&gt; createChunkLineage(createChunkLineageRequest, authorization, ksUat)
+> Array&lt;ChunkLineageResponse&gt; createChunkLineage(createChunkLineageRequest)
 
 Create Chunk Lineage Handler
 
@@ -29,15 +29,17 @@ import type { CreateChunkLineageOperationRequest } from '@knowledge-stack/ksapi'
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ChunkLineagesApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ChunkLineagesApi(config);
 
   const body = {
     // CreateChunkLineageRequest
     createChunkLineageRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateChunkLineageOperationRequest;
 
   try {
@@ -58,8 +60,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **createChunkLineageRequest** | [CreateChunkLineageRequest](CreateChunkLineageRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -67,7 +67,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -86,7 +86,7 @@ No authorization required
 
 ## deleteChunkLineage
 
-> deleteChunkLineage(parentChunkId, chunkId, authorization, ksUat)
+> deleteChunkLineage(parentChunkId, chunkId)
 
 Delete Chunk Lineage Handler
 
@@ -103,17 +103,19 @@ import type { DeleteChunkLineageRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ChunkLineagesApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ChunkLineagesApi(config);
 
   const body = {
     // string | Parent chunk ID
     parentChunkId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | Child chunk ID
     chunkId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteChunkLineageRequest;
 
   try {
@@ -135,8 +137,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **parentChunkId** | `string` | Parent chunk ID | [Defaults to `undefined`] |
 | **chunkId** | `string` | Child chunk ID | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -144,7 +144,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -163,7 +163,7 @@ No authorization required
 
 ## getChunkLineage
 
-> LineageGraphResponse getChunkLineage(chunkId, maxDepth, authorization, ksUat)
+> LineageGraphResponse getChunkLineage(chunkId, maxDepth)
 
 Get Chunk Lineage Handler
 
@@ -180,17 +180,19 @@ import type { GetChunkLineageRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ChunkLineagesApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ChunkLineagesApi(config);
 
   const body = {
     // string
     chunkId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // number (optional)
     maxDepth: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetChunkLineageRequest;
 
   try {
@@ -212,8 +214,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **chunkId** | `string` |  | [Defaults to `undefined`] |
 | **maxDepth** | `number` |  | [Optional] [Defaults to `3`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -221,7 +221,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

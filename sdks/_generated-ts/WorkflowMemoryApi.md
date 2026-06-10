@@ -14,7 +14,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## appendWorkflowMemoryChunk
 
-> MemoryChunkResponse appendWorkflowMemoryChunk(definitionId, appendMemoryChunkRequest, authorization, ksUat)
+> MemoryChunkResponse appendWorkflowMemoryChunk(definitionId, appendMemoryChunkRequest)
 
 Append Workflow Memory Chunk Handler
 
@@ -29,17 +29,19 @@ import type { AppendWorkflowMemoryChunkRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowMemoryApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowMemoryApi(config);
 
   const body = {
     // string
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // AppendMemoryChunkRequest
     appendMemoryChunkRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies AppendWorkflowMemoryChunkRequest;
 
   try {
@@ -61,8 +63,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **definitionId** | `string` |  | [Defaults to `undefined`] |
 | **appendMemoryChunkRequest** | [AppendMemoryChunkRequest](AppendMemoryChunkRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -70,7 +70,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -89,7 +89,7 @@ No authorization required
 
 ## editWorkflowMemoryChunk
 
-> MemoryChunkResponse editWorkflowMemoryChunk(definitionId, chunkId, editMemoryChunkRequest, authorization, ksUat)
+> MemoryChunkResponse editWorkflowMemoryChunk(definitionId, chunkId, editMemoryChunkRequest)
 
 Edit Workflow Memory Chunk Handler
 
@@ -104,7 +104,13 @@ import type { EditWorkflowMemoryChunkRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowMemoryApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowMemoryApi(config);
 
   const body = {
     // string
@@ -113,10 +119,6 @@ async function example() {
     chunkId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // EditMemoryChunkRequest
     editMemoryChunkRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies EditWorkflowMemoryChunkRequest;
 
   try {
@@ -139,8 +141,6 @@ example().catch(console.error);
 | **definitionId** | `string` |  | [Defaults to `undefined`] |
 | **chunkId** | `string` |  | [Defaults to `undefined`] |
 | **editMemoryChunkRequest** | [EditMemoryChunkRequest](EditMemoryChunkRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -148,7 +148,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -167,7 +167,7 @@ No authorization required
 
 ## forgetWorkflowMemoryChunk
 
-> forgetWorkflowMemoryChunk(definitionId, chunkId, authorization, ksUat)
+> forgetWorkflowMemoryChunk(definitionId, chunkId)
 
 Forget Workflow Memory Chunk Handler
 
@@ -182,17 +182,19 @@ import type { ForgetWorkflowMemoryChunkRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowMemoryApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowMemoryApi(config);
 
   const body = {
     // string
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string
     chunkId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ForgetWorkflowMemoryChunkRequest;
 
   try {
@@ -214,8 +216,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **definitionId** | `string` |  | [Defaults to `undefined`] |
 | **chunkId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -223,7 +223,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -242,7 +242,7 @@ No authorization required
 
 ## getWorkflowMemoryChunk
 
-> MemoryChunkResponse getWorkflowMemoryChunk(definitionId, chunkId, authorization, ksUat)
+> MemoryChunkResponse getWorkflowMemoryChunk(definitionId, chunkId)
 
 Get Workflow Memory Chunk Handler
 
@@ -257,17 +257,19 @@ import type { GetWorkflowMemoryChunkRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowMemoryApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowMemoryApi(config);
 
   const body = {
     // string
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string
     chunkId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetWorkflowMemoryChunkRequest;
 
   try {
@@ -289,8 +291,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **definitionId** | `string` |  | [Defaults to `undefined`] |
 | **chunkId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -298,7 +298,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -317,7 +317,7 @@ No authorization required
 
 ## listWorkflowMemoryChunks
 
-> PaginatedResponseMemoryChunkResponse listWorkflowMemoryChunks(definitionId, limit, offset, authorization, ksUat)
+> PaginatedResponseMemoryChunkResponse listWorkflowMemoryChunks(definitionId, limit, offset)
 
 List Workflow Memory Chunks Handler
 
@@ -332,7 +332,13 @@ import type { ListWorkflowMemoryChunksRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowMemoryApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowMemoryApi(config);
 
   const body = {
     // string
@@ -341,10 +347,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListWorkflowMemoryChunksRequest;
 
   try {
@@ -367,8 +369,6 @@ example().catch(console.error);
 | **definitionId** | `string` |  | [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -376,7 +376,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

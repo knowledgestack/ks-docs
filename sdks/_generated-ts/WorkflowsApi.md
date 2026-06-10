@@ -14,7 +14,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## cancelTemporalWorkflow
 
-> WorkflowCancelResponse cancelTemporalWorkflow(workflowId, authorization, ksUat)
+> WorkflowCancelResponse cancelTemporalWorkflow(workflowId)
 
 Cancel Temporal Workflow Handler
 
@@ -31,15 +31,17 @@ import type { CancelTemporalWorkflowRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowsApi(config);
 
   const body = {
     // string
     workflowId: workflowId_example,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CancelTemporalWorkflowRequest;
 
   try {
@@ -60,8 +62,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **workflowId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -69,7 +69,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -88,7 +88,7 @@ No authorization required
 
 ## dvWorkflowRerun
 
-> WorkflowActionResponse dvWorkflowRerun(workflowId, authorization, ksUat)
+> WorkflowActionResponse dvWorkflowRerun(workflowId)
 
 Dv Workflow Rerun Handler
 
@@ -105,15 +105,17 @@ import type { DvWorkflowRerunRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowsApi(config);
 
   const body = {
     // string
     workflowId: workflowId_example,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DvWorkflowRerunRequest;
 
   try {
@@ -134,8 +136,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **workflowId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -143,7 +143,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -162,7 +162,7 @@ No authorization required
 
 ## getDvWorkflow
 
-> WorkflowDetailResponse getDvWorkflow(workflowId, authorization, ksUat)
+> WorkflowDetailResponse getDvWorkflow(workflowId)
 
 Get Dv Workflow Handler
 
@@ -179,15 +179,17 @@ import type { GetDvWorkflowRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowsApi(config);
 
   const body = {
     // string
     workflowId: workflowId_example,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetDvWorkflowRequest;
 
   try {
@@ -208,8 +210,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **workflowId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -217,7 +217,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -236,7 +236,7 @@ No authorization required
 
 ## getTemporalWorkflowStatus
 
-> TemporalWorkflowStatusResponse getTemporalWorkflowStatus(workflowId, authorization, ksUat)
+> TemporalWorkflowStatusResponse getTemporalWorkflowStatus(workflowId)
 
 Get Temporal Workflow Status Handler
 
@@ -253,15 +253,17 @@ import type { GetTemporalWorkflowStatusRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowsApi(config);
 
   const body = {
     // string
     workflowId: workflowId_example,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetTemporalWorkflowStatusRequest;
 
   try {
@@ -282,8 +284,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **workflowId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -291,7 +291,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -310,7 +310,7 @@ No authorization required
 
 ## listDvWorkflows
 
-> PaginatedResponseWorkflowSummaryResponse listDvWorkflows(limit, offset, authorization, ksUat)
+> PaginatedResponseWorkflowSummaryResponse listDvWorkflows(limit, offset)
 
 List Dv Workflows Handler
 
@@ -327,17 +327,19 @@ import type { ListDvWorkflowsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowsApi(config);
 
   const body = {
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListDvWorkflowsRequest;
 
   try {
@@ -359,8 +361,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -368,7 +368,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

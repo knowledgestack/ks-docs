@@ -27,7 +27,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## changePhoneNumber
 
-> UserResponse changePhoneNumber(changePhoneNumberRequest, authorization, ksUat)
+> UserResponse changePhoneNumber(changePhoneNumberRequest)
 
 Change Phone Number Handler
 
@@ -44,15 +44,17 @@ import type { ChangePhoneNumberOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new AuthApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new AuthApi(config);
 
   const body = {
     // ChangePhoneNumberRequest
     changePhoneNumberRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ChangePhoneNumberOperationRequest;
 
   try {
@@ -73,8 +75,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **changePhoneNumberRequest** | [ChangePhoneNumberRequest](ChangePhoneNumberRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -82,7 +82,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -741,7 +741,7 @@ No authorization required
 
 ## refreshUat
 
-> UserResponse refreshUat(tenantId, authorization, ksUat)
+> UserResponse refreshUat(tenantId)
 
 Refresh Uat Handler
 
@@ -758,15 +758,17 @@ import type { RefreshUatRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new AuthApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new AuthApi(config);
 
   const body = {
     // string | Target tenant ID to switch to. None=refresh current tenant (optional)
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies RefreshUatRequest;
 
   try {
@@ -787,8 +789,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` | Target tenant ID to switch to. None&#x3D;refresh current tenant | [Optional] [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -796,7 +796,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -815,7 +815,7 @@ No authorization required
 
 ## requestPhoneChange
 
-> PhoneValidationResponse requestPhoneChange(requestPhoneChangeRequest, authorization, ksUat)
+> PhoneValidationResponse requestPhoneChange(requestPhoneChangeRequest)
 
 Request Phone Change Handler
 
@@ -832,15 +832,17 @@ import type { RequestPhoneChangeOperationRequest } from '@knowledge-stack/ksapi'
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new AuthApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new AuthApi(config);
 
   const body = {
     // RequestPhoneChangeRequest
     requestPhoneChangeRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies RequestPhoneChangeOperationRequest;
 
   try {
@@ -861,8 +863,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **requestPhoneChangeRequest** | [RequestPhoneChangeRequest](RequestPhoneChangeRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -870,7 +870,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -889,7 +889,7 @@ No authorization required
 
 ## resetPassword
 
-> UserResponse resetPassword(passwordResetRequest, authorization, ksUat)
+> UserResponse resetPassword(passwordResetRequest)
 
 Reset Password Handler
 
@@ -906,15 +906,17 @@ import type { ResetPasswordRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new AuthApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new AuthApi(config);
 
   const body = {
     // PasswordResetRequest
     passwordResetRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ResetPasswordRequest;
 
   try {
@@ -935,8 +937,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **passwordResetRequest** | [PasswordResetRequest](PasswordResetRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -944,7 +944,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

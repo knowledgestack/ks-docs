@@ -10,6 +10,7 @@ Name | Type
 `name` | string
 `description` | string
 `maxRunDurationSeconds` | number
+`parentPathPartId` | string
 `instructionPathPartId` | string
 `approvalRequired` | boolean
 
@@ -23,6 +24,7 @@ const example = {
   "name": null,
   "description": null,
   "maxRunDurationSeconds": null,
+  "parentPathPartId": null,
   "instructionPathPartId": null,
   "approvalRequired": null,
 } satisfies CreateWorkflowDefinitionRequest

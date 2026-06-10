@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **description** | **str** |  | [optional] 
 **max_run_duration_seconds** | **int** |  | [optional] [default to 1800]
+**parent_path_part_id** | **UUID** | The &#x60;&#x60;path_part_id&#x60;&#x60; of the folder the workflow is created under (the folder&#39;s PathPart id, not the Folder PDO id). The caller needs write access to it; the workflow may live anywhere in the path tree. | 
 **instruction_path_part_id** | **UUID** | DOCUMENT path_part of the instruction document. Omit (or pass null) to have the server auto-create an empty instruction.md. | [optional] 
 **approval_required** | **bool** |  | 
 

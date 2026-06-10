@@ -12,7 +12,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## acquireDocumentCheckout
 
-> DocumentCheckoutResponse acquireDocumentCheckout(documentId, force, authorization, ksUat)
+> DocumentCheckoutResponse acquireDocumentCheckout(documentId, force)
 
 Acquire Document Checkout Handler
 
@@ -29,17 +29,19 @@ import type { AcquireDocumentCheckoutRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentCheckoutApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentCheckoutApi(config);
 
   const body = {
     // string | Document ID
     documentId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // boolean | OWNER/ADMIN only — atomically take the checkout regardless of the current holder. Sealed docs are still refused. (optional)
     force: true,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies AcquireDocumentCheckoutRequest;
 
   try {
@@ -61,8 +63,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **documentId** | `string` | Document ID | [Defaults to `undefined`] |
 | **force** | `boolean` | OWNER/ADMIN only — atomically take the checkout regardless of the current holder. Sealed docs are still refused. | [Optional] [Defaults to `false`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -70,7 +70,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -89,7 +89,7 @@ No authorization required
 
 ## getDocumentCheckout
 
-> DocumentCheckoutResponse getDocumentCheckout(documentId, authorization, ksUat)
+> DocumentCheckoutResponse getDocumentCheckout(documentId)
 
 Get Document Checkout Handler
 
@@ -106,15 +106,17 @@ import type { GetDocumentCheckoutRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentCheckoutApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentCheckoutApi(config);
 
   const body = {
     // string | Document ID
     documentId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetDocumentCheckoutRequest;
 
   try {
@@ -135,8 +137,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **documentId** | `string` | Document ID | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -144,7 +144,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -163,7 +163,7 @@ No authorization required
 
 ## releaseDocumentCheckout
 
-> releaseDocumentCheckout(documentId, authorization, ksUat)
+> releaseDocumentCheckout(documentId)
 
 Release Document Checkout Handler
 
@@ -180,15 +180,17 @@ import type { ReleaseDocumentCheckoutRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentCheckoutApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentCheckoutApi(config);
 
   const body = {
     // string | Document ID
     documentId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ReleaseDocumentCheckoutRequest;
 
   try {
@@ -209,8 +211,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **documentId** | `string` | Document ID | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -218,7 +218,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -11,7 +11,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## getPathPartApproval
 
-> PathPartApprovalResponse getPathPartApproval(pathPartId, authorization, ksUat)
+> PathPartApprovalResponse getPathPartApproval(pathPartId)
 
 Get Path Part Approval Handler
 
@@ -28,15 +28,17 @@ import type { GetPathPartApprovalRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new PathPartApprovalsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartApprovalsApi(config);
 
   const body = {
     // string
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetPathPartApprovalRequest;
 
   try {
@@ -57,8 +59,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **pathPartId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -66,7 +66,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -85,7 +85,7 @@ No authorization required
 
 ## setPathPartApproval
 
-> PathPartApprovalResponse setPathPartApproval(pathPartId, setApprovalStateRequest, authorization, ksUat)
+> PathPartApprovalResponse setPathPartApproval(pathPartId, setApprovalStateRequest)
 
 Set Path Part Approval Handler
 
@@ -102,17 +102,19 @@ import type { SetPathPartApprovalRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new PathPartApprovalsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartApprovalsApi(config);
 
   const body = {
     // string
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // SetApprovalStateRequest
     setApprovalStateRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies SetPathPartApprovalRequest;
 
   try {
@@ -134,8 +136,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **pathPartId** | `string` |  | [Defaults to `undefined`] |
 | **setApprovalStateRequest** | [SetApprovalStateRequest](SetApprovalStateRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -143,7 +143,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

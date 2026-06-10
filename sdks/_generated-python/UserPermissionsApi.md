@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 
 # **create_user_permission**
-> PermissionResponse create_user_permission(create_permission_request, authorization=authorization, ks_uat=ks_uat)
+> PermissionResponse create_user_permission(create_permission_request)
 
 Create User Permission Handler
 
@@ -19,6 +19,8 @@ Create a path permission for a user in a tenant (admin/owner only).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -33,18 +35,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UserPermissionsApi(api_client)
     create_permission_request = ksapi.CreatePermissionRequest() # CreatePermissionRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Create User Permission Handler
-        api_response = api_instance.create_user_permission(create_permission_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.create_user_permission(create_permission_request)
         print("The response of UserPermissionsApi->create_user_permission:\n")
         pprint(api_response)
     except Exception as e:
@@ -59,8 +74,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_permission_request** | [**CreatePermissionRequest**](CreatePermissionRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -68,7 +81,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -85,7 +98,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_user_permission**
-> delete_user_permission(permission_id, tenant_id, authorization=authorization, ks_uat=ks_uat)
+> delete_user_permission(permission_id, tenant_id)
 
 Delete User Permission Handler
 
@@ -93,6 +106,8 @@ Delete a path permission (admin/owner only).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -105,6 +120,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -112,12 +142,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.UserPermissionsApi(api_client)
     permission_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Tenant ID the permission belongs to
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Delete User Permission Handler
-        api_instance.delete_user_permission(permission_id, tenant_id, authorization=authorization, ks_uat=ks_uat)
+        api_instance.delete_user_permission(permission_id, tenant_id)
     except Exception as e:
         print("Exception when calling UserPermissionsApi->delete_user_permission: %s\n" % e)
 ```
@@ -131,8 +159,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **permission_id** | **UUID**|  | 
  **tenant_id** | **UUID**| Tenant ID the permission belongs to | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -140,7 +166,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -157,7 +183,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_user_permissions**
-> PaginatedResponsePermissionResponse list_user_permissions(tenant_id, user_id, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponsePermissionResponse list_user_permissions(tenant_id, user_id, limit=limit, offset=offset)
 
 List User Permissions Handler
 
@@ -165,6 +191,8 @@ List path permissions for a user in a tenant (admin/owner only).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -178,6 +206,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -187,12 +230,10 @@ with ksapi.ApiClient(configuration) as api_client:
     user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | User ID to list permissions for
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List User Permissions Handler
-        api_response = api_instance.list_user_permissions(tenant_id, user_id, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_user_permissions(tenant_id, user_id, limit=limit, offset=offset)
         print("The response of UserPermissionsApi->list_user_permissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -210,8 +251,6 @@ Name | Type | Description  | Notes
  **user_id** | **UUID**| User ID to list permissions for | 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -219,7 +258,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -236,7 +275,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_user_permission**
-> PermissionResponse update_user_permission(permission_id, tenant_id, update_permission_request, authorization=authorization, ks_uat=ks_uat)
+> PermissionResponse update_user_permission(permission_id, tenant_id, update_permission_request)
 
 Update User Permission Handler
 
@@ -244,6 +283,8 @@ Update a path permission (admin/owner only).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -258,6 +299,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -266,12 +322,10 @@ with ksapi.ApiClient(configuration) as api_client:
     permission_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Tenant ID the permission belongs to
     update_permission_request = ksapi.UpdatePermissionRequest() # UpdatePermissionRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Update User Permission Handler
-        api_response = api_instance.update_user_permission(permission_id, tenant_id, update_permission_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.update_user_permission(permission_id, tenant_id, update_permission_request)
         print("The response of UserPermissionsApi->update_user_permission:\n")
         pprint(api_response)
     except Exception as e:
@@ -288,8 +342,6 @@ Name | Type | Description  | Notes
  **permission_id** | **UUID**|  | 
  **tenant_id** | **UUID**| Tenant ID the permission belongs to | 
  **update_permission_request** | [**UpdatePermissionRequest**](UpdatePermissionRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -297,7 +349,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

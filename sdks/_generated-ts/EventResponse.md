@@ -13,6 +13,7 @@ Name | Type
 `ts` | Date
 `actorUserId` | string
 `payload` | { [key: string]: any; }
+`actor` | [UserInfo](UserInfo.md)
 
 ## Example
 
@@ -27,6 +28,7 @@ const example = {
   "ts": null,
   "actorUserId": null,
   "payload": null,
+  "actor": null,
 } satisfies EventResponse
 
 console.log(example)

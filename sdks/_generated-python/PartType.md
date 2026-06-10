@@ -22,6 +22,10 @@ Type of path part in the filesystem.
 
 * `WORKFLOW_RUN` (value: `'WORKFLOW_RUN'`)
 
+* `DATA_SOURCE` (value: `'DATA_SOURCE'`)
+
+* `DATA_SOURCE_TABLE` (value: `'DATA_SOURCE_TABLE'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

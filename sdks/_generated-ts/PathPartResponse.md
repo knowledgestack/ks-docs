@@ -16,8 +16,7 @@ Name | Type
 `systemManaged` | boolean
 `excludeFromQdrant` | boolean
 `tags` | [Array&lt;TagResponse&gt;](TagResponse.md)
-`canRead` | boolean
-`canWrite` | boolean
+`permissions` | [ItemPermissions](ItemPermissions.md)
 `createdAt` | Date
 `updatedAt` | Date
 
@@ -37,8 +36,7 @@ const example = {
   "systemManaged": null,
   "excludeFromQdrant": null,
   "tags": null,
-  "canRead": null,
-  "canWrite": null,
+  "permissions": null,
   "createdAt": null,
   "updatedAt": null,
 } satisfies PathPartResponse

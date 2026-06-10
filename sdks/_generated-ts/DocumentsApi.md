@@ -6,6 +6,7 @@ All URIs are relative to *http://localhost:8000*
 |------------- | ------------- | -------------|
 | [**createDocument**](DocumentsApi.md#createdocumentoperation) | **POST** /v1/documents | Create Document Handler |
 | [**deleteDocument**](DocumentsApi.md#deletedocument) | **DELETE** /v1/documents/{document_id} | Delete Document Handler |
+| [**downloadDocument**](DocumentsApi.md#downloaddocument) | **POST** /v1/documents/{document_id}/download | Download Document Handler |
 | [**getDocument**](DocumentsApi.md#getdocument) | **GET** /v1/documents/{document_id} | Get Document Handler |
 | [**ingestDocument**](DocumentsApi.md#ingestdocument) | **POST** /v1/documents/ingest | Ingest Document Handler |
 | [**ingestDocumentVersion**](DocumentsApi.md#ingestdocumentversion) | **POST** /v1/documents/{document_id}/ingest | Ingest Document Version Handler |
@@ -16,7 +17,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## createDocument
 
-> DocumentResponse createDocument(createDocumentRequest, authorization, ksUat)
+> DocumentResponse createDocument(createDocumentRequest)
 
 Create Document Handler
 
@@ -33,15 +34,17 @@ import type { CreateDocumentOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
 
   const body = {
     // CreateDocumentRequest
     createDocumentRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateDocumentOperationRequest;
 
   try {
@@ -62,8 +65,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **createDocumentRequest** | [CreateDocumentRequest](CreateDocumentRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -71,7 +72,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -90,11 +91,11 @@ No authorization required
 
 ## deleteDocument
 
-> deleteDocument(documentId, authorization, ksUat)
+> deleteDocument(documentId)
 
 Delete Document Handler
 
-Delete a document and all its contents.  WARNING: This cascades to all children (versions, sections, chunks, etc.) due to parent_id ON DELETE CASCADE.
+Move a document and all its contents to trash.
 
 ### Example
 
@@ -107,15 +108,17 @@ import type { DeleteDocumentRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
 
   const body = {
     // string
     documentId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteDocumentRequest;
 
   try {
@@ -136,8 +139,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **documentId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -145,7 +146,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -162,9 +163,86 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
+## downloadDocument
+
+> DocumentDownloadResponse downloadDocument(documentId, artifact)
+
+Download Document Handler
+
+Issue a short-lived, audited download link for a document\&#39;s active version.  Records a &#x60;&#x60;document.downloaded&#x60;&#x60; audit event so the customer audit log captures who downloaded which document/version and when.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentsApi,
+} from '@knowledge-stack/ksapi';
+import type { DownloadDocumentRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
+
+  const body = {
+    // string
+    documentId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // DownloadArtifact | Artifact to download: source or fast_plaintext (optional)
+    artifact: ...,
+  } satisfies DownloadDocumentRequest;
+
+  try {
+    const data = await api.downloadDocument(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **documentId** | `string` |  | [Defaults to `undefined`] |
+| **artifact** | `DownloadArtifact` | Artifact to download: source or fast_plaintext | [Optional] [Defaults to `undefined`] [Enum: source, fast_plaintext] |
+
+### Return type
+
+[**DocumentDownloadResponse**](DocumentDownloadResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
 ## getDocument
 
-> DocumentResponse getDocument(documentId, withTags, authorization, ksUat)
+> DocumentResponse getDocument(documentId, withTags)
 
 Get Document Handler
 
@@ -179,17 +257,19 @@ import type { GetDocumentRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
 
   const body = {
     // string
     documentId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // boolean | Include tags in the response (default: false) (optional)
     withTags: true,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetDocumentRequest;
 
   try {
@@ -211,8 +291,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **documentId** | `string` |  | [Defaults to `undefined`] |
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -220,7 +298,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -239,7 +317,7 @@ No authorization required
 
 ## ingestDocument
 
-> IngestDocumentResponse ingestDocument(file, pathPartId, authorization, ksUat, name, ingestionMode, chunkType, secondaryTaxonomy, pageDpi)
+> IngestDocumentResponse ingestDocument(file, pathPartId, name, ingestionMode, chunkType, secondaryTaxonomy, pageDpi, workflowRunId, workflowDefinitionId)
 
 Ingest Document Handler
 
@@ -256,17 +334,19 @@ import type { IngestDocumentRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
 
   const body = {
     // Blob
     file: BINARY_DATA_HERE,
     // string | Parent path part ID (must be a FOLDER type)
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
     // string | Document name (defaults to filename) (optional)
     name: name_example,
     // IngestionMode (optional)
@@ -277,6 +357,10 @@ async function example() {
     secondaryTaxonomy: ...,
     // number | DPI for PDF page screenshots (default 72, min 36, max 216). (optional)
     pageDpi: 56,
+    // string | Workflow run context for assumed agent uploads. (optional)
+    workflowRunId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Workflow definition context for assumed agent uploads. (optional)
+    workflowDefinitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
   } satisfies IngestDocumentRequest;
 
   try {
@@ -298,13 +382,13 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **file** | `Blob` |  | [Defaults to `undefined`] |
 | **pathPartId** | `string` | Parent path part ID (must be a FOLDER type) | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 | **name** | `string` | Document name (defaults to filename) | [Optional] [Defaults to `undefined`] |
 | **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk] |
 | **chunkType** | `ChunkType` |  | [Optional] [Defaults to `undefined`] [Enum: TEXT, TABLE, IMAGE, HTML, UNKNOWN] |
 | **secondaryTaxonomy** | `ImageTaxonomy` |  | [Optional] [Defaults to `undefined`] [Enum: picture, flowchart] |
 | **pageDpi** | `number` | DPI for PDF page screenshots (default 72, min 36, max 216). | [Optional] [Defaults to `72`] |
+| **workflowRunId** | `string` | Workflow run context for assumed agent uploads. | [Optional] [Defaults to `undefined`] |
+| **workflowDefinitionId** | `string` | Workflow definition context for assumed agent uploads. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -312,7 +396,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -331,7 +415,7 @@ No authorization required
 
 ## ingestDocumentVersion
 
-> IngestDocumentResponse ingestDocumentVersion(documentId, file, authorization, ksUat, ingestionMode, chunkType, secondaryTaxonomy, pageDpi)
+> IngestDocumentResponse ingestDocumentVersion(documentId, file, ingestionMode, chunkType, secondaryTaxonomy, pageDpi, workflowRunId, workflowDefinitionId)
 
 Ingest Document Version Handler
 
@@ -348,17 +432,19 @@ import type { IngestDocumentVersionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
 
   const body = {
     // string | Document ID
     documentId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // Blob
     file: BINARY_DATA_HERE,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
     // IngestionMode (optional)
     ingestionMode: ...,
     // ChunkType (optional)
@@ -367,6 +453,10 @@ async function example() {
     secondaryTaxonomy: ...,
     // number | DPI for PDF page screenshots (default 72, min 36, max 216). (optional)
     pageDpi: 56,
+    // string | Workflow run context for assumed agent uploads. (optional)
+    workflowRunId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Workflow definition context for assumed agent uploads. (optional)
+    workflowDefinitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
   } satisfies IngestDocumentVersionRequest;
 
   try {
@@ -388,12 +478,12 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **documentId** | `string` | Document ID | [Defaults to `undefined`] |
 | **file** | `Blob` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 | **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk] |
 | **chunkType** | `ChunkType` |  | [Optional] [Defaults to `undefined`] [Enum: TEXT, TABLE, IMAGE, HTML, UNKNOWN] |
 | **secondaryTaxonomy** | `ImageTaxonomy` |  | [Optional] [Defaults to `undefined`] [Enum: picture, flowchart] |
 | **pageDpi** | `number` | DPI for PDF page screenshots (default 72, min 36, max 216). | [Optional] [Defaults to `72`] |
+| **workflowRunId** | `string` | Workflow run context for assumed agent uploads. | [Optional] [Defaults to `undefined`] |
+| **workflowDefinitionId** | `string` | Workflow definition context for assumed agent uploads. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -401,7 +491,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -420,7 +510,7 @@ No authorization required
 
 ## listDocuments
 
-> PaginatedResponseDocumentResponse listDocuments(parentPathPartId, sortOrder, withTags, limit, offset, authorization, ksUat)
+> PaginatedResponseDocumentResponse listDocuments(parentPathPartId, sortOrder, withTags, limit, offset)
 
 List Documents Handler
 
@@ -437,7 +527,13 @@ import type { ListDocumentsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
 
   const body = {
     // string | Parent PathPart ID (defaults to root) (optional)
@@ -450,10 +546,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListDocumentsRequest;
 
   try {
@@ -478,8 +570,6 @@ example().catch(console.error);
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -487,7 +577,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -506,7 +596,7 @@ No authorization required
 
 ## updateDocument
 
-> DocumentResponse updateDocument(documentId, updateDocumentRequest, authorization, ksUat)
+> DocumentResponse updateDocument(documentId, updateDocumentRequest)
 
 Update Document Handler
 
@@ -523,17 +613,19 @@ import type { UpdateDocumentOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
 
   const body = {
     // string
     documentId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdateDocumentRequest
     updateDocumentRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateDocumentOperationRequest;
 
   try {
@@ -555,8 +647,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **documentId** | `string` |  | [Defaults to `undefined`] |
 | **updateDocumentRequest** | [UpdateDocumentRequest](UpdateDocumentRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -564,7 +654,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

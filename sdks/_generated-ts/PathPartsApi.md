@@ -6,6 +6,7 @@ All URIs are relative to *http://localhost:8000*
 |------------- | ------------- | -------------|
 | [**appendPathPartEvent**](PathPartsApi.md#appendpathpartevent) | **POST** /v1/path-parts/{path_part_id}/events | Append Path Part Event Handler |
 | [**bulkRemovePathPartTags**](PathPartsApi.md#bulkremovepathparttags) | **DELETE** /v1/path-parts/{path_part_id}/tags | Bulk Remove Path Part Tags Handler |
+| [**checkPathPartAccess**](PathPartsApi.md#checkpathpartaccess) | **GET** /v1/path-parts/{path_part_id}/access-check | Check Path Part Access Handler |
 | [**getPathPart**](PathPartsApi.md#getpathpart) | **GET** /v1/path-parts/{path_part_id} | Get Path Part Handler |
 | [**getPathPartAncestry**](PathPartsApi.md#getpathpartancestry) | **GET** /v1/path-parts/{path_part_id}/ancestry | Get Path Part Ancestry Handler |
 | [**getPathPartSubtreeChunks**](PathPartsApi.md#getpathpartsubtreechunks) | **GET** /v1/path-parts/{path_part_id}/subtree_chunks | Get Path Part Subtree Chunks Handler |
@@ -18,7 +19,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## appendPathPartEvent
 
-> EventResponse appendPathPartEvent(pathPartId, appendEventRequest, authorization, ksUat)
+> EventResponse appendPathPartEvent(pathPartId, appendEventRequest)
 
 Append Path Part Event Handler
 
@@ -35,17 +36,19 @@ import type { AppendPathPartEventRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new PathPartsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartsApi(config);
 
   const body = {
     // string
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // AppendEventRequest
     appendEventRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies AppendPathPartEventRequest;
 
   try {
@@ -67,8 +70,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **pathPartId** | `string` |  | [Defaults to `undefined`] |
 | **appendEventRequest** | [AppendEventRequest](AppendEventRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -76,7 +77,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -95,7 +96,7 @@ No authorization required
 
 ## bulkRemovePathPartTags
 
-> PathPartTagsResponse bulkRemovePathPartTags(pathPartId, bulkTagRequest, authorization, ksUat)
+> PathPartTagsResponse bulkRemovePathPartTags(pathPartId, bulkTagRequest)
 
 Bulk Remove Path Part Tags Handler
 
@@ -112,17 +113,19 @@ import type { BulkRemovePathPartTagsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new PathPartsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartsApi(config);
 
   const body = {
     // string
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // BulkTagRequest
     bulkTagRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies BulkRemovePathPartTagsRequest;
 
   try {
@@ -144,8 +147,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **pathPartId** | `string` |  | [Defaults to `undefined`] |
 | **bulkTagRequest** | [BulkTagRequest](BulkTagRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -153,7 +154,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -170,9 +171,89 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
+## checkPathPartAccess
+
+> AccessCheckResponse checkPathPartAccess(pathPartId, userId, capability)
+
+Check Path Part Access Handler
+
+Explain whether &#x60;&#x60;user_id&#x60;&#x60; has &#x60;&#x60;capability&#x60;&#x60; on a path part.  ADMIN/OWNER-only introspection: resolves the target user\&#39;s effective permissions and reports the decision plus the reason (the matching grant path, or a role bypass). OWNER/ADMIN targets bypass path checks by role, so they are always allowed.  404 if the path part does not exist or the target user is not a member of this tenant.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  PathPartsApi,
+} from '@knowledge-stack/ksapi';
+import type { CheckPathPartAccessRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartsApi(config);
+
+  const body = {
+    // string
+    pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | The user whose access is being explained
+    userId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // PermissionCapability | Capability to check (READ_ONLY or READ_WRITE) (optional)
+    capability: ...,
+  } satisfies CheckPathPartAccessRequest;
+
+  try {
+    const data = await api.checkPathPartAccess(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **pathPartId** | `string` |  | [Defaults to `undefined`] |
+| **userId** | `string` | The user whose access is being explained | [Defaults to `undefined`] |
+| **capability** | `PermissionCapability` | Capability to check (READ_ONLY or READ_WRITE) | [Optional] [Defaults to `undefined`] [Enum: READ_ONLY, READ_WRITE, READ_WRITE_DELETE] |
+
+### Return type
+
+[**AccessCheckResponse**](AccessCheckResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
 ## getPathPart
 
-> PathPartResponse getPathPart(pathPartId, authorization, ksUat)
+> PathPartResponse getPathPart(pathPartId)
 
 Get Path Part Handler
 
@@ -189,15 +270,17 @@ import type { GetPathPartRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new PathPartsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartsApi(config);
 
   const body = {
     // string
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetPathPartRequest;
 
   try {
@@ -218,8 +301,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **pathPartId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -227,7 +308,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -246,7 +327,7 @@ No authorization required
 
 ## getPathPartAncestry
 
-> AncestryResponse getPathPartAncestry(pathPartId, authorization, ksUat)
+> AncestryResponse getPathPartAncestry(pathPartId)
 
 Get Path Part Ancestry Handler
 
@@ -263,15 +344,17 @@ import type { GetPathPartAncestryRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new PathPartsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartsApi(config);
 
   const body = {
     // string
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetPathPartAncestryRequest;
 
   try {
@@ -292,8 +375,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **pathPartId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -301,7 +382,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -320,7 +401,7 @@ No authorization required
 
 ## getPathPartSubtreeChunks
 
-> SubtreeChunksResponse getPathPartSubtreeChunks(pathPartId, authorization, ksUat)
+> SubtreeChunksResponse getPathPartSubtreeChunks(pathPartId)
 
 Get Path Part Subtree Chunks Handler
 
@@ -337,15 +418,17 @@ import type { GetPathPartSubtreeChunksRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new PathPartsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartsApi(config);
 
   const body = {
     // string
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetPathPartSubtreeChunksRequest;
 
   try {
@@ -366,8 +449,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **pathPartId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -375,7 +456,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -394,7 +475,7 @@ No authorization required
 
 ## getPathPartTags
 
-> PathPartTagsResponse getPathPartTags(pathPartId, includeInherited, authorization, ksUat)
+> PathPartTagsResponse getPathPartTags(pathPartId, includeInherited)
 
 Get Path Part Tags Handler
 
@@ -411,17 +492,19 @@ import type { GetPathPartTagsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new PathPartsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartsApi(config);
 
   const body = {
     // string
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // boolean | Include tags inherited from ancestor path parts (optional)
     includeInherited: true,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetPathPartTagsRequest;
 
   try {
@@ -443,8 +526,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **pathPartId** | `string` |  | [Defaults to `undefined`] |
 | **includeInherited** | `boolean` | Include tags inherited from ancestor path parts | [Optional] [Defaults to `false`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -452,7 +533,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -471,7 +552,7 @@ No authorization required
 
 ## listPathPartEvents
 
-> PaginatedResponseEventResponse listPathPartEvents(pathPartId, kind, since, until, recursive, limit, offset, authorization, ksUat)
+> PaginatedResponseEventResponse listPathPartEvents(pathPartId, kind, since, until, recursive, limit, offset)
 
 List Path Part Events Handler
 
@@ -488,7 +569,13 @@ import type { ListPathPartEventsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new PathPartsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartsApi(config);
 
   const body = {
     // string
@@ -505,10 +592,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListPathPartEventsRequest;
 
   try {
@@ -535,8 +618,6 @@ example().catch(console.error);
 | **recursive** | `boolean` | Include events from descendant path_parts as well as the subject itself | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -544,7 +625,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -563,7 +644,7 @@ No authorization required
 
 ## listPathParts
 
-> PaginatedResponsePathPartResponse listPathParts(parentPathId, maxDepth, sortOrder, limit, offset, authorization, ksUat)
+> PaginatedResponsePathPartResponse listPathParts(parentPathId, maxDepth, sortOrder, limit, offset)
 
 List Path Parts Handler
 
@@ -580,7 +661,13 @@ import type { ListPathPartsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new PathPartsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartsApi(config);
 
   const body = {
     // string | Parent PathPart ID (defaults to root) (optional)
@@ -593,10 +680,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListPathPartsRequest;
 
   try {
@@ -621,8 +704,6 @@ example().catch(console.error);
 | **sortOrder** | `PathOrder` | Sort order for results (default: LOGICAL) | [Optional] [Defaults to `undefined`] [Enum: LOGICAL, NAME, UPDATED_AT, CREATED_AT] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -630,7 +711,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -649,7 +730,7 @@ No authorization required
 
 ## setPathPartTags
 
-> PathPartTagsResponse setPathPartTags(pathPartId, bulkTagRequest, authorization, ksUat)
+> PathPartTagsResponse setPathPartTags(pathPartId, bulkTagRequest)
 
 Set Path Part Tags Handler
 
@@ -666,17 +747,19 @@ import type { SetPathPartTagsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new PathPartsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartsApi(config);
 
   const body = {
     // string
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // BulkTagRequest
     bulkTagRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies SetPathPartTagsRequest;
 
   try {
@@ -698,8 +781,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **pathPartId** | `string` |  | [Defaults to `undefined`] |
 | **bulkTagRequest** | [BulkTagRequest](BulkTagRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -707,7 +788,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

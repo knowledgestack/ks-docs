@@ -15,7 +15,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## createSection
 
-> SectionResponse createSection(createSectionRequest, authorization, ksUat)
+> SectionResponse createSection(createSectionRequest)
 
 Create Section Handler
 
@@ -32,15 +32,17 @@ import type { CreateSectionOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new SectionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new SectionsApi(config);
 
   const body = {
     // CreateSectionRequest
     createSectionRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateSectionOperationRequest;
 
   try {
@@ -61,8 +63,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **createSectionRequest** | [CreateSectionRequest](CreateSectionRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -70,7 +70,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -89,7 +89,7 @@ No authorization required
 
 ## deleteSection
 
-> deleteSection(sectionId, authorization, ksUat)
+> deleteSection(sectionId)
 
 Delete Section Handler
 
@@ -106,15 +106,17 @@ import type { DeleteSectionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new SectionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new SectionsApi(config);
 
   const body = {
     // string
     sectionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteSectionRequest;
 
   try {
@@ -135,8 +137,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **sectionId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -144,7 +144,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -163,7 +163,7 @@ No authorization required
 
 ## dissolveSection
 
-> DissolveSectionResponse dissolveSection(sectionId, authorization, ksUat)
+> DissolveSectionResponse dissolveSection(sectionId)
 
 Dissolve Section Handler
 
@@ -180,15 +180,17 @@ import type { DissolveSectionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new SectionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new SectionsApi(config);
 
   const body = {
     // string
     sectionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DissolveSectionRequest;
 
   try {
@@ -209,8 +211,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **sectionId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -218,7 +218,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -237,7 +237,7 @@ No authorization required
 
 ## getSection
 
-> SectionResponse getSection(sectionId, authorization, ksUat)
+> SectionResponse getSection(sectionId)
 
 Get Section Handler
 
@@ -254,15 +254,17 @@ import type { GetSectionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new SectionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new SectionsApi(config);
 
   const body = {
     // string
     sectionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetSectionRequest;
 
   try {
@@ -283,8 +285,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **sectionId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -292,7 +292,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -311,7 +311,7 @@ No authorization required
 
 ## getSectionsBulk
 
-> Array&lt;SectionResponse&gt; getSectionsBulk(sectionIds, authorization, ksUat)
+> Array&lt;SectionResponse&gt; getSectionsBulk(sectionIds)
 
 Get Sections Bulk Handler
 
@@ -328,15 +328,17 @@ import type { GetSectionsBulkRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new SectionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new SectionsApi(config);
 
   const body = {
     // Array<string> | Section IDs to fetch (max 200) (optional)
     sectionIds: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetSectionsBulkRequest;
 
   try {
@@ -357,8 +359,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **sectionIds** | `Array<string>` | Section IDs to fetch (max 200) | [Optional] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -366,7 +366,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -385,7 +385,7 @@ No authorization required
 
 ## updateSection
 
-> SectionResponse updateSection(sectionId, updateSectionRequest, authorization, ksUat)
+> SectionResponse updateSection(sectionId, updateSectionRequest)
 
 Update Section Handler
 
@@ -402,17 +402,19 @@ import type { UpdateSectionOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new SectionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new SectionsApi(config);
 
   const body = {
     // string
     sectionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdateSectionRequest
     updateSectionRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateSectionOperationRequest;
 
   try {
@@ -434,8 +436,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **sectionId** | `string` |  | [Defaults to `undefined`] |
 | **updateSectionRequest** | [UpdateSectionRequest](UpdateSectionRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -443,7 +443,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

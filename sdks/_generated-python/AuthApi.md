@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 
 # **change_phone_number**
-> UserResponse change_phone_number(change_phone_number_request, authorization=authorization, ks_uat=ks_uat)
+> UserResponse change_phone_number(change_phone_number_request)
 
 Change Phone Number Handler
 
@@ -36,6 +36,8 @@ The new phone is read from the Redis validation record pinned by
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -50,18 +52,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     change_phone_number_request = ksapi.ChangePhoneNumberRequest() # ChangePhoneNumberRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Change Phone Number Handler
-        api_response = api_instance.change_phone_number(change_phone_number_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.change_phone_number(change_phone_number_request)
         print("The response of AuthApi->change_phone_number:\n")
         pprint(api_response)
     except Exception as e:
@@ -76,8 +91,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **change_phone_number_request** | [**ChangePhoneNumberRequest**](ChangePhoneNumberRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -85,7 +98,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -771,7 +784,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **refresh_uat**
-> UserResponse refresh_uat(tenant_id=tenant_id, authorization=authorization, ks_uat=ks_uat)
+> UserResponse refresh_uat(tenant_id=tenant_id)
 
 Refresh Uat Handler
 
@@ -779,6 +792,8 @@ Refresh or switch the user's active tenant token.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -792,18 +807,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Target tenant ID to switch to. None=refresh current tenant (optional)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Refresh Uat Handler
-        api_response = api_instance.refresh_uat(tenant_id=tenant_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.refresh_uat(tenant_id=tenant_id)
         print("The response of AuthApi->refresh_uat:\n")
         pprint(api_response)
     except Exception as e:
@@ -818,8 +846,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tenant_id** | **UUID**| Target tenant ID to switch to. None&#x3D;refresh current tenant | [optional] 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -827,7 +853,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -844,7 +870,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **request_phone_change**
-> PhoneValidationResponse request_phone_change(request_phone_change_request, authorization=authorization, ks_uat=ks_uat)
+> PhoneValidationResponse request_phone_change(request_phone_change_request)
 
 Request Phone Change Handler
 
@@ -855,6 +881,8 @@ caller is identified by their UAT, so authentication is required.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -869,18 +897,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     request_phone_change_request = ksapi.RequestPhoneChangeRequest() # RequestPhoneChangeRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Request Phone Change Handler
-        api_response = api_instance.request_phone_change(request_phone_change_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.request_phone_change(request_phone_change_request)
         print("The response of AuthApi->request_phone_change:\n")
         pprint(api_response)
     except Exception as e:
@@ -895,8 +936,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **request_phone_change_request** | [**RequestPhoneChangeRequest**](RequestPhoneChangeRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -904,7 +943,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -921,7 +960,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **reset_password**
-> UserResponse reset_password(password_reset_request, authorization=authorization, ks_uat=ks_uat)
+> UserResponse reset_password(password_reset_request)
 
 Reset Password Handler
 
@@ -929,6 +968,8 @@ Reset password for the authenticated user
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -943,18 +984,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     password_reset_request = ksapi.PasswordResetRequest() # PasswordResetRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Reset Password Handler
-        api_response = api_instance.reset_password(password_reset_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.reset_password(password_reset_request)
         print("The response of AuthApi->reset_password:\n")
         pprint(api_response)
     except Exception as e:
@@ -969,8 +1023,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **password_reset_request** | [**PasswordResetRequest**](PasswordResetRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -978,7 +1030,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

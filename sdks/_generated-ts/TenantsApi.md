@@ -21,7 +21,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## activateTenantUser
 
-> TenantUserResponse activateTenantUser(tenantId, userId, authorization, ksUat)
+> TenantUserResponse activateTenantUser(tenantId, userId)
 
 Activate Tenant User Handler
 
@@ -38,17 +38,19 @@ import type { ActivateTenantUserRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
 
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string
     userId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ActivateTenantUserRequest;
 
   try {
@@ -70,8 +72,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
 | **userId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -79,7 +79,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -98,7 +98,7 @@ No authorization required
 
 ## deactivateTenantUser
 
-> TenantUserResponse deactivateTenantUser(tenantId, userId, authorization, ksUat)
+> TenantUserResponse deactivateTenantUser(tenantId, userId)
 
 Deactivate Tenant User Handler
 
@@ -115,17 +115,19 @@ import type { DeactivateTenantUserRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
 
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string
     userId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeactivateTenantUserRequest;
 
   try {
@@ -147,8 +149,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
 | **userId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -156,7 +156,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -175,7 +175,7 @@ No authorization required
 
 ## deleteTenant
 
-> deleteTenant(tenantId, authorization, ksUat)
+> deleteTenant(tenantId)
 
 Delete Tenant
 
@@ -192,15 +192,17 @@ import type { DeleteTenantRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
 
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteTenantRequest;
 
   try {
@@ -221,8 +223,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -230,7 +230,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -249,7 +249,7 @@ No authorization required
 
 ## deleteTenantLogo
 
-> TenantResponse deleteTenantLogo(tenantId, logoType, authorization, ksUat)
+> TenantResponse deleteTenantLogo(tenantId, logoType)
 
 Delete Tenant Logo
 
@@ -266,17 +266,19 @@ import type { DeleteTenantLogoRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
 
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // BrandingLogoType (optional)
     logoType: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteTenantLogoRequest;
 
   try {
@@ -298,8 +300,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
 | **logoType** | `BrandingLogoType` |  | [Optional] [Defaults to `undefined`] [Enum: logo, logo_dark, favicon] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -307,7 +307,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -326,7 +326,7 @@ No authorization required
 
 ## deleteTenantUser
 
-> deleteTenantUser(tenantId, userId, authorization, ksUat)
+> deleteTenantUser(tenantId, userId)
 
 Delete Tenant User Handler
 
@@ -343,17 +343,19 @@ import type { DeleteTenantUserRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
 
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string
     userId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteTenantUserRequest;
 
   try {
@@ -375,8 +377,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
 | **userId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -384,7 +384,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -403,7 +403,7 @@ No authorization required
 
 ## getTenant
 
-> TenantResponse getTenant(tenantId, authorization, ksUat)
+> TenantResponse getTenant(tenantId)
 
 Get Tenant
 
@@ -420,15 +420,17 @@ import type { GetTenantRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
 
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetTenantRequest;
 
   try {
@@ -449,8 +451,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -458,7 +458,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -477,7 +477,7 @@ No authorization required
 
 ## getTenantQuotaState
 
-> TenantQuotaStateResponse getTenantQuotaState(tenantId, authorization, ksUat)
+> TenantQuotaStateResponse getTenantQuotaState(tenantId)
 
 Get Tenant Quota State Handler
 
@@ -494,15 +494,17 @@ import type { GetTenantQuotaStateRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
 
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetTenantQuotaStateRequest;
 
   try {
@@ -523,8 +525,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -532,7 +532,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -551,7 +551,7 @@ No authorization required
 
 ## listTenantUsers
 
-> PaginatedResponseTenantUserResponse listTenantUsers(tenantId, limit, offset, authorization, ksUat)
+> PaginatedResponseTenantUserResponse listTenantUsers(tenantId, limit, offset)
 
 List Tenant Users
 
@@ -568,7 +568,13 @@ import type { ListTenantUsersRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
 
   const body = {
     // string
@@ -577,10 +583,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListTenantUsersRequest;
 
   try {
@@ -603,8 +605,6 @@ example().catch(console.error);
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -612,7 +612,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -631,7 +631,7 @@ No authorization required
 
 ## listTenants
 
-> PaginatedResponseTenantResponse listTenants(limit, offset, authorization, ksUat)
+> PaginatedResponseTenantResponse listTenants(limit, offset)
 
 List Tenants
 
@@ -648,17 +648,19 @@ import type { ListTenantsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
 
   const body = {
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListTenantsRequest;
 
   try {
@@ -680,8 +682,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -689,7 +689,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -708,7 +708,7 @@ No authorization required
 
 ## updateTenant
 
-> TenantResponse updateTenant(tenantId, updateTenantRequest, authorization, ksUat)
+> TenantResponse updateTenant(tenantId, updateTenantRequest)
 
 Update Tenant
 
@@ -725,17 +725,19 @@ import type { UpdateTenantOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
 
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdateTenantRequest
     updateTenantRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateTenantOperationRequest;
 
   try {
@@ -757,8 +759,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
 | **updateTenantRequest** | [UpdateTenantRequest](UpdateTenantRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -766,7 +766,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -785,7 +785,7 @@ No authorization required
 
 ## updateTenantUser
 
-> TenantUserResponse updateTenantUser(tenantId, userId, tenantUserEditRequest, authorization, ksUat)
+> TenantUserResponse updateTenantUser(tenantId, userId, tenantUserEditRequest)
 
 Update Tenant User
 
@@ -802,7 +802,13 @@ import type { UpdateTenantUserRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
 
   const body = {
     // string
@@ -811,10 +817,6 @@ async function example() {
     userId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // TenantUserEditRequest
     tenantUserEditRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateTenantUserRequest;
 
   try {
@@ -837,8 +839,6 @@ example().catch(console.error);
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
 | **userId** | `string` |  | [Defaults to `undefined`] |
 | **tenantUserEditRequest** | [TenantUserEditRequest](TenantUserEditRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -846,7 +846,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -865,7 +865,7 @@ No authorization required
 
 ## uploadTenantLogo
 
-> TenantResponse uploadTenantLogo(tenantId, file, authorization, ksUat, logoType)
+> TenantResponse uploadTenantLogo(tenantId, file, logoType)
 
 Upload Tenant Logo
 
@@ -882,17 +882,19 @@ import type { UploadTenantLogoRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
 
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // Blob
     file: BINARY_DATA_HERE,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
     // BrandingLogoType (optional)
     logoType: ...,
   } satisfies UploadTenantLogoRequest;
@@ -916,8 +918,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
 | **file** | `Blob` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 | **logoType** | `BrandingLogoType` |  | [Optional] [Defaults to `undefined`] [Enum: logo, logo_dark, favicon] |
 
 ### Return type
@@ -926,7 +926,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

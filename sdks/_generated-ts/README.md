@@ -54,7 +54,7 @@ Below this line is auto-generated reference content.
 
 ---
 
-# @knowledge-stack/ksapi@1.95.4
+# @knowledge-stack/ksapi@1.96.0
 
 A TypeScript SDK client for the localhost API.
 
@@ -78,15 +78,17 @@ import type { AgentAskRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new AgentApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new AgentApi(config);
 
   const body = {
     // AskRequest
     askRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies AgentAskRequest;
 
   try {
@@ -116,6 +118,7 @@ All URIs are relative to *http://localhost:8000*
 *ApiKeysApi* | [**deleteApiKey**](docs/ApiKeysApi.md#deleteapikey) | **DELETE** /v1/api-keys/{api_key_id} | Delete Api Key Handler
 *ApiKeysApi* | [**getApiKey**](docs/ApiKeysApi.md#getapikey) | **GET** /v1/api-keys/{api_key_id} | Get Api Key Handler
 *ApiKeysApi* | [**listApiKeys**](docs/ApiKeysApi.md#listapikeys) | **GET** /v1/api-keys | List Api Keys Handler
+*AuditEventsApi* | [**listAuditEvents**](docs/AuditEventsApi.md#listauditevents) | **GET** /v1/audit-events | List Audit Events Handler
 *AuthApi* | [**changePhoneNumber**](docs/AuthApi.md#changephonenumberoperation) | **PUT** /v1/auth/pw/me/phone_number | Change Phone Number Handler
 *AuthApi* | [**createPasswordUser**](docs/AuthApi.md#createpassworduseroperation) | **POST** /v1/auth/pw/user | Create Password User Handler
 *AuthApi* | [**createPhonePasswordUser**](docs/AuthApi.md#createphonepassworduseroperation) | **POST** /v1/auth/pw/phone_user | Create Phone Password User Handler
@@ -146,6 +149,13 @@ All URIs are relative to *http://localhost:8000*
 *ChunksApi* | [**searchChunks**](docs/ChunksApi.md#searchchunks) | **POST** /v1/chunks/search | Search Chunks Handler
 *ChunksApi* | [**updateChunkContent**](docs/ChunksApi.md#updatechunkcontentoperation) | **PATCH** /v1/chunks/{chunk_id}/content | Update Chunk Content Handler
 *ChunksApi* | [**updateChunkMetadata**](docs/ChunksApi.md#updatechunkmetadataoperation) | **PATCH** /v1/chunks/{chunk_id} | Update Chunk Metadata Handler
+*DataSourcesApi* | [**createDataSource**](docs/DataSourcesApi.md#createdatasourceoperation) | **POST** /v1/data-sources | Create Data Source Handler
+*DataSourcesApi* | [**getDataSource**](docs/DataSourcesApi.md#getdatasource) | **GET** /v1/data-sources/{data_source_id} | Get Data Source Handler
+*DataSourcesApi* | [**getDataSourceCatalog**](docs/DataSourcesApi.md#getdatasourcecatalog) | **GET** /v1/data-sources/{data_source_id}/catalog | Get Data Source Catalog Handler
+*DataSourcesApi* | [**modelDataSourceTable**](docs/DataSourcesApi.md#modeldatasourcetable) | **POST** /v1/data-sources/{data_source_id}/tables | Model Data Source Table Handler
+*DataSourcesApi* | [**queryDataSource**](docs/DataSourcesApi.md#querydatasource) | **POST** /v1/data-sources/{data_source_id}/query | Query Data Source Handler
+*DataSourcesApi* | [**testDataSourceConnection**](docs/DataSourcesApi.md#testdatasourceconnection) | **POST** /v1/data-sources/{data_source_id}/test | Test Data Source Connection Handler
+*DataSourcesApi* | [**updateDataSourceTable**](docs/DataSourcesApi.md#updatedatasourcetable) | **PATCH** /v1/data-sources/{data_source_id}/tables/{table_id} | Update Data Source Table Handler
 *DefaultApi* | [**healthCheck**](docs/DefaultApi.md#healthcheck) | **GET** /healthz | Health Check Handler
 *DefaultApi* | [**hello**](docs/DefaultApi.md#hello) | **GET** / | Root Handler
 *DocumentCheckoutApi* | [**acquireDocumentCheckout**](docs/DocumentCheckoutApi.md#acquiredocumentcheckout) | **POST** /v1/documents/{document_id}/checkout | Acquire Document Checkout Handler
@@ -155,12 +165,15 @@ All URIs are relative to *http://localhost:8000*
 *DocumentVersionsApi* | [**createDocumentVersion**](docs/DocumentVersionsApi.md#createdocumentversion) | **POST** /v1/documents/{document_id}/versions | Create Document Version Handler
 *DocumentVersionsApi* | [**deleteDocumentVersion**](docs/DocumentVersionsApi.md#deletedocumentversion) | **DELETE** /v1/document_versions/{version_id} | Delete Document Version Handler
 *DocumentVersionsApi* | [**documentVersionAction**](docs/DocumentVersionsApi.md#documentversionaction) | **POST** /v1/document_versions/{version_id} | Document Version Action Handler
+*DocumentVersionsApi* | [**downloadDocumentVersion**](docs/DocumentVersionsApi.md#downloaddocumentversion) | **POST** /v1/document_versions/{version_id}/download | Download Document Version Handler
 *DocumentVersionsApi* | [**getDocumentVersion**](docs/DocumentVersionsApi.md#getdocumentversion) | **GET** /v1/document_versions/{version_id} | Get Document Version Handler
 *DocumentVersionsApi* | [**getDocumentVersionContents**](docs/DocumentVersionsApi.md#getdocumentversioncontents) | **GET** /v1/document_versions/{version_id}/contents | Get Document Version Contents Handler
+*DocumentVersionsApi* | [**getDocumentVersionDiff**](docs/DocumentVersionsApi.md#getdocumentversiondiff) | **GET** /v1/document_versions/{version_id}/diff | Get Document Version Diff Handler
 *DocumentVersionsApi* | [**listDocumentVersions**](docs/DocumentVersionsApi.md#listdocumentversions) | **GET** /v1/document_versions | List Document Versions Handler
 *DocumentVersionsApi* | [**updateDocumentVersionMetadata**](docs/DocumentVersionsApi.md#updatedocumentversionmetadata) | **PATCH** /v1/document_versions/{version_id}/metadata | Update Document Version Metadata Handler
 *DocumentsApi* | [**createDocument**](docs/DocumentsApi.md#createdocumentoperation) | **POST** /v1/documents | Create Document Handler
 *DocumentsApi* | [**deleteDocument**](docs/DocumentsApi.md#deletedocument) | **DELETE** /v1/documents/{document_id} | Delete Document Handler
+*DocumentsApi* | [**downloadDocument**](docs/DocumentsApi.md#downloaddocument) | **POST** /v1/documents/{document_id}/download | Download Document Handler
 *DocumentsApi* | [**getDocument**](docs/DocumentsApi.md#getdocument) | **GET** /v1/documents/{document_id} | Get Document Handler
 *DocumentsApi* | [**ingestDocument**](docs/DocumentsApi.md#ingestdocument) | **POST** /v1/documents/ingest | Ingest Document Handler
 *DocumentsApi* | [**ingestDocumentVersion**](docs/DocumentsApi.md#ingestdocumentversion) | **POST** /v1/documents/{document_id}/ingest | Ingest Document Version Handler
@@ -183,10 +196,16 @@ All URIs are relative to *http://localhost:8000*
 *InvitesApi* | [**deleteInvite**](docs/InvitesApi.md#deleteinvite) | **DELETE** /v1/invites/{invite_id} | Delete Invite
 *InvitesApi* | [**listInvites**](docs/InvitesApi.md#listinvites) | **GET** /v1/invites | List Invites Handler
 *InvitesApi* | [**updateInvite**](docs/InvitesApi.md#updateinviteoperation) | **PATCH** /v1/invites/{invite_id} | Update Invite Handler
+*MemoryApi* | [**approveMemoryProposal**](docs/MemoryApi.md#approvememoryproposal) | **POST** /v1/memory/proposals/{chunk_id}/approve | Approve Memory Proposal Handler
+*MemoryApi* | [**getMemoryBody**](docs/MemoryApi.md#getmemorybody) | **GET** /v1/memory/body | Get Memory Body Handler
+*MemoryApi* | [**listMemoryProposals**](docs/MemoryApi.md#listmemoryproposals) | **GET** /v1/memory/proposals | List Memory Proposals Handler
+*MemoryApi* | [**proposeMemoryChunk**](docs/MemoryApi.md#proposememorychunkoperation) | **POST** /v1/memory/proposals | Propose Memory Chunk Handler
+*MemoryApi* | [**rejectMemoryProposal**](docs/MemoryApi.md#rejectmemoryproposal) | **POST** /v1/memory/proposals/{chunk_id}/reject | Reject Memory Proposal Handler
 *PathPartApprovalsApi* | [**getPathPartApproval**](docs/PathPartApprovalsApi.md#getpathpartapproval) | **GET** /v1/path-parts/{path_part_id}/approval | Get Path Part Approval Handler
 *PathPartApprovalsApi* | [**setPathPartApproval**](docs/PathPartApprovalsApi.md#setpathpartapproval) | **POST** /v1/path-parts/{path_part_id}/approval | Set Path Part Approval Handler
 *PathPartsApi* | [**appendPathPartEvent**](docs/PathPartsApi.md#appendpathpartevent) | **POST** /v1/path-parts/{path_part_id}/events | Append Path Part Event Handler
 *PathPartsApi* | [**bulkRemovePathPartTags**](docs/PathPartsApi.md#bulkremovepathparttags) | **DELETE** /v1/path-parts/{path_part_id}/tags | Bulk Remove Path Part Tags Handler
+*PathPartsApi* | [**checkPathPartAccess**](docs/PathPartsApi.md#checkpathpartaccess) | **GET** /v1/path-parts/{path_part_id}/access-check | Check Path Part Access Handler
 *PathPartsApi* | [**getPathPart**](docs/PathPartsApi.md#getpathpart) | **GET** /v1/path-parts/{path_part_id} | Get Path Part Handler
 *PathPartsApi* | [**getPathPartAncestry**](docs/PathPartsApi.md#getpathpartancestry) | **GET** /v1/path-parts/{path_part_id}/ancestry | Get Path Part Ancestry Handler
 *PathPartsApi* | [**getPathPartSubtreeChunks**](docs/PathPartsApi.md#getpathpartsubtreechunks) | **GET** /v1/path-parts/{path_part_id}/subtree_chunks | Get Path Part Subtree Chunks Handler
@@ -243,6 +262,9 @@ All URIs are relative to *http://localhost:8000*
 *ThreadsApi* | [**sendUserMessage**](docs/ThreadsApi.md#sendusermessage) | **POST** /v1/threads/{thread_id}/user_message | Send User Message Handler
 *ThreadsApi* | [**streamThread**](docs/ThreadsApi.md#streamthread) | **GET** /v1/threads/{thread_id}/stream | Stream Thread Handler
 *ThreadsApi* | [**updateThread**](docs/ThreadsApi.md#updatethreadoperation) | **PATCH** /v1/threads/{thread_id} | Update Thread Handler
+*TrashApi* | [**listTrash**](docs/TrashApi.md#listtrash) | **GET** /v1/trash | List Trash Handler
+*TrashApi* | [**permanentlyDeleteTrashItem**](docs/TrashApi.md#permanentlydeletetrashitem) | **DELETE** /v1/trash/{path_part_id} | Permanently Delete Trash Item Handler
+*TrashApi* | [**restoreTrashItem**](docs/TrashApi.md#restoretrashitem) | **POST** /v1/trash/{path_part_id}/restore | Restore Trash Item Handler
 *UserPermissionsApi* | [**createUserPermission**](docs/UserPermissionsApi.md#createuserpermission) | **POST** /v1/user-permissions | Create User Permission Handler
 *UserPermissionsApi* | [**deleteUserPermission**](docs/UserPermissionsApi.md#deleteuserpermission) | **DELETE** /v1/user-permissions/{permission_id} | Delete User Permission Handler
 *UserPermissionsApi* | [**listUserPermissions**](docs/UserPermissionsApi.md#listuserpermissions) | **GET** /v1/user-permissions | List User Permissions Handler
@@ -283,6 +305,7 @@ All URIs are relative to *http://localhost:8000*
 ### Models
 
 - [AcceptInviteResponse](docs/AcceptInviteResponse.md)
+- [AccessCheckResponse](docs/AccessCheckResponse.md)
 - [AddMemberRequest](docs/AddMemberRequest.md)
 - [AncestryResponse](docs/AncestryResponse.md)
 - [ApiKeyResponse](docs/ApiKeyResponse.md)
@@ -293,6 +316,11 @@ All URIs are relative to *http://localhost:8000*
 - [AskResponse](docs/AskResponse.md)
 - [BrandingLogoType](docs/BrandingLogoType.md)
 - [BulkTagRequest](docs/BulkTagRequest.md)
+- [CatalogColumnResponse](docs/CatalogColumnResponse.md)
+- [CatalogTableResponse](docs/CatalogTableResponse.md)
+- [CellChange](docs/CellChange.md)
+- [CellChangeType](docs/CellChangeType.md)
+- [CellDiff](docs/CellDiff.md)
 - [ChangePhoneNumberRequest](docs/ChangePhoneNumberRequest.md)
 - [ChangeSubscriptionRequest](docs/ChangeSubscriptionRequest.md)
 - [CheckpointDetails](docs/CheckpointDetails.md)
@@ -310,10 +338,13 @@ All URIs are relative to *http://localhost:8000*
 - [CitedChunk](docs/CitedChunk.md)
 - [ClearVersionContentsResponse](docs/ClearVersionContentsResponse.md)
 - [CloneWorkflowRunRequest](docs/CloneWorkflowRunRequest.md)
+- [ColumnConfig](docs/ColumnConfig.md)
+- [ConnectionConfig](docs/ConnectionConfig.md)
 - [CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
 - [CreateApiKeyResponse](docs/CreateApiKeyResponse.md)
 - [CreateChunkLineageRequest](docs/CreateChunkLineageRequest.md)
 - [CreateChunkRequest](docs/CreateChunkRequest.md)
+- [CreateDataSourceRequest](docs/CreateDataSourceRequest.md)
 - [CreateDocumentRequest](docs/CreateDocumentRequest.md)
 - [CreateFolderRequest](docs/CreateFolderRequest.md)
 - [CreateGroupPermissionRequest](docs/CreateGroupPermissionRequest.md)
@@ -326,10 +357,22 @@ All URIs are relative to *http://localhost:8000*
 - [CreateThreadMessageRequest](docs/CreateThreadMessageRequest.md)
 - [CreateThreadRequest](docs/CreateThreadRequest.md)
 - [CreateWorkflowDefinitionRequest](docs/CreateWorkflowDefinitionRequest.md)
+- [DataSourceCatalogResponse](docs/DataSourceCatalogResponse.md)
+- [DataSourceDetailResponse](docs/DataSourceDetailResponse.md)
+- [DataSourceEngine](docs/DataSourceEngine.md)
+- [DataSourceQueryRequest](docs/DataSourceQueryRequest.md)
+- [DataSourceQueryResponse](docs/DataSourceQueryResponse.md)
+- [DataSourceResponse](docs/DataSourceResponse.md)
+- [DataSourceTableResponse](docs/DataSourceTableResponse.md)
+- [DiffFormat](docs/DiffFormat.md)
+- [DiffRow](docs/DiffRow.md)
+- [DiffRowType](docs/DiffRowType.md)
+- [DiffSpan](docs/DiffSpan.md)
 - [DirectorySyncResponse](docs/DirectorySyncResponse.md)
 - [DisplayNameFormat](docs/DisplayNameFormat.md)
 - [DissolveSectionResponse](docs/DissolveSectionResponse.md)
 - [DocumentCheckoutResponse](docs/DocumentCheckoutResponse.md)
+- [DocumentDownloadResponse](docs/DocumentDownloadResponse.md)
 - [DocumentOrigin](docs/DocumentOrigin.md)
 - [DocumentResponse](docs/DocumentResponse.md)
 - [DocumentType](docs/DocumentType.md)
@@ -341,6 +384,7 @@ All URIs are relative to *http://localhost:8000*
 - [DocumentVersionResponse](docs/DocumentVersionResponse.md)
 - [DocxParagraphAnchorInput](docs/DocxParagraphAnchorInput.md)
 - [DocxParagraphAnchorOutput](docs/DocxParagraphAnchorOutput.md)
+- [DownloadArtifact](docs/DownloadArtifact.md)
 - [EditMemoryChunkRequest](docs/EditMemoryChunkRequest.md)
 - [EmailSentResponse](docs/EmailSentResponse.md)
 - [EmailVerificationRequest](docs/EmailVerificationRequest.md)
@@ -357,7 +401,7 @@ All URIs are relative to *http://localhost:8000*
 - [FolderAction](docs/FolderAction.md)
 - [FolderActionResponse](docs/FolderActionResponse.md)
 - [FolderResponse](docs/FolderResponse.md)
-- [FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse](docs/FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse.md)
+- [FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse](docs/FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse.md)
 - [GroupPermissionResponse](docs/GroupPermissionResponse.md)
 - [GroupResponse](docs/GroupResponse.md)
 - [HTTPValidationError](docs/HTTPValidationError.md)
@@ -376,19 +420,23 @@ All URIs are relative to *http://localhost:8000*
 - [InviteResponse](docs/InviteResponse.md)
 - [InviteStatus](docs/InviteStatus.md)
 - [InviteUserRequest](docs/InviteUserRequest.md)
+- [ItemPermissions](docs/ItemPermissions.md)
 - [LineageEdgeResponse](docs/LineageEdgeResponse.md)
 - [LineageGraphResponse](docs/LineageGraphResponse.md)
 - [LineageNodeResponse](docs/LineageNodeResponse.md)
 - [LocationInner](docs/LocationInner.md)
 - [MembershipResponse](docs/MembershipResponse.md)
+- [MemoryBodyResponse](docs/MemoryBodyResponse.md)
 - [MemoryChunkResponse](docs/MemoryChunkResponse.md)
 - [MemoryKind](docs/MemoryKind.md)
+- [MemoryScope](docs/MemoryScope.md)
 - [MessageRole](docs/MessageRole.md)
 - [MeteredQuotaStatus](docs/MeteredQuotaStatus.md)
+- [ModelTableRequest](docs/ModelTableRequest.md)
 - [NonFilesystemReferenceType](docs/NonFilesystemReferenceType.md)
 - [OnboardingCompanyRequest](docs/OnboardingCompanyRequest.md)
 - [OnboardingProfileRequest](docs/OnboardingProfileRequest.md)
-- [PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator](docs/PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator.md)
+- [PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator](docs/PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator.md)
 - [PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator](docs/PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator.md)
 - [PaginatedResponseDocumentResponse](docs/PaginatedResponseDocumentResponse.md)
 - [PaginatedResponseDocumentVersionResponse](docs/PaginatedResponseDocumentVersionResponse.md)
@@ -401,12 +449,14 @@ All URIs are relative to *http://localhost:8000*
 - [PaginatedResponseMembershipResponse](docs/PaginatedResponseMembershipResponse.md)
 - [PaginatedResponseMemoryChunkResponse](docs/PaginatedResponseMemoryChunkResponse.md)
 - [PaginatedResponsePathPartResponse](docs/PaginatedResponsePathPartResponse.md)
+- [PaginatedResponsePendingMemoryChunkResponse](docs/PaginatedResponsePendingMemoryChunkResponse.md)
 - [PaginatedResponsePermissionResponse](docs/PaginatedResponsePermissionResponse.md)
 - [PaginatedResponseTagResponse](docs/PaginatedResponseTagResponse.md)
 - [PaginatedResponseTenantResponse](docs/PaginatedResponseTenantResponse.md)
 - [PaginatedResponseTenantUserResponse](docs/PaginatedResponseTenantUserResponse.md)
 - [PaginatedResponseThreadMessageResponse](docs/PaginatedResponseThreadMessageResponse.md)
 - [PaginatedResponseThreadResponse](docs/PaginatedResponseThreadResponse.md)
+- [PaginatedResponseTrashItemResponse](docs/PaginatedResponseTrashItemResponse.md)
 - [PaginatedResponseWorkflowDefinitionResponse](docs/PaginatedResponseWorkflowDefinitionResponse.md)
 - [PaginatedResponseWorkflowRunResponse](docs/PaginatedResponseWorkflowRunResponse.md)
 - [PaginatedResponseWorkflowSummaryResponse](docs/PaginatedResponseWorkflowSummaryResponse.md)
@@ -421,6 +471,7 @@ All URIs are relative to *http://localhost:8000*
 - [PathPartApprovalState](docs/PathPartApprovalState.md)
 - [PathPartResponse](docs/PathPartResponse.md)
 - [PathPartTagsResponse](docs/PathPartTagsResponse.md)
+- [PendingMemoryChunkResponse](docs/PendingMemoryChunkResponse.md)
 - [PermissionCapability](docs/PermissionCapability.md)
 - [PermissionResponse](docs/PermissionResponse.md)
 - [PhoneValidationResponse](docs/PhoneValidationResponse.md)
@@ -429,6 +480,8 @@ All URIs are relative to *http://localhost:8000*
 - [PipelineStatus](docs/PipelineStatus.md)
 - [Polygon](docs/Polygon.md)
 - [PolygonReference](docs/PolygonReference.md)
+- [ProposeMemoryChunkRequest](docs/ProposeMemoryChunkRequest.md)
+- [ProposedMemoryChunkResponse](docs/ProposedMemoryChunkResponse.md)
 - [ReferenceType](docs/ReferenceType.md)
 - [RequestPhoneChangeRequest](docs/RequestPhoneChangeRequest.md)
 - [ResolvedReferenceInput](docs/ResolvedReferenceInput.md)
@@ -469,11 +522,13 @@ All URIs are relative to *http://localhost:8000*
 - [TenantUserEditRequest](docs/TenantUserEditRequest.md)
 - [TenantUserResponse](docs/TenantUserResponse.md)
 - [TenantUserRole](docs/TenantUserRole.md)
+- [TextDiff](docs/TextDiff.md)
 - [ThreadMessageContent](docs/ThreadMessageContent.md)
 - [ThreadMessageDetailsInput](docs/ThreadMessageDetailsInput.md)
 - [ThreadMessageDetailsOutput](docs/ThreadMessageDetailsOutput.md)
 - [ThreadMessageResponse](docs/ThreadMessageResponse.md)
 - [ThreadResponse](docs/ThreadResponse.md)
+- [TrashItemResponse](docs/TrashItemResponse.md)
 - [UpdateChunkContentRequest](docs/UpdateChunkContentRequest.md)
 - [UpdateChunkMetadataRequest](docs/UpdateChunkMetadataRequest.md)
 - [UpdateDocumentRequest](docs/UpdateDocumentRequest.md)
@@ -483,6 +538,7 @@ All URIs are relative to *http://localhost:8000*
 - [UpdateInviteRequest](docs/UpdateInviteRequest.md)
 - [UpdatePermissionRequest](docs/UpdatePermissionRequest.md)
 - [UpdateSectionRequest](docs/UpdateSectionRequest.md)
+- [UpdateTableRequest](docs/UpdateTableRequest.md)
 - [UpdateTagRequest](docs/UpdateTagRequest.md)
 - [UpdateTenantRequest](docs/UpdateTenantRequest.md)
 - [UpdateThreadRequest](docs/UpdateThreadRequest.md)
@@ -497,6 +553,7 @@ All URIs are relative to *http://localhost:8000*
 - [ValidateResetCodeRequest](docs/ValidateResetCodeRequest.md)
 - [ValidationError](docs/ValidationError.md)
 - [VersionChunkIdsResponse](docs/VersionChunkIdsResponse.md)
+- [VersionDiffResponse](docs/VersionDiffResponse.md)
 - [WorkflowActionResponse](docs/WorkflowActionResponse.md)
 - [WorkflowCallbackResponse](docs/WorkflowCallbackResponse.md)
 - [WorkflowCancelResponse](docs/WorkflowCancelResponse.md)
@@ -514,8 +571,20 @@ All URIs are relative to *http://localhost:8000*
 
 ### Authorization
 
-Endpoints do not require authorization.
 
+Authentication schemes defined for the API:
+<a id="cookieAuth"></a>
+#### cookieAuth
+
+
+- **Type**: API key
+- **API key parameter name**: `ks_uat`
+- **Location**: 
+<a id="bearerAuth"></a>
+#### bearerAuth
+
+
+- **Type**: HTTP Bearer Token authentication
 
 ## About
 
@@ -524,7 +593,7 @@ and is automatically generated by the
 [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `0.1.0`
-- Package version: `1.95.4`
+- Package version: `1.96.0`
 - Generator version: `7.21.0`
 - Build package: `org.openapitools.codegen.languages.TypeScriptFetchClientCodegen`
 

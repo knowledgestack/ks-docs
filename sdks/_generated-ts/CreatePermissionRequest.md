@@ -10,6 +10,7 @@ Name | Type
 `userId` | string
 `pathPartId` | string
 `capability` | [PermissionCapability](PermissionCapability.md)
+`canApprove` | boolean
 
 ## Example
 
@@ -22,6 +23,7 @@ const example = {
   "userId": null,
   "pathPartId": null,
   "capability": null,
+  "canApprove": null,
 } satisfies CreatePermissionRequest
 
 console.log(example)

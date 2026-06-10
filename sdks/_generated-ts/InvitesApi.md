@@ -14,7 +14,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## acceptInvite
 
-> AcceptInviteResponse acceptInvite(inviteId, authorization, ksUat)
+> AcceptInviteResponse acceptInvite(inviteId)
 
 Accept Invite
 
@@ -31,15 +31,17 @@ import type { AcceptInviteRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new InvitesApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new InvitesApi(config);
 
   const body = {
     // string | Either an Invite ID (traditional per-email invite) OR a Tenant ID (when the tenant has ``invite_link.enabled``). Tenant lookup is tried first.
     inviteId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies AcceptInviteRequest;
 
   try {
@@ -60,8 +62,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **inviteId** | `string` | Either an Invite ID (traditional per-email invite) OR a Tenant ID (when the tenant has &#x60;&#x60;invite_link.enabled&#x60;&#x60;). Tenant lookup is tried first. | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -69,7 +69,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -88,7 +88,7 @@ No authorization required
 
 ## createInvite
 
-> InviteResponse createInvite(inviteUserRequest, authorization, ksUat)
+> InviteResponse createInvite(inviteUserRequest)
 
 Create Invite
 
@@ -105,15 +105,17 @@ import type { CreateInviteRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new InvitesApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new InvitesApi(config);
 
   const body = {
     // InviteUserRequest
     inviteUserRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateInviteRequest;
 
   try {
@@ -134,8 +136,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **inviteUserRequest** | [InviteUserRequest](InviteUserRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -143,7 +143,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -162,7 +162,7 @@ No authorization required
 
 ## deleteInvite
 
-> deleteInvite(inviteId, authorization, ksUat)
+> deleteInvite(inviteId)
 
 Delete Invite
 
@@ -179,15 +179,17 @@ import type { DeleteInviteRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new InvitesApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new InvitesApi(config);
 
   const body = {
     // string
     inviteId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteInviteRequest;
 
   try {
@@ -208,8 +210,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **inviteId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -217,7 +217,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -236,7 +236,7 @@ No authorization required
 
 ## listInvites
 
-> PaginatedResponseInviteResponse listInvites(email, status, limit, offset, authorization, ksUat)
+> PaginatedResponseInviteResponse listInvites(email, status, limit, offset)
 
 List Invites Handler
 
@@ -253,7 +253,13 @@ import type { ListInvitesRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new InvitesApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new InvitesApi(config);
 
   const body = {
     // string | Filter by email (case-insensitive partial match) (optional)
@@ -264,10 +270,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListInvitesRequest;
 
   try {
@@ -291,8 +293,6 @@ example().catch(console.error);
 | **status** | `InviteStatus` | Filter by invite status (pending, accepted, expired) | [Optional] [Defaults to `undefined`] [Enum: pending, accepted, expired] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -300,7 +300,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -319,7 +319,7 @@ No authorization required
 
 ## updateInvite
 
-> InviteResponse updateInvite(inviteId, updateInviteRequest, authorization, ksUat)
+> InviteResponse updateInvite(inviteId, updateInviteRequest)
 
 Update Invite Handler
 
@@ -336,17 +336,19 @@ import type { UpdateInviteOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new InvitesApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new InvitesApi(config);
 
   const body = {
     // string
     inviteId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdateInviteRequest
     updateInviteRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateInviteOperationRequest;
 
   try {
@@ -368,8 +370,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **inviteId** | `string` |  | [Defaults to `undefined`] |
 | **updateInviteRequest** | [UpdateInviteRequest](UpdateInviteRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -377,7 +377,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

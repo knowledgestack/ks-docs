@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **create_thread_message**
-> ThreadMessageResponse create_thread_message(thread_id, create_thread_message_request, authorization=authorization, ks_uat=ks_uat)
+> ThreadMessageResponse create_thread_message(thread_id, create_thread_message_request)
 
 Create Thread Message Handler
 
@@ -18,6 +18,8 @@ Create a new message in a thread.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -32,6 +34,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -39,12 +56,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.ThreadMessagesApi(api_client)
     thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     create_thread_message_request = ksapi.CreateThreadMessageRequest() # CreateThreadMessageRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Create Thread Message Handler
-        api_response = api_instance.create_thread_message(thread_id, create_thread_message_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.create_thread_message(thread_id, create_thread_message_request)
         print("The response of ThreadMessagesApi->create_thread_message:\n")
         pprint(api_response)
     except Exception as e:
@@ -60,8 +75,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **thread_id** | **UUID**|  | 
  **create_thread_message_request** | [**CreateThreadMessageRequest**](CreateThreadMessageRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -69,7 +82,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -86,7 +99,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_thread_message**
-> ThreadMessageResponse get_thread_message(thread_id, message_id, with_details=with_details, authorization=authorization, ks_uat=ks_uat)
+> ThreadMessageResponse get_thread_message(thread_id, message_id, with_details=with_details)
 
 Get Thread Message Handler
 
@@ -96,6 +109,8 @@ Use `with_details=false` to exclude execution step data and reduce payload size.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -109,6 +124,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -117,12 +147,10 @@ with ksapi.ApiClient(configuration) as api_client:
     thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     message_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     with_details = True # bool | Include execution steps in response (default true) (optional) (default to True)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Thread Message Handler
-        api_response = api_instance.get_thread_message(thread_id, message_id, with_details=with_details, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_thread_message(thread_id, message_id, with_details=with_details)
         print("The response of ThreadMessagesApi->get_thread_message:\n")
         pprint(api_response)
     except Exception as e:
@@ -139,8 +167,6 @@ Name | Type | Description  | Notes
  **thread_id** | **UUID**|  | 
  **message_id** | **UUID**|  | 
  **with_details** | **bool**| Include execution steps in response (default true) | [optional] [default to True]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -148,7 +174,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -165,7 +191,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_thread_messages**
-> PaginatedResponseThreadMessageResponse list_thread_messages(thread_id, before=before, with_details=with_details, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponseThreadMessageResponse list_thread_messages(thread_id, before=before, with_details=with_details, limit=limit, offset=offset)
 
 List Thread Messages Handler
 
@@ -178,6 +204,8 @@ Use `with_details=false` to exclude execution step data and reduce payload size.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -191,6 +219,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -201,12 +244,10 @@ with ksapi.ApiClient(configuration) as api_client:
     with_details = True # bool | Include execution steps in response (default true) (optional) (default to True)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List Thread Messages Handler
-        api_response = api_instance.list_thread_messages(thread_id, before=before, with_details=with_details, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_thread_messages(thread_id, before=before, with_details=with_details, limit=limit, offset=offset)
         print("The response of ThreadMessagesApi->list_thread_messages:\n")
         pprint(api_response)
     except Exception as e:
@@ -225,8 +266,6 @@ Name | Type | Description  | Notes
  **with_details** | **bool**| Include execution steps in response (default true) | [optional] [default to True]
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -234,7 +273,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

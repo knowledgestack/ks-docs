@@ -12,7 +12,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## deleteFeedback
 
-> deleteFeedback(feedbackId, authorization, ksUat)
+> deleteFeedback(feedbackId)
 
 Delete Feedback Handler
 
@@ -29,15 +29,17 @@ import type { DeleteFeedbackRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new FeedbackApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new FeedbackApi(config);
 
   const body = {
     // string
     feedbackId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteFeedbackRequest;
 
   try {
@@ -58,8 +60,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **feedbackId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -67,7 +67,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -86,7 +86,7 @@ No authorization required
 
 ## listFeedback
 
-> PaginatedResponseFeedbackEventResponse listFeedback(targetType, targetId, rating, limit, offset, authorization, ksUat)
+> PaginatedResponseFeedbackEventResponse listFeedback(targetType, targetId, rating, limit, offset)
 
 List Feedback Handler
 
@@ -103,7 +103,13 @@ import type { ListFeedbackRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new FeedbackApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new FeedbackApi(config);
 
   const body = {
     // FeedbackTargetType (optional)
@@ -116,10 +122,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListFeedbackRequest;
 
   try {
@@ -144,8 +146,6 @@ example().catch(console.error);
 | **rating** | `FeedbackRating` |  | [Optional] [Defaults to `undefined`] [Enum: UP, DOWN] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -153,7 +153,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -172,7 +172,7 @@ No authorization required
 
 ## submitFeedback
 
-> FeedbackEventResponse submitFeedback(submitFeedbackRequest, authorization, ksUat)
+> FeedbackEventResponse submitFeedback(submitFeedbackRequest)
 
 Submit Feedback Handler
 
@@ -189,15 +189,17 @@ import type { SubmitFeedbackOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new FeedbackApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new FeedbackApi(config);
 
   const body = {
     // SubmitFeedbackRequest
     submitFeedbackRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies SubmitFeedbackOperationRequest;
 
   try {
@@ -218,8 +220,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **submitFeedbackRequest** | [SubmitFeedbackRequest](SubmitFeedbackRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -227,7 +227,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

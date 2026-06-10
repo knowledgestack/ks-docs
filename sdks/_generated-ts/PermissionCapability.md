@@ -1,7 +1,7 @@
 
 # PermissionCapability
 
-Permission capability.
+Path access capability, a strict ladder: read < write < delete.
 
 ## Properties
 

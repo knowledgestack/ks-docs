@@ -21,6 +21,7 @@ Name | Type | Description | Notes
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
+**permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; null on mutation responses. | [optional] 
 
 ## Example
 

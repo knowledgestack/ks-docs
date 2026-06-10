@@ -16,7 +16,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## createWorkflowDefinition
 
-> WorkflowDefinitionResponse createWorkflowDefinition(createWorkflowDefinitionRequest, authorization, ksUat)
+> WorkflowDefinitionResponse createWorkflowDefinition(createWorkflowDefinitionRequest)
 
 Create Workflow Definition Handler
 
@@ -31,15 +31,17 @@ import type { CreateWorkflowDefinitionOperationRequest } from '@knowledge-stack/
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowDefinitionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowDefinitionsApi(config);
 
   const body = {
     // CreateWorkflowDefinitionRequest
     createWorkflowDefinitionRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateWorkflowDefinitionOperationRequest;
 
   try {
@@ -60,8 +62,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **createWorkflowDefinitionRequest** | [CreateWorkflowDefinitionRequest](CreateWorkflowDefinitionRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -69,7 +69,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -88,7 +88,7 @@ No authorization required
 
 ## createWorkflowRun
 
-> WorkflowRunResponse createWorkflowRun(definitionId, authorization, ksUat, files, inputScope, idempotencyKey)
+> WorkflowRunResponse createWorkflowRun(definitionId, files, inputScope, idempotencyKey)
 
 Create Workflow Run Handler
 
@@ -105,15 +105,17 @@ import type { CreateWorkflowRunRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowDefinitionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowDefinitionsApi(config);
 
   const body = {
     // string
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
     // Array<Blob> | DEPRECATED — do not send files here. Carrying file bytes on run creation makes the call block on synchronous S3 upload (the ~30s \\\'Create run\\\' wait). Instead create an empty draft (omit this field), then upload each file to the run\\\'s ``inputs/`` folder via ``POST /v1/documents/ingest`` with ``path_part_id`` set to the run\\\'s ``inputs_path_part_id``; that path ingests asynchronously and auto-syncs the run\\\'s state. This field will be removed once the FE has migrated. (optional)
     files: /path/to/file.txt,
     // string | JSON array of ``DOCUMENT`` or ``FOLDER`` path_part UUIDs referenced from the existing knowledge base, pinned onto the new draft\\\'s input scope. Optional — omit for an empty draft and add references later via PATCH. (optional)
@@ -140,8 +142,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **definitionId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 | **files** | `Array<Blob>` | DEPRECATED — do not send files here. Carrying file bytes on run creation makes the call block on synchronous S3 upload (the ~30s \\\&#39;Create run\\\&#39; wait). Instead create an empty draft (omit this field), then upload each file to the run\\\&#39;s &#x60;&#x60;inputs/&#x60;&#x60; folder via &#x60;&#x60;POST /v1/documents/ingest&#x60;&#x60; with &#x60;&#x60;path_part_id&#x60;&#x60; set to the run\\\&#39;s &#x60;&#x60;inputs_path_part_id&#x60;&#x60;; that path ingests asynchronously and auto-syncs the run\\\&#39;s state. This field will be removed once the FE has migrated. | [Optional] |
 | **inputScope** | `string` | JSON array of &#x60;&#x60;DOCUMENT&#x60;&#x60; or &#x60;&#x60;FOLDER&#x60;&#x60; path_part UUIDs referenced from the existing knowledge base, pinned onto the new draft\\\&#39;s input scope. Optional — omit for an empty draft and add references later via PATCH. | [Optional] [Defaults to `undefined`] |
 | **idempotencyKey** | `string` | Optional key to prevent duplicate runs from retries. | [Optional] [Defaults to `undefined`] |
@@ -152,7 +152,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -171,7 +171,7 @@ No authorization required
 
 ## deleteWorkflowDefinition
 
-> deleteWorkflowDefinition(definitionId, authorization, ksUat)
+> deleteWorkflowDefinition(definitionId)
 
 Delete Workflow Definition Handler
 
@@ -186,15 +186,17 @@ import type { DeleteWorkflowDefinitionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowDefinitionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowDefinitionsApi(config);
 
   const body = {
     // string
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteWorkflowDefinitionRequest;
 
   try {
@@ -215,8 +217,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **definitionId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -224,7 +224,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -243,7 +243,7 @@ No authorization required
 
 ## getWorkflowDefinition
 
-> WorkflowDefinitionResponse getWorkflowDefinition(definitionId, authorization, ksUat)
+> WorkflowDefinitionResponse getWorkflowDefinition(definitionId)
 
 Get Workflow Definition Handler
 
@@ -258,15 +258,17 @@ import type { GetWorkflowDefinitionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowDefinitionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowDefinitionsApi(config);
 
   const body = {
     // string
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetWorkflowDefinitionRequest;
 
   try {
@@ -287,8 +289,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **definitionId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -296,7 +296,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -315,7 +315,7 @@ No authorization required
 
 ## listWorkflowDefinitions
 
-> PaginatedResponseWorkflowDefinitionResponse listWorkflowDefinitions(limit, offset, authorization, ksUat)
+> PaginatedResponseWorkflowDefinitionResponse listWorkflowDefinitions(limit, offset)
 
 List Workflow Definitions Handler
 
@@ -330,17 +330,19 @@ import type { ListWorkflowDefinitionsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowDefinitionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowDefinitionsApi(config);
 
   const body = {
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListWorkflowDefinitionsRequest;
 
   try {
@@ -362,8 +364,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -371,7 +371,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -390,7 +390,7 @@ No authorization required
 
 ## listWorkflowRuns
 
-> PaginatedResponseWorkflowRunResponse listWorkflowRuns(definitionId, limit, offset, authorization, ksUat)
+> PaginatedResponseWorkflowRunResponse listWorkflowRuns(definitionId, limit, offset)
 
 List Workflow Runs Handler
 
@@ -405,7 +405,13 @@ import type { ListWorkflowRunsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowDefinitionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowDefinitionsApi(config);
 
   const body = {
     // string
@@ -414,10 +420,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListWorkflowRunsRequest;
 
   try {
@@ -440,8 +442,6 @@ example().catch(console.error);
 | **definitionId** | `string` |  | [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -449,7 +449,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -468,7 +468,7 @@ No authorization required
 
 ## updateWorkflowDefinition
 
-> WorkflowDefinitionResponse updateWorkflowDefinition(definitionId, updateWorkflowDefinitionRequest, authorization, ksUat)
+> WorkflowDefinitionResponse updateWorkflowDefinition(definitionId, updateWorkflowDefinitionRequest)
 
 Update Workflow Definition Handler
 
@@ -483,17 +483,19 @@ import type { UpdateWorkflowDefinitionOperationRequest } from '@knowledge-stack/
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowDefinitionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowDefinitionsApi(config);
 
   const body = {
     // string
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdateWorkflowDefinitionRequest
     updateWorkflowDefinitionRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateWorkflowDefinitionOperationRequest;
 
   try {
@@ -515,8 +517,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **definitionId** | `string` |  | [Defaults to `undefined`] |
 | **updateWorkflowDefinitionRequest** | [UpdateWorkflowDefinitionRequest](UpdateWorkflowDefinitionRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -524,7 +524,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

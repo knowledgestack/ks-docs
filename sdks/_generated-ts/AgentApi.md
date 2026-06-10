@@ -11,7 +11,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## agentAsk
 
-> AskResponse agentAsk(askRequest, authorization, ksUat)
+> AskResponse agentAsk(askRequest)
 
 Agent Ask Handler
 
@@ -28,15 +28,17 @@ import type { AgentAskRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new AgentApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new AgentApi(config);
 
   const body = {
     // AskRequest
     askRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies AgentAskRequest;
 
   try {
@@ -57,8 +59,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **askRequest** | [AskRequest](AskRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -66,7 +66,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -85,7 +85,7 @@ No authorization required
 
 ## agentExtract
 
-> ExtractResponse agentExtract(extractRequest, authorization, ksUat)
+> ExtractResponse agentExtract(extractRequest)
 
 Agent Extract Handler
 
@@ -102,15 +102,17 @@ import type { AgentExtractRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new AgentApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new AgentApi(config);
 
   const body = {
     // ExtractRequest
     extractRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies AgentExtractRequest;
 
   try {
@@ -131,8 +133,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **extractRequest** | [ExtractRequest](ExtractRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -140,7 +140,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

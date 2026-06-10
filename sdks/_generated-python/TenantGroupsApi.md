@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 
 # **add_group_member**
-> MembershipResponse add_group_member(group_id, add_member_request, authorization=authorization, ks_uat=ks_uat)
+> MembershipResponse add_group_member(group_id, add_member_request)
 
 Add Group Member Handler
 
@@ -28,6 +28,8 @@ Add a user to a group (admin/owner only).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -42,6 +44,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -49,12 +66,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     add_member_request = ksapi.AddMemberRequest() # AddMemberRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Add Group Member Handler
-        api_response = api_instance.add_group_member(group_id, add_member_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.add_group_member(group_id, add_member_request)
         print("The response of TenantGroupsApi->add_group_member:\n")
         pprint(api_response)
     except Exception as e:
@@ -70,8 +85,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **UUID**|  | 
  **add_member_request** | [**AddMemberRequest**](AddMemberRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -79,7 +92,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -96,7 +109,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_group_permission**
-> GroupPermissionResponse create_group_permission(group_id, create_group_permission_request, authorization=authorization, ks_uat=ks_uat)
+> GroupPermissionResponse create_group_permission(group_id, create_group_permission_request)
 
 Create Group Permission Handler
 
@@ -104,6 +117,8 @@ Create a path permission for a group (admin/owner only).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -118,6 +133,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -125,12 +155,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     create_group_permission_request = ksapi.CreateGroupPermissionRequest() # CreateGroupPermissionRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Create Group Permission Handler
-        api_response = api_instance.create_group_permission(group_id, create_group_permission_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.create_group_permission(group_id, create_group_permission_request)
         print("The response of TenantGroupsApi->create_group_permission:\n")
         pprint(api_response)
     except Exception as e:
@@ -146,8 +174,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **UUID**|  | 
  **create_group_permission_request** | [**CreateGroupPermissionRequest**](CreateGroupPermissionRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -155,7 +181,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -172,7 +198,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_tenant_group**
-> GroupResponse create_tenant_group(create_group_request, authorization=authorization, ks_uat=ks_uat)
+> GroupResponse create_tenant_group(create_group_request)
 
 Create Tenant Group Handler
 
@@ -180,6 +206,8 @@ Create a new tenant group (admin/owner only).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -194,18 +222,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     create_group_request = ksapi.CreateGroupRequest() # CreateGroupRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Create Tenant Group Handler
-        api_response = api_instance.create_tenant_group(create_group_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.create_tenant_group(create_group_request)
         print("The response of TenantGroupsApi->create_tenant_group:\n")
         pprint(api_response)
     except Exception as e:
@@ -220,8 +261,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_group_request** | [**CreateGroupRequest**](CreateGroupRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -229,7 +268,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -246,7 +285,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_group_permission**
-> delete_group_permission(group_id, permission_id, authorization=authorization, ks_uat=ks_uat)
+> delete_group_permission(group_id, permission_id)
 
 Delete Group Permission Handler
 
@@ -254,6 +293,8 @@ Delete a path permission from a group (admin/owner only).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -266,6 +307,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -273,12 +329,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     permission_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Delete Group Permission Handler
-        api_instance.delete_group_permission(group_id, permission_id, authorization=authorization, ks_uat=ks_uat)
+        api_instance.delete_group_permission(group_id, permission_id)
     except Exception as e:
         print("Exception when calling TenantGroupsApi->delete_group_permission: %s\n" % e)
 ```
@@ -292,8 +346,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **UUID**|  | 
  **permission_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -301,7 +353,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -318,7 +370,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_tenant_group**
-> delete_tenant_group(group_id, authorization=authorization, ks_uat=ks_uat)
+> delete_tenant_group(group_id)
 
 Delete Tenant Group Handler
 
@@ -326,6 +378,8 @@ Delete a tenant group (admin/owner only).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -338,18 +392,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Delete Tenant Group Handler
-        api_instance.delete_tenant_group(group_id, authorization=authorization, ks_uat=ks_uat)
+        api_instance.delete_tenant_group(group_id)
     except Exception as e:
         print("Exception when calling TenantGroupsApi->delete_tenant_group: %s\n" % e)
 ```
@@ -362,8 +429,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -371,7 +436,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -388,7 +453,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_tenant_group**
-> GroupResponse get_tenant_group(group_id, authorization=authorization, ks_uat=ks_uat)
+> GroupResponse get_tenant_group(group_id)
 
 Get Tenant Group Handler
 
@@ -396,6 +461,8 @@ Get a tenant group by ID (group member or admin/owner).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -409,18 +476,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Tenant Group Handler
-        api_response = api_instance.get_tenant_group(group_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_tenant_group(group_id)
         print("The response of TenantGroupsApi->get_tenant_group:\n")
         pprint(api_response)
     except Exception as e:
@@ -435,8 +515,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -444,7 +522,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -461,7 +539,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_group_members**
-> PaginatedResponseMembershipResponse list_group_members(group_id, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponseMembershipResponse list_group_members(group_id, limit=limit, offset=offset)
 
 List Group Members Handler
 
@@ -469,6 +547,8 @@ List members of a group (group members or admin/owner).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -482,6 +562,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -490,12 +585,10 @@ with ksapi.ApiClient(configuration) as api_client:
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List Group Members Handler
-        api_response = api_instance.list_group_members(group_id, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_group_members(group_id, limit=limit, offset=offset)
         print("The response of TenantGroupsApi->list_group_members:\n")
         pprint(api_response)
     except Exception as e:
@@ -512,8 +605,6 @@ Name | Type | Description  | Notes
  **group_id** | **UUID**|  | 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -521,7 +612,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -538,7 +629,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_group_permissions**
-> PaginatedResponseGroupPermissionResponse list_group_permissions(group_id, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponseGroupPermissionResponse list_group_permissions(group_id, limit=limit, offset=offset)
 
 List Group Permissions Handler
 
@@ -546,6 +637,8 @@ List path permissions for a group (group member or admin/owner).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -559,6 +652,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -567,12 +675,10 @@ with ksapi.ApiClient(configuration) as api_client:
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List Group Permissions Handler
-        api_response = api_instance.list_group_permissions(group_id, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_group_permissions(group_id, limit=limit, offset=offset)
         print("The response of TenantGroupsApi->list_group_permissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -589,8 +695,6 @@ Name | Type | Description  | Notes
  **group_id** | **UUID**|  | 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -598,7 +702,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -615,7 +719,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_my_groups**
-> List[GroupResponse] list_my_groups(authorization=authorization, ks_uat=ks_uat)
+> List[GroupResponse] list_my_groups()
 
 List My Groups Handler
 
@@ -623,6 +727,8 @@ List groups the current user belongs to.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -636,17 +742,30 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List My Groups Handler
-        api_response = api_instance.list_my_groups(authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_my_groups()
         print("The response of TenantGroupsApi->list_my_groups:\n")
         pprint(api_response)
     except Exception as e:
@@ -657,11 +776,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -669,7 +784,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -681,12 +796,11 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_tenant_groups**
-> PaginatedResponseGroupResponse list_tenant_groups(limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponseGroupResponse list_tenant_groups(limit=limit, offset=offset)
 
 List Tenant Groups Handler
 
@@ -696,6 +810,8 @@ Admin/owner see all groups; other members see only groups they belong to.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -709,6 +825,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -716,12 +847,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.TenantGroupsApi(api_client)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List Tenant Groups Handler
-        api_response = api_instance.list_tenant_groups(limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_tenant_groups(limit=limit, offset=offset)
         print("The response of TenantGroupsApi->list_tenant_groups:\n")
         pprint(api_response)
     except Exception as e:
@@ -737,8 +866,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -746,7 +873,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -763,7 +890,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **remove_group_member**
-> remove_group_member(group_id, user_id, authorization=authorization, ks_uat=ks_uat)
+> remove_group_member(group_id, user_id)
 
 Remove Group Member Handler
 
@@ -771,6 +898,8 @@ Remove a user from a group (admin/owner only).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -783,6 +912,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -790,12 +934,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Remove Group Member Handler
-        api_instance.remove_group_member(group_id, user_id, authorization=authorization, ks_uat=ks_uat)
+        api_instance.remove_group_member(group_id, user_id)
     except Exception as e:
         print("Exception when calling TenantGroupsApi->remove_group_member: %s\n" % e)
 ```
@@ -809,8 +951,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **UUID**|  | 
  **user_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -818,7 +958,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -835,7 +975,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_group_permission**
-> GroupPermissionResponse update_group_permission(group_id, permission_id, update_group_permission_request, authorization=authorization, ks_uat=ks_uat)
+> GroupPermissionResponse update_group_permission(group_id, permission_id, update_group_permission_request)
 
 Update Group Permission Handler
 
@@ -843,6 +983,8 @@ Update a path permission for a group (admin/owner only).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -857,6 +999,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -865,12 +1022,10 @@ with ksapi.ApiClient(configuration) as api_client:
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     permission_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     update_group_permission_request = ksapi.UpdateGroupPermissionRequest() # UpdateGroupPermissionRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Update Group Permission Handler
-        api_response = api_instance.update_group_permission(group_id, permission_id, update_group_permission_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.update_group_permission(group_id, permission_id, update_group_permission_request)
         print("The response of TenantGroupsApi->update_group_permission:\n")
         pprint(api_response)
     except Exception as e:
@@ -887,8 +1042,6 @@ Name | Type | Description  | Notes
  **group_id** | **UUID**|  | 
  **permission_id** | **UUID**|  | 
  **update_group_permission_request** | [**UpdateGroupPermissionRequest**](UpdateGroupPermissionRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -896,7 +1049,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -913,7 +1066,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_tenant_group**
-> GroupResponse update_tenant_group(group_id, update_group_request, authorization=authorization, ks_uat=ks_uat)
+> GroupResponse update_tenant_group(group_id, update_group_request)
 
 Update Tenant Group Handler
 
@@ -921,6 +1074,8 @@ Update a tenant group (admin/owner only).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -935,6 +1090,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -942,12 +1112,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     update_group_request = ksapi.UpdateGroupRequest() # UpdateGroupRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Update Tenant Group Handler
-        api_response = api_instance.update_tenant_group(group_id, update_group_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.update_tenant_group(group_id, update_group_request)
         print("The response of TenantGroupsApi->update_tenant_group:\n")
         pprint(api_response)
     except Exception as e:
@@ -963,8 +1131,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **UUID**|  | 
  **update_group_request** | [**UpdateGroupRequest**](UpdateGroupRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -972,7 +1138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

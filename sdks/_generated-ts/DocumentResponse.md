@@ -25,7 +25,7 @@ Name | Type
 `createdAt` | Date
 `updatedAt` | Date
 `tags` | [Array&lt;TagResponse&gt;](TagResponse.md)
-`canWrite` | boolean
+`permissions` | [ItemPermissions](ItemPermissions.md)
 `checkout` | [DocumentCheckoutResponse](DocumentCheckoutResponse.md)
 
 ## Example
@@ -53,7 +53,7 @@ const example = {
   "createdAt": null,
   "updatedAt": null,
   "tags": null,
-  "canWrite": null,
+  "permissions": null,
   "checkout": null,
 } satisfies DocumentResponse
 

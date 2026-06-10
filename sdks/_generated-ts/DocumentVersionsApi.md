@@ -8,8 +8,10 @@ All URIs are relative to *http://localhost:8000*
 | [**createDocumentVersion**](DocumentVersionsApi.md#createdocumentversion) | **POST** /v1/documents/{document_id}/versions | Create Document Version Handler |
 | [**deleteDocumentVersion**](DocumentVersionsApi.md#deletedocumentversion) | **DELETE** /v1/document_versions/{version_id} | Delete Document Version Handler |
 | [**documentVersionAction**](DocumentVersionsApi.md#documentversionaction) | **POST** /v1/document_versions/{version_id} | Document Version Action Handler |
+| [**downloadDocumentVersion**](DocumentVersionsApi.md#downloaddocumentversion) | **POST** /v1/document_versions/{version_id}/download | Download Document Version Handler |
 | [**getDocumentVersion**](DocumentVersionsApi.md#getdocumentversion) | **GET** /v1/document_versions/{version_id} | Get Document Version Handler |
 | [**getDocumentVersionContents**](DocumentVersionsApi.md#getdocumentversioncontents) | **GET** /v1/document_versions/{version_id}/contents | Get Document Version Contents Handler |
+| [**getDocumentVersionDiff**](DocumentVersionsApi.md#getdocumentversiondiff) | **GET** /v1/document_versions/{version_id}/diff | Get Document Version Diff Handler |
 | [**listDocumentVersions**](DocumentVersionsApi.md#listdocumentversions) | **GET** /v1/document_versions | List Document Versions Handler |
 | [**updateDocumentVersionMetadata**](DocumentVersionsApi.md#updatedocumentversionmetadata) | **PATCH** /v1/document_versions/{version_id}/metadata | Update Document Version Metadata Handler |
 
@@ -17,7 +19,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## clearDocumentVersionContents
 
-> ClearVersionContentsResponse clearDocumentVersionContents(versionId, authorization, ksUat)
+> ClearVersionContentsResponse clearDocumentVersionContents(versionId)
 
 Clear Document Version Contents Handler
 
@@ -34,15 +36,17 @@ import type { ClearDocumentVersionContentsRequest } from '@knowledge-stack/ksapi
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentVersionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentVersionsApi(config);
 
   const body = {
     // string | DocumentVersion ID
     versionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ClearDocumentVersionContentsRequest;
 
   try {
@@ -63,8 +67,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **versionId** | `string` | DocumentVersion ID | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -72,7 +74,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -91,7 +93,7 @@ No authorization required
 
 ## createDocumentVersion
 
-> DocumentVersionResponse createDocumentVersion(documentId, authorization, ksUat)
+> DocumentVersionResponse createDocumentVersion(documentId)
 
 Create Document Version Handler
 
@@ -108,15 +110,17 @@ import type { CreateDocumentVersionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentVersionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentVersionsApi(config);
 
   const body = {
     // string | Document ID
     documentId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateDocumentVersionRequest;
 
   try {
@@ -137,8 +141,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **documentId** | `string` | Document ID | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -146,7 +148,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -165,7 +167,7 @@ No authorization required
 
 ## deleteDocumentVersion
 
-> deleteDocumentVersion(versionId, authorization, ksUat)
+> deleteDocumentVersion(versionId)
 
 Delete Document Version Handler
 
@@ -182,15 +184,17 @@ import type { DeleteDocumentVersionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentVersionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentVersionsApi(config);
 
   const body = {
     // string | DocumentVersion ID
     versionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteDocumentVersionRequest;
 
   try {
@@ -211,8 +215,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **versionId** | `string` | DocumentVersion ID | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -220,7 +222,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -239,7 +241,7 @@ No authorization required
 
 ## documentVersionAction
 
-> DocumentVersionActionResponse documentVersionAction(versionId, action, authorization, ksUat)
+> DocumentVersionActionResponse documentVersionAction(versionId, action)
 
 Document Version Action Handler
 
@@ -256,17 +258,19 @@ import type { DocumentVersionActionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentVersionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentVersionsApi(config);
 
   const body = {
     // string | DocumentVersion ID
     versionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // DocumentVersionAction | Action to perform
     action: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DocumentVersionActionRequest;
 
   try {
@@ -288,8 +292,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **versionId** | `string` | DocumentVersion ID | [Defaults to `undefined`] |
 | **action** | `DocumentVersionAction` | Action to perform | [Defaults to `undefined`] [Enum: reembed] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -297,7 +299,84 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## downloadDocumentVersion
+
+> DocumentDownloadResponse downloadDocumentVersion(versionId, artifact)
+
+Download Document Version Handler
+
+Issue a short-lived, audited download link for a specific version.  Records a &#x60;&#x60;document.downloaded&#x60;&#x60; audit event anchored to the document so the customer audit log captures who downloaded which version and when.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentVersionsApi,
+} from '@knowledge-stack/ksapi';
+import type { DownloadDocumentVersionRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentVersionsApi(config);
+
+  const body = {
+    // string | DocumentVersion ID
+    versionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // DownloadArtifact | Artifact to download: source or fast_plaintext (optional)
+    artifact: ...,
+  } satisfies DownloadDocumentVersionRequest;
+
+  try {
+    const data = await api.downloadDocumentVersion(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **versionId** | `string` | DocumentVersion ID | [Defaults to `undefined`] |
+| **artifact** | `DownloadArtifact` | Artifact to download: source or fast_plaintext | [Optional] [Defaults to `undefined`] [Enum: source, fast_plaintext] |
+
+### Return type
+
+[**DocumentDownloadResponse**](DocumentDownloadResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -316,7 +395,7 @@ No authorization required
 
 ## getDocumentVersion
 
-> DocumentVersionResponse getDocumentVersion(versionId, includePageScreenshots, authorization, ksUat)
+> DocumentVersionResponse getDocumentVersion(versionId, includePageScreenshots)
 
 Get Document Version Handler
 
@@ -331,17 +410,19 @@ import type { GetDocumentVersionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentVersionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentVersionsApi(config);
 
   const body = {
     // string | DocumentVersion ID
     versionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // boolean | When true, populate page_screenshot_urls with presigned URLs for every per-page WEBP screenshot the ingestion pipeline produced. Off by default to keep typical responses small. (optional)
     includePageScreenshots: true,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetDocumentVersionRequest;
 
   try {
@@ -363,8 +444,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **versionId** | `string` | DocumentVersion ID | [Defaults to `undefined`] |
 | **includePageScreenshots** | `boolean` | When true, populate page_screenshot_urls with presigned URLs for every per-page WEBP screenshot the ingestion pipeline produced. Off by default to keep typical responses small. | [Optional] [Defaults to `false`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -372,7 +451,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -391,7 +470,7 @@ No authorization required
 
 ## getDocumentVersionContents
 
-> PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator getDocumentVersionContents(versionId, sectionId, contentType, limit, offset, authorization, ksUat)
+> PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator getDocumentVersionContents(versionId, sectionId, contentType, limit, offset)
 
 Get Document Version Contents Handler
 
@@ -408,7 +487,13 @@ import type { GetDocumentVersionContentsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentVersionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentVersionsApi(config);
 
   const body = {
     // string | DocumentVersion ID
@@ -421,10 +506,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetDocumentVersionContentsRequest;
 
   try {
@@ -449,8 +530,6 @@ example().catch(console.error);
 | **contentType** | `DocumentVersionContentTypeFilter` | Filter by content type: SECTION or CHUNK. Omit to return both types. | [Optional] [Defaults to `undefined`] [Enum: SECTION, CHUNK] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -458,7 +537,84 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getDocumentVersionDiff
+
+> VersionDiffResponse getDocumentVersionDiff(versionId, fromVersionId)
+
+Get Document Version Diff Handler
+
+Side-by-side diff of a version against a previous one of the same document.  Diffs the two versions\&#39; plaintext on the fly (no stored diff), so any pair of versions can be compared. &#x60;&#x60;from_version_id&#x60;&#x60; defaults to the immediate predecessor; the first version diffs against empty (all additions). Requires read permission on the document.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentVersionsApi,
+} from '@knowledge-stack/ksapi';
+import type { GetDocumentVersionDiffRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentVersionsApi(config);
+
+  const body = {
+    // string | The new (right) version ID
+    versionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | The old (left) version; defaults to the predecessor (optional)
+    fromVersionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies GetDocumentVersionDiffRequest;
+
+  try {
+    const data = await api.getDocumentVersionDiff(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **versionId** | `string` | The new (right) version ID | [Defaults to `undefined`] |
+| **fromVersionId** | `string` | The old (left) version; defaults to the predecessor | [Optional] [Defaults to `undefined`] |
+
+### Return type
+
+[**VersionDiffResponse**](VersionDiffResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -477,7 +633,7 @@ No authorization required
 
 ## listDocumentVersions
 
-> PaginatedResponseDocumentVersionResponse listDocumentVersions(documentId, limit, offset, authorization, ksUat)
+> PaginatedResponseDocumentVersionResponse listDocumentVersions(documentId, limit, offset)
 
 List Document Versions Handler
 
@@ -494,7 +650,13 @@ import type { ListDocumentVersionsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentVersionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentVersionsApi(config);
 
   const body = {
     // string | Document ID to list versions for
@@ -503,10 +665,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListDocumentVersionsRequest;
 
   try {
@@ -529,8 +687,6 @@ example().catch(console.error);
 | **documentId** | `string` | Document ID to list versions for | [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -538,7 +694,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -557,7 +713,7 @@ No authorization required
 
 ## updateDocumentVersionMetadata
 
-> DocumentVersionResponse updateDocumentVersionMetadata(versionId, documentVersionMetadataUpdate, authorization, ksUat)
+> DocumentVersionResponse updateDocumentVersionMetadata(versionId, documentVersionMetadataUpdate)
 
 Update Document Version Metadata Handler
 
@@ -574,17 +730,19 @@ import type { UpdateDocumentVersionMetadataRequest } from '@knowledge-stack/ksap
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new DocumentVersionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentVersionsApi(config);
 
   const body = {
     // string | DocumentVersion ID
     versionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // DocumentVersionMetadataUpdate
     documentVersionMetadataUpdate: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateDocumentVersionMetadataRequest;
 
   try {
@@ -606,8 +764,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **versionId** | `string` | DocumentVersion ID | [Defaults to `undefined`] |
 | **documentVersionMetadataUpdate** | [DocumentVersionMetadataUpdate](DocumentVersionMetadataUpdate.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -615,7 +771,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

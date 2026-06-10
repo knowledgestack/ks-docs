@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **delete_feedback**
-> delete_feedback(feedback_id, authorization=authorization, ks_uat=ks_uat)
+> delete_feedback(feedback_id)
 
 Delete Feedback Handler
 
@@ -23,6 +23,8 @@ Returns 403 if the user does not own the feedback and is not OWNER/ADMIN.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -35,18 +37,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FeedbackApi(api_client)
     feedback_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Delete Feedback Handler
-        api_instance.delete_feedback(feedback_id, authorization=authorization, ks_uat=ks_uat)
+        api_instance.delete_feedback(feedback_id)
     except Exception as e:
         print("Exception when calling FeedbackApi->delete_feedback: %s\n" % e)
 ```
@@ -59,8 +74,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **feedback_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -68,7 +81,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -85,7 +98,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_feedback**
-> PaginatedResponseFeedbackEventResponse list_feedback(target_type=target_type, target_id=target_id, rating=rating, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponseFeedbackEventResponse list_feedback(target_type=target_type, target_id=target_id, rating=rating, limit=limit, offset=offset)
 
 List Feedback Handler
 
@@ -96,6 +109,8 @@ OWNER/ADMIN role: returns feedback from all users.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -111,6 +126,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -121,12 +151,10 @@ with ksapi.ApiClient(configuration) as api_client:
     rating = ksapi.FeedbackRating() # FeedbackRating |  (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List Feedback Handler
-        api_response = api_instance.list_feedback(target_type=target_type, target_id=target_id, rating=rating, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_feedback(target_type=target_type, target_id=target_id, rating=rating, limit=limit, offset=offset)
         print("The response of FeedbackApi->list_feedback:\n")
         pprint(api_response)
     except Exception as e:
@@ -145,8 +173,6 @@ Name | Type | Description  | Notes
  **rating** | [**FeedbackRating**](.md)|  | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -154,7 +180,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -171,7 +197,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **submit_feedback**
-> FeedbackEventResponse submit_feedback(submit_feedback_request, authorization=authorization, ks_uat=ks_uat)
+> FeedbackEventResponse submit_feedback(submit_feedback_request)
 
 Submit Feedback Handler
 
@@ -182,6 +208,8 @@ Validates that the target entity exists and the user can read it.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -196,18 +224,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FeedbackApi(api_client)
     submit_feedback_request = ksapi.SubmitFeedbackRequest() # SubmitFeedbackRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Submit Feedback Handler
-        api_response = api_instance.submit_feedback(submit_feedback_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.submit_feedback(submit_feedback_request)
         print("The response of FeedbackApi->submit_feedback:\n")
         pprint(api_response)
     except Exception as e:
@@ -222,8 +263,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **submit_feedback_request** | [**SubmitFeedbackRequest**](SubmitFeedbackRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -231,7 +270,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

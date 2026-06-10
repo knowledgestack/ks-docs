@@ -22,7 +22,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## addGroupMember
 
-> MembershipResponse addGroupMember(groupId, addMemberRequest, authorization, ksUat)
+> MembershipResponse addGroupMember(groupId, addMemberRequest)
 
 Add Group Member Handler
 
@@ -39,17 +39,19 @@ import type { AddGroupMemberRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   const body = {
     // string
     groupId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // AddMemberRequest
     addMemberRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies AddGroupMemberRequest;
 
   try {
@@ -71,8 +73,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | `string` |  | [Defaults to `undefined`] |
 | **addMemberRequest** | [AddMemberRequest](AddMemberRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -80,7 +80,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -99,7 +99,7 @@ No authorization required
 
 ## createGroupPermission
 
-> GroupPermissionResponse createGroupPermission(groupId, createGroupPermissionRequest, authorization, ksUat)
+> GroupPermissionResponse createGroupPermission(groupId, createGroupPermissionRequest)
 
 Create Group Permission Handler
 
@@ -116,17 +116,19 @@ import type { CreateGroupPermissionOperationRequest } from '@knowledge-stack/ksa
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   const body = {
     // string
     groupId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // CreateGroupPermissionRequest
     createGroupPermissionRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateGroupPermissionOperationRequest;
 
   try {
@@ -148,8 +150,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | `string` |  | [Defaults to `undefined`] |
 | **createGroupPermissionRequest** | [CreateGroupPermissionRequest](CreateGroupPermissionRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -157,7 +157,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -176,7 +176,7 @@ No authorization required
 
 ## createTenantGroup
 
-> GroupResponse createTenantGroup(createGroupRequest, authorization, ksUat)
+> GroupResponse createTenantGroup(createGroupRequest)
 
 Create Tenant Group Handler
 
@@ -193,15 +193,17 @@ import type { CreateTenantGroupRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   const body = {
     // CreateGroupRequest
     createGroupRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateTenantGroupRequest;
 
   try {
@@ -222,8 +224,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **createGroupRequest** | [CreateGroupRequest](CreateGroupRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -231,7 +231,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -250,7 +250,7 @@ No authorization required
 
 ## deleteGroupPermission
 
-> deleteGroupPermission(groupId, permissionId, authorization, ksUat)
+> deleteGroupPermission(groupId, permissionId)
 
 Delete Group Permission Handler
 
@@ -267,17 +267,19 @@ import type { DeleteGroupPermissionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   const body = {
     // string
     groupId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string
     permissionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteGroupPermissionRequest;
 
   try {
@@ -299,8 +301,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | `string` |  | [Defaults to `undefined`] |
 | **permissionId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -308,7 +308,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -327,7 +327,7 @@ No authorization required
 
 ## deleteTenantGroup
 
-> deleteTenantGroup(groupId, authorization, ksUat)
+> deleteTenantGroup(groupId)
 
 Delete Tenant Group Handler
 
@@ -344,15 +344,17 @@ import type { DeleteTenantGroupRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   const body = {
     // string
     groupId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteTenantGroupRequest;
 
   try {
@@ -373,8 +375,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -382,7 +382,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -401,7 +401,7 @@ No authorization required
 
 ## getTenantGroup
 
-> GroupResponse getTenantGroup(groupId, authorization, ksUat)
+> GroupResponse getTenantGroup(groupId)
 
 Get Tenant Group Handler
 
@@ -418,15 +418,17 @@ import type { GetTenantGroupRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   const body = {
     // string
     groupId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetTenantGroupRequest;
 
   try {
@@ -447,8 +449,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -456,7 +456,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -475,7 +475,7 @@ No authorization required
 
 ## listGroupMembers
 
-> PaginatedResponseMembershipResponse listGroupMembers(groupId, limit, offset, authorization, ksUat)
+> PaginatedResponseMembershipResponse listGroupMembers(groupId, limit, offset)
 
 List Group Members Handler
 
@@ -492,7 +492,13 @@ import type { ListGroupMembersRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   const body = {
     // string
@@ -501,10 +507,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListGroupMembersRequest;
 
   try {
@@ -527,8 +529,6 @@ example().catch(console.error);
 | **groupId** | `string` |  | [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -536,7 +536,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -555,7 +555,7 @@ No authorization required
 
 ## listGroupPermissions
 
-> PaginatedResponseGroupPermissionResponse listGroupPermissions(groupId, limit, offset, authorization, ksUat)
+> PaginatedResponseGroupPermissionResponse listGroupPermissions(groupId, limit, offset)
 
 List Group Permissions Handler
 
@@ -572,7 +572,13 @@ import type { ListGroupPermissionsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   const body = {
     // string
@@ -581,10 +587,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListGroupPermissionsRequest;
 
   try {
@@ -607,8 +609,6 @@ example().catch(console.error);
 | **groupId** | `string` |  | [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -616,7 +616,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -635,7 +635,7 @@ No authorization required
 
 ## listMyGroups
 
-> Array&lt;GroupResponse&gt; listMyGroups(authorization, ksUat)
+> Array&lt;GroupResponse&gt; listMyGroups()
 
 List My Groups Handler
 
@@ -652,17 +652,16 @@ import type { ListMyGroupsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
-
-  const body = {
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
-  } satisfies ListMyGroupsRequest;
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   try {
-    const data = await api.listMyGroups(body);
+    const data = await api.listMyGroups();
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -675,11 +674,7 @@ example().catch(console.error);
 
 ### Parameters
 
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -687,7 +682,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -699,14 +694,13 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listTenantGroups
 
-> PaginatedResponseGroupResponse listTenantGroups(limit, offset, authorization, ksUat)
+> PaginatedResponseGroupResponse listTenantGroups(limit, offset)
 
 List Tenant Groups Handler
 
@@ -723,17 +717,19 @@ import type { ListTenantGroupsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   const body = {
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListTenantGroupsRequest;
 
   try {
@@ -755,8 +751,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -764,7 +758,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -783,7 +777,7 @@ No authorization required
 
 ## removeGroupMember
 
-> removeGroupMember(groupId, userId, authorization, ksUat)
+> removeGroupMember(groupId, userId)
 
 Remove Group Member Handler
 
@@ -800,17 +794,19 @@ import type { RemoveGroupMemberRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   const body = {
     // string
     groupId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string
     userId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies RemoveGroupMemberRequest;
 
   try {
@@ -832,8 +828,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | `string` |  | [Defaults to `undefined`] |
 | **userId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -841,7 +835,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -860,7 +854,7 @@ No authorization required
 
 ## updateGroupPermission
 
-> GroupPermissionResponse updateGroupPermission(groupId, permissionId, updateGroupPermissionRequest, authorization, ksUat)
+> GroupPermissionResponse updateGroupPermission(groupId, permissionId, updateGroupPermissionRequest)
 
 Update Group Permission Handler
 
@@ -877,7 +871,13 @@ import type { UpdateGroupPermissionOperationRequest } from '@knowledge-stack/ksa
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   const body = {
     // string
@@ -886,10 +886,6 @@ async function example() {
     permissionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdateGroupPermissionRequest
     updateGroupPermissionRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateGroupPermissionOperationRequest;
 
   try {
@@ -912,8 +908,6 @@ example().catch(console.error);
 | **groupId** | `string` |  | [Defaults to `undefined`] |
 | **permissionId** | `string` |  | [Defaults to `undefined`] |
 | **updateGroupPermissionRequest** | [UpdateGroupPermissionRequest](UpdateGroupPermissionRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -921,7 +915,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -940,7 +934,7 @@ No authorization required
 
 ## updateTenantGroup
 
-> GroupResponse updateTenantGroup(groupId, updateGroupRequest, authorization, ksUat)
+> GroupResponse updateTenantGroup(groupId, updateGroupRequest)
 
 Update Tenant Group Handler
 
@@ -957,17 +951,19 @@ import type { UpdateTenantGroupRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new TenantGroupsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantGroupsApi(config);
 
   const body = {
     // string
     groupId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdateGroupRequest
     updateGroupRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateTenantGroupRequest;
 
   try {
@@ -989,8 +985,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | `string` |  | [Defaults to `undefined`] |
 | **updateGroupRequest** | [UpdateGroupRequest](UpdateGroupRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -998,7 +992,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -20,7 +20,7 @@ Name | Type
 `createdAt` | Date
 `updatedAt` | Date
 `tags` | [Array&lt;TagResponse&gt;](TagResponse.md)
-`canWrite` | boolean
+`permissions` | [ItemPermissions](ItemPermissions.md)
 
 ## Example
 
@@ -42,7 +42,7 @@ const example = {
   "createdAt": null,
   "updatedAt": null,
   "tags": null,
-  "canWrite": null,
+  "permissions": null,
 } satisfies FolderResponse
 
 console.log(example)

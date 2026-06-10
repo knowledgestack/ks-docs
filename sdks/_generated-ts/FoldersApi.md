@@ -17,7 +17,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## createFolder
 
-> FolderResponse createFolder(createFolderRequest, authorization, ksUat)
+> FolderResponse createFolder(createFolderRequest)
 
 Create Folder Handler
 
@@ -34,15 +34,17 @@ import type { CreateFolderOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new FoldersApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new FoldersApi(config);
 
   const body = {
     // CreateFolderRequest
     createFolderRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateFolderOperationRequest;
 
   try {
@@ -63,8 +65,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **createFolderRequest** | [CreateFolderRequest](CreateFolderRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -72,7 +72,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -91,11 +91,11 @@ No authorization required
 
 ## deleteFolder
 
-> deleteFolder(folderId, authorization, ksUat)
+> deleteFolder(folderId)
 
 Delete Folder Handler
 
-Delete a folder and all its contents.  WARNING: This cascades to all children due to parent_id ON DELETE CASCADE. The root folder cannot be deleted.
+Move a folder and all its contents to trash.
 
 ### Example
 
@@ -108,15 +108,17 @@ import type { DeleteFolderRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new FoldersApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new FoldersApi(config);
 
   const body = {
     // string
     folderId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteFolderRequest;
 
   try {
@@ -137,8 +139,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **folderId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -146,7 +146,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -165,7 +165,7 @@ No authorization required
 
 ## folderAction
 
-> FolderActionResponse folderAction(folderId, action, authorization, ksUat)
+> FolderActionResponse folderAction(folderId, action)
 
 Folder Action Handler
 
@@ -182,17 +182,19 @@ import type { FolderActionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new FoldersApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new FoldersApi(config);
 
   const body = {
     // string
     folderId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // FolderAction | Action to perform
     action: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies FolderActionRequest;
 
   try {
@@ -214,8 +216,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **folderId** | `string` |  | [Defaults to `undefined`] |
 | **action** | `FolderAction` | Action to perform | [Defaults to `undefined`] [Enum: reembed] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -223,7 +223,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -242,7 +242,7 @@ No authorization required
 
 ## getFolder
 
-> FolderResponse getFolder(folderId, withTags, authorization, ksUat)
+> FolderResponse getFolder(folderId, withTags)
 
 Get Folder Handler
 
@@ -257,17 +257,19 @@ import type { GetFolderRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new FoldersApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new FoldersApi(config);
 
   const body = {
     // string
     folderId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // boolean | Include tags in the response (default: false) (optional)
     withTags: true,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetFolderRequest;
 
   try {
@@ -289,8 +291,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **folderId** | `string` |  | [Defaults to `undefined`] |
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -298,7 +298,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -317,7 +317,7 @@ No authorization required
 
 ## listFolderContents
 
-> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator listFolderContents(folderId, maxDepth, sortOrder, withTags, limit, offset, authorization, ksUat)
+> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator listFolderContents(folderId, maxDepth, sortOrder, withTags, limit, offset)
 
 List Folder Contents Handler
 
@@ -334,7 +334,13 @@ import type { ListFolderContentsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new FoldersApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new FoldersApi(config);
 
   const body = {
     // string
@@ -349,10 +355,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListFolderContentsRequest;
 
   try {
@@ -378,16 +380,14 @@ example().catch(console.error);
 | **withTags** | `boolean` | Include tag IDs for each item (default: false) | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
-[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator.md)
+[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -406,7 +406,7 @@ No authorization required
 
 ## listFolders
 
-> PaginatedResponseFolderResponse listFolders(parentPathPartId, sortOrder, withTags, limit, offset, authorization, ksUat)
+> PaginatedResponseFolderResponse listFolders(parentPathPartId, sortOrder, withTags, limit, offset)
 
 List Folders Handler
 
@@ -423,7 +423,13 @@ import type { ListFoldersRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new FoldersApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new FoldersApi(config);
 
   const body = {
     // string | Parent PathPart ID (defaults to root) (optional)
@@ -436,10 +442,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListFoldersRequest;
 
   try {
@@ -464,8 +466,6 @@ example().catch(console.error);
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -473,7 +473,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -492,7 +492,7 @@ No authorization required
 
 ## searchItems
 
-> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator searchItems(nameLike, sortOrder, partType, withTags, parentPathPartId, limit, offset, authorization, ksUat)
+> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator searchItems(nameLike, sortOrder, partType, withTags, parentPathPartId, limit, offset)
 
 Search Items Handler
 
@@ -509,7 +509,13 @@ import type { SearchItemsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new FoldersApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new FoldersApi(config);
 
   const body = {
     // string | Case-insensitive partial name search
@@ -526,10 +532,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies SearchItemsRequest;
 
   try {
@@ -556,16 +558,14 @@ example().catch(console.error);
 | **parentPathPartId** | `string` | Scope search to descendants of this folder\&#39;s path part | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
-[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDiscriminator.md)
+[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator.md)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -584,7 +584,7 @@ No authorization required
 
 ## updateFolder
 
-> FolderResponse updateFolder(folderId, updateFolderRequest, authorization, ksUat)
+> FolderResponse updateFolder(folderId, updateFolderRequest)
 
 Update Folder Handler
 
@@ -601,17 +601,19 @@ import type { UpdateFolderOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new FoldersApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new FoldersApi(config);
 
   const body = {
     // string
     folderId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdateFolderRequest
     updateFolderRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateFolderOperationRequest;
 
   try {
@@ -633,8 +635,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **folderId** | `string` |  | [Defaults to `undefined`] |
 | **updateFolderRequest** | [UpdateFolderRequest](UpdateFolderRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -642,7 +642,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

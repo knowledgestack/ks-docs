@@ -18,7 +18,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## createChunk
 
-> ChunkResponse createChunk(createChunkRequest, authorization, ksUat)
+> ChunkResponse createChunk(createChunkRequest)
 
 Create Chunk Handler
 
@@ -35,15 +35,17 @@ import type { CreateChunkOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ChunksApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ChunksApi(config);
 
   const body = {
     // CreateChunkRequest
     createChunkRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateChunkOperationRequest;
 
   try {
@@ -64,8 +66,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **createChunkRequest** | [CreateChunkRequest](CreateChunkRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -73,7 +73,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -92,7 +92,7 @@ No authorization required
 
 ## deleteChunk
 
-> deleteChunk(chunkId, authorization, ksUat)
+> deleteChunk(chunkId)
 
 Delete Chunk Handler
 
@@ -109,15 +109,17 @@ import type { DeleteChunkRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ChunksApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ChunksApi(config);
 
   const body = {
     // string
     chunkId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteChunkRequest;
 
   try {
@@ -138,8 +140,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **chunkId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -147,7 +147,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -166,7 +166,7 @@ No authorization required
 
 ## getChunk
 
-> ChunkResponse getChunk(chunkId, withDocument, authorization, ksUat)
+> ChunkResponse getChunk(chunkId, withDocument)
 
 Get Chunk Handler
 
@@ -183,17 +183,19 @@ import type { GetChunkRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ChunksApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ChunksApi(config);
 
   const body = {
     // string
     chunkId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // boolean | Include ancestor document_id and document_version_id (default: false) (optional)
     withDocument: true,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetChunkRequest;
 
   try {
@@ -215,8 +217,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **chunkId** | `string` |  | [Defaults to `undefined`] |
 | **withDocument** | `boolean` | Include ancestor document_id and document_version_id (default: false) | [Optional] [Defaults to `false`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -224,7 +224,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -243,7 +243,7 @@ No authorization required
 
 ## getChunkNeighbors
 
-> ChunkNeighborsResponse getChunkNeighbors(chunkId, prev, next, contentType, withinSection, authorization, ksUat)
+> ChunkNeighborsResponse getChunkNeighbors(chunkId, prev, next, contentType, withinSection)
 
 Get Chunk Neighbors Handler
 
@@ -260,7 +260,13 @@ import type { GetChunkNeighborsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ChunksApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ChunksApi(config);
 
   const body = {
     // string
@@ -273,10 +279,6 @@ async function example() {
     contentType: ...,
     // boolean | When true (default), traverse only the anchor\'s sibling chain under the same parent. When false, traverse the entire document version in DFS order, crossing section boundaries. (optional)
     withinSection: true,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetChunkNeighborsRequest;
 
   try {
@@ -299,10 +301,8 @@ example().catch(console.error);
 | **chunkId** | `string` |  | [Defaults to `undefined`] |
 | **prev** | `number` | Number of preceding items to include (max 50). | [Optional] [Defaults to `1`] |
 | **next** | `number` | Number of succeeding items to include (max 50). | [Optional] [Defaults to `1`] |
-| **contentType** | `PartType` | Filter by content type: SECTION or CHUNK. Omit to return both. SECTION is rejected when the anchor is a chunk (always). | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT, DOCUMENT_VERSION, SECTION, CHUNK, THREAD, THREAD_MESSAGE, WORKFLOW_DEFINITION, WORKFLOW_RUN] |
+| **contentType** | `PartType` | Filter by content type: SECTION or CHUNK. Omit to return both. SECTION is rejected when the anchor is a chunk (always). | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT, DOCUMENT_VERSION, SECTION, CHUNK, THREAD, THREAD_MESSAGE, WORKFLOW_DEFINITION, WORKFLOW_RUN, DATA_SOURCE, DATA_SOURCE_TABLE] |
 | **withinSection** | `boolean` | When true (default), traverse only the anchor\&#39;s sibling chain under the same parent. When false, traverse the entire document version in DFS order, crossing section boundaries. | [Optional] [Defaults to `true`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -310,7 +310,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -329,7 +329,7 @@ No authorization required
 
 ## getChunksBulk
 
-> Array&lt;ChunkBulkResponse&gt; getChunksBulk(chunkIds, authorization, ksUat)
+> Array&lt;ChunkBulkResponse&gt; getChunksBulk(chunkIds)
 
 Get Chunks Bulk Handler
 
@@ -346,15 +346,17 @@ import type { GetChunksBulkRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ChunksApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ChunksApi(config);
 
   const body = {
     // Array<string> | Chunk IDs to resolve (max 200) (optional)
     chunkIds: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetChunksBulkRequest;
 
   try {
@@ -375,8 +377,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **chunkIds** | `Array<string>` | Chunk IDs to resolve (max 200) | [Optional] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -384,7 +384,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -403,7 +403,7 @@ No authorization required
 
 ## getVersionChunkIds
 
-> VersionChunkIdsResponse getVersionChunkIds(documentVersionId, authorization, ksUat)
+> VersionChunkIdsResponse getVersionChunkIds(documentVersionId)
 
 Get Version Chunk Ids Handler
 
@@ -420,15 +420,17 @@ import type { GetVersionChunkIdsRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ChunksApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ChunksApi(config);
 
   const body = {
     // string | Document version ID
     documentVersionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetVersionChunkIdsRequest;
 
   try {
@@ -449,8 +451,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **documentVersionId** | `string` | Document version ID | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -458,7 +458,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -477,7 +477,7 @@ No authorization required
 
 ## searchChunks
 
-> Array&lt;ScoredChunkResponse&gt; searchChunks(chunkSearchRequest, authorization, ksUat)
+> Array&lt;ScoredChunkResponse&gt; searchChunks(chunkSearchRequest)
 
 Search Chunks Handler
 
@@ -494,15 +494,17 @@ import type { SearchChunksRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ChunksApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ChunksApi(config);
 
   const body = {
     // ChunkSearchRequest
     chunkSearchRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies SearchChunksRequest;
 
   try {
@@ -523,8 +525,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **chunkSearchRequest** | [ChunkSearchRequest](ChunkSearchRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -532,7 +532,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -551,7 +551,7 @@ No authorization required
 
 ## updateChunkContent
 
-> ChunkResponse updateChunkContent(chunkId, updateChunkContentRequest, authorization, ksUat)
+> ChunkResponse updateChunkContent(chunkId, updateChunkContentRequest)
 
 Update Chunk Content Handler
 
@@ -568,17 +568,19 @@ import type { UpdateChunkContentOperationRequest } from '@knowledge-stack/ksapi'
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ChunksApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ChunksApi(config);
 
   const body = {
     // string
     chunkId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdateChunkContentRequest
     updateChunkContentRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateChunkContentOperationRequest;
 
   try {
@@ -600,8 +602,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **chunkId** | `string` |  | [Defaults to `undefined`] |
 | **updateChunkContentRequest** | [UpdateChunkContentRequest](UpdateChunkContentRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -609,7 +609,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -628,7 +628,7 @@ No authorization required
 
 ## updateChunkMetadata
 
-> ChunkResponse updateChunkMetadata(chunkId, updateChunkMetadataRequest, authorization, ksUat)
+> ChunkResponse updateChunkMetadata(chunkId, updateChunkMetadataRequest)
 
 Update Chunk Metadata Handler
 
@@ -645,17 +645,19 @@ import type { UpdateChunkMetadataOperationRequest } from '@knowledge-stack/ksapi
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ChunksApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ChunksApi(config);
 
   const body = {
     // string
     chunkId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdateChunkMetadataRequest
     updateChunkMetadataRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateChunkMetadataOperationRequest;
 
   try {
@@ -677,8 +679,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **chunkId** | `string` |  | [Defaults to `undefined`] |
 | **updateChunkMetadataRequest** | [UpdateChunkMetadataRequest](UpdateChunkMetadataRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -686,7 +686,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

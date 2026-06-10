@@ -18,7 +18,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## cloneWorkflowRun
 
-> WorkflowRunResponse cloneWorkflowRun(runId, cloneWorkflowRunRequest, authorization, ksUat)
+> WorkflowRunResponse cloneWorkflowRun(runId, cloneWorkflowRunRequest)
 
 Clone Workflow Run Handler
 
@@ -35,17 +35,19 @@ import type { CloneWorkflowRunOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowRunsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowRunsApi(config);
 
   const body = {
     // string
     runId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // CloneWorkflowRunRequest
     cloneWorkflowRunRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CloneWorkflowRunOperationRequest;
 
   try {
@@ -67,8 +69,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **runId** | `string` |  | [Defaults to `undefined`] |
 | **cloneWorkflowRunRequest** | [CloneWorkflowRunRequest](CloneWorkflowRunRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -76,7 +76,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -95,7 +95,7 @@ No authorization required
 
 ## deleteWorkflowRun
 
-> deleteWorkflowRun(runId, authorization, ksUat)
+> deleteWorkflowRun(runId)
 
 Delete Workflow Run Handler
 
@@ -110,15 +110,17 @@ import type { DeleteWorkflowRunRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowRunsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowRunsApi(config);
 
   const body = {
     // string
     runId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteWorkflowRunRequest;
 
   try {
@@ -139,8 +141,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **runId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -148,7 +148,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -167,7 +167,7 @@ No authorization required
 
 ## getWorkflowRun
 
-> WorkflowRunResponse getWorkflowRun(runId, authorization, ksUat)
+> WorkflowRunResponse getWorkflowRun(runId)
 
 Get Workflow Run Handler
 
@@ -182,15 +182,17 @@ import type { GetWorkflowRunRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowRunsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowRunsApi(config);
 
   const body = {
     // string
     runId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetWorkflowRunRequest;
 
   try {
@@ -211,8 +213,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **runId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -220,7 +220,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -239,7 +239,7 @@ No authorization required
 
 ## retryWorkflowRun
 
-> WorkflowRunResponse retryWorkflowRun(runId, authorization, ksUat)
+> WorkflowRunResponse retryWorkflowRun(runId)
 
 Retry Workflow Run Handler
 
@@ -256,15 +256,17 @@ import type { RetryWorkflowRunRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowRunsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowRunsApi(config);
 
   const body = {
     // string
     runId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies RetryWorkflowRunRequest;
 
   try {
@@ -285,8 +287,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **runId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -294,7 +294,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -313,11 +313,11 @@ No authorization required
 
 ## setWorkflowRunApproval
 
-> WorkflowRunResponse setWorkflowRunApproval(runId, setWorkflowRunApprovalRequest, authorization, ksUat)
+> WorkflowRunResponse setWorkflowRunApproval(runId, setWorkflowRunApprovalRequest)
 
 Set Workflow Run Approval Handler
 
-Approve an entire completed run in one call.  Approves every output document under &#x60;&#x60;outputs/&#x60;&#x60; then the run folder. The run must be &#x60;&#x60;COMPLETED&#x60;&#x60; and its definition must have required approval. Requires write access to the run folder. &#x60;&#x60;run_id&#x60;&#x60; is the WorkflowRun id.
+Approve an entire completed run in one call.  Approves every output document under &#x60;&#x60;outputs/&#x60;&#x60; then the run folder. The run must be &#x60;&#x60;COMPLETED&#x60;&#x60; and its definition must have required approval. Requires approve access to the run folder and refuses agents (assumed identities) — approval is human-in-the-loop. &#x60;&#x60;run_id&#x60;&#x60; is the WorkflowRun id.
 
 ### Example
 
@@ -330,17 +330,19 @@ import type { SetWorkflowRunApprovalOperationRequest } from '@knowledge-stack/ks
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowRunsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowRunsApi(config);
 
   const body = {
     // string
     runId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // SetWorkflowRunApprovalRequest
     setWorkflowRunApprovalRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies SetWorkflowRunApprovalOperationRequest;
 
   try {
@@ -362,8 +364,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **runId** | `string` |  | [Defaults to `undefined`] |
 | **setWorkflowRunApprovalRequest** | [SetWorkflowRunApprovalRequest](SetWorkflowRunApprovalRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -371,7 +371,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -390,7 +390,7 @@ No authorization required
 
 ## startWorkflowRun
 
-> WorkflowRunResponse startWorkflowRun(runId, authorization, ksUat)
+> WorkflowRunResponse startWorkflowRun(runId)
 
 Start Workflow Run Handler
 
@@ -407,15 +407,17 @@ import type { StartWorkflowRunRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowRunsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowRunsApi(config);
 
   const body = {
     // string
     runId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies StartWorkflowRunRequest;
 
   try {
@@ -436,8 +438,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **runId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -445,7 +445,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -464,7 +464,7 @@ No authorization required
 
 ## stopWorkflowRun
 
-> WorkflowRunResponse stopWorkflowRun(runId, authorization, ksUat)
+> WorkflowRunResponse stopWorkflowRun(runId)
 
 Stop Workflow Run Handler
 
@@ -481,15 +481,17 @@ import type { StopWorkflowRunRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowRunsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowRunsApi(config);
 
   const body = {
     // string
     runId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies StopWorkflowRunRequest;
 
   try {
@@ -510,8 +512,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **runId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -519,7 +519,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -538,7 +538,7 @@ No authorization required
 
 ## updateWorkflowRun
 
-> WorkflowRunResponse updateWorkflowRun(runId, updateWorkflowRunRequest, authorization, ksUat)
+> WorkflowRunResponse updateWorkflowRun(runId, updateWorkflowRunRequest)
 
 Update Workflow Run Handler
 
@@ -555,17 +555,19 @@ import type { UpdateWorkflowRunOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowRunsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowRunsApi(config);
 
   const body = {
     // string
     runId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UpdateWorkflowRunRequest
     updateWorkflowRunRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateWorkflowRunOperationRequest;
 
   try {
@@ -587,8 +589,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **runId** | `string` |  | [Defaults to `undefined`] |
 | **updateWorkflowRunRequest** | [UpdateWorkflowRunRequest](UpdateWorkflowRunRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -596,7 +596,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -615,7 +615,7 @@ No authorization required
 
 ## workflowRunCallback
 
-> WorkflowCallbackResponse workflowRunCallback(runId, workflowRunCallbackRequest, authorization, ksUat)
+> WorkflowCallbackResponse workflowRunCallback(runId, workflowRunCallbackRequest)
 
 Workflow Run Callback Handler
 
@@ -632,17 +632,19 @@ import type { WorkflowRunCallbackOperationRequest } from '@knowledge-stack/ksapi
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new WorkflowRunsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowRunsApi(config);
 
   const body = {
     // string
     runId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // WorkflowRunCallbackRequest
     workflowRunCallbackRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies WorkflowRunCallbackOperationRequest;
 
   try {
@@ -664,8 +666,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **runId** | `string` |  | [Defaults to `undefined`] |
 | **workflowRunCallbackRequest** | [WorkflowRunCallbackRequest](WorkflowRunCallbackRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -673,7 +673,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

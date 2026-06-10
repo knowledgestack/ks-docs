@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **get_path_part_approval**
-> PathPartApprovalResponse get_path_part_approval(path_part_id, authorization=authorization, ks_uat=ks_uat)
+> PathPartApprovalResponse get_path_part_approval(path_part_id)
 
 Get Path Part Approval Handler
 
@@ -22,6 +22,8 @@ why. 404 if the path_part never entered the approval flow (its
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -35,18 +37,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartApprovalsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Path Part Approval Handler
-        api_response = api_instance.get_path_part_approval(path_part_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_path_part_approval(path_part_id)
         print("The response of PathPartApprovalsApi->get_path_part_approval:\n")
         pprint(api_response)
     except Exception as e:
@@ -61,8 +76,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path_part_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -70,7 +83,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -87,7 +100,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_path_part_approval**
-> PathPartApprovalResponse set_path_part_approval(path_part_id, set_approval_state_request, authorization=authorization, ks_uat=ks_uat)
+> PathPartApprovalResponse set_path_part_approval(path_part_id, set_approval_state_request)
 
 Set Path Part Approval Handler
 
@@ -105,6 +118,8 @@ captured in the corresponding event payload (for ``pending``).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -119,6 +134,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -126,12 +156,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.PathPartApprovalsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     set_approval_state_request = ksapi.SetApprovalStateRequest() # SetApprovalStateRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Set Path Part Approval Handler
-        api_response = api_instance.set_path_part_approval(path_part_id, set_approval_state_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.set_path_part_approval(path_part_id, set_approval_state_request)
         print("The response of PathPartApprovalsApi->set_path_part_approval:\n")
         pprint(api_response)
     except Exception as e:
@@ -147,8 +175,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path_part_id** | **UUID**|  | 
  **set_approval_state_request** | [**SetApprovalStateRequest**](SetApprovalStateRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -156,7 +182,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

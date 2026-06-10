@@ -12,6 +12,7 @@ Name | Type
 `pathPartId` | string
 `materializedPath` | string
 `capability` | [PermissionCapability](PermissionCapability.md)
+`canApprove` | boolean
 `createdAt` | Date
 `updatedAt` | Date
 
@@ -28,6 +29,7 @@ const example = {
   "pathPartId": null,
   "materializedPath": null,
   "capability": null,
+  "canApprove": null,
   "createdAt": null,
   "updatedAt": null,
 } satisfies GroupPermissionResponse

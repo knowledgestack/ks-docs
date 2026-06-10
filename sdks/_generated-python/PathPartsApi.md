@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**append_path_part_event**](PathPartsApi.md#append_path_part_event) | **POST** /v1/path-parts/{path_part_id}/events | Append Path Part Event Handler
 [**bulk_remove_path_part_tags**](PathPartsApi.md#bulk_remove_path_part_tags) | **DELETE** /v1/path-parts/{path_part_id}/tags | Bulk Remove Path Part Tags Handler
+[**check_path_part_access**](PathPartsApi.md#check_path_part_access) | **GET** /v1/path-parts/{path_part_id}/access-check | Check Path Part Access Handler
 [**get_path_part**](PathPartsApi.md#get_path_part) | **GET** /v1/path-parts/{path_part_id} | Get Path Part Handler
 [**get_path_part_ancestry**](PathPartsApi.md#get_path_part_ancestry) | **GET** /v1/path-parts/{path_part_id}/ancestry | Get Path Part Ancestry Handler
 [**get_path_part_subtree_chunks**](PathPartsApi.md#get_path_part_subtree_chunks) | **GET** /v1/path-parts/{path_part_id}/subtree_chunks | Get Path Part Subtree Chunks Handler
@@ -16,7 +17,7 @@ Method | HTTP request | Description
 
 
 # **append_path_part_event**
-> EventResponse append_path_part_event(path_part_id, append_event_request, authorization=authorization, ks_uat=ks_uat)
+> EventResponse append_path_part_event(path_part_id, append_event_request)
 
 Append Path Part Event Handler
 
@@ -36,6 +37,8 @@ encoded JSON.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -50,6 +53,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -57,12 +75,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     append_event_request = ksapi.AppendEventRequest() # AppendEventRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Append Path Part Event Handler
-        api_response = api_instance.append_path_part_event(path_part_id, append_event_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.append_path_part_event(path_part_id, append_event_request)
         print("The response of PathPartsApi->append_path_part_event:\n")
         pprint(api_response)
     except Exception as e:
@@ -78,8 +94,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path_part_id** | **UUID**|  | 
  **append_event_request** | [**AppendEventRequest**](AppendEventRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -87,7 +101,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -104,7 +118,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **bulk_remove_path_part_tags**
-> PathPartTagsResponse bulk_remove_path_part_tags(path_part_id, bulk_tag_request, authorization=authorization, ks_uat=ks_uat)
+> PathPartTagsResponse bulk_remove_path_part_tags(path_part_id, bulk_tag_request)
 
 Bulk Remove Path Part Tags Handler
 
@@ -115,6 +129,8 @@ Requires write permission on the target path part.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -129,6 +145,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -136,12 +167,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     bulk_tag_request = ksapi.BulkTagRequest() # BulkTagRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Bulk Remove Path Part Tags Handler
-        api_response = api_instance.bulk_remove_path_part_tags(path_part_id, bulk_tag_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.bulk_remove_path_part_tags(path_part_id, bulk_tag_request)
         print("The response of PathPartsApi->bulk_remove_path_part_tags:\n")
         pprint(api_response)
     except Exception as e:
@@ -157,8 +186,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path_part_id** | **UUID**|  | 
  **bulk_tag_request** | [**BulkTagRequest**](BulkTagRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -166,7 +193,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -182,8 +209,107 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **check_path_part_access**
+> AccessCheckResponse check_path_part_access(path_part_id, user_id, capability=capability)
+
+Check Path Part Access Handler
+
+Explain whether ``user_id`` has ``capability`` on a path part.
+
+ADMIN/OWNER-only introspection: resolves the target user's effective
+permissions and reports the decision plus the reason (the matching
+grant path, or a role bypass). OWNER/ADMIN targets bypass path checks
+by role, so they are always allowed.
+
+404 if the path part does not exist or the target user is not a
+member of this tenant.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.access_check_response import AccessCheckResponse
+from ksapi.models.permission_capability import PermissionCapability
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.PathPartsApi(api_client)
+    path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | The user whose access is being explained
+    capability = ksapi.PermissionCapability() # PermissionCapability | Capability to check (READ_ONLY or READ_WRITE) (optional)
+
+    try:
+        # Check Path Part Access Handler
+        api_response = api_instance.check_path_part_access(path_part_id, user_id, capability=capability)
+        print("The response of PathPartsApi->check_path_part_access:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PathPartsApi->check_path_part_access: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **path_part_id** | **UUID**|  | 
+ **user_id** | **UUID**| The user whose access is being explained | 
+ **capability** | [**PermissionCapability**](.md)| Capability to check (READ_ONLY or READ_WRITE) | [optional] 
+
+### Return type
+
+[**AccessCheckResponse**](AccessCheckResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_path_part**
-> PathPartResponse get_path_part(path_part_id, authorization=authorization, ks_uat=ks_uat)
+> PathPartResponse get_path_part(path_part_id)
 
 Get Path Part Handler
 
@@ -193,6 +319,8 @@ Returns the path part with its attached tag IDs.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -206,18 +334,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Path Part Handler
-        api_response = api_instance.get_path_part(path_part_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_path_part(path_part_id)
         print("The response of PathPartsApi->get_path_part:\n")
         pprint(api_response)
     except Exception as e:
@@ -232,8 +373,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path_part_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -241,7 +380,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -258,7 +397,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_path_part_ancestry**
-> AncestryResponse get_path_part_ancestry(path_part_id, authorization=authorization, ks_uat=ks_uat)
+> AncestryResponse get_path_part_ancestry(path_part_id)
 
 Get Path Part Ancestry Handler
 
@@ -270,6 +409,8 @@ read the leaf, they can navigate its ancestors.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -283,18 +424,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Path Part Ancestry Handler
-        api_response = api_instance.get_path_part_ancestry(path_part_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_path_part_ancestry(path_part_id)
         print("The response of PathPartsApi->get_path_part_ancestry:\n")
         pprint(api_response)
     except Exception as e:
@@ -309,8 +463,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path_part_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -318,7 +470,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -335,7 +487,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_path_part_subtree_chunks**
-> SubtreeChunksResponse get_path_part_subtree_chunks(path_part_id, authorization=authorization, ks_uat=ks_uat)
+> SubtreeChunksResponse get_path_part_subtree_chunks(path_part_id)
 
 Get Path Part Subtree Chunks Handler
 
@@ -345,6 +497,8 @@ Returns chunks grouped by identical (path_part_ids, tag_ids) tuples.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -358,18 +512,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Path Part Subtree Chunks Handler
-        api_response = api_instance.get_path_part_subtree_chunks(path_part_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_path_part_subtree_chunks(path_part_id)
         print("The response of PathPartsApi->get_path_part_subtree_chunks:\n")
         pprint(api_response)
     except Exception as e:
@@ -384,8 +551,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path_part_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -393,7 +558,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -410,7 +575,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_path_part_tags**
-> PathPartTagsResponse get_path_part_tags(path_part_id, include_inherited=include_inherited, authorization=authorization, ks_uat=ks_uat)
+> PathPartTagsResponse get_path_part_tags(path_part_id, include_inherited=include_inherited)
 
 Get Path Part Tags Handler
 
@@ -422,6 +587,8 @@ deduplicated union of tags from all ancestors (including the path part itself).
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -435,6 +602,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -442,12 +624,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     include_inherited = False # bool | Include tags inherited from ancestor path parts (optional) (default to False)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Path Part Tags Handler
-        api_response = api_instance.get_path_part_tags(path_part_id, include_inherited=include_inherited, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_path_part_tags(path_part_id, include_inherited=include_inherited)
         print("The response of PathPartsApi->get_path_part_tags:\n")
         pprint(api_response)
     except Exception as e:
@@ -463,8 +643,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path_part_id** | **UUID**|  | 
  **include_inherited** | **bool**| Include tags inherited from ancestor path parts | [optional] [default to False]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -472,7 +650,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -489,7 +667,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_path_part_events**
-> PaginatedResponseEventResponse list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponseEventResponse list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, limit=limit, offset=offset)
 
 List Path Part Events Handler
 
@@ -506,6 +684,8 @@ events under this workflow definition".
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -519,6 +699,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -531,12 +726,10 @@ with ksapi.ApiClient(configuration) as api_client:
     recursive = False # bool | Include events from descendant path_parts as well as the subject itself (optional) (default to False)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List Path Part Events Handler
-        api_response = api_instance.list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, limit=limit, offset=offset)
         print("The response of PathPartsApi->list_path_part_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -557,8 +750,6 @@ Name | Type | Description  | Notes
  **recursive** | **bool**| Include events from descendant path_parts as well as the subject itself | [optional] [default to False]
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -566,7 +757,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -583,7 +774,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_path_parts**
-> PaginatedResponsePathPartResponse list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+> PaginatedResponsePathPartResponse list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, limit=limit, offset=offset)
 
 List Path Parts Handler
 
@@ -602,6 +793,8 @@ use GET /folders/{folder_id}/contents instead.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -616,6 +809,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -626,12 +834,10 @@ with ksapi.ApiClient(configuration) as api_client:
     sort_order = ksapi.PathOrder() # PathOrder | Sort order for results (default: LOGICAL) (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # List Path Parts Handler
-        api_response = api_instance.list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, limit=limit, offset=offset, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, limit=limit, offset=offset)
         print("The response of PathPartsApi->list_path_parts:\n")
         pprint(api_response)
     except Exception as e:
@@ -650,8 +856,6 @@ Name | Type | Description  | Notes
  **sort_order** | [**PathOrder**](.md)| Sort order for results (default: LOGICAL) | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -659,7 +863,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -676,7 +880,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **set_path_part_tags**
-> PathPartTagsResponse set_path_part_tags(path_part_id, bulk_tag_request, authorization=authorization, ks_uat=ks_uat)
+> PathPartTagsResponse set_path_part_tags(path_part_id, bulk_tag_request)
 
 Set Path Part Tags Handler
 
@@ -690,6 +894,8 @@ Requires write permission on the target path part.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -704,6 +910,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -711,12 +932,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     bulk_tag_request = ksapi.BulkTagRequest() # BulkTagRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Set Path Part Tags Handler
-        api_response = api_instance.set_path_part_tags(path_part_id, bulk_tag_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.set_path_part_tags(path_part_id, bulk_tag_request)
         print("The response of PathPartsApi->set_path_part_tags:\n")
         pprint(api_response)
     except Exception as e:
@@ -732,8 +951,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path_part_id** | **UUID**|  | 
  **bulk_tag_request** | [**BulkTagRequest**](BulkTagRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -741,7 +958,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

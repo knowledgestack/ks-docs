@@ -1,15 +1,15 @@
-# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse
+# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**part_type** | **str** | Path part type | [default to 'WORKFLOW_RUN']
+**part_type** | **str** | Path part type | [default to 'DATA_SOURCE_TABLE']
 **id** | **UUID** |  | 
-**path_part_id** | **UUID** | WORKFLOW_RUN path_part of this run | 
-**name** | **str** | Run display name; mirrors &#x60;&#x60;path_part.name&#x60;&#x60; (the run&#39;s UUID until a slug feature lands). | 
-**parent_path_part_id** | **UUID** | FOLDER path_part of the containing folder | 
+**path_part_id** | **UUID** | DATA_SOURCE_TABLE path_part of this table | 
+**name** | **str** |  | 
+**parent_path_part_id** | **UUID** | DATA_SOURCE path_part of the parent connector | 
 **materialized_path** | **str** | Full materialized path from root | 
 **system_managed** | **bool** | Whether this document is system-managed | 
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 **tags** | [**List[TagResponse]**](TagResponse.md) | Tags attached to this document | [optional] 
-**can_write** | **bool** | Whether the current caller has write access to this document. Only populated by endpoints that compute it (e.g. folder contents). | [optional] 
+**permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; null on mutation responses. | [optional] 
 **document_type** | [**DocumentType**](DocumentType.md) |  | 
 **document_origin** | [**DocumentOrigin**](DocumentOrigin.md) |  | 
 **active_version_id** | **UUID** | Active version ID | 
@@ -43,23 +43,27 @@ Name | Type | Description | Notes
 **input_path_part_ids** | **List[UUID]** | Flat list of currently-pinned KB-reference path_part ids (DOCUMENT + FOLDER). On a NOT_STARTED run this is the only surface for KB refs (run_snapshot is NULL). | [optional] 
 **outputs_path_part_ids** | **List[UUID]** |  | 
 **run_thread_id** | **UUID** | The run&#39;s primary chat thread (1:1). NULL while NOT_STARTED; set by Start. The FE opens the run by opening this thread. | [optional] 
+**engine** | [**DataSourceEngine**](DataSourceEngine.md) |  | 
+**data_source_id** | **UUID** |  | 
+**table_name** | **str** |  | 
+**column_config** | **List[Dict[str, object]]** |  | 
 
 ## Example
 
 ```python
-from ksapi.models.folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response import FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse
+from ksapi.models.folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response import FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse from a JSON string
-folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_instance = FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse.from_json(json)
+# create an instance of FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse from a JSON string
+folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_instance = FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse.from_json(json)
 # print the JSON string representation of the object
-print(FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse.to_json())
+print(FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse.to_json())
 
 # convert the object into a dict
-folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_dict = folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_instance.to_dict()
-# create an instance of FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse from a dict
-folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_from_dict = FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse.from_dict(folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_dict)
+folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_dict = folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_instance.to_dict()
+# create an instance of FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse from a dict
+folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_from_dict = FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse.from_dict(folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -8,6 +8,7 @@ Name | Type
 ------------ | -------------
 `pathPartId` | string
 `capability` | [PermissionCapability](PermissionCapability.md)
+`canApprove` | boolean
 
 ## Example
 
@@ -18,6 +19,7 @@ import type { CreateGroupPermissionRequest } from '@knowledge-stack/ksapi'
 const example = {
   "pathPartId": null,
   "capability": null,
+  "canApprove": null,
 } satisfies CreateGroupPermissionRequest
 
 console.log(example)

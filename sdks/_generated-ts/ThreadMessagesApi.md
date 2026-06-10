@@ -12,7 +12,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## createThreadMessage
 
-> ThreadMessageResponse createThreadMessage(threadId, createThreadMessageRequest, authorization, ksUat)
+> ThreadMessageResponse createThreadMessage(threadId, createThreadMessageRequest)
 
 Create Thread Message Handler
 
@@ -29,17 +29,19 @@ import type { CreateThreadMessageOperationRequest } from '@knowledge-stack/ksapi
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ThreadMessagesApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ThreadMessagesApi(config);
 
   const body = {
     // string
     threadId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // CreateThreadMessageRequest
     createThreadMessageRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateThreadMessageOperationRequest;
 
   try {
@@ -61,8 +63,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **threadId** | `string` |  | [Defaults to `undefined`] |
 | **createThreadMessageRequest** | [CreateThreadMessageRequest](CreateThreadMessageRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -70,7 +70,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -89,7 +89,7 @@ No authorization required
 
 ## getThreadMessage
 
-> ThreadMessageResponse getThreadMessage(threadId, messageId, withDetails, authorization, ksUat)
+> ThreadMessageResponse getThreadMessage(threadId, messageId, withDetails)
 
 Get Thread Message Handler
 
@@ -106,7 +106,13 @@ import type { GetThreadMessageRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ThreadMessagesApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ThreadMessagesApi(config);
 
   const body = {
     // string
@@ -115,10 +121,6 @@ async function example() {
     messageId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // boolean | Include execution steps in response (default true) (optional)
     withDetails: true,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetThreadMessageRequest;
 
   try {
@@ -141,8 +143,6 @@ example().catch(console.error);
 | **threadId** | `string` |  | [Defaults to `undefined`] |
 | **messageId** | `string` |  | [Defaults to `undefined`] |
 | **withDetails** | `boolean` | Include execution steps in response (default true) | [Optional] [Defaults to `true`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -150,7 +150,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -169,7 +169,7 @@ No authorization required
 
 ## listThreadMessages
 
-> PaginatedResponseThreadMessageResponse listThreadMessages(threadId, before, withDetails, limit, offset, authorization, ksUat)
+> PaginatedResponseThreadMessageResponse listThreadMessages(threadId, before, withDetails, limit, offset)
 
 List Thread Messages Handler
 
@@ -186,7 +186,13 @@ import type { ListThreadMessagesRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ThreadMessagesApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new ThreadMessagesApi(config);
 
   const body = {
     // string
@@ -199,10 +205,6 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ListThreadMessagesRequest;
 
   try {
@@ -227,8 +229,6 @@ example().catch(console.error);
 | **withDetails** | `boolean` | Include execution steps in response (default true) | [Optional] [Defaults to `true`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -236,7 +236,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

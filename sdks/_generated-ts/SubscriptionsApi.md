@@ -11,7 +11,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## changeTenantSubscription
 
-> SubmitSubscriptionResponse changeTenantSubscription(tenantId, changeSubscriptionRequest, idempotencyKey, authorization, ksUat)
+> SubmitSubscriptionResponse changeTenantSubscription(tenantId, changeSubscriptionRequest, idempotencyKey)
 
 Change Tenant Subscription Handler
 
@@ -28,7 +28,13 @@ import type { ChangeTenantSubscriptionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new SubscriptionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new SubscriptionsApi(config);
 
   const body = {
     // string
@@ -37,10 +43,6 @@ async function example() {
     changeSubscriptionRequest: ...,
     // string (optional)
     idempotencyKey: idempotencyKey_example,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies ChangeTenantSubscriptionRequest;
 
   try {
@@ -63,8 +65,6 @@ example().catch(console.error);
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
 | **changeSubscriptionRequest** | [ChangeSubscriptionRequest](ChangeSubscriptionRequest.md) |  | |
 | **idempotencyKey** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -72,7 +72,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -91,7 +91,7 @@ No authorization required
 
 ## getTenantSubscription
 
-> SubscriptionPlanResponse getTenantSubscription(tenantId, authorization, ksUat)
+> SubscriptionPlanResponse getTenantSubscription(tenantId)
 
 Get Tenant Subscription Handler
 
@@ -108,15 +108,17 @@ import type { GetTenantSubscriptionRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new SubscriptionsApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new SubscriptionsApi(config);
 
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetTenantSubscriptionRequest;
 
   try {
@@ -137,8 +139,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -146,7 +146,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

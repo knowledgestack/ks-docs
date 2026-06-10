@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **path_part_id** | **UUID** |  | 
 **materialized_path** | **str** |  | 
 **capability** | [**PermissionCapability**](PermissionCapability.md) |  | 
+**can_approve** | **bool** |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

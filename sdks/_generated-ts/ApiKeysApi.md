@@ -13,7 +13,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## createApiKey
 
-> CreateApiKeyResponse createApiKey(createApiKeyRequest, ksUat)
+> CreateApiKeyResponse createApiKey(createApiKeyRequest)
 
 Create Api Key Handler
 
@@ -30,13 +30,15 @@ import type { CreateApiKeyOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ApiKeysApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new ApiKeysApi(config);
 
   const body = {
     // CreateApiKeyRequest
     createApiKeyRequest: ...,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies CreateApiKeyOperationRequest;
 
   try {
@@ -57,7 +59,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **createApiKeyRequest** | [CreateApiKeyRequest](CreateApiKeyRequest.md) |  | |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -65,7 +66,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth)
 
 ### HTTP request headers
 
@@ -84,7 +85,7 @@ No authorization required
 
 ## deleteApiKey
 
-> deleteApiKey(apiKeyId, ksUat)
+> deleteApiKey(apiKeyId)
 
 Delete Api Key Handler
 
@@ -101,13 +102,15 @@ import type { DeleteApiKeyRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ApiKeysApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new ApiKeysApi(config);
 
   const body = {
     // string
     apiKeyId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies DeleteApiKeyRequest;
 
   try {
@@ -128,7 +131,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **apiKeyId** | `string` |  | [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -136,7 +138,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth)
 
 ### HTTP request headers
 
@@ -155,7 +157,7 @@ No authorization required
 
 ## getApiKey
 
-> ApiKeyResponse getApiKey(apiKeyId, ksUat)
+> ApiKeyResponse getApiKey(apiKeyId)
 
 Get Api Key Handler
 
@@ -172,13 +174,15 @@ import type { GetApiKeyRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ApiKeysApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new ApiKeysApi(config);
 
   const body = {
     // string
     apiKeyId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies GetApiKeyRequest;
 
   try {
@@ -199,7 +203,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **apiKeyId** | `string` |  | [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -207,7 +210,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth)
 
 ### HTTP request headers
 
@@ -226,7 +229,7 @@ No authorization required
 
 ## listApiKeys
 
-> Array&lt;ApiKeyResponse&gt; listApiKeys(ksUat)
+> Array&lt;ApiKeyResponse&gt; listApiKeys()
 
 List Api Keys Handler
 
@@ -243,15 +246,14 @@ import type { ListApiKeysRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new ApiKeysApi();
-
-  const body = {
-    // string (optional)
-    ksUat: ksUat_example,
-  } satisfies ListApiKeysRequest;
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+  });
+  const api = new ApiKeysApi(config);
 
   try {
-    const data = await api.listApiKeys(body);
+    const data = await api.listApiKeys();
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -264,10 +266,7 @@ example().catch(console.error);
 
 ### Parameters
 
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -275,7 +274,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth)
 
 ### HTTP request headers
 
@@ -287,7 +286,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

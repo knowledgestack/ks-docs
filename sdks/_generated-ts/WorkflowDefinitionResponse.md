@@ -22,6 +22,7 @@ Name | Type
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
 `createdAt` | Date
 `updatedAt` | Date
+`permissions` | [ItemPermissions](ItemPermissions.md)
 
 ## Example
 
@@ -45,6 +46,7 @@ const example = {
   "approvalState": null,
   "createdAt": null,
   "updatedAt": null,
+  "permissions": null,
 } satisfies WorkflowDefinitionResponse
 
 console.log(example)

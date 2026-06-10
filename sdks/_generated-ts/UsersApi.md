@@ -14,7 +14,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## getMe
 
-> UserResponse getMe(authorization, ksUat)
+> UserResponse getMe()
 
 Get Me Handler
 
@@ -31,17 +31,16 @@ import type { GetMeRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new UsersApi();
-
-  const body = {
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
-  } satisfies GetMeRequest;
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UsersApi(config);
 
   try {
-    const data = await api.getMe(body);
+    const data = await api.getMe();
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -54,11 +53,7 @@ example().catch(console.error);
 
 ### Parameters
 
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -66,7 +61,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -78,14 +73,13 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## skipOnboarding
 
-> UserResponse skipOnboarding(authorization, ksUat)
+> UserResponse skipOnboarding()
 
 Skip Onboarding Handler
 
@@ -102,17 +96,16 @@ import type { SkipOnboardingRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new UsersApi();
-
-  const body = {
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
-  } satisfies SkipOnboardingRequest;
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UsersApi(config);
 
   try {
-    const data = await api.skipOnboarding(body);
+    const data = await api.skipOnboarding();
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -125,11 +118,7 @@ example().catch(console.error);
 
 ### Parameters
 
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -137,7 +126,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -149,14 +138,13 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## updateMe
 
-> UserResponse updateMe(updateUserRequest, authorization, ksUat)
+> UserResponse updateMe(updateUserRequest)
 
 Update Me Handler
 
@@ -173,15 +161,17 @@ import type { UpdateMeRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new UsersApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UsersApi(config);
 
   const body = {
     // UpdateUserRequest
     updateUserRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateMeRequest;
 
   try {
@@ -202,8 +192,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **updateUserRequest** | [UpdateUserRequest](UpdateUserRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -211,7 +199,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -230,7 +218,7 @@ No authorization required
 
 ## updateOnboardingCompany
 
-> UserResponse updateOnboardingCompany(onboardingCompanyRequest, authorization, ksUat)
+> UserResponse updateOnboardingCompany(onboardingCompanyRequest)
 
 Update Onboarding Company Handler
 
@@ -247,15 +235,17 @@ import type { UpdateOnboardingCompanyRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new UsersApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UsersApi(config);
 
   const body = {
     // OnboardingCompanyRequest
     onboardingCompanyRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateOnboardingCompanyRequest;
 
   try {
@@ -276,8 +266,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **onboardingCompanyRequest** | [OnboardingCompanyRequest](OnboardingCompanyRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -285,7 +273,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -304,7 +292,7 @@ No authorization required
 
 ## updateOnboardingProfile
 
-> UserResponse updateOnboardingProfile(onboardingProfileRequest, authorization, ksUat)
+> UserResponse updateOnboardingProfile(onboardingProfileRequest)
 
 Update Onboarding Profile Handler
 
@@ -321,15 +309,17 @@ import type { UpdateOnboardingProfileRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new UsersApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UsersApi(config);
 
   const body = {
     // OnboardingProfileRequest
     onboardingProfileRequest: ...,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies UpdateOnboardingProfileRequest;
 
   try {
@@ -350,8 +340,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **onboardingProfileRequest** | [OnboardingProfileRequest](OnboardingProfileRequest.md) |  | |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -359,7 +347,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

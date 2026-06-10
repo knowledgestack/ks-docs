@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 
 # **create_chunk**
-> ChunkResponse create_chunk(create_chunk_request, authorization=authorization, ks_uat=ks_uat)
+> ChunkResponse create_chunk(create_chunk_request)
 
 Create Chunk Handler
 
@@ -27,6 +27,8 @@ DOCUMENT_VERSION or SECTION). Content is deduplicated by SHA256 hash.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -41,18 +43,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     create_chunk_request = ksapi.CreateChunkRequest() # CreateChunkRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Create Chunk Handler
-        api_response = api_instance.create_chunk(create_chunk_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.create_chunk(create_chunk_request)
         print("The response of ChunksApi->create_chunk:\n")
         pprint(api_response)
     except Exception as e:
@@ -67,8 +82,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **create_chunk_request** | [**CreateChunkRequest**](CreateChunkRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -76,7 +89,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -93,7 +106,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_chunk**
-> delete_chunk(chunk_id, authorization=authorization, ks_uat=ks_uat)
+> delete_chunk(chunk_id)
 
 Delete Chunk Handler
 
@@ -104,6 +117,8 @@ The associated ChunkContent may remain if shared by other chunks.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -116,18 +131,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Delete Chunk Handler
-        api_instance.delete_chunk(chunk_id, authorization=authorization, ks_uat=ks_uat)
+        api_instance.delete_chunk(chunk_id)
     except Exception as e:
         print("Exception when calling ChunksApi->delete_chunk: %s\n" % e)
 ```
@@ -140,8 +168,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chunk_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -149,7 +175,7 @@ void (empty response body)
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -166,7 +192,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_chunk**
-> ChunkResponse get_chunk(chunk_id, with_document=with_document, authorization=authorization, ks_uat=ks_uat)
+> ChunkResponse get_chunk(chunk_id, with_document=with_document)
 
 Get Chunk Handler
 
@@ -174,6 +200,8 @@ Get a chunk by its ID, including content.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -187,6 +215,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -194,12 +237,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.ChunksApi(api_client)
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     with_document = False # bool | Include ancestor document_id and document_version_id (default: false) (optional) (default to False)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Chunk Handler
-        api_response = api_instance.get_chunk(chunk_id, with_document=with_document, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_chunk(chunk_id, with_document=with_document)
         print("The response of ChunksApi->get_chunk:\n")
         pprint(api_response)
     except Exception as e:
@@ -215,8 +256,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chunk_id** | **UUID**|  | 
  **with_document** | **bool**| Include ancestor document_id and document_version_id (default: false) | [optional] [default to False]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -224,7 +263,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -241,7 +280,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_chunk_neighbors**
-> ChunkNeighborsResponse get_chunk_neighbors(chunk_id, prev=prev, next=next, content_type=content_type, within_section=within_section, authorization=authorization, ks_uat=ks_uat)
+> ChunkNeighborsResponse get_chunk_neighbors(chunk_id, prev=prev, next=next, content_type=content_type, within_section=within_section)
 
 Get Chunk Neighbors Handler
 
@@ -266,6 +305,8 @@ a chunk, so a SECTION-only filter would exclude it.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -280,6 +321,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -290,12 +346,10 @@ with ksapi.ApiClient(configuration) as api_client:
     next = 1 # int | Number of succeeding items to include (max 50). (optional) (default to 1)
     content_type = ksapi.PartType() # PartType | Filter by content type: SECTION or CHUNK. Omit to return both. SECTION is rejected when the anchor is a chunk (always). (optional)
     within_section = True # bool | When true (default), traverse only the anchor's sibling chain under the same parent. When false, traverse the entire document version in DFS order, crossing section boundaries. (optional) (default to True)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Chunk Neighbors Handler
-        api_response = api_instance.get_chunk_neighbors(chunk_id, prev=prev, next=next, content_type=content_type, within_section=within_section, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_chunk_neighbors(chunk_id, prev=prev, next=next, content_type=content_type, within_section=within_section)
         print("The response of ChunksApi->get_chunk_neighbors:\n")
         pprint(api_response)
     except Exception as e:
@@ -314,8 +368,6 @@ Name | Type | Description  | Notes
  **next** | **int**| Number of succeeding items to include (max 50). | [optional] [default to 1]
  **content_type** | [**PartType**](.md)| Filter by content type: SECTION or CHUNK. Omit to return both. SECTION is rejected when the anchor is a chunk (always). | [optional] 
  **within_section** | **bool**| When true (default), traverse only the anchor&#39;s sibling chain under the same parent. When false, traverse the entire document version in DFS order, crossing section boundaries. | [optional] [default to True]
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -323,7 +375,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -340,7 +392,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_chunks_bulk**
-> List[ChunkBulkResponse] get_chunks_bulk(chunk_ids=chunk_ids, authorization=authorization, ks_uat=ks_uat)
+> List[ChunkBulkResponse] get_chunks_bulk(chunk_ids=chunk_ids)
 
 Get Chunks Bulk Handler
 
@@ -352,6 +404,8 @@ Non-existent IDs are silently skipped. Limited to 200 IDs per call.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -365,18 +419,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     chunk_ids = None # List[UUID] | Chunk IDs to resolve (max 200) (optional)
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Chunks Bulk Handler
-        api_response = api_instance.get_chunks_bulk(chunk_ids=chunk_ids, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_chunks_bulk(chunk_ids=chunk_ids)
         print("The response of ChunksApi->get_chunks_bulk:\n")
         pprint(api_response)
     except Exception as e:
@@ -391,8 +458,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chunk_ids** | [**List[UUID]**](UUID.md)| Chunk IDs to resolve (max 200) | [optional] 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -400,7 +465,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -417,7 +482,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_version_chunk_ids**
-> VersionChunkIdsResponse get_version_chunk_ids(document_version_id, authorization=authorization, ks_uat=ks_uat)
+> VersionChunkIdsResponse get_version_chunk_ids(document_version_id)
 
 Get Version Chunk Ids Handler
 
@@ -427,6 +492,8 @@ Used by the embedding pipeline to discover chunks for a version.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -440,18 +507,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     document_version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Document version ID
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Get Version Chunk Ids Handler
-        api_response = api_instance.get_version_chunk_ids(document_version_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.get_version_chunk_ids(document_version_id)
         print("The response of ChunksApi->get_version_chunk_ids:\n")
         pprint(api_response)
     except Exception as e:
@@ -466,8 +546,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **document_version_id** | **UUID**| Document version ID | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -475,7 +553,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -492,7 +570,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **search_chunks**
-> List[ScoredChunkResponse] search_chunks(chunk_search_request, authorization=authorization, ks_uat=ks_uat)
+> List[ScoredChunkResponse] search_chunks(chunk_search_request)
 
 Search Chunks Handler
 
@@ -511,6 +589,8 @@ no-op searches should validate path access client-side first.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -525,18 +605,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     chunk_search_request = ksapi.ChunkSearchRequest() # ChunkSearchRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Search Chunks Handler
-        api_response = api_instance.search_chunks(chunk_search_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.search_chunks(chunk_search_request)
         print("The response of ChunksApi->search_chunks:\n")
         pprint(api_response)
     except Exception as e:
@@ -551,8 +644,6 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chunk_search_request** | [**ChunkSearchRequest**](ChunkSearchRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -560,7 +651,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -577,7 +668,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_chunk_content**
-> ChunkResponse update_chunk_content(chunk_id, update_chunk_content_request, authorization=authorization, ks_uat=ks_uat)
+> ChunkResponse update_chunk_content(chunk_id, update_chunk_content_request)
 
 Update Chunk Content Handler
 
@@ -588,6 +679,8 @@ matches an existing content hash, it will be deduplicated.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -602,6 +695,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -609,12 +717,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.ChunksApi(api_client)
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     update_chunk_content_request = ksapi.UpdateChunkContentRequest() # UpdateChunkContentRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Update Chunk Content Handler
-        api_response = api_instance.update_chunk_content(chunk_id, update_chunk_content_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.update_chunk_content(chunk_id, update_chunk_content_request)
         print("The response of ChunksApi->update_chunk_content:\n")
         pprint(api_response)
     except Exception as e:
@@ -630,8 +736,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chunk_id** | **UUID**|  | 
  **update_chunk_content_request** | [**UpdateChunkContentRequest**](UpdateChunkContentRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -639,7 +743,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -656,7 +760,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_chunk_metadata**
-> ChunkResponse update_chunk_metadata(chunk_id, update_chunk_metadata_request, authorization=authorization, ks_uat=ks_uat)
+> ChunkResponse update_chunk_metadata(chunk_id, update_chunk_metadata_request)
 
 Update Chunk Metadata Handler
 
@@ -668,6 +772,8 @@ allow reparenting or reordering the chunk within the same document version.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -682,6 +788,21 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
@@ -689,12 +810,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.ChunksApi(api_client)
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     update_chunk_metadata_request = ksapi.UpdateChunkMetadataRequest() # UpdateChunkMetadataRequest | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Update Chunk Metadata Handler
-        api_response = api_instance.update_chunk_metadata(chunk_id, update_chunk_metadata_request, authorization=authorization, ks_uat=ks_uat)
+        api_response = api_instance.update_chunk_metadata(chunk_id, update_chunk_metadata_request)
         print("The response of ChunksApi->update_chunk_metadata:\n")
         pprint(api_response)
     except Exception as e:
@@ -710,8 +829,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **chunk_id** | **UUID**|  | 
  **update_chunk_metadata_request** | [**UpdateChunkMetadataRequest**](UpdateChunkMetadataRequest.md)|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -719,7 +836,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

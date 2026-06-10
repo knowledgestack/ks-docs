@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** | Creation timestamp | 
 **updated_at** | **datetime** | Last update timestamp | 
 **tags** | [**List[TagResponse]**](TagResponse.md) | Tags attached to this folder | [optional] 
-**can_write** | **bool** | Whether the current caller has write access to this folder. Only populated by endpoints that compute it (e.g. folder contents). | [optional] 
+**permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; null on mutation responses. | [optional] 
 
 ## Example
 

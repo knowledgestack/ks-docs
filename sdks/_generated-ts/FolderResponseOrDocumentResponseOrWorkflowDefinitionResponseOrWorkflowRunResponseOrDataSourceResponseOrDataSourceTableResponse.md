@@ -1,5 +1,5 @@
 
-# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse
+# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse
 
 
 ## Properties
@@ -19,7 +19,7 @@ Name | Type
 `createdAt` | Date
 `updatedAt` | Date
 `tags` | [Array&lt;TagResponse&gt;](TagResponse.md)
-`canWrite` | boolean
+`permissions` | [ItemPermissions](ItemPermissions.md)
 `documentType` | [DocumentType](DocumentType.md)
 `documentOrigin` | [DocumentOrigin](DocumentOrigin.md)
 `activeVersionId` | string
@@ -44,11 +44,15 @@ Name | Type
 `inputPathPartIds` | Array&lt;string&gt;
 `outputsPathPartIds` | Array&lt;string&gt;
 `runThreadId` | string
+`engine` | [DataSourceEngine](DataSourceEngine.md)
+`dataSourceId` | string
+`tableName` | string
+`columnConfig` | Array&lt;{ [key: string]: any; }&gt;
 
 ## Example
 
 ```typescript
-import type { FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse } from '@knowledge-stack/ksapi'
+import type { FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
@@ -65,7 +69,7 @@ const example = {
   "createdAt": null,
   "updatedAt": null,
   "tags": null,
-  "canWrite": null,
+  "permissions": null,
   "documentType": null,
   "documentOrigin": null,
   "activeVersionId": null,
@@ -90,7 +94,11 @@ const example = {
   "inputPathPartIds": null,
   "outputsPathPartIds": null,
   "runThreadId": null,
-} satisfies FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse
+  "engine": null,
+  "dataSourceId": null,
+  "tableName": null,
+  "columnConfig": null,
+} satisfies FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse
 
 console.log(example)
 
@@ -99,7 +107,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponse
+const exampleParsed = JSON.parse(exampleJSON) as FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse
 console.log(exampleParsed)
 ```
 

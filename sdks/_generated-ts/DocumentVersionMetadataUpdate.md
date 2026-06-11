@@ -9,6 +9,7 @@ Name | Type
 ------------ | -------------
 `sourceS3` | string
 `cleanedSourceS3` | string
+`preconversionSourceS3` | string
 `standardPipelineJsonS3` | string
 `fastPlaintextS3` | string
 `highAccuracyContentListS3` | string
@@ -38,6 +39,7 @@ import type { DocumentVersionMetadataUpdate } from '@knowledge-stack/ksapi'
 const example = {
   "sourceS3": null,
   "cleanedSourceS3": null,
+  "preconversionSourceS3": null,
   "standardPipelineJsonS3": null,
   "fastPlaintextS3": null,
   "highAccuracyContentListS3": null,

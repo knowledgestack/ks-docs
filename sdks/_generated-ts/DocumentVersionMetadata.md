@@ -9,6 +9,7 @@ Name | Type
 ------------ | -------------
 `sourceS3` | string
 `cleanedSourceS3` | string
+`preconversionSourceS3` | string
 `fastPlaintextS3` | string
 `hash` | string
 `pipelineState` | [PipelineState](PipelineState.md)
@@ -35,6 +36,7 @@ import type { DocumentVersionMetadata } from '@knowledge-stack/ksapi'
 const example = {
   "sourceS3": null,
   "cleanedSourceS3": null,
+  "preconversionSourceS3": null,
   "fastPlaintextS3": null,
   "hash": null,
   "pipelineState": null,

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **source_s3** | **str** | S3 URL to the source document (set by API on upload) | [optional] 
 **cleaned_source_s3** | **str** | S3 URL to watermark-removed source document | [optional] 
+**preconversion_source_s3** | **str** | S3 URL to the original pre-conversion legacy Office file; null unless this version was converted from a legacy binary format. After conversion source_s3 points at the modern OOXML file and this field preserves the original for traceability. | [optional] 
 **fast_plaintext_s3** | **str** | S3 URL to the fast plaintext export of the document | [optional] 
 **hash** | **str** | Base64-encoded SHA256 hash of the uploaded source file | [optional] 
 **pipeline_state** | [**PipelineState**](PipelineState.md) | Current state of the ingestion pipeline workflow | [optional] 

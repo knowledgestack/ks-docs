@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **source_s3** | **str** |  | [optional] 
 **cleaned_source_s3** | **str** |  | [optional] 
+**preconversion_source_s3** | **str** |  | [optional] 
 **standard_pipeline_json_s3** | **str** |  | [optional] 
 **fast_plaintext_s3** | **str** |  | [optional] 
 **high_accuracy_content_list_s3** | **str** |  | [optional] 

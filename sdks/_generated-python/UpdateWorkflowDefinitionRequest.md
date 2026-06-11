@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **description** | **str** |  | [optional] 
 **max_run_duration_seconds** | **int** |  | [optional] [default to 1800]
 **instruction_path_part_id** | **UUID** | DOCUMENT path_part of the instruction document. Pass null (or omit) to retain the existing pinned instruction; pass a UUID to replace it. Never nulled out — the column is NOT NULL. | [optional] 
+**parent_path_part_id** | **UUID** | FOLDER path_part to move the definition under. Pass null (or omit) to leave it where it is. The move is rejected with 409 while any run of this definition is IN_PROGRESS. | [optional] 
 **is_active** | **bool** |  | 
 **approval_required** | **bool** |  | 
 

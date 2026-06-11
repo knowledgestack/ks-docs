@@ -11,6 +11,7 @@ Name | Type
 `description` | string
 `maxRunDurationSeconds` | number
 `instructionPathPartId` | string
+`parentPathPartId` | string
 `isActive` | boolean
 `approvalRequired` | boolean
 
@@ -25,6 +26,7 @@ const example = {
   "description": null,
   "maxRunDurationSeconds": null,
   "instructionPathPartId": null,
+  "parentPathPartId": null,
   "isActive": null,
   "approvalRequired": null,
 } satisfies UpdateWorkflowDefinitionRequest

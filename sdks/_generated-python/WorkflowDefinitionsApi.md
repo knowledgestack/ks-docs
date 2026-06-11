@@ -546,6 +546,12 @@ Name | Type | Description  | Notes
 
 Update Workflow Definition Handler
 
+Update a workflow definition (PUT semantics).
+
+To move: provide ``parent_path_part_id``. Rejected with 409 while a
+run is IN_PROGRESS. The FOR UPDATE load serializes the move against
+run start, which takes the same definition-row lock.
+
 ### Example
 
 * Api Key Authentication (cookieAuth):

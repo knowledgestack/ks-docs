@@ -472,6 +472,8 @@ example().catch(console.error);
 
 Update Workflow Definition Handler
 
+Update a workflow definition (PUT semantics).  To move: provide &#x60;&#x60;parent_path_part_id&#x60;&#x60;. Rejected with 409 while a run is IN_PROGRESS. The FOR UPDATE load serializes the move against run start, which takes the same definition-row lock.
+
 ### Example
 
 ```ts

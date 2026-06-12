@@ -18,8 +18,8 @@ Name | Type | Description | Notes
 **cell_range** | **str** | Cell address range, e.g. &#39;A1:D10&#39; (XLSX only) | [optional] 
 **dependency_summary** | **Dict[str, object]** | Upstream/downstream/cross-sheet cell references for audit reasoning (XLSX only) | [optional] 
 **formulas** | **List[Dict[str, str]]** | Formula cells in this chunk as [{address, formula, value}] (XLSX only) | [optional] 
-**key_cells** | **List[Dict[str, object]]** | Notable output/header cells for quick identification (XLSX only) | [optional] 
-**named_ranges** | **List[Dict[str, object]]** | Named ranges overlapping this chunk (XLSX only) | [optional] 
+**key_cells** | **List[str]** | Notable output/header cells as A1 refs, e.g. &#39;Sheet1!A1&#39; (XLSX only) | [optional] 
+**named_ranges** | **List[str]** | Names of named ranges overlapping this chunk (XLSX only) | [optional] 
 
 ## Example
 

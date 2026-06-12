@@ -19,8 +19,8 @@ Name | Type
 `cellRange` | string
 `dependencySummary` | { [key: string]: any; }
 `formulas` | Array&lt;{ [key: string]: string; }&gt;
-`keyCells` | Array&lt;{ [key: string]: any; }&gt;
-`namedRanges` | Array&lt;{ [key: string]: any; }&gt;
+`keyCells` | Array&lt;string&gt;
+`namedRanges` | Array&lt;string&gt;
 
 ## Example
 

@@ -101,6 +101,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -184,6 +185,7 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -276,6 +278,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -362,6 +365,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -469,6 +473,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -579,11 +584,12 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_documents**
-> PaginatedResponseDocumentResponse list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset)
+> PaginatedResponseDocumentResponse list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, document_type=document_type, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
 
 List Documents Handler
 
@@ -599,8 +605,10 @@ If parent_path_part_id is not provided, lists top-level documents.
 
 ```python
 import ksapi
+from ksapi.models.document_type import DocumentType
 from ksapi.models.paginated_response_document_response import PaginatedResponseDocumentResponse
 from ksapi.models.path_order import PathOrder
+from ksapi.models.sort_direction import SortDirection
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -632,13 +640,20 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.DocumentsApi(api_client)
     parent_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent PathPart ID (defaults to root) (optional)
     sort_order = ksapi.PathOrder() # PathOrder | Sort order for results (default: LOGICAL) (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the column's natural default (optional)
+    owner_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter to documents owned by this user (optional)
+    document_type = ksapi.DocumentType() # DocumentType | Filter to documents of this type (optional)
     with_tags = False # bool | Include tags in the response (default: false) (optional) (default to False)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    created_after = '2013-10-20T19:20:30+01:00' # datetime | Only items created at or after this timestamp (inclusive) (optional)
+    created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
+    updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
+    updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
 
     try:
         # List Documents Handler
-        api_response = api_instance.list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset)
+        api_response = api_instance.list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, document_type=document_type, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of DocumentsApi->list_documents:\n")
         pprint(api_response)
     except Exception as e:
@@ -654,9 +669,16 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **parent_path_part_id** | **UUID**| Parent PathPart ID (defaults to root) | [optional] 
  **sort_order** | [**PathOrder**](.md)| Sort order for results (default: LOGICAL) | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the column&#39;s natural default | [optional] 
+ **owner_id** | **UUID**| Filter to documents owned by this user | [optional] 
+ **document_type** | [**DocumentType**](.md)| Filter to documents of this type | [optional] 
  **with_tags** | **bool**| Include tags in the response (default: false) | [optional] [default to False]
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **created_after** | **datetime**| Only items created at or after this timestamp (inclusive) | [optional] 
+ **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
+ **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
+ **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
 
 ### Return type
 
@@ -677,6 +699,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -772,6 +795,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -8,6 +8,7 @@ Request to create a new API key.
 Name | Type
 ------------ | -------------
 `name` | string
+`expiresAt` | Date
 
 ## Example
 
@@ -17,6 +18,7 @@ import type { CreateApiKeyRequest } from '@knowledge-stack/ksapi'
 // TODO: Update the object below with actual values
 const example = {
   "name": null,
+  "expiresAt": null,
 } satisfies CreateApiKeyRequest
 
 console.log(example)

@@ -86,6 +86,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -160,6 +161,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -237,6 +239,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -301,7 +304,7 @@ example().catch(console.error);
 | **chunkId** | `string` |  | [Defaults to `undefined`] |
 | **prev** | `number` | Number of preceding items to include (max 50). | [Optional] [Defaults to `1`] |
 | **next** | `number` | Number of succeeding items to include (max 50). | [Optional] [Defaults to `1`] |
-| **contentType** | `PartType` | Filter by content type: SECTION or CHUNK. Omit to return both. SECTION is rejected when the anchor is a chunk (always). | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT, DOCUMENT_VERSION, SECTION, CHUNK, THREAD, THREAD_MESSAGE, WORKFLOW_DEFINITION, WORKFLOW_RUN, DATA_SOURCE, DATA_SOURCE_TABLE] |
+| **contentType** | `PartType` | Filter by content type: SECTION or CHUNK. Omit to return both. SECTION is rejected when the anchor is a chunk (always). | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT, DOCUMENT_VERSION, SECTION, CHUNK, THREAD, THREAD_MESSAGE, WORKFLOW_DEFINITION, WORKFLOW_RUN, DATA_SOURCE, DATA_SOURCE_TABLE, API_CONNECTION] |
 | **withinSection** | `boolean` | When true (default), traverse only the anchor\&#39;s sibling chain under the same parent. When false, traverse the entire document version in DFS order, crossing section boundaries. | [Optional] [Defaults to `true`] |
 
 ### Return type
@@ -323,6 +326,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -397,6 +401,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -471,6 +476,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -545,6 +551,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -622,6 +629,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -699,6 +707,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

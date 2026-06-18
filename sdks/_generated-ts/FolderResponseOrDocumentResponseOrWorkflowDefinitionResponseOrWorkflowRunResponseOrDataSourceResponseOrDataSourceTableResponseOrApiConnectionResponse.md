@@ -1,5 +1,5 @@
 
-# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse
+# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse
 
 
 ## Properties
@@ -16,6 +16,7 @@ Name | Type
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
 `excludeFromQdrant` | boolean
 `tenantId` | string
+`owner` | [UserInfo](UserInfo.md)
 `createdAt` | Date
 `updatedAt` | Date
 `tags` | [Array&lt;TagResponse&gt;](TagResponse.md)
@@ -24,13 +25,15 @@ Name | Type
 `documentOrigin` | [DocumentOrigin](DocumentOrigin.md)
 `activeVersionId` | string
 `activeVersion` | [DocumentVersionResponse](DocumentVersionResponse.md)
-`owner` | [UserInfo](UserInfo.md)
 `checkout` | [DocumentCheckoutResponse](DocumentCheckoutResponse.md)
 `description` | string
 `maxRunDurationSeconds` | number
 `instructionPathPartId` | string
 `isActive` | boolean
 `approvalRequired` | boolean
+`isTemplate` | boolean
+`createdFromId` | string
+`copyCount` | number
 `workflowDefinitionId` | string
 `triggeredBy` | [UserInfo](UserInfo.md)
 `executionState` | [WorkflowExecutionState](WorkflowExecutionState.md)
@@ -48,11 +51,17 @@ Name | Type
 `dataSourceId` | string
 `tableName` | string
 `columnConfig` | Array&lt;{ [key: string]: any; }&gt;
+`baseUrl` | string
+`networkClass` | [NetworkClass](NetworkClass.md)
+`verifyTls` | boolean
+`apiDocs` | string
+`disclaimerAcceptedAt` | Date
+`disclaimerAcceptedBy` | string
 
 ## Example
 
 ```typescript
-import type { FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse } from '@knowledge-stack/ksapi'
+import type { FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
@@ -66,6 +75,7 @@ const example = {
   "approvalState": null,
   "excludeFromQdrant": null,
   "tenantId": null,
+  "owner": null,
   "createdAt": null,
   "updatedAt": null,
   "tags": null,
@@ -74,13 +84,15 @@ const example = {
   "documentOrigin": null,
   "activeVersionId": null,
   "activeVersion": null,
-  "owner": null,
   "checkout": null,
   "description": null,
   "maxRunDurationSeconds": null,
   "instructionPathPartId": null,
   "isActive": null,
   "approvalRequired": null,
+  "isTemplate": null,
+  "createdFromId": null,
+  "copyCount": null,
   "workflowDefinitionId": null,
   "triggeredBy": null,
   "executionState": null,
@@ -98,7 +110,13 @@ const example = {
   "dataSourceId": null,
   "tableName": null,
   "columnConfig": null,
-} satisfies FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse
+  "baseUrl": null,
+  "networkClass": null,
+  "verifyTls": null,
+  "apiDocs": null,
+  "disclaimerAcceptedAt": null,
+  "disclaimerAcceptedBy": null,
+} satisfies FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse
 
 console.log(example)
 
@@ -107,7 +125,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse
+const exampleParsed = JSON.parse(exampleJSON) as FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse
 console.log(exampleParsed)
 ```
 

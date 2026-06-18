@@ -8,6 +8,7 @@ All URIs are relative to *http://localhost:8000*
 | [**createWorkflowRun**](WorkflowDefinitionsApi.md#createworkflowrun) | **POST** /v1/workflow-definitions/{definition_id}/runs | Create Workflow Run Handler |
 | [**deleteWorkflowDefinition**](WorkflowDefinitionsApi.md#deleteworkflowdefinition) | **DELETE** /v1/workflow-definitions/{definition_id} | Delete Workflow Definition Handler |
 | [**getWorkflowDefinition**](WorkflowDefinitionsApi.md#getworkflowdefinition) | **GET** /v1/workflow-definitions/{definition_id} | Get Workflow Definition Handler |
+| [**instantiateWorkflowTemplate**](WorkflowDefinitionsApi.md#instantiateworkflowtemplateoperation) | **POST** /v1/workflow-definitions/{template_id}/instantiate | Instantiate Workflow Template Handler |
 | [**listWorkflowDefinitions**](WorkflowDefinitionsApi.md#listworkflowdefinitions) | **GET** /v1/workflow-definitions | List Workflow Definitions Handler |
 | [**listWorkflowRuns**](WorkflowDefinitionsApi.md#listworkflowruns) | **GET** /v1/workflow-definitions/{definition_id}/runs | List Workflow Runs Handler |
 | [**updateWorkflowDefinition**](WorkflowDefinitionsApi.md#updateworkflowdefinitionoperation) | **PUT** /v1/workflow-definitions/{definition_id} | Update Workflow Definition Handler |
@@ -82,6 +83,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -165,6 +167,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -237,6 +240,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -309,13 +313,90 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## instantiateWorkflowTemplate
+
+> WorkflowDefinitionResponse instantiateWorkflowTemplate(templateId, instantiateWorkflowTemplateRequest)
+
+Instantiate Workflow Template Handler
+
+### Example
+
+```ts
+import {
+  Configuration,
+  WorkflowDefinitionsApi,
+} from '@knowledge-stack/ksapi';
+import type { InstantiateWorkflowTemplateOperationRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowDefinitionsApi(config);
+
+  const body = {
+    // string
+    templateId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // InstantiateWorkflowTemplateRequest
+    instantiateWorkflowTemplateRequest: ...,
+  } satisfies InstantiateWorkflowTemplateOperationRequest;
+
+  try {
+    const data = await api.instantiateWorkflowTemplate(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **templateId** | `string` |  | [Defaults to `undefined`] |
+| **instantiateWorkflowTemplateRequest** | [InstantiateWorkflowTemplateRequest](InstantiateWorkflowTemplateRequest.md) |  | |
+
+### Return type
+
+[**WorkflowDefinitionResponse**](WorkflowDefinitionResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listWorkflowDefinitions
 
-> PaginatedResponseWorkflowDefinitionResponse listWorkflowDefinitions(limit, offset)
+> PaginatedResponseWorkflowDefinitionResponse listWorkflowDefinitions(mine, sortBy, sortDir, isTemplate, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
 
 List Workflow Definitions Handler
 
@@ -339,10 +420,26 @@ async function example() {
   const api = new WorkflowDefinitionsApi(config);
 
   const body = {
+    // boolean | Only definitions the caller created (owner). (optional)
+    mine: true,
+    // WorkflowDefinitionOrder | Field to sort definitions by (default: CREATED_AT) (optional)
+    sortBy: ...,
+    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
+    sortDir: ...,
+    // boolean (optional)
+    isTemplate: true,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // Date | Only items created at or after this timestamp (inclusive) (optional)
+    createdAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items created strictly before this timestamp (optional)
+    createdBefore: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated at or after this timestamp (inclusive) (optional)
+    updatedAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated strictly before this timestamp (optional)
+    updatedBefore: 2013-10-20T19:20:30+01:00,
   } satisfies ListWorkflowDefinitionsRequest;
 
   try {
@@ -362,8 +459,16 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
+| **mine** | `boolean` | Only definitions the caller created (owner). | [Optional] [Defaults to `false`] |
+| **sortBy** | `WorkflowDefinitionOrder` | Field to sort definitions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, UPDATED_AT] |
+| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
+| **isTemplate** | `boolean` |  | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -384,13 +489,14 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listWorkflowRuns
 
-> PaginatedResponseWorkflowRunResponse listWorkflowRuns(definitionId, limit, offset)
+> PaginatedResponseWorkflowRunResponse listWorkflowRuns(definitionId, sortBy, sortDir, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
 
 List Workflow Runs Handler
 
@@ -416,10 +522,22 @@ async function example() {
   const body = {
     // string
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // WorkflowRunOrder | Field to sort runs by (default: STARTED_AT) (optional)
+    sortBy: ...,
+    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
+    sortDir: ...,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // Date | Only items created at or after this timestamp (inclusive) (optional)
+    createdAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items created strictly before this timestamp (optional)
+    createdBefore: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated at or after this timestamp (inclusive) (optional)
+    updatedAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated strictly before this timestamp (optional)
+    updatedBefore: 2013-10-20T19:20:30+01:00,
   } satisfies ListWorkflowRunsRequest;
 
   try {
@@ -440,8 +558,14 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **definitionId** | `string` |  | [Defaults to `undefined`] |
+| **sortBy** | `WorkflowRunOrder` | Field to sort runs by (default: STARTED_AT) | [Optional] [Defaults to `undefined`] [Enum: STARTED_AT, CREATED_AT, COMPLETED_AT] |
+| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -462,6 +586,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -539,6 +664,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

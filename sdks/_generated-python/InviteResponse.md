@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **accepted_at** | **datetime** |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
+**invited_by_user_id** | **UUID** |  | [optional] 
 **invite_link** | **str** |  | 
 **email_id** | **UUID** |  | [optional] 
 

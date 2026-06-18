@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **key_suffix** | **str** |  | 
 **created_at** | **datetime** |  | 
+**expires_at** | **datetime** |  | 
+**last_used_at** | **datetime** |  | 
 
 ## Example
 

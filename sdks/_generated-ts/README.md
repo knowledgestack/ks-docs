@@ -54,7 +54,7 @@ Below this line is auto-generated reference content.
 
 ---
 
-# @knowledge-stack/ksapi@1.101.2
+# @knowledge-stack/ksapi@1.102.0
 
 A TypeScript SDK client for the localhost API.
 
@@ -114,10 +114,16 @@ All URIs are relative to *http://localhost:8000*
 | ----- | ------ | ------------ | -------------
 *AgentApi* | [**agentAsk**](docs/AgentApi.md#agentask) | **POST** /v1/agent/ask | Agent Ask Handler
 *AgentApi* | [**agentExtract**](docs/AgentApi.md#agentextract) | **POST** /v1/agent/extract | Agent Extract Handler
+*ApiConnectionsApi* | [**acceptApiConnectionDisclaimer**](docs/ApiConnectionsApi.md#acceptapiconnectiondisclaimer) | **POST** /v1/api-connections/{connection_id}/disclaimer | Accept Api Connection Disclaimer Handler
+*ApiConnectionsApi* | [**createApiConnection**](docs/ApiConnectionsApi.md#createapiconnectionoperation) | **POST** /v1/api-connections | Create Api Connection Handler
+*ApiConnectionsApi* | [**executeApiConnectionRequest**](docs/ApiConnectionsApi.md#executeapiconnectionrequest) | **POST** /v1/api-connections/{connection_id}/request | Execute Api Connection Request Handler
+*ApiConnectionsApi* | [**getApiConnection**](docs/ApiConnectionsApi.md#getapiconnection) | **GET** /v1/api-connections/{connection_id} | Get Api Connection Handler
+*ApiConnectionsApi* | [**updateApiConnection**](docs/ApiConnectionsApi.md#updateapiconnectionoperation) | **PATCH** /v1/api-connections/{connection_id} | Update Api Connection Handler
 *ApiKeysApi* | [**createApiKey**](docs/ApiKeysApi.md#createapikeyoperation) | **POST** /v1/api-keys | Create Api Key Handler
 *ApiKeysApi* | [**deleteApiKey**](docs/ApiKeysApi.md#deleteapikey) | **DELETE** /v1/api-keys/{api_key_id} | Delete Api Key Handler
 *ApiKeysApi* | [**getApiKey**](docs/ApiKeysApi.md#getapikey) | **GET** /v1/api-keys/{api_key_id} | Get Api Key Handler
 *ApiKeysApi* | [**listApiKeys**](docs/ApiKeysApi.md#listapikeys) | **GET** /v1/api-keys | List Api Keys Handler
+*AuditEventsApi* | [**exportAuditEvents**](docs/AuditEventsApi.md#exportauditevents) | **GET** /v1/audit-events/export | Export Audit Events Handler
 *AuditEventsApi* | [**listAuditEvents**](docs/AuditEventsApi.md#listauditevents) | **GET** /v1/audit-events | List Audit Events Handler
 *AuthApi* | [**changePhoneNumber**](docs/AuthApi.md#changephonenumberoperation) | **PUT** /v1/auth/pw/me/phone_number | Change Phone Number Handler
 *AuthApi* | [**createPasswordUser**](docs/AuthApi.md#createpassworduseroperation) | **POST** /v1/auth/pw/user | Create Password User Handler
@@ -213,6 +219,7 @@ All URIs are relative to *http://localhost:8000*
 *PathPartsApi* | [**listPathPartEvents**](docs/PathPartsApi.md#listpathpartevents) | **GET** /v1/path-parts/{path_part_id}/events | List Path Part Events Handler
 *PathPartsApi* | [**listPathParts**](docs/PathPartsApi.md#listpathparts) | **GET** /v1/path-parts | List Path Parts Handler
 *PathPartsApi* | [**setPathPartTags**](docs/PathPartsApi.md#setpathparttags) | **POST** /v1/path-parts/{path_part_id}/tags | Set Path Part Tags Handler
+*PathPartsApi* | [**transferPathPartOwner**](docs/PathPartsApi.md#transferpathpartowner) | **PUT** /v1/path-parts/{path_part_id}/owner | Transfer Path Part Owner Handler
 *PublicApi* | [**listPublicSubscriptions**](docs/PublicApi.md#listpublicsubscriptions) | **GET** /public/subscriptions | List Public Subscriptions Handler
 *SectionsApi* | [**createSection**](docs/SectionsApi.md#createsectionoperation) | **POST** /v1/sections | Create Section Handler
 *SectionsApi* | [**deleteSection**](docs/SectionsApi.md#deletesection) | **DELETE** /v1/sections/{section_id} | Delete Section Handler
@@ -278,6 +285,7 @@ All URIs are relative to *http://localhost:8000*
 *WorkflowDefinitionsApi* | [**createWorkflowRun**](docs/WorkflowDefinitionsApi.md#createworkflowrun) | **POST** /v1/workflow-definitions/{definition_id}/runs | Create Workflow Run Handler
 *WorkflowDefinitionsApi* | [**deleteWorkflowDefinition**](docs/WorkflowDefinitionsApi.md#deleteworkflowdefinition) | **DELETE** /v1/workflow-definitions/{definition_id} | Delete Workflow Definition Handler
 *WorkflowDefinitionsApi* | [**getWorkflowDefinition**](docs/WorkflowDefinitionsApi.md#getworkflowdefinition) | **GET** /v1/workflow-definitions/{definition_id} | Get Workflow Definition Handler
+*WorkflowDefinitionsApi* | [**instantiateWorkflowTemplate**](docs/WorkflowDefinitionsApi.md#instantiateworkflowtemplateoperation) | **POST** /v1/workflow-definitions/{template_id}/instantiate | Instantiate Workflow Template Handler
 *WorkflowDefinitionsApi* | [**listWorkflowDefinitions**](docs/WorkflowDefinitionsApi.md#listworkflowdefinitions) | **GET** /v1/workflow-definitions | List Workflow Definitions Handler
 *WorkflowDefinitionsApi* | [**listWorkflowRuns**](docs/WorkflowDefinitionsApi.md#listworkflowruns) | **GET** /v1/workflow-definitions/{definition_id}/runs | List Workflow Runs Handler
 *WorkflowDefinitionsApi* | [**updateWorkflowDefinition**](docs/WorkflowDefinitionsApi.md#updateworkflowdefinitionoperation) | **PUT** /v1/workflow-definitions/{definition_id} | Update Workflow Definition Handler
@@ -289,6 +297,8 @@ All URIs are relative to *http://localhost:8000*
 *WorkflowRunsApi* | [**cloneWorkflowRun**](docs/WorkflowRunsApi.md#cloneworkflowrunoperation) | **POST** /v1/workflow-runs/{run_id}/clone | Clone Workflow Run Handler
 *WorkflowRunsApi* | [**deleteWorkflowRun**](docs/WorkflowRunsApi.md#deleteworkflowrun) | **DELETE** /v1/workflow-runs/{run_id} | Delete Workflow Run Handler
 *WorkflowRunsApi* | [**getWorkflowRun**](docs/WorkflowRunsApi.md#getworkflowrun) | **GET** /v1/workflow-runs/{run_id} | Get Workflow Run Handler
+*WorkflowRunsApi* | [**getWorkflowRunsSummary**](docs/WorkflowRunsApi.md#getworkflowrunssummary) | **GET** /v1/workflow-runs/summary | Get Workflow Runs Summary Handler
+*WorkflowRunsApi* | [**listWorkflowRunsForTenant**](docs/WorkflowRunsApi.md#listworkflowrunsfortenant) | **GET** /v1/workflow-runs | List Workflow Runs For Tenant Handler
 *WorkflowRunsApi* | [**retryWorkflowRun**](docs/WorkflowRunsApi.md#retryworkflowrun) | **POST** /v1/workflow-runs/{run_id}/retry | Retry Workflow Run Handler
 *WorkflowRunsApi* | [**setWorkflowRunApproval**](docs/WorkflowRunsApi.md#setworkflowrunapprovaloperation) | **POST** /v1/workflow-runs/{run_id}/approval | Set Workflow Run Approval Handler
 *WorkflowRunsApi* | [**startWorkflowRun**](docs/WorkflowRunsApi.md#startworkflowrun) | **POST** /v1/workflow-runs/{run_id}/start | Start Workflow Run Handler
@@ -304,10 +314,15 @@ All URIs are relative to *http://localhost:8000*
 
 ### Models
 
+- [AcceptDisclaimerRequest](docs/AcceptDisclaimerRequest.md)
 - [AcceptInviteResponse](docs/AcceptInviteResponse.md)
 - [AccessCheckResponse](docs/AccessCheckResponse.md)
 - [AddMemberRequest](docs/AddMemberRequest.md)
 - [AncestryResponse](docs/AncestryResponse.md)
+- [ApiAuthConfig](docs/ApiAuthConfig.md)
+- [ApiConnectionRequestRequest](docs/ApiConnectionRequestRequest.md)
+- [ApiConnectionRequestResponse](docs/ApiConnectionRequestResponse.md)
+- [ApiConnectionResponse](docs/ApiConnectionResponse.md)
 - [ApiKeyResponse](docs/ApiKeyResponse.md)
 - [AppendEventRequest](docs/AppendEventRequest.md)
 - [AppendMemoryChunkRequest](docs/AppendMemoryChunkRequest.md)
@@ -340,6 +355,7 @@ All URIs are relative to *http://localhost:8000*
 - [CloneWorkflowRunRequest](docs/CloneWorkflowRunRequest.md)
 - [ColumnConfig](docs/ColumnConfig.md)
 - [ConnectionConfig](docs/ConnectionConfig.md)
+- [CreateApiConnectionRequest](docs/CreateApiConnectionRequest.md)
 - [CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
 - [CreateApiKeyResponse](docs/CreateApiKeyResponse.md)
 - [CreateChunkLineageRequest](docs/CreateChunkLineageRequest.md)
@@ -381,6 +397,7 @@ All URIs are relative to *http://localhost:8000*
 - [DocumentVersionContentTypeFilter](docs/DocumentVersionContentTypeFilter.md)
 - [DocumentVersionMetadata](docs/DocumentVersionMetadata.md)
 - [DocumentVersionMetadataUpdate](docs/DocumentVersionMetadataUpdate.md)
+- [DocumentVersionOrder](docs/DocumentVersionOrder.md)
 - [DocumentVersionResponse](docs/DocumentVersionResponse.md)
 - [DocxParagraphAnchorInput](docs/DocxParagraphAnchorInput.md)
 - [DocxParagraphAnchorOutput](docs/DocxParagraphAnchorOutput.md)
@@ -390,18 +407,22 @@ All URIs are relative to *http://localhost:8000*
 - [EmailVerificationRequest](docs/EmailVerificationRequest.md)
 - [EnrichedCitation](docs/EnrichedCitation.md)
 - [EnrichedThreadMessageContent](docs/EnrichedThreadMessageContent.md)
+- [ErrorResponse](docs/ErrorResponse.md)
 - [EventResponse](docs/EventResponse.md)
 - [ExtractRequest](docs/ExtractRequest.md)
 - [ExtractResponse](docs/ExtractResponse.md)
 - [FeaturesResponse](docs/FeaturesResponse.md)
 - [FeedbackEventResponse](docs/FeedbackEventResponse.md)
+- [FeedbackOrder](docs/FeedbackOrder.md)
 - [FeedbackRating](docs/FeedbackRating.md)
 - [FeedbackReason](docs/FeedbackReason.md)
 - [FeedbackTargetType](docs/FeedbackTargetType.md)
 - [FolderAction](docs/FolderAction.md)
 - [FolderActionResponse](docs/FolderActionResponse.md)
 - [FolderResponse](docs/FolderResponse.md)
-- [FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse](docs/FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse.md)
+- [FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse](docs/FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse.md)
+- [GroupMemberOrder](docs/GroupMemberOrder.md)
+- [GroupPermissionOrder](docs/GroupPermissionOrder.md)
 - [GroupPermissionResponse](docs/GroupPermissionResponse.md)
 - [GroupResponse](docs/GroupResponse.md)
 - [HTTPValidationError](docs/HTTPValidationError.md)
@@ -414,9 +435,11 @@ All URIs are relative to *http://localhost:8000*
 - [IngestDocumentResponse](docs/IngestDocumentResponse.md)
 - [IngestionMode](docs/IngestionMode.md)
 - [InputSnapshot](docs/InputSnapshot.md)
+- [InstantiateWorkflowTemplateRequest](docs/InstantiateWorkflowTemplateRequest.md)
 - [InstructionSnapshot](docs/InstructionSnapshot.md)
 - [InviteLinkSettingsRequest](docs/InviteLinkSettingsRequest.md)
 - [InviteLinkSettingsResponse](docs/InviteLinkSettingsResponse.md)
+- [InviteOrder](docs/InviteOrder.md)
 - [InviteResponse](docs/InviteResponse.md)
 - [InviteStatus](docs/InviteStatus.md)
 - [InviteUserRequest](docs/InviteUserRequest.md)
@@ -433,10 +456,11 @@ All URIs are relative to *http://localhost:8000*
 - [MessageRole](docs/MessageRole.md)
 - [MeteredQuotaStatus](docs/MeteredQuotaStatus.md)
 - [ModelTableRequest](docs/ModelTableRequest.md)
+- [NetworkClass](docs/NetworkClass.md)
 - [NonFilesystemReferenceType](docs/NonFilesystemReferenceType.md)
 - [OnboardingCompanyRequest](docs/OnboardingCompanyRequest.md)
 - [OnboardingProfileRequest](docs/OnboardingProfileRequest.md)
-- [PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator](docs/PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseDiscriminator.md)
+- [PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseApiConnectionResponseDiscriminator](docs/PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseApiConnectionResponseDiscriminator.md)
 - [PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator](docs/PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator.md)
 - [PaginatedResponseDocumentResponse](docs/PaginatedResponseDocumentResponse.md)
 - [PaginatedResponseDocumentVersionResponse](docs/PaginatedResponseDocumentVersionResponse.md)
@@ -502,6 +526,7 @@ All URIs are relative to *http://localhost:8000*
 - [SetApprovalStateRequest](docs/SetApprovalStateRequest.md)
 - [SetWorkflowRunApprovalRequest](docs/SetWorkflowRunApprovalRequest.md)
 - [SignInRequest](docs/SignInRequest.md)
+- [SortDirection](docs/SortDirection.md)
 - [StepInput](docs/StepInput.md)
 - [StepKind](docs/StepKind.md)
 - [StepOutput](docs/StepOutput.md)
@@ -512,14 +537,17 @@ All URIs are relative to *http://localhost:8000*
 - [SubtreeChunksResponse](docs/SubtreeChunksResponse.md)
 - [SupportedIdP](docs/SupportedIdP.md)
 - [SupportedLanguage](docs/SupportedLanguage.md)
+- [TagOrder](docs/TagOrder.md)
 - [TagResponse](docs/TagResponse.md)
 - [TemporalWorkflowStatusResponse](docs/TemporalWorkflowStatusResponse.md)
 - [TenantBrandingResponse](docs/TenantBrandingResponse.md)
+- [TenantGroupOrder](docs/TenantGroupOrder.md)
 - [TenantQuotaStateResponse](docs/TenantQuotaStateResponse.md)
 - [TenantResponse](docs/TenantResponse.md)
 - [TenantSettingsResponse](docs/TenantSettingsResponse.md)
 - [TenantSettingsUpdate](docs/TenantSettingsUpdate.md)
 - [TenantUserEditRequest](docs/TenantUserEditRequest.md)
+- [TenantUserOrder](docs/TenantUserOrder.md)
 - [TenantUserResponse](docs/TenantUserResponse.md)
 - [TenantUserRole](docs/TenantUserRole.md)
 - [TextDiff](docs/TextDiff.md)
@@ -527,8 +555,12 @@ All URIs are relative to *http://localhost:8000*
 - [ThreadMessageDetailsInput](docs/ThreadMessageDetailsInput.md)
 - [ThreadMessageDetailsOutput](docs/ThreadMessageDetailsOutput.md)
 - [ThreadMessageResponse](docs/ThreadMessageResponse.md)
+- [ThreadOrder](docs/ThreadOrder.md)
 - [ThreadResponse](docs/ThreadResponse.md)
+- [TransferOwnerRequest](docs/TransferOwnerRequest.md)
+- [TransferOwnerResponse](docs/TransferOwnerResponse.md)
 - [TrashItemResponse](docs/TrashItemResponse.md)
+- [UpdateApiConnectionRequest](docs/UpdateApiConnectionRequest.md)
 - [UpdateChunkContentRequest](docs/UpdateChunkContentRequest.md)
 - [UpdateChunkMetadataRequest](docs/UpdateChunkMetadataRequest.md)
 - [UpdateDocumentRequest](docs/UpdateDocumentRequest.md)
@@ -549,20 +581,25 @@ All URIs are relative to *http://localhost:8000*
 - [UserInfo](docs/UserInfo.md)
 - [UserMessageRequest](docs/UserMessageRequest.md)
 - [UserMessageResponse](docs/UserMessageResponse.md)
+- [UserPermissionOrder](docs/UserPermissionOrder.md)
 - [UserResponse](docs/UserResponse.md)
 - [ValidateResetCodeRequest](docs/ValidateResetCodeRequest.md)
 - [ValidationError](docs/ValidationError.md)
 - [VersionChunkIdsResponse](docs/VersionChunkIdsResponse.md)
 - [VersionDiffResponse](docs/VersionDiffResponse.md)
 - [WorkflowActionResponse](docs/WorkflowActionResponse.md)
+- [WorkflowAdoptionStats](docs/WorkflowAdoptionStats.md)
 - [WorkflowCallbackResponse](docs/WorkflowCallbackResponse.md)
 - [WorkflowCancelResponse](docs/WorkflowCancelResponse.md)
+- [WorkflowDefinitionOrder](docs/WorkflowDefinitionOrder.md)
 - [WorkflowDefinitionResponse](docs/WorkflowDefinitionResponse.md)
 - [WorkflowDetailResponse](docs/WorkflowDetailResponse.md)
 - [WorkflowExecutionState](docs/WorkflowExecutionState.md)
 - [WorkflowRunCallbackRequest](docs/WorkflowRunCallbackRequest.md)
+- [WorkflowRunOrder](docs/WorkflowRunOrder.md)
 - [WorkflowRunResponse](docs/WorkflowRunResponse.md)
 - [WorkflowRunSnapshot](docs/WorkflowRunSnapshot.md)
+- [WorkflowRunSummaryResponse](docs/WorkflowRunSummaryResponse.md)
 - [WorkflowSummaryResponse](docs/WorkflowSummaryResponse.md)
 - [XlsxCellAnchorInput](docs/XlsxCellAnchorInput.md)
 - [XlsxCellAnchorInputOrDocxParagraphAnchorInput](docs/XlsxCellAnchorInputOrDocxParagraphAnchorInput.md)
@@ -593,7 +630,7 @@ and is automatically generated by the
 [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `0.1.0`
-- Package version: `1.101.2`
+- Package version: `1.102.0`
 - Generator version: `7.21.0`
 - Build package: `org.openapitools.codegen.languages.TypeScriptFetchClientCodegen`
 

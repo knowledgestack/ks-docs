@@ -19,7 +19,11 @@ Name | Type
 `instructionPathPartId` | string
 `isActive` | boolean
 `approvalRequired` | boolean
+`isTemplate` | boolean
+`createdFromId` | string
+`copyCount` | number
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
+`owner` | [UserInfo](UserInfo.md)
 `createdAt` | Date
 `updatedAt` | Date
 `permissions` | [ItemPermissions](ItemPermissions.md)
@@ -43,7 +47,11 @@ const example = {
   "instructionPathPartId": null,
   "isActive": null,
   "approvalRequired": null,
+  "isTemplate": null,
+  "createdFromId": null,
+  "copyCount": null,
   "approvalState": null,
+  "owner": null,
   "createdAt": null,
   "updatedAt": null,
   "permissions": null,

@@ -16,6 +16,7 @@ Name | Type
 `name` | string
 `engine` | [DataSourceEngine](DataSourceEngine.md)
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
+`owner` | [UserInfo](UserInfo.md)
 `createdAt` | Date
 `updatedAt` | Date
 
@@ -35,6 +36,7 @@ const example = {
   "name": null,
   "engine": null,
   "approvalState": null,
+  "owner": null,
   "createdAt": null,
   "updatedAt": null,
 } satisfies DataSourceResponse

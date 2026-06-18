@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **materialized_path** | **str** | Original materialized path | 
 **deleted_at** | **datetime** | When the item was moved to trash | 
 **deleted_by** | **UUID** | User that moved it to trash | 
+**owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the item, or null if unowned. | [optional] 
 
 ## Example
 

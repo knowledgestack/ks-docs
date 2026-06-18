@@ -13,6 +13,7 @@ Name | Type
 `parentPathPartId` | string
 `instructionPathPartId` | string
 `approvalRequired` | boolean
+`isTemplate` | boolean
 
 ## Example
 
@@ -27,6 +28,7 @@ const example = {
   "parentPathPartId": null,
   "instructionPathPartId": null,
   "approvalRequired": null,
+  "isTemplate": null,
 } satisfies CreateWorkflowDefinitionRequest
 
 console.log(example)

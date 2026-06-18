@@ -85,6 +85,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -159,6 +160,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -236,6 +238,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -311,6 +314,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -409,6 +413,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -504,13 +509,14 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listDocuments
 
-> PaginatedResponseDocumentResponse listDocuments(parentPathPartId, sortOrder, withTags, limit, offset)
+> PaginatedResponseDocumentResponse listDocuments(parentPathPartId, sortOrder, sortDir, ownerId, documentType, withTags, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
 
 List Documents Handler
 
@@ -540,12 +546,26 @@ async function example() {
     parentPathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // PathOrder | Sort order for results (default: LOGICAL) (optional)
     sortOrder: ...,
+    // SortDirection | Sort direction; overrides the column\'s natural default (optional)
+    sortDir: ...,
+    // string | Filter to documents owned by this user (optional)
+    ownerId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // DocumentType | Filter to documents of this type (optional)
+    documentType: ...,
     // boolean | Include tags in the response (default: false) (optional)
     withTags: true,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // Date | Only items created at or after this timestamp (inclusive) (optional)
+    createdAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items created strictly before this timestamp (optional)
+    createdBefore: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated at or after this timestamp (inclusive) (optional)
+    updatedAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated strictly before this timestamp (optional)
+    updatedBefore: 2013-10-20T19:20:30+01:00,
   } satisfies ListDocumentsRequest;
 
   try {
@@ -567,9 +587,16 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **parentPathPartId** | `string` | Parent PathPart ID (defaults to root) | [Optional] [Defaults to `undefined`] |
 | **sortOrder** | `PathOrder` | Sort order for results (default: LOGICAL) | [Optional] [Defaults to `undefined`] [Enum: LOGICAL, NAME, UPDATED_AT, CREATED_AT] |
+| **sortDir** | `SortDirection` | Sort direction; overrides the column\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
+| **ownerId** | `string` | Filter to documents owned by this user | [Optional] [Defaults to `undefined`] |
+| **documentType** | `DocumentType` | Filter to documents of this type | [Optional] [Defaults to `undefined`] [Enum: PDF, DOCX, PLAINTEXT, IMAGE, XLSX, CSV, PPTX, UNKNOWN] |
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -590,6 +617,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -667,6 +695,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

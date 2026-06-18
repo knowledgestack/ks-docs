@@ -103,6 +103,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -194,6 +195,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -281,6 +283,7 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -372,6 +375,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -460,6 +464,7 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -548,6 +553,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -637,11 +643,12 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_tenant_users**
-> PaginatedResponseTenantUserResponse list_tenant_users(tenant_id, limit=limit, offset=offset)
+> PaginatedResponseTenantUserResponse list_tenant_users(tenant_id, sort_by=sort_by, sort_dir=sort_dir, role=role, username_like=username_like, active_only=active_only, limit=limit, offset=offset)
 
 List Tenant Users
 
@@ -657,6 +664,9 @@ Requires OWNER or ADMIN membership in the tenant.
 ```python
 import ksapi
 from ksapi.models.paginated_response_tenant_user_response import PaginatedResponseTenantUserResponse
+from ksapi.models.sort_direction import SortDirection
+from ksapi.models.tenant_user_order import TenantUserOrder
+from ksapi.models.tenant_user_role import TenantUserRole
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -687,12 +697,17 @@ with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    sort_by = ksapi.TenantUserOrder() # TenantUserOrder | Field to sort members by (default: active-first) (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
+    role = ksapi.TenantUserRole() # TenantUserRole | Filter to members with this role (optional)
+    username_like = 'username_like_example' # str | Case-insensitive substring filter on first/last name (optional)
+    active_only = False # bool | Exclude deactivated members (optional) (default to False)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
 
     try:
         # List Tenant Users
-        api_response = api_instance.list_tenant_users(tenant_id, limit=limit, offset=offset)
+        api_response = api_instance.list_tenant_users(tenant_id, sort_by=sort_by, sort_dir=sort_dir, role=role, username_like=username_like, active_only=active_only, limit=limit, offset=offset)
         print("The response of TenantsApi->list_tenant_users:\n")
         pprint(api_response)
     except Exception as e:
@@ -707,6 +722,11 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tenant_id** | **UUID**|  | 
+ **sort_by** | [**TenantUserOrder**](.md)| Field to sort members by (default: active-first) | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
+ **role** | [**TenantUserRole**](.md)| Filter to members with this role | [optional] 
+ **username_like** | **str**| Case-insensitive substring filter on first/last name | [optional] 
+ **active_only** | **bool**| Exclude deactivated members | [optional] [default to False]
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
 
@@ -729,6 +749,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -817,6 +838,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -908,6 +930,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1001,6 +1024,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1095,6 +1119,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

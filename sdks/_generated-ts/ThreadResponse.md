@@ -12,6 +12,7 @@ Name | Type
 `parentThreadId` | string
 `materializedPath` | string
 `tenantId` | string
+`owner` | [UserInfo](UserInfo.md)
 `createdAt` | Date
 `updatedAt` | Date
 
@@ -28,6 +29,7 @@ const example = {
   "parentThreadId": null,
   "materializedPath": null,
   "tenantId": null,
+  "owner": null,
   "createdAt": null,
   "updatedAt": null,
 } satisfies ThreadResponse

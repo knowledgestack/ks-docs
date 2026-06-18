@@ -80,13 +80,14 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listFeedback
 
-> PaginatedResponseFeedbackEventResponse listFeedback(targetType, targetId, rating, limit, offset)
+> PaginatedResponseFeedbackEventResponse listFeedback(targetType, targetId, rating, sortBy, sortDir, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
 
 List Feedback Handler
 
@@ -118,10 +119,22 @@ async function example() {
     targetId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // FeedbackRating (optional)
     rating: ...,
+    // FeedbackOrder | Field to sort feedback by (default: CREATED_AT) (optional)
+    sortBy: ...,
+    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
+    sortDir: ...,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // Date | Only items created at or after this timestamp (inclusive) (optional)
+    createdAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items created strictly before this timestamp (optional)
+    createdBefore: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated at or after this timestamp (inclusive) (optional)
+    updatedAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated strictly before this timestamp (optional)
+    updatedBefore: 2013-10-20T19:20:30+01:00,
   } satisfies ListFeedbackRequest;
 
   try {
@@ -144,8 +157,14 @@ example().catch(console.error);
 | **targetType** | `FeedbackTargetType` |  | [Optional] [Defaults to `undefined`] [Enum: THREAD, MESSAGE, DOCUMENT, DOCUMENT_VERSION, CHUNK] |
 | **targetId** | `string` |  | [Optional] [Defaults to `undefined`] |
 | **rating** | `FeedbackRating` |  | [Optional] [Defaults to `undefined`] [Enum: UP, DOWN] |
+| **sortBy** | `FeedbackOrder` | Field to sort feedback by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT] |
+| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -166,6 +185,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -240,6 +260,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

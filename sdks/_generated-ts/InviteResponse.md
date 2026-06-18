@@ -16,6 +16,7 @@ Name | Type
 `acceptedAt` | Date
 `createdAt` | Date
 `updatedAt` | Date
+`invitedByUserId` | string
 `inviteLink` | string
 `emailId` | string
 
@@ -35,6 +36,7 @@ const example = {
   "acceptedAt": null,
   "createdAt": null,
   "updatedAt": null,
+  "invitedByUserId": null,
   "inviteLink": null,
   "emailId": null,
 } satisfies InviteResponse

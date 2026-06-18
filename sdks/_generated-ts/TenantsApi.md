@@ -92,6 +92,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -169,6 +170,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -243,6 +245,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -320,6 +323,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -397,6 +401,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -471,6 +476,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -545,13 +551,14 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listTenantUsers
 
-> PaginatedResponseTenantUserResponse listTenantUsers(tenantId, limit, offset)
+> PaginatedResponseTenantUserResponse listTenantUsers(tenantId, sortBy, sortDir, role, usernameLike, activeOnly, limit, offset)
 
 List Tenant Users
 
@@ -579,6 +586,16 @@ async function example() {
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // TenantUserOrder | Field to sort members by (default: active-first) (optional)
+    sortBy: ...,
+    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
+    sortDir: ...,
+    // TenantUserRole | Filter to members with this role (optional)
+    role: ...,
+    // string | Case-insensitive substring filter on first/last name (optional)
+    usernameLike: usernameLike_example,
+    // boolean | Exclude deactivated members (optional)
+    activeOnly: true,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -603,6 +620,11 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
+| **sortBy** | `TenantUserOrder` | Field to sort members by (default: active-first) | [Optional] [Defaults to `undefined`] [Enum: ADDED_AT, USERNAME, ROLE] |
+| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
+| **role** | `TenantUserRole` | Filter to members with this role | [Optional] [Defaults to `undefined`] [Enum: USER, OWNER, ADMIN] |
+| **usernameLike** | `string` | Case-insensitive substring filter on first/last name | [Optional] [Defaults to `undefined`] |
+| **activeOnly** | `boolean` | Exclude deactivated members | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 
@@ -625,6 +647,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -702,6 +725,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -779,6 +803,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -859,6 +884,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -939,6 +965,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

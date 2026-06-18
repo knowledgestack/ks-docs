@@ -107,6 +107,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -197,6 +198,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -282,18 +284,19 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_invites**
-> PaginatedResponseInviteResponse list_invites(email=email, status=status, limit=limit, offset=offset)
+> PaginatedResponseInviteResponse list_invites(email=email, status=status, role=role, invited_by=invited_by, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
 
 List Invites Handler
 
 List invites with pagination, filtering, and sorting.
 
-Supports filtering by tenant_id (requires admin access), email, and status.
-Results can be sorted by created_at, updated_at, expires_at, or accepted_at.
+Supports filtering by email, status, role, and a created_at/updated_at
+timestamp range. Results sort by created_at (ascending) by default.
 
 ### Example
 
@@ -302,8 +305,11 @@ Results can be sorted by created_at, updated_at, expires_at, or accepted_at.
 
 ```python
 import ksapi
+from ksapi.models.invite_order import InviteOrder
 from ksapi.models.invite_status import InviteStatus
 from ksapi.models.paginated_response_invite_response import PaginatedResponseInviteResponse
+from ksapi.models.sort_direction import SortDirection
+from ksapi.models.tenant_user_role import TenantUserRole
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -335,12 +341,20 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.InvitesApi(api_client)
     email = 'email_example' # str | Filter by email (case-insensitive partial match) (optional)
     status = ksapi.InviteStatus() # InviteStatus | Filter by invite status (pending, accepted, expired) (optional)
+    role = ksapi.TenantUserRole() # TenantUserRole | Filter by invite role (optional)
+    invited_by = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter to invites sent by this user (optional)
+    sort_by = ksapi.InviteOrder() # InviteOrder | Field to sort invites by (default: CREATED_AT) (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    created_after = '2013-10-20T19:20:30+01:00' # datetime | Only items created at or after this timestamp (inclusive) (optional)
+    created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
+    updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
+    updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
 
     try:
         # List Invites Handler
-        api_response = api_instance.list_invites(email=email, status=status, limit=limit, offset=offset)
+        api_response = api_instance.list_invites(email=email, status=status, role=role, invited_by=invited_by, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of InvitesApi->list_invites:\n")
         pprint(api_response)
     except Exception as e:
@@ -356,8 +370,16 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **email** | **str**| Filter by email (case-insensitive partial match) | [optional] 
  **status** | [**InviteStatus**](.md)| Filter by invite status (pending, accepted, expired) | [optional] 
+ **role** | [**TenantUserRole**](.md)| Filter by invite role | [optional] 
+ **invited_by** | **UUID**| Filter to invites sent by this user | [optional] 
+ **sort_by** | [**InviteOrder**](.md)| Field to sort invites by (default: CREATED_AT) | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **created_after** | **datetime**| Only items created at or after this timestamp (inclusive) | [optional] 
+ **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
+ **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
+ **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
 
 ### Return type
 
@@ -378,6 +400,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -470,6 +493,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

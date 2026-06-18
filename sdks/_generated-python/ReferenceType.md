@@ -25,6 +25,8 @@
 
 * `DATA_SOURCE_TABLE` (value: `'DATA_SOURCE_TABLE'`)
 
+* `API_CONNECTION` (value: `'API_CONNECTION'`)
+
 * `IMAGE` (value: `'image'`)
 
 * `MEMORY` (value: `'memory'`)

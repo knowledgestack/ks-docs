@@ -12,6 +12,7 @@ Name | Type
 `key` | string
 `keySuffix` | string
 `createdAt` | Date
+`expiresAt` | Date
 
 ## Example
 
@@ -25,6 +26,7 @@ const example = {
   "key": null,
   "keySuffix": null,
   "createdAt": null,
+  "expiresAt": null,
 } satisfies CreateApiKeyResponse
 
 console.log(example)

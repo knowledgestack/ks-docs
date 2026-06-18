@@ -95,6 +95,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -178,6 +179,7 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -264,11 +266,12 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_tags**
-> PaginatedResponseTagResponse list_tags(limit=limit, offset=offset)
+> PaginatedResponseTagResponse list_tags(sort_by=sort_by, sort_dir=sort_dir, name_like=name_like, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
 
 List Tags Handler
 
@@ -282,6 +285,8 @@ List all tags for the current tenant.
 ```python
 import ksapi
 from ksapi.models.paginated_response_tag_response import PaginatedResponseTagResponse
+from ksapi.models.sort_direction import SortDirection
+from ksapi.models.tag_order import TagOrder
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -311,12 +316,19 @@ configuration = ksapi.Configuration(
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TagsApi(api_client)
+    sort_by = ksapi.TagOrder() # TagOrder | Field to sort tags by (default: NAME) (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
+    name_like = 'name_like_example' # str | Case-insensitive substring filter on name (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    created_after = '2013-10-20T19:20:30+01:00' # datetime | Only items created at or after this timestamp (inclusive) (optional)
+    created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
+    updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
+    updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
 
     try:
         # List Tags Handler
-        api_response = api_instance.list_tags(limit=limit, offset=offset)
+        api_response = api_instance.list_tags(sort_by=sort_by, sort_dir=sort_dir, name_like=name_like, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of TagsApi->list_tags:\n")
         pprint(api_response)
     except Exception as e:
@@ -330,8 +342,15 @@ with ksapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **sort_by** | [**TagOrder**](.md)| Field to sort tags by (default: NAME) | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
+ **name_like** | **str**| Case-insensitive substring filter on name | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **created_after** | **datetime**| Only items created at or after this timestamp (inclusive) | [optional] 
+ **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
+ **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
+ **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
 
 ### Return type
 
@@ -352,6 +371,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -441,6 +461,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

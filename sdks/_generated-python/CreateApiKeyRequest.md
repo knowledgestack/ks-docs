@@ -7,6 +7,7 @@ Request to create a new API key.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
+**expires_at** | **datetime** | Optional absolute expiry. Null means the key never expires. | [optional] 
 
 ## Example
 

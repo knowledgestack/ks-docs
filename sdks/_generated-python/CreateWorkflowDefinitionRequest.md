@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **parent_path_part_id** | **UUID** | The &#x60;&#x60;path_part_id&#x60;&#x60; of the folder the workflow is created under (the folder&#39;s PathPart id, not the Folder PDO id). The caller needs write access to it; the workflow may live anywhere in the path tree. | 
 **instruction_path_part_id** | **UUID** | DOCUMENT path_part of the instruction document. Omit (or pass null) to have the server auto-create an empty instruction.md. | [optional] 
 **approval_required** | **bool** |  | 
+**is_template** | **bool** | Create a non-runnable template. Templates are excluded from the default list and cannot have runs; users instantiate them into their own runnable workflow. Immutable after creation. | [optional] [default to False]
 
 ## Example
 

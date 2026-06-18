@@ -15,6 +15,7 @@ Name | Type
 `materializedPath` | string
 `deletedAt` | Date
 `deletedBy` | string
+`owner` | [UserInfo](UserInfo.md)
 
 ## Example
 
@@ -31,6 +32,7 @@ const example = {
   "materializedPath": null,
   "deletedAt": null,
   "deletedBy": null,
+  "owner": null,
 } satisfies TrashItemResponse
 
 console.log(example)

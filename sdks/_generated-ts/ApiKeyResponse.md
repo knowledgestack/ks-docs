@@ -11,6 +11,8 @@ Name | Type
 `name` | string
 `keySuffix` | string
 `createdAt` | Date
+`expiresAt` | Date
+`lastUsedAt` | Date
 
 ## Example
 
@@ -23,6 +25,8 @@ const example = {
   "name": null,
   "keySuffix": null,
   "createdAt": null,
+  "expiresAt": null,
+  "lastUsedAt": null,
 } satisfies ApiKeyResponse
 
 console.log(example)

@@ -14,6 +14,7 @@ All URIs are relative to *http://localhost:8000*
 | [**listPathPartEvents**](PathPartsApi.md#listpathpartevents) | **GET** /v1/path-parts/{path_part_id}/events | List Path Part Events Handler |
 | [**listPathParts**](PathPartsApi.md#listpathparts) | **GET** /v1/path-parts | List Path Parts Handler |
 | [**setPathPartTags**](PathPartsApi.md#setpathparttags) | **POST** /v1/path-parts/{path_part_id}/tags | Set Path Part Tags Handler |
+| [**transferPathPartOwner**](PathPartsApi.md#transferpathpartowner) | **PUT** /v1/path-parts/{path_part_id}/owner | Transfer Path Part Owner Handler |
 
 
 
@@ -90,6 +91,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -167,6 +169,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -247,6 +250,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -321,6 +325,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -395,6 +400,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -469,6 +475,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -546,6 +553,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -638,13 +646,14 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listPathParts
 
-> PaginatedResponsePathPartResponse listPathParts(parentPathId, maxDepth, sortOrder, limit, offset)
+> PaginatedResponsePathPartResponse listPathParts(parentPathId, maxDepth, sortOrder, sortDir, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
 
 List Path Parts Handler
 
@@ -676,10 +685,20 @@ async function example() {
     maxDepth: 56,
     // PathOrder | Sort order for results (default: LOGICAL) (optional)
     sortOrder: ...,
+    // SortDirection | Sort direction; overrides the column\'s natural default (optional)
+    sortDir: ...,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // Date | Only items created at or after this timestamp (inclusive) (optional)
+    createdAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items created strictly before this timestamp (optional)
+    createdBefore: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated at or after this timestamp (inclusive) (optional)
+    updatedAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated strictly before this timestamp (optional)
+    updatedBefore: 2013-10-20T19:20:30+01:00,
   } satisfies ListPathPartsRequest;
 
   try {
@@ -702,8 +721,13 @@ example().catch(console.error);
 | **parentPathId** | `string` | Parent PathPart ID (defaults to root) | [Optional] [Defaults to `undefined`] |
 | **maxDepth** | `number` | Maximum depth to traverse (1 &#x3D; direct children, default: 1) | [Optional] [Defaults to `1`] |
 | **sortOrder** | `PathOrder` | Sort order for results (default: LOGICAL) | [Optional] [Defaults to `undefined`] [Enum: LOGICAL, NAME, UPDATED_AT, CREATED_AT] |
+| **sortDir** | `SortDirection` | Sort direction; overrides the column\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -724,6 +748,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -801,6 +826,85 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## transferPathPartOwner
+
+> TransferOwnerResponse transferPathPartOwner(pathPartId, transferOwnerRequest)
+
+Transfer Path Part Owner Handler
+
+Transfer ownership of a shared path_part to another tenant member.  Allowed for the current owner or a tenant ADMIN/OWNER. Personal items (under /users/{uid}) and system-managed items cannot be transferred.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  PathPartsApi,
+} from '@knowledge-stack/ksapi';
+import type { TransferPathPartOwnerRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartsApi(config);
+
+  const body = {
+    // string
+    pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // TransferOwnerRequest
+    transferOwnerRequest: ...,
+  } satisfies TransferPathPartOwnerRequest;
+
+  try {
+    const data = await api.transferPathPartOwner(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **pathPartId** | `string` |  | [Defaults to `undefined`] |
+| **transferOwnerRequest** | [TransferOwnerRequest](TransferOwnerRequest.md) |  | |
+
+### Return type
+
+[**TransferOwnerResponse**](TransferOwnerResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

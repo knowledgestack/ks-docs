@@ -14,6 +14,7 @@ Method | HTTP request | Description
 [**list_path_part_events**](PathPartsApi.md#list_path_part_events) | **GET** /v1/path-parts/{path_part_id}/events | List Path Part Events Handler
 [**list_path_parts**](PathPartsApi.md#list_path_parts) | **GET** /v1/path-parts | List Path Parts Handler
 [**set_path_part_tags**](PathPartsApi.md#set_path_part_tags) | **POST** /v1/path-parts/{path_part_id}/tags | Set Path Part Tags Handler
+[**transfer_path_part_owner**](PathPartsApi.md#transfer_path_part_owner) | **PUT** /v1/path-parts/{path_part_id}/owner | Transfer Path Part Owner Handler
 
 
 # **append_path_part_event**
@@ -114,6 +115,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -206,6 +208,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -305,6 +308,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -393,6 +397,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -483,6 +488,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -571,6 +577,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -663,6 +670,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -770,11 +778,12 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_path_parts**
-> PaginatedResponsePathPartResponse list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, limit=limit, offset=offset)
+> PaginatedResponsePathPartResponse list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
 
 List Path Parts Handler
 
@@ -800,6 +809,7 @@ use GET /folders/{folder_id}/contents instead.
 import ksapi
 from ksapi.models.paginated_response_path_part_response import PaginatedResponsePathPartResponse
 from ksapi.models.path_order import PathOrder
+from ksapi.models.sort_direction import SortDirection
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -832,12 +842,17 @@ with ksapi.ApiClient(configuration) as api_client:
     parent_path_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent PathPart ID (defaults to root) (optional)
     max_depth = 1 # int | Maximum depth to traverse (1 = direct children, default: 1) (optional) (default to 1)
     sort_order = ksapi.PathOrder() # PathOrder | Sort order for results (default: LOGICAL) (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the column's natural default (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    created_after = '2013-10-20T19:20:30+01:00' # datetime | Only items created at or after this timestamp (inclusive) (optional)
+    created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
+    updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
+    updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
 
     try:
         # List Path Parts Handler
-        api_response = api_instance.list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, limit=limit, offset=offset)
+        api_response = api_instance.list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of PathPartsApi->list_path_parts:\n")
         pprint(api_response)
     except Exception as e:
@@ -854,8 +869,13 @@ Name | Type | Description  | Notes
  **parent_path_id** | **UUID**| Parent PathPart ID (defaults to root) | [optional] 
  **max_depth** | **int**| Maximum depth to traverse (1 &#x3D; direct children, default: 1) | [optional] [default to 1]
  **sort_order** | [**PathOrder**](.md)| Sort order for results (default: LOGICAL) | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the column&#39;s natural default | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **created_after** | **datetime**| Only items created at or after this timestamp (inclusive) | [optional] 
+ **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
+ **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
+ **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
 
 ### Return type
 
@@ -876,6 +896,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -971,6 +992,100 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **transfer_path_part_owner**
+> TransferOwnerResponse transfer_path_part_owner(path_part_id, transfer_owner_request)
+
+Transfer Path Part Owner Handler
+
+Transfer ownership of a shared path_part to another tenant member.
+
+Allowed for the current owner or a tenant ADMIN/OWNER. Personal items (under
+/users/{uid}) and system-managed items cannot be transferred.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.transfer_owner_request import TransferOwnerRequest
+from ksapi.models.transfer_owner_response import TransferOwnerResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.PathPartsApi(api_client)
+    path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    transfer_owner_request = ksapi.TransferOwnerRequest() # TransferOwnerRequest | 
+
+    try:
+        # Transfer Path Part Owner Handler
+        api_response = api_instance.transfer_path_part_owner(path_part_id, transfer_owner_request)
+        print("The response of PathPartsApi->transfer_path_part_owner:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PathPartsApi->transfer_path_part_owner: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **path_part_id** | **UUID**|  | 
+ **transfer_owner_request** | [**TransferOwnerRequest**](TransferOwnerRequest.md)|  | 
+
+### Return type
+
+[**TransferOwnerResponse**](TransferOwnerResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

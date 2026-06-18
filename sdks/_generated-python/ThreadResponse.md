@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **parent_thread_id** | **UUID** | Parent Thread ID (for subthreads) | [optional] 
 **materialized_path** | **str** | Full materialized path from root | 
 **tenant_id** | **UUID** | Tenant ID | 
+**owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the thread, or null if unowned. | [optional] 
 **created_at** | **datetime** | Creation timestamp | 
 **updated_at** | **datetime** | Last update timestamp | 
 

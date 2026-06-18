@@ -17,6 +17,7 @@ Name | Type
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
 `excludeFromQdrant` | boolean
 `tenantId` | string
+`owner` | [UserInfo](UserInfo.md)
 `createdAt` | Date
 `updatedAt` | Date
 `tags` | [Array&lt;TagResponse&gt;](TagResponse.md)
@@ -39,6 +40,7 @@ const example = {
   "approvalState": null,
   "excludeFromQdrant": null,
   "tenantId": null,
+  "owner": null,
   "createdAt": null,
   "updatedAt": null,
   "tags": null,

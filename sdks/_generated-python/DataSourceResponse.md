@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **engine** | [**DataSourceEngine**](DataSourceEngine.md) |  | 
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
+**owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the connector, or null if unowned. | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

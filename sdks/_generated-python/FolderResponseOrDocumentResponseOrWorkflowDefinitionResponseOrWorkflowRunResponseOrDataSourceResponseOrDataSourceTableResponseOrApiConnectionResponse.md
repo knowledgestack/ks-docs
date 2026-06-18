@@ -1,35 +1,38 @@
-# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse
+# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**part_type** | **str** | Path part type | [default to 'DATA_SOURCE_TABLE']
+**part_type** | **str** | Path part type | [default to 'API_CONNECTION']
 **id** | **UUID** |  | 
-**path_part_id** | **UUID** | DATA_SOURCE_TABLE path_part of this table | 
+**path_part_id** | **UUID** |  | 
 **name** | **str** |  | 
-**parent_path_part_id** | **UUID** | DATA_SOURCE path_part of the parent connector | 
-**materialized_path** | **str** | Full materialized path from root | 
+**parent_path_part_id** | **UUID** |  | 
+**materialized_path** | **str** |  | 
 **system_managed** | **bool** | Whether this document is system-managed | 
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
 **exclude_from_qdrant** | **bool** | Direct exclusion flag on this document&#39;s path part only. The effective exclusion also applies when any ancestor folder has the flag set — fetch the ancestry to determine effective state. | 
 **tenant_id** | **UUID** |  | 
+**owner** | [**UserInfo**](UserInfo.md) |  | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 **tags** | [**List[TagResponse]**](TagResponse.md) | Tags attached to this document | [optional] 
-**permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; null on mutation responses. | [optional] 
+**permissions** | [**ItemPermissions**](ItemPermissions.md) |  | 
 **document_type** | [**DocumentType**](DocumentType.md) |  | 
 **document_origin** | [**DocumentOrigin**](DocumentOrigin.md) |  | 
 **active_version_id** | **UUID** | Active version ID | 
 **active_version** | [**DocumentVersionResponse**](DocumentVersionResponse.md) |  | 
-**owner** | [**UserInfo**](UserInfo.md) |  | 
 **checkout** | [**DocumentCheckoutResponse**](DocumentCheckoutResponse.md) | Active write-lock state. Null when no checkout is held. Populated on detail endpoints (GET /v1/documents/{id}). Any tenant member with read access may observe this state. | [optional] 
 **description** | **str** |  | 
 **max_run_duration_seconds** | **int** |  | 
 **instruction_path_part_id** | **UUID** | DOCUMENT path_part of the instruction document | 
 **is_active** | **bool** |  | 
 **approval_required** | **bool** |  | 
+**is_template** | **bool** | Whether this definition is a non-runnable template | 
+**created_from_id** | **UUID** | Source definition this workflow was copied from (a template or any other workflow); null if hand-authored. | 
+**copy_count** | **int** | Number of workflows copied from this definition. | [optional] [default to 0]
 **workflow_definition_id** | **UUID** |  | 
 **triggered_by** | [**UserInfo**](UserInfo.md) |  | 
 **execution_state** | [**WorkflowExecutionState**](WorkflowExecutionState.md) |  | 
@@ -47,23 +50,29 @@ Name | Type | Description | Notes
 **data_source_id** | **UUID** |  | 
 **table_name** | **str** |  | 
 **column_config** | **List[Dict[str, object]]** |  | 
+**base_url** | **str** |  | 
+**network_class** | [**NetworkClass**](NetworkClass.md) |  | 
+**verify_tls** | **bool** |  | 
+**api_docs** | **str** |  | 
+**disclaimer_accepted_at** | **datetime** |  | 
+**disclaimer_accepted_by** | **UUID** |  | 
 
 ## Example
 
 ```python
-from ksapi.models.folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response import FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse
+from ksapi.models.folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_or_api_connection_response import FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse from a JSON string
-folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_instance = FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse.from_json(json)
+# create an instance of FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse from a JSON string
+folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_or_api_connection_response_instance = FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse.from_json(json)
 # print the JSON string representation of the object
-print(FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse.to_json())
+print(FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse.to_json())
 
 # convert the object into a dict
-folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_dict = folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_instance.to_dict()
-# create an instance of FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse from a dict
-folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_from_dict = FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponse.from_dict(folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_dict)
+folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_or_api_connection_response_dict = folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_or_api_connection_response_instance.to_dict()
+# create an instance of FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse from a dict
+folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_or_api_connection_response_from_dict = FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse.from_dict(folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_table_response_or_api_connection_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

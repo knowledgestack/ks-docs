@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
 **exclude_from_qdrant** | **bool** | Direct exclusion flag on this folder&#39;s path part only. The effective exclusion also applies when any ancestor folder has the flag set — fetch the ancestry to determine effective state. | 
 **tenant_id** | **UUID** | Tenant ID | 
+**owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the folder, or null if unowned. | [optional] 
 **created_at** | **datetime** | Creation timestamp | 
 **updated_at** | **datetime** | Last update timestamp | 
 **tags** | [**List[TagResponse]**](TagResponse.md) | Tags attached to this folder | [optional] 

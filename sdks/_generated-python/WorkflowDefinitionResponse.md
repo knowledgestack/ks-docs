@@ -18,7 +18,11 @@ Name | Type | Description | Notes
 **instruction_path_part_id** | **UUID** | DOCUMENT path_part of the instruction document | 
 **is_active** | **bool** |  | 
 **approval_required** | **bool** |  | 
+**is_template** | **bool** | Whether this definition is a non-runnable template | 
+**created_from_id** | **UUID** | Source definition this workflow was copied from (a template or any other workflow); null if hand-authored. | 
+**copy_count** | **int** | Number of workflows copied from this definition. | [optional] [default to 0]
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
+**owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the workflow, or null if unowned. | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 **permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; null on mutation responses. | [optional] 

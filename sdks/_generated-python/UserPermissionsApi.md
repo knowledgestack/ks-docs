@@ -94,6 +94,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **201** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -179,11 +180,12 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_user_permissions**
-> PaginatedResponsePermissionResponse list_user_permissions(tenant_id, user_id, limit=limit, offset=offset)
+> PaginatedResponsePermissionResponse list_user_permissions(tenant_id, user_id, sort_by=sort_by, sort_dir=sort_dir, capability=capability, limit=limit, offset=offset)
 
 List User Permissions Handler
 
@@ -197,6 +199,9 @@ List path permissions for a user in a tenant (admin/owner only).
 ```python
 import ksapi
 from ksapi.models.paginated_response_permission_response import PaginatedResponsePermissionResponse
+from ksapi.models.permission_capability import PermissionCapability
+from ksapi.models.sort_direction import SortDirection
+from ksapi.models.user_permission_order import UserPermissionOrder
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -228,12 +233,15 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.UserPermissionsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Tenant ID to list permissions for
     user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | User ID to list permissions for
+    sort_by = ksapi.UserPermissionOrder() # UserPermissionOrder | Field to sort permissions by (default: CREATED_AT) (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
+    capability = ksapi.PermissionCapability() # PermissionCapability | Filter to a single capability level (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
 
     try:
         # List User Permissions Handler
-        api_response = api_instance.list_user_permissions(tenant_id, user_id, limit=limit, offset=offset)
+        api_response = api_instance.list_user_permissions(tenant_id, user_id, sort_by=sort_by, sort_dir=sort_dir, capability=capability, limit=limit, offset=offset)
         print("The response of UserPermissionsApi->list_user_permissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -249,6 +257,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tenant_id** | **UUID**| Tenant ID to list permissions for | 
  **user_id** | **UUID**| User ID to list permissions for | 
+ **sort_by** | [**UserPermissionOrder**](.md)| Field to sort permissions by (default: CREATED_AT) | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
+ **capability** | [**PermissionCapability**](.md)| Filter to a single capability level | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
 
@@ -271,6 +282,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -362,6 +374,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

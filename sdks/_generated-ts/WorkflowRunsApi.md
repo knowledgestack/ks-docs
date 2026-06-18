@@ -7,6 +7,8 @@ All URIs are relative to *http://localhost:8000*
 | [**cloneWorkflowRun**](WorkflowRunsApi.md#cloneworkflowrunoperation) | **POST** /v1/workflow-runs/{run_id}/clone | Clone Workflow Run Handler |
 | [**deleteWorkflowRun**](WorkflowRunsApi.md#deleteworkflowrun) | **DELETE** /v1/workflow-runs/{run_id} | Delete Workflow Run Handler |
 | [**getWorkflowRun**](WorkflowRunsApi.md#getworkflowrun) | **GET** /v1/workflow-runs/{run_id} | Get Workflow Run Handler |
+| [**getWorkflowRunsSummary**](WorkflowRunsApi.md#getworkflowrunssummary) | **GET** /v1/workflow-runs/summary | Get Workflow Runs Summary Handler |
+| [**listWorkflowRunsForTenant**](WorkflowRunsApi.md#listworkflowrunsfortenant) | **GET** /v1/workflow-runs | List Workflow Runs For Tenant Handler |
 | [**retryWorkflowRun**](WorkflowRunsApi.md#retryworkflowrun) | **POST** /v1/workflow-runs/{run_id}/retry | Retry Workflow Run Handler |
 | [**setWorkflowRunApproval**](WorkflowRunsApi.md#setworkflowrunapprovaloperation) | **POST** /v1/workflow-runs/{run_id}/approval | Set Workflow Run Approval Handler |
 | [**startWorkflowRun**](WorkflowRunsApi.md#startworkflowrun) | **POST** /v1/workflow-runs/{run_id}/start | Start Workflow Run Handler |
@@ -89,6 +91,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -161,6 +164,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -233,6 +237,199 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getWorkflowRunsSummary
+
+> WorkflowRunSummaryResponse getWorkflowRunsSummary(since, until, definitionId)
+
+Get Workflow Runs Summary Handler
+
+Aggregate workflow-runs health, read-gated and permission-scoped.  Numbers cover only runs under workflows the caller can read (OWNER/ADMIN ⇒ tenant-wide). Windowed metrics default to the last 7 days; the approval backlog and active-definition count are point-in-time.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  WorkflowRunsApi,
+} from '@knowledge-stack/ksapi';
+import type { GetWorkflowRunsSummaryRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowRunsApi(config);
+
+  const body = {
+    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
+    since: 2013-10-20T19:20:30+01:00,
+    // Date | Window end (inclusive). Defaults to open-ended. (optional)
+    until: 2013-10-20T19:20:30+01:00,
+    // string | Scope all numbers to one workflow (requires read). (optional)
+    definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies GetWorkflowRunsSummaryRequest;
+
+  try {
+    const data = await api.getWorkflowRunsSummary(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end (inclusive). Defaults to open-ended. | [Optional] [Defaults to `undefined`] |
+| **definitionId** | `string` | Scope all numbers to one workflow (requires read). | [Optional] [Defaults to `undefined`] |
+
+### Return type
+
+[**WorkflowRunSummaryResponse**](WorkflowRunSummaryResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## listWorkflowRunsForTenant
+
+> PaginatedResponseWorkflowRunResponse listWorkflowRunsForTenant(state, mine, pendingApprovalForMe, definitionId, ownerId, sortBy, sortDir, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+
+List Workflow Runs For Tenant Handler
+
+List runs across every workflow in the tenant, permission-scoped.  The single spine behind the dashboard worklists — the FE composes its tabs from preset filters (&#x60;&#x60;mine&#x60;&#x60; + &#x60;&#x60;state&#x60;&#x60;, &#x60;&#x60;pending_approval_for_me&#x60;&#x60;). Visibility follows the same model as the per-definition list: OWNER/ADMIN see all; a USER sees runs under workflows they can read.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  WorkflowRunsApi,
+} from '@knowledge-stack/ksapi';
+import type { ListWorkflowRunsForTenantRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowRunsApi(config);
+
+  const body = {
+    // Array<WorkflowExecutionState> | Keep only runs in these execution states (repeatable). (optional)
+    state: ...,
+    // boolean | Only runs the caller created (owner). Overrides owner_id. (optional)
+    mine: true,
+    // boolean | Only runs pending approval that the caller may approve. (optional)
+    pendingApprovalForMe: true,
+    // string | Only runs under this workflow definition. (optional)
+    definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Only runs created by this user. (optional)
+    ownerId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // WorkflowRunOrder | Field to sort runs by (default: STARTED_AT) (optional)
+    sortBy: ...,
+    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
+    sortDir: ...,
+    // number | Number of items per page (optional)
+    limit: 56,
+    // number | Number of items to skip (optional)
+    offset: 56,
+    // Date | Only items created at or after this timestamp (inclusive) (optional)
+    createdAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items created strictly before this timestamp (optional)
+    createdBefore: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated at or after this timestamp (inclusive) (optional)
+    updatedAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated strictly before this timestamp (optional)
+    updatedBefore: 2013-10-20T19:20:30+01:00,
+  } satisfies ListWorkflowRunsForTenantRequest;
+
+  try {
+    const data = await api.listWorkflowRunsForTenant(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **state** | `Array<WorkflowExecutionState>` | Keep only runs in these execution states (repeatable). | [Optional] |
+| **mine** | `boolean` | Only runs the caller created (owner). Overrides owner_id. | [Optional] [Defaults to `false`] |
+| **pendingApprovalForMe** | `boolean` | Only runs pending approval that the caller may approve. | [Optional] [Defaults to `false`] |
+| **definitionId** | `string` | Only runs under this workflow definition. | [Optional] [Defaults to `undefined`] |
+| **ownerId** | `string` | Only runs created by this user. | [Optional] [Defaults to `undefined`] |
+| **sortBy** | `WorkflowRunOrder` | Field to sort runs by (default: STARTED_AT) | [Optional] [Defaults to `undefined`] [Enum: STARTED_AT, CREATED_AT, COMPLETED_AT] |
+| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
+| **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
+| **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+
+### Return type
+
+[**PaginatedResponseWorkflowRunResponse**](PaginatedResponseWorkflowRunResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -307,6 +504,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **202** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -384,6 +582,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -458,6 +657,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **202** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -532,6 +732,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -609,6 +810,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -686,6 +888,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

@@ -81,6 +81,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -158,13 +159,14 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listUserPermissions
 
-> PaginatedResponsePermissionResponse listUserPermissions(tenantId, userId, limit, offset)
+> PaginatedResponsePermissionResponse listUserPermissions(tenantId, userId, sortBy, sortDir, capability, limit, offset)
 
 List User Permissions Handler
 
@@ -194,6 +196,12 @@ async function example() {
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | User ID to list permissions for
     userId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // UserPermissionOrder | Field to sort permissions by (default: CREATED_AT) (optional)
+    sortBy: ...,
+    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
+    sortDir: ...,
+    // PermissionCapability | Filter to a single capability level (optional)
+    capability: ...,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -219,6 +227,9 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` | Tenant ID to list permissions for | [Defaults to `undefined`] |
 | **userId** | `string` | User ID to list permissions for | [Defaults to `undefined`] |
+| **sortBy** | `UserPermissionOrder` | Field to sort permissions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, CAPABILITY] |
+| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
+| **capability** | `PermissionCapability` | Filter to a single capability level | [Optional] [Defaults to `undefined`] [Enum: READ_ONLY, READ_WRITE, READ_WRITE_DELETE] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 
@@ -241,6 +252,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -321,6 +333,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

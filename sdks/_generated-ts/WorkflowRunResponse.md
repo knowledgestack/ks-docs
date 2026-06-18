@@ -28,6 +28,7 @@ Name | Type
 `inputPathPartIds` | Array&lt;string&gt;
 `outputsPathPartIds` | Array&lt;string&gt;
 `runThreadId` | string
+`owner` | [UserInfo](UserInfo.md)
 `createdAt` | Date
 `updatedAt` | Date
 `permissions` | [ItemPermissions](ItemPermissions.md)
@@ -60,6 +61,7 @@ const example = {
   "inputPathPartIds": null,
   "outputsPathPartIds": null,
   "runThreadId": null,
+  "owner": null,
   "createdAt": null,
   "updatedAt": null,
   "permissions": null,

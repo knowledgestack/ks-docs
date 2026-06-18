@@ -1,7 +1,7 @@
 
 # DataSourceQueryResponse
 
-Read-only query result. ``generated_sql`` echoes the executed SQL.
+Read-only query result. ``generated_sql`` echoes the executed SQL.  ``sql_validation_warnings`` lists non-blocking semantic-lint findings (e.g. aggregate without a filter, fan-out join); empty when the SQL is clean. The query still runs and returns rows regardless of warnings.
 
 ## Properties
 
@@ -12,6 +12,7 @@ Name | Type
 `rowCount` | number
 `truncated` | boolean
 `generatedSql` | string
+`sqlValidationWarnings` | Array&lt;string&gt;
 
 ## Example
 
@@ -25,6 +26,7 @@ const example = {
   "rowCount": null,
   "truncated": null,
   "generatedSql": null,
+  "sqlValidationWarnings": null,
 } satisfies DataSourceQueryResponse
 
 console.log(example)

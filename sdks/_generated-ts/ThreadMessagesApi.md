@@ -83,6 +83,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -163,13 +164,14 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listThreadMessages
 
-> PaginatedResponseThreadMessageResponse listThreadMessages(threadId, before, withDetails, limit, offset)
+> PaginatedResponseThreadMessageResponse listThreadMessages(threadId, before, role, sortDir, withDetails, limit, offset)
 
 List Thread Messages Handler
 
@@ -199,6 +201,10 @@ async function example() {
     threadId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // Date | Cursor for keyset pagination: only return messages with created_at < this value (optional)
     before: 2013-10-20T19:20:30+01:00,
+    // MessageRole | Filter messages by role (USER, ASSISTANT, SYSTEM) (optional)
+    role: ...,
+    // SortDirection | ASC for oldest-first; default/DESC keeps newest-first (optional)
+    sortDir: ...,
     // boolean | Include execution steps in response (default true) (optional)
     withDetails: true,
     // number | Number of items per page (optional)
@@ -226,6 +232,8 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **threadId** | `string` |  | [Defaults to `undefined`] |
 | **before** | `Date` | Cursor for keyset pagination: only return messages with created_at &lt; this value | [Optional] [Defaults to `undefined`] |
+| **role** | `MessageRole` | Filter messages by role (USER, ASSISTANT, SYSTEM) | [Optional] [Defaults to `undefined`] [Enum: USER, ASSISTANT, SYSTEM] |
+| **sortDir** | `SortDirection` | ASC for oldest-first; default/DESC keeps newest-first | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **withDetails** | `boolean` | Include execution steps in response (default true) | [Optional] [Defaults to `true`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
@@ -249,6 +257,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

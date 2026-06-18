@@ -93,6 +93,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -170,6 +171,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -244,6 +246,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -321,6 +324,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -395,6 +399,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -469,13 +474,14 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listGroupMembers
 
-> PaginatedResponseMembershipResponse listGroupMembers(groupId, limit, offset)
+> PaginatedResponseMembershipResponse listGroupMembers(groupId, sortBy, sortDir, usernameLike, limit, offset)
 
 List Group Members Handler
 
@@ -503,6 +509,12 @@ async function example() {
   const body = {
     // string
     groupId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // GroupMemberOrder | Field to sort members by (default: ADDED_AT) (optional)
+    sortBy: ...,
+    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
+    sortDir: ...,
+    // string | Case-insensitive substring filter on member name (optional)
+    usernameLike: usernameLike_example,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -527,6 +539,9 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | `string` |  | [Defaults to `undefined`] |
+| **sortBy** | `GroupMemberOrder` | Field to sort members by (default: ADDED_AT) | [Optional] [Defaults to `undefined`] [Enum: ADDED_AT, USERNAME] |
+| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
+| **usernameLike** | `string` | Case-insensitive substring filter on member name | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 
@@ -549,13 +564,14 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listGroupPermissions
 
-> PaginatedResponseGroupPermissionResponse listGroupPermissions(groupId, limit, offset)
+> PaginatedResponseGroupPermissionResponse listGroupPermissions(groupId, sortBy, sortDir, capability, limit, offset)
 
 List Group Permissions Handler
 
@@ -583,6 +599,12 @@ async function example() {
   const body = {
     // string
     groupId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // GroupPermissionOrder | Field to sort permissions by (default: CREATED_AT) (optional)
+    sortBy: ...,
+    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
+    sortDir: ...,
+    // PermissionCapability | Filter to permissions with this capability (optional)
+    capability: ...,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -607,6 +629,9 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | `string` |  | [Defaults to `undefined`] |
+| **sortBy** | `GroupPermissionOrder` | Field to sort permissions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, CAPABILITY] |
+| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
+| **capability** | `PermissionCapability` | Filter to permissions with this capability | [Optional] [Defaults to `undefined`] [Enum: READ_ONLY, READ_WRITE, READ_WRITE_DELETE] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 
@@ -629,6 +654,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -694,13 +720,14 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listTenantGroups
 
-> PaginatedResponseGroupResponse listTenantGroups(limit, offset)
+> PaginatedResponseGroupResponse listTenantGroups(sortBy, sortDir, nameLike, hasUserIds, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
 
 List Tenant Groups Handler
 
@@ -726,10 +753,26 @@ async function example() {
   const api = new TenantGroupsApi(config);
 
   const body = {
+    // TenantGroupOrder | Field to sort groups by (default: NAME) (optional)
+    sortBy: ...,
+    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
+    sortDir: ...,
+    // string | Case-insensitive substring filter on name (optional)
+    nameLike: nameLike_example,
+    // Array<string> | Only groups containing ALL of these user ids (optional)
+    hasUserIds: ...,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // Date | Only items created at or after this timestamp (inclusive) (optional)
+    createdAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items created strictly before this timestamp (optional)
+    createdBefore: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated at or after this timestamp (inclusive) (optional)
+    updatedAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated strictly before this timestamp (optional)
+    updatedBefore: 2013-10-20T19:20:30+01:00,
   } satisfies ListTenantGroupsRequest;
 
   try {
@@ -749,8 +792,16 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
+| **sortBy** | `TenantGroupOrder` | Field to sort groups by (default: NAME) | [Optional] [Defaults to `undefined`] [Enum: NAME, CREATED_AT] |
+| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
+| **nameLike** | `string` | Case-insensitive substring filter on name | [Optional] [Defaults to `undefined`] |
+| **hasUserIds** | `Array<string>` | Only groups containing ALL of these user ids | [Optional] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -771,6 +822,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -848,6 +900,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -928,6 +981,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
@@ -1005,6 +1059,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 

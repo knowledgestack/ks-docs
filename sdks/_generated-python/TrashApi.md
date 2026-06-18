@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 
 # **list_trash**
-> PaginatedResponseTrashItemResponse list_trash(limit=limit, offset=offset)
+> PaginatedResponseTrashItemResponse list_trash(sort_order=sort_order, sort_dir=sort_dir, deleted_by=deleted_by, part_type=part_type, owner_id=owner_id, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
 
 List Trash Handler
 
@@ -24,6 +24,9 @@ List top-level trash items visible to the caller.
 ```python
 import ksapi
 from ksapi.models.paginated_response_trash_item_response import PaginatedResponseTrashItemResponse
+from ksapi.models.part_type import PartType
+from ksapi.models.path_order import PathOrder
+from ksapi.models.sort_direction import SortDirection
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -53,12 +56,21 @@ configuration = ksapi.Configuration(
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TrashApi(api_client)
+    sort_order = ksapi.PathOrder() # PathOrder | Sort order (default: LOGICAL = deletion recency) (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the column's natural default (optional)
+    deleted_by = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter to items deleted by this user (optional)
+    part_type = [ksapi.PartType()] # List[PartType] | Filter to these path-part types (folders, documents, ...) (optional)
+    owner_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter to items owned (created) by this user (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    created_after = '2013-10-20T19:20:30+01:00' # datetime | Only items created at or after this timestamp (inclusive) (optional)
+    created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
+    updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
+    updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
 
     try:
         # List Trash Handler
-        api_response = api_instance.list_trash(limit=limit, offset=offset)
+        api_response = api_instance.list_trash(sort_order=sort_order, sort_dir=sort_dir, deleted_by=deleted_by, part_type=part_type, owner_id=owner_id, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of TrashApi->list_trash:\n")
         pprint(api_response)
     except Exception as e:
@@ -72,8 +84,17 @@ with ksapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **sort_order** | [**PathOrder**](.md)| Sort order (default: LOGICAL &#x3D; deletion recency) | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the column&#39;s natural default | [optional] 
+ **deleted_by** | **UUID**| Filter to items deleted by this user | [optional] 
+ **part_type** | [**List[PartType]**](PartType.md)| Filter to these path-part types (folders, documents, ...) | [optional] 
+ **owner_id** | **UUID**| Filter to items owned (created) by this user | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **created_after** | **datetime**| Only items created at or after this timestamp (inclusive) | [optional] 
+ **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
+ **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
+ **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
 
 ### Return type
 
@@ -94,6 +115,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -177,6 +199,7 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -260,6 +283,7 @@ void (empty response body)
 |-------------|-------------|------------------|
 **204** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

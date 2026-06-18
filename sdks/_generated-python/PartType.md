@@ -26,6 +26,8 @@ Type of path part in the filesystem.
 
 * `DATA_SOURCE_TABLE` (value: `'DATA_SOURCE_TABLE'`)
 
+* `API_CONNECTION` (value: `'API_CONNECTION'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

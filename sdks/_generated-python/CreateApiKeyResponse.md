@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **key** | **str** |  | 
 **key_suffix** | **str** |  | 
 **created_at** | **datetime** |  | 
+**expires_at** | **datetime** |  | 
 
 ## Example
 

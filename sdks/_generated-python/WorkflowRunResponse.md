@@ -27,6 +27,7 @@ Name | Type | Description | Notes
 **input_path_part_ids** | **List[UUID]** | Flat list of currently-pinned KB-reference path_part ids (DOCUMENT + FOLDER). On a NOT_STARTED run this is the only surface for KB refs (run_snapshot is NULL). | [optional] 
 **outputs_path_part_ids** | **List[UUID]** |  | 
 **run_thread_id** | **UUID** | The run&#39;s primary chat thread (1:1). NULL while NOT_STARTED; set by Start. The FE opens the run by opening this thread. | [optional] 
+**owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the run, or null if unowned. Usually the same user as &#x60;&#x60;triggered_by&#x60;&#x60; unless ownership was transferred. | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 **permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; null on mutation responses. | [optional] 

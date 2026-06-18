@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
 **exclude_from_qdrant** | **bool** | Direct exclusion flag on this document&#39;s path part only. The effective exclusion also applies when any ancestor folder has the flag set — fetch the ancestry to determine effective state. | 
 **tenant_id** | **UUID** | Tenant ID | 
-**owner** | [**UserInfo**](UserInfo.md) |  | 
+**owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the document, or null if unowned. Transferable via PATCH by the current owner or an ADMIN/OWNER. | [optional] 
 **created_at** | **datetime** | Creation timestamp | 
 **updated_at** | **datetime** | Last update timestamp | 
 **tags** | [**List[TagResponse]**](TagResponse.md) | Tags attached to this document | [optional] 

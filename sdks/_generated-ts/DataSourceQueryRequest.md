@@ -1,7 +1,7 @@
 
 # DataSourceQueryRequest
 
-A read-only SQL query the caller (or agent) wrote.
+A read-only SQL query the caller (or agent) wrote.  ``offset`` skips that many leading result rows, so callers can page through a large result a window of ``max_rows`` at a time.
 
 ## Properties
 
@@ -9,6 +9,7 @@ Name | Type
 ------------ | -------------
 `sql` | string
 `maxRows` | number
+`offset` | number
 
 ## Example
 
@@ -19,6 +20,7 @@ import type { DataSourceQueryRequest } from '@knowledge-stack/ksapi'
 const example = {
   "sql": null,
   "maxRows": null,
+  "offset": null,
 } satisfies DataSourceQueryRequest
 
 console.log(example)

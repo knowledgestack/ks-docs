@@ -595,7 +595,7 @@ Name | Type | Description  | Notes
 
 Search Items Handler
 
-Search for folders and documents by name.
+Search for folders, documents, and data-source connectors by name.
 
 Performs a case-insensitive partial name match using trigram indexing.
 Results are filtered by the current user's path permissions.

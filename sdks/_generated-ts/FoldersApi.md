@@ -520,7 +520,7 @@ example().catch(console.error);
 
 Search Items Handler
 
-Search for folders and documents by name.  Performs a case-insensitive partial name match using trigram indexing. Results are filtered by the current user\&#39;s path permissions.  When parent_path_part_id is provided, only items under that folder are searched. Otherwise, all accessible items across the tenant are searched.
+Search for folders, documents, and data-source connectors by name.  Performs a case-insensitive partial name match using trigram indexing. Results are filtered by the current user\&#39;s path permissions.  When parent_path_part_id is provided, only items under that folder are searched. Otherwise, all accessible items across the tenant are searched.
 
 ### Example
 
@@ -577,7 +577,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **nameLike** | `string` | Case-insensitive partial name search | [Defaults to `undefined`] |
 | **sortOrder** | `SearchSortOrder` | Sort order for results (default: NAME) | [Optional] [Defaults to `undefined`] [Enum: NAME, UPDATED_AT, CREATED_AT] |
-| **partType** | `SearchablePartType` | Filter by item type (default: both folders and documents) | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT] |
+| **partType** | `SearchablePartType` | Filter by item type (default: both folders and documents) | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT, DATA_SOURCE] |
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
 | **parentPathPartId** | `string` | Scope search to descendants of this folder\&#39;s path part | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |

@@ -1,6 +1,6 @@
 # DataSourceQueryRequest
 
-A read-only SQL query the caller (or agent) wrote.
+A read-only SQL query the caller (or agent) wrote.  ``offset`` skips that many leading result rows, so callers can page through a large result a window of ``max_rows`` at a time.
 
 ## Properties
 
@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **sql** | **str** |  | 
 **max_rows** | **int** |  | [optional] [default to 1000]
+**offset** | **int** |  | [optional] [default to 0]
 
 ## Example
 

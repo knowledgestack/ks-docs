@@ -20,7 +20,7 @@ All URIs are relative to *http://localhost:8000*
 
 Create Thread Handler
 
-Create a new thread.  If parent_path_part_id is omitted, the thread is created under the user\&#39;s /users/{user_id}/threads/ folder (auto-provisioned if needed).
+Create a new thread.  If parent_path_part_id is omitted, the thread is created under the user\&#39;s /users/{user_id}/threads/ folder (auto-provisioned if needed).  With &#x60;&#x60;message_for_title&#x60;&#x60;, the thread is created as \&quot;New Thread\&quot; and its title is summarized in a background task; the FE learns the final title via a &#x60;&#x60;THREAD_TITLE_CHANGED&#x60;&#x60; WebSocket event.
 
 ### Example
 

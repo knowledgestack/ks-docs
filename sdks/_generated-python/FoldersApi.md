@@ -595,7 +595,7 @@ Name | Type | Description  | Notes
 
 Search Items Handler
 
-Search for folders, documents, and data-source connectors by name.
+Search for folders, documents, and connectors by name.
 
 Performs a case-insensitive partial name match using trigram indexing.
 Results are filtered by the current user's path permissions.
@@ -644,7 +644,7 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.FoldersApi(api_client)
     name_like = 'name_like_example' # str | Case-insensitive partial name search
     sort_order = ksapi.SearchSortOrder() # SearchSortOrder | Sort order for results (default: NAME) (optional)
-    part_type = ksapi.SearchablePartType() # SearchablePartType | Filter by item type (default: both folders and documents) (optional)
+    part_type = ksapi.SearchablePartType() # SearchablePartType | Filter by item type (default: all searchable types) (optional)
     with_tags = False # bool | Include tags in the response (default: false) (optional) (default to False)
     parent_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope search to descendants of this folder's path part (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
@@ -668,7 +668,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name_like** | **str**| Case-insensitive partial name search | 
  **sort_order** | [**SearchSortOrder**](.md)| Sort order for results (default: NAME) | [optional] 
- **part_type** | [**SearchablePartType**](.md)| Filter by item type (default: both folders and documents) | [optional] 
+ **part_type** | [**SearchablePartType**](.md)| Filter by item type (default: all searchable types) | [optional] 
  **with_tags** | **bool**| Include tags in the response (default: false) | [optional] [default to False]
  **parent_path_part_id** | **UUID**| Scope search to descendants of this folder&#39;s path part | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]

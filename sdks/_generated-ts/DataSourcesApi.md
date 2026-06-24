@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost:8000*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**createDataSource**](DataSourcesApi.md#createdatasourceoperation) | **POST** /v1/data-sources | Create Data Source Handler |
+| [**deleteDataSource**](DataSourcesApi.md#deletedatasource) | **DELETE** /v1/data-sources/{data_source_id} | Delete Data Source Handler |
 | [**getDataSource**](DataSourcesApi.md#getdatasource) | **GET** /v1/data-sources/{data_source_id} | Get Data Source Handler |
 | [**getDataSourceCatalog**](DataSourcesApi.md#getdatasourcecatalog) | **GET** /v1/data-sources/{data_source_id}/catalog | Get Data Source Catalog Handler |
 | [**modelDataSourceTable**](DataSourcesApi.md#modeldatasourcetable) | **POST** /v1/data-sources/{data_source_id}/tables | Model Data Source Table Handler |
@@ -83,6 +84,81 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## deleteDataSource
+
+> deleteDataSource(dataSourceId)
+
+Delete Data Source Handler
+
+Move a connector and its modeled tables to trash.  Soft-delete via the path_part subtree (the tables are children, so they trash with it). Connectors carry no Qdrant vectors, so there is no trash-sync workflow.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DataSourcesApi,
+} from '@knowledge-stack/ksapi';
+import type { DeleteDataSourceRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DataSourcesApi(config);
+
+  const body = {
+    // string
+    dataSourceId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies DeleteDataSourceRequest;
+
+  try {
+    const data = await api.deleteDataSource(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dataSourceId** | `string` |  | [Defaults to `undefined`] |
+
+### Return type
+
+`void` (Empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
 | **0** | Error response. |  -  |
 

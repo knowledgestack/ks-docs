@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**accept_api_connection_disclaimer**](ApiConnectionsApi.md#accept_api_connection_disclaimer) | **POST** /v1/api-connections/{connection_id}/disclaimer | Accept Api Connection Disclaimer Handler
 [**create_api_connection**](ApiConnectionsApi.md#create_api_connection) | **POST** /v1/api-connections | Create Api Connection Handler
+[**delete_api_connection**](ApiConnectionsApi.md#delete_api_connection) | **DELETE** /v1/api-connections/{connection_id} | Delete Api Connection Handler
 [**execute_api_connection_request**](ApiConnectionsApi.md#execute_api_connection_request) | **POST** /v1/api-connections/{connection_id}/request | Execute Api Connection Request Handler
 [**get_api_connection**](ApiConnectionsApi.md#get_api_connection) | **GET** /v1/api-connections/{connection_id} | Get Api Connection Handler
 [**update_api_connection**](ApiConnectionsApi.md#update_api_connection) | **PATCH** /v1/api-connections/{connection_id} | Update Api Connection Handler
@@ -184,6 +185,93 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **delete_api_connection**
+> delete_api_connection(connection_id)
+
+Delete Api Connection Handler
+
+Move a connection to trash (Admin/Owner).
+
+Soft-delete via the path_part subtree, mirroring create/update authz. A
+connection holds no Qdrant vectors, so there is no trash-sync workflow.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.ApiConnectionsApi(api_client)
+    connection_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+
+    try:
+        # Delete Api Connection Handler
+        api_instance.delete_api_connection(connection_id)
+    except Exception as e:
+        print("Exception when calling ApiConnectionsApi->delete_api_connection: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **connection_id** | **UUID**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **0** | Error response. |  -  |
 

@@ -520,7 +520,7 @@ example().catch(console.error);
 
 Search Items Handler
 
-Search for folders, documents, and data-source connectors by name.  Performs a case-insensitive partial name match using trigram indexing. Results are filtered by the current user\&#39;s path permissions.  When parent_path_part_id is provided, only items under that folder are searched. Otherwise, all accessible items across the tenant are searched.
+Search for folders, documents, and connectors by name.  Performs a case-insensitive partial name match using trigram indexing. Results are filtered by the current user\&#39;s path permissions.  When parent_path_part_id is provided, only items under that folder are searched. Otherwise, all accessible items across the tenant are searched.
 
 ### Example
 
@@ -546,7 +546,7 @@ async function example() {
     nameLike: nameLike_example,
     // SearchSortOrder | Sort order for results (default: NAME) (optional)
     sortOrder: ...,
-    // SearchablePartType | Filter by item type (default: both folders and documents) (optional)
+    // SearchablePartType | Filter by item type (default: all searchable types) (optional)
     partType: ...,
     // boolean | Include tags in the response (default: false) (optional)
     withTags: true,
@@ -577,7 +577,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **nameLike** | `string` | Case-insensitive partial name search | [Defaults to `undefined`] |
 | **sortOrder** | `SearchSortOrder` | Sort order for results (default: NAME) | [Optional] [Defaults to `undefined`] [Enum: NAME, UPDATED_AT, CREATED_AT] |
-| **partType** | `SearchablePartType` | Filter by item type (default: both folders and documents) | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT, DATA_SOURCE] |
+| **partType** | `SearchablePartType` | Filter by item type (default: all searchable types) | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT, DATA_SOURCE, API_CONNECTION] |
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
 | **parentPathPartId** | `string` | Scope search to descendants of this folder\&#39;s path part | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |

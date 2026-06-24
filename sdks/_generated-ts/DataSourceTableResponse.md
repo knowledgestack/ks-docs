@@ -19,6 +19,7 @@ Name | Type
 `description` | string
 `columnConfig` | Array&lt;{ [key: string]: any; }&gt;
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
+`permissions` | [ItemPermissions](ItemPermissions.md)
 `createdAt` | Date
 `updatedAt` | Date
 
@@ -41,6 +42,7 @@ const example = {
   "description": null,
   "columnConfig": null,
   "approvalState": null,
+  "permissions": null,
   "createdAt": null,
   "updatedAt": null,
 } satisfies DataSourceTableResponse

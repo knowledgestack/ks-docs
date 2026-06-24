@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **description** | **str** |  | 
 **column_config** | **List[Dict[str, object]]** |  | 
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
+**permissions** | [**ItemPermissions**](ItemPermissions.md) |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

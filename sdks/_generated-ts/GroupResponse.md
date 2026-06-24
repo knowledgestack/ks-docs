@@ -10,6 +10,7 @@ Name | Type
 `tenantId` | string
 `name` | string
 `description` | string
+`idpGroupId` | string
 `memberCount` | number
 `createdAt` | Date
 `updatedAt` | Date
@@ -25,6 +26,7 @@ const example = {
   "tenantId": null,
   "name": null,
   "description": null,
+  "idpGroupId": null,
   "memberCount": null,
   "createdAt": null,
   "updatedAt": null,

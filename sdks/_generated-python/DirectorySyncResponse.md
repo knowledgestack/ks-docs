@@ -11,6 +11,11 @@ Name | Type | Description | Notes
 **users_activated** | **int** |  | [optional] [default to 0]
 **users_deactivated** | **int** |  | [optional] [default to 0]
 **users_skipped** | **int** |  | [optional] [default to 0]
+**seat_cap_excluded_num** | **int** |  | [optional] [default to 0]
+**groups_created** | **int** |  | [optional] [default to 0]
+**groups_updated** | **int** |  | [optional] [default to 0]
+**group_memberships_added** | **int** |  | [optional] [default to 0]
+**group_memberships_removed** | **int** |  | [optional] [default to 0]
 **warnings** | **List[str]** |  | [optional] 
 **errors** | **List[str]** |  | [optional] 
 

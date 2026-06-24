@@ -10,6 +10,7 @@ Name | Type
 `tenantId` | string
 `groupId` | string
 `userId` | string
+`idpManaged` | boolean
 `createdAt` | Date
 `updatedAt` | Date
 
@@ -24,6 +25,7 @@ const example = {
   "tenantId": null,
   "groupId": null,
   "userId": null,
+  "idpManaged": null,
   "createdAt": null,
   "updatedAt": null,
 } satisfies MembershipResponse

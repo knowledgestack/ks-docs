@@ -12,6 +12,11 @@ Name | Type
 `usersActivated` | number
 `usersDeactivated` | number
 `usersSkipped` | number
+`seatCapExcludedNum` | number
+`groupsCreated` | number
+`groupsUpdated` | number
+`groupMembershipsAdded` | number
+`groupMembershipsRemoved` | number
 `warnings` | Array&lt;string&gt;
 `errors` | Array&lt;string&gt;
 
@@ -27,6 +32,11 @@ const example = {
   "usersActivated": null,
   "usersDeactivated": null,
   "usersSkipped": null,
+  "seatCapExcludedNum": null,
+  "groupsCreated": null,
+  "groupsUpdated": null,
+  "groupMembershipsAdded": null,
+  "groupMembershipsRemoved": null,
   "warnings": null,
   "errors": null,
 } satisfies DirectorySyncResponse

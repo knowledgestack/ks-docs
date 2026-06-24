@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **tenant_id** | **UUID** |  | 
 **group_id** | **UUID** |  | 
 **user_id** | **UUID** |  | 
+**idp_managed** | **bool** |  | [optional] [default to False]
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

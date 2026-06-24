@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **upto_message_id** | **UUID** | Last message covered by this summary (inclusive). | 
 **upto_message_created_at** | **datetime** | created_at of upto_message_id; tiebreaker for identical timestamps. | 
-**summary** | **Dict[str, object]** | Agent-internal CompressionSummary as a JSON blob. Server does not interpret this; the agent serializes/deserializes via its own model. | 
+**summary** | **Dict[str, object]** | Agent-internal summary blob (currently {\&quot;text\&quot;: ...}). Server does not interpret this; the agent reads the summary back from the message&#39;s content.text. | 
 **covered_message_count** | **int** |  | 
 **tokens_before** | **int** |  | 
 **tokens_after** | **int** |  | 

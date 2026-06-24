@@ -11,7 +11,7 @@ All URIs are relative to *http://localhost:8000*
 | [**listWorkflowRunsForTenant**](WorkflowRunsApi.md#listworkflowrunsfortenant) | **GET** /v1/workflow-runs | List Workflow Runs For Tenant Handler |
 | [**retryWorkflowRun**](WorkflowRunsApi.md#retryworkflowrun) | **POST** /v1/workflow-runs/{run_id}/retry | Retry Workflow Run Handler |
 | [**setWorkflowRunApproval**](WorkflowRunsApi.md#setworkflowrunapprovaloperation) | **POST** /v1/workflow-runs/{run_id}/approval | Set Workflow Run Approval Handler |
-| [**startWorkflowRun**](WorkflowRunsApi.md#startworkflowrun) | **POST** /v1/workflow-runs/{run_id}/start | Start Workflow Run Handler |
+| [**startWorkflowRun**](WorkflowRunsApi.md#startworkflowrunoperation) | **POST** /v1/workflow-runs/{run_id}/start | Start Workflow Run Handler |
 | [**stopWorkflowRun**](WorkflowRunsApi.md#stopworkflowrun) | **POST** /v1/workflow-runs/{run_id}/stop | Stop Workflow Run Handler |
 | [**updateWorkflowRun**](WorkflowRunsApi.md#updateworkflowrunoperation) | **PATCH** /v1/workflow-runs/{run_id} | Update Workflow Run Handler |
 | [**workflowRunCallback**](WorkflowRunsApi.md#workflowruncallbackoperation) | **POST** /v1/workflow-runs/{run_id}/callback | Workflow Run Callback Handler |
@@ -589,11 +589,11 @@ example().catch(console.error);
 
 ## startWorkflowRun
 
-> WorkflowRunResponse startWorkflowRun(runId)
+> WorkflowRunResponse startWorkflowRun(runId, startWorkflowRunRequest)
 
 Start Workflow Run Handler
 
-Flip a NOT_STARTED run to IN_PROGRESS and dispatch its agent run.  Idempotent on IN_PROGRESS (returns the row). Terminal states → 409. Inputs still ingesting or in a failed terminal state → 409. The snapshot is built at this point (KB DOCUMENTs resolve to active versions, uploaded DVs are walked from inputs/, KB FOLDERs stay live).
+Flip a NOT_STARTED run to IN_PROGRESS and dispatch its agent run.  Idempotent on IN_PROGRESS (returns the row). Terminal states → 409. Inputs still ingesting or in a failed terminal state → 409. The snapshot is built at this point (KB DOCUMENTs resolve to active versions, uploaded DVs are walked from inputs/, KB FOLDERs stay live).  The body is optional; &#x60;&#x60;user_message&#x60;&#x60; (when sent) is pinned into the snapshot and shown in the run thread (see &#x60;&#x60;StartWorkflowRunRequest&#x60;&#x60;).
 
 ### Example
 
@@ -602,7 +602,7 @@ import {
   Configuration,
   WorkflowRunsApi,
 } from '@knowledge-stack/ksapi';
-import type { StartWorkflowRunRequest } from '@knowledge-stack/ksapi';
+import type { StartWorkflowRunOperationRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
@@ -617,7 +617,9 @@ async function example() {
   const body = {
     // string
     runId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-  } satisfies StartWorkflowRunRequest;
+    // StartWorkflowRunRequest (optional)
+    startWorkflowRunRequest: ...,
+  } satisfies StartWorkflowRunOperationRequest;
 
   try {
     const data = await api.startWorkflowRun(body);
@@ -637,6 +639,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **runId** | `string` |  | [Defaults to `undefined`] |
+| **startWorkflowRunRequest** | [StartWorkflowRunRequest](StartWorkflowRunRequest.md) |  | [Optional] |
 
 ### Return type
 
@@ -648,7 +651,7 @@ example().catch(console.error);
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 

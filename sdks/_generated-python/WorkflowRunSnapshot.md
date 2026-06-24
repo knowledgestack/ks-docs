@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **max_run_duration_seconds** | **int** |  | 
 **instruction** | [**InstructionSnapshot**](InstructionSnapshot.md) |  | 
 **inputs** | [**List[InputSnapshot]**](InputSnapshot.md) |  | 
+**user_message** | **str** | Optional free-text message the caller supplied at Start. Pinned here so the runner injects it into the agent&#39;s first user turn and it survives retry, redrive, and workflow-thread follow-ups (all of which re-assemble the prompt from this snapshot). | [optional] 
 
 ## Example
 

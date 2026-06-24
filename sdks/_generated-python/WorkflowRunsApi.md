@@ -683,7 +683,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **start_workflow_run**
-> WorkflowRunResponse start_workflow_run(run_id)
+> WorkflowRunResponse start_workflow_run(run_id, start_workflow_run_request=start_workflow_run_request)
 
 Start Workflow Run Handler
 
@@ -694,6 +694,9 @@ Inputs still ingesting or in a failed terminal state → 409. The
 snapshot is built at this point (KB DOCUMENTs resolve to active
 versions, uploaded DVs are walked from inputs/, KB FOLDERs stay live).
 
+The body is optional; ``user_message`` (when sent) is pinned into the
+snapshot and shown in the run thread (see ``StartWorkflowRunRequest``).
+
 ### Example
 
 * Api Key Authentication (cookieAuth):
@@ -701,6 +704,7 @@ versions, uploaded DVs are walked from inputs/, KB FOLDERs stay live).
 
 ```python
 import ksapi
+from ksapi.models.start_workflow_run_request import StartWorkflowRunRequest
 from ksapi.models.workflow_run_response import WorkflowRunResponse
 from ksapi.rest import ApiException
 from pprint import pprint
@@ -732,10 +736,11 @@ with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    start_workflow_run_request = ksapi.StartWorkflowRunRequest() # StartWorkflowRunRequest |  (optional)
 
     try:
         # Start Workflow Run Handler
-        api_response = api_instance.start_workflow_run(run_id)
+        api_response = api_instance.start_workflow_run(run_id, start_workflow_run_request=start_workflow_run_request)
         print("The response of WorkflowRunsApi->start_workflow_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -750,6 +755,7 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **run_id** | **UUID**|  | 
+ **start_workflow_run_request** | [**StartWorkflowRunRequest**](StartWorkflowRunRequest.md)|  | [optional] 
 
 ### Return type
 
@@ -761,7 +767,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details

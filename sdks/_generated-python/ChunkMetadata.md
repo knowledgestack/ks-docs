@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **polygons** | [**List[PolygonReference]**](PolygonReference.md) | List of bounding boxes in the source document for the chunk, potentially from multiple areas of multiple pages. | [optional] 
 **s3_urls** | **List[str]** | Ordered s3:// URIs to visual assets for this chunk. Single-element for standard IMAGE/TABLE/HTML chunks, multi-element for multi-page single-chunk ingestion. | [optional] 
-**summary** | **str** | LLM-generated summary of the chunk content. Used for TABLE and HTML chunks to enrich embedding text. | [optional] 
+**summary** | **str** | LLM-generated summary of the chunk content. Used for TABLE and HTML chunks to enrich embedding text, and for JSON/YAML chunks (with summarize_for_embedding) as the sole dense embedding text. | [optional] 
+**summarize_for_embedding** | **bool** | When True, this chunk&#39;s dense embedding is built from its LLM-generated summary (see summary) instead of its raw content. Set for parsed JSON/YAML single chunks so noisy structured text does not dominate the vector; the raw content is still kept for display and sparse (keyword) retrieval. Enrichment generates the summary when this is set and summary is empty. | [optional] [default to False]
 **extracted_text_s3_uri** | **str** | S3 URI to extracted PDF text used for LLM grounding during enrichment | [optional] 
 **secondary_taxonomy** | [**ImageTaxonomy**](ImageTaxonomy.md) |  | [optional] 
 **sheet_name** | **str** | Worksheet name this chunk was extracted from (XLSX only) | [optional] 

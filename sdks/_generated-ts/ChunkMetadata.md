@@ -10,6 +10,7 @@ Name | Type
 `polygons` | [Array&lt;PolygonReference&gt;](PolygonReference.md)
 `s3Urls` | Array&lt;string&gt;
 `summary` | string
+`summarizeForEmbedding` | boolean
 `extractedTextS3Uri` | string
 `secondaryTaxonomy` | [ImageTaxonomy](ImageTaxonomy.md)
 `sheetName` | string
@@ -32,6 +33,7 @@ const example = {
   "polygons": null,
   "s3Urls": null,
   "summary": null,
+  "summarizeForEmbedding": null,
   "extractedTextS3Uri": null,
   "secondaryTaxonomy": null,
   "sheetName": null,

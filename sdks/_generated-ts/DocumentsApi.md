@@ -589,7 +589,7 @@ example().catch(console.error);
 | **sortOrder** | `PathOrder` | Sort order for results (default: LOGICAL) | [Optional] [Defaults to `undefined`] [Enum: LOGICAL, NAME, UPDATED_AT, CREATED_AT] |
 | **sortDir** | `SortDirection` | Sort direction; overrides the column\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **ownerId** | `string` | Filter to documents owned by this user | [Optional] [Defaults to `undefined`] |
-| **documentType** | `DocumentType` | Filter to documents of this type | [Optional] [Defaults to `undefined`] [Enum: PDF, DOCX, PLAINTEXT, IMAGE, XLSX, CSV, PPTX, UNKNOWN] |
+| **documentType** | `DocumentType` | Filter to documents of this type | [Optional] [Defaults to `undefined`] [Enum: PDF, DOCX, PLAINTEXT, IMAGE, XLSX, CSV, PPTX, JSON, YAML, UNKNOWN] |
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |

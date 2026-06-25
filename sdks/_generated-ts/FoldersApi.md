@@ -577,7 +577,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **nameLike** | `string` | Case-insensitive partial name search | [Defaults to `undefined`] |
 | **sortOrder** | `SearchSortOrder` | Sort order for results (default: NAME) | [Optional] [Defaults to `undefined`] [Enum: NAME, UPDATED_AT, CREATED_AT] |
-| **partType** | `SearchablePartType` | Filter by item type (default: all searchable types) | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT, DATA_SOURCE, API_CONNECTION] |
+| **partType** | `SearchablePartType` | Filter by item type (default: all searchable types) | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT, WORKFLOW_DEFINITION, WORKFLOW_RUN, DATA_SOURCE, API_CONNECTION] |
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
 | **parentPathPartId** | `string` | Scope search to descendants of this folder\&#39;s path part | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |

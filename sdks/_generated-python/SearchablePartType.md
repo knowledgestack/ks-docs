@@ -8,6 +8,10 @@ Part types that can be searched.
 
 * `DOCUMENT` (value: `'DOCUMENT'`)
 
+* `WORKFLOW_DEFINITION` (value: `'WORKFLOW_DEFINITION'`)
+
+* `WORKFLOW_RUN` (value: `'WORKFLOW_RUN'`)
+
 * `DATA_SOURCE` (value: `'DATA_SOURCE'`)
 
 * `API_CONNECTION` (value: `'API_CONNECTION'`)

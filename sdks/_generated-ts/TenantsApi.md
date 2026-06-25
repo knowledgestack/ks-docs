@@ -814,7 +814,7 @@ example().catch(console.error);
 
 Update Tenant User
 
-Update a user\&#39;s role in a tenant.  Requires OWNER or ADMIN role. Cannot create a duplicate owner.
+Update a user\&#39;s role and optional profile fields in a tenant.  Requires OWNER or ADMIN role. Cannot create a duplicate owner.
 
 ### Example
 

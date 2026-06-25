@@ -1,12 +1,14 @@
 # TenantUserEditRequest
 
-Request to update a tenant user's role.
+Request to update a tenant user's role and optional profile fields.  ``job_title`` and ``department`` follow partial-update semantics: omit (or send null) to leave the field unchanged, send an empty string to clear it to NULL.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **role** | [**TenantUserRole**](TenantUserRole.md) |  | 
+**job_title** | **str** | User&#39;s job title; omit to leave unchanged, empty string to clear | [optional] 
+**department** | **str** | User&#39;s department; omit to leave unchanged, empty string to clear | [optional] 
 
 ## Example
 

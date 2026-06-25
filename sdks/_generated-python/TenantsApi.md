@@ -939,7 +939,7 @@ Name | Type | Description  | Notes
 
 Update Tenant User
 
-Update a user's role in a tenant.
+Update a user's role and optional profile fields in a tenant.
 
 Requires OWNER or ADMIN role. Cannot create a duplicate owner.
 

@@ -1,13 +1,15 @@
 
 # TenantUserEditRequest
 
-Request to update a tenant user\'s role.
+Request to update a tenant user\'s role and optional profile fields.  ``job_title`` and ``department`` follow partial-update semantics: omit (or send null) to leave the field unchanged, send an empty string to clear it to NULL.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
 `role` | [TenantUserRole](TenantUserRole.md)
+`jobTitle` | string
+`department` | string
 
 ## Example
 
@@ -17,6 +19,8 @@ import type { TenantUserEditRequest } from '@knowledge-stack/ksapi'
 // TODO: Update the object below with actual values
 const example = {
   "role": null,
+  "jobTitle": null,
+  "department": null,
 } satisfies TenantUserEditRequest
 
 console.log(example)

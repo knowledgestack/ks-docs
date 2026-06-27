@@ -9,6 +9,8 @@ Name | Type
 ------------ | -------------
 `inputScope` | Array&lt;string&gt;
 `name` | string
+`autoStart` | boolean
+`userMessage` | string
 
 ## Example
 
@@ -19,6 +21,8 @@ import type { UpdateWorkflowRunRequest } from '@knowledge-stack/ksapi'
 const example = {
   "inputScope": null,
   "name": null,
+  "autoStart": null,
+  "userMessage": null,
 } satisfies UpdateWorkflowRunRequest
 
 console.log(example)

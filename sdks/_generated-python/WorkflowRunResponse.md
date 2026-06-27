@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **completed_at** | **datetime** |  | 
 **run_snapshot** | [**WorkflowRunSnapshot**](WorkflowRunSnapshot.md) | Frozen workflow configuration captured at Start time. NULL while the run is NOT_STARTED. | 
 **error** | **str** |  | 
+**auto_start** | **bool** | Whether the run dispatches itself once its &#x60;&#x60;inputs/&#x60;&#x60; uploads finish ingesting, with no separate Start call. | 
+**auto_start_user_message** | **str** | The note applied when this run auto-starts (set via create / PATCH &#x60;&#x60;user_message&#x60;&#x60;); null when none was supplied. | [optional] 
 **inputs_path_part_id** | **UUID** | FOLDER path_part of the run&#39;s &#x60;&#x60;inputs/&#x60;&#x60; subfolder | 
 **outputs_path_part_id** | **UUID** | FOLDER path_part of the run&#39;s &#x60;&#x60;outputs/&#x60;&#x60; subfolder | 
 **discussions_path_part_id** | **UUID** | FOLDER path_part of the run&#39;s &#x60;&#x60;discussions/&#x60;&#x60; subfolder | 

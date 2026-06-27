@@ -16,6 +16,7 @@ Name | Type
 `name` | string
 `dataSourceId` | string
 `tableName` | string
+`schemaName` | string
 `description` | string
 `columnConfig` | Array&lt;{ [key: string]: any; }&gt;
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
@@ -39,6 +40,7 @@ const example = {
   "name": null,
   "dataSourceId": null,
   "tableName": null,
+  "schemaName": null,
   "description": null,
   "columnConfig": null,
   "approvalState": null,

@@ -1,5 +1,5 @@
 
-# CatalogTableResponse
+# DataSourceSchemaResponse
 
 
 ## Properties
@@ -7,20 +7,18 @@
 Name | Type
 ------------ | -------------
 `name` | string
-`schemaName` | string
-`columns` | [Array&lt;CatalogColumnResponse&gt;](CatalogColumnResponse.md)
+`isDefault` | boolean
 
 ## Example
 
 ```typescript
-import type { CatalogTableResponse } from '@knowledge-stack/ksapi'
+import type { DataSourceSchemaResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
   "name": null,
-  "schemaName": null,
-  "columns": null,
-} satisfies CatalogTableResponse
+  "isDefault": null,
+} satisfies DataSourceSchemaResponse
 
 console.log(example)
 
@@ -29,7 +27,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CatalogTableResponse
+const exampleParsed = JSON.parse(exampleJSON) as DataSourceSchemaResponse
 console.log(exampleParsed)
 ```
 

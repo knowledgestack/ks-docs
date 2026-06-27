@@ -22,6 +22,8 @@ Name | Type
 `completedAt` | Date
 `runSnapshot` | [WorkflowRunSnapshot](WorkflowRunSnapshot.md)
 `error` | string
+`autoStart` | boolean
+`autoStartUserMessage` | string
 `inputsPathPartId` | string
 `outputsPathPartId` | string
 `discussionsPathPartId` | string
@@ -55,6 +57,8 @@ const example = {
   "completedAt": null,
   "runSnapshot": null,
   "error": null,
+  "autoStart": null,
+  "autoStartUserMessage": null,
   "inputsPathPartId": null,
   "outputsPathPartId": null,
   "discussionsPathPartId": null,

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **data_type** | **str** |  | 
 **is_pk** | **bool** |  | 
+**references** | [**ColumnReference**](ColumnReference.md) |  | [optional] 
 
 ## Example
 

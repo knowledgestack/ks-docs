@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **comment** | **str** |  | [optional] 
 **is_pk** | **bool** |  | [optional] [default to False]
 **exposed** | **bool** |  | [optional] [default to True]
+**references** | [**ColumnReference**](ColumnReference.md) |  | [optional] 
 
 ## Example
 

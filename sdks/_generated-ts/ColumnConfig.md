@@ -12,6 +12,7 @@ Name | Type
 `comment` | string
 `isPk` | boolean
 `exposed` | boolean
+`references` | [ColumnReference](ColumnReference.md)
 
 ## Example
 
@@ -25,6 +26,7 @@ const example = {
   "comment": null,
   "isPk": null,
   "exposed": null,
+  "references": null,
 } satisfies ColumnConfig
 
 console.log(example)

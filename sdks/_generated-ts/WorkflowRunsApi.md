@@ -746,7 +746,7 @@ example().catch(console.error);
 
 Update Workflow Run Handler
 
-Edit a NOT_STARTED run\&#39;s KB scope and / or display name.  Both body fields are optional but at least one must be present. The run must be &#x60;&#x60;NOT_STARTED&#x60;&#x60; (409 otherwise). Caller must be the triggerer or OWNER/ADMIN (403 otherwise). A name collision with a sibling run under the same definition\&#39;s &#x60;&#x60;runs/&#x60;&#x60; folder maps to a 409 via &#x60;&#x60;IntegrityError&#x60;&#x60; translation.
+Edit a NOT_STARTED run\&#39;s KB scope, name, and / or auto_start.  Both body fields are optional but at least one must be present. The run must be &#x60;&#x60;NOT_STARTED&#x60;&#x60; or &#x60;&#x60;PENDING&#x60;&#x60; (409 otherwise). Caller must be the triggerer or OWNER/ADMIN (403 otherwise). A name collision with a sibling run under the same definition\&#39;s &#x60;&#x60;runs/&#x60;&#x60; folder maps to a 409 via &#x60;&#x60;IntegrityError&#x60;&#x60; translation.  Arming &#x60;&#x60;auto_start&#x60;&#x60; on a run that is already &#x60;&#x60;NOT_STARTED&#x60;&#x60; (its inputs have settled) dispatches it immediately — the run would otherwise never receive an ingestion-completion hook to start it. A &#x60;&#x60;PENDING&#x60;&#x60; run is left to auto-advance when its uploads finish.
 
 ### Example
 

@@ -8,6 +8,7 @@ Model a DB table as a queryable child of the connector.
 Name | Type
 ------------ | -------------
 `tableName` | string
+`schemaName` | string
 `name` | string
 `description` | string
 `columnConfig` | [Array&lt;ColumnConfig&gt;](ColumnConfig.md)
@@ -20,6 +21,7 @@ import type { ModelTableRequest } from '@knowledge-stack/ksapi'
 // TODO: Update the object below with actual values
 const example = {
   "tableName": null,
+  "schemaName": null,
   "name": null,
   "description": null,
   "columnConfig": null,

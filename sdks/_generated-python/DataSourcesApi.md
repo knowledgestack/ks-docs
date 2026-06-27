@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**delete_data_source**](DataSourcesApi.md#delete_data_source) | **DELETE** /v1/data-sources/{data_source_id} | Delete Data Source Handler
 [**get_data_source**](DataSourcesApi.md#get_data_source) | **GET** /v1/data-sources/{data_source_id} | Get Data Source Handler
 [**get_data_source_catalog**](DataSourcesApi.md#get_data_source_catalog) | **GET** /v1/data-sources/{data_source_id}/catalog | Get Data Source Catalog Handler
+[**list_data_source_schemas**](DataSourcesApi.md#list_data_source_schemas) | **GET** /v1/data-sources/{data_source_id}/schemas | List Data Source Schemas Handler
 [**model_data_source_table**](DataSourcesApi.md#model_data_source_table) | **POST** /v1/data-sources/{data_source_id}/tables | Model Data Source Table Handler
 [**query_data_source**](DataSourcesApi.md#query_data_source) | **POST** /v1/data-sources/{data_source_id}/query | Query Data Source Handler
 [**test_data_source_connection**](DataSourcesApi.md#test_data_source_connection) | **POST** /v1/data-sources/{data_source_id}/test | Test Data Source Connection Handler
@@ -278,11 +279,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_data_source_catalog**
-> DataSourceCatalogResponse get_data_source_catalog(data_source_id)
+> DataSourceCatalogResponse get_data_source_catalog(data_source_id, var_schema=var_schema)
 
 Get Data Source Catalog Handler
 
-Live-introspect the external DB so an admin can pick tables to model.
+Live-introspect a schema of the external DB so an admin can pick tables.
 
 ### Example
 
@@ -322,10 +323,11 @@ with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    var_schema = 'var_schema_example' # str | Schema/namespace to introspect (default: connection default) (optional)
 
     try:
         # Get Data Source Catalog Handler
-        api_response = api_instance.get_data_source_catalog(data_source_id)
+        api_response = api_instance.get_data_source_catalog(data_source_id, var_schema=var_schema)
         print("The response of DataSourcesApi->get_data_source_catalog:\n")
         pprint(api_response)
     except Exception as e:
@@ -340,10 +342,98 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **data_source_id** | **UUID**|  | 
+ **var_schema** | **str**| Schema/namespace to introspect (default: connection default) | [optional] 
 
 ### Return type
 
 [**DataSourceCatalogResponse**](DataSourceCatalogResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_data_source_schemas**
+> DataSourceSchemaListResponse list_data_source_schemas(data_source_id)
+
+List Data Source Schemas Handler
+
+List the source's user namespaces (PG schemas / MySQL databases).
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.data_source_schema_list_response import DataSourceSchemaListResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DataSourcesApi(api_client)
+    data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+
+    try:
+        # List Data Source Schemas Handler
+        api_response = api_instance.list_data_source_schemas(data_source_id)
+        print("The response of DataSourcesApi->list_data_source_schemas:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DataSourcesApi->list_data_source_schemas: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data_source_id** | **UUID**|  | 
+
+### Return type
+
+[**DataSourceSchemaListResponse**](DataSourceSchemaListResponse.md)
 
 ### Authorization
 

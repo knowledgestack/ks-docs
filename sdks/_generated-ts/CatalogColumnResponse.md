@@ -9,6 +9,7 @@ Name | Type
 `name` | string
 `dataType` | string
 `isPk` | boolean
+`references` | [ColumnReference](ColumnReference.md)
 
 ## Example
 
@@ -20,6 +21,7 @@ const example = {
   "name": null,
   "dataType": null,
   "isPk": null,
+  "references": null,
 } satisfies CatalogColumnResponse
 
 console.log(example)

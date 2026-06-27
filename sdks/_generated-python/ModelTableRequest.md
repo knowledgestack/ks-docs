@@ -7,6 +7,7 @@ Model a DB table as a queryable child of the connector.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **table_name** | **str** |  | 
+**schema_name** | **str** | Schema/namespace of the table; omit for the default schema | [optional] 
 **name** | **str** | Display name; defaults to table_name | [optional] 
 **description** | **str** |  | [optional] 
 **column_config** | [**List[ColumnConfig]**](ColumnConfig.md) | Omit to auto-introspect all columns as exposed | [optional] 

@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
+**schema_name** | **str** |  | 
 **columns** | [**List[CatalogColumnResponse]**](CatalogColumnResponse.md) |  | 
 
 ## Example

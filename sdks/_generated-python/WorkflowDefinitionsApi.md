@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_workflow_run**
-> WorkflowRunResponse create_workflow_run(definition_id, files=files, input_scope=input_scope, idempotency_key=idempotency_key)
+> WorkflowRunResponse create_workflow_run(definition_id, files=files, input_scope=input_scope, idempotency_key=idempotency_key, auto_start=auto_start, user_message=user_message)
 
 Create Workflow Run Handler
 
@@ -160,10 +160,12 @@ with ksapi.ApiClient(configuration) as api_client:
     files = None # List[bytes] | DEPRECATED — do not send files here. Carrying file bytes on run creation makes the call block on synchronous S3 upload (the ~30s 'Create run' wait). Instead create an empty draft (omit this field), then upload each file to the run's ``inputs/`` folder via ``POST /v1/documents/ingest`` with ``path_part_id`` set to the run's ``inputs_path_part_id``; that path ingests asynchronously and auto-syncs the run's state. This field will be removed once the FE has migrated. (optional)
     input_scope = 'input_scope_example' # str | JSON array of ``DOCUMENT`` or ``FOLDER`` path_part UUIDs referenced from the existing knowledge base, pinned onto the new draft's input scope. Optional — omit for an empty draft and add references later via PATCH. (optional)
     idempotency_key = 'idempotency_key_example' # str | Optional key to prevent duplicate runs from retries. (optional)
+    auto_start = False # bool | When true, the run starts itself once its ``inputs/`` uploads finish ingesting — eliminating the separate Start call. If an upload's ingestion fails, the run is marked FAILED. Default false (two-step flow). Arm only after all uploads are queued; a synchronously-completing first upload would otherwise start the run before later uploads are added. (optional) (default to False)
+    user_message = 'user_message_example' # str | Optional note carried to the auto-start dispatch (the equivalent of the Start endpoint's ``user_message`` for a self-starting run). Applied only when ``auto_start`` fires. (optional)
 
     try:
         # Create Workflow Run Handler
-        api_response = api_instance.create_workflow_run(definition_id, files=files, input_scope=input_scope, idempotency_key=idempotency_key)
+        api_response = api_instance.create_workflow_run(definition_id, files=files, input_scope=input_scope, idempotency_key=idempotency_key, auto_start=auto_start, user_message=user_message)
         print("The response of WorkflowDefinitionsApi->create_workflow_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -181,6 +183,8 @@ Name | Type | Description  | Notes
  **files** | **List[bytes]**| DEPRECATED — do not send files here. Carrying file bytes on run creation makes the call block on synchronous S3 upload (the ~30s &#39;Create run&#39; wait). Instead create an empty draft (omit this field), then upload each file to the run&#39;s &#x60;&#x60;inputs/&#x60;&#x60; folder via &#x60;&#x60;POST /v1/documents/ingest&#x60;&#x60; with &#x60;&#x60;path_part_id&#x60;&#x60; set to the run&#39;s &#x60;&#x60;inputs_path_part_id&#x60;&#x60;; that path ingests asynchronously and auto-syncs the run&#39;s state. This field will be removed once the FE has migrated. | [optional] 
  **input_scope** | **str**| JSON array of &#x60;&#x60;DOCUMENT&#x60;&#x60; or &#x60;&#x60;FOLDER&#x60;&#x60; path_part UUIDs referenced from the existing knowledge base, pinned onto the new draft&#39;s input scope. Optional — omit for an empty draft and add references later via PATCH. | [optional] 
  **idempotency_key** | **str**| Optional key to prevent duplicate runs from retries. | [optional] 
+ **auto_start** | **bool**| When true, the run starts itself once its &#x60;&#x60;inputs/&#x60;&#x60; uploads finish ingesting — eliminating the separate Start call. If an upload&#39;s ingestion fails, the run is marked FAILED. Default false (two-step flow). Arm only after all uploads are queued; a synchronously-completing first upload would otherwise start the run before later uploads are added. | [optional] [default to False]
+ **user_message** | **str**| Optional note carried to the auto-start dispatch (the equivalent of the Start endpoint&#39;s &#x60;&#x60;user_message&#x60;&#x60; for a self-starting run). Applied only when &#x60;&#x60;auto_start&#x60;&#x60; fires. | [optional] 
 
 ### Return type
 

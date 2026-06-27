@@ -1,26 +1,23 @@
 
-# CatalogTableResponse
+# DataSourceSchemaListResponse
 
+The source\'s user namespaces (PG schemas / MySQL databases).
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`name` | string
-`schemaName` | string
-`columns` | [Array&lt;CatalogColumnResponse&gt;](CatalogColumnResponse.md)
+`schemas` | [Array&lt;DataSourceSchemaResponse&gt;](DataSourceSchemaResponse.md)
 
 ## Example
 
 ```typescript
-import type { CatalogTableResponse } from '@knowledge-stack/ksapi'
+import type { DataSourceSchemaListResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": null,
-  "schemaName": null,
-  "columns": null,
-} satisfies CatalogTableResponse
+  "schemas": null,
+} satisfies DataSourceSchemaListResponse
 
 console.log(example)
 
@@ -29,7 +26,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CatalogTableResponse
+const exampleParsed = JSON.parse(exampleJSON) as DataSourceSchemaListResponse
 console.log(exampleParsed)
 ```
 

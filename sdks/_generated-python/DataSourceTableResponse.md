@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **data_source_id** | **UUID** |  | 
 **table_name** | **str** |  | 
+**schema_name** | **str** | Schema/namespace in the external DB; null &#x3D; default schema | [optional] 
 **description** | **str** |  | 
 **column_config** | **List[Dict[str, object]]** |  | 
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 

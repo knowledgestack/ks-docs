@@ -41,6 +41,8 @@ Name | Type
 `completedAt` | Date
 `runSnapshot` | [WorkflowRunSnapshot](WorkflowRunSnapshot.md)
 `error` | string
+`autoStart` | boolean
+`autoStartUserMessage` | string
 `inputsPathPartId` | string
 `outputsPathPartId` | string
 `discussionsPathPartId` | string
@@ -50,6 +52,7 @@ Name | Type
 `engine` | [DataSourceEngine](DataSourceEngine.md)
 `dataSourceId` | string
 `tableName` | string
+`schemaName` | string
 `columnConfig` | Array&lt;{ [key: string]: any; }&gt;
 `baseUrl` | string
 `networkClass` | [NetworkClass](NetworkClass.md)
@@ -100,6 +103,8 @@ const example = {
   "completedAt": null,
   "runSnapshot": null,
   "error": null,
+  "autoStart": null,
+  "autoStartUserMessage": null,
   "inputsPathPartId": null,
   "outputsPathPartId": null,
   "discussionsPathPartId": null,
@@ -109,6 +114,7 @@ const example = {
   "engine": null,
   "dataSourceId": null,
   "tableName": null,
+  "schemaName": null,
   "columnConfig": null,
   "baseUrl": null,
   "networkClass": null,

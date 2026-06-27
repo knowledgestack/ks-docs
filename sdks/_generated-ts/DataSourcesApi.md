@@ -8,6 +8,7 @@ All URIs are relative to *http://localhost:8000*
 | [**deleteDataSource**](DataSourcesApi.md#deletedatasource) | **DELETE** /v1/data-sources/{data_source_id} | Delete Data Source Handler |
 | [**getDataSource**](DataSourcesApi.md#getdatasource) | **GET** /v1/data-sources/{data_source_id} | Get Data Source Handler |
 | [**getDataSourceCatalog**](DataSourcesApi.md#getdatasourcecatalog) | **GET** /v1/data-sources/{data_source_id}/catalog | Get Data Source Catalog Handler |
+| [**listDataSourceSchemas**](DataSourcesApi.md#listdatasourceschemas) | **GET** /v1/data-sources/{data_source_id}/schemas | List Data Source Schemas Handler |
 | [**modelDataSourceTable**](DataSourcesApi.md#modeldatasourcetable) | **POST** /v1/data-sources/{data_source_id}/tables | Model Data Source Table Handler |
 | [**queryDataSource**](DataSourcesApi.md#querydatasource) | **POST** /v1/data-sources/{data_source_id}/query | Query Data Source Handler |
 | [**testDataSourceConnection**](DataSourcesApi.md#testdatasourceconnection) | **POST** /v1/data-sources/{data_source_id}/test | Test Data Source Connection Handler |
@@ -242,11 +243,11 @@ example().catch(console.error);
 
 ## getDataSourceCatalog
 
-> DataSourceCatalogResponse getDataSourceCatalog(dataSourceId)
+> DataSourceCatalogResponse getDataSourceCatalog(dataSourceId, schema)
 
 Get Data Source Catalog Handler
 
-Live-introspect the external DB so an admin can pick tables to model.
+Live-introspect a schema of the external DB so an admin can pick tables.
 
 ### Example
 
@@ -270,6 +271,8 @@ async function example() {
   const body = {
     // string
     dataSourceId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Schema/namespace to introspect (default: connection default) (optional)
+    schema: schema_example,
   } satisfies GetDataSourceCatalogRequest;
 
   try {
@@ -290,10 +293,86 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **dataSourceId** | `string` |  | [Defaults to `undefined`] |
+| **schema** | `string` | Schema/namespace to introspect (default: connection default) | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
 [**DataSourceCatalogResponse**](DataSourceCatalogResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## listDataSourceSchemas
+
+> DataSourceSchemaListResponse listDataSourceSchemas(dataSourceId)
+
+List Data Source Schemas Handler
+
+List the source\&#39;s user namespaces (PG schemas / MySQL databases).
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DataSourcesApi,
+} from '@knowledge-stack/ksapi';
+import type { ListDataSourceSchemasRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DataSourcesApi(config);
+
+  const body = {
+    // string
+    dataSourceId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies ListDataSourceSchemasRequest;
+
+  try {
+    const data = await api.listDataSourceSchemas(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dataSourceId** | `string` |  | [Defaults to `undefined`] |
+
+### Return type
+
+[**DataSourceSchemaListResponse**](DataSourceSchemaListResponse.md)
 
 ### Authorization
 

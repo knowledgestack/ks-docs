@@ -1,26 +1,27 @@
 
-# CatalogTableResponse
+# ColumnReference
 
+The table+column a foreign-key column points at.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`name` | string
 `schemaName` | string
-`columns` | [Array&lt;CatalogColumnResponse&gt;](CatalogColumnResponse.md)
+`table` | string
+`column` | string
 
 ## Example
 
 ```typescript
-import type { CatalogTableResponse } from '@knowledge-stack/ksapi'
+import type { ColumnReference } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": null,
   "schemaName": null,
-  "columns": null,
-} satisfies CatalogTableResponse
+  "table": null,
+  "column": null,
+} satisfies ColumnReference
 
 console.log(example)
 
@@ -29,7 +30,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CatalogTableResponse
+const exampleParsed = JSON.parse(exampleJSON) as ColumnReference
 console.log(exampleParsed)
 ```
 

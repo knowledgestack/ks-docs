@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
 **schema_name** | **str** |  | 
+**is_view** | **bool** |  | [optional] [default to False]
 **columns** | [**List[CatalogColumnResponse]**](CatalogColumnResponse.md) |  | 
 
 ## Example

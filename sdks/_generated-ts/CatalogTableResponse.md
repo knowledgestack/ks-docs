@@ -8,6 +8,7 @@ Name | Type
 ------------ | -------------
 `name` | string
 `schemaName` | string
+`isView` | boolean
 `columns` | [Array&lt;CatalogColumnResponse&gt;](CatalogColumnResponse.md)
 
 ## Example
@@ -19,6 +20,7 @@ import type { CatalogTableResponse } from '@knowledge-stack/ksapi'
 const example = {
   "name": null,
   "schemaName": null,
+  "isView": null,
   "columns": null,
 } satisfies CatalogTableResponse
 

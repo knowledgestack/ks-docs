@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_workflow_run**
-> WorkflowRunResponse create_workflow_run(definition_id, files=files, input_scope=input_scope, idempotency_key=idempotency_key, auto_start=auto_start, user_message=user_message)
+> WorkflowRunResponse create_workflow_run(definition_id, files=files, input_scope=input_scope, idempotency_key=idempotency_key, auto_start=auto_start, user_message=user_message, name=name)
 
 Create Workflow Run Handler
 
@@ -162,10 +162,11 @@ with ksapi.ApiClient(configuration) as api_client:
     idempotency_key = 'idempotency_key_example' # str | Optional key to prevent duplicate runs from retries. (optional)
     auto_start = False # bool | When true, the run starts itself once its ``inputs/`` uploads finish ingesting — eliminating the separate Start call. If an upload's ingestion fails, the run is marked FAILED. Default false (two-step flow). Arm only after all uploads are queued; a synchronously-completing first upload would otherwise start the run before later uploads are added. (optional) (default to False)
     user_message = 'user_message_example' # str | Optional note carried to the auto-start dispatch (the equivalent of the Start endpoint's ``user_message`` for a self-starting run). Applied only when ``auto_start`` fires. (optional)
+    name = 'name_example' # str | Optional display name for the run. Omit to default to the run's UUID; rename later via PATCH. Must be unique among sibling runs under this definition's ``runs/`` folder — a collision returns 409. (optional)
 
     try:
         # Create Workflow Run Handler
-        api_response = api_instance.create_workflow_run(definition_id, files=files, input_scope=input_scope, idempotency_key=idempotency_key, auto_start=auto_start, user_message=user_message)
+        api_response = api_instance.create_workflow_run(definition_id, files=files, input_scope=input_scope, idempotency_key=idempotency_key, auto_start=auto_start, user_message=user_message, name=name)
         print("The response of WorkflowDefinitionsApi->create_workflow_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -185,6 +186,7 @@ Name | Type | Description  | Notes
  **idempotency_key** | **str**| Optional key to prevent duplicate runs from retries. | [optional] 
  **auto_start** | **bool**| When true, the run starts itself once its &#x60;&#x60;inputs/&#x60;&#x60; uploads finish ingesting — eliminating the separate Start call. If an upload&#39;s ingestion fails, the run is marked FAILED. Default false (two-step flow). Arm only after all uploads are queued; a synchronously-completing first upload would otherwise start the run before later uploads are added. | [optional] [default to False]
  **user_message** | **str**| Optional note carried to the auto-start dispatch (the equivalent of the Start endpoint&#39;s &#x60;&#x60;user_message&#x60;&#x60; for a self-starting run). Applied only when &#x60;&#x60;auto_start&#x60;&#x60; fires. | [optional] 
+ **name** | **str**| Optional display name for the run. Omit to default to the run&#39;s UUID; rename later via PATCH. Must be unique among sibling runs under this definition&#39;s &#x60;&#x60;runs/&#x60;&#x60; folder — a collision returns 409. | [optional] 
 
 ### Return type
 

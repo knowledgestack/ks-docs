@@ -1,6 +1,6 @@
 # VersionDiffResponse
 
-The diff between two document versions.  ``format`` selects the populated payload: ``text`` (side-by-side line diff, for Word/PDF/text) or ``cells`` (cell-level diff, for spreadsheets).
+The diff between two document versions.  ``format`` selects the populated payload: ``text`` (side-by-side line diff, for PDF/Markdown/text), ``cells`` (cell-level diff, for spreadsheets), ``structured`` (key-path diff, for JSON/YAML), or ``document`` (structured block diff, for Word .docx).
 
 ## Properties
 
@@ -13,6 +13,17 @@ Name | Type | Description | Notes
 **format** | [**DiffFormat**](DiffFormat.md) |  | 
 **text** | [**TextDiff**](TextDiff.md) |  | [optional] 
 **cells** | [**CellDiff**](CellDiff.md) |  | [optional] 
+**structured** | [**StructuredDiff**](StructuredDiff.md) |  | [optional] 
+**document** | [**DocumentDiff**](DocumentDiff.md) |  | [optional] 
+**degraded** | **bool** |  | [optional] [default to False]
+**degraded_reason** | **str** |  | [optional] 
+**algorithm_version** | **str** |  | [optional] [default to '1']
+**from_content_hash** | **str** |  | [optional] 
+**to_content_hash** | **str** |  | [optional] 
+**from_uploader** | [**UserInfo**](UserInfo.md) |  | [optional] 
+**to_uploader** | [**UserInfo**](UserInfo.md) |  | [optional] 
+**from_uploaded_at** | **datetime** |  | [optional] 
+**to_uploaded_at** | **datetime** |  | [optional] 
 
 ## Example
 

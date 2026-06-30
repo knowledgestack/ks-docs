@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **removed** | **int** |  | 
 **modified** | **int** |  | 
 **truncated** | **bool** |  | 
+**sheet_visibility_changes** | [**List[SheetVisibilityChange]**](SheetVisibilityChange.md) |  | 
 
 ## Example
 

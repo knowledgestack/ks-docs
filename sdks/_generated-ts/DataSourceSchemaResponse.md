@@ -1,13 +1,28 @@
 
 # DataSourceSchemaResponse
 
+A schema PDO under a connector, with the readable tables it contains.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
+`partType` | string
+`id` | string
+`pathPartId` | string
+`parentPathPartId` | string
+`materializedPath` | string
+`tenantId` | string
 `name` | string
+`dataSourceId` | string
+`schemaName` | string
 `isDefault` | boolean
+`description` | string
+`approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
+`permissions` | [ItemPermissions](ItemPermissions.md)
+`createdAt` | Date
+`updatedAt` | Date
+`tables` | [Array&lt;DataSourceTableResponse&gt;](DataSourceTableResponse.md)
 
 ## Example
 
@@ -16,8 +31,22 @@ import type { DataSourceSchemaResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
+  "partType": null,
+  "id": null,
+  "pathPartId": null,
+  "parentPathPartId": null,
+  "materializedPath": null,
+  "tenantId": null,
   "name": null,
+  "dataSourceId": null,
+  "schemaName": null,
   "isDefault": null,
+  "description": null,
+  "approvalState": null,
+  "permissions": null,
+  "createdAt": null,
+  "updatedAt": null,
+  "tables": null,
 } satisfies DataSourceSchemaResponse
 
 console.log(example)

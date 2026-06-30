@@ -664,10 +664,12 @@ Get Document Version Diff Handler
 
 Side-by-side diff of a version against a previous one of the same document.
 
-Diffs the two versions' plaintext on the fly (no stored diff), so any pair of
-versions can be compared. ``from_version_id`` defaults to the immediate
-predecessor; the first version diffs against empty (all additions). Requires
-read permission on the document.
+Diffs the two versions on the fly (no stored diff), so any pair of versions
+can be compared. ``from_version_id`` defaults to the immediate predecessor;
+the first version diffs against empty (all additions). Requires read
+permission on both versions. Viewing a diff is a sensitive read, so it emits
+a ``document.diff.viewed`` audit event (a durable write on this GET, by
+design — like a download).
 
 ### Example
 

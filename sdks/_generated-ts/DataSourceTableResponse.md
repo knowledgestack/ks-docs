@@ -1,7 +1,7 @@
 
 # DataSourceTableResponse
 
-Modeled-table response; a discriminated-union variant for listings.
+Modeled-table response; a discriminated-union variant for listings.  The table\'s schema is its parent ``DataSourceSchema`` PDO; the table no longer carries a ``schema_name`` of its own.
 
 ## Properties
 
@@ -15,8 +15,8 @@ Name | Type
 `tenantId` | string
 `name` | string
 `dataSourceId` | string
+`dataSourceSchemaId` | string
 `tableName` | string
-`schemaName` | string
 `description` | string
 `columnConfig` | Array&lt;{ [key: string]: any; }&gt;
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
@@ -39,8 +39,8 @@ const example = {
   "tenantId": null,
   "name": null,
   "dataSourceId": null,
+  "dataSourceSchemaId": null,
   "tableName": null,
-  "schemaName": null,
   "description": null,
   "columnConfig": null,
   "approvalState": null,

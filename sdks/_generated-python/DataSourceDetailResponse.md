@@ -1,13 +1,14 @@
 # DataSourceDetailResponse
 
-A connector plus the modeled tables the caller can read (describe).
+A connector plus the schemas (and their readable tables) the caller sees.  ``description_document_id`` points at the connector's generated, ingested \"Database overview\" Document (a hidden system file); null until generated.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **data_source** | [**DataSourceResponse**](DataSourceResponse.md) |  | 
-**tables** | [**List[DataSourceTableResponse]**](DataSourceTableResponse.md) |  | 
+**schemas** | [**List[DataSourceSchemaResponse]**](DataSourceSchemaResponse.md) |  | 
+**description_document_id** | **UUID** |  | [optional] 
 
 ## Example
 

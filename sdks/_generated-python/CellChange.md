@@ -1,6 +1,6 @@
 # CellChange
 
-One changed spreadsheet cell (``old`` is null for added, ``new`` for removed).
+One changed spreadsheet cell (``old`` is null for added, ``new`` for removed).  ``old``/``new`` are the displayed values (cached result for a formula cell); ``*_formula`` carry the formula text so a formula edit is visible even when the computed value is unchanged. ``formatting_changed`` flags a bold/colour/ number-format change on an otherwise unchanged cell.
 
 ## Properties
 
@@ -11,6 +11,13 @@ Name | Type | Description | Notes
 **old** | **str** |  | 
 **new** | **str** |  | 
 **type** | [**CellChangeType**](CellChangeType.md) |  | 
+**old_formula** | **str** |  | [optional] 
+**new_formula** | **str** |  | [optional] 
+**formula_changed** | **bool** |  | [optional] [default to False]
+**formatting_changed** | **bool** |  | [optional] [default to False]
+**comment_changed** | **bool** |  | [optional] [default to False]
+**old_comment** | **str** |  | [optional] 
+**new_comment** | **str** |  | [optional] 
 
 ## Example
 

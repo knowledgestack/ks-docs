@@ -1,7 +1,7 @@
 
 # VersionDiffResponse
 
-The diff between two document versions.  ``format`` selects the populated payload: ``text`` (side-by-side line diff, for Word/PDF/text) or ``cells`` (cell-level diff, for spreadsheets).
+The diff between two document versions.  ``format`` selects the populated payload: ``text`` (side-by-side line diff, for PDF/Markdown/text), ``cells`` (cell-level diff, for spreadsheets), ``structured`` (key-path diff, for JSON/YAML), or ``document`` (structured block diff, for Word .docx).
 
 ## Properties
 
@@ -14,6 +14,17 @@ Name | Type
 `format` | [DiffFormat](DiffFormat.md)
 `text` | [TextDiff](TextDiff.md)
 `cells` | [CellDiff](CellDiff.md)
+`structured` | [StructuredDiff](StructuredDiff.md)
+`document` | [DocumentDiff](DocumentDiff.md)
+`degraded` | boolean
+`degradedReason` | string
+`algorithmVersion` | string
+`fromContentHash` | string
+`toContentHash` | string
+`fromUploader` | [UserInfo](UserInfo.md)
+`toUploader` | [UserInfo](UserInfo.md)
+`fromUploadedAt` | Date
+`toUploadedAt` | Date
 
 ## Example
 
@@ -29,6 +40,17 @@ const example = {
   "format": null,
   "text": null,
   "cells": null,
+  "structured": null,
+  "document": null,
+  "degraded": null,
+  "degradedReason": null,
+  "algorithmVersion": null,
+  "fromContentHash": null,
+  "toContentHash": null,
+  "fromUploader": null,
+  "toUploader": null,
+  "fromUploadedAt": null,
+  "toUploadedAt": null,
 } satisfies VersionDiffResponse
 
 console.log(example)

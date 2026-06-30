@@ -1,6 +1,6 @@
 # DataSourceTableResponse
 
-Modeled-table response; a discriminated-union variant for listings.
+Modeled-table response; a discriminated-union variant for listings.  The table's schema is its parent ``DataSourceSchema`` PDO; the table no longer carries a ``schema_name`` of its own.
 
 ## Properties
 
@@ -9,13 +9,13 @@ Name | Type | Description | Notes
 **part_type** | **str** | Path part type | [optional] [default to 'DATA_SOURCE_TABLE']
 **id** | **UUID** |  | 
 **path_part_id** | **UUID** | DATA_SOURCE_TABLE path_part of this table | 
-**parent_path_part_id** | **UUID** | DATA_SOURCE path_part of the parent connector | 
+**parent_path_part_id** | **UUID** | DATA_SOURCE_SCHEMA path_part of the parent schema | 
 **materialized_path** | **str** | Full materialized path from root | 
 **tenant_id** | **UUID** |  | 
 **name** | **str** |  | 
 **data_source_id** | **UUID** |  | 
+**data_source_schema_id** | **UUID** | PDO id of the parent schema this table belongs to | 
 **table_name** | **str** |  | 
-**schema_name** | **str** | Schema/namespace in the external DB; null &#x3D; default schema | [optional] 
 **description** | **str** |  | 
 **column_config** | **List[Dict[str, object]]** |  | 
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 

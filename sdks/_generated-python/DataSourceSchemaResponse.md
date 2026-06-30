@@ -1,12 +1,27 @@
 # DataSourceSchemaResponse
 
+A schema PDO under a connector, with the readable tables it contains.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**part_type** | **str** | Path part type | [optional] [default to 'DATA_SOURCE_SCHEMA']
+**id** | **UUID** |  | 
+**path_part_id** | **UUID** | DATA_SOURCE_SCHEMA path_part of this schema | 
+**parent_path_part_id** | **UUID** | DATA_SOURCE path_part of the parent connector | 
+**materialized_path** | **str** | Full materialized path from root | 
+**tenant_id** | **UUID** |  | 
 **name** | **str** |  | 
-**is_default** | **bool** |  | 
+**data_source_id** | **UUID** |  | 
+**schema_name** | **str** | Real namespace in the external DB | 
+**is_default** | **bool** | True for the connection&#39;s default namespace | 
+**description** | **str** |  | 
+**approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
+**permissions** | [**ItemPermissions**](ItemPermissions.md) |  | 
+**created_at** | **datetime** |  | 
+**updated_at** | **datetime** |  | 
+**tables** | [**List[DataSourceTableResponse]**](DataSourceTableResponse.md) | Readable modeled tables in this schema | [optional] 
 
 ## Example
 

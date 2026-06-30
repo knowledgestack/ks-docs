@@ -12,6 +12,7 @@ Name | Type
 `removed` | number
 `modified` | number
 `truncated` | boolean
+`sheetVisibilityChanges` | [Array&lt;SheetVisibilityChange&gt;](SheetVisibilityChange.md)
 
 ## Example
 
@@ -25,6 +26,7 @@ const example = {
   "removed": null,
   "modified": null,
   "truncated": null,
+  "sheetVisibilityChanges": null,
 } satisfies CellDiff
 
 console.log(example)

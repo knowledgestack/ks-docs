@@ -14,6 +14,10 @@ Part types that can be searched.
 
 * `DATA_SOURCE` (value: `'DATA_SOURCE'`)
 
+* `DATA_SOURCE_SCHEMA` (value: `'DATA_SOURCE_SCHEMA'`)
+
+* `DATA_SOURCE_TABLE` (value: `'DATA_SOURCE_TABLE'`)
+
 * `API_CONNECTION` (value: `'API_CONNECTION'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

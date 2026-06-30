@@ -304,7 +304,7 @@ example().catch(console.error);
 | **chunkId** | `string` |  | [Defaults to `undefined`] |
 | **prev** | `number` | Number of preceding items to include (max 50). | [Optional] [Defaults to `1`] |
 | **next** | `number` | Number of succeeding items to include (max 50). | [Optional] [Defaults to `1`] |
-| **contentType** | `PartType` | Filter by content type: SECTION or CHUNK. Omit to return both. SECTION is rejected when the anchor is a chunk (always). | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT, DOCUMENT_VERSION, SECTION, CHUNK, THREAD, THREAD_MESSAGE, WORKFLOW_DEFINITION, WORKFLOW_RUN, DATA_SOURCE, DATA_SOURCE_TABLE, API_CONNECTION] |
+| **contentType** | `PartType` | Filter by content type: SECTION or CHUNK. Omit to return both. SECTION is rejected when the anchor is a chunk (always). | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT, DOCUMENT_VERSION, SECTION, CHUNK, THREAD, THREAD_MESSAGE, WORKFLOW_DEFINITION, WORKFLOW_RUN, DATA_SOURCE, DATA_SOURCE_SCHEMA, DATA_SOURCE_TABLE, API_CONNECTION] |
 | **withinSection** | `boolean` | When true (default), traverse only the anchor\&#39;s sibling chain under the same parent. When false, traverse the entire document version in DFS order, crossing section boundaries. | [Optional] [Defaults to `true`] |
 
 ### Return type

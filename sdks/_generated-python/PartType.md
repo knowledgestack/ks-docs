@@ -24,6 +24,8 @@ Type of path part in the filesystem.
 
 * `DATA_SOURCE` (value: `'DATA_SOURCE'`)
 
+* `DATA_SOURCE_SCHEMA` (value: `'DATA_SOURCE_SCHEMA'`)
+
 * `DATA_SOURCE_TABLE` (value: `'DATA_SOURCE_TABLE'`)
 
 * `API_CONNECTION` (value: `'API_CONNECTION'`)

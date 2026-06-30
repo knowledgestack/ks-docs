@@ -6,7 +6,7 @@ The source's user namespaces (PG schemas / MySQL databases).
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**schemas** | [**List[DataSourceSchemaResponse]**](DataSourceSchemaResponse.md) |  | 
+**schemas** | [**List[DataSourceSchemaListItem]**](DataSourceSchemaListItem.md) |  | 
 
 ## Example
 

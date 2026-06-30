@@ -54,7 +54,7 @@ Below this line is auto-generated reference content.
 
 ---
 
-# @knowledge-stack/ksapi@1.118.0
+# @knowledge-stack/ksapi@1.119.0
 
 A TypeScript SDK client for the localhost API.
 
@@ -159,10 +159,14 @@ All URIs are relative to *http://localhost:8000*
 *ChunksApi* | [**updateChunkMetadata**](docs/ChunksApi.md#updatechunkmetadataoperation) | **PATCH** /v1/chunks/{chunk_id} | Update Chunk Metadata Handler
 *DataSourcesApi* | [**createDataSource**](docs/DataSourcesApi.md#createdatasourceoperation) | **POST** /v1/data-sources | Create Data Source Handler
 *DataSourcesApi* | [**deleteDataSource**](docs/DataSourcesApi.md#deletedatasource) | **DELETE** /v1/data-sources/{data_source_id} | Delete Data Source Handler
+*DataSourcesApi* | [**deleteDataSourceSchema**](docs/DataSourcesApi.md#deletedatasourceschema) | **DELETE** /v1/data-sources/{data_source_id}/schemas/{schema_id} | Delete Data Source Schema Handler
+*DataSourcesApi* | [**deleteDataSourceTable**](docs/DataSourcesApi.md#deletedatasourcetable) | **DELETE** /v1/data-sources/{data_source_id}/tables/{table_id} | Delete Data Source Table Handler
+*DataSourcesApi* | [**generateDataSourceDescription**](docs/DataSourcesApi.md#generatedatasourcedescription) | **POST** /v1/data-sources/{data_source_id}/describe | Generate Data Source Description Handler
 *DataSourcesApi* | [**getDataSource**](docs/DataSourcesApi.md#getdatasource) | **GET** /v1/data-sources/{data_source_id} | Get Data Source Handler
 *DataSourcesApi* | [**getDataSourceCatalog**](docs/DataSourcesApi.md#getdatasourcecatalog) | **GET** /v1/data-sources/{data_source_id}/catalog | Get Data Source Catalog Handler
 *DataSourcesApi* | [**listDataSourceSchemas**](docs/DataSourcesApi.md#listdatasourceschemas) | **GET** /v1/data-sources/{data_source_id}/schemas | List Data Source Schemas Handler
 *DataSourcesApi* | [**modelDataSourceTable**](docs/DataSourcesApi.md#modeldatasourcetable) | **POST** /v1/data-sources/{data_source_id}/tables | Model Data Source Table Handler
+*DataSourcesApi* | [**modelDataSourceTables**](docs/DataSourcesApi.md#modeldatasourcetables) | **POST** /v1/data-sources/{data_source_id}/tables/batch | Model Data Source Tables Handler
 *DataSourcesApi* | [**queryDataSource**](docs/DataSourcesApi.md#querydatasource) | **POST** /v1/data-sources/{data_source_id}/query | Query Data Source Handler
 *DataSourcesApi* | [**testDataSourceConnection**](docs/DataSourcesApi.md#testdatasourceconnection) | **POST** /v1/data-sources/{data_source_id}/test | Test Data Source Connection Handler
 *DataSourcesApi* | [**updateDataSource**](docs/DataSourcesApi.md#updatedatasourceoperation) | **PATCH** /v1/data-sources/{data_source_id} | Update Data Source Handler
@@ -334,14 +338,19 @@ All URIs are relative to *http://localhost:8000*
 - [Args](docs/Args.md)
 - [AskRequest](docs/AskRequest.md)
 - [AskResponse](docs/AskResponse.md)
+- [BlockChangeType](docs/BlockChangeType.md)
+- [BlockKind](docs/BlockKind.md)
 - [BrandingLogoType](docs/BrandingLogoType.md)
 - [BulkDownloadRequest](docs/BulkDownloadRequest.md)
+- [BulkModelTablesRequest](docs/BulkModelTablesRequest.md)
+- [BulkModelTablesResponse](docs/BulkModelTablesResponse.md)
 - [BulkTagRequest](docs/BulkTagRequest.md)
 - [CatalogColumnResponse](docs/CatalogColumnResponse.md)
 - [CatalogTableResponse](docs/CatalogTableResponse.md)
 - [CellChange](docs/CellChange.md)
 - [CellChangeType](docs/CellChangeType.md)
 - [CellDiff](docs/CellDiff.md)
+- [ChangeClass](docs/ChangeClass.md)
 - [ChangePhoneNumberRequest](docs/ChangePhoneNumberRequest.md)
 - [ChangeSubscriptionRequest](docs/ChangeSubscriptionRequest.md)
 - [CheckpointDetails](docs/CheckpointDetails.md)
@@ -381,11 +390,13 @@ All URIs are relative to *http://localhost:8000*
 - [CreateThreadRequest](docs/CreateThreadRequest.md)
 - [CreateWorkflowDefinitionRequest](docs/CreateWorkflowDefinitionRequest.md)
 - [DataSourceCatalogResponse](docs/DataSourceCatalogResponse.md)
+- [DataSourceDescriptionResponse](docs/DataSourceDescriptionResponse.md)
 - [DataSourceDetailResponse](docs/DataSourceDetailResponse.md)
 - [DataSourceEngine](docs/DataSourceEngine.md)
 - [DataSourceQueryRequest](docs/DataSourceQueryRequest.md)
 - [DataSourceQueryResponse](docs/DataSourceQueryResponse.md)
 - [DataSourceResponse](docs/DataSourceResponse.md)
+- [DataSourceSchemaListItem](docs/DataSourceSchemaListItem.md)
 - [DataSourceSchemaListResponse](docs/DataSourceSchemaListResponse.md)
 - [DataSourceSchemaResponse](docs/DataSourceSchemaResponse.md)
 - [DataSourceTableResponse](docs/DataSourceTableResponse.md)
@@ -396,7 +407,9 @@ All URIs are relative to *http://localhost:8000*
 - [DirectorySyncResponse](docs/DirectorySyncResponse.md)
 - [DisplayNameFormat](docs/DisplayNameFormat.md)
 - [DissolveSectionResponse](docs/DissolveSectionResponse.md)
+- [DocumentBlockChange](docs/DocumentBlockChange.md)
 - [DocumentCheckoutResponse](docs/DocumentCheckoutResponse.md)
+- [DocumentDiff](docs/DocumentDiff.md)
 - [DocumentDownloadResponse](docs/DocumentDownloadResponse.md)
 - [DocumentOrigin](docs/DocumentOrigin.md)
 - [DocumentResponse](docs/DocumentResponse.md)
@@ -429,7 +442,7 @@ All URIs are relative to *http://localhost:8000*
 - [FolderAction](docs/FolderAction.md)
 - [FolderActionResponse](docs/FolderActionResponse.md)
 - [FolderResponse](docs/FolderResponse.md)
-- [FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse](docs/FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse.md)
+- [FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse](docs/FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse.md)
 - [GroupMemberOrder](docs/GroupMemberOrder.md)
 - [GroupPermissionOrder](docs/GroupPermissionOrder.md)
 - [GroupPermissionResponse](docs/GroupPermissionResponse.md)
@@ -465,11 +478,12 @@ All URIs are relative to *http://localhost:8000*
 - [MessageRole](docs/MessageRole.md)
 - [MeteredQuotaStatus](docs/MeteredQuotaStatus.md)
 - [ModelTableRequest](docs/ModelTableRequest.md)
+- [ModelTableResult](docs/ModelTableResult.md)
 - [NetworkClass](docs/NetworkClass.md)
 - [NonFilesystemReferenceType](docs/NonFilesystemReferenceType.md)
 - [OnboardingCompanyRequest](docs/OnboardingCompanyRequest.md)
 - [OnboardingProfileRequest](docs/OnboardingProfileRequest.md)
-- [PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseApiConnectionResponseDiscriminator](docs/PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceTableResponseApiConnectionResponseDiscriminator.md)
+- [PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator](docs/PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator.md)
 - [PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator](docs/PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator.md)
 - [PaginatedResponseDocumentResponse](docs/PaginatedResponseDocumentResponse.md)
 - [PaginatedResponseDocumentVersionResponse](docs/PaginatedResponseDocumentVersionResponse.md)
@@ -511,6 +525,7 @@ All URIs are relative to *http://localhost:8000*
 - [PhoneVerificationRequest](docs/PhoneVerificationRequest.md)
 - [PipelineState](docs/PipelineState.md)
 - [PipelineStatus](docs/PipelineStatus.md)
+- [PixelRegion](docs/PixelRegion.md)
 - [Polygon](docs/Polygon.md)
 - [PolygonReference](docs/PolygonReference.md)
 - [ProposeMemoryChunkRequest](docs/ProposeMemoryChunkRequest.md)
@@ -520,6 +535,7 @@ All URIs are relative to *http://localhost:8000*
 - [ResolvedReferenceInput](docs/ResolvedReferenceInput.md)
 - [ResolvedReferenceOutput](docs/ResolvedReferenceOutput.md)
 - [ResponseSendPwResetEmail](docs/ResponseSendPwResetEmail.md)
+- [RevisionEdit](docs/RevisionEdit.md)
 - [RootResponse](docs/RootResponse.md)
 - [SSOInitiateResponse](docs/SSOInitiateResponse.md)
 - [ScoredChunkResponse](docs/ScoredChunkResponse.md)
@@ -534,12 +550,16 @@ All URIs are relative to *http://localhost:8000*
 - [SendPasswordResetRequest](docs/SendPasswordResetRequest.md)
 - [SetApprovalStateRequest](docs/SetApprovalStateRequest.md)
 - [SetWorkflowRunApprovalRequest](docs/SetWorkflowRunApprovalRequest.md)
+- [SheetVisibilityChange](docs/SheetVisibilityChange.md)
 - [SignInRequest](docs/SignInRequest.md)
 - [SortDirection](docs/SortDirection.md)
 - [StartWorkflowRunRequest](docs/StartWorkflowRunRequest.md)
 - [StepInput](docs/StepInput.md)
 - [StepKind](docs/StepKind.md)
 - [StepOutput](docs/StepOutput.md)
+- [StructuredChange](docs/StructuredChange.md)
+- [StructuredChangeType](docs/StructuredChangeType.md)
+- [StructuredDiff](docs/StructuredDiff.md)
 - [SubmitFeedbackRequest](docs/SubmitFeedbackRequest.md)
 - [SubmitSubscriptionResponse](docs/SubmitSubscriptionResponse.md)
 - [SubscriptionPlanResponse](docs/SubscriptionPlanResponse.md)
@@ -547,6 +567,7 @@ All URIs are relative to *http://localhost:8000*
 - [SubtreeChunksResponse](docs/SubtreeChunksResponse.md)
 - [SupportedIdP](docs/SupportedIdP.md)
 - [SupportedLanguage](docs/SupportedLanguage.md)
+- [TableCellChange](docs/TableCellChange.md)
 - [TagOrder](docs/TagOrder.md)
 - [TagResponse](docs/TagResponse.md)
 - [TemporalWorkflowStatusResponse](docs/TemporalWorkflowStatusResponse.md)
@@ -641,7 +662,7 @@ and is automatically generated by the
 [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `0.1.0`
-- Package version: `1.118.0`
+- Package version: `1.119.0`
 - Generator version: `7.21.0`
 - Build package: `org.openapitools.codegen.languages.TypeScriptFetchClientCodegen`
 

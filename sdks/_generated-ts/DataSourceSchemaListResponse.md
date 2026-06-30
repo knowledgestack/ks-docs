@@ -7,7 +7,7 @@ The source\'s user namespaces (PG schemas / MySQL databases).
 
 Name | Type
 ------------ | -------------
-`schemas` | [Array&lt;DataSourceSchemaResponse&gt;](DataSourceSchemaResponse.md)
+`schemas` | [Array&lt;DataSourceSchemaListItem&gt;](DataSourceSchemaListItem.md)
 
 ## Example
 

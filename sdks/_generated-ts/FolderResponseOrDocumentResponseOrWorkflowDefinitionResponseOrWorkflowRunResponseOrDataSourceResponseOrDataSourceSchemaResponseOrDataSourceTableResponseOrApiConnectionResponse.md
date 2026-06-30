@@ -1,5 +1,5 @@
 
-# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse
+# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse
 
 
 ## Properties
@@ -51,8 +51,11 @@ Name | Type
 `runThreadId` | string
 `engine` | [DataSourceEngine](DataSourceEngine.md)
 `dataSourceId` | string
-`tableName` | string
 `schemaName` | string
+`isDefault` | boolean
+`tables` | [Array&lt;DataSourceTableResponse&gt;](DataSourceTableResponse.md)
+`dataSourceSchemaId` | string
+`tableName` | string
 `columnConfig` | Array&lt;{ [key: string]: any; }&gt;
 `baseUrl` | string
 `networkClass` | [NetworkClass](NetworkClass.md)
@@ -64,7 +67,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse } from '@knowledge-stack/ksapi'
+import type { FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
@@ -113,8 +116,11 @@ const example = {
   "runThreadId": null,
   "engine": null,
   "dataSourceId": null,
-  "tableName": null,
   "schemaName": null,
+  "isDefault": null,
+  "tables": null,
+  "dataSourceSchemaId": null,
+  "tableName": null,
   "columnConfig": null,
   "baseUrl": null,
   "networkClass": null,
@@ -122,7 +128,7 @@ const example = {
   "apiDocs": null,
   "disclaimerAcceptedAt": null,
   "disclaimerAcceptedBy": null,
-} satisfies FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse
+} satisfies FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse
 
 console.log(example)
 
@@ -131,7 +137,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceTableResponseOrApiConnectionResponse
+const exampleParsed = JSON.parse(exampleJSON) as FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse
 console.log(exampleParsed)
 ```
 

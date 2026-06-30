@@ -6,10 +6,14 @@ All URIs are relative to *http://localhost:8000*
 |------------- | ------------- | -------------|
 | [**createDataSource**](DataSourcesApi.md#createdatasourceoperation) | **POST** /v1/data-sources | Create Data Source Handler |
 | [**deleteDataSource**](DataSourcesApi.md#deletedatasource) | **DELETE** /v1/data-sources/{data_source_id} | Delete Data Source Handler |
+| [**deleteDataSourceSchema**](DataSourcesApi.md#deletedatasourceschema) | **DELETE** /v1/data-sources/{data_source_id}/schemas/{schema_id} | Delete Data Source Schema Handler |
+| [**deleteDataSourceTable**](DataSourcesApi.md#deletedatasourcetable) | **DELETE** /v1/data-sources/{data_source_id}/tables/{table_id} | Delete Data Source Table Handler |
+| [**generateDataSourceDescription**](DataSourcesApi.md#generatedatasourcedescription) | **POST** /v1/data-sources/{data_source_id}/describe | Generate Data Source Description Handler |
 | [**getDataSource**](DataSourcesApi.md#getdatasource) | **GET** /v1/data-sources/{data_source_id} | Get Data Source Handler |
 | [**getDataSourceCatalog**](DataSourcesApi.md#getdatasourcecatalog) | **GET** /v1/data-sources/{data_source_id}/catalog | Get Data Source Catalog Handler |
 | [**listDataSourceSchemas**](DataSourcesApi.md#listdatasourceschemas) | **GET** /v1/data-sources/{data_source_id}/schemas | List Data Source Schemas Handler |
 | [**modelDataSourceTable**](DataSourcesApi.md#modeldatasourcetable) | **POST** /v1/data-sources/{data_source_id}/tables | Model Data Source Table Handler |
+| [**modelDataSourceTables**](DataSourcesApi.md#modeldatasourcetables) | **POST** /v1/data-sources/{data_source_id}/tables/batch | Model Data Source Tables Handler |
 | [**queryDataSource**](DataSourcesApi.md#querydatasource) | **POST** /v1/data-sources/{data_source_id}/query | Query Data Source Handler |
 | [**testDataSourceConnection**](DataSourcesApi.md#testdatasourceconnection) | **POST** /v1/data-sources/{data_source_id}/test | Test Data Source Connection Handler |
 | [**updateDataSource**](DataSourcesApi.md#updatedatasourceoperation) | **PATCH** /v1/data-sources/{data_source_id} | Update Data Source Handler |
@@ -98,7 +102,7 @@ example().catch(console.error);
 
 Delete Data Source Handler
 
-Move a connector and its modeled tables to trash.  Soft-delete via the path_part subtree (the tables are children, so they trash with it). Connectors carry no Qdrant vectors, so there is no trash-sync workflow.
+Move a connector and its schemas/tables to trash.  Soft-delete via the path_part subtree (schemas + tables are children, so they trash with it). The connector\&#39;s generated &#x60;&#x60;.overview&#x60;&#x60; description Document IS ingested, so its Qdrant points are flipped to trashed via the set-trashed workflow (best-effort, mirrors the document delete path).
 
 ### Example
 
@@ -161,6 +165,237 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## deleteDataSourceSchema
+
+> deleteDataSourceSchema(dataSourceId, schemaId)
+
+Delete Data Source Schema Handler
+
+Un-model a schema and the tables under it (hard-delete the namespace).
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DataSourcesApi,
+} from '@knowledge-stack/ksapi';
+import type { DeleteDataSourceSchemaRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DataSourcesApi(config);
+
+  const body = {
+    // string
+    dataSourceId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string
+    schemaId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies DeleteDataSourceSchemaRequest;
+
+  try {
+    const data = await api.deleteDataSourceSchema(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dataSourceId** | `string` |  | [Defaults to `undefined`] |
+| **schemaId** | `string` |  | [Defaults to `undefined`] |
+
+### Return type
+
+`void` (Empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## deleteDataSourceTable
+
+> deleteDataSourceTable(dataSourceId, tableId)
+
+Delete Data Source Table Handler
+
+Un-model a single table (hard-delete it from its schema).
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DataSourcesApi,
+} from '@knowledge-stack/ksapi';
+import type { DeleteDataSourceTableRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DataSourcesApi(config);
+
+  const body = {
+    // string
+    dataSourceId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string
+    tableId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies DeleteDataSourceTableRequest;
+
+  try {
+    const data = await api.deleteDataSourceTable(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dataSourceId** | `string` |  | [Defaults to `undefined`] |
+| **tableId** | `string` |  | [Defaults to `undefined`] |
+
+### Return type
+
+`void` (Empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## generateDataSourceDescription
+
+> DataSourceDescriptionResponse generateDataSourceDescription(dataSourceId)
+
+Generate Data Source Description Handler
+
+(Re)generate the connector\&#39;s hidden, searchable \&#39;Database overview\&#39; Document.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector. The structural overview is deterministic; an LLM prose summary is prepended best-effort. The document ingests through the normal pipeline so the agent\&#39;s semantic search finds it.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DataSourcesApi,
+} from '@knowledge-stack/ksapi';
+import type { GenerateDataSourceDescriptionRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DataSourcesApi(config);
+
+  const body = {
+    // string
+    dataSourceId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies GenerateDataSourceDescriptionRequest;
+
+  try {
+    const data = await api.generateDataSourceDescription(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dataSourceId** | `string` |  | [Defaults to `undefined`] |
+
+### Return type
+
+[**DataSourceDescriptionResponse**](DataSourceDescriptionResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
 | **0** | Error response. |  -  |
 
@@ -401,7 +636,7 @@ example().catch(console.error);
 
 Model Data Source Table Handler
 
-Model a table as a queryable PathPart child; auto-introspect columns.
+Model a table under its (auto-created) Schema PDO; auto-introspect columns.
 
 ### Example
 
@@ -452,6 +687,84 @@ example().catch(console.error);
 ### Return type
 
 [**DataSourceTableResponse**](DataSourceTableResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## modelDataSourceTables
+
+> BulkModelTablesResponse modelDataSourceTables(dataSourceId, bulkModelTablesRequest)
+
+Model Data Source Tables Handler
+
+Import several tables across one or more schemas; per-item results.  Schemas are auto find-or-created. Duplicates are pre-checked against the already-modeled tables and earlier items in the same batch (so a conflict never triggers a failed INSERT, which would otherwise roll back the batch\&#39;s prior writes); introspection failures are reported per item. One bad item never aborts the batch.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DataSourcesApi,
+} from '@knowledge-stack/ksapi';
+import type { ModelDataSourceTablesRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DataSourcesApi(config);
+
+  const body = {
+    // string
+    dataSourceId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // BulkModelTablesRequest
+    bulkModelTablesRequest: ...,
+  } satisfies ModelDataSourceTablesRequest;
+
+  try {
+    const data = await api.modelDataSourceTables(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dataSourceId** | `string` |  | [Defaults to `undefined`] |
+| **bulkModelTablesRequest** | [BulkModelTablesRequest](BulkModelTablesRequest.md) |  | |
+
+### Return type
+
+[**BulkModelTablesResponse**](BulkModelTablesResponse.md)
 
 ### Authorization
 

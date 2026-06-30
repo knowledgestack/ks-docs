@@ -1,11 +1,13 @@
 # UpdateApiConnectionRequest
 
-Partial update (PATCH). A risk-increasing change re-arms the disclaimer.
+Partial update (PATCH). A risk-increasing change re-arms the disclaimer.  ``name`` renames the connection and ``parent_path_part_id`` moves it under a new FOLDER; neither is a risk-increasing change, so a rename/move alone leaves the disclaimer intact.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**name** | **str** |  | [optional] 
+**parent_path_part_id** | **UUID** | New parent FOLDER path_part to move the connection under. | [optional] 
 **base_url** | **str** |  | [optional] 
 **network_class** | [**NetworkClass**](NetworkClass.md) |  | [optional] 
 **verify_tls** | **bool** |  | [optional] 

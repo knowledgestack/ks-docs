@@ -6,7 +6,7 @@ POST body for ``/v1/workflow-runs/{id}/clone``.  Creates a new NOT_STARTED run u
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**include_inputs** | **bool** | When True, the new run&#39;s input_path_part_ids are pinned from the source run&#39;s snapshotted inputs (DOCUMENT_VERSION + FOLDER path_parts). When False, the new run is created with an empty input scope. | 
+**include_inputs** | **bool** | When True, the new run&#39;s input_path_part_ids are pinned from the source run&#39;s snapshotted inputs (DOCUMENT_VERSION, FOLDER, DATA_SOURCE, API_CONNECTION path_parts). When False, the new run is created with an empty input scope. | 
 
 ## Example
 

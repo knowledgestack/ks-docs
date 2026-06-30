@@ -1,12 +1,14 @@
 
 # UpdateApiConnectionRequest
 
-Partial update (PATCH). A risk-increasing change re-arms the disclaimer.
+Partial update (PATCH). A risk-increasing change re-arms the disclaimer.  ``name`` renames the connection and ``parent_path_part_id`` moves it under a new FOLDER; neither is a risk-increasing change, so a rename/move alone leaves the disclaimer intact.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
+`name` | string
+`parentPathPartId` | string
 `baseUrl` | string
 `networkClass` | [NetworkClass](NetworkClass.md)
 `verifyTls` | boolean
@@ -20,6 +22,8 @@ import type { UpdateApiConnectionRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
+  "name": null,
+  "parentPathPartId": null,
   "baseUrl": null,
   "networkClass": null,
   "verifyTls": null,

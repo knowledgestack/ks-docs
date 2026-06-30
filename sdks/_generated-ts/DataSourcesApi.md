@@ -12,6 +12,7 @@ All URIs are relative to *http://localhost:8000*
 | [**modelDataSourceTable**](DataSourcesApi.md#modeldatasourcetable) | **POST** /v1/data-sources/{data_source_id}/tables | Model Data Source Table Handler |
 | [**queryDataSource**](DataSourcesApi.md#querydatasource) | **POST** /v1/data-sources/{data_source_id}/query | Query Data Source Handler |
 | [**testDataSourceConnection**](DataSourcesApi.md#testdatasourceconnection) | **POST** /v1/data-sources/{data_source_id}/test | Test Data Source Connection Handler |
+| [**updateDataSource**](DataSourcesApi.md#updatedatasourceoperation) | **PATCH** /v1/data-sources/{data_source_id} | Update Data Source Handler |
 | [**updateDataSourceTable**](DataSourcesApi.md#updatedatasourcetable) | **PATCH** /v1/data-sources/{data_source_id}/tables/{table_id} | Update Data Source Table Handler |
 
 
@@ -619,6 +620,84 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## updateDataSource
+
+> DataSourceResponse updateDataSource(dataSourceId, updateDataSourceRequest)
+
+Update Data Source Handler
+
+Rename and/or move a connector.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector (and on the destination folder for a move).
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DataSourcesApi,
+} from '@knowledge-stack/ksapi';
+import type { UpdateDataSourceOperationRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DataSourcesApi(config);
+
+  const body = {
+    // string
+    dataSourceId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // UpdateDataSourceRequest
+    updateDataSourceRequest: ...,
+  } satisfies UpdateDataSourceOperationRequest;
+
+  try {
+    const data = await api.updateDataSource(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dataSourceId** | `string` |  | [Defaults to `undefined`] |
+| **updateDataSourceRequest** | [UpdateDataSourceRequest](UpdateDataSourceRequest.md) |  | |
+
+### Return type
+
+[**DataSourceResponse**](DataSourceResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
 | **0** | Error response. |  -  |
 

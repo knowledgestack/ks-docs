@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **instruction_path_part_id** | **UUID** | DOCUMENT path_part of the instruction document. Omit (or pass null) to have the server auto-create an empty instruction.md. | [optional] 
 **approval_required** | **bool** |  | 
 **is_template** | **bool** | Create a non-runnable template. Templates are excluded from the default list and cannot have runs; users instantiate them into their own runnable workflow. Immutable after creation. | [optional] [default to False]
+**common_file_path_part_ids** | **List[UUID]** | Optional path_part ids of common files (DOCUMENT / FOLDER / DATA_SOURCE / API_CONNECTION) attached to every run of this workflow — e.g. an output template. Merged with each run&#39;s own inputs at Start. The caller must be able to read each one. | [optional] 
 
 ## Example
 

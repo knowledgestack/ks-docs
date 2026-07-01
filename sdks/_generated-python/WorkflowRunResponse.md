@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **discussions_path_part_id** | **UUID** | FOLDER path_part of the run&#39;s &#x60;&#x60;discussions/&#x60;&#x60; subfolder | 
 **input_path_part_ids** | **List[UUID]** | Flat list of currently-pinned KB-reference path_part ids (DOCUMENT + FOLDER). On a NOT_STARTED run this is the only surface for KB refs (run_snapshot is NULL). | [optional] 
 **outputs_path_part_ids** | **List[UUID]** |  | 
+**excluded_common_files** | [**List[ExcludedCommonFile]**](ExcludedCommonFile.md) | Definition common files that were excluded from this run at Start (deleted or unreadable by the starter). Empty until Start builds the snapshot, and empty for the common happy path. | [optional] 
 **run_thread_id** | **UUID** | The run&#39;s primary chat thread (1:1). NULL while NOT_STARTED; set by Start. The FE opens the run by opening this thread. | [optional] 
 **owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the run, or null if unowned. Usually the same user as &#x60;&#x60;triggered_by&#x60;&#x60; unless ownership was transferred. | [optional] 
 **created_at** | **datetime** |  | 

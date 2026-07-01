@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **path_part_id** | **UUID** | DOCUMENT_VERSION path_part of the pinned input version, or the path_part of a live FOLDER / DATA_SOURCE / API_CONNECTION reference — see &#x60;&#x60;part_type&#x60;&#x60;. | 
 **materialized_path** | **str** |  | 
 **part_type** | **str** |  | 
+**origin** | [**InputOrigin**](InputOrigin.md) |  | [optional] 
 
 ## Example
 

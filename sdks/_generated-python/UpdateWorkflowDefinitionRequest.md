@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **parent_path_part_id** | **UUID** | FOLDER path_part to move the definition under. Pass null (or omit) to leave it where it is. The move is rejected with 409 while any run of this definition is IN_PROGRESS. | [optional] 
 **is_active** | **bool** |  | 
 **approval_required** | **bool** |  | 
+**common_file_path_part_ids** | **List[UUID]** | Common files attached to every run (DOCUMENT / FOLDER / DATA_SOURCE / API_CONNECTION path_part ids). Like &#x60;&#x60;instruction_path_part_id&#x60;&#x60;, this is the exception to PUT semantics: null (or omit) retains the stored list; pass [] to clear; pass a list to replace it wholesale. The caller must be able to read each one. | [optional] 
 
 ## Example
 

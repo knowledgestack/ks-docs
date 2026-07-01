@@ -14,6 +14,7 @@ Name | Type
 `parentPathPartId` | string
 `isActive` | boolean
 `approvalRequired` | boolean
+`commonFilePathPartIds` | Array&lt;string&gt;
 
 ## Example
 
@@ -29,6 +30,7 @@ const example = {
   "parentPathPartId": null,
   "isActive": null,
   "approvalRequired": null,
+  "commonFilePathPartIds": null,
 } satisfies UpdateWorkflowDefinitionRequest
 
 console.log(example)

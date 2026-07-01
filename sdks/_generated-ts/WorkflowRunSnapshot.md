@@ -11,6 +11,7 @@ Name | Type
 `maxRunDurationSeconds` | number
 `instruction` | [InstructionSnapshot](InstructionSnapshot.md)
 `inputs` | [Array&lt;InputSnapshot&gt;](InputSnapshot.md)
+`excludedCommonFiles` | [Array&lt;ExcludedCommonFile&gt;](ExcludedCommonFile.md)
 `userMessage` | string
 
 ## Example
@@ -24,6 +25,7 @@ const example = {
   "maxRunDurationSeconds": null,
   "instruction": null,
   "inputs": null,
+  "excludedCommonFiles": null,
   "userMessage": null,
 } satisfies WorkflowRunSnapshot
 

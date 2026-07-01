@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **max_run_duration_seconds** | **int** |  | 
 **instruction** | [**InstructionSnapshot**](InstructionSnapshot.md) |  | 
 **inputs** | [**List[InputSnapshot]**](InputSnapshot.md) |  | 
+**excluded_common_files** | [**List[ExcludedCommonFile]**](ExcludedCommonFile.md) | Definition common files left out of this run at Start (deleted or unreadable by the starter), each with its exclusion reason. Empty for the common happy path; pre-feature snapshots default to empty. | [optional] 
 **user_message** | **str** | Optional free-text message the caller supplied at Start. Pinned here so the runner injects it into the agent&#39;s first user turn and it survives retry, redrive, and workflow-thread follow-ups (all of which re-assemble the prompt from this snapshot). | [optional] 
 
 ## Example

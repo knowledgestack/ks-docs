@@ -32,6 +32,7 @@ Name | Type
 `isActive` | boolean
 `approvalRequired` | boolean
 `isTemplate` | boolean
+`commonFilePathPartIds` | Array&lt;string&gt;
 `createdFromId` | string
 `copyCount` | number
 `workflowDefinitionId` | string
@@ -48,6 +49,7 @@ Name | Type
 `discussionsPathPartId` | string
 `inputPathPartIds` | Array&lt;string&gt;
 `outputsPathPartIds` | Array&lt;string&gt;
+`excludedCommonFiles` | [Array&lt;ExcludedCommonFile&gt;](ExcludedCommonFile.md)
 `runThreadId` | string
 `engine` | [DataSourceEngine](DataSourceEngine.md)
 `dataSourceId` | string
@@ -97,6 +99,7 @@ const example = {
   "isActive": null,
   "approvalRequired": null,
   "isTemplate": null,
+  "commonFilePathPartIds": null,
   "createdFromId": null,
   "copyCount": null,
   "workflowDefinitionId": null,
@@ -113,6 +116,7 @@ const example = {
   "discussionsPathPartId": null,
   "inputPathPartIds": null,
   "outputsPathPartIds": null,
+  "excludedCommonFiles": null,
   "runThreadId": null,
   "engine": null,
   "dataSourceId": null,

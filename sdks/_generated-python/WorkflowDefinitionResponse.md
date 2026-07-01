@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **is_active** | **bool** |  | 
 **approval_required** | **bool** |  | 
 **is_template** | **bool** | Whether this definition is a non-runnable template | 
+**common_file_path_part_ids** | **List[UUID]** | Common files attached to every run (path_part ids). The FE renders these as &#39;attached to every run&#39; on the workflow page. | [optional] 
 **created_from_id** | **UUID** | Source definition this workflow was copied from (a template or any other workflow); null if hand-authored. | 
 **copy_count** | **int** | Number of workflows copied from this definition. | [optional] [default to 0]
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 

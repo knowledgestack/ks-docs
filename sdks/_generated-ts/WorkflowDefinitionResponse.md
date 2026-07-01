@@ -20,6 +20,7 @@ Name | Type
 `isActive` | boolean
 `approvalRequired` | boolean
 `isTemplate` | boolean
+`commonFilePathPartIds` | Array&lt;string&gt;
 `createdFromId` | string
 `copyCount` | number
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
@@ -48,6 +49,7 @@ const example = {
   "isActive": null,
   "approvalRequired": null,
   "isTemplate": null,
+  "commonFilePathPartIds": null,
   "createdFromId": null,
   "copyCount": null,
   "approvalState": null,

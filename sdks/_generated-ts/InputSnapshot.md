@@ -10,6 +10,7 @@ Name | Type
 `pathPartId` | string
 `materializedPath` | string
 `partType` | string
+`origin` | [InputOrigin](InputOrigin.md)
 
 ## Example
 
@@ -21,6 +22,7 @@ const example = {
   "pathPartId": null,
   "materializedPath": null,
   "partType": null,
+  "origin": null,
 } satisfies InputSnapshot
 
 console.log(example)

@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **is_active** | **bool** |  | 
 **approval_required** | **bool** |  | 
 **is_template** | **bool** | Whether this definition is a non-runnable template | 
+**common_file_path_part_ids** | **List[UUID]** | Common files attached to every run (path_part ids). The FE renders these as &#39;attached to every run&#39; on the workflow page. | [optional] 
 **created_from_id** | **UUID** | Source definition this workflow was copied from (a template or any other workflow); null if hand-authored. | 
 **copy_count** | **int** | Number of workflows copied from this definition. | [optional] [default to 0]
 **workflow_definition_id** | **UUID** |  | 
@@ -47,6 +48,7 @@ Name | Type | Description | Notes
 **discussions_path_part_id** | **UUID** | FOLDER path_part of the run&#39;s &#x60;&#x60;discussions/&#x60;&#x60; subfolder | 
 **input_path_part_ids** | **List[UUID]** | Flat list of currently-pinned KB-reference path_part ids (DOCUMENT + FOLDER). On a NOT_STARTED run this is the only surface for KB refs (run_snapshot is NULL). | [optional] 
 **outputs_path_part_ids** | **List[UUID]** |  | 
+**excluded_common_files** | [**List[ExcludedCommonFile]**](ExcludedCommonFile.md) | Definition common files that were excluded from this run at Start (deleted or unreadable by the starter). Empty until Start builds the snapshot, and empty for the common happy path. | [optional] 
 **run_thread_id** | **UUID** | The run&#39;s primary chat thread (1:1). NULL while NOT_STARTED; set by Start. The FE opens the run by opening this thread. | [optional] 
 **engine** | [**DataSourceEngine**](DataSourceEngine.md) |  | 
 **data_source_id** | **UUID** |  | 

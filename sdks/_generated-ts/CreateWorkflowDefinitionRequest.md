@@ -14,6 +14,7 @@ Name | Type
 `instructionPathPartId` | string
 `approvalRequired` | boolean
 `isTemplate` | boolean
+`commonFilePathPartIds` | Array&lt;string&gt;
 
 ## Example
 
@@ -29,6 +30,7 @@ const example = {
   "instructionPathPartId": null,
   "approvalRequired": null,
   "isTemplate": null,
+  "commonFilePathPartIds": null,
 } satisfies CreateWorkflowDefinitionRequest
 
 console.log(example)

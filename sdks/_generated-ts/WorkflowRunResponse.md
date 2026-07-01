@@ -29,6 +29,7 @@ Name | Type
 `discussionsPathPartId` | string
 `inputPathPartIds` | Array&lt;string&gt;
 `outputsPathPartIds` | Array&lt;string&gt;
+`excludedCommonFiles` | [Array&lt;ExcludedCommonFile&gt;](ExcludedCommonFile.md)
 `runThreadId` | string
 `owner` | [UserInfo](UserInfo.md)
 `createdAt` | Date
@@ -64,6 +65,7 @@ const example = {
   "discussionsPathPartId": null,
   "inputPathPartIds": null,
   "outputsPathPartIds": null,
+  "excludedCommonFiles": null,
   "runThreadId": null,
   "owner": null,
   "createdAt": null,

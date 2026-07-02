@@ -1,11 +1,15 @@
-# StepKind
+# ToolStatus
 
 
 ## Enum
 
-* `REASONING` (value: `'reasoning'`)
+* `RUNNING` (value: `'running'`)
 
-* `TOOL_CALL` (value: `'tool_call'`)
+* `SUCCESS` (value: `'success'`)
+
+* `ERROR` (value: `'error'`)
+
+* `CANCELED` (value: `'canceled'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

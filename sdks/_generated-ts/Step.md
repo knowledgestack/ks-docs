@@ -1,28 +1,34 @@
 
-# CreateThreadMessageRequest
+# Step
 
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`messageId` | string
-`role` | [MessageRole](MessageRole.md)
-`content` | [ThreadMessageContent](ThreadMessageContent.md)
-`details` | [ThreadMessageDetails](ThreadMessageDetails.md)
+`id` | string
+`name` | string
+`kind` | [StepKind](StepKind.md)
+`args` | [Args](Args.md)
+`detail` | string
+`startTime` | Date
+`endTime` | Date
 
 ## Example
 
 ```typescript
-import type { CreateThreadMessageRequest } from '@knowledge-stack/ksapi'
+import type { Step } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "messageId": null,
-  "role": null,
-  "content": null,
-  "details": null,
-} satisfies CreateThreadMessageRequest
+  "id": null,
+  "name": null,
+  "kind": null,
+  "args": null,
+  "detail": null,
+  "startTime": null,
+  "endTime": null,
+} satisfies Step
 
 console.log(example)
 
@@ -31,7 +37,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateThreadMessageRequest
+const exampleParsed = JSON.parse(exampleJSON) as Step
 console.log(exampleParsed)
 ```
 

@@ -1,28 +1,34 @@
 
-# CreateThreadMessageRequest
+# TextPart
 
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`messageId` | string
-`role` | [MessageRole](MessageRole.md)
-`content` | [ThreadMessageContent](ThreadMessageContent.md)
-`details` | [ThreadMessageDetails](ThreadMessageDetails.md)
+`id` | string
+`seq` | number
+`startTime` | Date
+`endTime` | Date
+`kind` | string
+`text` | string
+`citations` | [Array&lt;Citation&gt;](Citation.md)
 
 ## Example
 
 ```typescript
-import type { CreateThreadMessageRequest } from '@knowledge-stack/ksapi'
+import type { TextPart } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "messageId": null,
-  "role": null,
-  "content": null,
-  "details": null,
-} satisfies CreateThreadMessageRequest
+  "id": null,
+  "seq": null,
+  "startTime": null,
+  "endTime": null,
+  "kind": null,
+  "text": null,
+  "citations": null,
+} satisfies TextPart
 
 console.log(example)
 
@@ -31,7 +37,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateThreadMessageRequest
+const exampleParsed = JSON.parse(exampleJSON) as TextPart
 console.log(exampleParsed)
 ```
 

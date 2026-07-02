@@ -28,7 +28,10 @@ Name | Type
 `outputsPathPartId` | string
 `discussionsPathPartId` | string
 `inputPathPartIds` | Array&lt;string&gt;
-`outputsPathPartIds` | Array&lt;string&gt;
+`outputAssets` | [Array&lt;WorkflowRunAsset&gt;](WorkflowRunAsset.md)
+`inputAssets` | [Array&lt;WorkflowRunAsset&gt;](WorkflowRunAsset.md)
+`inputsPath` | string
+`outputsPath` | string
 `excludedCommonFiles` | [Array&lt;ExcludedCommonFile&gt;](ExcludedCommonFile.md)
 `runThreadId` | string
 `owner` | [UserInfo](UserInfo.md)
@@ -64,7 +67,10 @@ const example = {
   "outputsPathPartId": null,
   "discussionsPathPartId": null,
   "inputPathPartIds": null,
-  "outputsPathPartIds": null,
+  "outputAssets": null,
+  "inputAssets": null,
+  "inputsPath": null,
+  "outputsPath": null,
   "excludedCommonFiles": null,
   "runThreadId": null,
   "owner": null,

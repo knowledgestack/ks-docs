@@ -1,5 +1,5 @@
 
-# StepOutput
+# ToolPart
 
 
 ## Properties
@@ -7,30 +7,40 @@
 Name | Type
 ------------ | -------------
 `id` | string
-`name` | string
-`kind` | [StepKind](StepKind.md)
-`args` | [Args](Args.md)
-`detail` | string
+`seq` | number
 `startTime` | Date
 `endTime` | Date
-`steps` | [Array&lt;StepOutput&gt;](StepOutput.md)
+`kind` | string
+`toolCallId` | string
+`toolName` | string
+`input` | [Input](Input.md)
+`status` | [ToolStatus](ToolStatus.md)
+`result` | any
+`isError` | boolean
+`durationMs` | number
+`extras` | { [key: string]: any; }
 
 ## Example
 
 ```typescript
-import type { StepOutput } from '@knowledge-stack/ksapi'
+import type { ToolPart } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
   "id": null,
-  "name": null,
-  "kind": null,
-  "args": null,
-  "detail": null,
+  "seq": null,
   "startTime": null,
   "endTime": null,
-  "steps": null,
-} satisfies StepOutput
+  "kind": null,
+  "toolCallId": null,
+  "toolName": null,
+  "input": null,
+  "status": null,
+  "result": null,
+  "isError": null,
+  "durationMs": null,
+  "extras": null,
+} satisfies ToolPart
 
 console.log(example)
 
@@ -39,7 +49,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as StepOutput
+const exampleParsed = JSON.parse(exampleJSON) as ToolPart
 console.log(exampleParsed)
 ```
 

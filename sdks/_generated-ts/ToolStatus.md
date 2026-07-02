@@ -1,36 +1,20 @@
 
-# StepInput
+# ToolStatus
 
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`id` | string
-`name` | string
-`kind` | [StepKind](StepKind.md)
-`args` | [Args](Args.md)
-`detail` | string
-`startTime` | Date
-`endTime` | Date
-`steps` | [Array&lt;StepInput&gt;](StepInput.md)
 
 ## Example
 
 ```typescript
-import type { StepInput } from '@knowledge-stack/ksapi'
+import type { ToolStatus } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "id": null,
-  "name": null,
-  "kind": null,
-  "args": null,
-  "detail": null,
-  "startTime": null,
-  "endTime": null,
-  "steps": null,
-} satisfies StepInput
+} satisfies ToolStatus
 
 console.log(example)
 
@@ -39,7 +23,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as StepInput
+const exampleParsed = JSON.parse(exampleJSON) as ToolStatus
 console.log(exampleParsed)
 ```
 

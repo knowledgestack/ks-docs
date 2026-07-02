@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **message_id** | **UUID** | Optional caller-supplied ThreadMessage ID for idempotent creates. | [optional] 
 **role** | [**MessageRole**](MessageRole.md) |  | 
 **content** | [**ThreadMessageContent**](ThreadMessageContent.md) |  | 
-**details** | [**ThreadMessageDetailsInput**](ThreadMessageDetailsInput.md) | Message details (execution steps). Omit for user messages. | [optional] 
+**details** | [**ThreadMessageDetails**](ThreadMessageDetails.md) | Message details (execution steps). Omit for user messages. | [optional] 
 
 ## Example
 

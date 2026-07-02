@@ -1,28 +1,25 @@
 
-# CreateThreadMessageRequest
+# MessageUsage
 
+Token counts only — the run\'s model lives on ``details.model_id``.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`messageId` | string
-`role` | [MessageRole](MessageRole.md)
-`content` | [ThreadMessageContent](ThreadMessageContent.md)
-`details` | [ThreadMessageDetails](ThreadMessageDetails.md)
+`inputTokens` | number
+`outputTokens` | number
 
 ## Example
 
 ```typescript
-import type { CreateThreadMessageRequest } from '@knowledge-stack/ksapi'
+import type { MessageUsage } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "messageId": null,
-  "role": null,
-  "content": null,
-  "details": null,
-} satisfies CreateThreadMessageRequest
+  "inputTokens": null,
+  "outputTokens": null,
+} satisfies MessageUsage
 
 console.log(example)
 
@@ -31,7 +28,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateThreadMessageRequest
+const exampleParsed = JSON.parse(exampleJSON) as MessageUsage
 console.log(exampleParsed)
 ```
 

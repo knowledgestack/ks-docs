@@ -1,26 +1,20 @@
 
-# ThreadMessageDetailsInput
+# Input
 
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`steps` | [Array&lt;StepInput&gt;](StepInput.md)
-`checkpoint` | [CheckpointDetails](CheckpointDetails.md)
-`modelId` | string
 
 ## Example
 
 ```typescript
-import type { ThreadMessageDetailsInput } from '@knowledge-stack/ksapi'
+import type { Input } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "steps": null,
-  "checkpoint": null,
-  "modelId": null,
-} satisfies ThreadMessageDetailsInput
+} satisfies Input
 
 console.log(example)
 
@@ -29,7 +23,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as ThreadMessageDetailsInput
+const exampleParsed = JSON.parse(exampleJSON) as Input
 console.log(exampleParsed)
 ```
 

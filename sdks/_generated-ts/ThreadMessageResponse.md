@@ -11,7 +11,8 @@ Name | Type
 `sequence` | number
 `role` | [MessageRole](MessageRole.md)
 `content` | [EnrichedThreadMessageContent](EnrichedThreadMessageContent.md)
-`details` | [ThreadMessageDetailsOutput](ThreadMessageDetailsOutput.md)
+`details` | [ThreadMessageDetails](ThreadMessageDetails.md)
+`parts` | [Array&lt;TextPartOrReasoningPartOrToolPartOrDocEditPart&gt;](TextPartOrReasoningPartOrToolPartOrDocEditPart.md)
 `parentPathId` | string
 `materializedPath` | string
 `tenantId` | string
@@ -32,6 +33,7 @@ const example = {
   "role": null,
   "content": null,
   "details": null,
+  "parts": null,
   "parentPathId": null,
   "materializedPath": null,
   "tenantId": null,

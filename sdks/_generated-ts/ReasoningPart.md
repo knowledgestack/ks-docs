@@ -1,26 +1,32 @@
 
-# ThreadMessageDetailsOutput
+# ReasoningPart
 
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`steps` | [Array&lt;StepOutput&gt;](StepOutput.md)
-`checkpoint` | [CheckpointDetails](CheckpointDetails.md)
-`modelId` | string
+`id` | string
+`seq` | number
+`startTime` | Date
+`endTime` | Date
+`kind` | string
+`text` | string
 
 ## Example
 
 ```typescript
-import type { ThreadMessageDetailsOutput } from '@knowledge-stack/ksapi'
+import type { ReasoningPart } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "steps": null,
-  "checkpoint": null,
-  "modelId": null,
-} satisfies ThreadMessageDetailsOutput
+  "id": null,
+  "seq": null,
+  "startTime": null,
+  "endTime": null,
+  "kind": null,
+  "text": null,
+} satisfies ReasoningPart
 
 console.log(example)
 
@@ -29,7 +35,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as ThreadMessageDetailsOutput
+const exampleParsed = JSON.parse(exampleJSON) as ReasoningPart
 console.log(exampleParsed)
 ```
 

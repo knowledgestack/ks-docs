@@ -10,8 +10,7 @@ Name | Type | Description | Notes
 **sequence** | **int** | Sequence number (from path_part.name) | 
 **role** | [**MessageRole**](MessageRole.md) |  | 
 **content** | [**EnrichedThreadMessageContent**](EnrichedThreadMessageContent.md) |  | 
-**details** | [**ThreadMessageDetails**](ThreadMessageDetails.md) | Message details (None when not requested via with_details) | [optional] 
-**parts** | [**List[TextPartOrReasoningPartOrToolPartOrDocEditPart]**](TextPartOrReasoningPartOrToolPartOrDocEditPart.md) | Ordered content parts (text/reasoning/tool/doc_edit). Native rows return details.parts; legacy rows return a best-effort read-time projection of details.steps. Empty when details are not requested. | [optional] 
+**details** | [**ThreadMessageDetails**](ThreadMessageDetails.md) | Message details (None when not requested via with_details). Ordered content parts live on details.parts; native rows also carry an old-format details.steps back-fill for the deployed frontend. | [optional] 
 **parent_path_id** | **UUID** | Thread&#39;s PathPart ID | 
 **materialized_path** | **str** | Full materialized path from root | 
 **tenant_id** | **UUID** | Tenant ID | 

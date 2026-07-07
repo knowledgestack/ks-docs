@@ -325,11 +325,11 @@ example().catch(console.error);
 
 ## listWorkflowRunsForTenant
 
-> PaginatedResponseWorkflowRunResponse listWorkflowRunsForTenant(state, mine, pendingApprovalForMe, definitionId, ownerId, sortBy, sortDir, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseWorkflowRunResponse listWorkflowRunsForTenant(state, mine, approvableByMe, definitionId, ownerId, sortBy, sortDir, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, approvalState, includeTagIds, excludeTagIds)
 
 List Workflow Runs For Tenant Handler
 
-List runs across every workflow in the tenant, permission-scoped.  The single spine behind the dashboard worklists — the FE composes its tabs from preset filters (&#x60;&#x60;mine&#x60;&#x60; + &#x60;&#x60;state&#x60;&#x60;, &#x60;&#x60;pending_approval_for_me&#x60;&#x60;). Visibility follows the same model as the per-definition list: OWNER/ADMIN see all; a USER sees runs under workflows they can read.
+List runs across every workflow in the tenant, permission-scoped.  The single spine behind the dashboard worklists — the FE composes its tabs from preset filters (&#x60;&#x60;mine&#x60;&#x60; + &#x60;&#x60;state&#x60;&#x60;, and the approval worklist &#x60;&#x60;approval_state&#x3D;pending&#x60;&#x60; + &#x60;&#x60;approvable_by_me&#x60;&#x60;). Visibility follows the same model as the per-definition list: OWNER/ADMIN see all; a USER sees runs under workflows they can read.
 
 ### Example
 
@@ -355,8 +355,8 @@ async function example() {
     state: ...,
     // boolean | Only runs the caller created (owner). Overrides owner_id. (optional)
     mine: true,
-    // boolean | Only runs pending approval that the caller may approve. (optional)
-    pendingApprovalForMe: true,
+    // boolean | Only runs the caller may approve (approve-path scoped). Compose with approval_state=pending for the approval worklist. (optional)
+    approvableByMe: true,
     // string | Only runs under this workflow definition. (optional)
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | Only runs created by this user. (optional)
@@ -377,6 +377,12 @@ async function example() {
     updatedAfter: 2013-10-20T19:20:30+01:00,
     // Date | Only items updated strictly before this timestamp (optional)
     updatedBefore: 2013-10-20T19:20:30+01:00,
+    // Array<PathPartApprovalState> | Keep only items in these approval states (repeatable): not_required, pending, approved. (optional)
+    approvalState: ...,
+    // Array<string> | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). (optional)
+    includeTagIds: ...,
+    // Array<string> | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. (optional)
+    excludeTagIds: ...,
   } satisfies ListWorkflowRunsForTenantRequest;
 
   try {
@@ -398,7 +404,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **state** | `Array<WorkflowExecutionState>` | Keep only runs in these execution states (repeatable). | [Optional] |
 | **mine** | `boolean` | Only runs the caller created (owner). Overrides owner_id. | [Optional] [Defaults to `false`] |
-| **pendingApprovalForMe** | `boolean` | Only runs pending approval that the caller may approve. | [Optional] [Defaults to `false`] |
+| **approvableByMe** | `boolean` | Only runs the caller may approve (approve-path scoped). Compose with approval_state&#x3D;pending for the approval worklist. | [Optional] [Defaults to `false`] |
 | **definitionId** | `string` | Only runs under this workflow definition. | [Optional] [Defaults to `undefined`] |
 | **ownerId** | `string` | Only runs created by this user. | [Optional] [Defaults to `undefined`] |
 | **sortBy** | `WorkflowRunOrder` | Field to sort runs by (default: STARTED_AT) | [Optional] [Defaults to `undefined`] [Enum: STARTED_AT, CREATED_AT, COMPLETED_AT] |
@@ -409,6 +415,9 @@ example().catch(console.error);
 | **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **approvalState** | `Array<PathPartApprovalState>` | Keep only items in these approval states (repeatable): not_required, pending, approved. | [Optional] |
+| **includeTagIds** | `Array<string>` | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). | [Optional] |
+| **excludeTagIds** | `Array<string>` | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. | [Optional] |
 
 ### Return type
 

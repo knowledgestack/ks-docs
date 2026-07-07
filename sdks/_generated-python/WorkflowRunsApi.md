@@ -376,16 +376,17 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_workflow_runs_for_tenant**
-> PaginatedResponseWorkflowRunResponse list_workflow_runs_for_tenant(state=state, mine=mine, pending_approval_for_me=pending_approval_for_me, definition_id=definition_id, owner_id=owner_id, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+> PaginatedResponseWorkflowRunResponse list_workflow_runs_for_tenant(state=state, mine=mine, approvable_by_me=approvable_by_me, definition_id=definition_id, owner_id=owner_id, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
 
 List Workflow Runs For Tenant Handler
 
 List runs across every workflow in the tenant, permission-scoped.
 
 The single spine behind the dashboard worklists — the FE composes its
-tabs from preset filters (``mine`` + ``state``, ``pending_approval_for_me``).
-Visibility follows the same model as the per-definition list: OWNER/ADMIN
-see all; a USER sees runs under workflows they can read.
+tabs from preset filters (``mine`` + ``state``, and the approval worklist
+``approval_state=pending`` + ``approvable_by_me``). Visibility follows the
+same model as the per-definition list: OWNER/ADMIN see all; a USER sees
+runs under workflows they can read.
 
 ### Example
 
@@ -395,6 +396,7 @@ see all; a USER sees runs under workflows they can read.
 ```python
 import ksapi
 from ksapi.models.paginated_response_workflow_run_response import PaginatedResponseWorkflowRunResponse
+from ksapi.models.path_part_approval_state import PathPartApprovalState
 from ksapi.models.sort_direction import SortDirection
 from ksapi.models.workflow_execution_state import WorkflowExecutionState
 from ksapi.models.workflow_run_order import WorkflowRunOrder
@@ -429,7 +431,7 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.WorkflowRunsApi(api_client)
     state = [ksapi.WorkflowExecutionState()] # List[WorkflowExecutionState] | Keep only runs in these execution states (repeatable). (optional)
     mine = False # bool | Only runs the caller created (owner). Overrides owner_id. (optional) (default to False)
-    pending_approval_for_me = False # bool | Only runs pending approval that the caller may approve. (optional) (default to False)
+    approvable_by_me = False # bool | Only runs the caller may approve (approve-path scoped). Compose with approval_state=pending for the approval worklist. (optional) (default to False)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Only runs under this workflow definition. (optional)
     owner_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Only runs created by this user. (optional)
     sort_by = ksapi.WorkflowRunOrder() # WorkflowRunOrder | Field to sort runs by (default: STARTED_AT) (optional)
@@ -440,10 +442,13 @@ with ksapi.ApiClient(configuration) as api_client:
     created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
     updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
     updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
+    approval_state = [ksapi.PathPartApprovalState()] # List[PathPartApprovalState] | Keep only items in these approval states (repeatable): not_required, pending, approved. (optional)
+    include_tag_ids = None # List[UUID] | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). (optional)
+    exclude_tag_ids = None # List[UUID] | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. (optional)
 
     try:
         # List Workflow Runs For Tenant Handler
-        api_response = api_instance.list_workflow_runs_for_tenant(state=state, mine=mine, pending_approval_for_me=pending_approval_for_me, definition_id=definition_id, owner_id=owner_id, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = api_instance.list_workflow_runs_for_tenant(state=state, mine=mine, approvable_by_me=approvable_by_me, definition_id=definition_id, owner_id=owner_id, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
         print("The response of WorkflowRunsApi->list_workflow_runs_for_tenant:\n")
         pprint(api_response)
     except Exception as e:
@@ -459,7 +464,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **state** | [**List[WorkflowExecutionState]**](WorkflowExecutionState.md)| Keep only runs in these execution states (repeatable). | [optional] 
  **mine** | **bool**| Only runs the caller created (owner). Overrides owner_id. | [optional] [default to False]
- **pending_approval_for_me** | **bool**| Only runs pending approval that the caller may approve. | [optional] [default to False]
+ **approvable_by_me** | **bool**| Only runs the caller may approve (approve-path scoped). Compose with approval_state&#x3D;pending for the approval worklist. | [optional] [default to False]
  **definition_id** | **UUID**| Only runs under this workflow definition. | [optional] 
  **owner_id** | **UUID**| Only runs created by this user. | [optional] 
  **sort_by** | [**WorkflowRunOrder**](.md)| Field to sort runs by (default: STARTED_AT) | [optional] 
@@ -470,6 +475,9 @@ Name | Type | Description  | Notes
  **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
  **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
  **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
+ **approval_state** | [**List[PathPartApprovalState]**](PathPartApprovalState.md)| Keep only items in these approval states (repeatable): not_required, pending, approved. | [optional] 
+ **include_tag_ids** | [**List[UUID]**](UUID.md)| Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). | [optional] 
+ **exclude_tag_ids** | [**List[UUID]**](UUID.md)| Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. | [optional] 
 
 ### Return type
 

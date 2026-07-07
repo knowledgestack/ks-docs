@@ -370,7 +370,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_folder_contents**
-> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator list_folder_contents(folder_id, max_depth=max_depth, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset)
+> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator list_folder_contents(folder_id, max_depth=max_depth, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
 
 List Folder Contents Handler
 
@@ -380,6 +380,10 @@ Returns a discriminated union of FolderResponse and DocumentResponse items,
 distinguished by the `part_type` field ("FOLDER" or "DOCUMENT").
 
 When with_tags=true, each item includes a tags field with the full tag objects.
+
+``approval_state`` / ``include_tag_ids`` / ``exclude_tag_ids`` filter the
+result at the path_part layer: approval state on the item, tags matched by
+self-or-ancestor inheritance (include = OR, exclude wins).
 
 This is the preferred way to list folder contents when you need document metadata.
 For generic path traversal of folders only, use GET /path-parts.
@@ -393,6 +397,7 @@ For generic path traversal of folders only, use GET /path-parts.
 import ksapi
 from ksapi.models.paginated_response_annotated_union_folder_response_document_response_workflow_definition_response_workflow_run_response_data_source_response_data_source_schema_response_data_source_table_response_api_connection_response_discriminator import PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator
 from ksapi.models.path_order import PathOrder
+from ksapi.models.path_part_approval_state import PathPartApprovalState
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -428,10 +433,13 @@ with ksapi.ApiClient(configuration) as api_client:
     with_tags = False # bool | Include tag IDs for each item (default: false) (optional) (default to False)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    approval_state = [ksapi.PathPartApprovalState()] # List[PathPartApprovalState] | Keep only items in these approval states (repeatable): not_required, pending, approved. (optional)
+    include_tag_ids = None # List[UUID] | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). (optional)
+    exclude_tag_ids = None # List[UUID] | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. (optional)
 
     try:
         # List Folder Contents Handler
-        api_response = api_instance.list_folder_contents(folder_id, max_depth=max_depth, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset)
+        api_response = api_instance.list_folder_contents(folder_id, max_depth=max_depth, sort_order=sort_order, with_tags=with_tags, limit=limit, offset=offset, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
         print("The response of FoldersApi->list_folder_contents:\n")
         pprint(api_response)
     except Exception as e:
@@ -451,6 +459,9 @@ Name | Type | Description  | Notes
  **with_tags** | **bool**| Include tag IDs for each item (default: false) | [optional] [default to False]
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **approval_state** | [**List[PathPartApprovalState]**](PathPartApprovalState.md)| Keep only items in these approval states (repeatable): not_required, pending, approved. | [optional] 
+ **include_tag_ids** | [**List[UUID]**](UUID.md)| Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). | [optional] 
+ **exclude_tag_ids** | [**List[UUID]**](UUID.md)| Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. | [optional] 
 
 ### Return type
 

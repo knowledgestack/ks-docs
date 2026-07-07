@@ -321,11 +321,11 @@ example().catch(console.error);
 
 ## listFolderContents
 
-> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator listFolderContents(folderId, maxDepth, sortOrder, withTags, limit, offset)
+> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator listFolderContents(folderId, maxDepth, sortOrder, withTags, limit, offset, approvalState, includeTagIds, excludeTagIds)
 
 List Folder Contents Handler
 
-List all contents (folders and documents) under a folder.  Returns a discriminated union of FolderResponse and DocumentResponse items, distinguished by the &#x60;part_type&#x60; field (\&quot;FOLDER\&quot; or \&quot;DOCUMENT\&quot;).  When with_tags&#x3D;true, each item includes a tags field with the full tag objects.  This is the preferred way to list folder contents when you need document metadata. For generic path traversal of folders only, use GET /path-parts.
+List all contents (folders and documents) under a folder.  Returns a discriminated union of FolderResponse and DocumentResponse items, distinguished by the &#x60;part_type&#x60; field (\&quot;FOLDER\&quot; or \&quot;DOCUMENT\&quot;).  When with_tags&#x3D;true, each item includes a tags field with the full tag objects.  &#x60;&#x60;approval_state&#x60;&#x60; / &#x60;&#x60;include_tag_ids&#x60;&#x60; / &#x60;&#x60;exclude_tag_ids&#x60;&#x60; filter the result at the path_part layer: approval state on the item, tags matched by self-or-ancestor inheritance (include &#x3D; OR, exclude wins).  This is the preferred way to list folder contents when you need document metadata. For generic path traversal of folders only, use GET /path-parts.
 
 ### Example
 
@@ -359,6 +359,12 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // Array<PathPartApprovalState> | Keep only items in these approval states (repeatable): not_required, pending, approved. (optional)
+    approvalState: ...,
+    // Array<string> | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). (optional)
+    includeTagIds: ...,
+    // Array<string> | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. (optional)
+    excludeTagIds: ...,
   } satisfies ListFolderContentsRequest;
 
   try {
@@ -384,6 +390,9 @@ example().catch(console.error);
 | **withTags** | `boolean` | Include tag IDs for each item (default: false) | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **approvalState** | `Array<PathPartApprovalState>` | Keep only items in these approval states (repeatable): not_required, pending, approved. | [Optional] |
+| **includeTagIds** | `Array<string>` | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). | [Optional] |
+| **excludeTagIds** | `Array<string>` | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. | [Optional] |
 
 ### Return type
 

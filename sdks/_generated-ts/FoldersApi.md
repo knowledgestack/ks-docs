@@ -321,11 +321,11 @@ example().catch(console.error);
 
 ## listFolderContents
 
-> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator listFolderContents(folderId, maxDepth, sortOrder, withTags, limit, offset, approvalState, includeTagIds, excludeTagIds)
+> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator listFolderContents(folderId, maxDepth, sortOrder, sortDir, ownerId, nameLike, withTags, limit, offset, approvalState, includeTagIds, excludeTagIds, createdAfter, createdBefore, updatedAfter, updatedBefore)
 
 List Folder Contents Handler
 
-List all contents (folders and documents) under a folder.  Returns a discriminated union of FolderResponse and DocumentResponse items, distinguished by the &#x60;part_type&#x60; field (\&quot;FOLDER\&quot; or \&quot;DOCUMENT\&quot;).  When with_tags&#x3D;true, each item includes a tags field with the full tag objects.  &#x60;&#x60;approval_state&#x60;&#x60; / &#x60;&#x60;include_tag_ids&#x60;&#x60; / &#x60;&#x60;exclude_tag_ids&#x60;&#x60; filter the result at the path_part layer: approval state on the item, tags matched by self-or-ancestor inheritance (include &#x3D; OR, exclude wins).  This is the preferred way to list folder contents when you need document metadata. For generic path traversal of folders only, use GET /path-parts.
+List all contents (folders and documents) under a folder.  Returns a discriminated union of FolderResponse and DocumentResponse items, distinguished by the &#x60;part_type&#x60; field (\&quot;FOLDER\&quot; or \&quot;DOCUMENT\&quot;).  When with_tags&#x3D;true, each item includes a tags field with the full tag objects.  &#x60;&#x60;approval_state&#x60;&#x60; / &#x60;&#x60;include_tag_ids&#x60;&#x60; / &#x60;&#x60;exclude_tag_ids&#x60;&#x60; filter the result at the path_part layer: approval state on the item, tags matched by self-or-ancestor inheritance (include &#x3D; OR, exclude wins).  &#x60;&#x60;sort_dir&#x60;&#x60;, &#x60;&#x60;owner_id&#x60;&#x60;, &#x60;&#x60;name_like&#x60;&#x60;, the created_at/updated_at range filters, and the STATUS/OWNER/TAGS sorts apply to the direct-children listing only (&#x60;&#x60;max_depth&#x3D;1&#x60;&#x60;); combining them with a deeper traversal is a 400.  This is the preferred way to list folder contents when you need document metadata. For generic path traversal of folders only, use GET /path-parts.
 
 ### Example
 
@@ -351,8 +351,14 @@ async function example() {
     folderId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // number | Maximum depth to traverse (1=direct children, default: 1) (optional)
     maxDepth: 56,
-    // PathOrder | Sort order for results (default: LOGICAL) (optional)
+    // ContentsSortOrder | Sort order for results (default: LOGICAL) (optional)
     sortOrder: ...,
+    // SortDirection | Sort direction; overrides the column\'s natural default (optional)
+    sortDir: ...,
+    // string | Filter to items owned by this user (optional)
+    ownerId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // string | Case-insensitive substring filter on the item name (optional)
+    nameLike: nameLike_example,
     // boolean | Include tag IDs for each item (default: false) (optional)
     withTags: true,
     // number | Number of items per page (optional)
@@ -365,6 +371,14 @@ async function example() {
     includeTagIds: ...,
     // Array<string> | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. (optional)
     excludeTagIds: ...,
+    // Date | Only items created at or after this timestamp (inclusive) (optional)
+    createdAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items created strictly before this timestamp (optional)
+    createdBefore: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated at or after this timestamp (inclusive) (optional)
+    updatedAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated strictly before this timestamp (optional)
+    updatedBefore: 2013-10-20T19:20:30+01:00,
   } satisfies ListFolderContentsRequest;
 
   try {
@@ -386,13 +400,20 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **folderId** | `string` |  | [Defaults to `undefined`] |
 | **maxDepth** | `number` | Maximum depth to traverse (1&#x3D;direct children, default: 1) | [Optional] [Defaults to `1`] |
-| **sortOrder** | `PathOrder` | Sort order for results (default: LOGICAL) | [Optional] [Defaults to `undefined`] [Enum: LOGICAL, NAME, UPDATED_AT, CREATED_AT] |
+| **sortOrder** | `ContentsSortOrder` | Sort order for results (default: LOGICAL) | [Optional] [Defaults to `undefined`] [Enum: LOGICAL, NAME, UPDATED_AT, CREATED_AT, STATUS, OWNER, TAGS] |
+| **sortDir** | `SortDirection` | Sort direction; overrides the column\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
+| **ownerId** | `string` | Filter to items owned by this user | [Optional] [Defaults to `undefined`] |
+| **nameLike** | `string` | Case-insensitive substring filter on the item name | [Optional] [Defaults to `undefined`] |
 | **withTags** | `boolean` | Include tag IDs for each item (default: false) | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 | **approvalState** | `Array<PathPartApprovalState>` | Keep only items in these approval states (repeatable): not_required, pending, approved. | [Optional] |
 | **includeTagIds** | `Array<string>` | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). | [Optional] |
 | **excludeTagIds** | `Array<string>` | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. | [Optional] |
+| **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 

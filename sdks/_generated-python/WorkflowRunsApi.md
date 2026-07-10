@@ -795,18 +795,16 @@ Stop Workflow Run Handler
 
 Stop a running workflow run, terminalizing it so its thread un-bricks.
 
-While a run sits ``IN_PROGRESS`` its run thread is read-only: every new USER
-message 409s (``run_in_progress``). A user "stop" must therefore move the run
-out of ``IN_PROGRESS``. We mark it ``FAILED`` ("Stopped by user") with a pure
-DB write that does **not** depend on Temporal — so this same call also
-recovers a run already stranded ``IN_PROGRESS`` by a cancel whose terminal
-callback never landed (the permanent-brick case) — then best-effort cancel
-its Temporal workflow.
+Marks the run ``FAILED`` ("Stopped by user") with a pure DB write (no Temporal
+dependency, so it also recovers a run stranded ``IN_PROGRESS`` by a lost
+cancel callback), then best-effort revokes the streaming reply's lease and
+cancels the Temporal workflow. Revoking the lease is what makes stop
+authoritative — the cancel only *requests* a cooperative stop; see
+docs/api/notification_system.md for the lease protocol.
 
-Idempotent: a run already in a terminal state (or not yet started) is
-returned unchanged. The terminal-state guard in ``mark_run_failed`` plus the
-callback handler's ``already_terminal`` no-op make a real completion landing
-concurrently safe (last writer is ignored, never an error).
+Idempotent: a terminal or not-yet-started run is returned unchanged (the
+``mark_run_failed`` guard + the callback's ``already_terminal`` no-op keep a
+real completion landing concurrently safe).
 
 ### Example
 

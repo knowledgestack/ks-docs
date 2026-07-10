@@ -1,7 +1,7 @@
 
 # WorkflowRunAsset
 
-One input or output file/reference of a run, actionable in one call.  ``id`` is the PDO id (``path_part.metadata_obj_id``); ``path_part_id`` is the underlying path part (kept for approval-state / path-part lookups). Route on ``part_type`` to pick the API that takes ``id``: ``DOCUMENT`` → download_document / bulk-download (active version); ``DOCUMENT_VERSION`` → download_document_version (a version-pinned input, e.g. a cloned run\'s inputs); ``FOLDER`` / ``DATA_SOURCE`` / ``API_CONNECTION`` → list/query via that type\'s endpoint. Output assets are always ``DOCUMENT``.
+One input or output file/reference of a run, actionable in one call.  ``id`` is the PDO id (``path_part.metadata_obj_id``); ``path_part_id`` is the underlying path part (kept for approval-state / path-part lookups). Route on ``part_type`` to pick the API that takes ``id``: ``DOCUMENT`` → download_document / bulk-download (active version); ``DOCUMENT_VERSION`` → download_document_version (a version-pinned input, e.g. a cloned run\'s inputs); ``FOLDER`` / ``DATA_SOURCE`` / ``API_CONNECTION`` → list/query via that type\'s endpoint. Output assets are always ``DOCUMENT``.  ``origin`` tags an input asset\'s provenance (definition common file vs run reference vs upload) so the FE can group them; it is ``None`` on output assets.
 
 ## Properties
 
@@ -13,6 +13,7 @@ Name | Type
 `partType` | [PartType](PartType.md)
 `materializedPath` | string
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
+`origin` | [InputOrigin](InputOrigin.md)
 
 ## Example
 
@@ -27,6 +28,7 @@ const example = {
   "partType": null,
   "materializedPath": null,
   "approvalState": null,
+  "origin": null,
 } satisfies WorkflowRunAsset
 
 console.log(example)

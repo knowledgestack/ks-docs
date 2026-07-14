@@ -1,7 +1,7 @@
 
 # DataSourceDetailResponse
 
-A connector plus the schemas (and their readable tables) the caller sees.  ``description_document_id`` points at the connector\'s generated, ingested \"Database overview\" Document (a hidden system file); null until generated.
+A connector plus the schemas (and their readable tables) the caller sees.
 
 ## Properties
 
@@ -9,7 +9,6 @@ Name | Type
 ------------ | -------------
 `dataSource` | [DataSourceResponse](DataSourceResponse.md)
 `schemas` | [Array&lt;DataSourceSchemaResponse&gt;](DataSourceSchemaResponse.md)
-`descriptionDocumentId` | string
 
 ## Example
 
@@ -20,7 +19,6 @@ import type { DataSourceDetailResponse } from '@knowledge-stack/ksapi'
 const example = {
   "dataSource": null,
   "schemas": null,
-  "descriptionDocumentId": null,
 } satisfies DataSourceDetailResponse
 
 console.log(example)

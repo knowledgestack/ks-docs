@@ -22,7 +22,7 @@ Quota: consumes one MESSAGE before ``start_workflow``. Refund
 semantics distinguish cause:
 
 * **Cancellation** (client disconnect → ``asyncio.CancelledError``,
-  OR explicit ``DELETE /v1/workflows/{id}`` while we await
+  OR explicit ``DELETE /v1/system-jobs/{id}`` while we await
   ``handle.result()`` → Temporal-wrapped ``CancelledError``)
   → **NO REFUND.** The user walked away or actively cancelled;
   that's their volition. We still best-effort cancel the

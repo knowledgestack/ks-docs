@@ -449,7 +449,7 @@ example().catch(console.error);
 
 Retry Workflow Run Handler
 
-Re-run a FAILED run (including a user-stopped one) in place.  Flips &#x60;&#x60;FAILED -&gt; IN_PROGRESS&#x60;&#x60; against the run\&#39;s existing snapshot and re-dispatches the agent. 409 if the run is not FAILED (NOT_STARTED/PENDING use Start; COMPLETED is cloned) or was never started. Triggerer or OWNER/ADMIN only.
+Re-run a FAILED run (including a user-stopped one) in place.  Flips &#x60;&#x60;FAILED -&gt; IN_PROGRESS&#x60;&#x60; against the run\&#39;s existing snapshot and re-dispatches the agent. 409 if the run is not FAILED (NOT_STARTED/PENDING use Start; COMPLETED is cloned) or was never started. Triggerer or OWNER/ADMIN only.  Runs in the background — poll &#x60;&#x60;GET /v1/workflow-runs/{run_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED.
 
 ### Example
 
@@ -511,7 +511,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **202** | Successful Response |  -  |
+| **202** | Successful Response |  * Location - Poll this run resource until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED. <br>  |
 | **422** | Validation Error |  -  |
 | **0** | Error response. |  -  |
 
@@ -602,7 +602,7 @@ example().catch(console.error);
 
 Start Workflow Run Handler
 
-Flip a NOT_STARTED run to IN_PROGRESS and dispatch its agent run.  Idempotent on IN_PROGRESS (returns the row). Terminal states → 409. Inputs still ingesting or in a failed terminal state → 409. The snapshot is built at this point (KB DOCUMENTs resolve to active versions, uploaded DVs are walked from inputs/, KB FOLDERs stay live).  The body is optional; &#x60;&#x60;user_message&#x60;&#x60; (when sent) is pinned into the snapshot and shown in the run thread (see &#x60;&#x60;StartWorkflowRunRequest&#x60;&#x60;).
+Flip a NOT_STARTED run to IN_PROGRESS and dispatch its agent run.  Idempotent on IN_PROGRESS (returns the row). Terminal states → 409. Inputs still ingesting or in a failed terminal state → 409. The snapshot is built at this point (KB DOCUMENTs resolve to active versions, uploaded DVs are walked from inputs/, KB FOLDERs stay live).  The body is optional; &#x60;&#x60;user_message&#x60;&#x60; (when sent) is pinned into the snapshot and shown in the run thread (see &#x60;&#x60;StartWorkflowRunRequest&#x60;&#x60;).  The run executes in the background — poll &#x60;&#x60;GET /v1/workflow-runs/{run_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED. There is no completion webhook.
 
 ### Example
 
@@ -667,7 +667,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **202** | Successful Response |  -  |
+| **202** | Successful Response |  * Location - Poll this run resource until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED. <br>  |
 | **422** | Validation Error |  -  |
 | **0** | Error response. |  -  |
 

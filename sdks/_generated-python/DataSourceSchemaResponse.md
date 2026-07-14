@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **data_source_id** | **UUID** |  | 
 **schema_name** | **str** | Real namespace in the external DB | 
 **is_default** | **bool** | True for the connection&#39;s default namespace | 
-**description** | **str** |  | 
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
 **permissions** | [**ItemPermissions**](ItemPermissions.md) |  | 
 **created_at** | **datetime** |  | 

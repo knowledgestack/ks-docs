@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **workflow_id** | **str** |  | 
+**user_message_id** | **UUID** |  | 
 
 ## Example
 

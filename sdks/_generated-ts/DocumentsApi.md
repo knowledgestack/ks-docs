@@ -325,7 +325,7 @@ example().catch(console.error);
 
 Ingest Document Handler
 
-Upload a file, create document + version, and trigger ingestion workflow.  Returns 201 with the Temporal workflow ID.
+Upload a file, create document + version, and trigger ingestion workflow.  Returns 201 immediately with the Temporal &#x60;&#x60;workflow_id&#x60;&#x60;. Ingestion runs in the background — poll &#x60;&#x60;GET /v1/system-jobs/document_versions/{workflow_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;status&#x60;&#x60; is terminal (anything other than &#x60;&#x60;pending&#x60;&#x60;/&#x60;&#x60;processing&#x60;&#x60;). There is no completion webhook.
 
 ### Example
 
@@ -411,7 +411,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Successful Response |  -  |
+| **201** | Successful Response |  * Location - Poll this ingestion-status resource until the pipeline reaches a terminal state. <br>  |
 | **422** | Validation Error |  -  |
 | **0** | Error response. |  -  |
 
@@ -424,7 +424,7 @@ example().catch(console.error);
 
 Ingest Document Version Handler
 
-Upload a new file for an existing document, creating a new version and triggering ingestion.  Creates a new document version (incrementing the highest version number), uploads the file to S3, and starts the ingestion workflow. Upon successful ingestion, the new version is automatically activated (set as the document\&#39;s active_version) and the old version\&#39;s Qdrant points are deactivated.  Returns 201 with the Temporal workflow ID.
+Upload a new file for an existing document, creating a new version and triggering ingestion.  Creates a new document version (incrementing the highest version number), uploads the file to S3, and starts the ingestion workflow. Upon successful ingestion, the new version is automatically activated (set as the document\&#39;s active_version) and the old version\&#39;s Qdrant points are deactivated.  Returns 201 immediately with the Temporal &#x60;&#x60;workflow_id&#x60;&#x60;. Ingestion runs in the background — poll &#x60;&#x60;GET /v1/system-jobs/document_versions/{workflow_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;status&#x60;&#x60; is terminal.
 
 ### Example
 
@@ -507,7 +507,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **201** | Successful Response |  -  |
+| **201** | Successful Response |  * Location - Poll this ingestion-status resource until the pipeline reaches a terminal state. <br>  |
 | **422** | Validation Error |  -  |
 | **0** | Error response. |  -  |
 

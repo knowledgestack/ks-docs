@@ -1,24 +1,29 @@
 
-# UserMessageResponse
+# SearchTablesRequest
 
+Semantic search over connector table summaries (agent table discovery).
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`workflowId` | string
-`userMessageId` | string
+`query` | string
+`topK` | number
+`scoreThreshold` | number
+`dataSourceId` | string
 
 ## Example
 
 ```typescript
-import type { UserMessageResponse } from '@knowledge-stack/ksapi'
+import type { SearchTablesRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "workflowId": null,
-  "userMessageId": null,
-} satisfies UserMessageResponse
+  "query": null,
+  "topK": null,
+  "scoreThreshold": null,
+  "dataSourceId": null,
+} satisfies SearchTablesRequest
 
 console.log(example)
 
@@ -27,7 +32,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as UserMessageResponse
+const exampleParsed = JSON.parse(exampleJSON) as SearchTablesRequest
 console.log(exampleParsed)
 ```
 

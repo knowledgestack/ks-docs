@@ -54,7 +54,7 @@ Below this line is auto-generated reference content.
 
 ---
 
-# @knowledge-stack/ksapi@1.132.0
+# @knowledge-stack/ksapi@1.133.0
 
 A TypeScript SDK client for the localhost API.
 
@@ -161,14 +161,17 @@ All URIs are relative to *http://localhost:8000*
 *DataSourcesApi* | [**deleteDataSource**](docs/DataSourcesApi.md#deletedatasource) | **DELETE** /v1/data-sources/{data_source_id} | Delete Data Source Handler
 *DataSourcesApi* | [**deleteDataSourceSchema**](docs/DataSourcesApi.md#deletedatasourceschema) | **DELETE** /v1/data-sources/{data_source_id}/schemas/{schema_id} | Delete Data Source Schema Handler
 *DataSourcesApi* | [**deleteDataSourceTable**](docs/DataSourcesApi.md#deletedatasourcetable) | **DELETE** /v1/data-sources/{data_source_id}/tables/{table_id} | Delete Data Source Table Handler
-*DataSourcesApi* | [**generateDataSourceDescription**](docs/DataSourcesApi.md#generatedatasourcedescription) | **POST** /v1/data-sources/{data_source_id}/describe | Generate Data Source Description Handler
+*DataSourcesApi* | [**describeDataSourceTables**](docs/DataSourcesApi.md#describedatasourcetables) | **POST** /v1/data-sources/{data_source_id}/describe | Describe Data Source Tables Handler
 *DataSourcesApi* | [**getDataSource**](docs/DataSourcesApi.md#getdatasource) | **GET** /v1/data-sources/{data_source_id} | Get Data Source Handler
 *DataSourcesApi* | [**getDataSourceCatalog**](docs/DataSourcesApi.md#getdatasourcecatalog) | **GET** /v1/data-sources/{data_source_id}/catalog | Get Data Source Catalog Handler
 *DataSourcesApi* | [**listDataSourceSchemas**](docs/DataSourcesApi.md#listdatasourceschemas) | **GET** /v1/data-sources/{data_source_id}/schemas | List Data Source Schemas Handler
 *DataSourcesApi* | [**modelDataSourceTable**](docs/DataSourcesApi.md#modeldatasourcetable) | **POST** /v1/data-sources/{data_source_id}/tables | Model Data Source Table Handler
 *DataSourcesApi* | [**modelDataSourceTables**](docs/DataSourcesApi.md#modeldatasourcetables) | **POST** /v1/data-sources/{data_source_id}/tables/batch | Model Data Source Tables Handler
 *DataSourcesApi* | [**queryDataSource**](docs/DataSourcesApi.md#querydatasource) | **POST** /v1/data-sources/{data_source_id}/query | Query Data Source Handler
+*DataSourcesApi* | [**searchDataSourceTables**](docs/DataSourcesApi.md#searchdatasourcetables) | **POST** /v1/data-sources/tables/search | Search Data Source Tables Handler
+*DataSourcesApi* | [**syncDataSource**](docs/DataSourcesApi.md#syncdatasource) | **POST** /v1/data-sources/{data_source_id}/sync | Sync Data Source Handler
 *DataSourcesApi* | [**testDataSourceConnection**](docs/DataSourcesApi.md#testdatasourceconnection) | **POST** /v1/data-sources/{data_source_id}/test | Test Data Source Connection Handler
+*DataSourcesApi* | [**testDataSourceConnectionFresh**](docs/DataSourcesApi.md#testdatasourceconnectionfresh) | **POST** /v1/data-sources/test-connection | Test Data Source Connection Fresh Handler
 *DataSourcesApi* | [**updateDataSource**](docs/DataSourcesApi.md#updatedatasourceoperation) | **PATCH** /v1/data-sources/{data_source_id} | Update Data Source Handler
 *DataSourcesApi* | [**updateDataSourceTable**](docs/DataSourcesApi.md#updatedatasourcetable) | **PATCH** /v1/data-sources/{data_source_id}/tables/{table_id} | Update Data Source Table Handler
 *DefaultApi* | [**healthCheck**](docs/DefaultApi.md#healthcheck) | **GET** /healthz | Health Check Handler
@@ -238,6 +241,11 @@ All URIs are relative to *http://localhost:8000*
 *SectionsApi* | [**updateSection**](docs/SectionsApi.md#updatesectionoperation) | **PATCH** /v1/sections/{section_id} | Update Section Handler
 *SubscriptionsApi* | [**changeTenantSubscription**](docs/SubscriptionsApi.md#changetenantsubscription) | **POST** /v1/tenants/{tenant_id}/subscriptions | Change Tenant Subscription Handler
 *SubscriptionsApi* | [**getTenantSubscription**](docs/SubscriptionsApi.md#gettenantsubscription) | **GET** /v1/tenants/{tenant_id}/subscriptions | Get Tenant Subscription Handler
+*SystemJobsApi* | [**cancelTemporalWorkflow**](docs/SystemJobsApi.md#canceltemporalworkflow) | **DELETE** /v1/system-jobs/{workflow_id} | Cancel Temporal Workflow Handler
+*SystemJobsApi* | [**dvWorkflowRerun**](docs/SystemJobsApi.md#dvworkflowrerun) | **POST** /v1/system-jobs/document_versions/{workflow_id} | Dv Workflow Rerun Handler
+*SystemJobsApi* | [**getDvWorkflow**](docs/SystemJobsApi.md#getdvworkflow) | **GET** /v1/system-jobs/document_versions/{workflow_id} | Get Dv Workflow Handler
+*SystemJobsApi* | [**getTemporalWorkflowStatus**](docs/SystemJobsApi.md#gettemporalworkflowstatus) | **GET** /v1/system-jobs/{workflow_id} | Get Temporal Workflow Status Handler
+*SystemJobsApi* | [**listDvWorkflows**](docs/SystemJobsApi.md#listdvworkflows) | **GET** /v1/system-jobs/document_versions | List Dv Workflows Handler
 *TagsApi* | [**createTag**](docs/TagsApi.md#createtagoperation) | **POST** /v1/tags | Create Tag Handler
 *TagsApi* | [**deleteTag**](docs/TagsApi.md#deletetag) | **DELETE** /v1/tags/{tag_id} | Delete Tag Handler
 *TagsApi* | [**getTag**](docs/TagsApi.md#gettag) | **GET** /v1/tags/{tag_id} | Get Tag Handler
@@ -314,11 +322,6 @@ All URIs are relative to *http://localhost:8000*
 *WorkflowRunsApi* | [**stopWorkflowRun**](docs/WorkflowRunsApi.md#stopworkflowrun) | **POST** /v1/workflow-runs/{run_id}/stop | Stop Workflow Run Handler
 *WorkflowRunsApi* | [**updateWorkflowRun**](docs/WorkflowRunsApi.md#updateworkflowrunoperation) | **PATCH** /v1/workflow-runs/{run_id} | Update Workflow Run Handler
 *WorkflowRunsApi* | [**workflowRunCallback**](docs/WorkflowRunsApi.md#workflowruncallbackoperation) | **POST** /v1/workflow-runs/{run_id}/callback | Workflow Run Callback Handler
-*WorkflowsApi* | [**cancelTemporalWorkflow**](docs/WorkflowsApi.md#canceltemporalworkflow) | **DELETE** /v1/workflows/{workflow_id} | Cancel Temporal Workflow Handler
-*WorkflowsApi* | [**dvWorkflowRerun**](docs/WorkflowsApi.md#dvworkflowrerun) | **POST** /v1/workflows/document_versions/{workflow_id} | Dv Workflow Rerun Handler
-*WorkflowsApi* | [**getDvWorkflow**](docs/WorkflowsApi.md#getdvworkflow) | **GET** /v1/workflows/document_versions/{workflow_id} | Get Dv Workflow Handler
-*WorkflowsApi* | [**getTemporalWorkflowStatus**](docs/WorkflowsApi.md#gettemporalworkflowstatus) | **GET** /v1/workflows/{workflow_id} | Get Temporal Workflow Status Handler
-*WorkflowsApi* | [**listDvWorkflows**](docs/WorkflowsApi.md#listdvworkflows) | **GET** /v1/workflows/document_versions | List Dv Workflows Handler
 
 
 ### Models
@@ -392,7 +395,7 @@ All URIs are relative to *http://localhost:8000*
 - [CreateThreadRequest](docs/CreateThreadRequest.md)
 - [CreateWorkflowDefinitionRequest](docs/CreateWorkflowDefinitionRequest.md)
 - [DataSourceCatalogResponse](docs/DataSourceCatalogResponse.md)
-- [DataSourceDescriptionResponse](docs/DataSourceDescriptionResponse.md)
+- [DataSourceDescribeResponse](docs/DataSourceDescribeResponse.md)
 - [DataSourceDetailResponse](docs/DataSourceDetailResponse.md)
 - [DataSourceEngine](docs/DataSourceEngine.md)
 - [DataSourceQueryRequest](docs/DataSourceQueryRequest.md)
@@ -401,6 +404,7 @@ All URIs are relative to *http://localhost:8000*
 - [DataSourceSchemaListItem](docs/DataSourceSchemaListItem.md)
 - [DataSourceSchemaListResponse](docs/DataSourceSchemaListResponse.md)
 - [DataSourceSchemaResponse](docs/DataSourceSchemaResponse.md)
+- [DataSourceSyncResponse](docs/DataSourceSyncResponse.md)
 - [DataSourceTableResponse](docs/DataSourceTableResponse.md)
 - [DiffFormat](docs/DiffFormat.md)
 - [DiffRow](docs/DiffRow.md)
@@ -545,9 +549,13 @@ All URIs are relative to *http://localhost:8000*
 - [ResponseSendPwResetEmail](docs/ResponseSendPwResetEmail.md)
 - [RevisionEdit](docs/RevisionEdit.md)
 - [RootResponse](docs/RootResponse.md)
+- [RunFolder](docs/RunFolder.md)
+- [RunFolderRef](docs/RunFolderRef.md)
 - [SSOInitiateResponse](docs/SSOInitiateResponse.md)
 - [ScoredChunkResponse](docs/ScoredChunkResponse.md)
 - [SearchSortOrder](docs/SearchSortOrder.md)
+- [SearchTablesRequest](docs/SearchTablesRequest.md)
+- [SearchTablesResponse](docs/SearchTablesResponse.md)
 - [SearchType](docs/SearchType.md)
 - [SearchablePartType](docs/SearchablePartType.md)
 - [SeatQuotaStatus](docs/SeatQuotaStatus.md)
@@ -575,6 +583,7 @@ All URIs are relative to *http://localhost:8000*
 - [SupportedIdP](docs/SupportedIdP.md)
 - [SupportedLanguage](docs/SupportedLanguage.md)
 - [TableCellChange](docs/TableCellChange.md)
+- [TableSearchResult](docs/TableSearchResult.md)
 - [TagOrder](docs/TagOrder.md)
 - [TagResponse](docs/TagResponse.md)
 - [TemporalWorkflowStatusResponse](docs/TemporalWorkflowStatusResponse.md)
@@ -588,6 +597,8 @@ All URIs are relative to *http://localhost:8000*
 - [TenantUserOrder](docs/TenantUserOrder.md)
 - [TenantUserResponse](docs/TenantUserResponse.md)
 - [TenantUserRole](docs/TenantUserRole.md)
+- [TestConnectionRequest](docs/TestConnectionRequest.md)
+- [TestConnectionResponse](docs/TestConnectionResponse.md)
 - [TextDiff](docs/TextDiff.md)
 - [TextPart](docs/TextPart.md)
 - [TextPartOrReasoningPartOrToolPartOrDocEditPart](docs/TextPartOrReasoningPartOrToolPartOrDocEditPart.md)
@@ -596,6 +607,7 @@ All URIs are relative to *http://localhost:8000*
 - [ThreadMessageResponse](docs/ThreadMessageResponse.md)
 - [ThreadOrder](docs/ThreadOrder.md)
 - [ThreadResponse](docs/ThreadResponse.md)
+- [ToolDisplayType](docs/ToolDisplayType.md)
 - [ToolPart](docs/ToolPart.md)
 - [ToolStatus](docs/ToolStatus.md)
 - [TransferOwnerRequest](docs/TransferOwnerRequest.md)
@@ -673,7 +685,7 @@ and is automatically generated by the
 [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `0.1.0`
-- Package version: `1.132.0`
+- Package version: `1.133.0`
 - Generator version: `7.21.0`
 - Build package: `org.openapitools.codegen.languages.TypeScriptFetchClientCodegen`
 

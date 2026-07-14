@@ -1,6 +1,6 @@
 # UpdateDataSourceRequest
 
-Rename and/or move a connector (PATCH). Both fields optional.  A body with both ``None`` is rejected as a no-op 400. ``name`` renames the connector path_part; ``parent_path_part_id`` moves it under a new FOLDER (the move cascades ``materialized_path`` to the modeled-table children). Connection credentials and engine are not editable here.
+Rename, move, and/or re-credential a connector (PATCH). All optional.  A body with every field ``None`` is rejected as a no-op 400. ``name`` renames the connector path_part; ``parent_path_part_id`` moves it under a new FOLDER (the move cascades ``materialized_path`` to the modeled-table children). ``connection_config`` supplies a full, fresh credential set (never a partial patch — the stored password is never read back or echoed); it is re-validated before persisting. ``engine`` stays immutable: changing it would invalidate every modeled table's dialect assumptions.
 
 ## Properties
 
@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | [optional] 
 **parent_path_part_id** | **UUID** | New parent FOLDER path_part to move the connector under. | [optional] 
+**connection_config** | [**ConnectionConfig**](ConnectionConfig.md) | Fresh, whole-object credentials to replace the stored ones. | [optional] 
 
 ## Example
 

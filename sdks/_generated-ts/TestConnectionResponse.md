@@ -1,24 +1,25 @@
 
-# UserMessageResponse
+# TestConnectionResponse
 
+Connection-test outcome carried in the body (200 either way).  ``error`` holds the failure detail when ``success`` is false so the FE can render inline validation instead of handling a 400.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`workflowId` | string
-`userMessageId` | string
+`success` | boolean
+`error` | string
 
 ## Example
 
 ```typescript
-import type { UserMessageResponse } from '@knowledge-stack/ksapi'
+import type { TestConnectionResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "workflowId": null,
-  "userMessageId": null,
-} satisfies UserMessageResponse
+  "success": null,
+  "error": null,
+} satisfies TestConnectionResponse
 
 console.log(example)
 
@@ -27,7 +28,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as UserMessageResponse
+const exampleParsed = JSON.parse(exampleJSON) as TestConnectionResponse
 console.log(exampleParsed)
 ```
 

@@ -8,14 +8,17 @@ Method | HTTP request | Description
 [**delete_data_source**](DataSourcesApi.md#delete_data_source) | **DELETE** /v1/data-sources/{data_source_id} | Delete Data Source Handler
 [**delete_data_source_schema**](DataSourcesApi.md#delete_data_source_schema) | **DELETE** /v1/data-sources/{data_source_id}/schemas/{schema_id} | Delete Data Source Schema Handler
 [**delete_data_source_table**](DataSourcesApi.md#delete_data_source_table) | **DELETE** /v1/data-sources/{data_source_id}/tables/{table_id} | Delete Data Source Table Handler
-[**generate_data_source_description**](DataSourcesApi.md#generate_data_source_description) | **POST** /v1/data-sources/{data_source_id}/describe | Generate Data Source Description Handler
+[**describe_data_source_tables**](DataSourcesApi.md#describe_data_source_tables) | **POST** /v1/data-sources/{data_source_id}/describe | Describe Data Source Tables Handler
 [**get_data_source**](DataSourcesApi.md#get_data_source) | **GET** /v1/data-sources/{data_source_id} | Get Data Source Handler
 [**get_data_source_catalog**](DataSourcesApi.md#get_data_source_catalog) | **GET** /v1/data-sources/{data_source_id}/catalog | Get Data Source Catalog Handler
 [**list_data_source_schemas**](DataSourcesApi.md#list_data_source_schemas) | **GET** /v1/data-sources/{data_source_id}/schemas | List Data Source Schemas Handler
 [**model_data_source_table**](DataSourcesApi.md#model_data_source_table) | **POST** /v1/data-sources/{data_source_id}/tables | Model Data Source Table Handler
 [**model_data_source_tables**](DataSourcesApi.md#model_data_source_tables) | **POST** /v1/data-sources/{data_source_id}/tables/batch | Model Data Source Tables Handler
 [**query_data_source**](DataSourcesApi.md#query_data_source) | **POST** /v1/data-sources/{data_source_id}/query | Query Data Source Handler
+[**search_data_source_tables**](DataSourcesApi.md#search_data_source_tables) | **POST** /v1/data-sources/tables/search | Search Data Source Tables Handler
+[**sync_data_source**](DataSourcesApi.md#sync_data_source) | **POST** /v1/data-sources/{data_source_id}/sync | Sync Data Source Handler
 [**test_data_source_connection**](DataSourcesApi.md#test_data_source_connection) | **POST** /v1/data-sources/{data_source_id}/test | Test Data Source Connection Handler
+[**test_data_source_connection_fresh**](DataSourcesApi.md#test_data_source_connection_fresh) | **POST** /v1/data-sources/test-connection | Test Data Source Connection Fresh Handler
 [**update_data_source**](DataSourcesApi.md#update_data_source) | **PATCH** /v1/data-sources/{data_source_id} | Update Data Source Handler
 [**update_data_source_table**](DataSourcesApi.md#update_data_source_table) | **PATCH** /v1/data-sources/{data_source_id}/tables/{table_id} | Update Data Source Table Handler
 
@@ -116,9 +119,10 @@ Delete Data Source Handler
 Move a connector and its schemas/tables to trash.
 
 Soft-delete via the path_part subtree (schemas + tables are children, so
-they trash with it). The connector's generated ``.overview`` description
-Document IS ingested, so its Qdrant points are flipped to trashed via the
-set-trashed workflow (best-effort, mirrors the document delete path).
+they trash with it). Each modeled table's summary Qdrant point carries that
+table's path_part, so the set-trashed workflow flips it to trashed too —
+keeping trashed tables out of the agent's table search (best-effort, mirrors
+the document delete path).
 
 ### Example
 
@@ -288,7 +292,7 @@ void (empty response body)
 
 Delete Data Source Table Handler
 
-Un-model a single table (hard-delete it from its schema).
+Un-model a single table (hard-delete it) and purge its summary point.
 
 ### Example
 
@@ -369,16 +373,19 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **generate_data_source_description**
-> DataSourceDescriptionResponse generate_data_source_description(data_source_id)
+# **describe_data_source_tables**
+> DataSourceDescribeResponse describe_data_source_tables(data_source_id)
 
-Generate Data Source Description Handler
+Describe Data Source Tables Handler
 
-(Re)generate the connector's hidden, searchable 'Database overview' Document.
+Summarize + embed each modeled table so the agent can find it by meaning.
 
-Requires ``can_write`` on the connector. The structural overview is
-deterministic; an LLM prose summary is prepended best-effort. The document
-ingests through the normal pipeline so the agent's semantic search finds it.
+Requires ``can_write`` on the connector. Writes one dense Qdrant point per
+table (``object_kind=table_description``) so the agent's table search
+surfaces the right table across the corpus, while users never see the
+summaries in ordinary chunk search. Content-hash gated: a table whose
+summary + exposed columns are unchanged makes no LLM/embedding call, so a
+repeat call is cheap.
 
 ### Example
 
@@ -387,7 +394,7 @@ ingests through the normal pipeline so the agent's semantic search finds it.
 
 ```python
 import ksapi
-from ksapi.models.data_source_description_response import DataSourceDescriptionResponse
+from ksapi.models.data_source_describe_response import DataSourceDescribeResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -420,12 +427,12 @@ with ksapi.ApiClient(configuration) as api_client:
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
-        # Generate Data Source Description Handler
-        api_response = api_instance.generate_data_source_description(data_source_id)
-        print("The response of DataSourcesApi->generate_data_source_description:\n")
+        # Describe Data Source Tables Handler
+        api_response = api_instance.describe_data_source_tables(data_source_id)
+        print("The response of DataSourcesApi->describe_data_source_tables:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling DataSourcesApi->generate_data_source_description: %s\n" % e)
+        print("Exception when calling DataSourcesApi->describe_data_source_tables: %s\n" % e)
 ```
 
 
@@ -439,7 +446,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**DataSourceDescriptionResponse**](DataSourceDescriptionResponse.md)
+[**DataSourceDescribeResponse**](DataSourceDescribeResponse.md)
 
 ### Authorization
 
@@ -999,6 +1006,192 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **search_data_source_tables**
+> SearchTablesResponse search_data_source_tables(search_tables_request)
+
+Search Data Source Tables Handler
+
+Find modeled tables by the meaning of their summaries (agent discovery).
+
+Dense semantic search over each table's summary, scoped to the tenant
+(optionally one connector). Only tables the caller can read are returned;
+users never see these summaries in ordinary chunk search.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.search_tables_request import SearchTablesRequest
+from ksapi.models.search_tables_response import SearchTablesResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DataSourcesApi(api_client)
+    search_tables_request = ksapi.SearchTablesRequest() # SearchTablesRequest | 
+
+    try:
+        # Search Data Source Tables Handler
+        api_response = api_instance.search_data_source_tables(search_tables_request)
+        print("The response of DataSourcesApi->search_data_source_tables:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DataSourcesApi->search_data_source_tables: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **search_tables_request** | [**SearchTablesRequest**](SearchTablesRequest.md)|  | 
+
+### Return type
+
+[**SearchTablesResponse**](SearchTablesResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **sync_data_source**
+> DataSourceSyncResponse sync_data_source(data_source_id)
+
+Sync Data Source Handler
+
+Reconcile modeled tables against the live external catalog.
+
+Requires ``can_write``. Re-introspects each modeled schema and, per table:
+a schema change (columns added/removed/retyped) refreshes ``column_config``
+(preserving the admin's ``exposed``/``comment`` field-modeling) and
+re-summarizes + re-embeds; an unchanged table is a no-op; a table dropped
+from the source is soft-deleted (keeping the "was modeled, now gone" record)
+and its embedding purged. It never models tables that were not imported.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.data_source_sync_response import DataSourceSyncResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DataSourcesApi(api_client)
+    data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+
+    try:
+        # Sync Data Source Handler
+        api_response = api_instance.sync_data_source(data_source_id)
+        print("The response of DataSourcesApi->sync_data_source:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DataSourcesApi->sync_data_source: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **data_source_id** | **UUID**|  | 
+
+### Return type
+
+[**DataSourceSyncResponse**](DataSourceSyncResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **test_data_source_connection**
 > test_data_source_connection(data_source_id)
 
@@ -1083,15 +1276,108 @@ void (empty response body)
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **test_data_source_connection_fresh**
+> TestConnectionResponse test_data_source_connection_fresh(test_connection_request)
+
+Test Data Source Connection Fresh Handler
+
+Probe fresh creds or a stored connector without persisting anything.
+
+Returns a 200 body describing success/failure (vs the 400 the create/test
+routes raise) so the FE can render inline connection validation.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.test_connection_request import TestConnectionRequest
+from ksapi.models.test_connection_response import TestConnectionResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DataSourcesApi(api_client)
+    test_connection_request = ksapi.TestConnectionRequest() # TestConnectionRequest | 
+
+    try:
+        # Test Data Source Connection Fresh Handler
+        api_response = api_instance.test_data_source_connection_fresh(test_connection_request)
+        print("The response of DataSourcesApi->test_data_source_connection_fresh:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DataSourcesApi->test_data_source_connection_fresh: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **test_connection_request** | [**TestConnectionRequest**](TestConnectionRequest.md)|  | 
+
+### Return type
+
+[**TestConnectionResponse**](TestConnectionResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_data_source**
 > DataSourceResponse update_data_source(data_source_id, update_data_source_request)
 
 Update Data Source Handler
 
-Rename and/or move a connector.
+Rename, move, and/or re-credential a connector.
 
 Requires ``can_write`` on the connector (and on the destination folder
-for a move).
+for a move). Fresh ``connection_config`` is re-validated against the DB
+before persisting (bad creds → 400, consistent with create); creds are
+never echoed back. ``engine`` is immutable.
 
 ### Example
 
@@ -1181,7 +1467,7 @@ Name | Type | Description  | Notes
 
 Update Data Source Table Handler
 
-Field-modeling: update the table's description / column allowlist.
+Field-modeling: update the table's column allowlist.
 
 ### Example
 

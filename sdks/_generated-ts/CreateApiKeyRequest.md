@@ -17,8 +17,8 @@ import type { CreateApiKeyRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "name": null,
-  "expiresAt": null,
+  "name": rpa-invoice-bot,
+  "expiresAt": 2026-12-31T23:59:59Z,
 } satisfies CreateApiKeyRequest
 
 console.log(example)

@@ -8,14 +8,17 @@ All URIs are relative to *http://localhost:8000*
 | [**deleteDataSource**](DataSourcesApi.md#deletedatasource) | **DELETE** /v1/data-sources/{data_source_id} | Delete Data Source Handler |
 | [**deleteDataSourceSchema**](DataSourcesApi.md#deletedatasourceschema) | **DELETE** /v1/data-sources/{data_source_id}/schemas/{schema_id} | Delete Data Source Schema Handler |
 | [**deleteDataSourceTable**](DataSourcesApi.md#deletedatasourcetable) | **DELETE** /v1/data-sources/{data_source_id}/tables/{table_id} | Delete Data Source Table Handler |
-| [**generateDataSourceDescription**](DataSourcesApi.md#generatedatasourcedescription) | **POST** /v1/data-sources/{data_source_id}/describe | Generate Data Source Description Handler |
+| [**describeDataSourceTables**](DataSourcesApi.md#describedatasourcetables) | **POST** /v1/data-sources/{data_source_id}/describe | Describe Data Source Tables Handler |
 | [**getDataSource**](DataSourcesApi.md#getdatasource) | **GET** /v1/data-sources/{data_source_id} | Get Data Source Handler |
 | [**getDataSourceCatalog**](DataSourcesApi.md#getdatasourcecatalog) | **GET** /v1/data-sources/{data_source_id}/catalog | Get Data Source Catalog Handler |
 | [**listDataSourceSchemas**](DataSourcesApi.md#listdatasourceschemas) | **GET** /v1/data-sources/{data_source_id}/schemas | List Data Source Schemas Handler |
 | [**modelDataSourceTable**](DataSourcesApi.md#modeldatasourcetable) | **POST** /v1/data-sources/{data_source_id}/tables | Model Data Source Table Handler |
 | [**modelDataSourceTables**](DataSourcesApi.md#modeldatasourcetables) | **POST** /v1/data-sources/{data_source_id}/tables/batch | Model Data Source Tables Handler |
 | [**queryDataSource**](DataSourcesApi.md#querydatasource) | **POST** /v1/data-sources/{data_source_id}/query | Query Data Source Handler |
+| [**searchDataSourceTables**](DataSourcesApi.md#searchdatasourcetables) | **POST** /v1/data-sources/tables/search | Search Data Source Tables Handler |
+| [**syncDataSource**](DataSourcesApi.md#syncdatasource) | **POST** /v1/data-sources/{data_source_id}/sync | Sync Data Source Handler |
 | [**testDataSourceConnection**](DataSourcesApi.md#testdatasourceconnection) | **POST** /v1/data-sources/{data_source_id}/test | Test Data Source Connection Handler |
+| [**testDataSourceConnectionFresh**](DataSourcesApi.md#testdatasourceconnectionfresh) | **POST** /v1/data-sources/test-connection | Test Data Source Connection Fresh Handler |
 | [**updateDataSource**](DataSourcesApi.md#updatedatasourceoperation) | **PATCH** /v1/data-sources/{data_source_id} | Update Data Source Handler |
 | [**updateDataSourceTable**](DataSourcesApi.md#updatedatasourcetable) | **PATCH** /v1/data-sources/{data_source_id}/tables/{table_id} | Update Data Source Table Handler |
 
@@ -102,7 +105,7 @@ example().catch(console.error);
 
 Delete Data Source Handler
 
-Move a connector and its schemas/tables to trash.  Soft-delete via the path_part subtree (schemas + tables are children, so they trash with it). The connector\&#39;s generated &#x60;&#x60;.overview&#x60;&#x60; description Document IS ingested, so its Qdrant points are flipped to trashed via the set-trashed workflow (best-effort, mirrors the document delete path).
+Move a connector and its schemas/tables to trash.  Soft-delete via the path_part subtree (schemas + tables are children, so they trash with it). Each modeled table\&#39;s summary Qdrant point carries that table\&#39;s path_part, so the set-trashed workflow flips it to trashed too — keeping trashed tables out of the agent\&#39;s table search (best-effort, mirrors the document delete path).
 
 ### Example
 
@@ -255,7 +258,7 @@ example().catch(console.error);
 
 Delete Data Source Table Handler
 
-Un-model a single table (hard-delete it from its schema).
+Un-model a single table (hard-delete it) and purge its summary point.
 
 ### Example
 
@@ -327,13 +330,13 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## generateDataSourceDescription
+## describeDataSourceTables
 
-> DataSourceDescriptionResponse generateDataSourceDescription(dataSourceId)
+> DataSourceDescribeResponse describeDataSourceTables(dataSourceId)
 
-Generate Data Source Description Handler
+Describe Data Source Tables Handler
 
-(Re)generate the connector\&#39;s hidden, searchable \&#39;Database overview\&#39; Document.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector. The structural overview is deterministic; an LLM prose summary is prepended best-effort. The document ingests through the normal pipeline so the agent\&#39;s semantic search finds it.
+Summarize + embed each modeled table so the agent can find it by meaning.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector. Writes one dense Qdrant point per table (&#x60;&#x60;object_kind&#x3D;table_description&#x60;&#x60;) so the agent\&#39;s table search surfaces the right table across the corpus, while users never see the summaries in ordinary chunk search. Content-hash gated: a table whose summary + exposed columns are unchanged makes no LLM/embedding call, so a repeat call is cheap.
 
 ### Example
 
@@ -342,7 +345,7 @@ import {
   Configuration,
   DataSourcesApi,
 } from '@knowledge-stack/ksapi';
-import type { GenerateDataSourceDescriptionRequest } from '@knowledge-stack/ksapi';
+import type { DescribeDataSourceTablesRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
@@ -357,10 +360,10 @@ async function example() {
   const body = {
     // string
     dataSourceId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-  } satisfies GenerateDataSourceDescriptionRequest;
+  } satisfies DescribeDataSourceTablesRequest;
 
   try {
-    const data = await api.generateDataSourceDescription(body);
+    const data = await api.describeDataSourceTables(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -380,7 +383,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**DataSourceDescriptionResponse**](DataSourceDescriptionResponse.md)
+[**DataSourceDescribeResponse**](DataSourceDescribeResponse.md)
 
 ### Authorization
 
@@ -864,6 +867,156 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
+## searchDataSourceTables
+
+> SearchTablesResponse searchDataSourceTables(searchTablesRequest)
+
+Search Data Source Tables Handler
+
+Find modeled tables by the meaning of their summaries (agent discovery).  Dense semantic search over each table\&#39;s summary, scoped to the tenant (optionally one connector). Only tables the caller can read are returned; users never see these summaries in ordinary chunk search.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DataSourcesApi,
+} from '@knowledge-stack/ksapi';
+import type { SearchDataSourceTablesRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DataSourcesApi(config);
+
+  const body = {
+    // SearchTablesRequest
+    searchTablesRequest: ...,
+  } satisfies SearchDataSourceTablesRequest;
+
+  try {
+    const data = await api.searchDataSourceTables(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **searchTablesRequest** | [SearchTablesRequest](SearchTablesRequest.md) |  | |
+
+### Return type
+
+[**SearchTablesResponse**](SearchTablesResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## syncDataSource
+
+> DataSourceSyncResponse syncDataSource(dataSourceId)
+
+Sync Data Source Handler
+
+Reconcile modeled tables against the live external catalog.  Requires &#x60;&#x60;can_write&#x60;&#x60;. Re-introspects each modeled schema and, per table: a schema change (columns added/removed/retyped) refreshes &#x60;&#x60;column_config&#x60;&#x60; (preserving the admin\&#39;s &#x60;&#x60;exposed&#x60;&#x60;/&#x60;&#x60;comment&#x60;&#x60; field-modeling) and re-summarizes + re-embeds; an unchanged table is a no-op; a table dropped from the source is soft-deleted (keeping the \&quot;was modeled, now gone\&quot; record) and its embedding purged. It never models tables that were not imported.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DataSourcesApi,
+} from '@knowledge-stack/ksapi';
+import type { SyncDataSourceRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DataSourcesApi(config);
+
+  const body = {
+    // string
+    dataSourceId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies SyncDataSourceRequest;
+
+  try {
+    const data = await api.syncDataSource(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **dataSourceId** | `string` |  | [Defaults to `undefined`] |
+
+### Return type
+
+[**DataSourceSyncResponse**](DataSourceSyncResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
 ## testDataSourceConnection
 
 > testDataSourceConnection(dataSourceId)
@@ -939,13 +1092,88 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
+## testDataSourceConnectionFresh
+
+> TestConnectionResponse testDataSourceConnectionFresh(testConnectionRequest)
+
+Test Data Source Connection Fresh Handler
+
+Probe fresh creds or a stored connector without persisting anything.  Returns a 200 body describing success/failure (vs the 400 the create/test routes raise) so the FE can render inline connection validation.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DataSourcesApi,
+} from '@knowledge-stack/ksapi';
+import type { TestDataSourceConnectionFreshRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DataSourcesApi(config);
+
+  const body = {
+    // TestConnectionRequest
+    testConnectionRequest: ...,
+  } satisfies TestDataSourceConnectionFreshRequest;
+
+  try {
+    const data = await api.testDataSourceConnectionFresh(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **testConnectionRequest** | [TestConnectionRequest](TestConnectionRequest.md) |  | |
+
+### Return type
+
+[**TestConnectionResponse**](TestConnectionResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
 ## updateDataSource
 
 > DataSourceResponse updateDataSource(dataSourceId, updateDataSourceRequest)
 
 Update Data Source Handler
 
-Rename and/or move a connector.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector (and on the destination folder for a move).
+Rename, move, and/or re-credential a connector.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector (and on the destination folder for a move). Fresh &#x60;&#x60;connection_config&#x60;&#x60; is re-validated against the DB before persisting (bad creds → 400, consistent with create); creds are never echoed back. &#x60;&#x60;engine&#x60;&#x60; is immutable.
 
 ### Example
 
@@ -1023,7 +1251,7 @@ example().catch(console.error);
 
 Update Data Source Table Handler
 
-Field-modeling: update the table\&#39;s description / column allowlist.
+Field-modeling: update the table\&#39;s column allowlist.
 
 ### Example
 

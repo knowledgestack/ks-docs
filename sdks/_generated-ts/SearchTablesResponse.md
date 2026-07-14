@@ -1,24 +1,23 @@
 
-# UserMessageResponse
+# SearchTablesResponse
 
+Ranked tables matching a summary search (readable by the caller).
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`workflowId` | string
-`userMessageId` | string
+`results` | [Array&lt;TableSearchResult&gt;](TableSearchResult.md)
 
 ## Example
 
 ```typescript
-import type { UserMessageResponse } from '@knowledge-stack/ksapi'
+import type { SearchTablesResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "workflowId": null,
-  "userMessageId": null,
-} satisfies UserMessageResponse
+  "results": null,
+} satisfies SearchTablesResponse
 
 console.log(example)
 
@@ -27,7 +26,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as UserMessageResponse
+const exampleParsed = JSON.parse(exampleJSON) as SearchTablesResponse
 console.log(exampleParsed)
 ```
 

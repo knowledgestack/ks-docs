@@ -23,14 +23,9 @@ Name | Type | Description | Notes
 **error** | **str** |  | 
 **auto_start** | **bool** | Whether the run dispatches itself once its &#x60;&#x60;inputs/&#x60;&#x60; uploads finish ingesting, with no separate Start call. | 
 **auto_start_user_message** | **str** | The note applied when this run auto-starts (set via create / PATCH &#x60;&#x60;user_message&#x60;&#x60;); null when none was supplied. | [optional] 
-**inputs_path_part_id** | **UUID** | FOLDER path_part of the run&#39;s &#x60;&#x60;inputs/&#x60;&#x60; subfolder | 
-**outputs_path_part_id** | **UUID** | FOLDER path_part of the run&#39;s &#x60;&#x60;outputs/&#x60;&#x60; subfolder | 
-**discussions_path_part_id** | **UUID** | FOLDER path_part of the run&#39;s &#x60;&#x60;discussions/&#x60;&#x60; subfolder | 
-**input_path_part_ids** | **List[UUID]** | Flat list of currently-pinned KB-reference path_part ids (DOCUMENT + FOLDER). On a NOT_STARTED run this is the only surface for KB refs (run_snapshot is NULL). | [optional] 
-**output_assets** | [**List[WorkflowRunAsset]**](WorkflowRunAsset.md) | Generated files under &#x60;&#x60;outputs/&#x60;&#x60; (recursing nested folders), each carrying the DOCUMENT PDO &#x60;&#x60;id&#x60;&#x60; to feed straight to download / bulk-download. Empty until the run produces output. | [optional] 
-**input_assets** | [**List[WorkflowRunAsset]**](WorkflowRunAsset.md) | The run&#39;s input context: pinned KB references (&#x60;&#x60;input_path_part_ids&#x60;&#x60;) plus any files uploaded under &#x60;&#x60;inputs/&#x60;&#x60;, each resolved to its PDO &#x60;&#x60;id&#x60;&#x60; + metadata. | [optional] 
-**inputs_path** | **str** | Full materialized path of the run&#39;s &#x60;&#x60;inputs/&#x60;&#x60; folder | 
-**outputs_path** | **str** | Full materialized path of the run&#39;s &#x60;&#x60;outputs/&#x60;&#x60; folder | 
+**inputs** | [**RunFolder**](RunFolder.md) |  | 
+**outputs** | [**RunFolder**](RunFolder.md) |  | 
+**discussions** | [**RunFolderRef**](RunFolderRef.md) |  | 
 **excluded_common_files** | [**List[ExcludedCommonFile]**](ExcludedCommonFile.md) | Definition common files that were excluded from this run at Start (deleted or unreadable by the starter). Empty until Start builds the snapshot, and empty for the common happy path. | [optional] 
 **run_thread_id** | **UUID** | The run&#39;s primary chat thread (1:1). NULL while NOT_STARTED; set by Start. The FE opens the run by opening this thread. | [optional] 
 **owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the run, or null if unowned. Usually the same user as &#x60;&#x60;triggered_by&#x60;&#x60; unless ownership was transferred. | [optional] 

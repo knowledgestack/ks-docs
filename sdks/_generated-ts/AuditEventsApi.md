@@ -15,7 +15,7 @@ All URIs are relative to *http://localhost:8000*
 
 Export Audit Events Handler
 
-Export the tenant\&#39;s audit events as a CSV download (admin/owner only).  Same filters as &#x60;&#x60;list_audit_events&#x60;&#x60; but unpaginated — streams every matching event newest-first. Each row resolves the actor\&#39;s name and the subject\&#39;s name + path so an auditor can read the file directly in Excel.
+Export the tenant\&#39;s audit events as a CSV download (admin/owner only).  Same filters as &#x60;&#x60;list_audit_events&#x60;&#x60; but unpaginated — streams every matching event newest-first. Each row resolves the actor\&#39;s name and the subject\&#39;s name + path so an auditor can read the file directly in Excel.  With no &#x60;since&#x60;/&#x60;until&#x60; the export covers the entire audit log; pass either bound to narrow to an optional from/to window.
 
 ### Example
 
@@ -41,9 +41,9 @@ async function example() {
     actorUserId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | Filter to one event kind (optional)
     kind: kind_example,
-    // Date | Only events at or after this timestamp (optional)
+    // Date | Only events at or after this timestamp (from). Omit to export the entire audit log. Must not be in the future or after `until`. (optional)
     since: 2013-10-20T19:20:30+01:00,
-    // Date | Only events strictly before this timestamp (optional)
+    // Date | Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. (optional)
     until: 2013-10-20T19:20:30+01:00,
     // string | Scope to one document/folder/run subject (optional)
     subjectPathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
@@ -70,8 +70,8 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **actorUserId** | `string` | Filter to one actor | [Optional] [Defaults to `undefined`] |
 | **kind** | `string` | Filter to one event kind | [Optional] [Defaults to `undefined`] |
-| **since** | `Date` | Only events at or after this timestamp | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Only events strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **since** | `Date` | Only events at or after this timestamp (from). Omit to export the entire audit log. Must not be in the future or after &#x60;until&#x60;. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. | [Optional] [Defaults to `undefined`] |
 | **subjectPathPartId** | `string` | Scope to one document/folder/run subject | [Optional] [Defaults to `undefined`] |
 | **recursive** | `boolean` | Include the subject\&#39;s descendants (needs subject) | [Optional] [Defaults to `false`] |
 
@@ -105,7 +105,7 @@ example().catch(console.error);
 
 List Audit Events Handler
 
-List the tenant\&#39;s audit events, newest first (admin/owner only).  Returns every event in the caller\&#39;s own tenant — ADMIN/OWNER bypass path permissions by design. Filter by actor, kind, time window, and/or a subject subtree. Each event carries its resolved actor name.
+List the tenant\&#39;s audit events, newest first (admin/owner only).  Returns every event in the caller\&#39;s own tenant — ADMIN/OWNER bypass path permissions by design. Filter by actor, kind, an optional &#x60;since&#x60;(from)/ &#x60;until&#x60;(to) window, and/or a subject subtree. Each event carries its resolved actor name.
 
 ### Example
 
@@ -131,9 +131,9 @@ async function example() {
     actorUserId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | Filter to one event kind (optional)
     kind: kind_example,
-    // Date | Only events at or after this timestamp (optional)
+    // Date | Only events at or after this timestamp (from). Omit for no lower bound. Must not be in the future or after `until`. (optional)
     since: 2013-10-20T19:20:30+01:00,
-    // Date | Only events strictly before this timestamp (optional)
+    // Date | Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. (optional)
     until: 2013-10-20T19:20:30+01:00,
     // string | Scope to one document/folder/run subject (optional)
     subjectPathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
@@ -166,8 +166,8 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **actorUserId** | `string` | Filter to one actor | [Optional] [Defaults to `undefined`] |
 | **kind** | `string` | Filter to one event kind | [Optional] [Defaults to `undefined`] |
-| **since** | `Date` | Only events at or after this timestamp | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Only events strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **since** | `Date` | Only events at or after this timestamp (from). Omit for no lower bound. Must not be in the future or after &#x60;until&#x60;. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. | [Optional] [Defaults to `undefined`] |
 | **subjectPathPartId** | `string` | Scope to one document/folder/run subject | [Optional] [Defaults to `undefined`] |
 | **recursive** | `boolean` | Include the subject\&#39;s descendants (needs subject) | [Optional] [Defaults to `false`] |
 | **sortDir** | `SortDirection` | Sort by timestamp (default: DESC, newest first) | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |

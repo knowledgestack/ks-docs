@@ -1,14 +1,14 @@
-# ksapi.WorkflowsApi
+# ksapi.SystemJobsApi
 
 All URIs are relative to *http://localhost:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**cancel_temporal_workflow**](WorkflowsApi.md#cancel_temporal_workflow) | **DELETE** /v1/workflows/{workflow_id} | Cancel Temporal Workflow Handler
-[**dv_workflow_rerun**](WorkflowsApi.md#dv_workflow_rerun) | **POST** /v1/workflows/document_versions/{workflow_id} | Dv Workflow Rerun Handler
-[**get_dv_workflow**](WorkflowsApi.md#get_dv_workflow) | **GET** /v1/workflows/document_versions/{workflow_id} | Get Dv Workflow Handler
-[**get_temporal_workflow_status**](WorkflowsApi.md#get_temporal_workflow_status) | **GET** /v1/workflows/{workflow_id} | Get Temporal Workflow Status Handler
-[**list_dv_workflows**](WorkflowsApi.md#list_dv_workflows) | **GET** /v1/workflows/document_versions | List Dv Workflows Handler
+[**cancel_temporal_workflow**](SystemJobsApi.md#cancel_temporal_workflow) | **DELETE** /v1/system-jobs/{workflow_id} | Cancel Temporal Workflow Handler
+[**dv_workflow_rerun**](SystemJobsApi.md#dv_workflow_rerun) | **POST** /v1/system-jobs/document_versions/{workflow_id} | Dv Workflow Rerun Handler
+[**get_dv_workflow**](SystemJobsApi.md#get_dv_workflow) | **GET** /v1/system-jobs/document_versions/{workflow_id} | Get Dv Workflow Handler
+[**get_temporal_workflow_status**](SystemJobsApi.md#get_temporal_workflow_status) | **GET** /v1/system-jobs/{workflow_id} | Get Temporal Workflow Status Handler
+[**list_dv_workflows**](SystemJobsApi.md#list_dv_workflows) | **GET** /v1/system-jobs/document_versions | List Dv Workflows Handler
 
 
 # **cancel_temporal_workflow**
@@ -57,16 +57,16 @@ configuration = ksapi.Configuration(
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ksapi.WorkflowsApi(api_client)
+    api_instance = ksapi.SystemJobsApi(api_client)
     workflow_id = 'workflow_id_example' # str | 
 
     try:
         # Cancel Temporal Workflow Handler
         api_response = api_instance.cancel_temporal_workflow(workflow_id)
-        print("The response of WorkflowsApi->cancel_temporal_workflow:\n")
+        print("The response of SystemJobsApi->cancel_temporal_workflow:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkflowsApi->cancel_temporal_workflow: %s\n" % e)
+        print("Exception when calling SystemJobsApi->cancel_temporal_workflow: %s\n" % e)
 ```
 
 
@@ -147,16 +147,16 @@ configuration = ksapi.Configuration(
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ksapi.WorkflowsApi(api_client)
+    api_instance = ksapi.SystemJobsApi(api_client)
     workflow_id = 'workflow_id_example' # str | 
 
     try:
         # Dv Workflow Rerun Handler
         api_response = api_instance.dv_workflow_rerun(workflow_id)
-        print("The response of WorkflowsApi->dv_workflow_rerun:\n")
+        print("The response of SystemJobsApi->dv_workflow_rerun:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkflowsApi->dv_workflow_rerun: %s\n" % e)
+        print("Exception when calling SystemJobsApi->dv_workflow_rerun: %s\n" % e)
 ```
 
 
@@ -234,16 +234,16 @@ configuration = ksapi.Configuration(
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ksapi.WorkflowsApi(api_client)
+    api_instance = ksapi.SystemJobsApi(api_client)
     workflow_id = 'workflow_id_example' # str | 
 
     try:
         # Get Dv Workflow Handler
         api_response = api_instance.get_dv_workflow(workflow_id)
-        print("The response of WorkflowsApi->get_dv_workflow:\n")
+        print("The response of SystemJobsApi->get_dv_workflow:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkflowsApi->get_dv_workflow: %s\n" % e)
+        print("Exception when calling SystemJobsApi->get_dv_workflow: %s\n" % e)
 ```
 
 
@@ -321,16 +321,16 @@ configuration = ksapi.Configuration(
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ksapi.WorkflowsApi(api_client)
+    api_instance = ksapi.SystemJobsApi(api_client)
     workflow_id = 'workflow_id_example' # str | 
 
     try:
         # Get Temporal Workflow Status Handler
         api_response = api_instance.get_temporal_workflow_status(workflow_id)
-        print("The response of WorkflowsApi->get_temporal_workflow_status:\n")
+        print("The response of SystemJobsApi->get_temporal_workflow_status:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkflowsApi->get_temporal_workflow_status: %s\n" % e)
+        print("Exception when calling SystemJobsApi->get_temporal_workflow_status: %s\n" % e)
 ```
 
 
@@ -410,17 +410,17 @@ configuration = ksapi.Configuration(
 # Enter a context with an instance of the API client
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = ksapi.WorkflowsApi(api_client)
+    api_instance = ksapi.SystemJobsApi(api_client)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
 
     try:
         # List Dv Workflows Handler
         api_response = api_instance.list_dv_workflows(limit=limit, offset=offset)
-        print("The response of WorkflowsApi->list_dv_workflows:\n")
+        print("The response of SystemJobsApi->list_dv_workflows:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling WorkflowsApi->list_dv_workflows: %s\n" % e)
+        print("Exception when calling SystemJobsApi->list_dv_workflows: %s\n" % e)
 ```
 
 

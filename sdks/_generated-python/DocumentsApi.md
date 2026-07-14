@@ -376,7 +376,10 @@ Ingest Document Handler
 
 Upload a file, create document + version, and trigger ingestion workflow.
 
-Returns 201 with the Temporal workflow ID.
+Returns 201 immediately with the Temporal ``workflow_id``. Ingestion runs in
+the background — poll ``GET /v1/system-jobs/document_versions/{workflow_id}``
+(also given in the ``Location`` header) until ``status`` is terminal (anything
+other than ``pending``/``processing``). There is no completion webhook.
 
 ### Example
 
@@ -471,7 +474,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Successful Response |  -  |
+**201** | Successful Response |  * Location - Poll this run resource until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED. <br>  |
 **422** | Validation Error |  -  |
 **0** | Error response. |  -  |
 
@@ -489,7 +492,9 @@ uploads the file to S3, and starts the ingestion workflow. Upon successful
 ingestion, the new version is automatically activated (set as the document's
 active_version) and the old version's Qdrant points are deactivated.
 
-Returns 201 with the Temporal workflow ID.
+Returns 201 immediately with the Temporal ``workflow_id``. Ingestion runs in
+the background — poll ``GET /v1/system-jobs/document_versions/{workflow_id}``
+(also given in the ``Location`` header) until ``status`` is terminal.
 
 ### Example
 
@@ -582,7 +587,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**201** | Successful Response |  -  |
+**201** | Successful Response |  * Location - Poll this run resource until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED. <br>  |
 **422** | Validation Error |  -  |
 **0** | Error response. |  -  |
 

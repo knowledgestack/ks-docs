@@ -1,24 +1,29 @@
 
-# UserMessageResponse
+# DataSourceSyncResponse
 
+Result of reconciling modeled tables against the live external catalog.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`workflowId` | string
-`userMessageId` | string
+`dataSourceId` | string
+`updated` | number
+`unchanged` | number
+`deleted` | number
 
 ## Example
 
 ```typescript
-import type { UserMessageResponse } from '@knowledge-stack/ksapi'
+import type { DataSourceSyncResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "workflowId": null,
-  "userMessageId": null,
-} satisfies UserMessageResponse
+  "dataSourceId": null,
+  "updated": null,
+  "unchanged": null,
+  "deleted": null,
+} satisfies DataSourceSyncResponse
 
 console.log(example)
 
@@ -27,7 +32,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as UserMessageResponse
+const exampleParsed = JSON.parse(exampleJSON) as DataSourceSyncResponse
 console.log(exampleParsed)
 ```
 

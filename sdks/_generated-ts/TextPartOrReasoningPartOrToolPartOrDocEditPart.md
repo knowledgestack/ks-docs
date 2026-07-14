@@ -21,6 +21,7 @@ Name | Type
 `isError` | boolean
 `durationMs` | number
 `extras` | { [key: string]: any; }
+`displayType` | [ToolDisplayType](ToolDisplayType.md)
 `documentId` | string
 `baseVersionId` | string
 `newVersionId` | string
@@ -49,6 +50,7 @@ const example = {
   "isError": null,
   "durationMs": null,
   "extras": null,
+  "displayType": null,
   "documentId": null,
   "baseVersionId": null,
   "newVersionId": null,

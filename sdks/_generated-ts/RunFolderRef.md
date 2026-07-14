@@ -1,33 +1,27 @@
 
-# CreateApiKeyResponse
+# RunFolderRef
 
-Response after creating an API key. Contains the full key (shown once).
+A run\'s managed subfolder (inputs / outputs / discussions).  ``id`` is the FOLDER PDO id — pass it to ``list_folder_contents`` or ``bulk-download`` (``folder_ids``) to act on the whole folder in one call. ``path_part_id`` is the underlying path part.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
 `id` | string
-`name` | string
-`key` | string
-`keySuffix` | string
-`createdAt` | Date
-`expiresAt` | Date
+`pathPartId` | string
+`materializedPath` | string
 
 ## Example
 
 ```typescript
-import type { CreateApiKeyResponse } from '@knowledge-stack/ksapi'
+import type { RunFolderRef } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
   "id": null,
-  "name": null,
-  "key": sk-user-0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef,
-  "keySuffix": null,
-  "createdAt": null,
-  "expiresAt": null,
-} satisfies CreateApiKeyResponse
+  "pathPartId": null,
+  "materializedPath": null,
+} satisfies RunFolderRef
 
 console.log(example)
 
@@ -36,7 +30,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateApiKeyResponse
+const exampleParsed = JSON.parse(exampleJSON) as RunFolderRef
 console.log(exampleParsed)
 ```
 

@@ -7,7 +7,7 @@ Standard error body returned for every non-2xx response.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **detail** | **str** | Human-readable explanation of the error. | 
-**code** | **str** | Stable, machine-readable error code (e.g. &#39;not_found&#39;). | 
+**code** | **str** | Stable, machine-readable error code from a closed set. Branch on this instead of parsing &#39;detail&#39;. &#39;quota_exceeded&#39;/&#39;too_many_requests&#39; carry a Retry-After header; &#39;service_unavailable&#39; is retryable. | 
 **request_id** | **str** | Correlates to the x-request-id response header; quote it to support. | [optional] 
 
 ## Example

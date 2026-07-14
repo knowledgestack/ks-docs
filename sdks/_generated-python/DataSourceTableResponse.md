@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **data_source_id** | **UUID** |  | 
 **data_source_schema_id** | **UUID** | PDO id of the parent schema this table belongs to | 
 **table_name** | **str** |  | 
-**description** | **str** |  | 
 **column_config** | **List[Dict[str, object]]** |  | 
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
 **permissions** | [**ItemPermissions**](ItemPermissions.md) |  | 

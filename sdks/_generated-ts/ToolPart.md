@@ -19,6 +19,7 @@ Name | Type
 `isError` | boolean
 `durationMs` | number
 `extras` | { [key: string]: any; }
+`displayType` | [ToolDisplayType](ToolDisplayType.md)
 
 ## Example
 
@@ -40,6 +41,7 @@ const example = {
   "isError": null,
   "durationMs": null,
   "extras": null,
+  "displayType": null,
 } satisfies ToolPart
 
 console.log(example)

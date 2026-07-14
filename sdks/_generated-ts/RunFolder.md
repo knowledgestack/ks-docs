@@ -1,24 +1,29 @@
 
-# UserMessageResponse
+# RunFolder
 
+A run subfolder plus its resolved assets (``inputs/`` or ``outputs/``).
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`workflowId` | string
-`userMessageId` | string
+`id` | string
+`pathPartId` | string
+`materializedPath` | string
+`assets` | [Array&lt;WorkflowRunAsset&gt;](WorkflowRunAsset.md)
 
 ## Example
 
 ```typescript
-import type { UserMessageResponse } from '@knowledge-stack/ksapi'
+import type { RunFolder } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "workflowId": null,
-  "userMessageId": null,
-} satisfies UserMessageResponse
+  "id": null,
+  "pathPartId": null,
+  "materializedPath": null,
+  "assets": null,
+} satisfies RunFolder
 
 console.log(example)
 
@@ -27,7 +32,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as UserMessageResponse
+const exampleParsed = JSON.parse(exampleJSON) as RunFolder
 console.log(exampleParsed)
 ```
 

@@ -7,7 +7,6 @@ Field-modeling update for a modeled table (PATCH).
 
 Name | Type
 ------------ | -------------
-`description` | string
 `columnConfig` | [Array&lt;ColumnConfig&gt;](ColumnConfig.md)
 
 ## Example
@@ -17,7 +16,6 @@ import type { UpdateTableRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "description": null,
   "columnConfig": null,
 } satisfies UpdateTableRequest
 

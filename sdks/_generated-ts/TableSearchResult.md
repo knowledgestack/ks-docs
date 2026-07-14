@@ -1,25 +1,35 @@
 
-# DataSourceDescriptionResponse
+# TableSearchResult
 
-Result of (re)generating a connector\'s searchable description Document.
+A modeled table matched by summary search, with its query coordinates.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
 `dataSourceId` | string
-`descriptionDocumentId` | string
+`tableId` | string
+`schemaName` | string
+`tableName` | string
+`name` | string
+`summary` | string
+`score` | number
 
 ## Example
 
 ```typescript
-import type { DataSourceDescriptionResponse } from '@knowledge-stack/ksapi'
+import type { TableSearchResult } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
   "dataSourceId": null,
-  "descriptionDocumentId": null,
-} satisfies DataSourceDescriptionResponse
+  "tableId": null,
+  "schemaName": null,
+  "tableName": null,
+  "name": null,
+  "summary": null,
+  "score": null,
+} satisfies TableSearchResult
 
 console.log(example)
 
@@ -28,7 +38,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as DataSourceDescriptionResponse
+const exampleParsed = JSON.parse(exampleJSON) as TableSearchResult
 console.log(exampleParsed)
 ```
 

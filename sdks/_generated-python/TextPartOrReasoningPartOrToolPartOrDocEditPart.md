@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **is_error** | **bool** |  | [optional] [default to False]
 **duration_ms** | **int** |  | [optional] 
 **extras** | **Dict[str, object]** |  | [optional] 
+**display_type** | [**ToolDisplayType**](ToolDisplayType.md) |  | [optional] 
 **document_id** | **UUID** |  | 
 **base_version_id** | **UUID** |  | [optional] 
 **new_version_id** | **UUID** |  | 

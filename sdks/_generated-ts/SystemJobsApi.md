@@ -1,14 +1,14 @@
-# WorkflowsApi
+# SystemJobsApi
 
 All URIs are relative to *http://localhost:8000*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**cancelTemporalWorkflow**](WorkflowsApi.md#canceltemporalworkflow) | **DELETE** /v1/workflows/{workflow_id} | Cancel Temporal Workflow Handler |
-| [**dvWorkflowRerun**](WorkflowsApi.md#dvworkflowrerun) | **POST** /v1/workflows/document_versions/{workflow_id} | Dv Workflow Rerun Handler |
-| [**getDvWorkflow**](WorkflowsApi.md#getdvworkflow) | **GET** /v1/workflows/document_versions/{workflow_id} | Get Dv Workflow Handler |
-| [**getTemporalWorkflowStatus**](WorkflowsApi.md#gettemporalworkflowstatus) | **GET** /v1/workflows/{workflow_id} | Get Temporal Workflow Status Handler |
-| [**listDvWorkflows**](WorkflowsApi.md#listdvworkflows) | **GET** /v1/workflows/document_versions | List Dv Workflows Handler |
+| [**cancelTemporalWorkflow**](SystemJobsApi.md#canceltemporalworkflow) | **DELETE** /v1/system-jobs/{workflow_id} | Cancel Temporal Workflow Handler |
+| [**dvWorkflowRerun**](SystemJobsApi.md#dvworkflowrerun) | **POST** /v1/system-jobs/document_versions/{workflow_id} | Dv Workflow Rerun Handler |
+| [**getDvWorkflow**](SystemJobsApi.md#getdvworkflow) | **GET** /v1/system-jobs/document_versions/{workflow_id} | Get Dv Workflow Handler |
+| [**getTemporalWorkflowStatus**](SystemJobsApi.md#gettemporalworkflowstatus) | **GET** /v1/system-jobs/{workflow_id} | Get Temporal Workflow Status Handler |
+| [**listDvWorkflows**](SystemJobsApi.md#listdvworkflows) | **GET** /v1/system-jobs/document_versions | List Dv Workflows Handler |
 
 
 
@@ -25,7 +25,7 @@ Cancel any Temporal workflow owned by the caller\&#39;s tenant.  No status guard
 ```ts
 import {
   Configuration,
-  WorkflowsApi,
+  SystemJobsApi,
 } from '@knowledge-stack/ksapi';
 import type { CancelTemporalWorkflowRequest } from '@knowledge-stack/ksapi';
 
@@ -37,7 +37,7 @@ async function example() {
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
   });
-  const api = new WorkflowsApi(config);
+  const api = new SystemJobsApi(config);
 
   const body = {
     // string
@@ -100,7 +100,7 @@ Rerun a workflow. USER role requires &#x60;&#x60;can_write&#x60;&#x60; on the do
 ```ts
 import {
   Configuration,
-  WorkflowsApi,
+  SystemJobsApi,
 } from '@knowledge-stack/ksapi';
 import type { DvWorkflowRerunRequest } from '@knowledge-stack/ksapi';
 
@@ -112,7 +112,7 @@ async function example() {
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
   });
-  const api = new WorkflowsApi(config);
+  const api = new SystemJobsApi(config);
 
   const body = {
     // string
@@ -175,7 +175,7 @@ Get single workflow detail with live Temporal status.
 ```ts
 import {
   Configuration,
-  WorkflowsApi,
+  SystemJobsApi,
 } from '@knowledge-stack/ksapi';
 import type { GetDvWorkflowRequest } from '@knowledge-stack/ksapi';
 
@@ -187,7 +187,7 @@ async function example() {
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
   });
-  const api = new WorkflowsApi(config);
+  const api = new SystemJobsApi(config);
 
   const body = {
     // string
@@ -250,7 +250,7 @@ Get live Temporal status for any workflow owned by the caller\&#39;s tenant.
 ```ts
 import {
   Configuration,
-  WorkflowsApi,
+  SystemJobsApi,
 } from '@knowledge-stack/ksapi';
 import type { GetTemporalWorkflowStatusRequest } from '@knowledge-stack/ksapi';
 
@@ -262,7 +262,7 @@ async function example() {
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
   });
-  const api = new WorkflowsApi(config);
+  const api = new SystemJobsApi(config);
 
   const body = {
     // string
@@ -325,7 +325,7 @@ List all workflows for the current tenant (paginated, DB-backed).  ADMIN/OWNER s
 ```ts
 import {
   Configuration,
-  WorkflowsApi,
+  SystemJobsApi,
 } from '@knowledge-stack/ksapi';
 import type { ListDvWorkflowsRequest } from '@knowledge-stack/ksapi';
 
@@ -337,7 +337,7 @@ async function example() {
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
   });
-  const api = new WorkflowsApi(config);
+  const api = new SystemJobsApi(config);
 
   const body = {
     // number | Number of items per page (optional)

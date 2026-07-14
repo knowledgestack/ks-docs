@@ -16,7 +16,7 @@ import type { AskRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "prompt": null,
+  "prompt": Summarize the latest version of the Q3 vendor contract.,
 } satisfies AskRequest
 
 console.log(example)

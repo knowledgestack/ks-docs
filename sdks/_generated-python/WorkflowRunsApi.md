@@ -514,6 +514,9 @@ re-dispatches the agent. 409 if the run is not FAILED (NOT_STARTED/PENDING
 use Start; COMPLETED is cloned) or was never started. Triggerer or
 OWNER/ADMIN only.
 
+Runs in the background — poll ``GET /v1/workflow-runs/{run_id}`` (also given
+in the ``Location`` header) until ``execution_state`` is COMPLETED or FAILED.
+
 ### Example
 
 * Api Key Authentication (cookieAuth):
@@ -588,7 +591,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Successful Response |  -  |
+**202** | Successful Response |  * Location - Poll this run resource until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED. <br>  |
 **422** | Validation Error |  -  |
 **0** | Error response. |  -  |
 
@@ -705,6 +708,10 @@ versions, uploaded DVs are walked from inputs/, KB FOLDERs stay live).
 The body is optional; ``user_message`` (when sent) is pinned into the
 snapshot and shown in the run thread (see ``StartWorkflowRunRequest``).
 
+The run executes in the background — poll ``GET /v1/workflow-runs/{run_id}``
+(also given in the ``Location`` header) until ``execution_state`` is
+COMPLETED or FAILED. There is no completion webhook.
+
 ### Example
 
 * Api Key Authentication (cookieAuth):
@@ -782,7 +789,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Successful Response |  -  |
+**202** | Successful Response |  * Location - Poll this run resource until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED. <br>  |
 **422** | Validation Error |  -  |
 **0** | Error response. |  -  |
 

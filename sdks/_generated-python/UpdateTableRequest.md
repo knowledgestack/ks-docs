@@ -6,7 +6,6 @@ Field-modeling update for a modeled table (PATCH).
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **str** |  | [optional] 
 **column_config** | [**List[ColumnConfig]**](ColumnConfig.md) |  | [optional] 
 
 ## Example

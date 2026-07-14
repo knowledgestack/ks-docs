@@ -44,14 +44,9 @@ Name | Type
 `error` | string
 `autoStart` | boolean
 `autoStartUserMessage` | string
-`inputsPathPartId` | string
-`outputsPathPartId` | string
-`discussionsPathPartId` | string
-`inputPathPartIds` | Array&lt;string&gt;
-`outputAssets` | [Array&lt;WorkflowRunAsset&gt;](WorkflowRunAsset.md)
-`inputAssets` | [Array&lt;WorkflowRunAsset&gt;](WorkflowRunAsset.md)
-`inputsPath` | string
-`outputsPath` | string
+`inputs` | [RunFolder](RunFolder.md)
+`outputs` | [RunFolder](RunFolder.md)
+`discussions` | [RunFolderRef](RunFolderRef.md)
 `excludedCommonFiles` | [Array&lt;ExcludedCommonFile&gt;](ExcludedCommonFile.md)
 `runThreadId` | string
 `engine` | [DataSourceEngine](DataSourceEngine.md)
@@ -114,14 +109,9 @@ const example = {
   "error": null,
   "autoStart": null,
   "autoStartUserMessage": null,
-  "inputsPathPartId": null,
-  "outputsPathPartId": null,
-  "discussionsPathPartId": null,
-  "inputPathPartIds": null,
-  "outputAssets": null,
-  "inputAssets": null,
-  "inputsPath": null,
-  "outputsPath": null,
+  "inputs": null,
+  "outputs": null,
+  "discussions": null,
   "excludedCommonFiles": null,
   "runThreadId": null,
   "engine": null,

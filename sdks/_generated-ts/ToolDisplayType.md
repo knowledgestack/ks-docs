@@ -1,24 +1,21 @@
 
-# UserMessageResponse
+# ToolDisplayType
 
+Language-neutral render category for a completed tool call.  The frontend keys its activity-card registry on this token and localizes the label itself (zh/en) — the server never emits human prose here. Unknown or unmapped tools fall back to ``GENERIC`` so a new/dev tool degrades to the generic card instead of breaking rendering.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`workflowId` | string
-`userMessageId` | string
 
 ## Example
 
 ```typescript
-import type { UserMessageResponse } from '@knowledge-stack/ksapi'
+import type { ToolDisplayType } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "workflowId": null,
-  "userMessageId": null,
-} satisfies UserMessageResponse
+} satisfies ToolDisplayType
 
 console.log(example)
 
@@ -27,7 +24,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as UserMessageResponse
+const exampleParsed = JSON.parse(exampleJSON) as ToolDisplayType
 console.log(exampleParsed)
 ```
 

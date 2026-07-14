@@ -10,7 +10,6 @@ Name | Type
 `tableName` | string
 `schemaName` | string
 `name` | string
-`description` | string
 `columnConfig` | [Array&lt;ColumnConfig&gt;](ColumnConfig.md)
 
 ## Example
@@ -23,7 +22,6 @@ const example = {
   "tableName": null,
   "schemaName": null,
   "name": null,
-  "description": null,
   "columnConfig": null,
 } satisfies ModelTableRequest
 

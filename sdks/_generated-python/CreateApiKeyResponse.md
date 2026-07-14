@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **UUID** |  | 
 **name** | **str** |  | 
-**key** | **str** |  | 
+**key** | **str** | The raw API key, returned only at creation. Send it as &#x60;Authorization: Bearer &lt;key&gt;&#x60;. | 
 **key_suffix** | **str** |  | 
 **created_at** | **datetime** |  | 
 **expires_at** | **datetime** |  | 

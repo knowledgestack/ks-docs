@@ -1,6 +1,6 @@
 # WorkflowRunAsset
 
-One input or output file/reference of a run, actionable in one call.  ``id`` is the PDO id (``path_part.metadata_obj_id``); ``path_part_id`` is the underlying path part (kept for approval-state / path-part lookups). Route on ``part_type`` to pick the API that takes ``id``: ``DOCUMENT`` → download_document / bulk-download (active version); ``DOCUMENT_VERSION`` → download_document_version (a version-pinned input, e.g. a cloned run's inputs); ``FOLDER`` / ``DATA_SOURCE`` / ``API_CONNECTION`` → list/query via that type's endpoint. Output assets are always ``DOCUMENT``.  ``origin`` tags an input asset's provenance (definition common file vs run reference vs upload) so the FE can group them; it is ``None`` on output assets.
+One input or output file/reference of a run, actionable in one call.  ``id`` is the PDO id (``path_part.metadata_obj_id``); ``path_part_id`` is the underlying path part (kept for approval-state / path-part lookups). Route on ``part_type`` to pick the API that takes ``id``: ``DOCUMENT`` → download_document / bulk-download (active version); ``DOCUMENT_VERSION`` → download_document_version (a version-pinned input, e.g. a cloned run's inputs); ``FOLDER`` / ``DATA_SOURCE`` / ``API_CONNECTION`` → list/query via that type's endpoint. Output assets are always ``DOCUMENT``.  ``origin`` tags an input's provenance. A ``DEFINITION_COMMON`` document is surfaced as a ``DOCUMENT`` (resolved from its pinned version to the parent document) so it routes to the doc page like a run-picked reference.
 
 ## Properties
 

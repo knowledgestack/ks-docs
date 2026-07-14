@@ -19,6 +19,9 @@ Same filters as ``list_audit_events`` but unpaginated — streams every
 matching event newest-first. Each row resolves the actor's name and the
 subject's name + path so an auditor can read the file directly in Excel.
 
+With no `since`/`until` the export covers the entire audit log; pass either
+bound to narrow to an optional from/to window.
+
 ### Example
 
 * Api Key Authentication (cookieAuth):
@@ -57,8 +60,8 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.AuditEventsApi(api_client)
     actor_user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter to one actor (optional)
     kind = 'kind_example' # str | Filter to one event kind (optional)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Only events at or after this timestamp (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Only events strictly before this timestamp (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Only events at or after this timestamp (from). Omit to export the entire audit log. Must not be in the future or after `until`. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. (optional)
     subject_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope to one document/folder/run subject (optional)
     recursive = False # bool | Include the subject's descendants (needs subject) (optional) (default to False)
 
@@ -80,8 +83,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **actor_user_id** | **UUID**| Filter to one actor | [optional] 
  **kind** | **str**| Filter to one event kind | [optional] 
- **since** | **datetime**| Only events at or after this timestamp | [optional] 
- **until** | **datetime**| Only events strictly before this timestamp | [optional] 
+ **since** | **datetime**| Only events at or after this timestamp (from). Omit to export the entire audit log. Must not be in the future or after &#x60;until&#x60;. | [optional] 
+ **until** | **datetime**| Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. | [optional] 
  **subject_path_part_id** | **UUID**| Scope to one document/folder/run subject | [optional] 
  **recursive** | **bool**| Include the subject&#39;s descendants (needs subject) | [optional] [default to False]
 
@@ -116,8 +119,9 @@ List Audit Events Handler
 List the tenant's audit events, newest first (admin/owner only).
 
 Returns every event in the caller's own tenant — ADMIN/OWNER bypass path
-permissions by design. Filter by actor, kind, time window, and/or a subject
-subtree. Each event carries its resolved actor name.
+permissions by design. Filter by actor, kind, an optional `since`(from)/
+`until`(to) window, and/or a subject subtree. Each event carries its
+resolved actor name.
 
 ### Example
 
@@ -159,8 +163,8 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.AuditEventsApi(api_client)
     actor_user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter to one actor (optional)
     kind = 'kind_example' # str | Filter to one event kind (optional)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Only events at or after this timestamp (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Only events strictly before this timestamp (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Only events at or after this timestamp (from). Omit for no lower bound. Must not be in the future or after `until`. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. (optional)
     subject_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope to one document/folder/run subject (optional)
     recursive = False # bool | Include the subject's descendants (needs subject) (optional) (default to False)
     sort_dir = ksapi.SortDirection() # SortDirection | Sort by timestamp (default: DESC, newest first) (optional)
@@ -185,8 +189,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **actor_user_id** | **UUID**| Filter to one actor | [optional] 
  **kind** | **str**| Filter to one event kind | [optional] 
- **since** | **datetime**| Only events at or after this timestamp | [optional] 
- **until** | **datetime**| Only events strictly before this timestamp | [optional] 
+ **since** | **datetime**| Only events at or after this timestamp (from). Omit for no lower bound. Must not be in the future or after &#x60;until&#x60;. | [optional] 
+ **until** | **datetime**| Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. | [optional] 
  **subject_path_part_id** | **UUID**| Scope to one document/folder/run subject | [optional] 
  **recursive** | **bool**| Include the subject&#39;s descendants (needs subject) | [optional] [default to False]
  **sort_dir** | [**SortDirection**](.md)| Sort by timestamp (default: DESC, newest first) | [optional] 

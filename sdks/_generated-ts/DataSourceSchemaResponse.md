@@ -17,7 +17,6 @@ Name | Type
 `dataSourceId` | string
 `schemaName` | string
 `isDefault` | boolean
-`description` | string
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
 `permissions` | [ItemPermissions](ItemPermissions.md)
 `createdAt` | Date
@@ -41,7 +40,6 @@ const example = {
   "dataSourceId": null,
   "schemaName": null,
   "isDefault": null,
-  "description": null,
   "approvalState": null,
   "permissions": null,
   "createdAt": null,

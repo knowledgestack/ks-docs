@@ -29,6 +29,8 @@
 
 * `API_CONNECTION` (value: `'API_CONNECTION'`)
 
+* `SKILL` (value: `'SKILL'`)
+
 * `IMAGE` (value: `'image'`)
 
 * `MEMORY` (value: `'memory'`)

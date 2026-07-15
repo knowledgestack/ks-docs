@@ -321,7 +321,7 @@ example().catch(console.error);
 
 ## listFolderContents
 
-> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator listFolderContents(folderId, maxDepth, sortOrder, sortDir, ownerId, nameLike, withTags, limit, offset, approvalState, includeTagIds, excludeTagIds, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat listFolderContents(folderId, maxDepth, sortOrder, sortDir, ownerId, nameLike, withTags, limit, offset, approvalState, includeTagIds, excludeTagIds, createdAfter, createdBefore, updatedAfter, updatedBefore)
 
 List Folder Contents Handler
 
@@ -417,7 +417,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator.md)
+[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat.md)
 
 ### Authorization
 
@@ -546,7 +546,7 @@ example().catch(console.error);
 
 ## searchItems
 
-> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator searchItems(nameLike, sortOrder, partType, withTags, parentPathPartId, limit, offset)
+> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat searchItems(nameLike, sortOrder, partType, withTags, parentPathPartId, limit, offset)
 
 Search Items Handler
 
@@ -615,7 +615,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator.md)
+[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat.md)
 
 ### Authorization
 

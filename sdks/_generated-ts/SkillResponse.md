@@ -1,7 +1,7 @@
 
-# WorkflowDefinitionResponse
+# SkillResponse
 
-Workflow definition response.  Doubles as a discriminated-union variant for folder-listing responses. The ``part_type`` literal is the discriminator: when the FE walks a folder tree it sees this shape mixed in with ``FolderResponse`` / ``DocumentResponse`` and can route to the dedicated workflow page based on ``part_type``.
+Skill response; ``part_type`` is the folder-listing discriminator.
 
 ## Properties
 
@@ -15,15 +15,9 @@ Name | Type
 `tenantId` | string
 `name` | string
 `description` | string
-`maxRunDurationSeconds` | number
-`instructionPathPartId` | string
-`isActive` | boolean
-`approvalRequired` | boolean
-`isTemplate` | boolean
-`selectedSkillIds` | Array&lt;string&gt;
-`commonFilePathPartIds` | Array&lt;string&gt;
-`createdFromId` | string
-`copyCount` | number
+`skillMd` | string
+`scriptNames` | Array&lt;string&gt;
+`hasUnpublishedChanges` | boolean
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
 `owner` | [UserInfo](UserInfo.md)
 `createdAt` | Date
@@ -33,7 +27,7 @@ Name | Type
 ## Example
 
 ```typescript
-import type { WorkflowDefinitionResponse } from '@knowledge-stack/ksapi'
+import type { SkillResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
@@ -45,21 +39,15 @@ const example = {
   "tenantId": null,
   "name": null,
   "description": null,
-  "maxRunDurationSeconds": null,
-  "instructionPathPartId": null,
-  "isActive": null,
-  "approvalRequired": null,
-  "isTemplate": null,
-  "selectedSkillIds": null,
-  "commonFilePathPartIds": null,
-  "createdFromId": null,
-  "copyCount": null,
+  "skillMd": null,
+  "scriptNames": null,
+  "hasUnpublishedChanges": null,
   "approvalState": null,
   "owner": null,
   "createdAt": null,
   "updatedAt": null,
   "permissions": null,
-} satisfies WorkflowDefinitionResponse
+} satisfies SkillResponse
 
 console.log(example)
 
@@ -68,7 +56,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as WorkflowDefinitionResponse
+const exampleParsed = JSON.parse(exampleJSON) as SkillResponse
 console.log(exampleParsed)
 ```
 

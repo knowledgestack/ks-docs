@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **inputs** | [**List[InputSnapshot]**](InputSnapshot.md) |  | 
 **excluded_common_files** | [**List[ExcludedCommonFile]**](ExcludedCommonFile.md) | Definition common files left out of this run at Start (deleted or unreadable by the starter), each with its exclusion reason. Empty for the common happy path; pre-feature snapshots default to empty. | [optional] 
 **user_message** | **str** | Optional free-text message the caller supplied at Start. Pinned here so the runner injects it into the agent&#39;s first user turn and it survives retry, redrive, and workflow-thread follow-ups (all of which re-assemble the prompt from this snapshot). | [optional] 
+**selected_skill_ids** | **List[UUID]** | Skill PDO ids to force-load into the run at turn 0, merged with the definition&#39;s prefill. Definition selections are validated readable + SKILL at write time; every id is re-checked fail-closed when the run materializes (a skill deleted or revoked after selection is dropped, never bricking the run). The runner materializes each skill&#39;s ACTIVE published version into the agent&#39;s skills dir; the agent can still discover others via search. Empty for the common case; pre-feature snapshots default to empty. | [optional] 
 
 ## Example
 

@@ -13,6 +13,7 @@ Name | Type
 `inputs` | [Array&lt;InputSnapshot&gt;](InputSnapshot.md)
 `excludedCommonFiles` | [Array&lt;ExcludedCommonFile&gt;](ExcludedCommonFile.md)
 `userMessage` | string
+`selectedSkillIds` | Array&lt;string&gt;
 
 ## Example
 
@@ -27,6 +28,7 @@ const example = {
   "inputs": null,
   "excludedCommonFiles": null,
   "userMessage": null,
+  "selectedSkillIds": null,
 } satisfies WorkflowRunSnapshot
 
 console.log(example)

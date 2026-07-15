@@ -1,36 +1,37 @@
-# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse
+# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR
 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**part_type** | **str** | Path part type | [default to 'API_CONNECTION']
+**part_type** | **str** | Path part type | [default to 'SKILL']
 **id** | **UUID** |  | 
-**path_part_id** | **UUID** |  | 
+**path_part_id** | **UUID** | SKILL path_part of this skill | 
 **name** | **str** |  | 
-**parent_path_part_id** | **UUID** |  | 
-**materialized_path** | **str** |  | 
+**parent_path_part_id** | **UUID** | FOLDER path_part of the containing folder | 
+**materialized_path** | **str** | Full materialized path from root | 
 **system_managed** | **bool** | Whether this document is system-managed | 
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
 **exclude_from_qdrant** | **bool** | Direct exclusion flag on this document&#39;s path part only. The effective exclusion also applies when any ancestor folder has the flag set — fetch the ancestry to determine effective state. | 
 **tenant_id** | **UUID** |  | 
-**owner** | [**UserInfo**](UserInfo.md) |  | [optional] 
+**owner** | [**UserInfo**](UserInfo.md) | Creator, or null. | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 **tags** | [**List[TagResponse]**](TagResponse.md) | Tags attached to this document | [optional] 
-**permissions** | [**ItemPermissions**](ItemPermissions.md) |  | 
+**permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; null on mutation responses. | 
 **document_type** | [**DocumentType**](DocumentType.md) |  | 
 **document_origin** | [**DocumentOrigin**](DocumentOrigin.md) |  | 
 **active_version_id** | **UUID** | Active version ID | 
 **active_version** | [**DocumentVersionResponse**](DocumentVersionResponse.md) |  | 
 **checkout** | [**DocumentCheckoutResponse**](DocumentCheckoutResponse.md) | Active write-lock state. Null when no checkout is held. Populated on detail endpoints (GET /v1/documents/{id}). Any tenant member with read access may observe this state. | [optional] 
-**description** | **str** |  | 
+**description** | **str** | One-line &#39;use when…&#39; routing signal, from the SKILL.md frontmatter. | 
 **max_run_duration_seconds** | **int** |  | 
 **instruction_path_part_id** | **UUID** | DOCUMENT path_part of the instruction document | 
 **is_active** | **bool** |  | 
 **approval_required** | **bool** |  | 
 **is_template** | **bool** | Whether this definition is a non-runnable template | 
+**selected_skill_ids** | **List[UUID]** | Skill PDO ids force-loaded into every run by default. The FE prefills these as the run&#39;s selected skills. | [optional] 
 **common_file_path_part_ids** | **List[UUID]** | Common files attached to every run (path_part ids). The FE renders these as &#39;attached to every run&#39; on the workflow page. | [optional] 
 **created_from_id** | **UUID** | Source definition this workflow was copied from (a template or any other workflow); null if hand-authored. | 
 **copy_count** | **int** | Number of workflows copied from this definition. | [optional] [default to 0]
@@ -62,23 +63,26 @@ Name | Type | Description | Notes
 **api_docs** | **str** |  | 
 **disclaimer_accepted_at** | **datetime** |  | 
 **disclaimer_accepted_by** | **UUID** |  | 
+**skill_md** | **str** | Full SKILL.md content; populated on detail reads, null on list. | [optional] 
+**script_names** | **List[str]** | Bundled script file names; populated on detail reads. | [optional] 
+**has_unpublished_changes** | **bool** | Whether the working copy differs from the active published version. Always present (incl. list responses) so the UI can flag a skill with an unpublished draft. | [optional] [default to False]
 
 ## Example
 
 ```python
-from ksapi.models.folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_schema_response_or_data_source_table_response_or_api_connection_response import FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse
+from ksapi.models.folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_schema_r import FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse from a JSON string
-folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_schema_response_or_data_source_table_response_or_api_connection_response_instance = FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse.from_json(json)
+# create an instance of FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR from a JSON string
+folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_schema_r_instance = FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR.from_json(json)
 # print the JSON string representation of the object
-print(FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse.to_json())
+print(FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR.to_json())
 
 # convert the object into a dict
-folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_schema_response_or_data_source_table_response_or_api_connection_response_dict = folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_schema_response_or_data_source_table_response_or_api_connection_response_instance.to_dict()
-# create an instance of FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse from a dict
-folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_schema_response_or_data_source_table_response_or_api_connection_response_from_dict = FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse.from_dict(folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_schema_response_or_data_source_table_response_or_api_connection_response_dict)
+folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_schema_r_dict = folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_schema_r_instance.to_dict()
+# create an instance of FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR from a dict
+folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_schema_r_from_dict = FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR.from_dict(folder_response_or_document_response_or_workflow_definition_response_or_workflow_run_response_or_data_source_response_or_data_source_schema_r_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

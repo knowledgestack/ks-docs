@@ -90,7 +90,7 @@ example().catch(console.error);
 
 ## createWorkflowRun
 
-> WorkflowRunResponse createWorkflowRun(definitionId, files, inputScope, idempotencyKey, autoStart, userMessage, name)
+> WorkflowRunResponse createWorkflowRun(definitionId, files, inputScope, idempotencyKey, autoStart, userMessage, name, selectedSkillIds)
 
 Create Workflow Run Handler
 
@@ -130,6 +130,8 @@ async function example() {
     userMessage: userMessage_example,
     // string | Optional display name for the run. Omit to default to the run\\\'s UUID; rename later via PATCH. Must be unique among sibling runs under this definition\\\'s ``runs/`` folder — a collision returns 409. (optional)
     name: name_example,
+    // string | JSON array of SKILL PDO UUIDs to force-load into this run ON TOP of the definition\\\'s prefill — the run\\\'s skills are the definition\\\'s list plus these additions. Each must be a SKILL the caller can read (else 400/403). Optional; omit to run with just the definition\\\'s skills. (optional)
+    selectedSkillIds: selectedSkillIds_example,
   } satisfies CreateWorkflowRunRequest;
 
   try {
@@ -156,6 +158,7 @@ example().catch(console.error);
 | **autoStart** | `boolean` | When true, the run starts itself once its &#x60;&#x60;inputs/&#x60;&#x60; uploads finish ingesting — eliminating the separate Start call. If an upload\\\&#39;s ingestion fails, the run is marked FAILED. Default false (two-step flow). Arm only after all uploads are queued; a synchronously-completing first upload would otherwise start the run before later uploads are added. | [Optional] [Defaults to `false`] |
 | **userMessage** | `string` | Optional note carried to the auto-start dispatch (the equivalent of the Start endpoint\\\&#39;s &#x60;&#x60;user_message&#x60;&#x60; for a self-starting run). Applied only when &#x60;&#x60;auto_start&#x60;&#x60; fires. | [Optional] [Defaults to `undefined`] |
 | **name** | `string` | Optional display name for the run. Omit to default to the run\\\&#39;s UUID; rename later via PATCH. Must be unique among sibling runs under this definition\\\&#39;s &#x60;&#x60;runs/&#x60;&#x60; folder — a collision returns 409. | [Optional] [Defaults to `undefined`] |
+| **selectedSkillIds** | `string` | JSON array of SKILL PDO UUIDs to force-load into this run ON TOP of the definition\\\&#39;s prefill — the run\\\&#39;s skills are the definition\\\&#39;s list plus these additions. Each must be a SKILL the caller can read (else 400/403). Optional; omit to run with just the definition\\\&#39;s skills. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 

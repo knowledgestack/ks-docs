@@ -1,5 +1,5 @@
 
-# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse
+# FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR
 
 
 ## Properties
@@ -32,6 +32,7 @@ Name | Type
 `isActive` | boolean
 `approvalRequired` | boolean
 `isTemplate` | boolean
+`selectedSkillIds` | Array&lt;string&gt;
 `commonFilePathPartIds` | Array&lt;string&gt;
 `createdFromId` | string
 `copyCount` | number
@@ -63,11 +64,14 @@ Name | Type
 `apiDocs` | string
 `disclaimerAcceptedAt` | Date
 `disclaimerAcceptedBy` | string
+`skillMd` | string
+`scriptNames` | Array&lt;string&gt;
+`hasUnpublishedChanges` | boolean
 
 ## Example
 
 ```typescript
-import type { FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse } from '@knowledge-stack/ksapi'
+import type { FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
@@ -97,6 +101,7 @@ const example = {
   "isActive": null,
   "approvalRequired": null,
   "isTemplate": null,
+  "selectedSkillIds": null,
   "commonFilePathPartIds": null,
   "createdFromId": null,
   "copyCount": null,
@@ -128,7 +133,10 @@ const example = {
   "apiDocs": null,
   "disclaimerAcceptedAt": null,
   "disclaimerAcceptedBy": null,
-} satisfies FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse
+  "skillMd": null,
+  "scriptNames": null,
+  "hasUnpublishedChanges": null,
+} satisfies FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR
 
 console.log(example)
 
@@ -137,7 +145,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse
+const exampleParsed = JSON.parse(exampleJSON) as FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR
 console.log(exampleParsed)
 ```
 

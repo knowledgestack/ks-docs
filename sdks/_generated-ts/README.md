@@ -54,7 +54,7 @@ Below this line is auto-generated reference content.
 
 ---
 
-# @knowledge-stack/ksapi@1.135.1
+# @knowledge-stack/ksapi@1.136.0
 
 A TypeScript SDK client for the localhost API.
 
@@ -239,6 +239,20 @@ All URIs are relative to *http://localhost:8000*
 *SectionsApi* | [**getSection**](docs/SectionsApi.md#getsection) | **GET** /v1/sections/{section_id} | Get Section Handler
 *SectionsApi* | [**getSectionsBulk**](docs/SectionsApi.md#getsectionsbulk) | **GET** /v1/sections/bulk | Get Sections Bulk Handler
 *SectionsApi* | [**updateSection**](docs/SectionsApi.md#updatesectionoperation) | **PATCH** /v1/sections/{section_id} | Update Section Handler
+*SkillsApi* | [**activateSkillVersion**](docs/SkillsApi.md#activateskillversionoperation) | **POST** /v1/skills/{skill_id}/versions/{version_id}/activate | Activate Skill Version Handler
+*SkillsApi* | [**checkinSkill**](docs/SkillsApi.md#checkinskill) | **POST** /v1/skills/{skill_id}/checkin | Checkin Skill Handler
+*SkillsApi* | [**checkoutSkill**](docs/SkillsApi.md#checkoutskill) | **POST** /v1/skills/{skill_id}/checkout | Checkout Skill Handler
+*SkillsApi* | [**createSkill**](docs/SkillsApi.md#createskilloperation) | **POST** /v1/skills | Create Skill Handler
+*SkillsApi* | [**deleteSkill**](docs/SkillsApi.md#deleteskill) | **DELETE** /v1/skills/{skill_id} | Delete Skill Handler
+*SkillsApi* | [**discardSkillDraft**](docs/SkillsApi.md#discardskilldraft) | **POST** /v1/skills/{skill_id}/discard-draft | Discard Skill Draft Handler
+*SkillsApi* | [**exportSkill**](docs/SkillsApi.md#exportskill) | **GET** /v1/skills/{skill_id}/export | Export Skill Handler
+*SkillsApi* | [**getSkill**](docs/SkillsApi.md#getskill) | **GET** /v1/skills/{skill_id} | Get Skill Handler
+*SkillsApi* | [**importSkill**](docs/SkillsApi.md#importskill) | **POST** /v1/skills/import | Import Skill Handler
+*SkillsApi* | [**listSkillVersions**](docs/SkillsApi.md#listskillversions) | **GET** /v1/skills/{skill_id}/versions | List Skill Versions Handler
+*SkillsApi* | [**listSkills**](docs/SkillsApi.md#listskills) | **GET** /v1/skills | List Skills Handler
+*SkillsApi* | [**publishSkillVersion**](docs/SkillsApi.md#publishskillversion) | **POST** /v1/skills/{skill_id}/versions | Publish Skill Version Handler
+*SkillsApi* | [**searchSkills**](docs/SkillsApi.md#searchskillsoperation) | **POST** /v1/skills/search | Search Skills Handler
+*SkillsApi* | [**updateSkill**](docs/SkillsApi.md#updateskilloperation) | **PATCH** /v1/skills/{skill_id} | Update Skill Handler
 *SubscriptionsApi* | [**changeTenantSubscription**](docs/SubscriptionsApi.md#changetenantsubscription) | **POST** /v1/tenants/{tenant_id}/subscriptions | Change Tenant Subscription Handler
 *SubscriptionsApi* | [**getTenantSubscription**](docs/SubscriptionsApi.md#gettenantsubscription) | **GET** /v1/tenants/{tenant_id}/subscriptions | Get Tenant Subscription Handler
 *SystemJobsApi* | [**cancelTemporalWorkflow**](docs/SystemJobsApi.md#canceltemporalworkflow) | **DELETE** /v1/system-jobs/{workflow_id} | Cancel Temporal Workflow Handler
@@ -329,6 +343,7 @@ All URIs are relative to *http://localhost:8000*
 - [AcceptDisclaimerRequest](docs/AcceptDisclaimerRequest.md)
 - [AcceptInviteResponse](docs/AcceptInviteResponse.md)
 - [AccessCheckResponse](docs/AccessCheckResponse.md)
+- [ActivateSkillVersionRequest](docs/ActivateSkillVersionRequest.md)
 - [AddMemberRequest](docs/AddMemberRequest.md)
 - [AncestryResponse](docs/AncestryResponse.md)
 - [ApiAuthConfig](docs/ApiAuthConfig.md)
@@ -390,6 +405,7 @@ All URIs are relative to *http://localhost:8000*
 - [CreatePermissionRequest](docs/CreatePermissionRequest.md)
 - [CreatePhonePasswordUserRequest](docs/CreatePhonePasswordUserRequest.md)
 - [CreateSectionRequest](docs/CreateSectionRequest.md)
+- [CreateSkillRequest](docs/CreateSkillRequest.md)
 - [CreateTagRequest](docs/CreateTagRequest.md)
 - [CreateThreadMessageRequest](docs/CreateThreadMessageRequest.md)
 - [CreateThreadRequest](docs/CreateThreadRequest.md)
@@ -450,7 +466,7 @@ All URIs are relative to *http://localhost:8000*
 - [FolderAction](docs/FolderAction.md)
 - [FolderActionResponse](docs/FolderActionResponse.md)
 - [FolderResponse](docs/FolderResponse.md)
-- [FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse](docs/FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaResponseOrDataSourceTableResponseOrApiConnectionResponse.md)
+- [FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR](docs/FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR.md)
 - [GroupMemberOrder](docs/GroupMemberOrder.md)
 - [GroupPermissionOrder](docs/GroupPermissionOrder.md)
 - [GroupPermissionResponse](docs/GroupPermissionResponse.md)
@@ -494,7 +510,7 @@ All URIs are relative to *http://localhost:8000*
 - [NonFilesystemReferenceType](docs/NonFilesystemReferenceType.md)
 - [OnboardingCompanyRequest](docs/OnboardingCompanyRequest.md)
 - [OnboardingProfileRequest](docs/OnboardingProfileRequest.md)
-- [PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator](docs/PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDataSourceResponseDataSourceSchemaResponseDataSourceTableResponseApiConnectionResponseDiscriminator.md)
+- [PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat](docs/PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat.md)
 - [PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator](docs/PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator.md)
 - [PaginatedResponseDocumentResponse](docs/PaginatedResponseDocumentResponse.md)
 - [PaginatedResponseDocumentVersionResponse](docs/PaginatedResponseDocumentVersionResponse.md)
@@ -509,6 +525,7 @@ All URIs are relative to *http://localhost:8000*
 - [PaginatedResponsePathPartResponse](docs/PaginatedResponsePathPartResponse.md)
 - [PaginatedResponsePendingMemoryChunkResponse](docs/PaginatedResponsePendingMemoryChunkResponse.md)
 - [PaginatedResponsePermissionResponse](docs/PaginatedResponsePermissionResponse.md)
+- [PaginatedResponseSkillResponse](docs/PaginatedResponseSkillResponse.md)
 - [PaginatedResponseTagResponse](docs/PaginatedResponseTagResponse.md)
 - [PaginatedResponseTenantResponse](docs/PaginatedResponseTenantResponse.md)
 - [PaginatedResponseTenantUserResponse](docs/PaginatedResponseTenantUserResponse.md)
@@ -553,6 +570,8 @@ All URIs are relative to *http://localhost:8000*
 - [RunFolderRef](docs/RunFolderRef.md)
 - [SSOInitiateResponse](docs/SSOInitiateResponse.md)
 - [ScoredChunkResponse](docs/ScoredChunkResponse.md)
+- [SearchSkillsRequest](docs/SearchSkillsRequest.md)
+- [SearchSkillsResponse](docs/SearchSkillsResponse.md)
 - [SearchSortOrder](docs/SearchSortOrder.md)
 - [SearchTablesRequest](docs/SearchTablesRequest.md)
 - [SearchTablesResponse](docs/SearchTablesResponse.md)
@@ -568,6 +587,11 @@ All URIs are relative to *http://localhost:8000*
 - [SetWorkflowRunApprovalRequest](docs/SetWorkflowRunApprovalRequest.md)
 - [SheetVisibilityChange](docs/SheetVisibilityChange.md)
 - [SignInRequest](docs/SignInRequest.md)
+- [SkillOrder](docs/SkillOrder.md)
+- [SkillResponse](docs/SkillResponse.md)
+- [SkillScriptFile](docs/SkillScriptFile.md)
+- [SkillSearchResult](docs/SkillSearchResult.md)
+- [SkillVersionResponse](docs/SkillVersionResponse.md)
 - [SortDirection](docs/SortDirection.md)
 - [StartWorkflowRunRequest](docs/StartWorkflowRunRequest.md)
 - [Step](docs/Step.md)
@@ -624,6 +648,7 @@ All URIs are relative to *http://localhost:8000*
 - [UpdateInviteRequest](docs/UpdateInviteRequest.md)
 - [UpdatePermissionRequest](docs/UpdatePermissionRequest.md)
 - [UpdateSectionRequest](docs/UpdateSectionRequest.md)
+- [UpdateSkillRequest](docs/UpdateSkillRequest.md)
 - [UpdateTableRequest](docs/UpdateTableRequest.md)
 - [UpdateTagRequest](docs/UpdateTagRequest.md)
 - [UpdateTenantRequest](docs/UpdateTenantRequest.md)
@@ -685,7 +710,7 @@ and is automatically generated by the
 [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `0.1.0`
-- Package version: `1.135.1`
+- Package version: `1.136.0`
 - Generator version: `7.21.0`
 - Build package: `org.openapitools.codegen.languages.TypeScriptFetchClientCodegen`
 

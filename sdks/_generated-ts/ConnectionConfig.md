@@ -12,6 +12,7 @@ Name | Type
 `database` | string
 `username` | string
 `password` | string
+`ssl` | boolean
 
 ## Example
 
@@ -25,6 +26,7 @@ const example = {
   "database": null,
   "username": null,
   "password": null,
+  "ssl": null,
 } satisfies ConnectionConfig
 
 console.log(example)

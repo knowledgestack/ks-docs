@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **database** | **str** |  | 
 **username** | **str** |  | 
 **password** | **str** |  | 
+**ssl** | **bool** | Encrypt the connection with TLS. Enable for managed cloud databases that require it (e.g. Alibaba/Tencent RDS); leave off for trusted private-network databases. Encryption only — the server certificate is not verified. | [optional] [default to False]
 
 ## Example
 

@@ -96,7 +96,7 @@ example().catch(console.error);
 
 Delete Document Handler
 
-Move a document and all its contents to trash.
+Move a document and all its contents to trash.  Requires an active document checkout held by the caller. Acquire one via &#x60;&#x60;POST /v1/documents/{id}/checkout&#x60;&#x60; first; otherwise this returns 409 Conflict (\&quot;A document checkout is required to edit this document.\&quot;).
 
 ### Example
 

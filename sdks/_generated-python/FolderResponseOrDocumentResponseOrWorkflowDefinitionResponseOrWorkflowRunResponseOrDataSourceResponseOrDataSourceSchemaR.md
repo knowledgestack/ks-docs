@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 **tags** | [**List[TagResponse]**](TagResponse.md) | Tags attached to this document | [optional] 
-**permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; null on mutation responses. | 
+**permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; populated on the list, detail read, and mutation responses. | 
 **document_type** | [**DocumentType**](DocumentType.md) |  | 
 **document_origin** | [**DocumentOrigin**](DocumentOrigin.md) |  | 
 **active_version_id** | **UUID** | Active version ID | 
@@ -63,8 +63,8 @@ Name | Type | Description | Notes
 **api_docs** | **str** |  | 
 **disclaimer_accepted_at** | **datetime** |  | 
 **disclaimer_accepted_by** | **UUID** |  | 
-**skill_md** | **str** | Full SKILL.md content; populated on detail reads, null on list. | [optional] 
-**script_names** | **List[str]** | Bundled script file names; populated on detail reads. | [optional] 
+**skill_md** | **str** | Full SKILL.md content; populated on the detail read and on mutation responses, null on list. | [optional] 
+**script_names** | **List[str]** | Bundled script file names; populated on the detail read and on mutation responses, empty on list. | [optional] 
 **has_unpublished_changes** | **bool** | Whether the working copy differs from the active published version. Always present (incl. list responses) so the UI can flag a skill with an unpublished draft. | [optional] [default to False]
 
 ## Example

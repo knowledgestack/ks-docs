@@ -14,14 +14,14 @@ Name | Type | Description | Notes
 **tenant_id** | **UUID** |  | 
 **name** | **str** |  | 
 **description** | **str** | One-line &#39;use when…&#39; routing signal, from the SKILL.md frontmatter. | 
-**skill_md** | **str** | Full SKILL.md content; populated on detail reads, null on list. | [optional] 
-**script_names** | **List[str]** | Bundled script file names; populated on detail reads. | [optional] 
+**skill_md** | **str** | Full SKILL.md content; populated on the detail read and on mutation responses, null on list. | [optional] 
+**script_names** | **List[str]** | Bundled script file names; populated on the detail read and on mutation responses, empty on list. | [optional] 
 **has_unpublished_changes** | **bool** | Whether the working copy differs from the active published version. Always present (incl. list responses) so the UI can flag a skill with an unpublished draft. | [optional] [default to False]
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
 **owner** | [**UserInfo**](UserInfo.md) | Creator, or null. | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
-**permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; null on mutation responses. | [optional] 
+**permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; populated on the list, detail read, and mutation responses. | [optional] 
 
 ## Example
 

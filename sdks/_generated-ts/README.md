@@ -54,7 +54,7 @@ Below this line is auto-generated reference content.
 
 ---
 
-# @knowledge-stack/ksapi@1.139.1
+# @knowledge-stack/ksapi@1.140.0
 
 A TypeScript SDK client for the localhost API.
 
@@ -72,9 +72,9 @@ Next, try it out.
 ```ts
 import {
   Configuration,
-  AgentApi,
+  AdminKbApi,
 } from '@knowledge-stack/ksapi';
-import type { AgentAskRequest } from '@knowledge-stack/ksapi';
+import type { GetAdminKbSummaryRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
@@ -84,15 +84,10 @@ async function example() {
     // Configure HTTP bearer authorization: bearerAuth
     accessToken: "YOUR BEARER TOKEN",
   });
-  const api = new AgentApi(config);
-
-  const body = {
-    // AskRequest
-    askRequest: ...,
-  } satisfies AgentAskRequest;
+  const api = new AdminKbApi(config);
 
   try {
-    const data = await api.agentAsk(body);
+    const data = await api.getAdminKbSummary();
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -112,6 +107,13 @@ All URIs are relative to *http://localhost:8000*
 
 | Class | Method | HTTP request | Description
 | ----- | ------ | ------------ | -------------
+*AdminKbApi* | [**getAdminKbSummary**](docs/AdminKbApi.md#getadminkbsummary) | **GET** /v1/admin/kb/summary | Get Admin Kb Summary Handler
+*AdminKbApi* | [**getAdminKbTimeseries**](docs/AdminKbApi.md#getadminkbtimeseries) | **GET** /v1/admin/kb/timeseries | Get Admin Kb Timeseries Handler
+*AdminWorkflowsApi* | [**getAdminWorkflowByHour**](docs/AdminWorkflowsApi.md#getadminworkflowbyhour) | **GET** /v1/admin/workflows/by-hour | Get Admin Workflow By Hour Handler
+*AdminWorkflowsApi* | [**getAdminWorkflowLeaderboard**](docs/AdminWorkflowsApi.md#getadminworkflowleaderboard) | **GET** /v1/admin/workflows/leaderboard | Get Admin Workflow Leaderboard Handler
+*AdminWorkflowsApi* | [**getAdminWorkflowOutputStats**](docs/AdminWorkflowsApi.md#getadminworkflowoutputstats) | **GET** /v1/admin/workflows/output-stats | Get Admin Workflow Output Stats Handler
+*AdminWorkflowsApi* | [**getAdminWorkflowSummary**](docs/AdminWorkflowsApi.md#getadminworkflowsummary) | **GET** /v1/admin/workflows/summary | Get Admin Workflow Summary Handler
+*AdminWorkflowsApi* | [**getAdminWorkflowTimeseries**](docs/AdminWorkflowsApi.md#getadminworkflowtimeseries) | **GET** /v1/admin/workflows/timeseries | Get Admin Workflow Timeseries Handler
 *AgentApi* | [**agentAsk**](docs/AgentApi.md#agentask) | **POST** /v1/agent/ask | Agent Ask Handler
 *AgentApi* | [**agentExtract**](docs/AgentApi.md#agentextract) | **POST** /v1/agent/extract | Agent Extract Handler
 *ApiConnectionsApi* | [**acceptApiConnectionDisclaimer**](docs/ApiConnectionsApi.md#acceptapiconnectiondisclaimer) | **POST** /v1/api-connections/{connection_id}/disclaimer | Accept Api Connection Disclaimer Handler
@@ -422,6 +424,7 @@ All URIs are relative to *http://localhost:8000*
 - [DataSourceSchemaResponse](docs/DataSourceSchemaResponse.md)
 - [DataSourceSyncResponse](docs/DataSourceSyncResponse.md)
 - [DataSourceTableResponse](docs/DataSourceTableResponse.md)
+- [DefinitionOutputStat](docs/DefinitionOutputStat.md)
 - [DiffFormat](docs/DiffFormat.md)
 - [DiffRow](docs/DiffRow.md)
 - [DiffRowType](docs/DiffRowType.md)
@@ -473,6 +476,7 @@ All URIs are relative to *http://localhost:8000*
 - [GroupResponse](docs/GroupResponse.md)
 - [HTTPValidationError](docs/HTTPValidationError.md)
 - [HealthCheckResponse](docs/HealthCheckResponse.md)
+- [HourHistogramResponse](docs/HourHistogramResponse.md)
 - [HybridSearchProfile](docs/HybridSearchProfile.md)
 - [IdpConfig](docs/IdpConfig.md)
 - [IdpType](docs/IdpType.md)
@@ -492,6 +496,11 @@ All URIs are relative to *http://localhost:8000*
 - [InviteStatus](docs/InviteStatus.md)
 - [InviteUserRequest](docs/InviteUserRequest.md)
 - [ItemPermissions](docs/ItemPermissions.md)
+- [KbMetric](docs/KbMetric.md)
+- [KbSummaryResponse](docs/KbSummaryResponse.md)
+- [KbTimeseriesResponse](docs/KbTimeseriesResponse.md)
+- [LabeledSeries](docs/LabeledSeries.md)
+- [LeaderboardEntry](docs/LeaderboardEntry.md)
 - [LineageEdgeResponse](docs/LineageEdgeResponse.md)
 - [LineageGraphResponse](docs/LineageGraphResponse.md)
 - [LineageNodeResponse](docs/LineageNodeResponse.md)
@@ -568,6 +577,7 @@ All URIs are relative to *http://localhost:8000*
 - [RootResponse](docs/RootResponse.md)
 - [RunFolder](docs/RunFolder.md)
 - [RunFolderRef](docs/RunFolderRef.md)
+- [RunTimeseriesResponse](docs/RunTimeseriesResponse.md)
 - [SSOInitiateResponse](docs/SSOInitiateResponse.md)
 - [ScoredChunkResponse](docs/ScoredChunkResponse.md)
 - [SearchSkillsRequest](docs/SearchSkillsRequest.md)
@@ -631,6 +641,8 @@ All URIs are relative to *http://localhost:8000*
 - [ThreadMessageResponse](docs/ThreadMessageResponse.md)
 - [ThreadOrder](docs/ThreadOrder.md)
 - [ThreadResponse](docs/ThreadResponse.md)
+- [TimeBucket](docs/TimeBucket.md)
+- [TimeseriesPoint](docs/TimeseriesPoint.md)
 - [ToolDisplayType](docs/ToolDisplayType.md)
 - [ToolPart](docs/ToolPart.md)
 - [ToolStatus](docs/ToolStatus.md)
@@ -674,6 +686,8 @@ All URIs are relative to *http://localhost:8000*
 - [WorkflowDefinitionResponse](docs/WorkflowDefinitionResponse.md)
 - [WorkflowDetailResponse](docs/WorkflowDetailResponse.md)
 - [WorkflowExecutionState](docs/WorkflowExecutionState.md)
+- [WorkflowLeaderboardResponse](docs/WorkflowLeaderboardResponse.md)
+- [WorkflowOutputStatsResponse](docs/WorkflowOutputStatsResponse.md)
 - [WorkflowRunAsset](docs/WorkflowRunAsset.md)
 - [WorkflowRunCallbackRequest](docs/WorkflowRunCallbackRequest.md)
 - [WorkflowRunOrder](docs/WorkflowRunOrder.md)
@@ -710,7 +724,7 @@ and is automatically generated by the
 [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `0.1.0`
-- Package version: `1.139.1`
+- Package version: `1.140.0`
 - Generator version: `7.21.0`
 - Build package: `org.openapitools.codegen.languages.TypeScriptFetchClientCodegen`
 

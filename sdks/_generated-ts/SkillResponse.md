@@ -17,6 +17,7 @@ Name | Type
 `description` | string
 `skillMd` | string
 `scriptNames` | Array&lt;string&gt;
+`scripts` | [Array&lt;SkillScriptFile&gt;](SkillScriptFile.md)
 `hasUnpublishedChanges` | boolean
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
 `owner` | [UserInfo](UserInfo.md)
@@ -41,6 +42,7 @@ const example = {
   "description": null,
   "skillMd": null,
   "scriptNames": null,
+  "scripts": null,
   "hasUnpublishedChanges": null,
   "approvalState": null,
   "owner": null,

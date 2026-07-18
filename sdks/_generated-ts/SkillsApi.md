@@ -558,7 +558,7 @@ example().catch(console.error);
 
 Get Skill Handler
 
-Skill detail: SKILL.md, scripts, has_unpublished_changes, permissions.
+Skill detail: SKILL.md, script contents, has_unpublished_changes, perms.
 
 ### Example
 

@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**get_workflow_run**](WorkflowRunsApi.md#get_workflow_run) | **GET** /v1/workflow-runs/{run_id} | Get Workflow Run Handler
 [**get_workflow_runs_summary**](WorkflowRunsApi.md#get_workflow_runs_summary) | **GET** /v1/workflow-runs/summary | Get Workflow Runs Summary Handler
 [**list_workflow_runs_for_tenant**](WorkflowRunsApi.md#list_workflow_runs_for_tenant) | **GET** /v1/workflow-runs | List Workflow Runs For Tenant Handler
+[**resume_workflow_run**](WorkflowRunsApi.md#resume_workflow_run) | **POST** /v1/workflow-runs/{run_id}/resume | Resume Workflow Run Handler
 [**retry_workflow_run**](WorkflowRunsApi.md#retry_workflow_run) | **POST** /v1/workflow-runs/{run_id}/retry | Retry Workflow Run Handler
 [**set_workflow_run_approval**](WorkflowRunsApi.md#set_workflow_run_approval) | **POST** /v1/workflow-runs/{run_id}/approval | Set Workflow Run Approval Handler
 [**start_workflow_run**](WorkflowRunsApi.md#start_workflow_run) | **POST** /v1/workflow-runs/{run_id}/start | Start Workflow Run Handler
@@ -502,17 +503,115 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **resume_workflow_run**
+> WorkflowRunResponse resume_workflow_run(run_id)
+
+Resume Workflow Run Handler
+
+Continue a FAILED run in place instead of restarting it.
+
+Unlike ``retry`` (which restarts the agent cold), ``resume`` loads the run's
+surviving thread history — the checkpoint summary and any persisted partial
+reply — and re-hydrates ``/work/``, so a run that timed out or was stopped
+near the end finishes from where it left off rather than redoing the work.
+Same guards as retry: 409 if the run is not FAILED or was never started;
+triggerer or OWNER/ADMIN only.
+
+Runs in the background — poll ``GET /v1/workflow-runs/{run_id}`` (also given
+in the ``Location`` header) until ``execution_state`` is COMPLETED or FAILED.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.workflow_run_response import WorkflowRunResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.WorkflowRunsApi(api_client)
+    run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+
+    try:
+        # Resume Workflow Run Handler
+        api_response = api_instance.resume_workflow_run(run_id)
+        print("The response of WorkflowRunsApi->resume_workflow_run:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling WorkflowRunsApi->resume_workflow_run: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **run_id** | **UUID**|  | 
+
+### Return type
+
+[**WorkflowRunResponse**](WorkflowRunResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Successful Response |  * Location - Poll this run resource until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED. <br>  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **retry_workflow_run**
 > WorkflowRunResponse retry_workflow_run(run_id)
 
 Retry Workflow Run Handler
 
-Re-run a FAILED run (including a user-stopped one) in place.
+Re-run a FAILED run (including a user-stopped one) from scratch.
 
-Flips ``FAILED -> IN_PROGRESS`` against the run's existing snapshot and
-re-dispatches the agent. 409 if the run is not FAILED (NOT_STARTED/PENDING
-use Start; COMPLETED is cloned) or was never started. Triggerer or
-OWNER/ADMIN only.
+Restarts the agent cold: flips ``FAILED -> IN_PROGRESS`` against the run's
+existing snapshot and re-dispatches with empty history. Use ``resume`` to
+continue from surviving history instead. 409 if the run is not FAILED
+(NOT_STARTED/PENDING use Start; COMPLETED is cloned) or was never started.
+Triggerer or OWNER/ADMIN only.
 
 Runs in the background — poll ``GET /v1/workflow-runs/{run_id}`` (also given
 in the ``Location`` header) until ``execution_state`` is COMPLETED or FAILED.

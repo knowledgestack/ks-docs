@@ -9,6 +9,7 @@ All URIs are relative to *http://localhost:8000*
 | [**getWorkflowRun**](WorkflowRunsApi.md#getworkflowrun) | **GET** /v1/workflow-runs/{run_id} | Get Workflow Run Handler |
 | [**getWorkflowRunsSummary**](WorkflowRunsApi.md#getworkflowrunssummary) | **GET** /v1/workflow-runs/summary | Get Workflow Runs Summary Handler |
 | [**listWorkflowRunsForTenant**](WorkflowRunsApi.md#listworkflowrunsfortenant) | **GET** /v1/workflow-runs | List Workflow Runs For Tenant Handler |
+| [**resumeWorkflowRun**](WorkflowRunsApi.md#resumeworkflowrun) | **POST** /v1/workflow-runs/{run_id}/resume | Resume Workflow Run Handler |
 | [**retryWorkflowRun**](WorkflowRunsApi.md#retryworkflowrun) | **POST** /v1/workflow-runs/{run_id}/retry | Retry Workflow Run Handler |
 | [**setWorkflowRunApproval**](WorkflowRunsApi.md#setworkflowrunapprovaloperation) | **POST** /v1/workflow-runs/{run_id}/approval | Set Workflow Run Approval Handler |
 | [**startWorkflowRun**](WorkflowRunsApi.md#startworkflowrunoperation) | **POST** /v1/workflow-runs/{run_id}/start | Start Workflow Run Handler |
@@ -443,13 +444,88 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
+## resumeWorkflowRun
+
+> WorkflowRunResponse resumeWorkflowRun(runId)
+
+Resume Workflow Run Handler
+
+Continue a FAILED run in place instead of restarting it.  Unlike &#x60;&#x60;retry&#x60;&#x60; (which restarts the agent cold), &#x60;&#x60;resume&#x60;&#x60; loads the run\&#39;s surviving thread history — the checkpoint summary and any persisted partial reply — and re-hydrates &#x60;&#x60;/work/&#x60;&#x60;, so a run that timed out or was stopped near the end finishes from where it left off rather than redoing the work. Same guards as retry: 409 if the run is not FAILED or was never started; triggerer or OWNER/ADMIN only.  Runs in the background — poll &#x60;&#x60;GET /v1/workflow-runs/{run_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  WorkflowRunsApi,
+} from '@knowledge-stack/ksapi';
+import type { ResumeWorkflowRunRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new WorkflowRunsApi(config);
+
+  const body = {
+    // string
+    runId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies ResumeWorkflowRunRequest;
+
+  try {
+    const data = await api.resumeWorkflowRun(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **runId** | `string` |  | [Defaults to `undefined`] |
+
+### Return type
+
+[**WorkflowRunResponse**](WorkflowRunResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **202** | Successful Response |  * Location - Poll this run resource until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED. <br>  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
 ## retryWorkflowRun
 
 > WorkflowRunResponse retryWorkflowRun(runId)
 
 Retry Workflow Run Handler
 
-Re-run a FAILED run (including a user-stopped one) in place.  Flips &#x60;&#x60;FAILED -&gt; IN_PROGRESS&#x60;&#x60; against the run\&#39;s existing snapshot and re-dispatches the agent. 409 if the run is not FAILED (NOT_STARTED/PENDING use Start; COMPLETED is cloned) or was never started. Triggerer or OWNER/ADMIN only.  Runs in the background — poll &#x60;&#x60;GET /v1/workflow-runs/{run_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED.
+Re-run a FAILED run (including a user-stopped one) from scratch.  Restarts the agent cold: flips &#x60;&#x60;FAILED -&gt; IN_PROGRESS&#x60;&#x60; against the run\&#39;s existing snapshot and re-dispatches with empty history. Use &#x60;&#x60;resume&#x60;&#x60; to continue from surviving history instead. 409 if the run is not FAILED (NOT_STARTED/PENDING use Start; COMPLETED is cloned) or was never started. Triggerer or OWNER/ADMIN only.  Runs in the background — poll &#x60;&#x60;GET /v1/workflow-runs/{run_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED.
 
 ### Example
 

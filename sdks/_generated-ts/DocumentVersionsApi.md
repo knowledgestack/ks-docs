@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost:8000*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**attachCitedAsset**](DocumentVersionsApi.md#attachcitedasset) | **POST** /v1/document_versions/{version_id}/cited-asset | Attach Cited Asset Handler |
 | [**clearDocumentVersionContents**](DocumentVersionsApi.md#cleardocumentversioncontents) | **DELETE** /v1/document_versions/{version_id}/contents | Clear Document Version Contents Handler |
 | [**createDocumentVersion**](DocumentVersionsApi.md#createdocumentversion) | **POST** /v1/documents/{document_id}/versions | Create Document Version Handler |
 | [**deleteDocumentVersion**](DocumentVersionsApi.md#deletedocumentversion) | **DELETE** /v1/document_versions/{version_id} | Delete Document Version Handler |
@@ -15,6 +16,84 @@ All URIs are relative to *http://localhost:8000*
 | [**listDocumentVersions**](DocumentVersionsApi.md#listdocumentversions) | **GET** /v1/document_versions | List Document Versions Handler |
 | [**updateDocumentVersionMetadata**](DocumentVersionsApi.md#updatedocumentversionmetadata) | **PATCH** /v1/document_versions/{version_id}/metadata | Update Document Version Metadata Handler |
 
+
+
+## attachCitedAsset
+
+> attachCitedAsset(versionId, file)
+
+Attach Cited Asset Handler
+
+Store the agent\&#39;s cited copy of a version\&#39;s source as its cited_source_s3 sibling.  The clean &#x60;&#x60;source_s3&#x60;&#x60; is untouched — chunking, the FE viewer, and downloads keep using it and render citations from &#x60;&#x60;citation_anchors&#x60;&#x60;. The cited copy (KS Citation comments intact) is read only by the agent edit round-trip (&#x60;&#x60;ks_download_to_sandbox&#x60;&#x60;) so a follow-up chat re-extracts anchors instead of losing them. Requires write access to the version.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentVersionsApi,
+} from '@knowledge-stack/ksapi';
+import type { AttachCitedAssetRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentVersionsApi(config);
+
+  const body = {
+    // string | DocumentVersion ID
+    versionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // Blob
+    file: BINARY_DATA_HERE,
+  } satisfies AttachCitedAssetRequest;
+
+  try {
+    const data = await api.attachCitedAsset(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **versionId** | `string` | DocumentVersion ID | [Defaults to `undefined`] |
+| **file** | `Blob` |  | [Defaults to `undefined`] |
+
+### Return type
+
+`void` (Empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `multipart/form-data`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## clearDocumentVersionContents

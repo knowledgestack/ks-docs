@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**attach_cited_asset**](DocumentVersionsApi.md#attach_cited_asset) | **POST** /v1/document_versions/{version_id}/cited-asset | Attach Cited Asset Handler
 [**clear_document_version_contents**](DocumentVersionsApi.md#clear_document_version_contents) | **DELETE** /v1/document_versions/{version_id}/contents | Clear Document Version Contents Handler
 [**create_document_version**](DocumentVersionsApi.md#create_document_version) | **POST** /v1/documents/{document_id}/versions | Create Document Version Handler
 [**delete_document_version**](DocumentVersionsApi.md#delete_document_version) | **DELETE** /v1/document_versions/{version_id} | Delete Document Version Handler
@@ -15,6 +16,98 @@ Method | HTTP request | Description
 [**list_document_versions**](DocumentVersionsApi.md#list_document_versions) | **GET** /v1/document_versions | List Document Versions Handler
 [**update_document_version_metadata**](DocumentVersionsApi.md#update_document_version_metadata) | **PATCH** /v1/document_versions/{version_id}/metadata | Update Document Version Metadata Handler
 
+
+# **attach_cited_asset**
+> attach_cited_asset(version_id, file)
+
+Attach Cited Asset Handler
+
+Store the agent's cited copy of a version's source as its cited_source_s3 sibling.
+
+The clean ``source_s3`` is untouched — chunking, the FE viewer, and downloads
+keep using it and render citations from ``citation_anchors``. The cited copy
+(KS Citation comments intact) is read only by the agent edit round-trip
+(``ks_download_to_sandbox``) so a follow-up chat re-extracts anchors instead
+of losing them. Requires write access to the version.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DocumentVersionsApi(api_client)
+    version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
+    file = None # bytes | 
+
+    try:
+        # Attach Cited Asset Handler
+        api_instance.attach_cited_asset(version_id, file)
+    except Exception as e:
+        print("Exception when calling DocumentVersionsApi->attach_cited_asset: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **version_id** | **UUID**| DocumentVersion ID | 
+ **file** | **bytes**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **clear_document_version_contents**
 > ClearVersionContentsResponse clear_document_version_contents(version_id)

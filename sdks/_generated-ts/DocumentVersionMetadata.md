@@ -10,6 +10,7 @@ Name | Type
 `sourceS3` | string
 `cleanedSourceS3` | string
 `preconversionSourceS3` | string
+`citedSourceS3` | string
 `fastPlaintextS3` | string
 `hash` | string
 `pipelineState` | [PipelineState](PipelineState.md)
@@ -37,6 +38,7 @@ const example = {
   "sourceS3": null,
   "cleanedSourceS3": null,
   "preconversionSourceS3": null,
+  "citedSourceS3": null,
   "fastPlaintextS3": null,
   "hash": null,
   "pipelineState": null,

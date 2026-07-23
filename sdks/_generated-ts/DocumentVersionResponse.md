@@ -19,6 +19,7 @@ Name | Type
 `createdAt` | Date
 `updatedAt` | Date
 `assetS3Url` | string
+`citedAssetS3Url` | string
 `fastPlaintextUrl` | string
 `pageScreenshotUrls` | Array&lt;string&gt;
 `systemMetadata` | [DocumentVersionMetadata](DocumentVersionMetadata.md)
@@ -42,6 +43,7 @@ const example = {
   "createdAt": null,
   "updatedAt": null,
   "assetS3Url": null,
+  "citedAssetS3Url": null,
   "fastPlaintextUrl": null,
   "pageScreenshotUrls": null,
   "systemMetadata": null,

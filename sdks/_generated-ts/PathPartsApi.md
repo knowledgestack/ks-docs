@@ -13,6 +13,7 @@ All URIs are relative to *http://localhost:8000*
 | [**getPathPartTags**](PathPartsApi.md#getpathparttags) | **GET** /v1/path-parts/{path_part_id}/tags | Get Path Part Tags Handler |
 | [**listPathPartEvents**](PathPartsApi.md#listpathpartevents) | **GET** /v1/path-parts/{path_part_id}/events | List Path Part Events Handler |
 | [**listPathParts**](PathPartsApi.md#listpathparts) | **GET** /v1/path-parts | List Path Parts Handler |
+| [**reorderPathPart**](PathPartsApi.md#reorderpathpartoperation) | **POST** /v1/path-parts/{path_part_id}/reorder | Reorder Path Part Handler |
 | [**setPathPartTags**](PathPartsApi.md#setpathparttags) | **POST** /v1/path-parts/{path_part_id}/tags | Set Path Part Tags Handler |
 | [**transferPathPartOwner**](PathPartsApi.md#transferpathpartowner) | **PUT** /v1/path-parts/{path_part_id}/owner | Transfer Path Part Owner Handler |
 
@@ -740,6 +741,84 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## reorderPathPart
+
+> PathPartResponse reorderPathPart(pathPartId, reorderPathPartRequest)
+
+Reorder Path Part Handler
+
+Reorder a path part within its sibling list.  The left-nav order follows the path_part sibling linked list: one per-parent chain shared by everyone in the tenant. Moving is confined to the node\&#39;s current parent; use the folder/document move endpoints to change parents.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  PathPartsApi,
+} from '@knowledge-stack/ksapi';
+import type { ReorderPathPartOperationRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new PathPartsApi(config);
+
+  const body = {
+    // string
+    pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // ReorderPathPartRequest
+    reorderPathPartRequest: ...,
+  } satisfies ReorderPathPartOperationRequest;
+
+  try {
+    const data = await api.reorderPathPart(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **pathPartId** | `string` |  | [Defaults to `undefined`] |
+| **reorderPathPartRequest** | [ReorderPathPartRequest](ReorderPathPartRequest.md) |  | |
+
+### Return type
+
+[**PathPartResponse**](PathPartResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
 - **Accept**: `application/json`
 
 

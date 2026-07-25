@@ -13,6 +13,7 @@ Method | HTTP request | Description
 [**get_path_part_tags**](PathPartsApi.md#get_path_part_tags) | **GET** /v1/path-parts/{path_part_id}/tags | Get Path Part Tags Handler
 [**list_path_part_events**](PathPartsApi.md#list_path_part_events) | **GET** /v1/path-parts/{path_part_id}/events | List Path Part Events Handler
 [**list_path_parts**](PathPartsApi.md#list_path_parts) | **GET** /v1/path-parts | List Path Parts Handler
+[**reorder_path_part**](PathPartsApi.md#reorder_path_part) | **POST** /v1/path-parts/{path_part_id}/reorder | Reorder Path Part Handler
 [**set_path_part_tags**](PathPartsApi.md#set_path_part_tags) | **POST** /v1/path-parts/{path_part_id}/tags | Set Path Part Tags Handler
 [**transfer_path_part_owner**](PathPartsApi.md#transfer_path_part_owner) | **PUT** /v1/path-parts/{path_part_id}/owner | Transfer Path Part Owner Handler
 
@@ -888,6 +889,100 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **reorder_path_part**
+> PathPartResponse reorder_path_part(path_part_id, reorder_path_part_request)
+
+Reorder Path Part Handler
+
+Reorder a path part within its sibling list.
+
+The left-nav order follows the path_part sibling linked list: one per-parent
+chain shared by everyone in the tenant. Moving is confined to the node's
+current parent; use the folder/document move endpoints to change parents.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.path_part_response import PathPartResponse
+from ksapi.models.reorder_path_part_request import ReorderPathPartRequest
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.PathPartsApi(api_client)
+    path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    reorder_path_part_request = ksapi.ReorderPathPartRequest() # ReorderPathPartRequest | 
+
+    try:
+        # Reorder Path Part Handler
+        api_response = api_instance.reorder_path_part(path_part_id, reorder_path_part_request)
+        print("The response of PathPartsApi->reorder_path_part:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling PathPartsApi->reorder_path_part: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **path_part_id** | **UUID**|  | 
+ **reorder_path_part_request** | [**ReorderPathPartRequest**](ReorderPathPartRequest.md)|  | 
+
+### Return type
+
+[**PathPartResponse**](PathPartResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 ### HTTP response details

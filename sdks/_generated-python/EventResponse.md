@@ -1,6 +1,6 @@
 # EventResponse
 
-One event row, anchored to a path_part subject.  ``kind`` is namespaced ``domain.action`` (e.g. ``workflow.approval``, ``document.created``). ``payload`` is the domain-specific structured JSON associated with the event.
+One event row, anchored to a path_part subject.  ``kind`` is namespaced ``domain.action`` (e.g. ``workflow.approval``, ``document.created``). ``payload`` is the domain-specific structured JSON associated with the event, stored verbatim and never rewritten — the human-readable resolution lives alongside it in ``references``.
 
 ## Properties
 
@@ -13,6 +13,11 @@ Name | Type | Description | Notes
 **actor_user_id** | **UUID** |  | 
 **payload** | **Dict[str, object]** |  | 
 **actor** | [**UserInfo**](UserInfo.md) |  | [optional] 
+**subject_name** | **str** |  | [optional] 
+**subject_path** | **str** |  | [optional] 
+**subject_object_id** | **UUID** |  | [optional] 
+**subject_part_type** | **str** |  | [optional] 
+**references** | [**Dict[str, ResolvedRef]**](ResolvedRef.md) |  | [optional] 
 
 ## Example
 

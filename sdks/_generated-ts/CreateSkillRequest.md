@@ -9,7 +9,7 @@ Name | Type
 ------------ | -------------
 `name` | string
 `skillMd` | string
-`scripts` | [Array&lt;SkillScriptFile&gt;](SkillScriptFile.md)
+`files` | [Array&lt;SkillFile&gt;](SkillFile.md)
 
 ## Example
 
@@ -20,7 +20,7 @@ import type { CreateSkillRequest } from '@knowledge-stack/ksapi'
 const example = {
   "name": null,
   "skillMd": null,
-  "scripts": null,
+  "files": null,
 } satisfies CreateSkillRequest
 
 console.log(example)

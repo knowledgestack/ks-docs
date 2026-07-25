@@ -7,7 +7,7 @@ Edit working-copy files in place (does NOT cut a version).
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **skill_md** | **str** | Replacement SKILL.md, written to the working copy in place; null leaves it unchanged. Publish a version to snapshot; the active version is unchanged until then. | [optional] 
-**scripts** | [**List[SkillScriptFile]**](SkillScriptFile.md) | Replace the working-copy scripts set (add/overwrite/remove to match); null leaves scripts unchanged, [] removes them all. | [optional] 
+**files** | [**List[SkillFile]**](SkillFile.md) | Replace the whole bundle below SKILL.md (add/overwrite/remove to match); null leaves the tree unchanged, [] removes every file. | [optional] 
 
 ## Example
 

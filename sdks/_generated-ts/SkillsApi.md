@@ -554,11 +554,11 @@ example().catch(console.error);
 
 ## getSkill
 
-> SkillResponse getSkill(skillId)
+> SkillResponse getSkill(skillId, includeFileContents)
 
 Get Skill Handler
 
-Skill detail: SKILL.md, script contents, has_unpublished_changes, perms.
+Skill detail: SKILL.md, file paths (+ contents on request), perms.
 
 ### Example
 
@@ -582,6 +582,8 @@ async function example() {
   const body = {
     // string
     skillId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // boolean | Include every bundle file\'s contents (base64 for binary). Off by default — the editor opts in; a large skill\'s contents can be many MB and one S3 read per file. (optional)
+    includeFileContents: true,
   } satisfies GetSkillRequest;
 
   try {
@@ -602,6 +604,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **skillId** | `string` |  | [Defaults to `undefined`] |
+| **includeFileContents** | `boolean` | Include every bundle file\&#39;s contents (base64 for binary). Off by default — the editor opts in; a large skill\&#39;s contents can be many MB and one S3 read per file. | [Optional] [Defaults to `false`] |
 
 ### Return type
 
@@ -633,7 +636,7 @@ example().catch(console.error);
 
 Import Skill Handler
 
-Create a skill by importing a redistributable ZIP (works across tenants).
+Create a skill from an uploaded ZIP or tarball (works across tenants).
 
 ### Example
 

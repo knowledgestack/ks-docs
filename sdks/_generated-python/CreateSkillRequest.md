@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | Skill machine name (its folder name); unique within the tenant. | 
 **skill_md** | **str** | Full SKILL.md content: YAML frontmatter with name + description, then the markdown instruction body. | 
-**scripts** | [**List[SkillScriptFile]**](SkillScriptFile.md) | Optional scripts bundled under the skill&#39;s scripts/ folder. | [optional] 
+**files** | [**List[SkillFile]**](SkillFile.md) | Optional bundle files at paths relative to the skill root (scripts/, references/, assets/, …). SKILL.md is supplied separately and must not be repeated here. | [optional] 
 
 ## Example
 

@@ -8,7 +8,7 @@ Edit working-copy files in place (does NOT cut a version).
 Name | Type
 ------------ | -------------
 `skillMd` | string
-`scripts` | [Array&lt;SkillScriptFile&gt;](SkillScriptFile.md)
+`files` | [Array&lt;SkillFile&gt;](SkillFile.md)
 
 ## Example
 
@@ -18,7 +18,7 @@ import type { UpdateSkillRequest } from '@knowledge-stack/ksapi'
 // TODO: Update the object below with actual values
 const example = {
   "skillMd": null,
-  "scripts": null,
+  "files": null,
 } satisfies UpdateSkillRequest
 
 console.log(example)

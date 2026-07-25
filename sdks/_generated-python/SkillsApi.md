@@ -636,11 +636,11 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_skill**
-> SkillResponse get_skill(skill_id)
+> SkillResponse get_skill(skill_id, include_file_contents=include_file_contents)
 
 Get Skill Handler
 
-Skill detail: SKILL.md, script contents, has_unpublished_changes, perms.
+Skill detail: SKILL.md, file paths (+ contents on request), perms.
 
 ### Example
 
@@ -680,10 +680,11 @@ with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     skill_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    include_file_contents = False # bool | Include every bundle file's contents (base64 for binary). Off by default — the editor opts in; a large skill's contents can be many MB and one S3 read per file. (optional) (default to False)
 
     try:
         # Get Skill Handler
-        api_response = api_instance.get_skill(skill_id)
+        api_response = api_instance.get_skill(skill_id, include_file_contents=include_file_contents)
         print("The response of SkillsApi->get_skill:\n")
         pprint(api_response)
     except Exception as e:
@@ -698,6 +699,7 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **skill_id** | **UUID**|  | 
+ **include_file_contents** | **bool**| Include every bundle file&#39;s contents (base64 for binary). Off by default — the editor opts in; a large skill&#39;s contents can be many MB and one S3 read per file. | [optional] [default to False]
 
 ### Return type
 
@@ -727,7 +729,7 @@ Name | Type | Description  | Notes
 
 Import Skill Handler
 
-Create a skill by importing a redistributable ZIP (works across tenants).
+Create a skill from an uploaded ZIP or tarball (works across tenants).
 
 ### Example
 

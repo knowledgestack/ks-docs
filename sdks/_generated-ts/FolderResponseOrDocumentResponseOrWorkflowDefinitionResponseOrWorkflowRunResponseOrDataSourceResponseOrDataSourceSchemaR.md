@@ -65,8 +65,8 @@ Name | Type
 `disclaimerAcceptedAt` | Date
 `disclaimerAcceptedBy` | string
 `skillMd` | string
-`scriptNames` | Array&lt;string&gt;
-`scripts` | [Array&lt;SkillScriptFile&gt;](SkillScriptFile.md)
+`filePaths` | Array&lt;string&gt;
+`files` | [Array&lt;SkillFile&gt;](SkillFile.md)
 `hasUnpublishedChanges` | boolean
 
 ## Example
@@ -135,8 +135,8 @@ const example = {
   "disclaimerAcceptedAt": null,
   "disclaimerAcceptedBy": null,
   "skillMd": null,
-  "scriptNames": null,
-  "scripts": null,
+  "filePaths": null,
+  "files": null,
   "hasUnpublishedChanges": null,
 } satisfies FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR
 

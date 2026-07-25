@@ -64,8 +64,8 @@ Name | Type | Description | Notes
 **disclaimer_accepted_at** | **datetime** |  | 
 **disclaimer_accepted_by** | **UUID** |  | 
 **skill_md** | **str** | Full SKILL.md content; populated on the detail read and on mutation responses, null on list. | [optional] 
-**script_names** | **List[str]** | Bundled script file names; populated on the detail read and on mutation responses, empty on list. | [optional] 
-**scripts** | [**List[SkillScriptFile]**](SkillScriptFile.md) | Bundled scripts with their contents; populated only on the detail read (GET /skills/{id}), null on list. Lets the editor read the current script set so a PATCH can safely resubmit the whole set. | [optional] 
+**file_paths** | **List[str]** | Bundle file paths relative to the skill root (SKILL.md excluded); populated on the detail read and on mutation responses, empty on list. | [optional] 
+**files** | [**List[SkillFile]**](SkillFile.md) | Bundle files with their contents; populated only on the detail read (GET /skills/{id}), null on list. Lets the editor read the current file set so a PATCH can safely resubmit the whole set. | [optional] 
 **has_unpublished_changes** | **bool** | Whether the working copy differs from the active published version. Always present (incl. list responses) so the UI can flag a skill with an unpublished draft. | [optional] [default to False]
 
 ## Example

@@ -12,6 +12,8 @@ Name | Type
 `parentPathId` | string
 `metadataObjId` | string
 `depth` | number
+`chunkStartIndex` | number
+`chunkEndIndex` | number
 `pageNumber` | number
 `materializedPath` | string
 `systemManaged` | boolean
@@ -35,6 +37,8 @@ const example = {
   "parentPathId": null,
   "metadataObjId": null,
   "depth": null,
+  "chunkStartIndex": null,
+  "chunkEndIndex": null,
   "pageNumber": null,
   "materializedPath": null,
   "systemManaged": null,

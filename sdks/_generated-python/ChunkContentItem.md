@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **parent_path_id** | **UUID** | Parent PathPart ID | 
 **metadata_obj_id** | **UUID** | Chunk ID | 
 **depth** | **int** | Depth relative to document version root | 
+**chunk_start_index** | **int** | 0-based ordinal of this chunk, counting CHUNK rows in DFS order from the traversal root. Usable directly as a read start/end coordinate. Null on endpoints that do not compute traversal ordinals. | [optional] 
 **content** | **str** | Chunk content | [optional] 
 **chunk_type** | [**ChunkType**](ChunkType.md) |  | [optional] 
 **chunk_metadata** | [**ChunkMetadata**](ChunkMetadata.md) | Chunk metadata | [optional] 

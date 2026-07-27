@@ -13,6 +13,7 @@ Name | Type
 `parentPathId` | string
 `metadataObjId` | string
 `depth` | number
+`chunkStartIndex` | number
 `content` | string
 `chunkType` | [ChunkType](ChunkType.md)
 `chunkMetadata` | [ChunkMetadata](ChunkMetadata.md)
@@ -35,6 +36,7 @@ const example = {
   "parentPathId": null,
   "metadataObjId": null,
   "depth": null,
+  "chunkStartIndex": null,
   "content": null,
   "chunkType": null,
   "chunkMetadata": null,

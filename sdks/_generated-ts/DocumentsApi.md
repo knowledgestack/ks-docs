@@ -10,6 +10,7 @@ All URIs are relative to *http://localhost:8000*
 | [**getDocument**](DocumentsApi.md#getdocument) | **GET** /v1/documents/{document_id} | Get Document Handler |
 | [**ingestDocument**](DocumentsApi.md#ingestdocument) | **POST** /v1/documents/ingest | Ingest Document Handler |
 | [**ingestDocumentVersion**](DocumentsApi.md#ingestdocumentversion) | **POST** /v1/documents/{document_id}/ingest | Ingest Document Version Handler |
+| [**ingestZip**](DocumentsApi.md#ingestzip) | **POST** /v1/documents/ingest-zip | Ingest Zip Handler |
 | [**listDocuments**](DocumentsApi.md#listdocuments) | **GET** /v1/documents | List Documents Handler |
 | [**updateDocument**](DocumentsApi.md#updatedocumentoperation) | **PATCH** /v1/documents/{document_id} | Update Document Handler |
 
@@ -508,6 +509,87 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **201** | Successful Response |  * Location - Poll this ingestion-status resource until the pipeline reaches a terminal state. <br>  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## ingestZip
+
+> IngestZipResponse ingestZip(file, pathPartId, ingestionMode)
+
+Ingest Zip Handler
+
+Upload a ZIP archive and ingest each member file individually.  Directory structure inside the ZIP is preserved as FOLDER PathParts under the target folder. Returns 202 with per-file outcomes — each file that ingests successfully has its own Temporal workflow ID to poll for status.  Whole-archive failures (not a ZIP, zip-bomb, &gt;500 files) return 400 before any DB writes. Per-file failures (unsupported type, oversized) are included in the response with &#x60;&#x60;error&#x60;&#x60; set; other files continue processing.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentsApi,
+} from '@knowledge-stack/ksapi';
+import type { IngestZipRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
+
+  const body = {
+    // Blob
+    file: BINARY_DATA_HERE,
+    // string | Parent path part ID (must be a FOLDER type)
+    pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // IngestionMode (optional)
+    ingestionMode: ...,
+  } satisfies IngestZipRequest;
+
+  try {
+    const data = await api.ingestZip(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **file** | `Blob` |  | [Defaults to `undefined`] |
+| **pathPartId** | `string` | Parent path part ID (must be a FOLDER type) | [Defaults to `undefined`] |
+| **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk] |
+
+### Return type
+
+[**IngestZipResponse**](IngestZipResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `multipart/form-data`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **202** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
 | **0** | Error response. |  -  |
 

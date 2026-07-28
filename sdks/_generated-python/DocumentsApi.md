@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**get_document**](DocumentsApi.md#get_document) | **GET** /v1/documents/{document_id} | Get Document Handler
 [**ingest_document**](DocumentsApi.md#ingest_document) | **POST** /v1/documents/ingest | Ingest Document Handler
 [**ingest_document_version**](DocumentsApi.md#ingest_document_version) | **POST** /v1/documents/{document_id}/ingest | Ingest Document Version Handler
+[**ingest_zip**](DocumentsApi.md#ingest_zip) | **POST** /v1/documents/ingest-zip | Ingest Zip Handler
 [**list_documents**](DocumentsApi.md#list_documents) | **GET** /v1/documents | List Documents Handler
 [**update_document**](DocumentsApi.md#update_document) | **PATCH** /v1/documents/{document_id} | Update Document Handler
 
@@ -592,6 +593,106 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** | Successful Response |  * Location - Poll this run resource until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED. <br>  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ingest_zip**
+> IngestZipResponse ingest_zip(file, path_part_id, ingestion_mode=ingestion_mode)
+
+Ingest Zip Handler
+
+Upload a ZIP archive and ingest each member file individually.
+
+Directory structure inside the ZIP is preserved as FOLDER PathParts under
+the target folder. Returns 202 with per-file outcomes — each file that
+ingests successfully has its own Temporal workflow ID to poll for status.
+
+Whole-archive failures (not a ZIP, zip-bomb, >500 files) return 400 before
+any DB writes. Per-file failures (unsupported type, oversized) are included
+in the response with ``error`` set; other files continue processing.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.ingest_zip_response import IngestZipResponse
+from ksapi.models.ingestion_mode import IngestionMode
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DocumentsApi(api_client)
+    file = None # bytes | 
+    path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent path part ID (must be a FOLDER type)
+    ingestion_mode = ksapi.IngestionMode() # IngestionMode |  (optional)
+
+    try:
+        # Ingest Zip Handler
+        api_response = api_instance.ingest_zip(file, path_part_id, ingestion_mode=ingestion_mode)
+        print("The response of DocumentsApi->ingest_zip:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->ingest_zip: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file** | **bytes**|  | 
+ **path_part_id** | **UUID**| Parent path part ID (must be a FOLDER type) | 
+ **ingestion_mode** | [**IngestionMode**](IngestionMode.md)|  | [optional] 
+
+### Return type
+
+[**IngestZipResponse**](IngestZipResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **0** | Error response. |  -  |
 

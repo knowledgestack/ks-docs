@@ -10,6 +10,10 @@ A knowledge-base time series the dashboard can request.
 
 * `INGESTION_FAILED` (value: `'ingestion_failed'`)
 
+* `MESSAGE` (value: `'message'`)
+
+* `SEARCH` (value: `'search'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

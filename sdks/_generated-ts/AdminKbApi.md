@@ -132,7 +132,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **metric** | `KbMetric` | Which KB metric to bucket. | [Defaults to `undefined`] [Enum: document_uploads, ingestion_completed, ingestion_failed] |
+| **metric** | `KbMetric` | Which KB metric to bucket. | [Defaults to `undefined`] [Enum: document_uploads, ingestion_completed, ingestion_failed, message, search] |
 | **since** | `Date` | Window start. | [Optional] [Defaults to `undefined`] |
 | **until** | `Date` | Window end. | [Optional] [Defaults to `undefined`] |
 | **bucket** | `TimeBucket` | Bucket size. | [Optional] [Defaults to `undefined`] [Enum: hour, day, week, month] |

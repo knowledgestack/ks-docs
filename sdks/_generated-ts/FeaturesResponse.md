@@ -11,6 +11,7 @@ Name | Type
 `githubLoginEnabled` | boolean
 `smsLoginEnabled` | boolean
 `defaultFrontendLanguage` | [SupportedLanguage](SupportedLanguage.md)
+`upload` | [UploadConstraints](UploadConstraints.md)
 
 ## Example
 
@@ -24,6 +25,7 @@ const example = {
   "githubLoginEnabled": null,
   "smsLoginEnabled": null,
   "defaultFrontendLanguage": null,
+  "upload": null,
 } satisfies FeaturesResponse
 
 console.log(example)

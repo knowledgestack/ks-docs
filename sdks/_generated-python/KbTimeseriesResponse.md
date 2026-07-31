@@ -1,6 +1,6 @@
 # KbTimeseriesResponse
 
-A knowledge-base metric bucketed over time.  ``series`` carries one entry per split — two (SOURCE / GENERATED) for ``document_uploads``, one for the ingestion metrics.
+A knowledge-base metric bucketed over time.  ``series`` carries one entry per split — two (SOURCE / GENERATED) for ``document_uploads``, one for the ingestion, message, and search metrics.
 
 ## Properties
 

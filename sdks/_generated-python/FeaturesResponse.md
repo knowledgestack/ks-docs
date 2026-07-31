@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **github_login_enabled** | **bool** |  | 
 **sms_login_enabled** | **bool** |  | 
 **default_frontend_language** | [**SupportedLanguage**](SupportedLanguage.md) |  | 
+**upload** | [**UploadConstraints**](UploadConstraints.md) |  | 
 
 ## Example
 

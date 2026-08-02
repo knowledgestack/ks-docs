@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**dv_workflow_rerun**](SystemJobsApi.md#dv_workflow_rerun) | **POST** /v1/system-jobs/document_versions/{workflow_id} | Dv Workflow Rerun Handler
 [**get_dv_workflow**](SystemJobsApi.md#get_dv_workflow) | **GET** /v1/system-jobs/document_versions/{workflow_id} | Get Dv Workflow Handler
 [**get_temporal_workflow_status**](SystemJobsApi.md#get_temporal_workflow_status) | **GET** /v1/system-jobs/{workflow_id} | Get Temporal Workflow Status Handler
+[**get_zip_ingestion_status**](SystemJobsApi.md#get_zip_ingestion_status) | **GET** /v1/system-jobs/zip-ingestions/{workflow_id} | Get Zip Ingestion Status Handler
 [**list_dv_workflows**](SystemJobsApi.md#list_dv_workflows) | **GET** /v1/system-jobs/document_versions | List Dv Workflows Handler
 
 
@@ -345,6 +346,97 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**TemporalWorkflowStatusResponse**](TemporalWorkflowStatusResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_zip_ingestion_status**
+> ZipIngestionStatusResponse get_zip_ingestion_status(workflow_id)
+
+Get Zip Ingestion Status Handler
+
+Get a ZIP fan-out's live status + per-member outcomes.
+
+Tenant-scoped via the TenantId search attribute. The per-member results come
+from the workflow's ``results`` query (served from retained history), so once
+Temporal retention expires this returns 404.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.zip_ingestion_status_response import ZipIngestionStatusResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.SystemJobsApi(api_client)
+    workflow_id = 'workflow_id_example' # str | 
+
+    try:
+        # Get Zip Ingestion Status Handler
+        api_response = api_instance.get_zip_ingestion_status(workflow_id)
+        print("The response of SystemJobsApi->get_zip_ingestion_status:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling SystemJobsApi->get_zip_ingestion_status: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **workflow_id** | **str**|  | 
+
+### Return type
+
+[**ZipIngestionStatusResponse**](ZipIngestionStatusResponse.md)
 
 ### Authorization
 

@@ -322,7 +322,7 @@ example().catch(console.error);
 
 ## ingestDocument
 
-> IngestDocumentResponse ingestDocument(file, pathPartId, name, ingestionMode, chunkType, secondaryTaxonomy, pageDpi, workflowRunId, workflowDefinitionId)
+> IngestDocumentResponse ingestDocument(file, pathPartId, name, ingestionMode, chunkType, secondaryTaxonomy, pageDpi, workflowRunId, tagIds, idempotencyKey, workflowDefinitionId)
 
 Ingest Document Handler
 
@@ -364,6 +364,10 @@ async function example() {
     pageDpi: 56,
     // string | Workflow run context for assumed agent uploads. (optional)
     workflowRunId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // Array<string> | Tag IDs applied to the created document. (optional)
+    tagIds: ...,
+    // string | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. (optional)
+    idempotencyKey: idempotencyKey_example,
     // string | Workflow definition context for assumed agent uploads. (optional)
     workflowDefinitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
   } satisfies IngestDocumentRequest;
@@ -393,6 +397,8 @@ example().catch(console.error);
 | **secondaryTaxonomy** | `ImageTaxonomy` |  | [Optional] [Defaults to `undefined`] [Enum: picture, flowchart] |
 | **pageDpi** | `number` | DPI for PDF page screenshots (default 72, min 36, max 216). | [Optional] [Defaults to `72`] |
 | **workflowRunId** | `string` | Workflow run context for assumed agent uploads. | [Optional] [Defaults to `undefined`] |
+| **tagIds** | `Array<string>` | Tag IDs applied to the created document. | [Optional] |
+| **idempotencyKey** | `string` | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. | [Optional] [Defaults to `undefined`] |
 | **workflowDefinitionId** | `string` | Workflow definition context for assumed agent uploads. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
@@ -517,11 +523,11 @@ example().catch(console.error);
 
 ## ingestZip
 
-> IngestZipResponse ingestZip(file, pathPartId, ingestionMode)
+> IngestZipResponse ingestZip(file, pathPartId, ingestionMode, tagIds)
 
 Ingest Zip Handler
 
-Upload a ZIP archive and ingest each member file individually.  Directory structure inside the ZIP is preserved as FOLDER PathParts under the target folder. Returns 202 with per-file outcomes — each file that ingests successfully has its own Temporal workflow ID to poll for status.  Whole-archive failures (not a ZIP, zip-bomb, &gt;500 files) return 400 before any DB writes. Per-file failures (unsupported type, oversized) are included in the response with &#x60;&#x60;error&#x60;&#x60; set; other files continue processing.
+Upload a ZIP archive; ingest each member asynchronously via a fan-out.  The whole archive nests under a single FOLDER named after the ZIP file (&#x60;&#x60;report.zip&#x60;&#x60; -&gt; &#x60;&#x60;report/&#x60;&#x60;), with the ZIP\&#39;s directory structure mirrored beneath it as FOLDER PathParts — all created synchronously. Returns 202 with the fan-out &#x60;&#x60;workflow_id&#x60;&#x60; (poll &#x60;&#x60;GET /v1/system-jobs/zip-ingestions/{workflow_id}&#x60;&#x60; for per-member outcomes) plus the artifacts &#x60;&#x60;skipped&#x60;&#x60; during classification.  Whole-archive failures (not a ZIP, zip-bomb, &gt;500 files) return 400 before any DB writes; a re-upload whose ZIP-named folder already exists returns 409. Per-member failures (unsupported type, oversized) surface in the polled workflow results, not in this response. Each member reuses the single-file ingest path, so run-enrollment and completion events fire per member there.
 
 ### Example
 
@@ -549,6 +555,8 @@ async function example() {
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // IngestionMode (optional)
     ingestionMode: ...,
+    // Array<string> | Tag IDs applied to every ingested member document. (optional)
+    tagIds: ...,
   } satisfies IngestZipRequest;
 
   try {
@@ -571,6 +579,7 @@ example().catch(console.error);
 | **file** | `Blob` |  | [Defaults to `undefined`] |
 | **pathPartId** | `string` | Parent path part ID (must be a FOLDER type) | [Defaults to `undefined`] |
 | **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk] |
+| **tagIds** | `Array<string>` | Tag IDs applied to every ingested member document. | [Optional] |
 
 ### Return type
 

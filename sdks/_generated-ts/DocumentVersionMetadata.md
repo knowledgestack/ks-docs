@@ -27,6 +27,7 @@ Name | Type
 `quotaPageCount` | number
 `quotaIdempotencyKey` | string
 `fileMd5` | string
+`idempotencyKey` | string
 
 ## Example
 
@@ -55,6 +56,7 @@ const example = {
   "quotaPageCount": null,
   "quotaIdempotencyKey": null,
   "fileMd5": null,
+  "idempotencyKey": null,
 } satisfies DocumentVersionMetadata
 
 console.log(example)

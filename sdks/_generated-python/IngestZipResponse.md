@@ -1,16 +1,13 @@
 # IngestZipResponse
 
-Aggregate response from a ZIP ingestion batch.
+Response from dispatching a ZIP archive to async ingestion.  ``workflow_id`` is the fan-out workflow to poll at ``GET /v1/system-jobs/zip-ingestions/{workflow_id}`` for per-member outcomes; it is None when the archive held no ingestible members. ``skipped`` are the artifact/error entries resolved synchronously during classification.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**files** | [**List[ZipFileResult]**](ZipFileResult.md) |  | 
-**total_found** | **int** |  | 
-**succeeded** | **int** |  | 
-**skipped** | **int** |  | 
-**failed** | **int** |  | 
+**workflow_id** | **str** |  | 
+**skipped** | [**List[ZipFileResult]**](ZipFileResult.md) |  | 
 
 ## Example
 

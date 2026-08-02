@@ -8,6 +8,7 @@ All URIs are relative to *http://localhost:8000*
 | [**dvWorkflowRerun**](SystemJobsApi.md#dvworkflowrerun) | **POST** /v1/system-jobs/document_versions/{workflow_id} | Dv Workflow Rerun Handler |
 | [**getDvWorkflow**](SystemJobsApi.md#getdvworkflow) | **GET** /v1/system-jobs/document_versions/{workflow_id} | Get Dv Workflow Handler |
 | [**getTemporalWorkflowStatus**](SystemJobsApi.md#gettemporalworkflowstatus) | **GET** /v1/system-jobs/{workflow_id} | Get Temporal Workflow Status Handler |
+| [**getZipIngestionStatus**](SystemJobsApi.md#getzipingestionstatus) | **GET** /v1/system-jobs/zip-ingestions/{workflow_id} | Get Zip Ingestion Status Handler |
 | [**listDvWorkflows**](SystemJobsApi.md#listdvworkflows) | **GET** /v1/system-jobs/document_versions | List Dv Workflows Handler |
 
 
@@ -291,6 +292,81 @@ example().catch(console.error);
 ### Return type
 
 [**TemporalWorkflowStatusResponse**](TemporalWorkflowStatusResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getZipIngestionStatus
+
+> ZipIngestionStatusResponse getZipIngestionStatus(workflowId)
+
+Get Zip Ingestion Status Handler
+
+Get a ZIP fan-out\&#39;s live status + per-member outcomes.  Tenant-scoped via the TenantId search attribute. The per-member results come from the workflow\&#39;s &#x60;&#x60;results&#x60;&#x60; query (served from retained history), so once Temporal retention expires this returns 404.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  SystemJobsApi,
+} from '@knowledge-stack/ksapi';
+import type { GetZipIngestionStatusRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new SystemJobsApi(config);
+
+  const body = {
+    // string
+    workflowId: workflowId_example,
+  } satisfies GetZipIngestionStatusRequest;
+
+  try {
+    const data = await api.getZipIngestionStatus(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **workflowId** | `string` |  | [Defaults to `undefined`] |
+
+### Return type
+
+[**ZipIngestionStatusResponse**](ZipIngestionStatusResponse.md)
 
 ### Authorization
 

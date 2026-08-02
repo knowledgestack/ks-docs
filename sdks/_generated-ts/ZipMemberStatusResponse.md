@@ -1,25 +1,33 @@
 
-# IngestZipResponse
+# ZipMemberStatusResponse
 
-Response from dispatching a ZIP archive to async ingestion.  ``workflow_id`` is the fan-out workflow to poll at ``GET /v1/system-jobs/zip-ingestions/{workflow_id}`` for per-member outcomes; it is None when the archive held no ingestible members. ``skipped`` are the artifact/error entries resolved synchronously during classification.
+One member\'s outcome within a ZIP fan-out (from the workflow query).
 
 ## Properties
 
 Name | Type
 ------------ | -------------
+`zipPath` | string
+`documentId` | string
+`documentVersionId` | string
 `workflowId` | string
-`skipped` | [Array&lt;ZipFileResult&gt;](ZipFileResult.md)
+`error` | string
+`skipped` | boolean
 
 ## Example
 
 ```typescript
-import type { IngestZipResponse } from '@knowledge-stack/ksapi'
+import type { ZipMemberStatusResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
+  "zipPath": null,
+  "documentId": null,
+  "documentVersionId": null,
   "workflowId": null,
+  "error": null,
   "skipped": null,
-} satisfies IngestZipResponse
+} satisfies ZipMemberStatusResponse
 
 console.log(example)
 
@@ -28,7 +36,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as IngestZipResponse
+const exampleParsed = JSON.parse(exampleJSON) as ZipMemberStatusResponse
 console.log(exampleParsed)
 ```
 

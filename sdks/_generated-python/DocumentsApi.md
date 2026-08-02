@@ -375,7 +375,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ingest_document**
-> IngestDocumentResponse ingest_document(file, path_part_id, name=name, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
+> IngestDocumentResponse ingest_document(file, path_part_id, name=name, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, tag_ids=tag_ids, idempotency_key=idempotency_key, workflow_definition_id=workflow_definition_id)
 
 Ingest Document Handler
 
@@ -434,11 +434,13 @@ with ksapi.ApiClient(configuration) as api_client:
     secondary_taxonomy = ksapi.ImageTaxonomy() # ImageTaxonomy |  (optional)
     page_dpi = 72 # int | DPI for PDF page screenshots (default 72, min 36, max 216). (optional) (default to 72)
     workflow_run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Workflow run context for assumed agent uploads. (optional)
+    tag_ids = None # List[UUID] | Tag IDs applied to the created document. (optional)
+    idempotency_key = 'idempotency_key_example' # str | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. (optional)
     workflow_definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Workflow definition context for assumed agent uploads. (optional)
 
     try:
         # Ingest Document Handler
-        api_response = api_instance.ingest_document(file, path_part_id, name=name, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
+        api_response = api_instance.ingest_document(file, path_part_id, name=name, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, tag_ids=tag_ids, idempotency_key=idempotency_key, workflow_definition_id=workflow_definition_id)
         print("The response of DocumentsApi->ingest_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -460,6 +462,8 @@ Name | Type | Description  | Notes
  **secondary_taxonomy** | [**ImageTaxonomy**](ImageTaxonomy.md)|  | [optional] 
  **page_dpi** | **int**| DPI for PDF page screenshots (default 72, min 36, max 216). | [optional] [default to 72]
  **workflow_run_id** | **UUID**| Workflow run context for assumed agent uploads. | [optional] 
+ **tag_ids** | [**List[UUID]**](UUID.md)| Tag IDs applied to the created document. | [optional] 
+ **idempotency_key** | **str**| Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. | [optional] 
  **workflow_definition_id** | **UUID**| Workflow definition context for assumed agent uploads. | [optional] 
 
 ### Return type
@@ -599,19 +603,23 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ingest_zip**
-> IngestZipResponse ingest_zip(file, path_part_id, ingestion_mode=ingestion_mode)
+> IngestZipResponse ingest_zip(file, path_part_id, ingestion_mode=ingestion_mode, tag_ids=tag_ids)
 
 Ingest Zip Handler
 
-Upload a ZIP archive and ingest each member file individually.
+Upload a ZIP archive; ingest each member asynchronously via a fan-out.
 
-Directory structure inside the ZIP is preserved as FOLDER PathParts under
-the target folder. Returns 202 with per-file outcomes — each file that
-ingests successfully has its own Temporal workflow ID to poll for status.
+The whole archive nests under a single FOLDER named after the ZIP file
+(``report.zip`` -> ``report/``), with the ZIP's directory structure mirrored
+beneath it as FOLDER PathParts — all created synchronously. Returns 202 with
+the fan-out ``workflow_id`` (poll ``GET /v1/system-jobs/zip-ingestions/{workflow_id}``
+for per-member outcomes) plus the artifacts ``skipped`` during classification.
 
 Whole-archive failures (not a ZIP, zip-bomb, >500 files) return 400 before
-any DB writes. Per-file failures (unsupported type, oversized) are included
-in the response with ``error`` set; other files continue processing.
+any DB writes; a re-upload whose ZIP-named folder already exists returns 409.
+Per-member failures (unsupported type, oversized) surface in the polled
+workflow results, not in this response. Each member reuses the single-file
+ingest path, so run-enrollment and completion events fire per member there.
 
 ### Example
 
@@ -654,10 +662,11 @@ with ksapi.ApiClient(configuration) as api_client:
     file = None # bytes | 
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent path part ID (must be a FOLDER type)
     ingestion_mode = ksapi.IngestionMode() # IngestionMode |  (optional)
+    tag_ids = None # List[UUID] | Tag IDs applied to every ingested member document. (optional)
 
     try:
         # Ingest Zip Handler
-        api_response = api_instance.ingest_zip(file, path_part_id, ingestion_mode=ingestion_mode)
+        api_response = api_instance.ingest_zip(file, path_part_id, ingestion_mode=ingestion_mode, tag_ids=tag_ids)
         print("The response of DocumentsApi->ingest_zip:\n")
         pprint(api_response)
     except Exception as e:
@@ -674,6 +683,7 @@ Name | Type | Description  | Notes
  **file** | **bytes**|  | 
  **path_part_id** | **UUID**| Parent path part ID (must be a FOLDER type) | 
  **ingestion_mode** | [**IngestionMode**](IngestionMode.md)|  | [optional] 
+ **tag_ids** | [**List[UUID]**](UUID.md)| Tag IDs applied to every ingested member document. | [optional] 
 
 ### Return type
 

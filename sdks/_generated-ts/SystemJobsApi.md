@@ -319,7 +319,7 @@ example().catch(console.error);
 
 Get Zip Ingestion Status Handler
 
-Get a ZIP fan-out\&#39;s live status + per-member outcomes.  Tenant-scoped via the TenantId search attribute. The per-member results come from the workflow\&#39;s &#x60;&#x60;results&#x60;&#x60; query (served from retained history), so once Temporal retention expires this returns 404.
+Get a ZIP fan-out\&#39;s live status + per-member outcomes.  Tenant-scoped via the TenantId search attribute (no per-path can_read check — intentionally consistent with the sibling generic Temporal endpoints below; the opaque workflow_id is only handed to the uploader, who had can_write on the target). The per-member results come from the workflow\&#39;s &#x60;&#x60;results&#x60;&#x60; query (served from retained history), so once Temporal retention expires this 404s.
 
 ### Example
 

@@ -239,7 +239,7 @@ example().catch(console.error);
 
 ## proposeMemoryChunk
 
-> ProposedMemoryChunkResponse proposeMemoryChunk(proposeMemoryChunkRequest)
+> PendingMemoryChunkResponse proposeMemoryChunk(proposeMemoryChunkRequest)
 
 Propose Memory Chunk Handler
 
@@ -288,7 +288,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**ProposedMemoryChunkResponse**](ProposedMemoryChunkResponse.md)
+[**PendingMemoryChunkResponse**](PendingMemoryChunkResponse.md)
 
 ### Authorization
 

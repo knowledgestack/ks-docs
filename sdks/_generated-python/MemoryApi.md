@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **propose_memory_chunk**
-> ProposedMemoryChunkResponse propose_memory_chunk(propose_memory_chunk_request)
+> PendingMemoryChunkResponse propose_memory_chunk(propose_memory_chunk_request)
 
 Propose Memory Chunk Handler
 
@@ -283,8 +283,8 @@ Propose Memory Chunk Handler
 
 ```python
 import ksapi
+from ksapi.models.pending_memory_chunk_response import PendingMemoryChunkResponse
 from ksapi.models.propose_memory_chunk_request import ProposeMemoryChunkRequest
-from ksapi.models.proposed_memory_chunk_response import ProposedMemoryChunkResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -336,7 +336,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ProposedMemoryChunkResponse**](ProposedMemoryChunkResponse.md)
+[**PendingMemoryChunkResponse**](PendingMemoryChunkResponse.md)
 
 ### Authorization
 

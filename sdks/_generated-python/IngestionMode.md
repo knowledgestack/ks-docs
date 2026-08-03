@@ -10,6 +10,8 @@ Ingestion pipeline mode — determines conversion and chunking strategy.
 
 * `SINGLE_CHUNK` (value: `'single_chunk'`)
 
+* `MEDIA` (value: `'media'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **summarize_for_embedding** | **bool** | When True, this chunk&#39;s dense embedding is built from its LLM-generated summary (see summary) instead of its raw content. Set for parsed JSON/YAML single chunks so noisy structured text does not dominate the vector; the raw content is still kept for display and sparse (keyword) retrieval. Enrichment generates the summary when this is set and summary is empty. | [optional] [default to False]
 **extracted_text_s3_uri** | **str** | S3 URI to extracted PDF text used for LLM grounding during enrichment | [optional] 
 **secondary_taxonomy** | [**ImageTaxonomy**](ImageTaxonomy.md) |  | [optional] 
+**start_ms** | **int** | Start time of this chunk in the source media (ms from start). | [optional] 
+**end_ms** | **int** | End time of this chunk in the source media (ms from start). | [optional] 
 **sheet_name** | **str** | Worksheet name this chunk was extracted from (XLSX only) | [optional] 
 **block_type** | **str** | XLSXParser block type (e.g. table, calculation_block, chart_anchor) | [optional] 
 **source_uri** | **str** | Cell range URI reference in the source workbook (XLSX only) | [optional] 

@@ -1,32 +1,25 @@
 
-# Citation
+# UploadStatusResponse
 
+Parts S3 already holds — resume by re-sending the rest.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`chunkId` | string
-`quote` | string
-`startChar` | number
-`length` | number
-`startMs` | number
-`endMs` | number
+`parts` | [Array&lt;UploadPartResponse&gt;](UploadPartResponse.md)
+`uploadedBytes` | number
 
 ## Example
 
 ```typescript
-import type { Citation } from '@knowledge-stack/ksapi'
+import type { UploadStatusResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "chunkId": null,
-  "quote": null,
-  "startChar": null,
-  "length": null,
-  "startMs": null,
-  "endMs": null,
-} satisfies Citation
+  "parts": null,
+  "uploadedBytes": null,
+} satisfies UploadStatusResponse
 
 console.log(example)
 
@@ -35,7 +28,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as Citation
+const exampleParsed = JSON.parse(exampleJSON) as UploadStatusResponse
 console.log(exampleParsed)
 ```
 

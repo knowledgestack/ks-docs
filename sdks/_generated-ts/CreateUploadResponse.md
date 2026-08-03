@@ -1,32 +1,29 @@
 
-# Citation
+# CreateUploadResponse
 
+Handles for a started resumable upload.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`chunkId` | string
-`quote` | string
-`startChar` | number
-`length` | number
-`startMs` | number
-`endMs` | number
+`documentId` | string
+`documentVersionId` | string
+`uploadToken` | string
+`partSize` | number
 
 ## Example
 
 ```typescript
-import type { Citation } from '@knowledge-stack/ksapi'
+import type { CreateUploadResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "chunkId": null,
-  "quote": null,
-  "startChar": null,
-  "length": null,
-  "startMs": null,
-  "endMs": null,
-} satisfies Citation
+  "documentId": null,
+  "documentVersionId": null,
+  "uploadToken": null,
+  "partSize": null,
+} satisfies CreateUploadResponse
 
 console.log(example)
 
@@ -35,7 +32,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as Citation
+const exampleParsed = JSON.parse(exampleJSON) as CreateUploadResponse
 console.log(exampleParsed)
 ```
 

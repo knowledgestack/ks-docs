@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **ingested_pages** | **int** | Per-period cap on ingested pages (PAGE). | 
 **messages** | **int** | Per-period cap on agent messages (MESSAGE). | 
 **searches** | **int** | Per-period cap on searches (SEARCH). | 
+**media_minutes** | **int** | Per-period cap on transcribed media minutes (MEDIA_MINUTE). | 
 **max_seats** | **int** | Upper bound on num_seats accepted by the upgrade endpoint. Admin PATCH may set tenant.seats above this value. | 
 **public** | **bool** | Whether this plan appears in the public listing. Private plans (custom enterprise tiers) are excluded from &#x60;&#x60;GET /public/subscriptions&#x60;&#x60; but their tenant members can still read them via &#x60;&#x60;GET /v1/tenants/{tenant_id}/subscriptions&#x60;&#x60;. | 
 **created_at** | **datetime** | Plan creation timestamp. | 

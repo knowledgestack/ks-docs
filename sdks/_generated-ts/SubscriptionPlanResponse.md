@@ -12,6 +12,7 @@ Name | Type
 `ingestedPages` | number
 `messages` | number
 `searches` | number
+`mediaMinutes` | number
 `maxSeats` | number
 `_public` | boolean
 `createdAt` | Date
@@ -29,6 +30,7 @@ const example = {
   "ingestedPages": null,
   "messages": null,
   "searches": null,
+  "mediaMinutes": null,
   "maxSeats": null,
   "_public": null,
   "createdAt": null,

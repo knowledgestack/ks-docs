@@ -11,6 +11,8 @@ Name | Type
 `quote` | string
 `startChar` | number
 `length` | number
+`startMs` | number
+`endMs` | number
 `documentId` | string
 `documentVersionId` | string
 `documentName` | string
@@ -29,6 +31,8 @@ const example = {
   "quote": null,
   "startChar": null,
   "length": null,
+  "startMs": null,
+  "endMs": null,
   "documentId": null,
   "documentVersionId": null,
   "documentName": null,

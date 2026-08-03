@@ -4,16 +4,171 @@ All URIs are relative to *http://localhost:8000*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**abortDocumentUpload**](DocumentsApi.md#abortdocumentupload) | **DELETE** /v1/documents/uploads | Abort Document Upload Handler |
+| [**completeDocumentUpload**](DocumentsApi.md#completedocumentupload) | **POST** /v1/documents/uploads/complete | Complete Document Upload Handler |
 | [**createDocument**](DocumentsApi.md#createdocumentoperation) | **POST** /v1/documents | Create Document Handler |
+| [**createDocumentUpload**](DocumentsApi.md#createdocumentupload) | **POST** /v1/documents/uploads | Create Document Upload Handler |
 | [**deleteDocument**](DocumentsApi.md#deletedocument) | **DELETE** /v1/documents/{document_id} | Delete Document Handler |
 | [**downloadDocument**](DocumentsApi.md#downloaddocument) | **POST** /v1/documents/{document_id}/download | Download Document Handler |
 | [**getDocument**](DocumentsApi.md#getdocument) | **GET** /v1/documents/{document_id} | Get Document Handler |
+| [**getDocumentUploadStatus**](DocumentsApi.md#getdocumentuploadstatus) | **GET** /v1/documents/uploads/parts | Get Document Upload Status Handler |
 | [**ingestDocument**](DocumentsApi.md#ingestdocument) | **POST** /v1/documents/ingest | Ingest Document Handler |
 | [**ingestDocumentVersion**](DocumentsApi.md#ingestdocumentversion) | **POST** /v1/documents/{document_id}/ingest | Ingest Document Version Handler |
 | [**ingestZip**](DocumentsApi.md#ingestzip) | **POST** /v1/documents/ingest-zip | Ingest Zip Handler |
 | [**listDocuments**](DocumentsApi.md#listdocuments) | **GET** /v1/documents | List Documents Handler |
 | [**updateDocument**](DocumentsApi.md#updatedocumentoperation) | **PATCH** /v1/documents/{document_id} | Update Document Handler |
+| [**uploadDocumentPart**](DocumentsApi.md#uploaddocumentpart) | **PUT** /v1/documents/uploads/parts/{part_number} | Upload Document Part Handler |
 
+
+
+## abortDocumentUpload
+
+> abortDocumentUpload(xUploadToken)
+
+Abort Document Upload Handler
+
+Discard an in-progress resumable upload and its parts.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentsApi,
+} from '@knowledge-stack/ksapi';
+import type { AbortDocumentUploadRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
+
+  const body = {
+    // string
+    xUploadToken: xUploadToken_example,
+  } satisfies AbortDocumentUploadRequest;
+
+  try {
+    const data = await api.abortDocumentUpload(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **xUploadToken** | `string` |  | [Defaults to `undefined`] |
+
+### Return type
+
+`void` (Empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **204** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## completeDocumentUpload
+
+> IngestDocumentResponse completeDocumentUpload(completeUploadRequest)
+
+Complete Document Upload Handler
+
+Assemble the uploaded parts, create the document, and start ingestion.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentsApi,
+} from '@knowledge-stack/ksapi';
+import type { CompleteDocumentUploadRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
+
+  const body = {
+    // CompleteUploadRequest
+    completeUploadRequest: ...,
+  } satisfies CompleteDocumentUploadRequest;
+
+  try {
+    const data = await api.completeDocumentUpload(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **completeUploadRequest** | [CompleteUploadRequest](CompleteUploadRequest.md) |  | |
+
+### Return type
+
+[**IngestDocumentResponse**](IngestDocumentResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## createDocument
@@ -70,6 +225,81 @@ example().catch(console.error);
 ### Return type
 
 [**DocumentResponse**](DocumentResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **201** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## createDocumentUpload
+
+> CreateUploadResponse createDocumentUpload(createUploadRequest)
+
+Create Document Upload Handler
+
+Begin a resumable multipart upload for a large file (audio/video/…).  Returns an opaque &#x60;&#x60;upload_token&#x60;&#x60;. Stream the file as parts to &#x60;&#x60;PUT /v1/documents/uploads/parts/{part_number}&#x60;&#x60; (every part except the last at least 5 MiB), then &#x60;&#x60;POST /v1/documents/uploads/complete&#x60;&#x60;. A dropped part is re-sent alone — &#x60;&#x60;GET /v1/documents/uploads/parts&#x60;&#x60; reports what landed.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentsApi,
+} from '@knowledge-stack/ksapi';
+import type { CreateDocumentUploadRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
+
+  const body = {
+    // CreateUploadRequest
+    createUploadRequest: ...,
+  } satisfies CreateDocumentUploadRequest;
+
+  try {
+    const data = await api.createDocumentUpload(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **createUploadRequest** | [CreateUploadRequest](CreateUploadRequest.md) |  | |
+
+### Return type
+
+[**CreateUploadResponse**](CreateUploadResponse.md)
 
 ### Authorization
 
@@ -320,6 +550,81 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
+## getDocumentUploadStatus
+
+> UploadStatusResponse getDocumentUploadStatus(xUploadToken)
+
+Get Document Upload Status Handler
+
+Report which parts S3 already holds so the client resumes the rest.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentsApi,
+} from '@knowledge-stack/ksapi';
+import type { GetDocumentUploadStatusRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
+
+  const body = {
+    // string
+    xUploadToken: xUploadToken_example,
+  } satisfies GetDocumentUploadStatusRequest;
+
+  try {
+    const data = await api.getDocumentUploadStatus(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **xUploadToken** | `string` |  | [Defaults to `undefined`] |
+
+### Return type
+
+[**UploadStatusResponse**](UploadStatusResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
 ## ingestDocument
 
 > IngestDocumentResponse ingestDocument(file, pathPartId, name, ingestionMode, chunkType, secondaryTaxonomy, pageDpi, workflowRunId, tagIds, idempotencyKey, workflowDefinitionId)
@@ -392,7 +697,7 @@ example().catch(console.error);
 | **file** | `Blob` |  | [Defaults to `undefined`] |
 | **pathPartId** | `string` | Parent path part ID (must be a FOLDER type) | [Defaults to `undefined`] |
 | **name** | `string` | Document name (defaults to filename) | [Optional] [Defaults to `undefined`] |
-| **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk] |
+| **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk, media] |
 | **chunkType** | `ChunkType` |  | [Optional] [Defaults to `undefined`] [Enum: TEXT, TABLE, IMAGE, HTML, UNKNOWN] |
 | **secondaryTaxonomy** | `ImageTaxonomy` |  | [Optional] [Defaults to `undefined`] [Enum: picture, flowchart] |
 | **pageDpi** | `number` | DPI for PDF page screenshots (default 72, min 36, max 216). | [Optional] [Defaults to `72`] |
@@ -490,7 +795,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **documentId** | `string` | Document ID | [Defaults to `undefined`] |
 | **file** | `Blob` |  | [Defaults to `undefined`] |
-| **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk] |
+| **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk, media] |
 | **chunkType** | `ChunkType` |  | [Optional] [Defaults to `undefined`] [Enum: TEXT, TABLE, IMAGE, HTML, UNKNOWN] |
 | **secondaryTaxonomy** | `ImageTaxonomy` |  | [Optional] [Defaults to `undefined`] [Enum: picture, flowchart] |
 | **pageDpi** | `number` | DPI for PDF page screenshots (default 72, min 36, max 216). | [Optional] [Defaults to `72`] |
@@ -578,7 +883,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **file** | `Blob` |  | [Defaults to `undefined`] |
 | **pathPartId** | `string` | Parent path part ID (must be a FOLDER type) | [Defaults to `undefined`] |
-| **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk] |
+| **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk, media] |
 | **tagIds** | `Array<string>` | Tag IDs applied to every ingested member document. | [Optional] |
 
 ### Return type
@@ -680,7 +985,7 @@ example().catch(console.error);
 | **sortOrder** | `PathOrder` | Sort order for results (default: LOGICAL) | [Optional] [Defaults to `undefined`] [Enum: LOGICAL, NAME, UPDATED_AT, CREATED_AT] |
 | **sortDir** | `SortDirection` | Sort direction; overrides the column\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **ownerId** | `string` | Filter to documents owned by this user | [Optional] [Defaults to `undefined`] |
-| **documentType** | `DocumentType` | Filter to documents of this type | [Optional] [Defaults to `undefined`] [Enum: PDF, DOCX, PLAINTEXT, IMAGE, XLSX, CSV, PPTX, JSON, YAML, CODE, UNKNOWN] |
+| **documentType** | `DocumentType` | Filter to documents of this type | [Optional] [Defaults to `undefined`] [Enum: PDF, DOCX, PLAINTEXT, IMAGE, XLSX, CSV, PPTX, JSON, YAML, CODE, AUDIO, VIDEO, UNKNOWN] |
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
@@ -778,6 +1083,87 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## uploadDocumentPart
+
+> UploadPartResponse uploadDocumentPart(partNumber, xUploadToken, body)
+
+Upload Document Part Handler
+
+Upload one part (raw octet-stream body) of a resumable upload.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentsApi,
+} from '@knowledge-stack/ksapi';
+import type { UploadDocumentPartRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
+
+  const body = {
+    // number
+    partNumber: 56,
+    // string
+    xUploadToken: xUploadToken_example,
+    // Blob
+    body: BINARY_DATA_HERE,
+  } satisfies UploadDocumentPartRequest;
+
+  try {
+    const data = await api.uploadDocumentPart(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **partNumber** | `number` |  | [Defaults to `undefined`] |
+| **xUploadToken** | `string` |  | [Defaults to `undefined`] |
+| **body** | `Blob` |  | |
+
+### Return type
+
+[**UploadPartResponse**](UploadPartResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/octet-stream`
 - **Accept**: `application/json`
 
 

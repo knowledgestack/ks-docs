@@ -4,16 +4,193 @@ All URIs are relative to *http://localhost:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**abort_document_upload**](DocumentsApi.md#abort_document_upload) | **DELETE** /v1/documents/uploads | Abort Document Upload Handler
+[**complete_document_upload**](DocumentsApi.md#complete_document_upload) | **POST** /v1/documents/uploads/complete | Complete Document Upload Handler
 [**create_document**](DocumentsApi.md#create_document) | **POST** /v1/documents | Create Document Handler
+[**create_document_upload**](DocumentsApi.md#create_document_upload) | **POST** /v1/documents/uploads | Create Document Upload Handler
 [**delete_document**](DocumentsApi.md#delete_document) | **DELETE** /v1/documents/{document_id} | Delete Document Handler
 [**download_document**](DocumentsApi.md#download_document) | **POST** /v1/documents/{document_id}/download | Download Document Handler
 [**get_document**](DocumentsApi.md#get_document) | **GET** /v1/documents/{document_id} | Get Document Handler
+[**get_document_upload_status**](DocumentsApi.md#get_document_upload_status) | **GET** /v1/documents/uploads/parts | Get Document Upload Status Handler
 [**ingest_document**](DocumentsApi.md#ingest_document) | **POST** /v1/documents/ingest | Ingest Document Handler
 [**ingest_document_version**](DocumentsApi.md#ingest_document_version) | **POST** /v1/documents/{document_id}/ingest | Ingest Document Version Handler
 [**ingest_zip**](DocumentsApi.md#ingest_zip) | **POST** /v1/documents/ingest-zip | Ingest Zip Handler
 [**list_documents**](DocumentsApi.md#list_documents) | **GET** /v1/documents | List Documents Handler
 [**update_document**](DocumentsApi.md#update_document) | **PATCH** /v1/documents/{document_id} | Update Document Handler
+[**upload_document_part**](DocumentsApi.md#upload_document_part) | **PUT** /v1/documents/uploads/parts/{part_number} | Upload Document Part Handler
 
+
+# **abort_document_upload**
+> abort_document_upload(x_upload_token)
+
+Abort Document Upload Handler
+
+Discard an in-progress resumable upload and its parts.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DocumentsApi(api_client)
+    x_upload_token = 'x_upload_token_example' # str | 
+
+    try:
+        # Abort Document Upload Handler
+        api_instance.abort_document_upload(x_upload_token)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->abort_document_upload: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_upload_token** | **str**|  | 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **complete_document_upload**
+> IngestDocumentResponse complete_document_upload(complete_upload_request)
+
+Complete Document Upload Handler
+
+Assemble the uploaded parts, create the document, and start ingestion.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.complete_upload_request import CompleteUploadRequest
+from ksapi.models.ingest_document_response import IngestDocumentResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DocumentsApi(api_client)
+    complete_upload_request = ksapi.CompleteUploadRequest() # CompleteUploadRequest | 
+
+    try:
+        # Complete Document Upload Handler
+        api_response = api_instance.complete_document_upload(complete_upload_request)
+        print("The response of DocumentsApi->complete_document_upload:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->complete_document_upload: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **complete_upload_request** | [**CompleteUploadRequest**](CompleteUploadRequest.md)|  | 
+
+### Return type
+
+[**IngestDocumentResponse**](IngestDocumentResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_document**
 > DocumentResponse create_document(create_document_request)
@@ -86,6 +263,99 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DocumentResponse**](DocumentResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **create_document_upload**
+> CreateUploadResponse create_document_upload(create_upload_request)
+
+Create Document Upload Handler
+
+Begin a resumable multipart upload for a large file (audio/video/…).
+
+Returns an opaque ``upload_token``. Stream the file as parts to
+``PUT /v1/documents/uploads/parts/{part_number}`` (every part except the last
+at least 5 MiB), then ``POST /v1/documents/uploads/complete``. A dropped part
+is re-sent alone — ``GET /v1/documents/uploads/parts`` reports what landed.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.create_upload_request import CreateUploadRequest
+from ksapi.models.create_upload_response import CreateUploadResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DocumentsApi(api_client)
+    create_upload_request = ksapi.CreateUploadRequest() # CreateUploadRequest | 
+
+    try:
+        # Create Document Upload Handler
+        api_response = api_instance.create_document_upload(create_upload_request)
+        print("The response of DocumentsApi->create_document_upload:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->create_document_upload: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_upload_request** | [**CreateUploadRequest**](CreateUploadRequest.md)|  | 
+
+### Return type
+
+[**CreateUploadResponse**](CreateUploadResponse.md)
 
 ### Authorization
 
@@ -354,6 +624,93 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DocumentResponse**](DocumentResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_document_upload_status**
+> UploadStatusResponse get_document_upload_status(x_upload_token)
+
+Get Document Upload Status Handler
+
+Report which parts S3 already holds so the client resumes the rest.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.upload_status_response import UploadStatusResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DocumentsApi(api_client)
+    x_upload_token = 'x_upload_token_example' # str | 
+
+    try:
+        # Get Document Upload Status Handler
+        api_response = api_instance.get_document_upload_status(x_upload_token)
+        print("The response of DocumentsApi->get_document_upload_status:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->get_document_upload_status: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **x_upload_token** | **str**|  | 
+
+### Return type
+
+[**UploadStatusResponse**](UploadStatusResponse.md)
 
 ### Authorization
 
@@ -907,6 +1264,97 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upload_document_part**
+> UploadPartResponse upload_document_part(part_number, x_upload_token, body)
+
+Upload Document Part Handler
+
+Upload one part (raw octet-stream body) of a resumable upload.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.upload_part_response import UploadPartResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DocumentsApi(api_client)
+    part_number = 56 # int | 
+    x_upload_token = 'x_upload_token_example' # str | 
+    body = None # bytes | 
+
+    try:
+        # Upload Document Part Handler
+        api_response = api_instance.upload_document_part(part_number, x_upload_token, body)
+        print("The response of DocumentsApi->upload_document_part:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->upload_document_part: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **part_number** | **int**|  | 
+ **x_upload_token** | **str**|  | 
+ **body** | **bytes**|  | 
+
+### Return type
+
+[**UploadPartResponse**](UploadPartResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/octet-stream
  - **Accept**: application/json
 
 ### HTTP response details

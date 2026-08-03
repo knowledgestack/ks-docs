@@ -1,32 +1,23 @@
 
-# Citation
+# CompleteUploadRequest
 
+Finalize a resumable upload and start ingestion.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`chunkId` | string
-`quote` | string
-`startChar` | number
-`length` | number
-`startMs` | number
-`endMs` | number
+`uploadToken` | string
 
 ## Example
 
 ```typescript
-import type { Citation } from '@knowledge-stack/ksapi'
+import type { CompleteUploadRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "chunkId": null,
-  "quote": null,
-  "startChar": null,
-  "length": null,
-  "startMs": null,
-  "endMs": null,
-} satisfies Citation
+  "uploadToken": null,
+} satisfies CompleteUploadRequest
 
 console.log(example)
 
@@ -35,7 +26,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as Citation
+const exampleParsed = JSON.parse(exampleJSON) as CompleteUploadRequest
 console.log(exampleParsed)
 ```
 

@@ -1,32 +1,27 @@
 
-# Citation
+# UploadPartResponse
 
+Acknowledgement of one stored part.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`chunkId` | string
-`quote` | string
-`startChar` | number
-`length` | number
-`startMs` | number
-`endMs` | number
+`partNumber` | number
+`etag` | string
+`size` | number
 
 ## Example
 
 ```typescript
-import type { Citation } from '@knowledge-stack/ksapi'
+import type { UploadPartResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "chunkId": null,
-  "quote": null,
-  "startChar": null,
-  "length": null,
-  "startMs": null,
-  "endMs": null,
-} satisfies Citation
+  "partNumber": null,
+  "etag": null,
+  "size": null,
+} satisfies UploadPartResponse
 
 console.log(example)
 
@@ -35,7 +30,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as Citation
+const exampleParsed = JSON.parse(exampleJSON) as UploadPartResponse
 console.log(exampleParsed)
 ```
 

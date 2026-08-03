@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **quote** | **str** | The quote from the chunk | 
 **start_char** | **int** | The 0-based start character of the quote in the chunk | 
 **length** | **int** | The length of the quote | 
+**start_ms** | **int** | Start time (ms) of the cited chunk in the source media, for AUDIO/VIDEO — lets the client deep-link playback to the moment. None for non-media chunks. | [optional] 
+**end_ms** | **int** | End time (ms) of the cited chunk in the source media (AUDIO/VIDEO); None for non-media chunks. | [optional] 
 **document_id** | **UUID** |  | [optional] 
 **document_version_id** | **UUID** |  | [optional] 
 **document_name** | **str** |  | [optional] 

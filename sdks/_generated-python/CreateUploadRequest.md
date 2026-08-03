@@ -1,0 +1,33 @@
+# CreateUploadRequest
+
+Begin a resumable upload.
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**parent_path_id** | **UUID** | Parent folder path part ID (FOLDER) | 
+**name** | **str** | Document name | 
+**filename** | **str** | Original filename; its extension selects the type + size cap | 
+**size_bytes** | **int** | Declared total size; fast-rejected against the type cap | 
+
+## Example
+
+```python
+from ksapi.models.create_upload_request import CreateUploadRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of CreateUploadRequest from a JSON string
+create_upload_request_instance = CreateUploadRequest.from_json(json)
+# print the JSON string representation of the object
+print(CreateUploadRequest.to_json())
+
+# convert the object into a dict
+create_upload_request_dict = create_upload_request_instance.to_dict()
+# create an instance of CreateUploadRequest from a dict
+create_upload_request_from_dict = CreateUploadRequest.from_dict(create_upload_request_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

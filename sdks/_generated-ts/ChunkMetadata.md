@@ -13,6 +13,8 @@ Name | Type
 `summarizeForEmbedding` | boolean
 `extractedTextS3Uri` | string
 `secondaryTaxonomy` | [ImageTaxonomy](ImageTaxonomy.md)
+`startMs` | number
+`endMs` | number
 `sheetName` | string
 `blockType` | string
 `sourceUri` | string
@@ -36,6 +38,8 @@ const example = {
   "summarizeForEmbedding": null,
   "extractedTextS3Uri": null,
   "secondaryTaxonomy": null,
+  "startMs": null,
+  "endMs": null,
   "sheetName": null,
   "blockType": null,
   "sourceUri": null,

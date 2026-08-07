@@ -627,7 +627,7 @@ example().catch(console.error);
 
 ## ingestDocument
 
-> IngestDocumentResponse ingestDocument(file, pathPartId, name, ingestionMode, chunkType, secondaryTaxonomy, pageDpi, workflowRunId, tagIds, idempotencyKey, workflowDefinitionId)
+> IngestDocumentResponse ingestDocument(file, pathPartId, name, tagIds, idempotencyKey, ingestionMode, chunkType, secondaryTaxonomy, pageDpi, workflowRunId, workflowDefinitionId)
 
 Ingest Document Handler
 
@@ -659,6 +659,10 @@ async function example() {
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | Document name (defaults to filename) (optional)
     name: name_example,
+    // Array<string> | Tag IDs applied to the created document. (optional)
+    tagIds: ...,
+    // string | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. (optional)
+    idempotencyKey: idempotencyKey_example,
     // IngestionMode (optional)
     ingestionMode: ...,
     // ChunkType (optional)
@@ -669,10 +673,6 @@ async function example() {
     pageDpi: 56,
     // string | Workflow run context for assumed agent uploads. (optional)
     workflowRunId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // Array<string> | Tag IDs applied to the created document. (optional)
-    tagIds: ...,
-    // string | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. (optional)
-    idempotencyKey: idempotencyKey_example,
     // string | Workflow definition context for assumed agent uploads. (optional)
     workflowDefinitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
   } satisfies IngestDocumentRequest;
@@ -697,13 +697,13 @@ example().catch(console.error);
 | **file** | `Blob` |  | [Defaults to `undefined`] |
 | **pathPartId** | `string` | Parent path part ID (must be a FOLDER type) | [Defaults to `undefined`] |
 | **name** | `string` | Document name (defaults to filename) | [Optional] [Defaults to `undefined`] |
+| **tagIds** | `Array<string>` | Tag IDs applied to the created document. | [Optional] |
+| **idempotencyKey** | `string` | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. | [Optional] [Defaults to `undefined`] |
 | **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk, media] |
 | **chunkType** | `ChunkType` |  | [Optional] [Defaults to `undefined`] [Enum: TEXT, TABLE, IMAGE, HTML, UNKNOWN] |
 | **secondaryTaxonomy** | `ImageTaxonomy` |  | [Optional] [Defaults to `undefined`] [Enum: picture, flowchart] |
 | **pageDpi** | `number` | DPI for PDF page screenshots (default 72, min 36, max 216). | [Optional] [Defaults to `72`] |
 | **workflowRunId** | `string` | Workflow run context for assumed agent uploads. | [Optional] [Defaults to `undefined`] |
-| **tagIds** | `Array<string>` | Tag IDs applied to the created document. | [Optional] |
-| **idempotencyKey** | `string` | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. | [Optional] [Defaults to `undefined`] |
 | **workflowDefinitionId** | `string` | Workflow definition context for assumed agent uploads. | [Optional] [Defaults to `undefined`] |
 
 ### Return type

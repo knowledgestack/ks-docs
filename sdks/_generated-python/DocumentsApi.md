@@ -732,7 +732,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ingest_document**
-> IngestDocumentResponse ingest_document(file, path_part_id, name=name, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, tag_ids=tag_ids, idempotency_key=idempotency_key, workflow_definition_id=workflow_definition_id)
+> IngestDocumentResponse ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
 
 Ingest Document Handler
 
@@ -786,18 +786,18 @@ with ksapi.ApiClient(configuration) as api_client:
     file = None # bytes | 
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent path part ID (must be a FOLDER type)
     name = 'name_example' # str | Document name (defaults to filename) (optional)
+    tag_ids = None # List[UUID] | Tag IDs applied to the created document. (optional)
+    idempotency_key = 'idempotency_key_example' # str | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. (optional)
     ingestion_mode = ksapi.IngestionMode() # IngestionMode |  (optional)
     chunk_type = ksapi.ChunkType() # ChunkType |  (optional)
     secondary_taxonomy = ksapi.ImageTaxonomy() # ImageTaxonomy |  (optional)
     page_dpi = 72 # int | DPI for PDF page screenshots (default 72, min 36, max 216). (optional) (default to 72)
     workflow_run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Workflow run context for assumed agent uploads. (optional)
-    tag_ids = None # List[UUID] | Tag IDs applied to the created document. (optional)
-    idempotency_key = 'idempotency_key_example' # str | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. (optional)
     workflow_definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Workflow definition context for assumed agent uploads. (optional)
 
     try:
         # Ingest Document Handler
-        api_response = api_instance.ingest_document(file, path_part_id, name=name, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, tag_ids=tag_ids, idempotency_key=idempotency_key, workflow_definition_id=workflow_definition_id)
+        api_response = api_instance.ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
         print("The response of DocumentsApi->ingest_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -814,13 +814,13 @@ Name | Type | Description  | Notes
  **file** | **bytes**|  | 
  **path_part_id** | **UUID**| Parent path part ID (must be a FOLDER type) | 
  **name** | **str**| Document name (defaults to filename) | [optional] 
+ **tag_ids** | [**List[UUID]**](UUID.md)| Tag IDs applied to the created document. | [optional] 
+ **idempotency_key** | **str**| Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. | [optional] 
  **ingestion_mode** | [**IngestionMode**](IngestionMode.md)|  | [optional] 
  **chunk_type** | [**ChunkType**](ChunkType.md)|  | [optional] 
  **secondary_taxonomy** | [**ImageTaxonomy**](ImageTaxonomy.md)|  | [optional] 
  **page_dpi** | **int**| DPI for PDF page screenshots (default 72, min 36, max 216). | [optional] [default to 72]
  **workflow_run_id** | **UUID**| Workflow run context for assumed agent uploads. | [optional] 
- **tag_ids** | [**List[UUID]**](UUID.md)| Tag IDs applied to the created document. | [optional] 
- **idempotency_key** | **str**| Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. | [optional] 
  **workflow_definition_id** | **UUID**| Workflow definition context for assumed agent uploads. | [optional] 
 
 ### Return type

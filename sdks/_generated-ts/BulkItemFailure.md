@@ -1,31 +1,25 @@
 
-# CreateUploadRequest
+# BulkItemFailure
 
-Begin a resumable upload.
+A single id that could not be applied, and why.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`parentPathId` | string
-`name` | string
-`filename` | string
-`sizeBytes` | number
-`tagIds` | Array&lt;string&gt;
+`id` | string
+`reason` | [BulkFailureReason](BulkFailureReason.md)
 
 ## Example
 
 ```typescript
-import type { CreateUploadRequest } from '@knowledge-stack/ksapi'
+import type { BulkItemFailure } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "parentPathId": null,
-  "name": null,
-  "filename": null,
-  "sizeBytes": null,
-  "tagIds": null,
-} satisfies CreateUploadRequest
+  "id": null,
+  "reason": null,
+} satisfies BulkItemFailure
 
 console.log(example)
 
@@ -34,7 +28,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateUploadRequest
+const exampleParsed = JSON.parse(exampleJSON) as BulkItemFailure
 console.log(exampleParsed)
 ```
 

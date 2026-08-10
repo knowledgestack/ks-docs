@@ -1,31 +1,25 @@
 
-# CreateUploadRequest
+# BulkDeleteRequest
 
-Begin a resumable upload.
+Soft-delete the selected folders and documents to Trash.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`parentPathId` | string
-`name` | string
-`filename` | string
-`sizeBytes` | number
-`tagIds` | Array&lt;string&gt;
+`folderIds` | Array&lt;string&gt;
+`documentIds` | Array&lt;string&gt;
 
 ## Example
 
 ```typescript
-import type { CreateUploadRequest } from '@knowledge-stack/ksapi'
+import type { BulkDeleteRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "parentPathId": null,
-  "name": null,
-  "filename": null,
-  "sizeBytes": null,
-  "tagIds": null,
-} satisfies CreateUploadRequest
+  "folderIds": null,
+  "documentIds": null,
+} satisfies BulkDeleteRequest
 
 console.log(example)
 
@@ -34,7 +28,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateUploadRequest
+const exampleParsed = JSON.parse(exampleJSON) as BulkDeleteRequest
 console.log(exampleParsed)
 ```
 

@@ -1,31 +1,25 @@
 
-# CreateUploadRequest
+# BulkRevokeRequest
 
-Begin a resumable upload.
+Revoke many permissions by their own permission-row ids.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`parentPathId` | string
-`name` | string
-`filename` | string
-`sizeBytes` | number
-`tagIds` | Array&lt;string&gt;
+`tenantId` | string
+`permissionIds` | Array&lt;string&gt;
 
 ## Example
 
 ```typescript
-import type { CreateUploadRequest } from '@knowledge-stack/ksapi'
+import type { BulkRevokeRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "parentPathId": null,
-  "name": null,
-  "filename": null,
-  "sizeBytes": null,
-  "tagIds": null,
-} satisfies CreateUploadRequest
+  "tenantId": null,
+  "permissionIds": null,
+} satisfies BulkRevokeRequest
 
 console.log(example)
 
@@ -34,7 +28,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateUploadRequest
+const exampleParsed = JSON.parse(exampleJSON) as BulkRevokeRequest
 console.log(exampleParsed)
 ```
 

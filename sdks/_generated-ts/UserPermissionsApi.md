@@ -4,11 +4,163 @@ All URIs are relative to *http://localhost:8000*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**bulkGrantUserPermissions**](UserPermissionsApi.md#bulkgrantuserpermissions) | **POST** /v1/user-permissions/bulk | Bulk Grant User Permissions Handler |
+| [**bulkRevokeUserPermissions**](UserPermissionsApi.md#bulkrevokeuserpermissions) | **POST** /v1/user-permissions/bulk-delete | Bulk Revoke User Permissions Handler |
 | [**createUserPermission**](UserPermissionsApi.md#createuserpermission) | **POST** /v1/user-permissions | Create User Permission Handler |
 | [**deleteUserPermission**](UserPermissionsApi.md#deleteuserpermission) | **DELETE** /v1/user-permissions/{permission_id} | Delete User Permission Handler |
 | [**listUserPermissions**](UserPermissionsApi.md#listuserpermissions) | **GET** /v1/user-permissions | List User Permissions Handler |
 | [**updateUserPermission**](UserPermissionsApi.md#updateuserpermission) | **PATCH** /v1/user-permissions/{permission_id} | Update User Permission Handler |
 
+
+
+## bulkGrantUserPermissions
+
+> BulkGrantResponse bulkGrantUserPermissions(bulkGrantRequest)
+
+Bulk Grant User Permissions Handler
+
+Grant many (user, object, capability) permissions (admin/owner only).  Each grant is applied in its own transaction, reporting a per-item outcome keyed on the (user_id, object_id) pair: a missing/trashed object or a user not in the tenant is &#x60;&#x60;not_found&#x60;&#x60;, hitting the per-user cap is &#x60;&#x60;permission_limit&#x60;&#x60;, and an already-covered grant is &#x60;&#x60;subsumed&#x60;&#x60;.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  UserPermissionsApi,
+} from '@knowledge-stack/ksapi';
+import type { BulkGrantUserPermissionsRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UserPermissionsApi(config);
+
+  const body = {
+    // BulkGrantRequest
+    bulkGrantRequest: ...,
+  } satisfies BulkGrantUserPermissionsRequest;
+
+  try {
+    const data = await api.bulkGrantUserPermissions(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **bulkGrantRequest** | [BulkGrantRequest](BulkGrantRequest.md) |  | |
+
+### Return type
+
+[**BulkGrantResponse**](BulkGrantResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## bulkRevokeUserPermissions
+
+> BulkOperationResponse bulkRevokeUserPermissions(bulkRevokeRequest)
+
+Bulk Revoke User Permissions Handler
+
+Revoke many permissions by their ids (admin/owner only), per item.  A permission id not found in the tenant lands in &#x60;&#x60;failed&#x60;&#x60; as &#x60;&#x60;not_found&#x60;&#x60;.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  UserPermissionsApi,
+} from '@knowledge-stack/ksapi';
+import type { BulkRevokeUserPermissionsRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UserPermissionsApi(config);
+
+  const body = {
+    // BulkRevokeRequest
+    bulkRevokeRequest: ...,
+  } satisfies BulkRevokeUserPermissionsRequest;
+
+  try {
+    const data = await api.bulkRevokeUserPermissions(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **bulkRevokeRequest** | [BulkRevokeRequest](BulkRevokeRequest.md) |  | |
+
+### Return type
+
+[**BulkOperationResponse**](BulkOperationResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## createUserPermission

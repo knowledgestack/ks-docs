@@ -4,10 +4,195 @@ All URIs are relative to *http://localhost:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**bulk_permanently_delete_trash**](TrashApi.md#bulk_permanently_delete_trash) | **POST** /v1/trash/bulk-delete | Bulk Permanently Delete Trash Handler
+[**bulk_restore_trash**](TrashApi.md#bulk_restore_trash) | **POST** /v1/trash/bulk-restore | Bulk Restore Trash Handler
 [**list_trash**](TrashApi.md#list_trash) | **GET** /v1/trash | List Trash Handler
 [**permanently_delete_trash_item**](TrashApi.md#permanently_delete_trash_item) | **DELETE** /v1/trash/{path_part_id} | Permanently Delete Trash Item Handler
 [**restore_trash_item**](TrashApi.md#restore_trash_item) | **POST** /v1/trash/{path_part_id}/restore | Restore Trash Item Handler
 
+
+# **bulk_permanently_delete_trash**
+> BulkOperationResponse bulk_permanently_delete_trash(bulk_trash_request)
+
+Bulk Permanently Delete Trash Handler
+
+Permanently delete the selected trashed objects (by PDO id), per item.
+
+An object not visible in the caller's trash scope lands in ``failed`` as
+``not_found``; the rest are hard-deleted and their Qdrant points purged.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.bulk_operation_response import BulkOperationResponse
+from ksapi.models.bulk_trash_request import BulkTrashRequest
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.TrashApi(api_client)
+    bulk_trash_request = ksapi.BulkTrashRequest() # BulkTrashRequest | 
+
+    try:
+        # Bulk Permanently Delete Trash Handler
+        api_response = api_instance.bulk_permanently_delete_trash(bulk_trash_request)
+        print("The response of TrashApi->bulk_permanently_delete_trash:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TrashApi->bulk_permanently_delete_trash: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bulk_trash_request** | [**BulkTrashRequest**](BulkTrashRequest.md)|  | 
+
+### Return type
+
+[**BulkOperationResponse**](BulkOperationResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **bulk_restore_trash**
+> BulkOperationResponse bulk_restore_trash(bulk_trash_request)
+
+Bulk Restore Trash Handler
+
+Restore the selected trashed objects (by PDO id), reporting per item.
+
+An object not visible in the caller's trash scope lands in ``failed`` as
+``not_found``; a live name collision at the original location that
+auto-rename cannot resolve lands as ``name_conflict``.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.bulk_operation_response import BulkOperationResponse
+from ksapi.models.bulk_trash_request import BulkTrashRequest
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.TrashApi(api_client)
+    bulk_trash_request = ksapi.BulkTrashRequest() # BulkTrashRequest | 
+
+    try:
+        # Bulk Restore Trash Handler
+        api_response = api_instance.bulk_restore_trash(bulk_trash_request)
+        print("The response of TrashApi->bulk_restore_trash:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TrashApi->bulk_restore_trash: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bulk_trash_request** | [**BulkTrashRequest**](BulkTrashRequest.md)|  | 
+
+### Return type
+
+[**BulkOperationResponse**](BulkOperationResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_trash**
 > PaginatedResponseTrashItemResponse list_trash(sort_order=sort_order, sort_dir=sort_dir, deleted_by=deleted_by, part_type=part_type, owner_id=owner_id, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)

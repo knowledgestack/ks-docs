@@ -1,31 +1,29 @@
 
-# CreateUploadRequest
+# BulkGrantItem
 
-Begin a resumable upload.
+One requested grant: a capability on an object (PDO id) for a user.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`parentPathId` | string
-`name` | string
-`filename` | string
-`sizeBytes` | number
-`tagIds` | Array&lt;string&gt;
+`userId` | string
+`objectId` | string
+`capability` | [PermissionCapability](PermissionCapability.md)
+`canApprove` | boolean
 
 ## Example
 
 ```typescript
-import type { CreateUploadRequest } from '@knowledge-stack/ksapi'
+import type { BulkGrantItem } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "parentPathId": null,
-  "name": null,
-  "filename": null,
-  "sizeBytes": null,
-  "tagIds": null,
-} satisfies CreateUploadRequest
+  "userId": null,
+  "objectId": null,
+  "capability": null,
+  "canApprove": null,
+} satisfies BulkGrantItem
 
 console.log(example)
 
@@ -34,7 +32,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateUploadRequest
+const exampleParsed = JSON.parse(exampleJSON) as BulkGrantItem
 console.log(exampleParsed)
 ```
 

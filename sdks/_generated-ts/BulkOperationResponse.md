@@ -1,31 +1,25 @@
 
-# CreateUploadRequest
+# BulkOperationResponse
 
-Begin a resumable upload.
+Per-item outcome of a bulk operation keyed on a single PDO id.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`parentPathId` | string
-`name` | string
-`filename` | string
-`sizeBytes` | number
-`tagIds` | Array&lt;string&gt;
+`succeeded` | Array&lt;string&gt;
+`failed` | [Array&lt;BulkItemFailure&gt;](BulkItemFailure.md)
 
 ## Example
 
 ```typescript
-import type { CreateUploadRequest } from '@knowledge-stack/ksapi'
+import type { BulkOperationResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "parentPathId": null,
-  "name": null,
-  "filename": null,
-  "sizeBytes": null,
-  "tagIds": null,
-} satisfies CreateUploadRequest
+  "succeeded": null,
+  "failed": null,
+} satisfies BulkOperationResponse
 
 console.log(example)
 
@@ -34,7 +28,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateUploadRequest
+const exampleParsed = JSON.parse(exampleJSON) as BulkOperationResponse
 console.log(exampleParsed)
 ```
 

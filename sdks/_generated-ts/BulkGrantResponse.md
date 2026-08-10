@@ -1,31 +1,25 @@
 
-# CreateUploadRequest
+# BulkGrantResponse
 
-Begin a resumable upload.
+Per-item outcome of a bulk grant (composite-keyed, unlike other bulks).
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`parentPathId` | string
-`name` | string
-`filename` | string
-`sizeBytes` | number
-`tagIds` | Array&lt;string&gt;
+`succeeded` | [Array&lt;BulkGrantSuccess&gt;](BulkGrantSuccess.md)
+`failed` | [Array&lt;BulkGrantItemFailure&gt;](BulkGrantItemFailure.md)
 
 ## Example
 
 ```typescript
-import type { CreateUploadRequest } from '@knowledge-stack/ksapi'
+import type { BulkGrantResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "parentPathId": null,
-  "name": null,
-  "filename": null,
-  "sizeBytes": null,
-  "tagIds": null,
-} satisfies CreateUploadRequest
+  "succeeded": null,
+  "failed": null,
+} satisfies BulkGrantResponse
 
 console.log(example)
 
@@ -34,7 +28,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateUploadRequest
+const exampleParsed = JSON.parse(exampleJSON) as BulkGrantResponse
 console.log(exampleParsed)
 ```
 

@@ -1,31 +1,23 @@
 
-# CreateUploadRequest
+# BulkTrashRequest
 
-Begin a resumable upload.
+Restore or permanently delete the selected trashed objects by PDO id.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`parentPathId` | string
-`name` | string
-`filename` | string
-`sizeBytes` | number
-`tagIds` | Array&lt;string&gt;
+`objectIds` | Array&lt;string&gt;
 
 ## Example
 
 ```typescript
-import type { CreateUploadRequest } from '@knowledge-stack/ksapi'
+import type { BulkTrashRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "parentPathId": null,
-  "name": null,
-  "filename": null,
-  "sizeBytes": null,
-  "tagIds": null,
-} satisfies CreateUploadRequest
+  "objectIds": null,
+} satisfies BulkTrashRequest
 
 console.log(example)
 
@@ -34,7 +26,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateUploadRequest
+const exampleParsed = JSON.parse(exampleJSON) as BulkTrashRequest
 console.log(exampleParsed)
 ```
 

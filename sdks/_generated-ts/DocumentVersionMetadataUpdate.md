@@ -20,6 +20,9 @@ Name | Type
 `totalPages` | number
 `totalSections` | number
 `totalChunks` | number
+`durationMs` | number
+`language` | string
+`segmentCount` | number
 `totalFormulas` | number
 `xlsxParseResultS3` | string
 `xlsxNamedRanges` | Array&lt;{ [key: string]: any; }&gt;
@@ -51,6 +54,9 @@ const example = {
   "totalPages": null,
   "totalSections": null,
   "totalChunks": null,
+  "durationMs": null,
+  "language": null,
+  "segmentCount": null,
   "totalFormulas": null,
   "xlsxParseResultS3": null,
   "xlsxNamedRanges": null,

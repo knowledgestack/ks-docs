@@ -1,31 +1,27 @@
 
-# CreateUploadRequest
+# BulkGrantItemFailure
 
-Begin a resumable upload.
+A grant that could not be created, keyed on its (user, object) pair.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`parentPathId` | string
-`name` | string
-`filename` | string
-`sizeBytes` | number
-`tagIds` | Array&lt;string&gt;
+`userId` | string
+`objectId` | string
+`reason` | [BulkFailureReason](BulkFailureReason.md)
 
 ## Example
 
 ```typescript
-import type { CreateUploadRequest } from '@knowledge-stack/ksapi'
+import type { BulkGrantItemFailure } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "parentPathId": null,
-  "name": null,
-  "filename": null,
-  "sizeBytes": null,
-  "tagIds": null,
-} satisfies CreateUploadRequest
+  "userId": null,
+  "objectId": null,
+  "reason": null,
+} satisfies BulkGrantItemFailure
 
 console.log(example)
 
@@ -34,7 +30,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateUploadRequest
+const exampleParsed = JSON.parse(exampleJSON) as BulkGrantItemFailure
 console.log(exampleParsed)
 ```
 

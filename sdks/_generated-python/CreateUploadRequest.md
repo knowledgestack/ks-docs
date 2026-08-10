@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **name** | **str** | Document name | 
 **filename** | **str** | Original filename; its extension selects the type + size cap | 
 **size_bytes** | **int** | Declared total size; fast-rejected against the type cap | 
+**tag_ids** | **List[UUID]** | Tags applied to the document on completion (mirrors the buffered ingest endpoints so a mixed submit tags recordings too) | [optional] 
 
 ## Example
 

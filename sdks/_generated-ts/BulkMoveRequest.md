@@ -1,31 +1,27 @@
 
-# CreateUploadRequest
+# BulkMoveRequest
 
-Begin a resumable upload.
+Move the selected folders and documents into ``target_folder_id``.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`parentPathId` | string
-`name` | string
-`filename` | string
-`sizeBytes` | number
-`tagIds` | Array&lt;string&gt;
+`folderIds` | Array&lt;string&gt;
+`documentIds` | Array&lt;string&gt;
+`targetFolderId` | string
 
 ## Example
 
 ```typescript
-import type { CreateUploadRequest } from '@knowledge-stack/ksapi'
+import type { BulkMoveRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "parentPathId": null,
-  "name": null,
-  "filename": null,
-  "sizeBytes": null,
-  "tagIds": null,
-} satisfies CreateUploadRequest
+  "folderIds": null,
+  "documentIds": null,
+  "targetFolderId": null,
+} satisfies BulkMoveRequest
 
 console.log(example)
 
@@ -34,7 +30,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CreateUploadRequest
+const exampleParsed = JSON.parse(exampleJSON) as BulkMoveRequest
 console.log(exampleParsed)
 ```
 

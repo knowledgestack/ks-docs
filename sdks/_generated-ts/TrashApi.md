@@ -4,10 +4,162 @@ All URIs are relative to *http://localhost:8000*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**bulkPermanentlyDeleteTrash**](TrashApi.md#bulkpermanentlydeletetrash) | **POST** /v1/trash/bulk-delete | Bulk Permanently Delete Trash Handler |
+| [**bulkRestoreTrash**](TrashApi.md#bulkrestoretrash) | **POST** /v1/trash/bulk-restore | Bulk Restore Trash Handler |
 | [**listTrash**](TrashApi.md#listtrash) | **GET** /v1/trash | List Trash Handler |
 | [**permanentlyDeleteTrashItem**](TrashApi.md#permanentlydeletetrashitem) | **DELETE** /v1/trash/{path_part_id} | Permanently Delete Trash Item Handler |
 | [**restoreTrashItem**](TrashApi.md#restoretrashitem) | **POST** /v1/trash/{path_part_id}/restore | Restore Trash Item Handler |
 
+
+
+## bulkPermanentlyDeleteTrash
+
+> BulkOperationResponse bulkPermanentlyDeleteTrash(bulkTrashRequest)
+
+Bulk Permanently Delete Trash Handler
+
+Permanently delete the selected trashed objects (by PDO id), per item.  An object not visible in the caller\&#39;s trash scope lands in &#x60;&#x60;failed&#x60;&#x60; as &#x60;&#x60;not_found&#x60;&#x60;; the rest are hard-deleted and their Qdrant points purged.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  TrashApi,
+} from '@knowledge-stack/ksapi';
+import type { BulkPermanentlyDeleteTrashRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TrashApi(config);
+
+  const body = {
+    // BulkTrashRequest
+    bulkTrashRequest: ...,
+  } satisfies BulkPermanentlyDeleteTrashRequest;
+
+  try {
+    const data = await api.bulkPermanentlyDeleteTrash(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **bulkTrashRequest** | [BulkTrashRequest](BulkTrashRequest.md) |  | |
+
+### Return type
+
+[**BulkOperationResponse**](BulkOperationResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## bulkRestoreTrash
+
+> BulkOperationResponse bulkRestoreTrash(bulkTrashRequest)
+
+Bulk Restore Trash Handler
+
+Restore the selected trashed objects (by PDO id), reporting per item.  An object not visible in the caller\&#39;s trash scope lands in &#x60;&#x60;failed&#x60;&#x60; as &#x60;&#x60;not_found&#x60;&#x60;; a live name collision at the original location that auto-rename cannot resolve lands as &#x60;&#x60;name_conflict&#x60;&#x60;.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  TrashApi,
+} from '@knowledge-stack/ksapi';
+import type { BulkRestoreTrashRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TrashApi(config);
+
+  const body = {
+    // BulkTrashRequest
+    bulkTrashRequest: ...,
+  } satisfies BulkRestoreTrashRequest;
+
+  try {
+    const data = await api.bulkRestoreTrash(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **bulkTrashRequest** | [BulkTrashRequest](BulkTrashRequest.md) |  | |
+
+### Return type
+
+[**BulkOperationResponse**](BulkOperationResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## listTrash

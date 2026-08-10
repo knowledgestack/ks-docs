@@ -4,11 +4,196 @@ All URIs are relative to *http://localhost:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**bulk_grant_user_permissions**](UserPermissionsApi.md#bulk_grant_user_permissions) | **POST** /v1/user-permissions/bulk | Bulk Grant User Permissions Handler
+[**bulk_revoke_user_permissions**](UserPermissionsApi.md#bulk_revoke_user_permissions) | **POST** /v1/user-permissions/bulk-delete | Bulk Revoke User Permissions Handler
 [**create_user_permission**](UserPermissionsApi.md#create_user_permission) | **POST** /v1/user-permissions | Create User Permission Handler
 [**delete_user_permission**](UserPermissionsApi.md#delete_user_permission) | **DELETE** /v1/user-permissions/{permission_id} | Delete User Permission Handler
 [**list_user_permissions**](UserPermissionsApi.md#list_user_permissions) | **GET** /v1/user-permissions | List User Permissions Handler
 [**update_user_permission**](UserPermissionsApi.md#update_user_permission) | **PATCH** /v1/user-permissions/{permission_id} | Update User Permission Handler
 
+
+# **bulk_grant_user_permissions**
+> BulkGrantResponse bulk_grant_user_permissions(bulk_grant_request)
+
+Bulk Grant User Permissions Handler
+
+Grant many (user, object, capability) permissions (admin/owner only).
+
+Each grant is applied in its own transaction, reporting a per-item outcome
+keyed on the (user_id, object_id) pair: a missing/trashed object or a user
+not in the tenant is ``not_found``, hitting the per-user cap is
+``permission_limit``, and an already-covered grant is ``subsumed``.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.bulk_grant_request import BulkGrantRequest
+from ksapi.models.bulk_grant_response import BulkGrantResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.UserPermissionsApi(api_client)
+    bulk_grant_request = ksapi.BulkGrantRequest() # BulkGrantRequest | 
+
+    try:
+        # Bulk Grant User Permissions Handler
+        api_response = api_instance.bulk_grant_user_permissions(bulk_grant_request)
+        print("The response of UserPermissionsApi->bulk_grant_user_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserPermissionsApi->bulk_grant_user_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bulk_grant_request** | [**BulkGrantRequest**](BulkGrantRequest.md)|  | 
+
+### Return type
+
+[**BulkGrantResponse**](BulkGrantResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **bulk_revoke_user_permissions**
+> BulkOperationResponse bulk_revoke_user_permissions(bulk_revoke_request)
+
+Bulk Revoke User Permissions Handler
+
+Revoke many permissions by their ids (admin/owner only), per item.
+
+A permission id not found in the tenant lands in ``failed`` as ``not_found``.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.bulk_operation_response import BulkOperationResponse
+from ksapi.models.bulk_revoke_request import BulkRevokeRequest
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.UserPermissionsApi(api_client)
+    bulk_revoke_request = ksapi.BulkRevokeRequest() # BulkRevokeRequest | 
+
+    try:
+        # Bulk Revoke User Permissions Handler
+        api_response = api_instance.bulk_revoke_user_permissions(bulk_revoke_request)
+        print("The response of UserPermissionsApi->bulk_revoke_user_permissions:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UserPermissionsApi->bulk_revoke_user_permissions: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **bulk_revoke_request** | [**BulkRevokeRequest**](BulkRevokeRequest.md)|  | 
+
+### Return type
+
+[**BulkOperationResponse**](BulkOperationResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_user_permission**
 > PermissionResponse create_user_permission(create_permission_request)

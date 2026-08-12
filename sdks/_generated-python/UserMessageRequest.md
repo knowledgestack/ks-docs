@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **input_text** | **str** | User input text. Mock agent dev controls may be embedded here (e.g. /mock duration&#x3D;5 wps&#x3D;3 scenario&#x3D;tool_call_once). | [optional] [default to '']
+**fast_mode** | **bool** | Answer with the faster, lower-cost chat profile. Ignored when the tenant pins a chat profile and on workflow-run threads. | [optional] [default to False]
 
 ## Example
 

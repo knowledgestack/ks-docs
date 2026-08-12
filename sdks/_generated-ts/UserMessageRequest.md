@@ -7,6 +7,7 @@
 Name | Type
 ------------ | -------------
 `inputText` | string
+`fastMode` | boolean
 
 ## Example
 
@@ -16,6 +17,7 @@ import type { UserMessageRequest } from '@knowledge-stack/ksapi'
 // TODO: Update the object below with actual values
 const example = {
   "inputText": null,
+  "fastMode": null,
 } satisfies UserMessageRequest
 
 console.log(example)

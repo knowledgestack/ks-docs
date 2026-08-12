@@ -1,30 +1,27 @@
 
-# UploadConstraints
+# SegmentSpan
 
+One ASR segment\'s span inside a media chunk (media chunks only).  Field names are deliberately compact — a media document stores hundreds of chunks x up to ~15 spans each in ``chunk_metadata`` JSONB.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`formats` | [Array&lt;UploadFormat&gt;](UploadFormat.md)
-`maxBytes` | number
-`maxImageBytes` | number
-`maxMediaBytes` | number
-`maxVideoBytes` | number
+`s` | number
+`e` | number
+`c` | number
 
 ## Example
 
 ```typescript
-import type { UploadConstraints } from '@knowledge-stack/ksapi'
+import type { SegmentSpan } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "formats": null,
-  "maxBytes": null,
-  "maxImageBytes": null,
-  "maxMediaBytes": null,
-  "maxVideoBytes": null,
-} satisfies UploadConstraints
+  "s": null,
+  "e": null,
+  "c": null,
+} satisfies SegmentSpan
 
 console.log(example)
 
@@ -33,7 +30,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as UploadConstraints
+const exampleParsed = JSON.parse(exampleJSON) as SegmentSpan
 console.log(exampleParsed)
 ```
 

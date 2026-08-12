@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 **formats** | [**List[UploadFormat]**](UploadFormat.md) |  | 
 **max_bytes** | **int** |  | 
 **max_image_bytes** | **int** |  | 
+**max_media_bytes** | **int** |  | 
+**max_video_bytes** | **int** |  | 
 
 ## Example
 

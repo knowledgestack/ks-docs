@@ -426,7 +426,7 @@ async function example() {
   const body = {
     // string
     documentId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // DownloadArtifact | Artifact to download: source or fast_plaintext (optional)
+    // DownloadArtifact | Artifact to download: source, fast_plaintext, or transcript (media only) (optional)
     artifact: ...,
   } satisfies DownloadDocumentRequest;
 
@@ -448,7 +448,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **documentId** | `string` |  | [Defaults to `undefined`] |
-| **artifact** | `DownloadArtifact` | Artifact to download: source or fast_plaintext | [Optional] [Defaults to `undefined`] [Enum: source, fast_plaintext] |
+| **artifact** | `DownloadArtifact` | Artifact to download: source, fast_plaintext, or transcript (media only) | [Optional] [Defaults to `undefined`] [Enum: source, fast_plaintext, transcript] |
 
 ### Return type
 

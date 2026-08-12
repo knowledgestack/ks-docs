@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **information_statistics** | [**InformationStatistics**](InformationStatistics.md) |  | [optional] 
 **quota_charged** | **bool** |  | [optional] 
 **quota_page_count** | **int** |  | [optional] 
+**quota_media_minutes** | **int** |  | [optional] 
 **quota_idempotency_key** | **str** |  | [optional] 
 **file_md5** | **str** |  | [optional] 
 

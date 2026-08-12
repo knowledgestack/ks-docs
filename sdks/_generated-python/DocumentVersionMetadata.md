@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **information_statistics** | [**InformationStatistics**](InformationStatistics.md) | Aggregate statistics for the document version (tokens, chunk counts, depth) | [optional] 
 **quota_charged** | **bool** | True once the conversion activity successfully consumed PAGE quota | [optional] [default to False]
 **quota_page_count** | **int** | Page quantity charged at conversion start; 0 if not yet charged | [optional] [default to 0]
+**quota_media_minutes** | **int** | MEDIA_MINUTE quantity charged at media preparation; 0 if not yet charged | [optional] [default to 0]
 **quota_idempotency_key** | **str** | Stable consume key (matches workflow_id); &#39;UNSET&#39; for pre-Phase-2 docs so refund logic short-circuits | [optional] [default to 'UNSET']
 **file_md5** | **str** | MD5 of source bytes; &#39;UNSET&#39; for pre-Phase-2 docs, real hex digest after first prep run | [optional] [default to 'UNSET']
 **idempotency_key** | **str** | Opt-in create key. A repeat ingest with the same key at the same (parent, name) replays this document instead of colliding — makes a ZIP fan-out member retry idempotent. | [optional] 

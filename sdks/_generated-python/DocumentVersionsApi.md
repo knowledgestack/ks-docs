@@ -517,7 +517,7 @@ with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
-    artifact = ksapi.DownloadArtifact() # DownloadArtifact | Artifact to download: source or fast_plaintext (optional)
+    artifact = ksapi.DownloadArtifact() # DownloadArtifact | Artifact to download: source, fast_plaintext, or transcript (media only) (optional)
 
     try:
         # Download Document Version Handler
@@ -536,7 +536,7 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **version_id** | **UUID**| DocumentVersion ID | 
- **artifact** | [**DownloadArtifact**](.md)| Artifact to download: source or fast_plaintext | [optional] 
+ **artifact** | [**DownloadArtifact**](.md)| Artifact to download: source, fast_plaintext, or transcript (media only) | [optional] 
 
 ### Return type
 

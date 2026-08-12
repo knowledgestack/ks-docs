@@ -15,6 +15,7 @@ Name | Type
 `secondaryTaxonomy` | [ImageTaxonomy](ImageTaxonomy.md)
 `startMs` | number
 `endMs` | number
+`segments` | [Array&lt;SegmentSpan&gt;](SegmentSpan.md)
 `sheetName` | string
 `blockType` | string
 `sourceUri` | string
@@ -40,6 +41,7 @@ const example = {
   "secondaryTaxonomy": null,
   "startMs": null,
   "endMs": null,
+  "segments": null,
   "sheetName": null,
   "blockType": null,
   "sourceUri": null,

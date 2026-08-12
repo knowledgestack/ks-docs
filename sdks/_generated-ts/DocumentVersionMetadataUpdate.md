@@ -13,6 +13,7 @@ Name | Type
 `citedSourceS3` | string
 `standardPipelineJsonS3` | string
 `fastPlaintextS3` | string
+`transcriptS3` | string
 `highAccuracyContentListS3` | string
 `highAccuracyMiddleS3` | string
 `hash` | string
@@ -47,6 +48,7 @@ const example = {
   "citedSourceS3": null,
   "standardPipelineJsonS3": null,
   "fastPlaintextS3": null,
+  "transcriptS3": null,
   "highAccuracyContentListS3": null,
   "highAccuracyMiddleS3": null,
   "hash": null,

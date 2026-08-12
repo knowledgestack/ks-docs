@@ -21,6 +21,7 @@ Name | Type
 `assetS3Url` | string
 `citedAssetS3Url` | string
 `fastPlaintextUrl` | string
+`transcriptUrl` | string
 `pageScreenshotUrls` | Array&lt;string&gt;
 `systemMetadata` | [DocumentVersionMetadata](DocumentVersionMetadata.md)
 
@@ -45,6 +46,7 @@ const example = {
   "assetS3Url": null,
   "citedAssetS3Url": null,
   "fastPlaintextUrl": null,
+  "transcriptUrl": null,
   "pageScreenshotUrls": null,
   "systemMetadata": null,
 } satisfies DocumentVersionResponse

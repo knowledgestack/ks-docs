@@ -12,6 +12,7 @@ Name | Type
 `preconversionSourceS3` | string
 `citedSourceS3` | string
 `fastPlaintextS3` | string
+`transcriptS3` | string
 `hash` | string
 `pipelineState` | [PipelineState](PipelineState.md)
 `totalPages` | number
@@ -44,6 +45,7 @@ const example = {
   "preconversionSourceS3": null,
   "citedSourceS3": null,
   "fastPlaintextS3": null,
+  "transcriptS3": null,
   "hash": null,
   "pipelineState": null,
   "totalPages": null,

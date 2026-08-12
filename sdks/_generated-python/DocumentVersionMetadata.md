@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **preconversion_source_s3** | **str** | S3 URL to the original pre-conversion legacy Office file; null unless this version was converted from a legacy binary format. After conversion source_s3 points at the modern OOXML file and this field preserves the original for traceability. | [optional] 
 **cited_source_s3** | **str** | S3 URL to the agent&#39;s cited copy of the source (KS Citation comments intact); null unless the agent uploaded a file carrying citations. Read only for the agent edit round-trip so a follow-up chat re-extracts citation anchors instead of losing them; source_s3 stays the clean artifact served to chunking, the FE viewer, and downloads. | [optional] 
 **fast_plaintext_s3** | **str** | S3 URL to the fast plaintext export of the document | [optional] 
+**transcript_s3** | **str** | S3 URI of the ASR transcript JSON (per-segment start_ms/end_ms/text); null for non-media. Chunks carry timings too, but at merged-chunk granularity, so this is the only per-segment source. | [optional] 
 **hash** | **str** | Base64-encoded SHA256 hash of the uploaded source file | [optional] 
 **pipeline_state** | [**PipelineState**](PipelineState.md) | Current state of the ingestion pipeline workflow | [optional] 
 **total_pages** | **int** | Total number of pages in the document | [optional] 

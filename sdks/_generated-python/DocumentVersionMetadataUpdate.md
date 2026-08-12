@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **cited_source_s3** | **str** |  | [optional] 
 **standard_pipeline_json_s3** | **str** |  | [optional] 
 **fast_plaintext_s3** | **str** |  | [optional] 
+**transcript_s3** | **str** |  | [optional] 
 **high_accuracy_content_list_s3** | **str** |  | [optional] 
 **high_accuracy_middle_s3** | **str** |  | [optional] 
 **hash** | **str** |  | [optional] 

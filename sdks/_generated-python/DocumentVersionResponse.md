@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **asset_s3_url** | **str** | Presigned URL to download the source document (6-hour validity) | [optional] 
 **cited_asset_s3_url** | **str** | Presigned URL (6-hour validity) to the agent&#39;s cited copy of the source, with KS Citation comments intact; null unless one was stored. For the agent edit round-trip only — human downloads and the FE viewer use asset_s3_url (clean) and render citations from citation_anchors. | [optional] 
 **fast_plaintext_url** | **str** | Presigned URL to download the fast plaintext export (6-hour validity) | [optional] 
+**transcript_url** | **str** | Presigned URL (6-hour validity) to the ASR transcript JSON with per-segment start_ms/end_ms/text; null for non-media. Chunks pack many segments into one, so this is what a client reads to follow a recording line by line. | [optional] 
 **page_screenshot_urls** | **List[str]** | Presigned URLs (6-hour validity) to per-page WEBP screenshots in page order: index 0 is page 1, index N-1 is page N. Populated only when the request includes include_page_screenshots&#x3D;true; null otherwise. | [optional] 
 **system_metadata** | [**DocumentVersionMetadata**](DocumentVersionMetadata.md) |  | [optional] 
 

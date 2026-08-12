@@ -26,10 +26,10 @@ Name | Type | Description | Notes
 **xlsx_kpi_catalog** | **List[Dict[str, object]]** | KPI (Key Performance Indicator) cells detected by the XLSX parser. Each entry contains a label, computed value, cell address, and driver cell references. Applicable to financial models and operational spreadsheets; not populated for template spreadsheets that lack computed KPI cells. | [optional] 
 **citation_anchors** | [**List[XlsxCellAnchorOutputOrDocxParagraphAnchorOutput]**](XlsxCellAnchorOutputOrDocxParagraphAnchorOutput.md) | In-file citation anchors for agent-generated .xlsx/.docx deliverables. Each anchor binds an in-file location (cell or paragraph) to the chunk IDs cited there. Populated by ks_upload_from_sandbox during upload; &#x60;&#x60;null&#x60;&#x60; for versions ingested before this field shipped or for files re-uploaded outside the agent flow. FE enriches chunks via /v1/chunks/bulk. | [optional] 
 **information_statistics** | [**InformationStatistics**](InformationStatistics.md) | Aggregate statistics for the document version (tokens, chunk counts, depth) | [optional] 
-**quota_charged** | **bool** | True once the conversion activity successfully consumed PAGE quota | [optional] [default to False]
+**quota_charged** | **bool** | Diagnostics only — nothing reads it and nothing refunds. Kept for pre-existing rows that carry it. | [optional] [default to False]
 **quota_page_count** | **int** | Page quantity charged at conversion start; 0 if not yet charged | [optional] [default to 0]
 **quota_media_minutes** | **int** | MEDIA_MINUTE quantity charged at media preparation; 0 if not yet charged | [optional] [default to 0]
-**quota_idempotency_key** | **str** | Stable consume key (matches workflow_id); &#39;UNSET&#39; for pre-Phase-2 docs so refund logic short-circuits | [optional] [default to 'UNSET']
+**quota_idempotency_key** | **str** | Stable consume key (matches workflow_id) written for diagnostics/audit; &#39;UNSET&#39; when no consume was committed | [optional] [default to 'UNSET']
 **file_md5** | **str** | MD5 of source bytes; &#39;UNSET&#39; for pre-Phase-2 docs, real hex digest after first prep run | [optional] [default to 'UNSET']
 **idempotency_key** | **str** | Opt-in create key. A repeat ingest with the same key at the same (parent, name) replays this document instead of colliding — makes a ZIP fan-out member retry idempotent. | [optional] 
 

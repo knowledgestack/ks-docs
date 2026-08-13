@@ -408,7 +408,7 @@ example().catch(console.error);
 
 ## listWorkflowDefinitions
 
-> PaginatedResponseWorkflowDefinitionResponse listWorkflowDefinitions(mine, sortBy, sortDir, isTemplate, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseWorkflowDefinitionResponse listWorkflowDefinitions(mine, search, sortBy, sortDir, isTemplate, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, includeTagIds, excludeTagIds)
 
 List Workflow Definitions Handler
 
@@ -434,6 +434,8 @@ async function example() {
   const body = {
     // boolean | Only definitions the caller created (owner). (optional)
     mine: true,
+    // string | Case-insensitive substring over name and description. (optional)
+    search: search_example,
     // WorkflowDefinitionOrder | Field to sort definitions by (default: CREATED_AT) (optional)
     sortBy: ...,
     // SortDirection | Sort direction; overrides the field\'s natural default (optional)
@@ -452,6 +454,10 @@ async function example() {
     updatedAfter: 2013-10-20T19:20:30+01:00,
     // Date | Only items updated strictly before this timestamp (optional)
     updatedBefore: 2013-10-20T19:20:30+01:00,
+    // Array<string> | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). (optional)
+    includeTagIds: ...,
+    // Array<string> | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. (optional)
+    excludeTagIds: ...,
   } satisfies ListWorkflowDefinitionsRequest;
 
   try {
@@ -472,7 +478,8 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **mine** | `boolean` | Only definitions the caller created (owner). | [Optional] [Defaults to `false`] |
-| **sortBy** | `WorkflowDefinitionOrder` | Field to sort definitions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, UPDATED_AT] |
+| **search** | `string` | Case-insensitive substring over name and description. | [Optional] [Defaults to `undefined`] |
+| **sortBy** | `WorkflowDefinitionOrder` | Field to sort definitions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, UPDATED_AT, NAME] |
 | **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **isTemplate** | `boolean` |  | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
@@ -481,6 +488,8 @@ example().catch(console.error);
 | **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **includeTagIds** | `Array<string>` | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). | [Optional] |
+| **excludeTagIds** | `Array<string>` | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. | [Optional] |
 
 ### Return type
 

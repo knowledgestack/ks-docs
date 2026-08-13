@@ -1,7 +1,7 @@
 
 # WorkflowDefinitionOrder
 
-Sortable fields for workflow-definition listings (time only for now).
+Sortable fields for workflow-definition listings.
 
 ## Properties
 

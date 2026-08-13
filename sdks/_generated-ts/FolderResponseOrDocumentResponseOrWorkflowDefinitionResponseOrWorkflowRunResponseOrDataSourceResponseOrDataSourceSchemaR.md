@@ -36,6 +36,8 @@ Name | Type
 `commonFilePathPartIds` | Array&lt;string&gt;
 `createdFromId` | string
 `copyCount` | number
+`lastRun` | [LastRunSummary](LastRunSummary.md)
+`pendingApprovalCount` | number
 `workflowDefinitionId` | string
 `triggeredBy` | [UserInfo](UserInfo.md)
 `executionState` | [WorkflowExecutionState](WorkflowExecutionState.md)
@@ -106,6 +108,8 @@ const example = {
   "commonFilePathPartIds": null,
   "createdFromId": null,
   "copyCount": null,
+  "lastRun": null,
+  "pendingApprovalCount": null,
   "workflowDefinitionId": null,
   "triggeredBy": null,
   "executionState": null,

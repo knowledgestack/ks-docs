@@ -23,6 +23,8 @@ Name | Type | Description | Notes
 **common_file_path_part_ids** | **List[UUID]** | Common files attached to every run (path_part ids). The FE renders these as &#39;attached to every run&#39; on the workflow page. | [optional] 
 **created_from_id** | **UUID** | Source definition this workflow was copied from (a template or any other workflow); null if hand-authored. | 
 **copy_count** | **int** | Number of workflows copied from this definition. | [optional] [default to 0]
+**last_run** | [**LastRunSummary**](LastRunSummary.md) | The definition&#39;s most recent run, or null if never run. | [optional] 
+**pending_approval_count** | **int** | Number of this definition&#39;s runs awaiting approval. | [optional] [default to 0]
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
 **owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the workflow, or null if unowned. | [optional] 
 **created_at** | **datetime** |  | 

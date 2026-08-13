@@ -24,6 +24,8 @@ Name | Type
 `commonFilePathPartIds` | Array&lt;string&gt;
 `createdFromId` | string
 `copyCount` | number
+`lastRun` | [LastRunSummary](LastRunSummary.md)
+`pendingApprovalCount` | number
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
 `owner` | [UserInfo](UserInfo.md)
 `createdAt` | Date
@@ -54,6 +56,8 @@ const example = {
   "commonFilePathPartIds": null,
   "createdFromId": null,
   "copyCount": null,
+  "lastRun": null,
+  "pendingApprovalCount": null,
   "approvalState": null,
   "owner": null,
   "createdAt": null,

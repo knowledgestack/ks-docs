@@ -469,7 +469,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_workflow_definitions**
-> PaginatedResponseWorkflowDefinitionResponse list_workflow_definitions(mine=mine, sort_by=sort_by, sort_dir=sort_dir, is_template=is_template, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+> PaginatedResponseWorkflowDefinitionResponse list_workflow_definitions(mine=mine, search=search, sort_by=sort_by, sort_dir=sort_dir, is_template=is_template, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
 
 List Workflow Definitions Handler
 
@@ -513,6 +513,7 @@ with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowDefinitionsApi(api_client)
     mine = False # bool | Only definitions the caller created (owner). (optional) (default to False)
+    search = 'search_example' # str | Case-insensitive substring over name and description. (optional)
     sort_by = ksapi.WorkflowDefinitionOrder() # WorkflowDefinitionOrder | Field to sort definitions by (default: CREATED_AT) (optional)
     sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
     is_template = False # bool |  (optional) (default to False)
@@ -522,10 +523,12 @@ with ksapi.ApiClient(configuration) as api_client:
     created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
     updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
     updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
+    include_tag_ids = None # List[UUID] | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). (optional)
+    exclude_tag_ids = None # List[UUID] | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. (optional)
 
     try:
         # List Workflow Definitions Handler
-        api_response = api_instance.list_workflow_definitions(mine=mine, sort_by=sort_by, sort_dir=sort_dir, is_template=is_template, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = api_instance.list_workflow_definitions(mine=mine, search=search, sort_by=sort_by, sort_dir=sort_dir, is_template=is_template, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
         print("The response of WorkflowDefinitionsApi->list_workflow_definitions:\n")
         pprint(api_response)
     except Exception as e:
@@ -540,6 +543,7 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **mine** | **bool**| Only definitions the caller created (owner). | [optional] [default to False]
+ **search** | **str**| Case-insensitive substring over name and description. | [optional] 
  **sort_by** | [**WorkflowDefinitionOrder**](.md)| Field to sort definitions by (default: CREATED_AT) | [optional] 
  **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
  **is_template** | **bool**|  | [optional] [default to False]
@@ -549,6 +553,8 @@ Name | Type | Description  | Notes
  **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
  **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
  **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
+ **include_tag_ids** | [**List[UUID]**](UUID.md)| Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). | [optional] 
+ **exclude_tag_ids** | [**List[UUID]**](UUID.md)| Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. | [optional] 
 
 ### Return type
 

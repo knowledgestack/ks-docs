@@ -11,6 +11,8 @@ Name | Type
 `maxImageBytes` | number
 `maxMediaBytes` | number
 `maxVideoBytes` | number
+`maxMediaDurationMs` | number
+`resumablePartSize` | number
 
 ## Example
 
@@ -24,6 +26,8 @@ const example = {
   "maxImageBytes": null,
   "maxMediaBytes": null,
   "maxVideoBytes": null,
+  "maxMediaDurationMs": null,
+  "resumablePartSize": null,
 } satisfies UploadConstraints
 
 console.log(example)

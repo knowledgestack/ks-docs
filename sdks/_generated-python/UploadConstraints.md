@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **max_image_bytes** | **int** |  | 
 **max_media_bytes** | **int** |  | 
 **max_video_bytes** | **int** |  | 
+**max_media_duration_ms** | **int** |  | 
+**resumable_part_size** | **int** |  | 
 
 ## Example
 

@@ -561,11 +561,11 @@ example().catch(console.error);
 
 ## listPathPartEvents
 
-> PaginatedResponseEventResponse listPathPartEvents(pathPartId, kind, since, until, recursive, limit, offset)
+> PaginatedResponseEventResponse listPathPartEvents(pathPartId, kind, since, until, recursive, includeChurn, limit, offset)
 
 List Path Part Events Handler
 
-List events anchored to a specific path_part subject.  Subject permission is enforced via the existing &#x60;&#x60;PathPermissionService&#x60;&#x60; — caller must have &#x60;&#x60;can_read&#x60;&#x60; on the subject\&#39;s materialized_path (OWNER/ADMIN bypass). Events are ordered newest-first by &#x60;&#x60;ts&#x60;&#x60; and paginated.  When &#x60;&#x60;recursive&#x3D;True&#x60;&#x60;, events on any descendant of the subject are included — useful for \&quot;all events under this folder\&quot; or \&quot;all events under this workflow definition\&quot;.
+List events anchored to a specific path_part subject.  Subject permission is enforced via the existing &#x60;&#x60;PathPermissionService&#x60;&#x60; — caller must have &#x60;&#x60;can_read&#x60;&#x60; on the subject\&#39;s materialized_path (OWNER/ADMIN bypass). Events are ordered newest-first by &#x60;&#x60;ts&#x60;&#x60; and paginated.  When &#x60;&#x60;recursive&#x3D;True&#x60;&#x60;, events on any descendant of the subject are included — useful for \&quot;all events under this folder\&quot; or \&quot;all events under this workflow definition\&quot;.  By default the feed collapses intra-document churn to match the tenant-wide admin view; pass &#x60;&#x60;include_churn&#x3D;True&#x60;&#x60; for the complete forensic feed (the agent\&#39;s &#x60;&#x60;list_events&#x60;&#x60; tool does this).
 
 ### Example
 
@@ -597,6 +597,8 @@ async function example() {
     until: 2013-10-20T19:20:30+01:00,
     // boolean | Include events from descendant path_parts as well as the subject itself (optional)
     recursive: true,
+    // boolean | Include intra-document churn hidden by default (raw chunk/section edits, version-metadata updates, and the v0 version-created row). Off by default so one upload / one logical edit shows as one event; ignored when an explicit kind is set. (optional)
+    includeChurn: true,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -625,6 +627,7 @@ example().catch(console.error);
 | **since** | `Date` | Only events at or after this timestamp | [Optional] [Defaults to `undefined`] |
 | **until** | `Date` | Only events strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **recursive** | `boolean` | Include events from descendant path_parts as well as the subject itself | [Optional] [Defaults to `false`] |
+| **includeChurn** | `boolean` | Include intra-document churn hidden by default (raw chunk/section edits, version-metadata updates, and the v0 version-created row). Off by default so one upload / one logical edit shows as one event; ignored when an explicit kind is set. | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 

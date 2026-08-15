@@ -676,7 +676,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_path_part_events**
-> PaginatedResponseEventResponse list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, limit=limit, offset=offset)
+> PaginatedResponseEventResponse list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, include_churn=include_churn, limit=limit, offset=offset)
 
 List Path Part Events Handler
 
@@ -690,6 +690,10 @@ ordered newest-first by ``ts`` and paginated.
 When ``recursive=True``, events on any descendant of the subject
 are included — useful for "all events under this folder" or "all
 events under this workflow definition".
+
+By default the feed collapses intra-document churn to match the
+tenant-wide admin view; pass ``include_churn=True`` for the complete
+forensic feed (the agent's ``list_events`` tool does this).
 
 ### Example
 
@@ -733,12 +737,13 @@ with ksapi.ApiClient(configuration) as api_client:
     since = '2013-10-20T19:20:30+01:00' # datetime | Only events at or after this timestamp (optional)
     until = '2013-10-20T19:20:30+01:00' # datetime | Only events strictly before this timestamp (optional)
     recursive = False # bool | Include events from descendant path_parts as well as the subject itself (optional) (default to False)
+    include_churn = False # bool | Include intra-document churn hidden by default (raw chunk/section edits, version-metadata updates, and the v0 version-created row). Off by default so one upload / one logical edit shows as one event; ignored when an explicit kind is set. (optional) (default to False)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
 
     try:
         # List Path Part Events Handler
-        api_response = api_instance.list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, limit=limit, offset=offset)
+        api_response = api_instance.list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, include_churn=include_churn, limit=limit, offset=offset)
         print("The response of PathPartsApi->list_path_part_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -757,6 +762,7 @@ Name | Type | Description  | Notes
  **since** | **datetime**| Only events at or after this timestamp | [optional] 
  **until** | **datetime**| Only events strictly before this timestamp | [optional] 
  **recursive** | **bool**| Include events from descendant path_parts as well as the subject itself | [optional] [default to False]
+ **include_churn** | **bool**| Include intra-document churn hidden by default (raw chunk/section edits, version-metadata updates, and the v0 version-created row). Off by default so one upload / one logical edit shows as one event; ignored when an explicit kind is set. | [optional] [default to False]
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
 

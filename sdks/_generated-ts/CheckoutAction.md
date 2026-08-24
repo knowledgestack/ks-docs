@@ -1,27 +1,21 @@
 
-# IdpConfig
+# CheckoutAction
 
-Polymorphic IdP configuration for a tenant.  Stored as JSONB in tenant.idp_config. The ``provider`` field determines which typed config class to use when parsing ``configuration``.
+What the client must do next after a subscription-change request.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`provider` | [SupportedIdP](SupportedIdP.md)
-`_configuration` | { [key: string]: any; }
-`syncCrontab` | string
 
 ## Example
 
 ```typescript
-import type { IdpConfig } from '@knowledge-stack/ksapi'
+import type { CheckoutAction } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "provider": null,
-  "_configuration": null,
-  "syncCrontab": null,
-} satisfies IdpConfig
+} satisfies CheckoutAction
 
 console.log(example)
 
@@ -30,7 +24,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as IdpConfig
+const exampleParsed = JSON.parse(exampleJSON) as CheckoutAction
 console.log(exampleParsed)
 ```
 

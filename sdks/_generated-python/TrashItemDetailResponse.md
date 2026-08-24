@@ -1,6 +1,6 @@
-# TrashItemResponse
+# TrashItemDetailResponse
 
-A top-level item currently in trash.
+A single trash item plus a preview link for DOCUMENT items.
 
 ## Properties
 
@@ -16,23 +16,24 @@ Name | Type | Description | Notes
 **deleted_by** | **UUID** | User that moved it to trash | 
 **document_type** | [**DocumentType**](DocumentType.md) |  | [optional] 
 **owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the item, or null if unowned. | [optional] 
+**asset_s3_url** | **str** | Presigned URL (6-hour validity) to the document&#39;s source blob for preview; null for folders and other non-document items. | [optional] 
 
 ## Example
 
 ```python
-from ksapi.models.trash_item_response import TrashItemResponse
+from ksapi.models.trash_item_detail_response import TrashItemDetailResponse
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of TrashItemResponse from a JSON string
-trash_item_response_instance = TrashItemResponse.from_json(json)
+# create an instance of TrashItemDetailResponse from a JSON string
+trash_item_detail_response_instance = TrashItemDetailResponse.from_json(json)
 # print the JSON string representation of the object
-print(TrashItemResponse.to_json())
+print(TrashItemDetailResponse.to_json())
 
 # convert the object into a dict
-trash_item_response_dict = trash_item_response_instance.to_dict()
-# create an instance of TrashItemResponse from a dict
-trash_item_response_from_dict = TrashItemResponse.from_dict(trash_item_response_dict)
+trash_item_detail_response_dict = trash_item_detail_response_instance.to_dict()
+# create an instance of TrashItemDetailResponse from a dict
+trash_item_detail_response_from_dict = TrashItemDetailResponse.from_dict(trash_item_detail_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

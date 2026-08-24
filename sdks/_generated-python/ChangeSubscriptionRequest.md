@@ -1,6 +1,6 @@
 # ChangeSubscriptionRequest
 
-Body for ``POST /v1/tenants/{tenant_id}/subscriptions``.
+Body for ``POST /v1/tenants/{tenant_id}/subscriptions``.  For a priced plan, ``interval`` and ``billing_system`` are required (``channel`` too for Ping++); the response carries the provider checkout to complete. For the free plan they are ignored — the downgrade is applied immediately (unbilled tenants) or scheduled for period end (billed tenants).
 
 ## Properties
 
@@ -8,6 +8,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **subscription_id** | **UUID** | Target plan to switch to. | 
 **num_seats** | **int** | Desired seat cap. Must be &lt;&#x3D; plan.max_seats and &gt;&#x3D; the count of active TenantUser rows. | 
+**interval** | [**BillingInterval**](BillingInterval.md) |  | [optional] 
+**billing_system** | [**BillingSystem**](BillingSystem.md) |  | [optional] 
+**channel** | **str** | Ping++ payment channel chosen in the UI (e.g. &#39;alipay_pc_direct&#39;, &#39;wx_pub_qr&#39;). Required when billing_system&#x3D;PING_PP. | [optional] 
+**channel_extra** | **Dict[str, object]** | Channel-specific Ping++ charge &#x60;extra&#x60; parameters (success_url, product ids, ... — see the Ping++ charge API for the chosen channel). Passed through verbatim; amounts are always resolved server-side. | [optional] 
 
 ## Example
 

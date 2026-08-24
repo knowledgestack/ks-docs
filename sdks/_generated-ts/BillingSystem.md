@@ -1,27 +1,21 @@
 
-# IdpConfig
+# BillingSystem
 
-Polymorphic IdP configuration for a tenant.  Stored as JSONB in tenant.idp_config. The ``provider`` field determines which typed config class to use when parsing ``configuration``.
+External payment platform a subscription or payment is linked to.  ``STRIPE`` serves North America; ``PING_PP`` (Ping++, a mainland-China payment aggregator fronting Alipay + WeChat Pay) serves China. Rows with no external billing linkage (free / admin-issued / synthetic fall-back subscriptions) carry NULL instead of a value.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`provider` | [SupportedIdP](SupportedIdP.md)
-`_configuration` | { [key: string]: any; }
-`syncCrontab` | string
 
 ## Example
 
 ```typescript
-import type { IdpConfig } from '@knowledge-stack/ksapi'
+import type { BillingSystem } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "provider": null,
-  "_configuration": null,
-  "syncCrontab": null,
-} satisfies IdpConfig
+} satisfies BillingSystem
 
 console.log(example)
 
@@ -30,7 +24,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as IdpConfig
+const exampleParsed = JSON.parse(exampleJSON) as BillingSystem
 console.log(exampleParsed)
 ```
 

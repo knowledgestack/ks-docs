@@ -11,11 +11,11 @@ All URIs are relative to *http://localhost:8000*
 
 ## changeTenantSubscription
 
-> SubmitSubscriptionResponse changeTenantSubscription(tenantId, changeSubscriptionRequest, idempotencyKey)
+> CheckoutResponse changeTenantSubscription(tenantId, changeSubscriptionRequest)
 
 Change Tenant Subscription Handler
 
-Submit a subscription change (mock-Stripe).  OWNER-only on the target tenant. Validates the request (tenant + plan exist, &#x60;&#x60;num_seats&#x60;&#x60; within bounds), submits the (mock-)Stripe subscription update, and returns 202. The plan/seat write is NOT applied here — that happens in &#x60;&#x60;POST /webhooks/stripe/subscription&#x60;&#x60; after Stripe confirms the change.  Async two-hop workflow per &#x60;&#x60;docs/billing_additional_limits.md&#x60;&#x60; §\&quot;Async payment workflow\&quot;: the dev environment exercises the same submit/webhook split as production will when the real Stripe SDK replaces the log-line stub in &#x60;&#x60;notify_billing&#x60;&#x60;.  Optional &#x60;&#x60;Idempotency-Key&#x60;&#x60; request header is forwarded to Stripe verbatim (clients that retry the same logical operation MUST send the same value across attempts; Stripe collapses duplicates server- side). Absent the header, the server generates a fresh &#x60;&#x60;uuid4()&#x60;&#x60; per call and emits a warning — but only when a Stripe call is actually about to fire (i.e. the validation passed AND the change is not a no-op). Warning before validation would false-positive on every 4xx and on every redundant submit.  **Header value lands in structured logs.** The header value is forwarded into the &#x60;&#x60;stripe.update_subscription&#x60;&#x60; log event\&#39;s &#x60;&#x60;idempotency_key&#x60;&#x60; field (and into the eventual real Stripe call). Use opaque random IDs (e.g. &#x60;&#x60;uuid4()&#x60;&#x60;); do NOT pass user identifiers, tokens, or other sensitive material as the &#x60;&#x60;Idempotency-Key&#x60;&#x60; header.
+Start a subscription change (OWNER only).  Priced plan → validates the request, creates a provider checkout (Stripe Checkout redirect / Ping++ charge credential), and returns it — nothing is written until the provider\&#39;s webhook confirms payment. Free plan → applied immediately for unbilled tenants, or scheduled for period end when a billed subscription is active (Stripe: &#x60;&#x60;cancel_at_period_end&#x60;&#x60;; Ping++ prepay simply isn\&#39;t renewed). Re-picking the current plan/seats while a Stripe cancellation is scheduled resumes the renewal. Deployments with no payment provider configured return 501 for priced checkouts (billing is optional — local-first).
 
 ### Example
 
@@ -41,8 +41,6 @@ async function example() {
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // ChangeSubscriptionRequest
     changeSubscriptionRequest: ...,
-    // string (optional)
-    idempotencyKey: idempotencyKey_example,
   } satisfies ChangeTenantSubscriptionRequest;
 
   try {
@@ -64,11 +62,10 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
 | **changeSubscriptionRequest** | [ChangeSubscriptionRequest](ChangeSubscriptionRequest.md) |  | |
-| **idempotencyKey** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
-[**SubmitSubscriptionResponse**](SubmitSubscriptionResponse.md)
+[**CheckoutResponse**](CheckoutResponse.md)
 
 ### Authorization
 
@@ -83,7 +80,7 @@ example().catch(console.error);
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **202** | Successful Response |  -  |
+| **200** | Successful Response |  -  |
 | **422** | Validation Error |  -  |
 | **0** | Error response. |  -  |
 
@@ -92,11 +89,11 @@ example().catch(console.error);
 
 ## getTenantSubscription
 
-> SubscriptionPlanResponse getTenantSubscription(tenantId)
+> TenantSubscriptionResponse getTenantSubscription(tenantId)
 
 Get Tenant Subscription Handler
 
-Read the tenant\&#39;s current subscription plan, including private tiers.  Any active member of the tenant can read. This is the only path that surfaces private (custom enterprise) plans to non-admin users — &#x60;&#x60;GET /public/subscriptions&#x60;&#x60; filters them out, but tenants on a private plan still need to see their own caps. Returns the full plan body (id, name, caps, max_seats, public flag, timestamps).  Returns 404 when the user is not a member of the tenant — same response shape as a non-existent tenant so we don\&#39;t leak existence to outsiders.
+Read the tenant\&#39;s current subscription: plan body + period state.  Any active member of the tenant can read. This is the only path that surfaces private (custom enterprise) plans to non-admin users — &#x60;&#x60;GET /public/subscriptions&#x60;&#x60; filters them out, but tenants on a private plan still need to see their own caps. The period fields let the FE render renewal/expiry state (billed subscriptions carry the paid-through date; unbilled ones a 100-year horizon), and &#x60;&#x60;will_renew&#x60;&#x60; distinguishes an auto-renewing Stripe subscription from one whose cancellation is scheduled (or a prepay/unbilled period that simply runs out).  Returns 404 when the user is not a member of the tenant — same response shape as a non-existent tenant so we don\&#39;t leak existence to outsiders.
 
 ### Example
 
@@ -143,7 +140,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**SubscriptionPlanResponse**](SubscriptionPlanResponse.md)
+[**TenantSubscriptionResponse**](TenantSubscriptionResponse.md)
 
 ### Authorization
 

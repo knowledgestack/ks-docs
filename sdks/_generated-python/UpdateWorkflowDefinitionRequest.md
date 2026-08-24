@@ -6,6 +6,9 @@ Full replacement (PUT semantics).
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**schedule_cadence** | [**ScheduleCadence**](ScheduleCadence.md) |  | [optional] 
+**schedule_start_at** | **datetime** | First occurrence. Read in &#x60;&#x60;schedule_timezone&#x60;&#x60;, so its local wall time, weekday and day of month drive the recurrence. A MONTHLY schedule must land on or before the 28th: Temporal silently skips months that are too short. | [optional] 
+**schedule_timezone** | **str** | IANA zone the schedule fires in, e.g. &#x60;&#x60;Asia/Shanghai&#x60;&#x60;. Optional: omit it to inherit the tenant timezone. Only set it to fire in a different zone than the tenant&#39;s. Must be an IANA name, not an ISO offset — an offset stops meaning the same wall clock across DST. | [optional] 
 **name** | **str** |  | 
 **description** | **str** |  | [optional] 
 **max_run_duration_seconds** | **int** |  | [optional] [default to 1800]

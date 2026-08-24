@@ -28,6 +28,9 @@ Name | Type
 `pendingApprovalCount` | number
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
 `owner` | [UserInfo](UserInfo.md)
+`scheduleCadence` | [ScheduleCadence](ScheduleCadence.md)
+`scheduleStartAt` | Date
+`scheduleTimezone` | string
 `createdAt` | Date
 `updatedAt` | Date
 `permissions` | [ItemPermissions](ItemPermissions.md)
@@ -60,6 +63,9 @@ const example = {
   "pendingApprovalCount": null,
   "approvalState": null,
   "owner": null,
+  "scheduleCadence": null,
+  "scheduleStartAt": null,
+  "scheduleTimezone": null,
   "createdAt": null,
   "updatedAt": null,
   "permissions": null,

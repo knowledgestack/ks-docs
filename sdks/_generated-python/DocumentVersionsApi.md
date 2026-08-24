@@ -207,6 +207,11 @@ Create Document Version Handler
 
 Create a new version for a document.
 
+Requires an active document checkout held by the caller. Acquire one via
+``POST /v1/documents/{id}/checkout`` first and release it after; otherwise
+this returns 409 Conflict ("A document checkout is required to edit this
+document.").
+
 The version number is automatically incremented from the highest existing version.
 
 ### Example
@@ -295,6 +300,11 @@ Name | Type | Description  | Notes
 Delete Document Version Handler
 
 Delete a document version by its ID.
+
+Requires an active document checkout held by the caller on the **parent
+document** (the version itself carries no lock). Acquire one via ``POST
+/v1/documents/{id}/checkout`` first; otherwise this returns 409 Conflict
+("A document checkout is required to edit this document.").
 
 Cannot delete the active version of a document.
 

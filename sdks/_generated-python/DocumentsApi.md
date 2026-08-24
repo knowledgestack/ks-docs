@@ -853,6 +853,11 @@ Ingest Document Version Handler
 
 Upload a new file for an existing document, creating a new version and triggering ingestion.
 
+Requires an active document checkout held by the caller. Acquire one via
+``POST /v1/documents/{id}/checkout`` first and release it after; otherwise
+this returns 409 Conflict ("A document checkout is required to edit this
+document.").
+
 Creates a new document version (incrementing the highest version number),
 uploads the file to S3, and starts the ingestion workflow. Upon successful
 ingestion, the new version is automatically activated (set as the document's

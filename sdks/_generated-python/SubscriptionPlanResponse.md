@@ -14,6 +14,10 @@ Name | Type | Description | Notes
 **media_minutes** | **int** | Per-period cap on transcribed media minutes (MEDIA_MINUTE). | 
 **max_seats** | **int** | Upper bound on num_seats accepted by the upgrade endpoint. Admin PATCH may set tenant.seats above this value. | 
 **public** | **bool** | Whether this plan appears in the public listing. Private plans (custom enterprise tiers) are excluded from &#x60;&#x60;GET /public/subscriptions&#x60;&#x60; but their tenant members can still read them via &#x60;&#x60;GET /v1/tenants/{tenant_id}/subscriptions&#x60;&#x60;. | 
+**price_monthly_usd_cents** | **int** | Per-seat monthly price in USD cents (Stripe / NA). NULL &#x3D; not self-serve purchasable in this currency/interval. | [optional] 
+**price_annual_usd_cents** | **int** | Per-seat annual price in USD cents (Stripe / NA). | [optional] 
+**price_monthly_cny_fen** | **int** | Per-seat monthly price in CNY fen (Ping++ / CN). | [optional] 
+**price_annual_cny_fen** | **int** | Per-seat annual price in CNY fen (Ping++ / CN). | [optional] 
 **created_at** | **datetime** | Plan creation timestamp. | 
 **updated_at** | **datetime** | Last-update timestamp. | 
 

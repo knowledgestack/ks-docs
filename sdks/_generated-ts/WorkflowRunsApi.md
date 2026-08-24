@@ -909,7 +909,7 @@ example().catch(console.error);
 
 Workflow Run Callback Handler
 
-Terminal-state write seam for the in-process agent runner.  The gating Temporal activities &#x60;&#x60;mark_run_completed_activity&#x60;&#x60; and &#x60;&#x60;mark_run_failed_activity&#x60;&#x60; authenticate as the triggering user (via &#x60;&#x60;assume_user&#x60;&#x60;) and POST here. Only the user who triggered the run (or OWNER/ADMIN) may write its terminal state. The handler is idempotent: a callback against an already-terminal row returns &#x60;&#x60;already_terminal&#x60;&#x60; and the activity-level retry treats it as a no-op.
+Terminal-state write seam for the in-process agent runner.  The gating Temporal activities &#x60;&#x60;mark_run_completed_activity&#x60;&#x60; and &#x60;&#x60;mark_run_failed_activity&#x60;&#x60; authenticate as the triggering user (via &#x60;&#x60;assume_user&#x60;&#x60;) and POST here. Only the user who triggered the run (or OWNER/ADMIN) may write its terminal state. The handler is idempotent: a callback against an already-terminal row returns &#x60;&#x60;already_terminal&#x60;&#x60; and the activity-level retry treats it as a no-op.  On the first terminal transition it emails the run\&#39;s triggering user (&#x60;&#x60;run.user_id&#x60;&#x60;) a completion or failure notification. Only already-loaded columns are captured in-session; recipient/language lookups and the send run post-commit and best-effort, so a rolled-back transaction never notifies and a notification failure never fails the callback.
 
 ### Example
 

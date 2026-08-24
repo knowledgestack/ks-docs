@@ -7,6 +7,9 @@ Create a new workflow definition.  Inputs are per-run (see ``POST /workflow-defi
 
 Name | Type
 ------------ | -------------
+`scheduleCadence` | [ScheduleCadence](ScheduleCadence.md)
+`scheduleStartAt` | Date
+`scheduleTimezone` | string
 `name` | string
 `description` | string
 `maxRunDurationSeconds` | number
@@ -24,6 +27,9 @@ import type { CreateWorkflowDefinitionRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
+  "scheduleCadence": null,
+  "scheduleStartAt": null,
+  "scheduleTimezone": null,
   "name": null,
   "description": null,
   "maxRunDurationSeconds": null,

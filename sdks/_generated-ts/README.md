@@ -54,7 +54,7 @@ Below this line is auto-generated reference content.
 
 ---
 
-# @knowledge-stack/ksapi@1.163.0
+# @knowledge-stack/ksapi@2.4.2
 
 A TypeScript SDK client for the localhost API.
 
@@ -146,6 +146,7 @@ All URIs are relative to *http://localhost:8000*
 *AuthApi* | [**signout**](docs/AuthApi.md#signout) | **POST** /v1/auth/signout | Signout Handler
 *AuthApi* | [**ssoSignin**](docs/AuthApi.md#ssosignin) | **GET** /v1/auth/sso/{tenant_id}/signin | Sso Login Handler
 *AuthApi* | [**validatePwResetCode**](docs/AuthApi.md#validatepwresetcode) | **POST** /v1/auth/pw/validate_reset_code | Validate Reset Code Handler
+*BillingApi* | [**listBillingPayments**](docs/BillingApi.md#listbillingpayments) | **GET** /v1/tenants/{tenant_id}/billing/payments | List Billing Payments Handler
 *BulkDeleteApi* | [**bulkDelete**](docs/BulkDeleteApi.md#bulkdeleteoperation) | **POST** /v1/bulk-delete | Bulk Delete Handler
 *BulkDownloadApi* | [**startBulkDownload**](docs/BulkDownloadApi.md#startbulkdownload) | **POST** /v1/bulk-download | Start Bulk Download Handler
 *BulkMoveApi* | [**bulkMove**](docs/BulkMoveApi.md#bulkmoveoperation) | **POST** /v1/bulk-move | Bulk Move Handler
@@ -315,6 +316,7 @@ All URIs are relative to *http://localhost:8000*
 *ThreadsApi* | [**updateThread**](docs/ThreadsApi.md#updatethreadoperation) | **PATCH** /v1/threads/{thread_id} | Update Thread Handler
 *TrashApi* | [**bulkPermanentlyDeleteTrash**](docs/TrashApi.md#bulkpermanentlydeletetrash) | **POST** /v1/trash/bulk-delete | Bulk Permanently Delete Trash Handler
 *TrashApi* | [**bulkRestoreTrash**](docs/TrashApi.md#bulkrestoretrash) | **POST** /v1/trash/bulk-restore | Bulk Restore Trash Handler
+*TrashApi* | [**getTrashItem**](docs/TrashApi.md#gettrashitem) | **GET** /v1/trash/{path_part_id} | Get Trash Item Handler
 *TrashApi* | [**listTrash**](docs/TrashApi.md#listtrash) | **GET** /v1/trash | List Trash Handler
 *TrashApi* | [**permanentlyDeleteTrashItem**](docs/TrashApi.md#permanentlydeletetrashitem) | **DELETE** /v1/trash/{path_part_id} | Permanently Delete Trash Item Handler
 *TrashApi* | [**restoreTrashItem**](docs/TrashApi.md#restoretrashitem) | **POST** /v1/trash/{path_part_id}/restore | Restore Trash Item Handler
@@ -374,6 +376,9 @@ All URIs are relative to *http://localhost:8000*
 - [Args](docs/Args.md)
 - [AskRequest](docs/AskRequest.md)
 - [AskResponse](docs/AskResponse.md)
+- [BillingInterval](docs/BillingInterval.md)
+- [BillingPaymentResponse](docs/BillingPaymentResponse.md)
+- [BillingSystem](docs/BillingSystem.md)
 - [BlockChangeType](docs/BlockChangeType.md)
 - [BlockKind](docs/BlockKind.md)
 - [BrandingLogoType](docs/BrandingLogoType.md)
@@ -401,6 +406,8 @@ All URIs are relative to *http://localhost:8000*
 - [ChangeClass](docs/ChangeClass.md)
 - [ChangePhoneNumberRequest](docs/ChangePhoneNumberRequest.md)
 - [ChangeSubscriptionRequest](docs/ChangeSubscriptionRequest.md)
+- [CheckoutAction](docs/CheckoutAction.md)
+- [CheckoutResponse](docs/CheckoutResponse.md)
 - [CheckpointDetails](docs/CheckpointDetails.md)
 - [ChunkBulkResponse](docs/ChunkBulkResponse.md)
 - [ChunkContentItem](docs/ChunkContentItem.md)
@@ -554,6 +561,7 @@ All URIs are relative to *http://localhost:8000*
 - [OnboardingProfileRequest](docs/OnboardingProfileRequest.md)
 - [PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat](docs/PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat.md)
 - [PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator](docs/PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator.md)
+- [PaginatedResponseBillingPaymentResponse](docs/PaginatedResponseBillingPaymentResponse.md)
 - [PaginatedResponseDocumentResponse](docs/PaginatedResponseDocumentResponse.md)
 - [PaginatedResponseDocumentVersionResponse](docs/PaginatedResponseDocumentVersionResponse.md)
 - [PaginatedResponseEventResponse](docs/PaginatedResponseEventResponse.md)
@@ -613,6 +621,7 @@ All URIs are relative to *http://localhost:8000*
 - [RunFolderRef](docs/RunFolderRef.md)
 - [RunTimeseriesResponse](docs/RunTimeseriesResponse.md)
 - [SSOInitiateResponse](docs/SSOInitiateResponse.md)
+- [ScheduleCadence](docs/ScheduleCadence.md)
 - [ScoredChunkResponse](docs/ScoredChunkResponse.md)
 - [SearchSkillsRequest](docs/SearchSkillsRequest.md)
 - [SearchSkillsResponse](docs/SearchSkillsResponse.md)
@@ -645,7 +654,6 @@ All URIs are relative to *http://localhost:8000*
 - [StructuredChangeType](docs/StructuredChangeType.md)
 - [StructuredDiff](docs/StructuredDiff.md)
 - [SubmitFeedbackRequest](docs/SubmitFeedbackRequest.md)
-- [SubmitSubscriptionResponse](docs/SubmitSubscriptionResponse.md)
 - [SubscriptionPlanResponse](docs/SubscriptionPlanResponse.md)
 - [SubtreeChunkGroup](docs/SubtreeChunkGroup.md)
 - [SubtreeChunksResponse](docs/SubtreeChunksResponse.md)
@@ -662,6 +670,7 @@ All URIs are relative to *http://localhost:8000*
 - [TenantResponse](docs/TenantResponse.md)
 - [TenantSettingsResponse](docs/TenantSettingsResponse.md)
 - [TenantSettingsUpdate](docs/TenantSettingsUpdate.md)
+- [TenantSubscriptionResponse](docs/TenantSubscriptionResponse.md)
 - [TenantUserEditRequest](docs/TenantUserEditRequest.md)
 - [TenantUserOrder](docs/TenantUserOrder.md)
 - [TenantUserResponse](docs/TenantUserResponse.md)
@@ -683,6 +692,7 @@ All URIs are relative to *http://localhost:8000*
 - [ToolStatus](docs/ToolStatus.md)
 - [TransferOwnerRequest](docs/TransferOwnerRequest.md)
 - [TransferOwnerResponse](docs/TransferOwnerResponse.md)
+- [TrashItemDetailResponse](docs/TrashItemDetailResponse.md)
 - [TrashItemResponse](docs/TrashItemResponse.md)
 - [UpdateApiConnectionRequest](docs/UpdateApiConnectionRequest.md)
 - [UpdateChunkContentRequest](docs/UpdateChunkContentRequest.md)
@@ -766,7 +776,7 @@ and is automatically generated by the
 [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `0.1.0`
-- Package version: `1.163.0`
+- Package version: `2.4.2`
 - Generator version: `7.21.0`
 - Build package: `org.openapitools.codegen.languages.TypeScriptFetchClientCodegen`
 

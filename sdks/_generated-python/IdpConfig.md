@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **provider** | [**SupportedIdP**](SupportedIdP.md) |  | 
 **configuration** | **Dict[str, object]** | Provider-specific configuration | 
+**sync_crontab** | **str** | Crontab string for directory sync | [optional] 
 
 ## Example
 

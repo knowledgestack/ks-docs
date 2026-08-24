@@ -38,6 +38,9 @@ Name | Type
 `copyCount` | number
 `lastRun` | [LastRunSummary](LastRunSummary.md)
 `pendingApprovalCount` | number
+`scheduleCadence` | [ScheduleCadence](ScheduleCadence.md)
+`scheduleStartAt` | Date
+`scheduleTimezone` | string
 `workflowDefinitionId` | string
 `triggeredBy` | [UserInfo](UserInfo.md)
 `executionState` | [WorkflowExecutionState](WorkflowExecutionState.md)
@@ -110,6 +113,9 @@ const example = {
   "copyCount": null,
   "lastRun": null,
   "pendingApprovalCount": null,
+  "scheduleCadence": null,
+  "scheduleStartAt": null,
+  "scheduleTimezone": null,
   "workflowDefinitionId": null,
   "triggeredBy": null,
   "executionState": null,

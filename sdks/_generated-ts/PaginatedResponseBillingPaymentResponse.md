@@ -1,27 +1,28 @@
 
-# IdpConfig
+# PaginatedResponseBillingPaymentResponse
 
-Polymorphic IdP configuration for a tenant.  Stored as JSONB in tenant.idp_config. The ``provider`` field determines which typed config class to use when parsing ``configuration``.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`provider` | [SupportedIdP](SupportedIdP.md)
-`_configuration` | { [key: string]: any; }
-`syncCrontab` | string
+`items` | [Array&lt;BillingPaymentResponse&gt;](BillingPaymentResponse.md)
+`total` | number
+`limit` | number
+`offset` | number
 
 ## Example
 
 ```typescript
-import type { IdpConfig } from '@knowledge-stack/ksapi'
+import type { PaginatedResponseBillingPaymentResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "provider": null,
-  "_configuration": null,
-  "syncCrontab": null,
-} satisfies IdpConfig
+  "items": null,
+  "total": null,
+  "limit": null,
+  "offset": null,
+} satisfies PaginatedResponseBillingPaymentResponse
 
 console.log(example)
 
@@ -30,7 +31,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as IdpConfig
+const exampleParsed = JSON.parse(exampleJSON) as PaginatedResponseBillingPaymentResponse
 console.log(exampleParsed)
 ```
 

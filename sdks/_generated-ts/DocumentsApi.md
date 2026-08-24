@@ -736,7 +736,7 @@ example().catch(console.error);
 
 Ingest Document Version Handler
 
-Upload a new file for an existing document, creating a new version and triggering ingestion.  Creates a new document version (incrementing the highest version number), uploads the file to S3, and starts the ingestion workflow. Upon successful ingestion, the new version is automatically activated (set as the document\&#39;s active_version) and the old version\&#39;s Qdrant points are deactivated.  Returns 201 immediately with the Temporal &#x60;&#x60;workflow_id&#x60;&#x60;. Ingestion runs in the background — poll &#x60;&#x60;GET /v1/system-jobs/document_versions/{workflow_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;status&#x60;&#x60; is terminal.
+Upload a new file for an existing document, creating a new version and triggering ingestion.  Requires an active document checkout held by the caller. Acquire one via &#x60;&#x60;POST /v1/documents/{id}/checkout&#x60;&#x60; first and release it after; otherwise this returns 409 Conflict (\&quot;A document checkout is required to edit this document.\&quot;).  Creates a new document version (incrementing the highest version number), uploads the file to S3, and starts the ingestion workflow. Upon successful ingestion, the new version is automatically activated (set as the document\&#39;s active_version) and the old version\&#39;s Qdrant points are deactivated.  Returns 201 immediately with the Temporal &#x60;&#x60;workflow_id&#x60;&#x60;. Ingestion runs in the background — poll &#x60;&#x60;GET /v1/system-jobs/document_versions/{workflow_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;status&#x60;&#x60; is terminal.
 
 ### Example
 

@@ -15,6 +15,10 @@ Name | Type
 `mediaMinutes` | number
 `maxSeats` | number
 `_public` | boolean
+`priceMonthlyUsdCents` | number
+`priceAnnualUsdCents` | number
+`priceMonthlyCnyFen` | number
+`priceAnnualCnyFen` | number
 `createdAt` | Date
 `updatedAt` | Date
 
@@ -33,6 +37,10 @@ const example = {
   "mediaMinutes": null,
   "maxSeats": null,
   "_public": null,
+  "priceMonthlyUsdCents": null,
+  "priceAnnualUsdCents": null,
+  "priceMonthlyCnyFen": null,
+  "priceAnnualCnyFen": null,
   "createdAt": null,
   "updatedAt": null,
 } satisfies SubscriptionPlanResponse

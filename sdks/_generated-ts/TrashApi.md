@@ -6,6 +6,7 @@ All URIs are relative to *http://localhost:8000*
 |------------- | ------------- | -------------|
 | [**bulkPermanentlyDeleteTrash**](TrashApi.md#bulkpermanentlydeletetrash) | **POST** /v1/trash/bulk-delete | Bulk Permanently Delete Trash Handler |
 | [**bulkRestoreTrash**](TrashApi.md#bulkrestoretrash) | **POST** /v1/trash/bulk-restore | Bulk Restore Trash Handler |
+| [**getTrashItem**](TrashApi.md#gettrashitem) | **GET** /v1/trash/{path_part_id} | Get Trash Item Handler |
 | [**listTrash**](TrashApi.md#listtrash) | **GET** /v1/trash | List Trash Handler |
 | [**permanentlyDeleteTrashItem**](TrashApi.md#permanentlydeletetrashitem) | **DELETE** /v1/trash/{path_part_id} | Permanently Delete Trash Item Handler |
 | [**restoreTrashItem**](TrashApi.md#restoretrashitem) | **POST** /v1/trash/{path_part_id}/restore | Restore Trash Item Handler |
@@ -149,6 +150,81 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## getTrashItem
+
+> TrashItemDetailResponse getTrashItem(pathPartId)
+
+Get Trash Item Handler
+
+Fetch a single trash root, with a preview URL for DOCUMENT items.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  TrashApi,
+} from '@knowledge-stack/ksapi';
+import type { GetTrashItemRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TrashApi(config);
+
+  const body = {
+    // string | Trashed PathPart ID
+    pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies GetTrashItemRequest;
+
+  try {
+    const data = await api.getTrashItem(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **pathPartId** | `string` | Trashed PathPart ID | [Defaults to `undefined`] |
+
+### Return type
+
+[**TrashItemDetailResponse**](TrashItemDetailResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: `application/json`
 
 

@@ -9,39 +9,22 @@ Method | HTTP request | Description
 
 
 # **change_tenant_subscription**
-> SubmitSubscriptionResponse change_tenant_subscription(tenant_id, change_subscription_request, idempotency_key=idempotency_key)
+> CheckoutResponse change_tenant_subscription(tenant_id, change_subscription_request)
 
 Change Tenant Subscription Handler
 
-Submit a subscription change (mock-Stripe).
+Start a subscription change (OWNER only).
 
-OWNER-only on the target tenant. Validates the request (tenant +
-plan exist, ``num_seats`` within bounds), submits the (mock-)Stripe
-subscription update, and returns 202. The plan/seat write is NOT
-applied here — that happens in
-``POST /webhooks/stripe/subscription`` after Stripe confirms the
-change.
-
-Async two-hop workflow per ``docs/billing_additional_limits.md``
-§"Async payment workflow": the dev environment exercises the same
-submit/webhook split as production will when the real Stripe SDK
-replaces the log-line stub in ``notify_billing``.
-
-Optional ``Idempotency-Key`` request header is forwarded to Stripe
-verbatim (clients that retry the same logical operation MUST send
-the same value across attempts; Stripe collapses duplicates server-
-side). Absent the header, the server generates a fresh ``uuid4()``
-per call and emits a warning — but only when a Stripe call is
-actually about to fire (i.e. the validation passed AND the change
-is not a no-op). Warning before validation would false-positive on
-every 4xx and on every redundant submit.
-
-**Header value lands in structured logs.** The header value is
-forwarded into the ``stripe.update_subscription`` log event's
-``idempotency_key`` field (and into the eventual real Stripe call).
-Use opaque random IDs (e.g. ``uuid4()``); do NOT pass user
-identifiers, tokens, or other sensitive material as the
-``Idempotency-Key`` header.
+Priced plan → validates the request, creates a provider checkout
+(Stripe Checkout redirect / Ping++ charge credential), and returns
+it — nothing is written until the provider's webhook confirms
+payment. Free plan → applied immediately for unbilled tenants, or
+scheduled for period end when a billed subscription is active
+(Stripe: ``cancel_at_period_end``; Ping++ prepay simply isn't
+renewed). Re-picking the current plan/seats while a Stripe
+cancellation is scheduled resumes the renewal. Deployments with no
+payment provider configured return 501 for priced checkouts
+(billing is optional — local-first).
 
 ### Example
 
@@ -51,7 +34,7 @@ identifiers, tokens, or other sensitive material as the
 ```python
 import ksapi
 from ksapi.models.change_subscription_request import ChangeSubscriptionRequest
-from ksapi.models.submit_subscription_response import SubmitSubscriptionResponse
+from ksapi.models.checkout_response import CheckoutResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -83,11 +66,10 @@ with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.SubscriptionsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     change_subscription_request = ksapi.ChangeSubscriptionRequest() # ChangeSubscriptionRequest | 
-    idempotency_key = 'idempotency_key_example' # str |  (optional)
 
     try:
         # Change Tenant Subscription Handler
-        api_response = api_instance.change_tenant_subscription(tenant_id, change_subscription_request, idempotency_key=idempotency_key)
+        api_response = api_instance.change_tenant_subscription(tenant_id, change_subscription_request)
         print("The response of SubscriptionsApi->change_tenant_subscription:\n")
         pprint(api_response)
     except Exception as e:
@@ -103,11 +85,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tenant_id** | **UUID**|  | 
  **change_subscription_request** | [**ChangeSubscriptionRequest**](ChangeSubscriptionRequest.md)|  | 
- **idempotency_key** | **str**|  | [optional] 
 
 ### Return type
 
-[**SubmitSubscriptionResponse**](SubmitSubscriptionResponse.md)
+[**CheckoutResponse**](CheckoutResponse.md)
 
 ### Authorization
 
@@ -122,24 +103,28 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**202** | Successful Response |  -  |
+**200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **0** | Error response. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_tenant_subscription**
-> SubscriptionPlanResponse get_tenant_subscription(tenant_id)
+> TenantSubscriptionResponse get_tenant_subscription(tenant_id)
 
 Get Tenant Subscription Handler
 
-Read the tenant's current subscription plan, including private tiers.
+Read the tenant's current subscription: plan body + period state.
 
 Any active member of the tenant can read. This is the only path
 that surfaces private (custom enterprise) plans to non-admin users —
 ``GET /public/subscriptions`` filters them out, but tenants on a
-private plan still need to see their own caps. Returns the full
-plan body (id, name, caps, max_seats, public flag, timestamps).
+private plan still need to see their own caps. The period fields
+let the FE render renewal/expiry state (billed subscriptions carry
+the paid-through date; unbilled ones a 100-year horizon), and
+``will_renew`` distinguishes an auto-renewing Stripe subscription
+from one whose cancellation is scheduled (or a prepay/unbilled
+period that simply runs out).
 
 Returns 404 when the user is not a member of the tenant — same
 response shape as a non-existent tenant so we don't leak existence
@@ -152,7 +137,7 @@ to outsiders.
 
 ```python
 import ksapi
-from ksapi.models.subscription_plan_response import SubscriptionPlanResponse
+from ksapi.models.tenant_subscription_response import TenantSubscriptionResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -204,7 +189,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SubscriptionPlanResponse**](SubscriptionPlanResponse.md)
+[**TenantSubscriptionResponse**](TenantSubscriptionResponse.md)
 
 ### Authorization
 

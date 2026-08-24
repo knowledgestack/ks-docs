@@ -177,7 +177,7 @@ example().catch(console.error);
 
 Create Document Version Handler
 
-Create a new version for a document.  The version number is automatically incremented from the highest existing version.
+Create a new version for a document.  Requires an active document checkout held by the caller. Acquire one via &#x60;&#x60;POST /v1/documents/{id}/checkout&#x60;&#x60; first and release it after; otherwise this returns 409 Conflict (\&quot;A document checkout is required to edit this document.\&quot;).  The version number is automatically incremented from the highest existing version.
 
 ### Example
 
@@ -252,7 +252,7 @@ example().catch(console.error);
 
 Delete Document Version Handler
 
-Delete a document version by its ID.  Cannot delete the active version of a document.
+Delete a document version by its ID.  Requires an active document checkout held by the caller on the **parent document** (the version itself carries no lock). Acquire one via &#x60;&#x60;POST /v1/documents/{id}/checkout&#x60;&#x60; first; otherwise this returns 409 Conflict (\&quot;A document checkout is required to edit this document.\&quot;).  Cannot delete the active version of a document.
 
 ### Example
 

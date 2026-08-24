@@ -1,7 +1,7 @@
 
-# TrashItemResponse
+# TrashItemDetailResponse
 
-A top-level item currently in trash.
+A single trash item plus a preview link for DOCUMENT items.
 
 ## Properties
 
@@ -17,11 +17,12 @@ Name | Type
 `deletedBy` | string
 `documentType` | [DocumentType](DocumentType.md)
 `owner` | [UserInfo](UserInfo.md)
+`assetS3Url` | string
 
 ## Example
 
 ```typescript
-import type { TrashItemResponse } from '@knowledge-stack/ksapi'
+import type { TrashItemDetailResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
@@ -35,7 +36,8 @@ const example = {
   "deletedBy": null,
   "documentType": null,
   "owner": null,
-} satisfies TrashItemResponse
+  "assetS3Url": null,
+} satisfies TrashItemDetailResponse
 
 console.log(example)
 
@@ -44,7 +46,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as TrashItemResponse
+const exampleParsed = JSON.parse(exampleJSON) as TrashItemDetailResponse
 console.log(exampleParsed)
 ```
 

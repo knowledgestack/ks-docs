@@ -27,6 +27,9 @@ Name | Type | Description | Notes
 **pending_approval_count** | **int** | Number of this definition&#39;s runs awaiting approval. | [optional] [default to 0]
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
 **owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the workflow, or null if unowned. | [optional] 
+**schedule_cadence** | [**ScheduleCadence**](ScheduleCadence.md) |  | [optional] 
+**schedule_start_at** | **datetime** | First occurrence, read in &#x60;&#x60;schedule_timezone&#x60;&#x60;. | [optional] 
+**schedule_timezone** | **str** | IANA zone the schedule fires in, e.g. &#x60;&#x60;Asia/Shanghai&#x60;&#x60;. Resolved at arm time: the tenant timezone unless the caller overrode it. Null only when unscheduled. | [optional] 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 **permissions** | [**ItemPermissions**](ItemPermissions.md) | Caller&#39;s effective rights; null on mutation responses. | [optional] 

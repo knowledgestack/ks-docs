@@ -37,6 +37,9 @@ Name | Type | Description | Notes
 **copy_count** | **int** | Number of workflows copied from this definition. | [optional] [default to 0]
 **last_run** | [**LastRunSummary**](LastRunSummary.md) | The definition&#39;s most recent run, or null if never run. | [optional] 
 **pending_approval_count** | **int** | Number of this definition&#39;s runs awaiting approval. | [optional] [default to 0]
+**schedule_cadence** | [**ScheduleCadence**](ScheduleCadence.md) |  | [optional] 
+**schedule_start_at** | **datetime** | First occurrence, read in &#x60;&#x60;schedule_timezone&#x60;&#x60;. | [optional] 
+**schedule_timezone** | **str** | IANA zone the schedule fires in, e.g. &#x60;&#x60;Asia/Shanghai&#x60;&#x60;. Resolved at arm time: the tenant timezone unless the caller overrode it. Null only when unscheduled. | [optional] 
 **workflow_definition_id** | **UUID** |  | 
 **triggered_by** | [**UserInfo**](UserInfo.md) |  | 
 **execution_state** | [**WorkflowExecutionState**](WorkflowExecutionState.md) |  | 

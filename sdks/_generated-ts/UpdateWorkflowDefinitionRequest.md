@@ -7,6 +7,9 @@ Full replacement (PUT semantics).
 
 Name | Type
 ------------ | -------------
+`scheduleCadence` | [ScheduleCadence](ScheduleCadence.md)
+`scheduleStartAt` | Date
+`scheduleTimezone` | string
 `name` | string
 `description` | string
 `maxRunDurationSeconds` | number
@@ -24,6 +27,9 @@ import type { UpdateWorkflowDefinitionRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
+  "scheduleCadence": null,
+  "scheduleStartAt": null,
+  "scheduleTimezone": null,
   "name": null,
   "description": null,
   "maxRunDurationSeconds": null,

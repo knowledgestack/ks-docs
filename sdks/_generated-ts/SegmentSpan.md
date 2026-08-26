@@ -1,7 +1,7 @@
 
 # SegmentSpan
 
-One ASR segment\'s span inside a media chunk (media chunks only).  Field names are deliberately compact — a media document stores hundreds of chunks x up to ~15 spans each in ``chunk_metadata`` JSONB.
+One ASR segment\'s span inside a media chunk (media chunks only).  Field names are deliberately compact — a media document stores hundreds of chunks x tens of spans each in ``chunk_metadata`` JSONB. Measured worst case is a 4-hour Mandarin recording: 175 chunks x ~33 spans, ~190 KB total.
 
 ## Properties
 
@@ -10,6 +10,7 @@ Name | Type
 `s` | number
 `e` | number
 `c` | number
+`k` | number
 
 ## Example
 
@@ -21,6 +22,7 @@ const example = {
   "s": null,
   "e": null,
   "c": null,
+  "k": null,
 } satisfies SegmentSpan
 
 console.log(example)

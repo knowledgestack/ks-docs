@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **duration_ms** | **int** | Media (audio/video) duration in milliseconds; null for non-media | [optional] 
 **language** | **str** | ASR-detected language of the media transcript, as returned by the ASR provider; null for non-media or when the provider omits it | [optional] 
 **segment_count** | **int** | Number of transcript segments produced by ASR; null for non-media | [optional] 
+**email** | [**EmailMetadata**](EmailMetadata.md) | Structured email headers; null for non-email documents | [optional] 
 **total_formulas** | **int** | Total formula cells in the workbook (XLSX only) | [optional] 
 **xlsx_parse_result_s3** | **str** | S3 URI to the full XLSX parse result JSON containing dependency graph, named ranges, and KPI catalog | [optional] 
 **xlsx_named_ranges** | **List[Dict[str, object]]** | Named ranges defined in the workbook (name, ref_string, scope) | [optional] 

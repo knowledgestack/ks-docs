@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **secondary_taxonomy** | [**ImageTaxonomy**](ImageTaxonomy.md) |  | [optional] 
 **start_ms** | **int** | Start time of this chunk in the source media (ms from start). | [optional] 
 **end_ms** | **int** | End time of this chunk in the source media (ms from start). | [optional] 
+**speakers** | **List[int]** | Every speaker label appearing in this chunk&#39;s segments, sorted. Lets a citation say which turn it came from. None when the provider does not diarize. | [optional] 
+**languages** | **List[str]** | Every language the ASR recognised across this chunk&#39;s segments, sorted. A meeting routinely code-switches, so a chunk can hold more than one; the document-level language is only the majority label and misreports a bilingual recording. None for non-media chunks and for media ingested before this field existed. | [optional] 
 **segments** | [**List[SegmentSpan]**](SegmentSpan.md) | Per-ASR-segment spans inside this media chunk, in order, each carrying its char offset in the chunk content. Lets citation resolution narrow a chunk-level timeframe to the enclosing segment. None for non-media chunks and media ingested before this field existed. | [optional] 
 **sheet_name** | **str** | Worksheet name this chunk was extracted from (XLSX only) | [optional] 
 **block_type** | **str** | XLSXParser block type (e.g. table, calculation_block, chart_anchor) | [optional] 

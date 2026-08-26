@@ -15,6 +15,8 @@ Name | Type
 `secondaryTaxonomy` | [ImageTaxonomy](ImageTaxonomy.md)
 `startMs` | number
 `endMs` | number
+`speakers` | Array&lt;number&gt;
+`languages` | Array&lt;string&gt;
 `segments` | [Array&lt;SegmentSpan&gt;](SegmentSpan.md)
 `sheetName` | string
 `blockType` | string
@@ -41,6 +43,8 @@ const example = {
   "secondaryTaxonomy": null,
   "startMs": null,
   "endMs": null,
+  "speakers": null,
+  "languages": null,
   "segments": null,
   "sheetName": null,
   "blockType": null,

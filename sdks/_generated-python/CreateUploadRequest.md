@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **filename** | **str** | Original filename; its extension selects the type + size cap | 
 **size_bytes** | **int** | Declared total size; fast-rejected against the type cap | 
 **tag_ids** | **List[UUID]** | Tags applied to the document on completion (mirrors the buffered ingest endpoints so a mixed submit tags recordings too) | [optional] 
+**workflow_run_id** | **UUID** | Workflow run this upload belongs to; attributes the resulting document to the run in the audit log. Must be sent together with workflow_definition_id, and only by an assumed identity. | [optional] 
+**workflow_definition_id** | **UUID** | Workflow definition for workflow_run_id. | [optional] 
+**idempotency_key** | **str** | Replay key for callers that retry (e.g. the ZIP fan-out); completing twice with the same key replays the existing document instead of creating a duplicate. | [optional] 
 
 ## Example
 

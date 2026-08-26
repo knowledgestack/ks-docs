@@ -627,7 +627,7 @@ example().catch(console.error);
 
 ## ingestDocument
 
-> IngestDocumentResponse ingestDocument(file, pathPartId, name, tagIds, idempotencyKey, ingestionMode, chunkType, secondaryTaxonomy, pageDpi, workflowRunId, workflowDefinitionId)
+> IngestDocumentResponse ingestDocument(file, pathPartId, name, tagIds, idempotencyKey, emailNestingDepth, ingestionMode, chunkType, secondaryTaxonomy, pageDpi, workflowRunId, workflowDefinitionId)
 
 Ingest Document Handler
 
@@ -663,6 +663,8 @@ async function example() {
     tagIds: ...,
     // string | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. (optional)
     idempotencyKey: idempotencyKey_example,
+    // number | Internal: set by the email member fan-out when a nested email re-enters this endpoint. Leave at 0 for direct uploads. (optional)
+    emailNestingDepth: 56,
     // IngestionMode (optional)
     ingestionMode: ...,
     // ChunkType (optional)
@@ -699,9 +701,10 @@ example().catch(console.error);
 | **name** | `string` | Document name (defaults to filename) | [Optional] [Defaults to `undefined`] |
 | **tagIds** | `Array<string>` | Tag IDs applied to the created document. | [Optional] |
 | **idempotencyKey** | `string` | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. | [Optional] [Defaults to `undefined`] |
+| **emailNestingDepth** | `number` | Internal: set by the email member fan-out when a nested email re-enters this endpoint. Leave at 0 for direct uploads. | [Optional] [Defaults to `0`] |
 | **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk, media] |
 | **chunkType** | `ChunkType` |  | [Optional] [Defaults to `undefined`] [Enum: TEXT, TABLE, IMAGE, HTML, UNKNOWN] |
-| **secondaryTaxonomy** | `ImageTaxonomy` |  | [Optional] [Defaults to `undefined`] [Enum: picture, flowchart] |
+| **secondaryTaxonomy** | `ImageTaxonomy` |  | [Optional] [Defaults to `undefined`] [Enum: picture, slide, flowchart] |
 | **pageDpi** | `number` | DPI for PDF page screenshots (default 72, min 36, max 216). | [Optional] [Defaults to `72`] |
 | **workflowRunId** | `string` | Workflow run context for assumed agent uploads. | [Optional] [Defaults to `undefined`] |
 | **workflowDefinitionId** | `string` | Workflow definition context for assumed agent uploads. | [Optional] [Defaults to `undefined`] |
@@ -797,7 +800,7 @@ example().catch(console.error);
 | **file** | `Blob` |  | [Defaults to `undefined`] |
 | **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk, media] |
 | **chunkType** | `ChunkType` |  | [Optional] [Defaults to `undefined`] [Enum: TEXT, TABLE, IMAGE, HTML, UNKNOWN] |
-| **secondaryTaxonomy** | `ImageTaxonomy` |  | [Optional] [Defaults to `undefined`] [Enum: picture, flowchart] |
+| **secondaryTaxonomy** | `ImageTaxonomy` |  | [Optional] [Defaults to `undefined`] [Enum: picture, slide, flowchart] |
 | **pageDpi** | `number` | DPI for PDF page screenshots (default 72, min 36, max 216). | [Optional] [Defaults to `72`] |
 | **workflowRunId** | `string` | Workflow run context for assumed agent uploads. | [Optional] [Defaults to `undefined`] |
 | **workflowDefinitionId** | `string` | Workflow definition context for assumed agent uploads. | [Optional] [Defaults to `undefined`] |
@@ -912,7 +915,7 @@ example().catch(console.error);
 
 ## listDocuments
 
-> PaginatedResponseDocumentResponse listDocuments(parentPathPartId, sortOrder, sortDir, ownerId, documentType, withTags, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseDocumentResponse listDocuments(parentPathPartId, sortOrder, sortDir, ownerId, documentType, durationMinMs, durationMaxMs, withTags, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
 
 List Documents Handler
 
@@ -948,6 +951,10 @@ async function example() {
     ownerId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // DocumentType | Filter to documents of this type (optional)
     documentType: ...,
+    // number | Only media whose active version is at least this long (milliseconds). Non-media documents have no duration and are excluded. (optional)
+    durationMinMs: 56,
+    // number | Only media whose active version is at most this long. (optional)
+    durationMaxMs: 56,
     // boolean | Include tags in the response (default: false) (optional)
     withTags: true,
     // number | Number of items per page (optional)
@@ -986,6 +993,8 @@ example().catch(console.error);
 | **sortDir** | `SortDirection` | Sort direction; overrides the column\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **ownerId** | `string` | Filter to documents owned by this user | [Optional] [Defaults to `undefined`] |
 | **documentType** | `DocumentType` | Filter to documents of this type | [Optional] [Defaults to `undefined`] [Enum: PDF, DOCX, PLAINTEXT, IMAGE, XLSX, CSV, PPTX, JSON, YAML, CODE, AUDIO, VIDEO, EMAIL, UNKNOWN] |
+| **durationMinMs** | `number` | Only media whose active version is at least this long (milliseconds). Non-media documents have no duration and are excluded. | [Optional] [Defaults to `undefined`] |
+| **durationMaxMs** | `number` | Only media whose active version is at most this long. | [Optional] [Defaults to `undefined`] |
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |

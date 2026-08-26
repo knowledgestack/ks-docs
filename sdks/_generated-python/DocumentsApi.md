@@ -732,7 +732,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ingest_document**
-> IngestDocumentResponse ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
+> IngestDocumentResponse ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, email_nesting_depth=email_nesting_depth, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
 
 Ingest Document Handler
 
@@ -788,6 +788,7 @@ with ksapi.ApiClient(configuration) as api_client:
     name = 'name_example' # str | Document name (defaults to filename) (optional)
     tag_ids = None # List[UUID] | Tag IDs applied to the created document. (optional)
     idempotency_key = 'idempotency_key_example' # str | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. (optional)
+    email_nesting_depth = 0 # int | Internal: set by the email member fan-out when a nested email re-enters this endpoint. Leave at 0 for direct uploads. (optional) (default to 0)
     ingestion_mode = ksapi.IngestionMode() # IngestionMode |  (optional)
     chunk_type = ksapi.ChunkType() # ChunkType |  (optional)
     secondary_taxonomy = ksapi.ImageTaxonomy() # ImageTaxonomy |  (optional)
@@ -797,7 +798,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Ingest Document Handler
-        api_response = api_instance.ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
+        api_response = api_instance.ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, email_nesting_depth=email_nesting_depth, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
         print("The response of DocumentsApi->ingest_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -816,6 +817,7 @@ Name | Type | Description  | Notes
  **name** | **str**| Document name (defaults to filename) | [optional] 
  **tag_ids** | [**List[UUID]**](UUID.md)| Tag IDs applied to the created document. | [optional] 
  **idempotency_key** | **str**| Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. | [optional] 
+ **email_nesting_depth** | **int**| Internal: set by the email member fan-out when a nested email re-enters this endpoint. Leave at 0 for direct uploads. | [optional] [default to 0]
  **ingestion_mode** | [**IngestionMode**](IngestionMode.md)|  | [optional] 
  **chunk_type** | [**ChunkType**](ChunkType.md)|  | [optional] 
  **secondary_taxonomy** | [**ImageTaxonomy**](ImageTaxonomy.md)|  | [optional] 
@@ -1071,7 +1073,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_documents**
-> PaginatedResponseDocumentResponse list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, document_type=document_type, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+> PaginatedResponseDocumentResponse list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, document_type=document_type, duration_min_ms=duration_min_ms, duration_max_ms=duration_max_ms, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
 
 List Documents Handler
 
@@ -1125,6 +1127,8 @@ with ksapi.ApiClient(configuration) as api_client:
     sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the column's natural default (optional)
     owner_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter to documents owned by this user (optional)
     document_type = ksapi.DocumentType() # DocumentType | Filter to documents of this type (optional)
+    duration_min_ms = 56 # int | Only media whose active version is at least this long (milliseconds). Non-media documents have no duration and are excluded. (optional)
+    duration_max_ms = 56 # int | Only media whose active version is at most this long. (optional)
     with_tags = False # bool | Include tags in the response (default: false) (optional) (default to False)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
@@ -1135,7 +1139,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Documents Handler
-        api_response = api_instance.list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, document_type=document_type, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = api_instance.list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, document_type=document_type, duration_min_ms=duration_min_ms, duration_max_ms=duration_max_ms, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of DocumentsApi->list_documents:\n")
         pprint(api_response)
     except Exception as e:
@@ -1154,6 +1158,8 @@ Name | Type | Description  | Notes
  **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the column&#39;s natural default | [optional] 
  **owner_id** | **UUID**| Filter to documents owned by this user | [optional] 
  **document_type** | [**DocumentType**](.md)| Filter to documents of this type | [optional] 
+ **duration_min_ms** | **int**| Only media whose active version is at least this long (milliseconds). Non-media documents have no duration and are excluded. | [optional] 
+ **duration_max_ms** | **int**| Only media whose active version is at most this long. | [optional] 
  **with_tags** | **bool**| Include tags in the response (default: false) | [optional] [default to False]
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]

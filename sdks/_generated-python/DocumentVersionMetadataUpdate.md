@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **duration_ms** | **int** |  | [optional] 
 **language** | **str** |  | [optional] 
 **segment_count** | **int** |  | [optional] 
+**email** | [**EmailMetadata**](EmailMetadata.md) |  | [optional] 
 **total_formulas** | **int** |  | [optional] 
 **xlsx_parse_result_s3** | **str** |  | [optional] 
 **xlsx_named_ranges** | **List[Dict[str, object]]** |  | [optional] 

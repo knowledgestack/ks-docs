@@ -12,6 +12,9 @@ Name | Type
 `filename` | string
 `sizeBytes` | number
 `tagIds` | Array&lt;string&gt;
+`workflowRunId` | string
+`workflowDefinitionId` | string
+`idempotencyKey` | string
 
 ## Example
 
@@ -25,6 +28,9 @@ const example = {
   "filename": null,
   "sizeBytes": null,
   "tagIds": null,
+  "workflowRunId": null,
+  "workflowDefinitionId": null,
+  "idempotencyKey": null,
 } satisfies CreateUploadRequest
 
 console.log(example)

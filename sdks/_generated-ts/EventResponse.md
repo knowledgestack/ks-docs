@@ -12,6 +12,7 @@ Name | Type
 `kind` | string
 `ts` | Date
 `actorUserId` | string
+`actorOnBehalfOf` | string
 `payload` | { [key: string]: any; }
 `actor` | [UserInfo](UserInfo.md)
 `subjectName` | string
@@ -32,6 +33,7 @@ const example = {
   "kind": null,
   "ts": null,
   "actorUserId": null,
+  "actorOnBehalfOf": null,
   "payload": null,
   "actor": null,
   "subjectName": null,

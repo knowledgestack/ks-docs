@@ -9,6 +9,9 @@ Name | Type | Description | Notes
 **workflow_id** | **str** | Temporal workflow ID | 
 **document_id** | **UUID** |  | 
 **document_version_id** | **UUID** |  | 
+**folder_id** | **UUID** | Folder created to hold this upload and its members. Set for email uploads, which always nest inside their own folder; null for every other type, which ingest directly into path_part_id. | [optional] 
+**attachment_count** | **int** | Members found on an email upload, each becoming its own document beside the email: the attachments of a single message, or the messages of an .mbox archive (whose own attachments are then expanded one level deeper). Always 0 for non-email uploads. Null for a .pst, whose members are enumerated only by the worker fan-out — poll attachment_workflow_id for per-member outcomes. | [optional] 
+**attachment_workflow_id** | **str** | Fan-out workflow ingesting the members. Poll GET /v1/system-jobs/zip-ingestions/{id} for per-member outcomes. Null when the upload had no ingestible members. | [optional] 
 
 ## Example
 

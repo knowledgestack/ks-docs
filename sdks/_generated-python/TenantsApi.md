@@ -210,8 +210,8 @@ Requires OWNER role in the tenant. Refused (409) while a
 provider-billed subscription is live — deleting the tenant would
 not stop Stripe/Ping++ from charging for it; the OWNER must
 downgrade to free (or let the prepay period expire) first.
-Deletes the tenant's LiteLLM team/keys, S3 bucket, and Qdrant vectors
-after the DB transaction commits.
+Deletes the tenant's LiteLLM team/keys and S3 bucket after the DB
+transaction commits.
 
 ### Example
 

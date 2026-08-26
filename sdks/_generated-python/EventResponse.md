@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **kind** | **str** |  | 
 **ts** | **datetime** |  | 
 **actor_user_id** | **UUID** |  | 
-**actor_on_behalf_of** | **UUID** |  | [optional] 
 **payload** | **Dict[str, object]** |  | 
 **actor** | [**UserInfo**](UserInfo.md) |  | [optional] 
 **subject_name** | **str** |  | [optional] 

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **summary** | **str** | LLM-generated summary of the chunk content. Used for TABLE and HTML chunks to enrich embedding text, and for JSON/YAML chunks (with summarize_for_embedding) as the sole dense embedding text. | [optional] 
 **summarize_for_embedding** | **bool** | When True, this chunk&#39;s dense embedding is built from its LLM-generated summary (see summary) instead of its raw content. Set for parsed JSON/YAML single chunks so noisy structured text does not dominate the vector; the raw content is still kept for display and sparse (keyword) retrieval. Enrichment generates the summary when this is set and summary is empty. | [optional] [default to False]
 **extracted_text_s3_uri** | **str** | S3 URI to extracted PDF text used for LLM grounding during enrichment | [optional] 
+**caption** | **str** | Caption and footnote lines MinerU extracted next to a visual, joined by newlines. IMAGE chunks only: their content is a generated description that enrichment overwrites, so the caption cannot live there — enrichment appends it to the description it writes. TABLE captions are appended to table_body directly, because a table&#39;s content is extracted text rather than generated. | [optional] 
 **secondary_taxonomy** | [**ImageTaxonomy**](ImageTaxonomy.md) |  | [optional] 
 **start_ms** | **int** | Start time of this chunk in the source media (ms from start). | [optional] 
 **end_ms** | **int** | End time of this chunk in the source media (ms from start). | [optional] 

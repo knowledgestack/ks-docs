@@ -12,6 +12,7 @@ Name | Type
 `summary` | string
 `summarizeForEmbedding` | boolean
 `extractedTextS3Uri` | string
+`caption` | string
 `secondaryTaxonomy` | [ImageTaxonomy](ImageTaxonomy.md)
 `startMs` | number
 `endMs` | number
@@ -40,6 +41,7 @@ const example = {
   "summary": null,
   "summarizeForEmbedding": null,
   "extractedTextS3Uri": null,
+  "caption": null,
   "secondaryTaxonomy": null,
   "startMs": null,
   "endMs": null,

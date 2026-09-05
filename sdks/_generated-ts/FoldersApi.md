@@ -546,7 +546,7 @@ example().catch(console.error);
 
 ## searchItems
 
-> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat searchItems(nameLike, sortOrder, partType, withTags, parentPathPartId, limit, offset)
+> SearchItemsResponse searchItems(nameLike, partType, sortOrder, withTags, parentPathPartId, limit, offset)
 
 Search Items Handler
 
@@ -574,10 +574,10 @@ async function example() {
   const body = {
     // string | Case-insensitive partial name search
     nameLike: nameLike_example,
-    // SearchSortOrder | Sort order for results (default: NAME) (optional)
-    sortOrder: ...,
-    // SearchablePartType | Filter by item type (default: all searchable types) (optional)
+    // Array<SearchablePartType> | Filter by item type; repeat the parameter to select several (default: all searchable types) (optional)
     partType: ...,
+    // SearchSortOrder | Sort order for results (default: RELEVANCE) (optional)
+    sortOrder: ...,
     // boolean | Include tags in the response (default: false) (optional)
     withTags: true,
     // string | Scope search to descendants of this folder\'s path part (optional)
@@ -606,8 +606,8 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **nameLike** | `string` | Case-insensitive partial name search | [Defaults to `undefined`] |
-| **sortOrder** | `SearchSortOrder` | Sort order for results (default: NAME) | [Optional] [Defaults to `undefined`] [Enum: NAME, UPDATED_AT, CREATED_AT] |
-| **partType** | `SearchablePartType` | Filter by item type (default: all searchable types) | [Optional] [Defaults to `undefined`] [Enum: FOLDER, DOCUMENT, WORKFLOW_DEFINITION, WORKFLOW_RUN, DATA_SOURCE, DATA_SOURCE_SCHEMA, DATA_SOURCE_TABLE, API_CONNECTION] |
+| **partType** | `Array<SearchablePartType>` | Filter by item type; repeat the parameter to select several (default: all searchable types) | [Optional] |
+| **sortOrder** | `SearchSortOrder` | Sort order for results (default: RELEVANCE) | [Optional] [Defaults to `undefined`] [Enum: RELEVANCE, NAME, UPDATED_AT, CREATED_AT] |
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
 | **parentPathPartId** | `string` | Scope search to descendants of this folder\&#39;s path part | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
@@ -615,7 +615,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat.md)
+[**SearchItemsResponse**](SearchItemsResponse.md)
 
 ### Authorization
 

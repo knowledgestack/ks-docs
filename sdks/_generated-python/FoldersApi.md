@@ -622,7 +622,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **search_items**
-> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat search_items(name_like, sort_order=sort_order, part_type=part_type, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset)
+> SearchItemsResponse search_items(name_like, part_type=part_type, sort_order=sort_order, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset)
 
 Search Items Handler
 
@@ -641,7 +641,7 @@ searched. Otherwise, all accessible items across the tenant are searched.
 
 ```python
 import ksapi
-from ksapi.models.paginated_response_annotated_union_folder_response_document_response_workflow_definition_response_workflow_run_response_dat import PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat
+from ksapi.models.search_items_response import SearchItemsResponse
 from ksapi.models.search_sort_order import SearchSortOrder
 from ksapi.models.searchable_part_type import SearchablePartType
 from ksapi.rest import ApiException
@@ -674,8 +674,8 @@ with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FoldersApi(api_client)
     name_like = 'name_like_example' # str | Case-insensitive partial name search
-    sort_order = ksapi.SearchSortOrder() # SearchSortOrder | Sort order for results (default: NAME) (optional)
-    part_type = ksapi.SearchablePartType() # SearchablePartType | Filter by item type (default: all searchable types) (optional)
+    part_type = [ksapi.SearchablePartType()] # List[SearchablePartType] | Filter by item type; repeat the parameter to select several (default: all searchable types) (optional)
+    sort_order = ksapi.SearchSortOrder() # SearchSortOrder | Sort order for results (default: RELEVANCE) (optional)
     with_tags = False # bool | Include tags in the response (default: false) (optional) (default to False)
     parent_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope search to descendants of this folder's path part (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
@@ -683,7 +683,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Search Items Handler
-        api_response = api_instance.search_items(name_like, sort_order=sort_order, part_type=part_type, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset)
+        api_response = api_instance.search_items(name_like, part_type=part_type, sort_order=sort_order, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset)
         print("The response of FoldersApi->search_items:\n")
         pprint(api_response)
     except Exception as e:
@@ -698,8 +698,8 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name_like** | **str**| Case-insensitive partial name search | 
- **sort_order** | [**SearchSortOrder**](.md)| Sort order for results (default: NAME) | [optional] 
- **part_type** | [**SearchablePartType**](.md)| Filter by item type (default: all searchable types) | [optional] 
+ **part_type** | [**List[SearchablePartType]**](SearchablePartType.md)| Filter by item type; repeat the parameter to select several (default: all searchable types) | [optional] 
+ **sort_order** | [**SearchSortOrder**](.md)| Sort order for results (default: RELEVANCE) | [optional] 
  **with_tags** | **bool**| Include tags in the response (default: false) | [optional] [default to False]
  **parent_path_part_id** | **UUID**| Scope search to descendants of this folder&#39;s path part | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
@@ -707,7 +707,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat**](PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat.md)
+[**SearchItemsResponse**](SearchItemsResponse.md)
 
 ### Authorization
 

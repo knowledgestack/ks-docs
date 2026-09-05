@@ -1,8 +1,10 @@
 # SearchSortOrder
 
-Sort order options for search results.
+Ordering for flat name search.  RELEVANCE ranks an exact name match first, then names starting with the query, then by how closely the name matches, then shorter names, then alphabetically.
 
 ## Enum
+
+* `RELEVANCE` (value: `'RELEVANCE'`)
 
 * `NAME` (value: `'NAME'`)
 

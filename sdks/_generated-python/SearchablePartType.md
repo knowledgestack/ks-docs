@@ -20,6 +20,8 @@ Part types that can be searched.
 
 * `API_CONNECTION` (value: `'API_CONNECTION'`)
 
+* `SKILL` (value: `'SKILL'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

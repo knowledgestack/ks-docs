@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **entity_id** | **UUID** |  | 
 **display_name** | **str** | Human-readable name for the entity | 
 **materialized_path** | **str** | Full materialized path (None for entities without path parts, e.g. tags, users) | [optional] 
+**document_type** | [**DocumentType**](DocumentType.md) |  | [optional] 
 
 ## Example
 

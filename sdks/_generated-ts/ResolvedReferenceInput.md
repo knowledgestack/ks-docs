@@ -11,6 +11,7 @@ Name | Type
 `entityId` | string
 `displayName` | string
 `materializedPath` | string
+`documentType` | [DocumentType](DocumentType.md)
 
 ## Example
 
@@ -23,6 +24,7 @@ const example = {
   "entityId": null,
   "displayName": null,
   "materializedPath": null,
+  "documentType": null,
 } satisfies ResolvedReferenceInput
 
 console.log(example)

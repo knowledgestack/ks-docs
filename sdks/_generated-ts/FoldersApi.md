@@ -546,11 +546,11 @@ example().catch(console.error);
 
 ## searchItems
 
-> SearchItemsResponse searchItems(nameLike, partType, sortOrder, withTags, parentPathPartId, limit, offset)
+> SearchItemsResponse searchItems(nameLike, partType, sortOrder, withTags, parentPathPartId, limit, offset, documentType, ownerId, createdAfter, createdBefore, updatedAfter, updatedBefore, includeTagIds, excludeTagIds)
 
 Search Items Handler
 
-Search for folders, documents, and connectors by name.  Performs a case-insensitive partial name match using trigram indexing. Results are filtered by the current user\&#39;s path permissions.  When parent_path_part_id is provided, only items under that folder are searched. Otherwise, all accessible items across the tenant are searched.
+Search for folders, documents, connectors, workflows and skills.  Every word of the query must appear in the item\&#39;s name or in a folder on the way to it; items named after the query rank above items that merely sit in a folder named after it. Matching is case-insensitive and served by trigram indexes, with a typo-tolerant fallback on names when nothing matches strictly. Results are filtered by the current user\&#39;s path permissions.  Owner, document type, timestamp and tag filters narrow both the page and &#x60;&#x60;counts_by_type&#x60;&#x60;; &#x60;&#x60;part_type&#x60;&#x60; narrows the page only, so the chips keep every type\&#39;s count.
 
 ### Example
 
@@ -586,6 +586,22 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // Array<DocumentType> | Only documents of these types; repeat the parameter to select several (default: every type, every item kind) (optional)
+    documentType: ...,
+    // string | Only items owned by this user (optional)
+    ownerId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // Date | Only items created at or after this timestamp (inclusive) (optional)
+    createdAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items created strictly before this timestamp (optional)
+    createdBefore: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated at or after this timestamp (inclusive) (optional)
+    updatedAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated strictly before this timestamp (optional)
+    updatedBefore: 2013-10-20T19:20:30+01:00,
+    // Array<string> | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). (optional)
+    includeTagIds: ...,
+    // Array<string> | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. (optional)
+    excludeTagIds: ...,
   } satisfies SearchItemsRequest;
 
   try {
@@ -612,6 +628,14 @@ example().catch(console.error);
 | **parentPathPartId** | `string` | Scope search to descendants of this folder\&#39;s path part | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **documentType** | `Array<DocumentType>` | Only documents of these types; repeat the parameter to select several (default: every type, every item kind) | [Optional] |
+| **ownerId** | `string` | Only items owned by this user | [Optional] [Defaults to `undefined`] |
+| **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **includeTagIds** | `Array<string>` | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). | [Optional] |
+| **excludeTagIds** | `Array<string>` | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. | [Optional] |
 
 ### Return type
 

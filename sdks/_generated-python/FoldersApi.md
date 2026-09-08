@@ -622,17 +622,22 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **search_items**
-> SearchItemsResponse search_items(name_like, part_type=part_type, sort_order=sort_order, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset)
+> SearchItemsResponse search_items(name_like, part_type=part_type, sort_order=sort_order, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset, document_type=document_type, owner_id=owner_id, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
 
 Search Items Handler
 
-Search for folders, documents, and connectors by name.
+Search for folders, documents, connectors, workflows and skills.
 
-Performs a case-insensitive partial name match using trigram indexing.
-Results are filtered by the current user's path permissions.
+Every word of the query must appear in the item's name or in a folder on
+the way to it; items named after the query rank above items that merely
+sit in a folder named after it. Matching is case-insensitive and served by
+trigram indexes, with a typo-tolerant fallback on names when nothing
+matches strictly. Results are filtered by the current user's path
+permissions.
 
-When parent_path_part_id is provided, only items under that folder are
-searched. Otherwise, all accessible items across the tenant are searched.
+Owner, document type, timestamp and tag filters narrow both the page and
+``counts_by_type``; ``part_type`` narrows the page only, so the chips keep
+every type's count.
 
 ### Example
 
@@ -641,6 +646,7 @@ searched. Otherwise, all accessible items across the tenant are searched.
 
 ```python
 import ksapi
+from ksapi.models.document_type import DocumentType
 from ksapi.models.search_items_response import SearchItemsResponse
 from ksapi.models.search_sort_order import SearchSortOrder
 from ksapi.models.searchable_part_type import SearchablePartType
@@ -680,10 +686,18 @@ with ksapi.ApiClient(configuration) as api_client:
     parent_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope search to descendants of this folder's path part (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    document_type = [ksapi.DocumentType()] # List[DocumentType] | Only documents of these types; repeat the parameter to select several (default: every type, every item kind) (optional)
+    owner_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Only items owned by this user (optional)
+    created_after = '2013-10-20T19:20:30+01:00' # datetime | Only items created at or after this timestamp (inclusive) (optional)
+    created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
+    updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
+    updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
+    include_tag_ids = None # List[UUID] | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). (optional)
+    exclude_tag_ids = None # List[UUID] | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. (optional)
 
     try:
         # Search Items Handler
-        api_response = api_instance.search_items(name_like, part_type=part_type, sort_order=sort_order, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset)
+        api_response = api_instance.search_items(name_like, part_type=part_type, sort_order=sort_order, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset, document_type=document_type, owner_id=owner_id, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
         print("The response of FoldersApi->search_items:\n")
         pprint(api_response)
     except Exception as e:
@@ -704,6 +718,14 @@ Name | Type | Description  | Notes
  **parent_path_part_id** | **UUID**| Scope search to descendants of this folder&#39;s path part | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **document_type** | [**List[DocumentType]**](DocumentType.md)| Only documents of these types; repeat the parameter to select several (default: every type, every item kind) | [optional] 
+ **owner_id** | **UUID**| Only items owned by this user | [optional] 
+ **created_after** | **datetime**| Only items created at or after this timestamp (inclusive) | [optional] 
+ **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
+ **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
+ **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
+ **include_tag_ids** | [**List[UUID]**](UUID.md)| Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). | [optional] 
+ **exclude_tag_ids** | [**List[UUID]**](UUID.md)| Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. | [optional] 
 
 ### Return type
 

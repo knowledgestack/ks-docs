@@ -1,7 +1,7 @@
 
 # DataSourceQueryResponse
 
-Read-only query result. ``generated_sql`` echoes the executed SQL.  ``sql_validation_warnings`` lists non-blocking semantic-lint findings (e.g. aggregate without a filter, fan-out join); empty when the SQL is clean. The query still runs and returns rows regardless of warnings.
+Read-only query result.  ``generated_sql`` echoes the SQL the caller submitted, not the statement that reached the source — a row bound is added to that so the page costs a page, and it is ours rather than something the caller asked for.  ``sql_validation_warnings`` lists non-blocking semantic-lint findings (e.g. aggregate without a filter, fan-out join); empty when the SQL is clean. The query still runs and returns rows regardless of warnings.
 
 ## Properties
 

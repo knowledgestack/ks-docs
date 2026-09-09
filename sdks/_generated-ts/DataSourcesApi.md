@@ -1173,7 +1173,7 @@ example().catch(console.error);
 
 Update Data Source Handler
 
-Rename, move, and/or re-credential a connector.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector (and on the destination folder for a move). Fresh &#x60;&#x60;connection_config&#x60;&#x60; is re-validated against the DB before persisting (bad creds → 400, consistent with create); creds are never echoed back. &#x60;&#x60;engine&#x60;&#x60; is immutable.
+Rename, move, and/or re-credential a connector.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector (and on the destination folder for a move); supplying &#x60;&#x60;connection_config&#x60;&#x60; additionally requires OWNER/ADMIN. Fresh &#x60;&#x60;connection_config&#x60;&#x60; is re-validated against the DB before persisting (bad creds → 400, consistent with create); creds are never echoed back. &#x60;&#x60;engine&#x60;&#x60; is immutable.
 
 ### Example
 

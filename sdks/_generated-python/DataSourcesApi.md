@@ -1374,10 +1374,11 @@ Update Data Source Handler
 
 Rename, move, and/or re-credential a connector.
 
-Requires ``can_write`` on the connector (and on the destination folder
-for a move). Fresh ``connection_config`` is re-validated against the DB
-before persisting (bad creds → 400, consistent with create); creds are
-never echoed back. ``engine`` is immutable.
+Requires ``can_write`` on the connector (and on the destination folder for a
+move); supplying ``connection_config`` additionally requires OWNER/ADMIN.
+Fresh ``connection_config`` is re-validated against the DB before persisting
+(bad creds → 400, consistent with create); creds are never echoed back.
+``engine`` is immutable.
 
 ### Example
 

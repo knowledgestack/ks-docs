@@ -195,10 +195,7 @@ Name | Type | Description  | Notes
 
 Delete Api Connection Handler
 
-Move a connection to trash (Admin/Owner).
-
-Soft-delete via the path_part subtree, mirroring create/update authz. A
-connection holds no Qdrant vectors, so there is no trash-sync workflow.
+Move a connection to trash; requires ``can_delete``.
 
 ### Example
 
@@ -459,7 +456,7 @@ Name | Type | Description  | Notes
 
 Update Api Connection Handler
 
-Update a connection (Admin/Owner). A risk-up change re-arms the disclaimer.
+Update a connection; changing its egress envelope needs Admin/Owner.
 
 ### Example
 

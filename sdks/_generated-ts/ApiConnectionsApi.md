@@ -172,7 +172,7 @@ example().catch(console.error);
 
 Delete Api Connection Handler
 
-Move a connection to trash (Admin/Owner).  Soft-delete via the path_part subtree, mirroring create/update authz. A connection holds no Qdrant vectors, so there is no trash-sync workflow.
+Move a connection to trash; requires &#x60;&#x60;can_delete&#x60;&#x60;.
 
 ### Example
 
@@ -400,7 +400,7 @@ example().catch(console.error);
 
 Update Api Connection Handler
 
-Update a connection (Admin/Owner). A risk-up change re-arms the disclaimer.
+Update a connection; changing its egress envelope needs Admin/Owner.
 
 ### Example
 

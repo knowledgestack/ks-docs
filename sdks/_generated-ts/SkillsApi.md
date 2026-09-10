@@ -11,6 +11,7 @@ All URIs are relative to *http://localhost:8000*
 | [**deleteSkill**](SkillsApi.md#deleteskill) | **DELETE** /v1/skills/{skill_id} | Delete Skill Handler |
 | [**discardSkillDraft**](SkillsApi.md#discardskilldraft) | **POST** /v1/skills/{skill_id}/discard-draft | Discard Skill Draft Handler |
 | [**exportSkill**](SkillsApi.md#exportskill) | **GET** /v1/skills/{skill_id}/export | Export Skill Handler |
+| [**exportSkills**](SkillsApi.md#exportskillsoperation) | **POST** /v1/skills/export | Export Skills Handler |
 | [**getSkill**](SkillsApi.md#getskill) | **GET** /v1/skills/{skill_id} | Get Skill Handler |
 | [**importSkill**](SkillsApi.md#importskill) | **POST** /v1/skills/import | Import Skill Handler |
 | [**listSkillVersions**](SkillsApi.md#listskillversions) | **GET** /v1/skills/{skill_id}/versions | List Skill Versions Handler |
@@ -546,6 +547,81 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## exportSkills
+
+> Blob exportSkills(exportSkillsRequest)
+
+Export Skills Handler
+
+Download several skills\&#39; active versions as one ZIP; needs can_read on each.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  SkillsApi,
+} from '@knowledge-stack/ksapi';
+import type { ExportSkillsOperationRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new SkillsApi(config);
+
+  const body = {
+    // ExportSkillsRequest
+    exportSkillsRequest: ...,
+  } satisfies ExportSkillsOperationRequest;
+
+  try {
+    const data = await api.exportSkills(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **exportSkillsRequest** | [ExportSkillsRequest](ExportSkillsRequest.md) |  | |
+
+### Return type
+
+**Blob**
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/zip`, `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | One ZIP with a top-level folder per skill. |  -  |
 | **422** | Validation Error |  -  |
 | **0** | Error response. |  -  |
 

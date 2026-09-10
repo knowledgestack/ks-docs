@@ -720,7 +720,7 @@ example().catch(console.error);
 
 ## listDocumentVersions
 
-> PaginatedResponseDocumentVersionResponse listDocumentVersions(documentId, sortBy, sortDir, uploaderTenantUserId, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseDocumentVersionResponse listDocumentVersions(documentId, sortBy, sortDir, uploaderUserId, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
 
 List Document Versions Handler
 
@@ -753,7 +753,7 @@ async function example() {
     // SortDirection | Sort direction; overrides the field\'s natural default (optional)
     sortDir: ...,
     // string | Filter to versions created by this user (optional)
-    uploaderTenantUserId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    uploaderUserId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -788,7 +788,7 @@ example().catch(console.error);
 | **documentId** | `string` | Document ID to list versions for | [Defaults to `undefined`] |
 | **sortBy** | `DocumentVersionOrder` | Field to sort versions by (default: VERSION) | [Optional] [Defaults to `undefined`] [Enum: VERSION, CREATED_AT] |
 | **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
-| **uploaderTenantUserId** | `string` | Filter to versions created by this user | [Optional] [Defaults to `undefined`] |
+| **uploaderUserId** | `string` | Filter to versions created by this user | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 | **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |

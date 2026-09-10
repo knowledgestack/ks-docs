@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **get_admin_workflow_by_hour**
-> HourHistogramResponse get_admin_workflow_by_hour(since=since, until=until, timezone=timezone, definition_id=definition_id)
+> HourHistogramResponse get_admin_workflow_by_hour(timezone=timezone, definition_id=definition_id, since=since, until=until)
 
 Get Admin Workflow By Hour Handler
 
@@ -55,14 +55,14 @@ configuration = ksapi.Configuration(
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Window start. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. (optional)
     timezone = 'timezone_example' # str | IANA tz override; defaults to tenant setting. (optional)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope to one workflow. (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end (inclusive). (optional)
 
     try:
         # Get Admin Workflow By Hour Handler
-        api_response = api_instance.get_admin_workflow_by_hour(since=since, until=until, timezone=timezone, definition_id=definition_id)
+        api_response = api_instance.get_admin_workflow_by_hour(timezone=timezone, definition_id=definition_id, since=since, until=until)
         print("The response of AdminWorkflowsApi->get_admin_workflow_by_hour:\n")
         pprint(api_response)
     except Exception as e:
@@ -76,10 +76,10 @@ with ksapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **since** | **datetime**| Window start. | [optional] 
- **until** | **datetime**| Window end. | [optional] 
  **timezone** | **str**| IANA tz override; defaults to tenant setting. | [optional] 
  **definition_id** | **UUID**| Scope to one workflow. | [optional] 
+ **since** | **datetime**| Window start (inclusive). Defaults to 7 days ago. | [optional] 
+ **until** | **datetime**| Window end (inclusive). | [optional] 
 
 ### Return type
 
@@ -105,7 +105,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_admin_workflow_leaderboard**
-> WorkflowLeaderboardResponse get_admin_workflow_leaderboard(since=since, until=until, limit=limit)
+> WorkflowLeaderboardResponse get_admin_workflow_leaderboard(limit=limit, since=since, until=until)
 
 Get Admin Workflow Leaderboard Handler
 
@@ -148,13 +148,13 @@ configuration = ksapi.Configuration(
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Window start. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. (optional)
     limit = 10 # int | Top-N per leaderboard. (optional) (default to 10)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end (inclusive). (optional)
 
     try:
         # Get Admin Workflow Leaderboard Handler
-        api_response = api_instance.get_admin_workflow_leaderboard(since=since, until=until, limit=limit)
+        api_response = api_instance.get_admin_workflow_leaderboard(limit=limit, since=since, until=until)
         print("The response of AdminWorkflowsApi->get_admin_workflow_leaderboard:\n")
         pprint(api_response)
     except Exception as e:
@@ -168,9 +168,9 @@ with ksapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **since** | **datetime**| Window start. | [optional] 
- **until** | **datetime**| Window end. | [optional] 
  **limit** | **int**| Top-N per leaderboard. | [optional] [default to 10]
+ **since** | **datetime**| Window start (inclusive). Defaults to 7 days ago. | [optional] 
+ **until** | **datetime**| Window end (inclusive). | [optional] 
 
 ### Return type
 
@@ -239,8 +239,8 @@ configuration = ksapi.Configuration(
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Window start. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end (inclusive). (optional)
 
     try:
         # Get Admin Workflow Output Stats Handler
@@ -258,8 +258,8 @@ with ksapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **since** | **datetime**| Window start. | [optional] 
- **until** | **datetime**| Window end. | [optional] 
+ **since** | **datetime**| Window start (inclusive). Defaults to 7 days ago. | [optional] 
+ **until** | **datetime**| Window end (inclusive). | [optional] 
 
 ### Return type
 
@@ -285,7 +285,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_admin_workflow_summary**
-> WorkflowRunSummaryResponse get_admin_workflow_summary(since=since, until=until, definition_id=definition_id)
+> WorkflowRunSummaryResponse get_admin_workflow_summary(definition_id=definition_id, since=since, until=until)
 
 Get Admin Workflow Summary Handler
 
@@ -328,13 +328,13 @@ configuration = ksapi.Configuration(
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
+    definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope all numbers to one workflow. (optional)
     since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
     until = '2013-10-20T19:20:30+01:00' # datetime | Window end (inclusive). (optional)
-    definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope all numbers to one workflow. (optional)
 
     try:
         # Get Admin Workflow Summary Handler
-        api_response = api_instance.get_admin_workflow_summary(since=since, until=until, definition_id=definition_id)
+        api_response = api_instance.get_admin_workflow_summary(definition_id=definition_id, since=since, until=until)
         print("The response of AdminWorkflowsApi->get_admin_workflow_summary:\n")
         pprint(api_response)
     except Exception as e:
@@ -348,9 +348,9 @@ with ksapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **definition_id** | **UUID**| Scope all numbers to one workflow. | [optional] 
  **since** | **datetime**| Window start (inclusive). Defaults to 7 days ago. | [optional] 
  **until** | **datetime**| Window end (inclusive). | [optional] 
- **definition_id** | **UUID**| Scope all numbers to one workflow. | [optional] 
 
 ### Return type
 
@@ -376,7 +376,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_admin_workflow_timeseries**
-> RunTimeseriesResponse get_admin_workflow_timeseries(since=since, until=until, bucket=bucket, timezone=timezone, definition_id=definition_id)
+> RunTimeseriesResponse get_admin_workflow_timeseries(timezone=timezone, definition_id=definition_id, since=since, until=until, bucket=bucket)
 
 Get Admin Workflow Timeseries Handler
 
@@ -420,15 +420,15 @@ configuration = ksapi.Configuration(
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Window start. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. (optional)
-    bucket = ksapi.TimeBucket() # TimeBucket | Bucket size. (optional)
     timezone = 'timezone_example' # str | IANA tz override; defaults to tenant setting. (optional)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope to one workflow. (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end (inclusive). (optional)
+    bucket = ksapi.TimeBucket() # TimeBucket | Bucket size. (optional)
 
     try:
         # Get Admin Workflow Timeseries Handler
-        api_response = api_instance.get_admin_workflow_timeseries(since=since, until=until, bucket=bucket, timezone=timezone, definition_id=definition_id)
+        api_response = api_instance.get_admin_workflow_timeseries(timezone=timezone, definition_id=definition_id, since=since, until=until, bucket=bucket)
         print("The response of AdminWorkflowsApi->get_admin_workflow_timeseries:\n")
         pprint(api_response)
     except Exception as e:
@@ -442,11 +442,11 @@ with ksapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **since** | **datetime**| Window start. | [optional] 
- **until** | **datetime**| Window end. | [optional] 
- **bucket** | [**TimeBucket**](.md)| Bucket size. | [optional] 
  **timezone** | **str**| IANA tz override; defaults to tenant setting. | [optional] 
  **definition_id** | **UUID**| Scope to one workflow. | [optional] 
+ **since** | **datetime**| Window start (inclusive). Defaults to 7 days ago. | [optional] 
+ **until** | **datetime**| Window end (inclusive). | [optional] 
+ **bucket** | [**TimeBucket**](.md)| Bucket size. | [optional] 
 
 ### Return type
 

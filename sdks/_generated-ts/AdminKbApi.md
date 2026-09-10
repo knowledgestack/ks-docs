@@ -77,7 +77,7 @@ This endpoint does not need any parameter.
 
 ## getAdminKbTimeseries
 
-> KbTimeseriesResponse getAdminKbTimeseries(metric, since, until, bucket, timezone)
+> KbTimeseriesResponse getAdminKbTimeseries(metric, timezone, since, until, bucket)
 
 Get Admin Kb Timeseries Handler
 
@@ -105,14 +105,14 @@ async function example() {
   const body = {
     // KbMetric | Which KB metric to bucket.
     metric: ...,
-    // Date | Window start. (optional)
+    // string | IANA tz override; defaults to tenant setting. (optional)
+    timezone: timezone_example,
+    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
     since: 2013-10-20T19:20:30+01:00,
-    // Date | Window end. (optional)
+    // Date | Window end (inclusive). (optional)
     until: 2013-10-20T19:20:30+01:00,
     // TimeBucket | Bucket size. (optional)
     bucket: ...,
-    // string | IANA tz override; defaults to tenant setting. (optional)
-    timezone: timezone_example,
   } satisfies GetAdminKbTimeseriesRequest;
 
   try {
@@ -133,10 +133,10 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **metric** | `KbMetric` | Which KB metric to bucket. | [Defaults to `undefined`] [Enum: document_uploads, ingestion_completed, ingestion_failed, message, search] |
-| **since** | `Date` | Window start. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Window end. | [Optional] [Defaults to `undefined`] |
-| **bucket** | `TimeBucket` | Bucket size. | [Optional] [Defaults to `undefined`] [Enum: hour, day, week, month] |
 | **timezone** | `string` | IANA tz override; defaults to tenant setting. | [Optional] [Defaults to `undefined`] |
+| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end (inclusive). | [Optional] [Defaults to `undefined`] |
+| **bucket** | `TimeBucket` | Bucket size. | [Optional] [Defaults to `undefined`] [Enum: hour, day, week, month] |
 
 ### Return type
 

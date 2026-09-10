@@ -91,7 +91,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_admin_kb_timeseries**
-> KbTimeseriesResponse get_admin_kb_timeseries(metric, since=since, until=until, bucket=bucket, timezone=timezone)
+> KbTimeseriesResponse get_admin_kb_timeseries(metric, timezone=timezone, since=since, until=until, bucket=bucket)
 
 Get Admin Kb Timeseries Handler
 
@@ -137,14 +137,14 @@ with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminKbApi(api_client)
     metric = ksapi.KbMetric() # KbMetric | Which KB metric to bucket.
-    since = '2013-10-20T19:20:30+01:00' # datetime | Window start. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. (optional)
-    bucket = ksapi.TimeBucket() # TimeBucket | Bucket size. (optional)
     timezone = 'timezone_example' # str | IANA tz override; defaults to tenant setting. (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end (inclusive). (optional)
+    bucket = ksapi.TimeBucket() # TimeBucket | Bucket size. (optional)
 
     try:
         # Get Admin Kb Timeseries Handler
-        api_response = api_instance.get_admin_kb_timeseries(metric, since=since, until=until, bucket=bucket, timezone=timezone)
+        api_response = api_instance.get_admin_kb_timeseries(metric, timezone=timezone, since=since, until=until, bucket=bucket)
         print("The response of AdminKbApi->get_admin_kb_timeseries:\n")
         pprint(api_response)
     except Exception as e:
@@ -159,10 +159,10 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **metric** | [**KbMetric**](.md)| Which KB metric to bucket. | 
- **since** | **datetime**| Window start. | [optional] 
- **until** | **datetime**| Window end. | [optional] 
- **bucket** | [**TimeBucket**](.md)| Bucket size. | [optional] 
  **timezone** | **str**| IANA tz override; defaults to tenant setting. | [optional] 
+ **since** | **datetime**| Window start (inclusive). Defaults to 7 days ago. | [optional] 
+ **until** | **datetime**| Window end (inclusive). | [optional] 
+ **bucket** | [**TimeBucket**](.md)| Bucket size. | [optional] 
 
 ### Return type
 

@@ -14,7 +14,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## getAdminWorkflowByHour
 
-> HourHistogramResponse getAdminWorkflowByHour(since, until, timezone, definitionId)
+> HourHistogramResponse getAdminWorkflowByHour(timezone, definitionId, since, until)
 
 Get Admin Workflow By Hour Handler
 
@@ -40,14 +40,14 @@ async function example() {
   const api = new AdminWorkflowsApi(config);
 
   const body = {
-    // Date | Window start. (optional)
-    since: 2013-10-20T19:20:30+01:00,
-    // Date | Window end. (optional)
-    until: 2013-10-20T19:20:30+01:00,
     // string | IANA tz override; defaults to tenant setting. (optional)
     timezone: timezone_example,
     // string | Scope to one workflow. (optional)
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
+    since: 2013-10-20T19:20:30+01:00,
+    // Date | Window end (inclusive). (optional)
+    until: 2013-10-20T19:20:30+01:00,
   } satisfies GetAdminWorkflowByHourRequest;
 
   try {
@@ -67,10 +67,10 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **since** | `Date` | Window start. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Window end. | [Optional] [Defaults to `undefined`] |
 | **timezone** | `string` | IANA tz override; defaults to tenant setting. | [Optional] [Defaults to `undefined`] |
 | **definitionId** | `string` | Scope to one workflow. | [Optional] [Defaults to `undefined`] |
+| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end (inclusive). | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -98,7 +98,7 @@ example().catch(console.error);
 
 ## getAdminWorkflowLeaderboard
 
-> WorkflowLeaderboardResponse getAdminWorkflowLeaderboard(since, until, limit)
+> WorkflowLeaderboardResponse getAdminWorkflowLeaderboard(limit, since, until)
 
 Get Admin Workflow Leaderboard Handler
 
@@ -124,12 +124,12 @@ async function example() {
   const api = new AdminWorkflowsApi(config);
 
   const body = {
-    // Date | Window start. (optional)
-    since: 2013-10-20T19:20:30+01:00,
-    // Date | Window end. (optional)
-    until: 2013-10-20T19:20:30+01:00,
     // number | Top-N per leaderboard. (optional)
     limit: 56,
+    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
+    since: 2013-10-20T19:20:30+01:00,
+    // Date | Window end (inclusive). (optional)
+    until: 2013-10-20T19:20:30+01:00,
   } satisfies GetAdminWorkflowLeaderboardRequest;
 
   try {
@@ -149,9 +149,9 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **since** | `Date` | Window start. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Window end. | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Top-N per leaderboard. | [Optional] [Defaults to `10`] |
+| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end (inclusive). | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -205,9 +205,9 @@ async function example() {
   const api = new AdminWorkflowsApi(config);
 
   const body = {
-    // Date | Window start. (optional)
+    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
     since: 2013-10-20T19:20:30+01:00,
-    // Date | Window end. (optional)
+    // Date | Window end (inclusive). (optional)
     until: 2013-10-20T19:20:30+01:00,
   } satisfies GetAdminWorkflowOutputStatsRequest;
 
@@ -228,8 +228,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **since** | `Date` | Window start. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Window end. | [Optional] [Defaults to `undefined`] |
+| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end (inclusive). | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -257,7 +257,7 @@ example().catch(console.error);
 
 ## getAdminWorkflowSummary
 
-> WorkflowRunSummaryResponse getAdminWorkflowSummary(since, until, definitionId)
+> WorkflowRunSummaryResponse getAdminWorkflowSummary(definitionId, since, until)
 
 Get Admin Workflow Summary Handler
 
@@ -283,12 +283,12 @@ async function example() {
   const api = new AdminWorkflowsApi(config);
 
   const body = {
+    // string | Scope all numbers to one workflow. (optional)
+    definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
     since: 2013-10-20T19:20:30+01:00,
     // Date | Window end (inclusive). (optional)
     until: 2013-10-20T19:20:30+01:00,
-    // string | Scope all numbers to one workflow. (optional)
-    definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
   } satisfies GetAdminWorkflowSummaryRequest;
 
   try {
@@ -308,9 +308,9 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
+| **definitionId** | `string` | Scope all numbers to one workflow. | [Optional] [Defaults to `undefined`] |
 | **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
 | **until** | `Date` | Window end (inclusive). | [Optional] [Defaults to `undefined`] |
-| **definitionId** | `string` | Scope all numbers to one workflow. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -338,7 +338,7 @@ example().catch(console.error);
 
 ## getAdminWorkflowTimeseries
 
-> RunTimeseriesResponse getAdminWorkflowTimeseries(since, until, bucket, timezone, definitionId)
+> RunTimeseriesResponse getAdminWorkflowTimeseries(timezone, definitionId, since, until, bucket)
 
 Get Admin Workflow Timeseries Handler
 
@@ -364,16 +364,16 @@ async function example() {
   const api = new AdminWorkflowsApi(config);
 
   const body = {
-    // Date | Window start. (optional)
-    since: 2013-10-20T19:20:30+01:00,
-    // Date | Window end. (optional)
-    until: 2013-10-20T19:20:30+01:00,
-    // TimeBucket | Bucket size. (optional)
-    bucket: ...,
     // string | IANA tz override; defaults to tenant setting. (optional)
     timezone: timezone_example,
     // string | Scope to one workflow. (optional)
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
+    since: 2013-10-20T19:20:30+01:00,
+    // Date | Window end (inclusive). (optional)
+    until: 2013-10-20T19:20:30+01:00,
+    // TimeBucket | Bucket size. (optional)
+    bucket: ...,
   } satisfies GetAdminWorkflowTimeseriesRequest;
 
   try {
@@ -393,11 +393,11 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **since** | `Date` | Window start. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Window end. | [Optional] [Defaults to `undefined`] |
-| **bucket** | `TimeBucket` | Bucket size. | [Optional] [Defaults to `undefined`] [Enum: hour, day, week, month] |
 | **timezone** | `string` | IANA tz override; defaults to tenant setting. | [Optional] [Defaults to `undefined`] |
 | **definitionId** | `string` | Scope to one workflow. | [Optional] [Defaults to `undefined`] |
+| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end (inclusive). | [Optional] [Defaults to `undefined`] |
+| **bucket** | `TimeBucket` | Bucket size. | [Optional] [Defaults to `undefined`] [Enum: hour, day, week, month] |
 
 ### Return type
 

@@ -9,8 +9,10 @@ Name | Type
 ------------ | -------------
 `name` | string
 `parentPathPartId` | string
+`sourceType` | [SourceType](SourceType.md)
 `engine` | [DataSourceEngine](DataSourceEngine.md)
 `connectionConfig` | [ConnectionConfig](ConnectionConfig.md)
+`sourceConfig` | [YidingConfig](YidingConfig.md)
 
 ## Example
 
@@ -21,8 +23,10 @@ import type { CreateDataSourceRequest } from '@knowledge-stack/ksapi'
 const example = {
   "name": null,
   "parentPathPartId": null,
+  "sourceType": null,
   "engine": null,
   "connectionConfig": null,
+  "sourceConfig": null,
 } satisfies CreateDataSourceRequest
 
 console.log(example)

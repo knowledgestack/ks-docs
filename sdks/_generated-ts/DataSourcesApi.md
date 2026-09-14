@@ -105,7 +105,7 @@ example().catch(console.error);
 
 Delete Data Source Handler
 
-Move a connector and its schemas/tables to trash.  Soft-delete via the path_part subtree (schemas + tables are children, so they trash with it). Each modeled table\&#39;s summary Qdrant point carries that table\&#39;s path_part, so the set-trashed workflow flips it to trashed too — keeping trashed tables out of the agent\&#39;s table search (best-effort, mirrors the document delete path).
+Move a connector and its schemas/tables to trash.  Soft-delete via the path_part subtree (schemas + tables are children, so they trash with it). Each modeled table\&#39;s summary Qdrant point carries that table\&#39;s path_part, so the set-trashed workflow flips it to trashed too — keeping trashed tables out of the agent\&#39;s table search (best-effort, mirrors the document delete path).  A YIDINGSYNC connector also owns a daily crawl schedule, which is removed here: left behind, it would fire every night at a connector that is gone. The check is not redundant — unlike the best-effort trash sync above, &#x60;&#x60;delete_connector_schedule&#x60;&#x60; re-raises anything that is not NOT_FOUND, so calling it for a DIRECT connector would put a Temporal outage in the way of a delete that never needed Temporal at all.
 
 ### Example
 
@@ -948,7 +948,7 @@ example().catch(console.error);
 
 Sync Data Source Handler
 
-Reconcile modeled tables against the live external catalog.  Requires &#x60;&#x60;can_write&#x60;&#x60;. Re-introspects each modeled schema and, per table: a schema change (columns added/removed/retyped) refreshes &#x60;&#x60;column_config&#x60;&#x60; (preserving the admin\&#39;s &#x60;&#x60;exposed&#x60;&#x60;/&#x60;&#x60;comment&#x60;&#x60; field-modeling) and re-summarizes + re-embeds; an unchanged table is a no-op; a table dropped from the source is soft-deleted (keeping the \&quot;was modeled, now gone\&quot; record) and its embedding purged. It never models tables that were not imported.
+Reconcile modeled tables against the live external catalog.  Requires &#x60;&#x60;can_write&#x60;&#x60;. Re-introspects each modeled schema and, per table: a schema change (columns added/removed/retyped) refreshes &#x60;&#x60;column_config&#x60;&#x60; (preserving the admin\&#39;s &#x60;&#x60;exposed&#x60;&#x60;/&#x60;&#x60;comment&#x60;&#x60; field-modeling) and re-summarizes + re-embeds; an unchanged table is a no-op; a table dropped from the source is soft-deleted (keeping the \&quot;was modeled, now gone\&quot; record) and its embedding purged. It never models tables that were not imported.  A crawler-fed connector has no catalog to reconcile against, so it starts a crawl instead and returns 202.
 
 ### Example
 
@@ -1011,6 +1011,7 @@ example().catch(console.error);
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
+| **202** | Crawl accepted; it runs in the background |  -  |
 | **422** | Validation Error |  -  |
 | **0** | Error response. |  -  |
 
@@ -1173,7 +1174,7 @@ example().catch(console.error);
 
 Update Data Source Handler
 
-Rename, move, and/or re-credential a connector.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector (and on the destination folder for a move); supplying &#x60;&#x60;connection_config&#x60;&#x60; additionally requires OWNER/ADMIN. Fresh &#x60;&#x60;connection_config&#x60;&#x60; is re-validated against the DB before persisting (bad creds → 400, consistent with create); creds are never echoed back. &#x60;&#x60;engine&#x60;&#x60; is immutable.
+Rename, move, and/or re-credential a connector.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector (and on the destination folder for a move); supplying &#x60;&#x60;connection_config&#x60;&#x60; additionally requires OWNER/ADMIN. Fresh &#x60;&#x60;connection_config&#x60;&#x60; is re-validated against the DB before persisting (bad creds → 400, consistent with create); creds are never echoed back. &#x60;&#x60;engine&#x60;&#x60; is immutable. A fresh &#x60;&#x60;source_config&#x60;&#x60; re-arms the crawl schedule, so changing &#x60;&#x60;cron&#x60;&#x60; takes effect immediately rather than at the next provisioning.
 
 ### Example
 

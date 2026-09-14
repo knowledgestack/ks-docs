@@ -10,6 +10,8 @@ Name | Type
 `name` | string
 `parentPathPartId` | string
 `connectionConfig` | [ConnectionConfig](ConnectionConfig.md)
+`sourceConfig` | [YidingConfig](YidingConfig.md)
+`syncState` | [YidingCursor](YidingCursor.md)
 
 ## Example
 
@@ -21,6 +23,8 @@ const example = {
   "name": null,
   "parentPathPartId": null,
   "connectionConfig": null,
+  "sourceConfig": null,
+  "syncState": null,
 } satisfies UpdateDataSourceRequest
 
 console.log(example)

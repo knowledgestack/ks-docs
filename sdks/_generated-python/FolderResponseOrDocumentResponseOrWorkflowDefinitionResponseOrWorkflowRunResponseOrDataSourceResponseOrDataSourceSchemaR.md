@@ -55,6 +55,9 @@ Name | Type | Description | Notes
 **excluded_common_files** | [**List[ExcludedCommonFile]**](ExcludedCommonFile.md) | Definition common files that were excluded from this run at Start (deleted or unreadable by the starter). Empty until Start builds the snapshot, and empty for the common happy path. | [optional] 
 **run_thread_id** | **UUID** | The run&#39;s primary chat thread (1:1). NULL while NOT_STARTED; set by Start. The FE opens the run by opening this thread. | [optional] 
 **engine** | [**DataSourceEngine**](DataSourceEngine.md) |  | 
+**source_type** | [**SourceType**](SourceType.md) |  | 
+**connection_summary** | [**ConnectionSummary**](ConnectionSummary.md) | Where the connector points, without the password. Null on a YIDINGSYNC connector until provisioning has built its database, so polling this is how the UI learns the sync is ready. | [optional] 
+**source_config** | [**SourceConfigSummary**](SourceConfigSummary.md) | A YIDINGSYNC connector&#39;s crawler config without the password: which shop, from when, and the crawl recurrence. Null on DIRECT. | [optional] 
 **data_source_id** | **UUID** |  | 
 **schema_name** | **str** | Real namespace in the external DB | 
 **is_default** | **bool** | True for the connection&#39;s default namespace | 

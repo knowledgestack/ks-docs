@@ -8,8 +8,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
 **parent_path_part_id** | **UUID** |  | 
-**engine** | [**DataSourceEngine**](DataSourceEngine.md) |  | 
-**connection_config** | [**ConnectionConfig**](ConnectionConfig.md) |  | 
+**source_type** | [**SourceType**](SourceType.md) |  | [optional] 
+**engine** | [**DataSourceEngine**](DataSourceEngine.md) |  | [optional] 
+**connection_config** | [**ConnectionConfig**](ConnectionConfig.md) |  | [optional] 
+**source_config** | [**YidingConfig**](YidingConfig.md) |  | [optional] 
 
 ## Example
 

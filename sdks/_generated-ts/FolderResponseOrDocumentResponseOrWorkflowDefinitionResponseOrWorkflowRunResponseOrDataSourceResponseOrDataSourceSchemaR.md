@@ -56,6 +56,9 @@ Name | Type
 `excludedCommonFiles` | [Array&lt;ExcludedCommonFile&gt;](ExcludedCommonFile.md)
 `runThreadId` | string
 `engine` | [DataSourceEngine](DataSourceEngine.md)
+`sourceType` | [SourceType](SourceType.md)
+`connectionSummary` | [ConnectionSummary](ConnectionSummary.md)
+`sourceConfig` | [SourceConfigSummary](SourceConfigSummary.md)
 `dataSourceId` | string
 `schemaName` | string
 `isDefault` | boolean
@@ -131,6 +134,9 @@ const example = {
   "excludedCommonFiles": null,
   "runThreadId": null,
   "engine": null,
+  "sourceType": null,
+  "connectionSummary": null,
+  "sourceConfig": null,
   "dataSourceId": null,
   "schemaName": null,
   "isDefault": null,

@@ -1,7 +1,7 @@
 
 # DataSourceResponse
 
-Connector response; a discriminated-union variant for folder listings.  The ``connection_config`` (host/port/credentials) is intentionally omitted — the password is write-only and never serialized back.
+Connector response; a discriminated-union variant for folder listings.  The stored ``connection_config`` is never returned whole: the password is write-only and never serialized back. What it points at travels in ``connection_summary`` instead, which a YIDINGSYNC connector needs — the server generated those credentials, so this is the only place its owner ever sees which database the sync built.
 
 ## Properties
 
@@ -15,6 +15,9 @@ Name | Type
 `tenantId` | string
 `name` | string
 `engine` | [DataSourceEngine](DataSourceEngine.md)
+`sourceType` | [SourceType](SourceType.md)
+`connectionSummary` | [ConnectionSummary](ConnectionSummary.md)
+`sourceConfig` | [SourceConfigSummary](SourceConfigSummary.md)
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
 `owner` | [UserInfo](UserInfo.md)
 `permissions` | [ItemPermissions](ItemPermissions.md)
@@ -36,6 +39,9 @@ const example = {
   "tenantId": null,
   "name": null,
   "engine": null,
+  "sourceType": null,
+  "connectionSummary": null,
+  "sourceConfig": null,
   "approvalState": null,
   "owner": null,
   "permissions": null,

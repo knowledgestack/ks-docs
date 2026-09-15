@@ -10,7 +10,7 @@ Name | Type
 `name` | string
 `parentPathPartId` | string
 `connectionConfig` | [ConnectionConfig](ConnectionConfig.md)
-`sourceConfig` | [YidingConfig](YidingConfig.md)
+`sourceConfig` | [YidingConfigChange](YidingConfigChange.md)
 `syncState` | [YidingCursor](YidingCursor.md)
 
 ## Example

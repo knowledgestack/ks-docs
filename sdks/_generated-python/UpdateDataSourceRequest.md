@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | [optional] 
 **parent_path_part_id** | **UUID** | New parent FOLDER path_part to move the connector under. | [optional] 
 **connection_config** | [**ConnectionConfig**](ConnectionConfig.md) | Fresh, whole-object credentials to replace the stored ones. | [optional] 
-**source_config** | [**YidingConfig**](YidingConfig.md) | Fresh YIDINGSYNC crawler config to replace the stored one (login, shop, start date, recurrence); rejected on a DIRECT connector. Changing &#x60;&#x60;cron&#x60;&#x60; re-arms the schedule. connection_config stays server-managed for YIDINGSYNC. | [optional] 
+**source_config** | [**YidingConfigChange**](YidingConfigChange.md) | What a YIDINGSYNC connector&#39;s crawler config may still change: the panel password and the crawl recurrence, each optional and each merged into the stored config rather than replacing it. Which shop and from when are fixed at creation. Rejected on a DIRECT connector. Changing &#x60;&#x60;cron&#x60;&#x60; re-arms the schedule. connection_config stays server-managed for YIDINGSYNC. | [optional] 
 **sync_state** | [**YidingCursor**](YidingCursor.md) | The crawl cursor, replaced whole. Written by the sync itself (the worker acts as the connector&#39;s owner) after each batch, so it records what has already been read. Moving it forward by hand makes the next run skip those days for good — the increment only re-scans what the cursor points at. | [optional] 
 
 ## Example

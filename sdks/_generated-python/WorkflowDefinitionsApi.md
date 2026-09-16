@@ -469,7 +469,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_workflow_definitions**
-> PaginatedResponseWorkflowDefinitionResponse list_workflow_definitions(mine=mine, search=search, sort_by=sort_by, sort_dir=sort_dir, is_template=is_template, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
+> PaginatedResponseWorkflowDefinitionResponse list_workflow_definitions(mine=mine, search=search, sort_by=sort_by, sort_dir=sort_dir, is_template=is_template, needs_approval=needs_approval, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
 
 List Workflow Definitions Handler
 
@@ -517,6 +517,7 @@ with ksapi.ApiClient(configuration) as api_client:
     sort_by = ksapi.WorkflowDefinitionOrder() # WorkflowDefinitionOrder | Field to sort definitions by (default: CREATED_AT) (optional)
     sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
     is_template = False # bool |  (optional) (default to False)
+    needs_approval = False # bool | Only definitions with a run awaiting approval. (optional) (default to False)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
     created_after = '2013-10-20T19:20:30+01:00' # datetime | Only items created at or after this timestamp (inclusive) (optional)
@@ -528,7 +529,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Workflow Definitions Handler
-        api_response = api_instance.list_workflow_definitions(mine=mine, search=search, sort_by=sort_by, sort_dir=sort_dir, is_template=is_template, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
+        api_response = api_instance.list_workflow_definitions(mine=mine, search=search, sort_by=sort_by, sort_dir=sort_dir, is_template=is_template, needs_approval=needs_approval, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
         print("The response of WorkflowDefinitionsApi->list_workflow_definitions:\n")
         pprint(api_response)
     except Exception as e:
@@ -547,6 +548,7 @@ Name | Type | Description  | Notes
  **sort_by** | [**WorkflowDefinitionOrder**](.md)| Field to sort definitions by (default: CREATED_AT) | [optional] 
  **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
  **is_template** | **bool**|  | [optional] [default to False]
+ **needs_approval** | **bool**| Only definitions with a run awaiting approval. | [optional] [default to False]
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
  **created_after** | **datetime**| Only items created at or after this timestamp (inclusive) | [optional] 

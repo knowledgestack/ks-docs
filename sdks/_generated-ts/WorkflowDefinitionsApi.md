@@ -408,7 +408,7 @@ example().catch(console.error);
 
 ## listWorkflowDefinitions
 
-> PaginatedResponseWorkflowDefinitionResponse listWorkflowDefinitions(mine, search, sortBy, sortDir, isTemplate, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, includeTagIds, excludeTagIds)
+> PaginatedResponseWorkflowDefinitionResponse listWorkflowDefinitions(mine, search, sortBy, sortDir, isTemplate, needsApproval, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, includeTagIds, excludeTagIds)
 
 List Workflow Definitions Handler
 
@@ -442,6 +442,8 @@ async function example() {
     sortDir: ...,
     // boolean (optional)
     isTemplate: true,
+    // boolean | Only definitions with a run awaiting approval. (optional)
+    needsApproval: true,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -482,6 +484,7 @@ example().catch(console.error);
 | **sortBy** | `WorkflowDefinitionOrder` | Field to sort definitions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, UPDATED_AT, NAME] |
 | **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **isTemplate** | `boolean` |  | [Optional] [Defaults to `false`] |
+| **needsApproval** | `boolean` | Only definitions with a run awaiting approval. | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 | **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |

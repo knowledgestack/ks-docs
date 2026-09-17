@@ -1012,6 +1012,7 @@ example().catch(console.error);
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
 | **202** | Crawl accepted; it runs in the background |  -  |
+| **409** | This connector\&#39;s crawl is already running |  -  |
 | **422** | Validation Error |  -  |
 | **0** | Error response. |  -  |
 

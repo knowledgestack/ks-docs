@@ -7,6 +7,7 @@ Request body for POST /v1/agent/ask.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **prompt** | **str** | User prompt passed directly to the agent | 
+**output_language** | [**SupportedLanguage**](SupportedLanguage.md) |  | [optional] 
 
 ## Example
 

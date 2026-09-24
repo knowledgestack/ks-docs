@@ -8,6 +8,7 @@ Name | Type
 ------------ | -------------
 `inputText` | string
 `fastMode` | boolean
+`outputLanguage` | [SupportedLanguage](SupportedLanguage.md)
 
 ## Example
 
@@ -18,6 +19,7 @@ import type { UserMessageRequest } from '@knowledge-stack/ksapi'
 const example = {
   "inputText": null,
   "fastMode": null,
+  "outputLanguage": null,
 } satisfies UserMessageRequest
 
 console.log(example)

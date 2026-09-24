@@ -108,6 +108,9 @@ answer = AgentApi(client).agent_ask(AskRequest(prompt="What are the renewal term
 print(answer.text)
 ```
 
+The answer is written in the tenant's configured language. Pass
+`output_language="en"` or `"zh"` to choose it for one request.
+
 Citation-grounded, multi-turn chat runs through **threads**; each assistant
 message exposes `content.citations`. Stream those tokens live below.
 

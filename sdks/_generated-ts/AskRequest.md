@@ -8,6 +8,7 @@ Request body for POST /v1/agent/ask.
 Name | Type
 ------------ | -------------
 `prompt` | string
+`outputLanguage` | [SupportedLanguage](SupportedLanguage.md)
 
 ## Example
 
@@ -17,6 +18,7 @@ import type { AskRequest } from '@knowledge-stack/ksapi'
 // TODO: Update the object below with actual values
 const example = {
   "prompt": Summarize the latest version of the Q3 vendor contract.,
+  "outputLanguage": null,
 } satisfies AskRequest
 
 console.log(example)

@@ -9,13 +9,14 @@ Name | Type | Description | Notes
 **status** | [**PipelineStatus**](PipelineStatus.md) |  | 
 **last_run_timestamp** | **datetime** | Timestamp of the last pipeline execution attempt (set once when a run starts) | [optional] 
 **last_state_update_timestamp** | **datetime** | Timestamp of the last pipeline state change (set by activities) | [optional] 
-**last_activity** | **str** | Name of the last activity that executed (e.g., &#39;document_preparation&#39;) | [optional] 
+**last_activity** | **str** | Name of the last activity that executed (e.g., &#39;pdf_preparation_activity&#39;) | [optional] 
 **error** | **str** | Error message if pipeline failed | [optional] 
 **temporal_workflow_id** | **str** | Temporal workflow ID for tracking the ingestion run | [optional] 
 **chunks_processed** | **int** | Number of chunks processed (for progress tracking) | [optional] 
 **page_dpi** | **int** | DPI used for PDF page screenshots during ingestion | [optional] 
 **ingestion_mode** | [**IngestionMode**](IngestionMode.md) |  | [optional] 
 **chunk_type** | [**ChunkType**](ChunkType.md) |  | [optional] 
+**secondary_taxonomy** | [**ImageTaxonomy**](ImageTaxonomy.md) |  | [optional] 
 
 ## Example
 

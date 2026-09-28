@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **extension** | **str** |  | 
 **content_type** | **str** |  | 
+**max_bytes** | **int** | Largest file of this format the buffered uploads accept (new document, new version, ZIP member, workflow-run file). A new audio/video document uses the resumable upload, capped at upload.max_media_bytes | 
 
 ## Example
 

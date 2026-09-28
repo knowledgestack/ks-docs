@@ -10,9 +10,6 @@ Name | Type
 `workflowId` | string
 `documentId` | string
 `documentVersionId` | string
-`folderId` | string
-`attachmentCount` | number
-`attachmentWorkflowId` | string
 
 ## Example
 
@@ -24,9 +21,6 @@ const example = {
   "workflowId": null,
   "documentId": null,
   "documentVersionId": null,
-  "folderId": null,
-  "attachmentCount": null,
-  "attachmentWorkflowId": null,
 } satisfies IngestDocumentResponse
 
 console.log(example)

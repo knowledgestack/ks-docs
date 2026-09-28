@@ -732,7 +732,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **ingest_document**
-> IngestDocumentResponse ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, email_nesting_depth=email_nesting_depth, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
+> IngestDocumentResponse ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
 
 Ingest Document Handler
 
@@ -788,7 +788,6 @@ with ksapi.ApiClient(configuration) as api_client:
     name = 'name_example' # str | Document name (defaults to filename) (optional)
     tag_ids = None # List[UUID] | Tag IDs applied to the created document. (optional)
     idempotency_key = 'idempotency_key_example' # str | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. (optional)
-    email_nesting_depth = 0 # int | Internal: set by the email member fan-out when a nested email re-enters this endpoint. Leave at 0 for direct uploads. (optional) (default to 0)
     ingestion_mode = ksapi.IngestionMode() # IngestionMode |  (optional)
     chunk_type = ksapi.ChunkType() # ChunkType |  (optional)
     secondary_taxonomy = ksapi.ImageTaxonomy() # ImageTaxonomy |  (optional)
@@ -798,7 +797,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Ingest Document Handler
-        api_response = api_instance.ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, email_nesting_depth=email_nesting_depth, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
+        api_response = api_instance.ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
         print("The response of DocumentsApi->ingest_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -817,7 +816,6 @@ Name | Type | Description  | Notes
  **name** | **str**| Document name (defaults to filename) | [optional] 
  **tag_ids** | [**List[UUID]**](UUID.md)| Tag IDs applied to the created document. | [optional] 
  **idempotency_key** | **str**| Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. | [optional] 
- **email_nesting_depth** | **int**| Internal: set by the email member fan-out when a nested email re-enters this endpoint. Leave at 0 for direct uploads. | [optional] [default to 0]
  **ingestion_mode** | [**IngestionMode**](IngestionMode.md)|  | [optional] 
  **chunk_type** | [**ChunkType**](ChunkType.md)|  | [optional] 
  **secondary_taxonomy** | [**ImageTaxonomy**](ImageTaxonomy.md)|  | [optional] 
@@ -859,6 +857,9 @@ Requires an active document checkout held by the caller. Acquire one via
 ``POST /v1/documents/{id}/checkout`` first and release it after; otherwise
 this returns 409 Conflict ("A document checkout is required to edit this
 document.").
+
+The file must be the document's type (a PDF document takes only PDF
+versions; ``.md`` and ``.txt`` are both PLAINTEXT); any other type is a 400.
 
 Creates a new document version (incrementing the highest version number),
 uploads the file to S3, and starts the ingestion workflow. Upon successful

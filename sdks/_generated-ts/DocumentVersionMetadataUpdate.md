@@ -24,7 +24,6 @@ Name | Type
 `durationMs` | number
 `language` | string
 `segmentCount` | number
-`email` | [EmailMetadata](EmailMetadata.md)
 `totalFormulas` | number
 `xlsxParseResultS3` | string
 `xlsxNamedRanges` | Array&lt;{ [key: string]: any; }&gt;
@@ -61,7 +60,6 @@ const example = {
   "durationMs": null,
   "language": null,
   "segmentCount": null,
-  "email": null,
   "totalFormulas": null,
   "xlsxParseResultS3": null,
   "xlsxNamedRanges": null,

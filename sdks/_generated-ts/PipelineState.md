@@ -17,6 +17,7 @@ Name | Type
 `pageDpi` | number
 `ingestionMode` | [IngestionMode](IngestionMode.md)
 `chunkType` | [ChunkType](ChunkType.md)
+`secondaryTaxonomy` | [ImageTaxonomy](ImageTaxonomy.md)
 
 ## Example
 
@@ -35,6 +36,7 @@ const example = {
   "pageDpi": null,
   "ingestionMode": null,
   "chunkType": null,
+  "secondaryTaxonomy": null,
 } satisfies PipelineState
 
 console.log(example)

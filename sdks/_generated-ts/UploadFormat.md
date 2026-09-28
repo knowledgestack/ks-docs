@@ -8,6 +8,7 @@ Name | Type
 ------------ | -------------
 `extension` | string
 `contentType` | string
+`maxBytes` | number
 
 ## Example
 
@@ -18,6 +19,7 @@ import type { UploadFormat } from '@knowledge-stack/ksapi'
 const example = {
   "extension": null,
   "contentType": null,
+  "maxBytes": null,
 } satisfies UploadFormat
 
 console.log(example)

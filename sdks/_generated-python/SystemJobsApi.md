@@ -371,11 +371,7 @@ Name | Type | Description  | Notes
 
 Get Zip Ingestion Status Handler
 
-Get a fan-out's live status + per-member outcomes.
-
-Serves both container fan-outs: a ZIP archive's members and an email's
-attachments. Both expose the same ``results`` query, so one endpoint covers
-them rather than duplicating the tenant check and hydration.
+Get a ZIP fan-out's live status + per-member outcomes.
 
 Tenant-scoped via the TenantId search attribute (no per-path can_read check —
 intentionally consistent with the sibling generic Temporal endpoints below;

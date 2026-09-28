@@ -627,7 +627,7 @@ example().catch(console.error);
 
 ## ingestDocument
 
-> IngestDocumentResponse ingestDocument(file, pathPartId, name, tagIds, idempotencyKey, emailNestingDepth, ingestionMode, chunkType, secondaryTaxonomy, pageDpi, workflowRunId, workflowDefinitionId)
+> IngestDocumentResponse ingestDocument(file, pathPartId, name, tagIds, idempotencyKey, ingestionMode, chunkType, secondaryTaxonomy, pageDpi, workflowRunId, workflowDefinitionId)
 
 Ingest Document Handler
 
@@ -663,8 +663,6 @@ async function example() {
     tagIds: ...,
     // string | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. (optional)
     idempotencyKey: idempotencyKey_example,
-    // number | Internal: set by the email member fan-out when a nested email re-enters this endpoint. Leave at 0 for direct uploads. (optional)
-    emailNestingDepth: 56,
     // IngestionMode (optional)
     ingestionMode: ...,
     // ChunkType (optional)
@@ -701,7 +699,6 @@ example().catch(console.error);
 | **name** | `string` | Document name (defaults to filename) | [Optional] [Defaults to `undefined`] |
 | **tagIds** | `Array<string>` | Tag IDs applied to the created document. | [Optional] |
 | **idempotencyKey** | `string` | Opt-in key: a repeat with the same key at the same (parent, name) replays the existing document instead of a 409. | [Optional] [Defaults to `undefined`] |
-| **emailNestingDepth** | `number` | Internal: set by the email member fan-out when a nested email re-enters this endpoint. Leave at 0 for direct uploads. | [Optional] [Defaults to `0`] |
 | **ingestionMode** | `IngestionMode` |  | [Optional] [Defaults to `undefined`] [Enum: high_accuracy, standard, single_chunk, media] |
 | **chunkType** | `ChunkType` |  | [Optional] [Defaults to `undefined`] [Enum: TEXT, TABLE, IMAGE, HTML, UNKNOWN] |
 | **secondaryTaxonomy** | `ImageTaxonomy` |  | [Optional] [Defaults to `undefined`] [Enum: picture, slide, flowchart] |
@@ -739,7 +736,7 @@ example().catch(console.error);
 
 Ingest Document Version Handler
 
-Upload a new file for an existing document, creating a new version and triggering ingestion.  Requires an active document checkout held by the caller. Acquire one via &#x60;&#x60;POST /v1/documents/{id}/checkout&#x60;&#x60; first and release it after; otherwise this returns 409 Conflict (\&quot;A document checkout is required to edit this document.\&quot;).  Creates a new document version (incrementing the highest version number), uploads the file to S3, and starts the ingestion workflow. Upon successful ingestion, the new version is automatically activated (set as the document\&#39;s active_version) and the old version\&#39;s Qdrant points are deactivated.  Returns 201 immediately with the Temporal &#x60;&#x60;workflow_id&#x60;&#x60;. Ingestion runs in the background — poll &#x60;&#x60;GET /v1/system-jobs/document_versions/{workflow_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;status&#x60;&#x60; is terminal.
+Upload a new file for an existing document, creating a new version and triggering ingestion.  Requires an active document checkout held by the caller. Acquire one via &#x60;&#x60;POST /v1/documents/{id}/checkout&#x60;&#x60; first and release it after; otherwise this returns 409 Conflict (\&quot;A document checkout is required to edit this document.\&quot;).  The file must be the document\&#39;s type (a PDF document takes only PDF versions; &#x60;&#x60;.md&#x60;&#x60; and &#x60;&#x60;.txt&#x60;&#x60; are both PLAINTEXT); any other type is a 400.  Creates a new document version (incrementing the highest version number), uploads the file to S3, and starts the ingestion workflow. Upon successful ingestion, the new version is automatically activated (set as the document\&#39;s active_version) and the old version\&#39;s Qdrant points are deactivated.  Returns 201 immediately with the Temporal &#x60;&#x60;workflow_id&#x60;&#x60;. Ingestion runs in the background — poll &#x60;&#x60;GET /v1/system-jobs/document_versions/{workflow_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;status&#x60;&#x60; is terminal.
 
 ### Example
 

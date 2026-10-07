@@ -4,12 +4,80 @@ All URIs are relative to *http://localhost:8000*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**deleteMyAvatar**](UsersApi.md#deletemyavatar) | **DELETE** /v1/users/me/avatar | Delete My Avatar Handler |
 | [**getMe**](UsersApi.md#getme) | **GET** /v1/users/me | Get Me Handler |
 | [**skipOnboarding**](UsersApi.md#skiponboarding) | **POST** /v1/users/me/onboarding/skip | Skip Onboarding Handler |
 | [**updateMe**](UsersApi.md#updateme) | **PATCH** /v1/users | Update Me Handler |
 | [**updateOnboardingCompany**](UsersApi.md#updateonboardingcompany) | **PATCH** /v1/users/me/onboarding/company | Update Onboarding Company Handler |
 | [**updateOnboardingProfile**](UsersApi.md#updateonboardingprofile) | **PATCH** /v1/users/me/onboarding/profile | Update Onboarding Profile Handler |
+| [**uploadMyAvatar**](UsersApi.md#uploadmyavatar) | **POST** /v1/users/me/avatar | Upload My Avatar Handler |
 
+
+
+## deleteMyAvatar
+
+> UserResponse deleteMyAvatar()
+
+Delete My Avatar Handler
+
+Remove the profile photo for the current tenant. No photo is a no-op.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  UsersApi,
+} from '@knowledge-stack/ksapi';
+import type { DeleteMyAvatarRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UsersApi(config);
+
+  try {
+    const data = await api.deleteMyAvatar();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**UserResponse**](UserResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## getMe
@@ -150,7 +218,7 @@ This endpoint does not need any parameter.
 
 Update Me Handler
 
-Update the user\&#39;s profile (default tenant, name fields).  When updating default_tenant_id, the user must belong to the specified tenant.
+Update the user\&#39;s name and default tenant, and the membership\&#39;s profile.  When updating default_tenant_id, the user must belong to the specified tenant.
 
 ### Example
 
@@ -300,7 +368,7 @@ example().catch(console.error);
 
 Update Onboarding Profile Handler
 
-Step 2 (final) of onboarding: per-user profile for the current tenant.  Writes name to the User row (global) and job_title to the TenantUser row (per-tenant), then stamps &#x60;&#x60;onboarding_completed_at&#x60;&#x60; on the membership. Returns 409 if onboarding has already been completed or skipped — post-onboarding edits go through PATCH /v1/users (name) or a future per-membership profile endpoint (job_title).
+Step 2 (final) of onboarding: per-user profile for the current tenant.  Writes name to the User row (global) and job_title to the TenantUser row (per-tenant), then stamps &#x60;&#x60;onboarding_completed_at&#x60;&#x60; on the membership. Returns 409 if onboarding has already been completed or skipped — post-onboarding edits go through PATCH /v1/users.
 
 ### Example
 
@@ -356,6 +424,81 @@ example().catch(console.error);
 ### HTTP request headers
 
 - **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## uploadMyAvatar
+
+> UserResponse uploadMyAvatar(file)
+
+Upload My Avatar Handler
+
+Set the profile photo for the current tenant. PNG, JPEG, WebP or GIF, at most 2 MB and 4096 px per side; the format is read from the bytes, not the content type.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  UsersApi,
+} from '@knowledge-stack/ksapi';
+import type { UploadMyAvatarRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UsersApi(config);
+
+  const body = {
+    // Blob
+    file: BINARY_DATA_HERE,
+  } satisfies UploadMyAvatarRequest;
+
+  try {
+    const data = await api.uploadMyAvatar(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **file** | `Blob` |  | [Defaults to `undefined`] |
+
+### Return type
+
+[**UserResponse**](UserResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `multipart/form-data`
 - **Accept**: `application/json`
 
 

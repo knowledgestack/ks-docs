@@ -4,12 +4,96 @@ All URIs are relative to *http://localhost:8000*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**delete_my_avatar**](UsersApi.md#delete_my_avatar) | **DELETE** /v1/users/me/avatar | Delete My Avatar Handler
 [**get_me**](UsersApi.md#get_me) | **GET** /v1/users/me | Get Me Handler
 [**skip_onboarding**](UsersApi.md#skip_onboarding) | **POST** /v1/users/me/onboarding/skip | Skip Onboarding Handler
 [**update_me**](UsersApi.md#update_me) | **PATCH** /v1/users | Update Me Handler
 [**update_onboarding_company**](UsersApi.md#update_onboarding_company) | **PATCH** /v1/users/me/onboarding/company | Update Onboarding Company Handler
 [**update_onboarding_profile**](UsersApi.md#update_onboarding_profile) | **PATCH** /v1/users/me/onboarding/profile | Update Onboarding Profile Handler
+[**upload_my_avatar**](UsersApi.md#upload_my_avatar) | **POST** /v1/users/me/avatar | Upload My Avatar Handler
 
+
+# **delete_my_avatar**
+> UserResponse delete_my_avatar()
+
+Delete My Avatar Handler
+
+Remove the profile photo for the current tenant. No photo is a no-op.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.user_response import UserResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.UsersApi(api_client)
+
+    try:
+        # Delete My Avatar Handler
+        api_response = api_instance.delete_my_avatar()
+        print("The response of UsersApi->delete_my_avatar:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UsersApi->delete_my_avatar: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**UserResponse**](UserResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_me**
 > UserResponse get_me()
@@ -187,7 +271,7 @@ This endpoint does not need any parameter.
 
 Update Me Handler
 
-Update the user's profile (default tenant, name fields).
+Update the user's name and default tenant, and the membership's profile.
 
 When updating default_tenant_id, the user must belong to the specified tenant.
 
@@ -379,8 +463,7 @@ Step 2 (final) of onboarding: per-user profile for the current tenant.
 Writes name to the User row (global) and job_title to the TenantUser
 row (per-tenant), then stamps ``onboarding_completed_at`` on the
 membership. Returns 409 if onboarding has already been completed or
-skipped — post-onboarding edits go through PATCH /v1/users (name) or
-a future per-membership profile endpoint (job_title).
+skipped — post-onboarding edits go through PATCH /v1/users.
 
 ### Example
 
@@ -451,6 +534,93 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **upload_my_avatar**
+> UserResponse upload_my_avatar(file)
+
+Upload My Avatar Handler
+
+Set the profile photo for the current tenant. PNG, JPEG, WebP or GIF, at most 2 MB and 4096 px per side; the format is read from the bytes, not the content type.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.user_response import UserResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.UsersApi(api_client)
+    file = None # bytes | 
+
+    try:
+        # Upload My Avatar Handler
+        api_response = api_instance.upload_my_avatar(file)
+        print("The response of UsersApi->upload_my_avatar:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UsersApi->upload_my_avatar: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **file** | **bytes**|  | 
+
+### Return type
+
+[**UserResponse**](UserResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details

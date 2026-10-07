@@ -16,6 +16,9 @@ Name | Type
 `currentTenantRole` | [TenantUserRole](TenantUserRole.md)
 `defaultTenantId` | string
 `jobTitle` | string
+`department` | string
+`bio` | string
+`avatarUrl` | string
 `onboardingCompletedAt` | Date
 
 ## Example
@@ -35,6 +38,9 @@ const example = {
   "currentTenantRole": null,
   "defaultTenantId": null,
   "jobTitle": null,
+  "department": null,
+  "bio": null,
+  "avatarUrl": null,
   "onboardingCompletedAt": null,
 } satisfies UserResponse
 

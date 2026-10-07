@@ -9,6 +9,9 @@ Name | Type
 `defaultTenantId` | string
 `firstName` | string
 `lastName` | string
+`jobTitle` | string
+`department` | string
+`bio` | string
 
 ## Example
 
@@ -20,6 +23,9 @@ const example = {
   "defaultTenantId": null,
   "firstName": null,
   "lastName": null,
+  "jobTitle": null,
+  "department": null,
+  "bio": null,
 } satisfies UpdateUserRequest
 
 console.log(example)

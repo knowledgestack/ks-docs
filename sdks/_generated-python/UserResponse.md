@@ -15,6 +15,9 @@ Name | Type | Description | Notes
 **current_tenant_role** | [**TenantUserRole**](TenantUserRole.md) |  | 
 **default_tenant_id** | **UUID** | Default tenant ID the user shall be logged into | 
 **job_title** | **str** | User&#39;s job title at the current tenant (per-membership) | [optional] 
+**department** | **str** | User&#39;s department at the current tenant (per-membership) | [optional] 
+**bio** | **str** | What the user wrote about themselves at the current tenant. The chat agent reads it on every turn. | [optional] 
+**avatar_url** | **str** | Presigned URL of the user&#39;s profile photo at the current tenant. Expires after six hours; read GET /v1/users/me again for a fresh one. | [optional] 
 **onboarding_completed_at** | **datetime** | When the user finished onboarding for the current tenant. NULL &#x3D; wizard should be shown. | [optional] 
 
 ## Example

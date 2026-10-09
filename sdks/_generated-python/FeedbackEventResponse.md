@@ -11,8 +11,8 @@ Name | Type | Description | Notes
 **target_id** | **UUID** |  | 
 **user_id** | **UUID** |  | 
 **rating** | [**FeedbackRating**](FeedbackRating.md) |  | 
-**reason** | [**FeedbackReason**](FeedbackReason.md) |  | 
-**comment** | **str** |  | 
+**reason** | [**FeedbackReason**](FeedbackReason.md) |  | [optional] 
+**comment** | **str** |  | [optional] 
 **extra_metadata** | **Dict[str, object]** |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 

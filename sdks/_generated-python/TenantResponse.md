@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **UUID** | Tenant ID | 
 **name** | **str** | Tenant name | 
+**owner** | [**UserInfo**](UserInfo.md) | The tenant OWNER&#39;s name, so a member knows who can grant access. Null only when the tenant has no OWNER membership. | 
 **idp_config** | **Dict[str, object]** | External IdP configuration | [optional] 
 **settings** | [**TenantSettingsResponse**](TenantSettingsResponse.md) |  | 
 **branding** | [**TenantBrandingResponse**](TenantBrandingResponse.md) |  | [optional] 

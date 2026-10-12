@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **sms_login_enabled** | **bool** |  | 
 **default_frontend_language** | [**SupportedLanguage**](SupportedLanguage.md) |  | 
 **upload** | [**UploadConstraints**](UploadConstraints.md) |  | 
+**data_source_engines** | [**List[DataSourceEngine]**](DataSourceEngine.md) |  | 
 
 ## Example
 

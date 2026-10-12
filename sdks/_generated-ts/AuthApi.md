@@ -102,7 +102,7 @@ example().catch(console.error);
 
 ## createPasswordUser
 
-> UserResponse createPasswordUser(createPasswordUserRequest)
+> SignUpResponse createPasswordUser(createPasswordUserRequest)
 
 Create Password User Handler
 
@@ -145,7 +145,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**SignUpResponse**](SignUpResponse.md)
 
 ### Authorization
 
@@ -388,7 +388,7 @@ No authorization required
 
 ## initiateSso
 
-> SSOInitiateResponse initiateSso(provider, tenantId)
+> SSOInitiateResponse initiateSso(provider, inviteId, tenantId)
 
 Initiate Sso Handler
 
@@ -410,6 +410,8 @@ async function example() {
   const body = {
     // IdpType | Provider to initiate SSO with
     provider: ...,
+    // string | Invite to resolve if this sign-in creates the account; carried in the session to the callback like the OAuth state. (optional)
+    inviteId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | Tenant ID to initiate SSO with (optional)
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
   } satisfies InitiateSsoRequest;
@@ -432,6 +434,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **provider** | `IdpType` | Provider to initiate SSO with | [Defaults to `undefined`] [Enum: PASSWORD, GOOGLE, MICROSOFT, GITHUB, TENANT] |
+| **inviteId** | `string` | Invite to resolve if this sign-in creates the account; carried in the session to the callback like the OAuth state. | [Optional] [Defaults to `undefined`] |
 | **tenantId** | `string` | Tenant ID to initiate SSO with | [Optional] [Defaults to `undefined`] |
 
 ### Return type
@@ -460,7 +463,7 @@ No authorization required
 
 ## oauth2Callback
 
-> UserResponse oauth2Callback(provider, code, state, error, errorDescription, tenantId)
+> SignUpResponse oauth2Callback(provider, code, state, error, errorDescription, tenantId)
 
 Oauth2 Callback Handler
 
@@ -520,7 +523,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**SignUpResponse**](SignUpResponse.md)
 
 ### Authorization
 

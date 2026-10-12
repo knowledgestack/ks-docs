@@ -87,11 +87,11 @@ example().catch(console.error);
 
 ## listFeedback
 
-> PaginatedResponseFeedbackEventResponse listFeedback(targetType, targetId, rating, sortBy, sortDir, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseFeedbackEventResponse listFeedback(targetType, targetId, rating, mine, sortBy, sortDir, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
 
 List Feedback Handler
 
-List feedback entries with optional filters.  USER role: only returns their own feedback. OWNER/ADMIN role: returns feedback from all users.
+List feedback entries with optional filters.  USER role: only returns their own feedback. OWNER/ADMIN role: returns feedback from all users unless &#x60;mine&#x60; is set.
 
 ### Example
 
@@ -115,10 +115,12 @@ async function example() {
   const body = {
     // FeedbackTargetType (optional)
     targetType: ...,
-    // string (optional)
-    targetId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // Array<string> | Repeatable. Feedback on any of these targets, so a thread page reads every visible message\'s feedback in one call; more than 200 ids is a 422 (send the page you render, not the thread). (optional)
+    targetId: ...,
     // FeedbackRating (optional)
     rating: ...,
+    // boolean | Only the caller\'s own feedback, whatever their role, so an owner or admin reading a thread sees their own vote on each message. (optional)
+    mine: true,
     // FeedbackOrder | Field to sort feedback by (default: CREATED_AT) (optional)
     sortBy: ...,
     // SortDirection | Sort direction; overrides the field\'s natural default (optional)
@@ -155,8 +157,9 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **targetType** | `FeedbackTargetType` |  | [Optional] [Defaults to `undefined`] [Enum: THREAD, MESSAGE, DOCUMENT, DOCUMENT_VERSION, CHUNK] |
-| **targetId** | `string` |  | [Optional] [Defaults to `undefined`] |
+| **targetId** | `Array<string>` | Repeatable. Feedback on any of these targets, so a thread page reads every visible message\&#39;s feedback in one call; more than 200 ids is a 422 (send the page you render, not the thread). | [Optional] |
 | **rating** | `FeedbackRating` |  | [Optional] [Defaults to `undefined`] [Enum: UP, DOWN] |
+| **mine** | `boolean` | Only the caller\&#39;s own feedback, whatever their role, so an owner or admin reading a thread sees their own vote on each message. | [Optional] [Defaults to `false`] |
 | **sortBy** | `FeedbackOrder` | Field to sort feedback by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT] |
 | **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |

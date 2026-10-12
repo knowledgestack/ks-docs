@@ -6,10 +6,10 @@ All URIs are relative to *http://localhost:8000*
 |------------- | ------------- | -------------|
 | [**deleteMyAvatar**](UsersApi.md#deletemyavatar) | **DELETE** /v1/users/me/avatar | Delete My Avatar Handler |
 | [**getMe**](UsersApi.md#getme) | **GET** /v1/users/me | Get Me Handler |
+| [**requestAccess**](UsersApi.md#requestaccess) | **POST** /v1/users/me/access_requests | Request Access Handler |
 | [**skipOnboarding**](UsersApi.md#skiponboarding) | **POST** /v1/users/me/onboarding/skip | Skip Onboarding Handler |
 | [**updateMe**](UsersApi.md#updateme) | **PATCH** /v1/users | Update Me Handler |
-| [**updateOnboardingCompany**](UsersApi.md#updateonboardingcompany) | **PATCH** /v1/users/me/onboarding/company | Update Onboarding Company Handler |
-| [**updateOnboardingProfile**](UsersApi.md#updateonboardingprofile) | **PATCH** /v1/users/me/onboarding/profile | Update Onboarding Profile Handler |
+| [**updateOnboardingState**](UsersApi.md#updateonboardingstate) | **PATCH** /v1/users/me/onboarding | Update Onboarding State Handler |
 | [**uploadMyAvatar**](UsersApi.md#uploadmyavatar) | **POST** /v1/users/me/avatar | Upload My Avatar Handler |
 
 
@@ -126,6 +126,72 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**UserResponse**](UserResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## requestAccess
+
+> AccessRequestResponse requestAccess()
+
+Request Access Handler
+
+Email the owner and admins for access; one request per member per day.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  UsersApi,
+} from '@knowledge-stack/ksapi';
+import type { RequestAccessRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new UsersApi(config);
+
+  try {
+    const data = await api.requestAccess();
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**AccessRequestResponse**](AccessRequestResponse.md)
 
 ### Authorization
 
@@ -287,13 +353,11 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
-## updateOnboardingCompany
+## updateOnboardingState
 
-> UserResponse updateOnboardingCompany(onboardingCompanyRequest)
+> UserResponse updateOnboardingState(onboardingStateUpdate)
 
-Update Onboarding Company Handler
-
-Step 1 of onboarding: tenant-wide company info.  Writes &#x60;&#x60;industry&#x60;&#x60; and &#x60;&#x60;description&#x60;&#x60; into the current tenant\&#39;s settings JSONB. Restricted to OWNER and ADMIN — invited USERs see a pre-filled, read-only step on the frontend instead.  Does not mark onboarding complete; the user finishes via the profile step. Re-running while the wizard is still open overwrites prior values; once onboarding has been completed/skipped, this endpoint returns 409. Post-onboarding edits go through PATCH /v1/tenants/{id}.
+Update Onboarding State Handler
 
 ### Example
 
@@ -302,7 +366,7 @@ import {
   Configuration,
   UsersApi,
 } from '@knowledge-stack/ksapi';
-import type { UpdateOnboardingCompanyRequest } from '@knowledge-stack/ksapi';
+import type { UpdateOnboardingStateRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
@@ -315,12 +379,12 @@ async function example() {
   const api = new UsersApi(config);
 
   const body = {
-    // OnboardingCompanyRequest
-    onboardingCompanyRequest: ...,
-  } satisfies UpdateOnboardingCompanyRequest;
+    // OnboardingStateUpdate
+    onboardingStateUpdate: ...,
+  } satisfies UpdateOnboardingStateRequest;
 
   try {
-    const data = await api.updateOnboardingCompany(body);
+    const data = await api.updateOnboardingState(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -336,82 +400,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **onboardingCompanyRequest** | [OnboardingCompanyRequest](OnboardingCompanyRequest.md) |  | |
-
-### Return type
-
-[**UserResponse**](UserResponse.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: `application/json`
-- **Accept**: `application/json`
-
-
-### HTTP response details
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-| **200** | Successful Response |  -  |
-| **422** | Validation Error |  -  |
-| **0** | Error response. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
-
-
-## updateOnboardingProfile
-
-> UserResponse updateOnboardingProfile(onboardingProfileRequest)
-
-Update Onboarding Profile Handler
-
-Step 2 (final) of onboarding: per-user profile for the current tenant.  Writes name to the User row (global) and job_title to the TenantUser row (per-tenant), then stamps &#x60;&#x60;onboarding_completed_at&#x60;&#x60; on the membership. Returns 409 if onboarding has already been completed or skipped — post-onboarding edits go through PATCH /v1/users.
-
-### Example
-
-```ts
-import {
-  Configuration,
-  UsersApi,
-} from '@knowledge-stack/ksapi';
-import type { UpdateOnboardingProfileRequest } from '@knowledge-stack/ksapi';
-
-async function example() {
-  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const config = new Configuration({ 
-    // To configure API key authorization: cookieAuth
-    apiKey: "YOUR API KEY",
-    // Configure HTTP bearer authorization: bearerAuth
-    accessToken: "YOUR BEARER TOKEN",
-  });
-  const api = new UsersApi(config);
-
-  const body = {
-    // OnboardingProfileRequest
-    onboardingProfileRequest: ...,
-  } satisfies UpdateOnboardingProfileRequest;
-
-  try {
-    const data = await api.updateOnboardingProfile(body);
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Run the test
-example().catch(console.error);
-```
-
-### Parameters
-
-
-| Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **onboardingProfileRequest** | [OnboardingProfileRequest](OnboardingProfileRequest.md) |  | |
+| **onboardingStateUpdate** | [OnboardingStateUpdate](OnboardingStateUpdate.md) |  | |
 
 ### Return type
 

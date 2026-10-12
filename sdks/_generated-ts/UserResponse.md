@@ -20,6 +20,12 @@ Name | Type
 `bio` | string
 `avatarUrl` | string
 `onboardingCompletedAt` | Date
+`joinMethod` | [TenantUserJoinMethod](TenantUserJoinMethod.md)
+`onboardingState` | [OnboardingState](OnboardingState.md)
+`invitedBy` | [UserInfo](UserInfo.md)
+`addedBy` | [AddedBy](AddedBy.md)
+`idpManagedFields` | Array&lt;string&gt;
+`onboardingEnabled` | boolean
 
 ## Example
 
@@ -42,6 +48,12 @@ const example = {
   "bio": null,
   "avatarUrl": null,
   "onboardingCompletedAt": null,
+  "joinMethod": null,
+  "onboardingState": null,
+  "invitedBy": null,
+  "addedBy": null,
+  "idpManagedFields": null,
+  "onboardingEnabled": null,
 } satisfies UserResponse
 
 console.log(example)

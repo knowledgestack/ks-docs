@@ -116,7 +116,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **create_password_user**
-> UserResponse create_password_user(create_password_user_request)
+> SignUpResponse create_password_user(create_password_user_request)
 
 Create Password User Handler
 
@@ -126,7 +126,7 @@ Create Password User Handler
 ```python
 import ksapi
 from ksapi.models.create_password_user_request import CreatePasswordUserRequest
-from ksapi.models.user_response import UserResponse
+from ksapi.models.sign_up_response import SignUpResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -163,7 +163,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**SignUpResponse**](SignUpResponse.md)
 
 ### Authorization
 
@@ -417,7 +417,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **initiate_sso**
-> SSOInitiateResponse initiate_sso(provider, tenant_id=tenant_id)
+> SSOInitiateResponse initiate_sso(provider, invite_id=invite_id, tenant_id=tenant_id)
 
 Initiate Sso Handler
 
@@ -445,11 +445,12 @@ with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     provider = ksapi.IdpType() # IdpType | Provider to initiate SSO with
+    invite_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Invite to resolve if this sign-in creates the account; carried in the session to the callback like the OAuth state. (optional)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Tenant ID to initiate SSO with (optional)
 
     try:
         # Initiate Sso Handler
-        api_response = api_instance.initiate_sso(provider, tenant_id=tenant_id)
+        api_response = api_instance.initiate_sso(provider, invite_id=invite_id, tenant_id=tenant_id)
         print("The response of AuthApi->initiate_sso:\n")
         pprint(api_response)
     except Exception as e:
@@ -464,6 +465,7 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **provider** | [**IdpType**](.md)| Provider to initiate SSO with | 
+ **invite_id** | **UUID**| Invite to resolve if this sign-in creates the account; carried in the session to the callback like the OAuth state. | [optional] 
  **tenant_id** | **UUID**| Tenant ID to initiate SSO with | [optional] 
 
 ### Return type
@@ -490,7 +492,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **oauth2_callback**
-> UserResponse oauth2_callback(provider, code=code, state=state, error=error, error_description=error_description, tenant_id=tenant_id)
+> SignUpResponse oauth2_callback(provider, code=code, state=state, error=error, error_description=error_description, tenant_id=tenant_id)
 
 Oauth2 Callback Handler
 
@@ -502,7 +504,7 @@ Handle OAuth2 callback from the given OAuth client.
 ```python
 import ksapi
 from ksapi.models.idp_type import IdpType
-from ksapi.models.user_response import UserResponse
+from ksapi.models.sign_up_response import SignUpResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -549,7 +551,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**SignUpResponse**](SignUpResponse.md)
 
 ### Authorization
 

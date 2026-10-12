@@ -8,6 +8,7 @@ All URIs are relative to *http://localhost:8000*
 | [**createInvite**](InvitesApi.md#createinvite) | **POST** /v1/invites | Create Invite |
 | [**deleteInvite**](InvitesApi.md#deleteinvite) | **DELETE** /v1/invites/{invite_id} | Delete Invite |
 | [**listInvites**](InvitesApi.md#listinvites) | **GET** /v1/invites | List Invites Handler |
+| [**previewInvite**](InvitesApi.md#previewinvite) | **GET** /v1/invites/{invite_id}/preview | Preview Invite Handler |
 | [**updateInvite**](InvitesApi.md#updateinviteoperation) | **PATCH** /v1/invites/{invite_id} | Update Invite Handler |
 
 
@@ -328,6 +329,75 @@ example().catch(console.error);
 ### Authorization
 
 [cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## previewInvite
+
+> InvitePreviewResponse previewInvite(inviteId)
+
+Preview Invite Handler
+
+Unauthenticated; the invite id in the emailed link is the only credential.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  InvitesApi,
+} from '@knowledge-stack/ksapi';
+import type { PreviewInviteRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const api = new InvitesApi();
+
+  const body = {
+    // string
+    inviteId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies PreviewInviteRequest;
+
+  try {
+    const data = await api.previewInvite(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **inviteId** | `string` |  | [Defaults to `undefined`] |
+
+### Return type
+
+[**InvitePreviewResponse**](InvitePreviewResponse.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 

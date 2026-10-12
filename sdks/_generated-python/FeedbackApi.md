@@ -99,14 +99,14 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_feedback**
-> PaginatedResponseFeedbackEventResponse list_feedback(target_type=target_type, target_id=target_id, rating=rating, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+> PaginatedResponseFeedbackEventResponse list_feedback(target_type=target_type, target_id=target_id, rating=rating, mine=mine, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
 
 List Feedback Handler
 
 List feedback entries with optional filters.
 
 USER role: only returns their own feedback.
-OWNER/ADMIN role: returns feedback from all users.
+OWNER/ADMIN role: returns feedback from all users unless `mine` is set.
 
 ### Example
 
@@ -150,8 +150,9 @@ with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FeedbackApi(api_client)
     target_type = ksapi.FeedbackTargetType() # FeedbackTargetType |  (optional)
-    target_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID |  (optional)
+    target_id = None # List[UUID] | Repeatable. Feedback on any of these targets, so a thread page reads every visible message's feedback in one call; more than 200 ids is a 422 (send the page you render, not the thread). (optional)
     rating = ksapi.FeedbackRating() # FeedbackRating |  (optional)
+    mine = False # bool | Only the caller's own feedback, whatever their role, so an owner or admin reading a thread sees their own vote on each message. (optional) (default to False)
     sort_by = ksapi.FeedbackOrder() # FeedbackOrder | Field to sort feedback by (default: CREATED_AT) (optional)
     sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
@@ -163,7 +164,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Feedback Handler
-        api_response = api_instance.list_feedback(target_type=target_type, target_id=target_id, rating=rating, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = api_instance.list_feedback(target_type=target_type, target_id=target_id, rating=rating, mine=mine, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of FeedbackApi->list_feedback:\n")
         pprint(api_response)
     except Exception as e:
@@ -178,8 +179,9 @@ with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **target_type** | [**FeedbackTargetType**](.md)|  | [optional] 
- **target_id** | **UUID**|  | [optional] 
+ **target_id** | [**List[UUID]**](UUID.md)| Repeatable. Feedback on any of these targets, so a thread page reads every visible message&#39;s feedback in one call; more than 200 ids is a 422 (send the page you render, not the thread). | [optional] 
  **rating** | [**FeedbackRating**](.md)|  | [optional] 
+ **mine** | **bool**| Only the caller&#39;s own feedback, whatever their role, so an owner or admin reading a thread sees their own vote on each message. | [optional] [default to False]
  **sort_by** | [**FeedbackOrder**](.md)| Field to sort feedback by (default: CREATED_AT) | [optional] 
  **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]

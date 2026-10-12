@@ -6,10 +6,10 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**delete_my_avatar**](UsersApi.md#delete_my_avatar) | **DELETE** /v1/users/me/avatar | Delete My Avatar Handler
 [**get_me**](UsersApi.md#get_me) | **GET** /v1/users/me | Get Me Handler
+[**request_access**](UsersApi.md#request_access) | **POST** /v1/users/me/access_requests | Request Access Handler
 [**skip_onboarding**](UsersApi.md#skip_onboarding) | **POST** /v1/users/me/onboarding/skip | Skip Onboarding Handler
 [**update_me**](UsersApi.md#update_me) | **PATCH** /v1/users | Update Me Handler
-[**update_onboarding_company**](UsersApi.md#update_onboarding_company) | **PATCH** /v1/users/me/onboarding/company | Update Onboarding Company Handler
-[**update_onboarding_profile**](UsersApi.md#update_onboarding_profile) | **PATCH** /v1/users/me/onboarding/profile | Update Onboarding Profile Handler
+[**update_onboarding_state**](UsersApi.md#update_onboarding_state) | **PATCH** /v1/users/me/onboarding | Update Onboarding State Handler
 [**upload_my_avatar**](UsersApi.md#upload_my_avatar) | **POST** /v1/users/me/avatar | Upload My Avatar Handler
 
 
@@ -161,6 +161,88 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**UserResponse**](UserResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **request_access**
+> AccessRequestResponse request_access()
+
+Request Access Handler
+
+Email the owner and admins for access; one request per member per day.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.access_request_response import AccessRequestResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.UsersApi(api_client)
+
+    try:
+        # Request Access Handler
+        api_response = api_instance.request_access()
+        print("The response of UsersApi->request_access:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UsersApi->request_access: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**AccessRequestResponse**](AccessRequestResponse.md)
 
 ### Authorization
 
@@ -356,21 +438,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_onboarding_company**
-> UserResponse update_onboarding_company(onboarding_company_request)
+# **update_onboarding_state**
+> UserResponse update_onboarding_state(onboarding_state_update)
 
-Update Onboarding Company Handler
-
-Step 1 of onboarding: tenant-wide company info.
-
-Writes ``industry`` and ``description`` into the current tenant's
-settings JSONB. Restricted to OWNER and ADMIN — invited USERs see a
-pre-filled, read-only step on the frontend instead.
-
-Does not mark onboarding complete; the user finishes via the profile
-step. Re-running while the wizard is still open overwrites prior
-values; once onboarding has been completed/skipped, this endpoint
-returns 409. Post-onboarding edits go through PATCH /v1/tenants/{id}.
+Update Onboarding State Handler
 
 ### Example
 
@@ -379,7 +450,7 @@ returns 409. Post-onboarding edits go through PATCH /v1/tenants/{id}.
 
 ```python
 import ksapi
-from ksapi.models.onboarding_company_request import OnboardingCompanyRequest
+from ksapi.models.onboarding_state_update import OnboardingStateUpdate
 from ksapi.models.user_response import UserResponse
 from ksapi.rest import ApiException
 from pprint import pprint
@@ -410,15 +481,15 @@ configuration = ksapi.Configuration(
 with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
-    onboarding_company_request = ksapi.OnboardingCompanyRequest() # OnboardingCompanyRequest | 
+    onboarding_state_update = ksapi.OnboardingStateUpdate() # OnboardingStateUpdate | 
 
     try:
-        # Update Onboarding Company Handler
-        api_response = api_instance.update_onboarding_company(onboarding_company_request)
-        print("The response of UsersApi->update_onboarding_company:\n")
+        # Update Onboarding State Handler
+        api_response = api_instance.update_onboarding_state(onboarding_state_update)
+        print("The response of UsersApi->update_onboarding_state:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling UsersApi->update_onboarding_company: %s\n" % e)
+        print("Exception when calling UsersApi->update_onboarding_state: %s\n" % e)
 ```
 
 
@@ -428,100 +499,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **onboarding_company_request** | [**OnboardingCompanyRequest**](OnboardingCompanyRequest.md)|  | 
-
-### Return type
-
-[**UserResponse**](UserResponse.md)
-
-### Authorization
-
-[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-**0** | Error response. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_onboarding_profile**
-> UserResponse update_onboarding_profile(onboarding_profile_request)
-
-Update Onboarding Profile Handler
-
-Step 2 (final) of onboarding: per-user profile for the current tenant.
-
-Writes name to the User row (global) and job_title to the TenantUser
-row (per-tenant), then stamps ``onboarding_completed_at`` on the
-membership. Returns 409 if onboarding has already been completed or
-skipped — post-onboarding edits go through PATCH /v1/users.
-
-### Example
-
-* Api Key Authentication (cookieAuth):
-* Bearer Authentication (bearerAuth):
-
-```python
-import ksapi
-from ksapi.models.onboarding_profile_request import OnboardingProfileRequest
-from ksapi.models.user_response import UserResponse
-from ksapi.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to http://localhost:8000
-# See configuration.py for a list of all supported configuration parameters.
-configuration = ksapi.Configuration(
-    host = "http://localhost:8000"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: cookieAuth
-configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
-
-# Configure Bearer authorization: bearerAuth
-configuration = ksapi.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = ksapi.UsersApi(api_client)
-    onboarding_profile_request = ksapi.OnboardingProfileRequest() # OnboardingProfileRequest | 
-
-    try:
-        # Update Onboarding Profile Handler
-        api_response = api_instance.update_onboarding_profile(onboarding_profile_request)
-        print("The response of UsersApi->update_onboarding_profile:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling UsersApi->update_onboarding_profile: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **onboarding_profile_request** | [**OnboardingProfileRequest**](OnboardingProfileRequest.md)|  | 
+ **onboarding_state_update** | [**OnboardingStateUpdate**](OnboardingStateUpdate.md)|  | 
 
 ### Return type
 

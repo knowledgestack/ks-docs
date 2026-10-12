@@ -54,7 +54,7 @@ Below this line is auto-generated reference content.
 
 ---
 
-# @knowledge-stack/ksapi@3.11.0
+# @knowledge-stack/ksapi@3.12.0
 
 A TypeScript SDK client for the localhost API.
 
@@ -227,6 +227,7 @@ All URIs are relative to *http://localhost:8000*
 *InvitesApi* | [**createInvite**](docs/InvitesApi.md#createinvite) | **POST** /v1/invites | Create Invite
 *InvitesApi* | [**deleteInvite**](docs/InvitesApi.md#deleteinvite) | **DELETE** /v1/invites/{invite_id} | Delete Invite
 *InvitesApi* | [**listInvites**](docs/InvitesApi.md#listinvites) | **GET** /v1/invites | List Invites Handler
+*InvitesApi* | [**previewInvite**](docs/InvitesApi.md#previewinvite) | **GET** /v1/invites/{invite_id}/preview | Preview Invite Handler
 *InvitesApi* | [**updateInvite**](docs/InvitesApi.md#updateinviteoperation) | **PATCH** /v1/invites/{invite_id} | Update Invite Handler
 *MemoryApi* | [**approveMemoryProposal**](docs/MemoryApi.md#approvememoryproposal) | **POST** /v1/memory/proposals/{chunk_id}/approve | Approve Memory Proposal Handler
 *MemoryApi* | [**getMemoryBody**](docs/MemoryApi.md#getmemorybody) | **GET** /v1/memory/body | Get Memory Body Handler
@@ -332,10 +333,10 @@ All URIs are relative to *http://localhost:8000*
 *UserPermissionsApi* | [**updateUserPermission**](docs/UserPermissionsApi.md#updateuserpermission) | **PATCH** /v1/user-permissions/{permission_id} | Update User Permission Handler
 *UsersApi* | [**deleteMyAvatar**](docs/UsersApi.md#deletemyavatar) | **DELETE** /v1/users/me/avatar | Delete My Avatar Handler
 *UsersApi* | [**getMe**](docs/UsersApi.md#getme) | **GET** /v1/users/me | Get Me Handler
+*UsersApi* | [**requestAccess**](docs/UsersApi.md#requestaccess) | **POST** /v1/users/me/access_requests | Request Access Handler
 *UsersApi* | [**skipOnboarding**](docs/UsersApi.md#skiponboarding) | **POST** /v1/users/me/onboarding/skip | Skip Onboarding Handler
 *UsersApi* | [**updateMe**](docs/UsersApi.md#updateme) | **PATCH** /v1/users | Update Me Handler
-*UsersApi* | [**updateOnboardingCompany**](docs/UsersApi.md#updateonboardingcompany) | **PATCH** /v1/users/me/onboarding/company | Update Onboarding Company Handler
-*UsersApi* | [**updateOnboardingProfile**](docs/UsersApi.md#updateonboardingprofile) | **PATCH** /v1/users/me/onboarding/profile | Update Onboarding Profile Handler
+*UsersApi* | [**updateOnboardingState**](docs/UsersApi.md#updateonboardingstate) | **PATCH** /v1/users/me/onboarding | Update Onboarding State Handler
 *UsersApi* | [**uploadMyAvatar**](docs/UsersApi.md#uploadmyavatar) | **POST** /v1/users/me/avatar | Upload My Avatar Handler
 *WorkflowDefinitionsApi* | [**createWorkflowDefinition**](docs/WorkflowDefinitionsApi.md#createworkflowdefinitionoperation) | **POST** /v1/workflow-definitions | Create Workflow Definition Handler
 *WorkflowDefinitionsApi* | [**createWorkflowRun**](docs/WorkflowDefinitionsApi.md#createworkflowrun) | **POST** /v1/workflow-definitions/{definition_id}/runs | Create Workflow Run Handler
@@ -369,8 +370,10 @@ All URIs are relative to *http://localhost:8000*
 - [AcceptDisclaimerRequest](docs/AcceptDisclaimerRequest.md)
 - [AcceptInviteResponse](docs/AcceptInviteResponse.md)
 - [AccessCheckResponse](docs/AccessCheckResponse.md)
+- [AccessRequestResponse](docs/AccessRequestResponse.md)
 - [ActivateSkillVersionRequest](docs/ActivateSkillVersionRequest.md)
 - [AddMemberRequest](docs/AddMemberRequest.md)
+- [AddedBy](docs/AddedBy.md)
 - [AncestryResponse](docs/AncestryResponse.md)
 - [ApiAuthConfig](docs/ApiAuthConfig.md)
 - [ApiConnectionRequestRequest](docs/ApiConnectionRequestRequest.md)
@@ -524,6 +527,9 @@ All URIs are relative to *http://localhost:8000*
 - [GroupPermissionOrder](docs/GroupPermissionOrder.md)
 - [GroupPermissionResponse](docs/GroupPermissionResponse.md)
 - [GroupResponse](docs/GroupResponse.md)
+- [GuideModuleProgress](docs/GuideModuleProgress.md)
+- [GuideModuleStatus](docs/GuideModuleStatus.md)
+- [GuideModules](docs/GuideModules.md)
 - [HTTPValidationError](docs/HTTPValidationError.md)
 - [HealthCheckResponse](docs/HealthCheckResponse.md)
 - [HourHistogramResponse](docs/HourHistogramResponse.md)
@@ -543,6 +549,9 @@ All URIs are relative to *http://localhost:8000*
 - [InviteLinkSettingsRequest](docs/InviteLinkSettingsRequest.md)
 - [InviteLinkSettingsResponse](docs/InviteLinkSettingsResponse.md)
 - [InviteOrder](docs/InviteOrder.md)
+- [InvitePreviewResponse](docs/InvitePreviewResponse.md)
+- [InvitePreviewState](docs/InvitePreviewState.md)
+- [InviteRejection](docs/InviteRejection.md)
 - [InviteResponse](docs/InviteResponse.md)
 - [InviteStatus](docs/InviteStatus.md)
 - [InviteUserRequest](docs/InviteUserRequest.md)
@@ -569,8 +578,9 @@ All URIs are relative to *http://localhost:8000*
 - [ModelTableResult](docs/ModelTableResult.md)
 - [NetworkClass](docs/NetworkClass.md)
 - [NonFilesystemReferenceType](docs/NonFilesystemReferenceType.md)
-- [OnboardingCompanyRequest](docs/OnboardingCompanyRequest.md)
-- [OnboardingProfileRequest](docs/OnboardingProfileRequest.md)
+- [OnboardingState](docs/OnboardingState.md)
+- [OnboardingStateUpdate](docs/OnboardingStateUpdate.md)
+- [OnboardingStep](docs/OnboardingStep.md)
 - [PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat](docs/PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat.md)
 - [PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator](docs/PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator.md)
 - [PaginatedResponseBillingPaymentResponse](docs/PaginatedResponseBillingPaymentResponse.md)
@@ -654,6 +664,7 @@ All URIs are relative to *http://localhost:8000*
 - [SetWorkflowRunApprovalRequest](docs/SetWorkflowRunApprovalRequest.md)
 - [SheetVisibilityChange](docs/SheetVisibilityChange.md)
 - [SignInRequest](docs/SignInRequest.md)
+- [SignUpResponse](docs/SignUpResponse.md)
 - [SkillFile](docs/SkillFile.md)
 - [SkillOrder](docs/SkillOrder.md)
 - [SkillResponse](docs/SkillResponse.md)
@@ -687,6 +698,7 @@ All URIs are relative to *http://localhost:8000*
 - [TenantSettingsUpdate](docs/TenantSettingsUpdate.md)
 - [TenantSubscriptionResponse](docs/TenantSubscriptionResponse.md)
 - [TenantUserEditRequest](docs/TenantUserEditRequest.md)
+- [TenantUserJoinMethod](docs/TenantUserJoinMethod.md)
 - [TenantUserOrder](docs/TenantUserOrder.md)
 - [TenantUserResponse](docs/TenantUserResponse.md)
 - [TenantUserRole](docs/TenantUserRole.md)
@@ -796,7 +808,7 @@ and is automatically generated by the
 [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `0.1.0`
-- Package version: `3.11.0`
+- Package version: `3.12.0`
 - Generator version: `7.21.0`
 - Build package: `org.openapitools.codegen.languages.TypeScriptFetchClientCodegen`
 

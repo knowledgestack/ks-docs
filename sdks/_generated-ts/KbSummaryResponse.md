@@ -10,6 +10,7 @@ Name | Type
 `documentsTotal` | number
 `documentsByOrigin` | { [key: string]: number; }
 `documentsByType` | { [key: string]: number; }
+`documentsByIngestionStatus` | { [key: string]: number; }
 `documentVersionsTotal` | number
 `chunksTotal` | number
 `chunksByType` | { [key: string]: number; }
@@ -35,6 +36,7 @@ const example = {
   "documentsTotal": null,
   "documentsByOrigin": null,
   "documentsByType": null,
+  "documentsByIngestionStatus": null,
   "documentVersionsTotal": null,
   "chunksTotal": null,
   "chunksByType": null,

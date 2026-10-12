@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**create_invite**](InvitesApi.md#create_invite) | **POST** /v1/invites | Create Invite
 [**delete_invite**](InvitesApi.md#delete_invite) | **DELETE** /v1/invites/{invite_id} | Delete Invite
 [**list_invites**](InvitesApi.md#list_invites) | **GET** /v1/invites | List Invites Handler
+[**preview_invite**](InvitesApi.md#preview_invite) | **GET** /v1/invites/{invite_id}/preview | Preview Invite Handler
 [**update_invite**](InvitesApi.md#update_invite) | **PATCH** /v1/invites/{invite_id} | Update Invite Handler
 
 
@@ -388,6 +389,76 @@ Name | Type | Description  | Notes
 ### Authorization
 
 [cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **preview_invite**
+> InvitePreviewResponse preview_invite(invite_id)
+
+Preview Invite Handler
+
+Unauthenticated; the invite id in the emailed link is the only credential.
+
+### Example
+
+
+```python
+import ksapi
+from ksapi.models.invite_preview_response import InvitePreviewResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+
+# Enter a context with an instance of the API client
+with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.InvitesApi(api_client)
+    invite_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+
+    try:
+        # Preview Invite Handler
+        api_response = api_instance.preview_invite(invite_id)
+        print("The response of InvitesApi->preview_invite:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InvitesApi->preview_invite: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **invite_id** | **UUID**|  | 
+
+### Return type
+
+[**InvitePreviewResponse**](InvitePreviewResponse.md)
+
+### Authorization
+
+No authorization required
 
 ### HTTP request headers
 

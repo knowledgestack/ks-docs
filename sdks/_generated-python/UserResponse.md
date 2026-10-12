@@ -19,6 +19,12 @@ Name | Type | Description | Notes
 **bio** | **str** | What the user wrote about themselves at the current tenant. The chat agent reads it on every turn. | [optional] 
 **avatar_url** | **str** | Presigned URL of the user&#39;s profile photo at the current tenant. Expires after six hours; read GET /v1/users/me again for a fresh one. | [optional] 
 **onboarding_completed_at** | **datetime** | When the user finished onboarding for the current tenant. NULL &#x3D; wizard should be shown. | [optional] 
+**join_method** | [**TenantUserJoinMethod**](TenantUserJoinMethod.md) |  | 
+**onboarding_state** | [**OnboardingState**](OnboardingState.md) | Resume step and guide progress for the current membership. | [optional] 
+**invited_by** | [**UserInfo**](UserInfo.md) | Who sent the accepted invite that created the current membership. NULL when the membership did not come from an email invite, and on the sign-in and sign-up responses; read it from GET /v1/users/me. | [optional] 
+**added_by** | [**AddedBy**](AddedBy.md) |  | [optional] 
+**idp_managed_fields** | **List[str]** | Profile fields the identity provider overwrites on every sync, so clients render them read-only. Empty unless directory-managed. | [optional] 
+**onboarding_enabled** | **bool** | The current tenant&#39;s onboarding switch: true forces the flow on, false hides it, NULL follows the deployment default. | [optional] 
 
 ## Example
 

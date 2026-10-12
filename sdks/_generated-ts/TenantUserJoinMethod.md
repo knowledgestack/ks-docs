@@ -1,25 +1,20 @@
 
-# OnboardingCompanyRequest
+# TenantUserJoinMethod
 
-Step 1 of onboarding — tenant-wide company info. OWNER/ADMIN only.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`description` | string
-`industry` | string
 
 ## Example
 
 ```typescript
-import type { OnboardingCompanyRequest } from '@knowledge-stack/ksapi'
+import type { TenantUserJoinMethod } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "description": null,
-  "industry": null,
-} satisfies OnboardingCompanyRequest
+} satisfies TenantUserJoinMethod
 
 console.log(example)
 
@@ -28,7 +23,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as OnboardingCompanyRequest
+const exampleParsed = JSON.parse(exampleJSON) as TenantUserJoinMethod
 console.log(exampleParsed)
 ```
 

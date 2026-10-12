@@ -12,6 +12,7 @@ Name | Type
 `smsLoginEnabled` | boolean
 `defaultFrontendLanguage` | [SupportedLanguage](SupportedLanguage.md)
 `upload` | [UploadConstraints](UploadConstraints.md)
+`dataSourceEngines` | [Array&lt;DataSourceEngine&gt;](DataSourceEngine.md)
 
 ## Example
 
@@ -26,6 +27,7 @@ const example = {
   "smsLoginEnabled": null,
   "defaultFrontendLanguage": null,
   "upload": null,
+  "dataSourceEngines": null,
 } satisfies FeaturesResponse
 
 console.log(example)

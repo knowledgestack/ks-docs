@@ -10,6 +10,7 @@ Name | Type
 `emailToken` | string
 `firstName` | string
 `lastName` | string
+`inviteId` | string
 
 ## Example
 
@@ -22,6 +23,7 @@ const example = {
   "emailToken": null,
   "firstName": null,
   "lastName": null,
+  "inviteId": null,
 } satisfies CreatePasswordUserRequest
 
 console.log(example)

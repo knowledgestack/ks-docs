@@ -9,6 +9,7 @@ Name | Type
 ------------ | -------------
 `id` | string
 `name` | string
+`owner` | [UserInfo](UserInfo.md)
 `idpConfig` | { [key: string]: any; }
 `settings` | [TenantSettingsResponse](TenantSettingsResponse.md)
 `branding` | [TenantBrandingResponse](TenantBrandingResponse.md)
@@ -24,6 +25,7 @@ import type { TenantResponse } from '@knowledge-stack/ksapi'
 const example = {
   "id": null,
   "name": null,
+  "owner": null,
   "idpConfig": null,
   "settings": null,
   "branding": null,

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **email_token** | **str** | Email verification token | 
 **first_name** | **str** | First name | [optional] 
 **last_name** | **str** | Last name | [optional] 
+**invite_id** | **UUID** | Invite to resolve before any workspace is provisioned. When it is valid for the verified email the account joins that tenant only; otherwise sign-up proceeds as usual and invite_rejection says why. | [optional] 
 
 ## Example
 

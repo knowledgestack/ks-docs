@@ -1,27 +1,22 @@
 
-# OnboardingProfileRequest
+# AccessRequestResponse
 
-Step 2 of onboarding — per-user info for the current tenant.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`firstName` | string
-`lastName` | string
-`jobTitle` | string
+`requestedAt` | Date
 
 ## Example
 
 ```typescript
-import type { OnboardingProfileRequest } from '@knowledge-stack/ksapi'
+import type { AccessRequestResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "firstName": null,
-  "lastName": null,
-  "jobTitle": null,
-} satisfies OnboardingProfileRequest
+  "requestedAt": null,
+} satisfies AccessRequestResponse
 
 console.log(example)
 
@@ -30,7 +25,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as OnboardingProfileRequest
+const exampleParsed = JSON.parse(exampleJSON) as AccessRequestResponse
 console.log(exampleParsed)
 ```
 

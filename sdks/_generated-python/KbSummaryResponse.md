@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **documents_total** | **int** |  | 
 **documents_by_origin** | **Dict[str, int]** | Live document count keyed by document_origin. | 
 **documents_by_type** | **Dict[str, int]** | Live document count keyed by document_type. | 
+**documents_by_ingestion_status** | **Dict[str, int]** | Live document count keyed by the active version&#39;s pipeline status (pending, processing, completed, failed, cancelled, quota_limit). Documents whose active version was never ingested are absent. | 
 **document_versions_total** | **int** |  | 
 **chunks_total** | **int** |  | 
 **chunks_by_type** | **Dict[str, int]** |  | 

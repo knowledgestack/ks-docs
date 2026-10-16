@@ -978,12 +978,14 @@ The whole archive nests under a single FOLDER named after the ZIP file
 (``report.zip`` -> ``report/``), with the ZIP's directory structure mirrored
 beneath it as FOLDER PathParts — all created synchronously. Returns 202 with
 the fan-out ``workflow_id`` (poll ``GET /v1/system-jobs/zip-ingestions/{workflow_id}``
-for per-member outcomes) plus the artifacts ``skipped`` during classification.
+for per-member outcomes). ``skipped`` carries OS artifacts (skipped) and the
+members rejected up front (nested archive, empty, over the size cap) as errors;
+with nothing left to ingest no workflow starts and ``workflow_id`` is null.
 
 Whole-archive failures (not a ZIP, zip-bomb, >500 files) return 400 before
 any DB writes; a re-upload whose ZIP-named folder already exists returns 409.
-Per-member failures (unsupported type, oversized) surface in the polled
-workflow results, not in this response. Each member reuses the single-file
+Failures of accepted members (for example an unsupported file type) surface
+in the polled workflow results, not in this response. Each member reuses the single-file
 ingest path, so run-enrollment and completion events fire per member there.
 
 ### Example

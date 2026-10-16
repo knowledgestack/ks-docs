@@ -8,11 +8,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **workflow_id** | **str** |  | 
 **document_id** | **UUID** |  | 
+**document_name** | **str** |  | 
+**materialized_path** | **str** | The document&#39;s path | 
 **document_version_id** | **UUID** |  | 
+**is_active_version** | **bool** | Whether this version is the document&#39;s active one; false for an unfinished newer upload and for a superseded older version | 
+**uploader** | [**UserInfo**](UserInfo.md) |  | 
 **status** | [**PipelineStatus**](PipelineStatus.md) |  | 
 **last_activity** | **str** |  | [optional] 
 **error** | **str** |  | [optional] 
-**last_run_timestamp** | **datetime** |  | 
+**last_run_timestamp** | **datetime** | When the last run started; the upload time until a run has started | 
 **last_state_update_timestamp** | **datetime** |  | [optional] 
 **created_at** | **datetime** |  | 
 

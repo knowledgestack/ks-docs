@@ -9,7 +9,11 @@ Name | Type
 ------------ | -------------
 `workflowId` | string
 `documentId` | string
+`documentName` | string
+`materializedPath` | string
 `documentVersionId` | string
+`isActiveVersion` | boolean
+`uploader` | [UserInfo](UserInfo.md)
 `status` | [PipelineStatus](PipelineStatus.md)
 `lastActivity` | string
 `error` | string
@@ -33,7 +37,11 @@ import type { WorkflowDetailResponse } from '@knowledge-stack/ksapi'
 const example = {
   "workflowId": null,
   "documentId": null,
+  "documentName": null,
+  "materializedPath": null,
   "documentVersionId": null,
+  "isActiveVersion": null,
+  "uploader": null,
   "status": null,
   "lastActivity": null,
   "error": null,

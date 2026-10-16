@@ -826,7 +826,7 @@ example().catch(console.error);
 
 Update Document Version Metadata Handler
 
-Merge metadata fields into an existing document version\&#39;s metadata.  Only non-null fields in the request body are merged; existing metadata fields not present in the request are preserved.  When this PATCH settles an &#x60;&#x60;inputs/&#x60;&#x60; upload\&#39;s ingestion (an in-progress pipeline reaching a terminal state), it drives the parent workflow run forward: the two-step &#x60;&#x60;PENDING &lt;-&gt; NOT_STARTED&#x60;&#x60; toggle, plus auto-start / auto-fail for an &#x60;&#x60;auto_start&#x60;&#x60; run (see &#x60;&#x60;WorkflowRunStartService.auto_advance_on_input_settled&#x60;&#x60;).
+Merge metadata fields into an existing document version\&#39;s metadata.  Only non-null fields in the request body are merged; existing metadata fields not present in the request are preserved.  When this PATCH settles an &#x60;&#x60;inputs/&#x60;&#x60; upload\&#39;s ingestion (an in-progress pipeline reaching a terminal state), it drives the parent workflow run forward: the two-step &#x60;&#x60;PENDING &lt;-&gt; NOT_STARTED&#x60;&#x60; toggle, plus auto-start / auto-fail for an &#x60;&#x60;auto_start&#x60;&#x60; run (see &#x60;&#x60;WorkflowRunStartService.auto_advance_on_input_settled&#x60;&#x60;).  Any settle pushes a tenant-wide &#x60;&#x60;document_detail_changed&#x60;&#x60;; a failed, cancelled or quota-limited one does so with the &#x60;&#x60;ingestion_failed&#x60;&#x60; kind so open views (the Ingestions page) refetch.
 
 ### Example
 

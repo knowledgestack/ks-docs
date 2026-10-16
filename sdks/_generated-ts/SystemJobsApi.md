@@ -4,13 +4,90 @@ All URIs are relative to *http://localhost:8000*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**bulkRerunDvWorkflows**](SystemJobsApi.md#bulkrerundvworkflows) | **POST** /v1/system-jobs/document_versions/bulk-rerun | Bulk Rerun Dv Workflows Handler |
 | [**cancelTemporalWorkflow**](SystemJobsApi.md#canceltemporalworkflow) | **DELETE** /v1/system-jobs/{workflow_id} | Cancel Temporal Workflow Handler |
 | [**dvWorkflowRerun**](SystemJobsApi.md#dvworkflowrerun) | **POST** /v1/system-jobs/document_versions/{workflow_id} | Dv Workflow Rerun Handler |
 | [**getDvWorkflow**](SystemJobsApi.md#getdvworkflow) | **GET** /v1/system-jobs/document_versions/{workflow_id} | Get Dv Workflow Handler |
 | [**getTemporalWorkflowStatus**](SystemJobsApi.md#gettemporalworkflowstatus) | **GET** /v1/system-jobs/{workflow_id} | Get Temporal Workflow Status Handler |
 | [**getZipIngestionStatus**](SystemJobsApi.md#getzipingestionstatus) | **GET** /v1/system-jobs/zip-ingestions/{workflow_id} | Get Zip Ingestion Status Handler |
+| [**listDvWorkflowUploaders**](SystemJobsApi.md#listdvworkflowuploaders) | **GET** /v1/system-jobs/document_versions/uploaders | List Dv Workflow Uploaders Handler |
 | [**listDvWorkflows**](SystemJobsApi.md#listdvworkflows) | **GET** /v1/system-jobs/document_versions | List Dv Workflows Handler |
 
+
+
+## bulkRerunDvWorkflows
+
+> BulkOperationResponse bulkRerunDvWorkflows(bulkRerunRequest)
+
+Bulk Rerun Dv Workflows Handler
+
+Re-run ingestion for the selected document versions, reporting per item.  &#x60;&#x60;not_found&#x60;&#x60;: missing, trashed, never ingested or without its stored source; &#x60;&#x60;forbidden&#x60;&#x60;: no &#x60;&#x60;can_write&#x60;&#x60;; &#x60;&#x60;in_progress_workflow&#x60;&#x60;: still pending/processing; &#x60;&#x60;already_ingested&#x60;&#x60;: completed; &#x60;&#x60;unsupported_document_type&#x60;&#x60;: a type that is no longer ingested; &#x60;&#x60;superseded&#x60;&#x60;: a newer version of the document exists. More than 200 ids is a 400 before any re-run.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  SystemJobsApi,
+} from '@knowledge-stack/ksapi';
+import type { BulkRerunDvWorkflowsRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new SystemJobsApi(config);
+
+  const body = {
+    // BulkRerunRequest
+    bulkRerunRequest: ...,
+  } satisfies BulkRerunDvWorkflowsRequest;
+
+  try {
+    const data = await api.bulkRerunDvWorkflows(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **bulkRerunRequest** | [BulkRerunRequest](BulkRerunRequest.md) |  | |
+
+### Return type
+
+[**BulkOperationResponse**](BulkOperationResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: `application/json`
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
 ## cancelTemporalWorkflow
@@ -19,7 +96,7 @@ All URIs are relative to *http://localhost:8000*
 
 Cancel Temporal Workflow Handler
 
-Cancel any Temporal workflow owned by the caller\&#39;s tenant.  No status guard — this is a thin Temporal wrapper. Cancelling an already-terminal workflow is a no-op on the Temporal side.
+Cancel any Temporal workflow owned by the caller\&#39;s tenant.  No status guard — this is a thin Temporal wrapper. Cancelling an already-terminal workflow is a no-op on the Temporal side. A run no worker ever picked up is terminated instead, since a cancel request is itself a workflow task nobody would process. When Temporal no longer has the run, or it was terminated here, a document version still showing it running is settled as cancelled (needs &#x60;&#x60;can_write&#x60;&#x60;) so it can be re-run.
 
 ### Example
 
@@ -94,7 +171,7 @@ example().catch(console.error);
 
 Dv Workflow Rerun Handler
 
-Rerun a workflow. USER role requires &#x60;&#x60;can_write&#x60;&#x60; on the document path.  &#x60;&#x60;s3_client&#x60;&#x60; is injected because &#x60;&#x60;DocumentIngestionService.__init__&#x60;&#x60; requires it, even though the re-ingestion path reuses the existing S3 source.
+Rerun a workflow. USER role requires &#x60;&#x60;can_write&#x60;&#x60; on the document path.  A version that a newer live version supersedes is refused with 409. &#x60;&#x60;s3_client&#x60;&#x60; is injected because &#x60;&#x60;DocumentIngestionService.__init__&#x60;&#x60; requires it, even though the re-ingestion path reuses the existing S3 source.
 
 ### Example
 
@@ -319,7 +396,7 @@ example().catch(console.error);
 
 Get Zip Ingestion Status Handler
 
-Get a ZIP fan-out\&#39;s live status + per-member outcomes.  Tenant-scoped via the TenantId search attribute (no per-path can_read check — intentionally consistent with the sibling generic Temporal endpoints below; the opaque workflow_id is only handed to the uploader, who had can_write on the target). The per-member results come from the workflow\&#39;s &#x60;&#x60;results&#x60;&#x60; query (served from retained history), so once Temporal retention expires this 404s.
+Get a ZIP fan-out\&#39;s live status + per-member outcomes.  Tenant-scoped via the TenantId search attribute (no per-path can_read check — intentionally consistent with the sibling generic Temporal endpoints below; the opaque workflow_id is only handed to the uploader, who had can_write on the target). The per-member results come from the workflow\&#39;s &#x60;&#x60;results&#x60;&#x60; query (served from retained history), so once Temporal retention expires this 404s. Any other workflow type has no &#x60;&#x60;results&#x60;&#x60; query and is a 404, not a 500.
 
 ### Example
 
@@ -388,13 +465,94 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
+## listDvWorkflowUploaders
+
+> PaginatedResponseUserInfo listDvWorkflowUploaders(usernameLike, limit, offset)
+
+List Dv Workflow Uploaders Handler
+
+People who uploaded a version the caller can list, for the uploader filter.  Scoped like &#x60;&#x60;list_dv_workflows&#x60;&#x60;: USER only counts versions under readable paths.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  SystemJobsApi,
+} from '@knowledge-stack/ksapi';
+import type { ListDvWorkflowUploadersRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new SystemJobsApi(config);
+
+  const body = {
+    // string | Case-insensitive substring of the first or last name (optional)
+    usernameLike: usernameLike_example,
+    // number | Number of items per page (optional)
+    limit: 56,
+    // number | Number of items to skip (optional)
+    offset: 56,
+  } satisfies ListDvWorkflowUploadersRequest;
+
+  try {
+    const data = await api.listDvWorkflowUploaders(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **usernameLike** | `string` | Case-insensitive substring of the first or last name | [Optional] [Defaults to `undefined`] |
+| **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
+| **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+
+### Return type
+
+[**PaginatedResponseUserInfo**](PaginatedResponseUserInfo.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
 ## listDvWorkflows
 
-> PaginatedResponseWorkflowSummaryResponse listDvWorkflows(limit, offset)
+> PaginatedResponseWorkflowSummaryResponse listDvWorkflows(limit, offset, sortDir, status, nameLike, latestVersionOnly, uploaderUserId, createdAfter, createdBefore, updatedAfter, updatedBefore)
 
 List Dv Workflows Handler
 
-List all workflows for the current tenant (paginated, DB-backed).  ADMIN/OWNER see all workflows; USER sees only those under permitted paths.
+List ingestions of live documents in the current tenant, newest upload first.  ADMIN/OWNER see every version; USER only versions under readable paths. &#x60;&#x60;sort_dir&#x3D;ASC&#x60;&#x60; lists the oldest upload first.
 
 ### Example
 
@@ -420,6 +578,24 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
+    // Array<PipelineStatus> | Only versions in one of these pipeline statuses (optional)
+    status: ...,
+    // string | Case-insensitive substring filter on document name (optional)
+    nameLike: nameLike_example,
+    // boolean | Skip versions superseded by a newer version (optional)
+    latestVersionOnly: true,
+    // string | Filter to versions uploaded by this user (optional)
+    uploaderUserId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // Date | Only items created at or after this timestamp (inclusive) (optional)
+    createdAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items created strictly before this timestamp (optional)
+    createdBefore: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated at or after this timestamp (inclusive) (optional)
+    updatedAfter: 2013-10-20T19:20:30+01:00,
+    // Date | Only items updated strictly before this timestamp (optional)
+    updatedBefore: 2013-10-20T19:20:30+01:00,
   } satisfies ListDvWorkflowsRequest;
 
   try {
@@ -441,6 +617,15 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
+| **status** | `Array<PipelineStatus>` | Only versions in one of these pipeline statuses | [Optional] |
+| **nameLike** | `string` | Case-insensitive substring filter on document name | [Optional] [Defaults to `undefined`] |
+| **latestVersionOnly** | `boolean` | Skip versions superseded by a newer version | [Optional] [Defaults to `false`] |
+| **uploaderUserId** | `string` | Filter to versions uploaded by this user | [Optional] [Defaults to `undefined`] |
+| **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
+| **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 

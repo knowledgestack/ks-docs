@@ -24,6 +24,12 @@ Why a single item in a bulk operation was not applied.  Every value is produced 
 
 * `PERMISSION_LIMIT` (value: `'permission_limit'`)
 
+* `ALREADY_INGESTED` (value: `'already_ingested'`)
+
+* `UNSUPPORTED_DOCUMENT_TYPE` (value: `'unsupported_document_type'`)
+
+* `SUPERSEDED` (value: `'superseded'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

@@ -981,6 +981,10 @@ workflow run forward: the two-step ``PENDING <-> NOT_STARTED`` toggle,
 plus auto-start / auto-fail for an ``auto_start`` run (see
 ``WorkflowRunStartService.auto_advance_on_input_settled``).
 
+Any settle pushes a tenant-wide ``document_detail_changed``; a failed,
+cancelled or quota-limited one does so with the ``ingestion_failed`` kind so
+open views (the Ingestions page) refetch.
+
 ### Example
 
 * Api Key Authentication (cookieAuth):

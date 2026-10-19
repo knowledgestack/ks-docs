@@ -75,6 +75,7 @@ Name | Type
 `skillMd` | string
 `filePaths` | Array&lt;string&gt;
 `files` | [Array&lt;SkillFile&gt;](SkillFile.md)
+`fileDocuments` | [Array&lt;SkillFileDocument&gt;](SkillFileDocument.md)
 `hasUnpublishedChanges` | boolean
 
 ## Example
@@ -153,6 +154,7 @@ const example = {
   "skillMd": null,
   "filePaths": null,
   "files": null,
+  "fileDocuments": null,
   "hasUnpublishedChanges": null,
 } satisfies FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR
 

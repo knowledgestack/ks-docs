@@ -74,6 +74,7 @@ Name | Type | Description | Notes
 **skill_md** | **str** | Full SKILL.md content; populated on the detail read and on mutation responses, null on list. | [optional] 
 **file_paths** | **List[str]** | Bundle file paths relative to the skill root (SKILL.md excluded); populated on the detail read and on mutation responses, empty on list. | [optional] 
 **files** | [**List[SkillFile]**](SkillFile.md) | Bundle files with their contents; populated only on the detail read (GET /skills/{id}), null on list. Lets the editor read the current file set so a PATCH can safely resubmit the whole set. | [optional] 
+**file_documents** | [**List[SkillFileDocument]**](SkillFileDocument.md) | Every working file with its Document id, SKILL.md included, sorted by path; populated with file_paths, empty on list. | [optional] 
 **has_unpublished_changes** | **bool** | Whether the working copy differs from the active published version. Always present (incl. list responses) so the UI can flag a skill with an unpublished draft. | [optional] [default to False]
 
 ## Example

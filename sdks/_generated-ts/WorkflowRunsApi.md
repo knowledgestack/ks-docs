@@ -450,7 +450,7 @@ example().catch(console.error);
 
 Resume Workflow Run Handler
 
-Continue a FAILED run in place instead of restarting it.  Unlike &#x60;&#x60;retry&#x60;&#x60; (which restarts the agent cold), &#x60;&#x60;resume&#x60;&#x60; loads the run\&#39;s surviving thread history — the checkpoint summary and any persisted partial reply — and re-hydrates &#x60;&#x60;/work/&#x60;&#x60;, so a run that timed out or was stopped near the end finishes from where it left off rather than redoing the work. Same guards as retry: 409 if the run is not FAILED or was never started; triggerer or OWNER/ADMIN only.  Runs in the background — poll &#x60;&#x60;GET /v1/workflow-runs/{run_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED.
+Continue a FAILED run in place instead of restarting it.  Unlike &#x60;&#x60;retry&#x60;&#x60; (which restarts the agent cold), &#x60;&#x60;resume&#x60;&#x60; loads the run\&#39;s surviving thread history — the checkpoint summary and any persisted partial reply — and re-hydrates &#x60;&#x60;/work/&#x60;&#x60;, so a run that timed out or was stopped near the end finishes from where it left off rather than redoing the work. Same guards and never-started re-arm as retry; triggerer or OWNER/ADMIN only.  Runs in the background — poll &#x60;&#x60;GET /v1/workflow-runs/{run_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED.
 
 ### Example
 
@@ -525,7 +525,7 @@ example().catch(console.error);
 
 Retry Workflow Run Handler
 
-Re-run a FAILED run (including a user-stopped one) from scratch.  Restarts the agent cold: flips &#x60;&#x60;FAILED -&gt; IN_PROGRESS&#x60;&#x60; against the run\&#39;s existing snapshot and re-dispatches with empty history. Use &#x60;&#x60;resume&#x60;&#x60; to continue from surviving history instead. 409 if the run is not FAILED (NOT_STARTED/PENDING use Start; COMPLETED is cloned) or was never started. Triggerer or OWNER/ADMIN only.  Runs in the background — poll &#x60;&#x60;GET /v1/workflow-runs/{run_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED.
+Re-run a FAILED run (including a user-stopped one) from scratch.  Restarts the agent cold: flips &#x60;&#x60;FAILED -&gt; IN_PROGRESS&#x60;&#x60; against the run\&#39;s existing snapshot and re-dispatches with empty history. Use &#x60;&#x60;resume&#x60;&#x60; to continue from surviving history instead. 409 if the run is not FAILED (NOT_STARTED/PENDING use Start; COMPLETED is cloned); never-started re-arms. Triggerer or OWNER/ADMIN only.  Runs in the background — poll &#x60;&#x60;GET /v1/workflow-runs/{run_id}&#x60;&#x60; (also given in the &#x60;&#x60;Location&#x60;&#x60; header) until &#x60;&#x60;execution_state&#x60;&#x60; is COMPLETED or FAILED.
 
 ### Example
 

@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **append_workflow_memory_chunk**
-> MemoryChunkResponse append_workflow_memory_chunk(definition_id, append_memory_chunk_request)
+> MemoryEntryResponse append_workflow_memory_chunk(definition_id, append_memory_chunk_request)
 
 Append Workflow Memory Chunk Handler
 
@@ -24,7 +24,7 @@ Append Workflow Memory Chunk Handler
 ```python
 import ksapi
 from ksapi.models.append_memory_chunk_request import AppendMemoryChunkRequest
-from ksapi.models.memory_chunk_response import MemoryChunkResponse
+from ksapi.models.memory_entry_response import MemoryEntryResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryChunkResponse**](MemoryChunkResponse.md)
+[**MemoryEntryResponse**](MemoryEntryResponse.md)
 
 ### Authorization
 
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **edit_workflow_memory_chunk**
-> MemoryChunkResponse edit_workflow_memory_chunk(definition_id, chunk_id, edit_memory_chunk_request)
+> MemoryEntryResponse edit_workflow_memory_chunk(definition_id, chunk_id, edit_memory_chunk_request)
 
 Edit Workflow Memory Chunk Handler
 
@@ -112,7 +112,7 @@ Edit Workflow Memory Chunk Handler
 ```python
 import ksapi
 from ksapi.models.edit_memory_chunk_request import EditMemoryChunkRequest
-from ksapi.models.memory_chunk_response import MemoryChunkResponse
+from ksapi.models.memory_entry_response import MemoryEntryResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -168,7 +168,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryChunkResponse**](MemoryChunkResponse.md)
+[**MemoryEntryResponse**](MemoryEntryResponse.md)
 
 ### Authorization
 
@@ -274,7 +274,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_workflow_memory_chunk**
-> MemoryChunkResponse get_workflow_memory_chunk(definition_id, chunk_id)
+> MemoryEntryResponse get_workflow_memory_chunk(definition_id, chunk_id)
 
 Get Workflow Memory Chunk Handler
 
@@ -285,7 +285,7 @@ Get Workflow Memory Chunk Handler
 
 ```python
 import ksapi
-from ksapi.models.memory_chunk_response import MemoryChunkResponse
+from ksapi.models.memory_entry_response import MemoryEntryResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -339,7 +339,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryChunkResponse**](MemoryChunkResponse.md)
+[**MemoryEntryResponse**](MemoryEntryResponse.md)
 
 ### Authorization
 
@@ -361,7 +361,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_workflow_memory_chunks**
-> PaginatedResponseMemoryChunkResponse list_workflow_memory_chunks(definition_id, limit=limit, offset=offset)
+> PaginatedResponseMemoryEntryResponse list_workflow_memory_chunks(definition_id, limit=limit, offset=offset)
 
 List Workflow Memory Chunks Handler
 
@@ -372,7 +372,7 @@ List Workflow Memory Chunks Handler
 
 ```python
 import ksapi
-from ksapi.models.paginated_response_memory_chunk_response import PaginatedResponseMemoryChunkResponse
+from ksapi.models.paginated_response_memory_entry_response import PaginatedResponseMemoryEntryResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -428,7 +428,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**PaginatedResponseMemoryChunkResponse**](PaginatedResponseMemoryChunkResponse.md)
+[**PaginatedResponseMemoryEntryResponse**](PaginatedResponseMemoryEntryResponse.md)
 
 ### Authorization
 

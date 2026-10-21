@@ -54,7 +54,7 @@ Below this line is auto-generated reference content.
 
 ---
 
-# @knowledge-stack/ksapi@3.16.2
+# @knowledge-stack/ksapi@3.17.0
 
 A TypeScript SDK client for the localhost API.
 
@@ -353,6 +353,15 @@ All URIs are relative to *http://localhost:8000*
 *WorkflowMemoryApi* | [**forgetWorkflowMemoryChunk**](docs/WorkflowMemoryApi.md#forgetworkflowmemorychunk) | **DELETE** /v1/workflow-definitions/{definition_id}/memory/chunks/{chunk_id} | Forget Workflow Memory Chunk Handler
 *WorkflowMemoryApi* | [**getWorkflowMemoryChunk**](docs/WorkflowMemoryApi.md#getworkflowmemorychunk) | **GET** /v1/workflow-definitions/{definition_id}/memory/chunks/{chunk_id} | Get Workflow Memory Chunk Handler
 *WorkflowMemoryApi* | [**listWorkflowMemoryChunks**](docs/WorkflowMemoryApi.md#listworkflowmemorychunks) | **GET** /v1/workflow-definitions/{definition_id}/memory | List Workflow Memory Chunks Handler
+*WorkflowRepositoryApi* | [**downloadWorkflowRepoBranchBundle**](docs/WorkflowRepositoryApi.md#downloadworkflowrepobranchbundle) | **GET** /v1/workflow-definitions/{definition_id}/memory/repo/branches/{run_id}/bundle | Download Workflow Repo Branch Bundle Handler
+*WorkflowRepositoryApi* | [**downloadWorkflowRepoBundle**](docs/WorkflowRepositoryApi.md#downloadworkflowrepobundle) | **GET** /v1/workflow-definitions/{definition_id}/memory/repo/bundle | Download Workflow Repo Bundle Handler
+*WorkflowRepositoryApi* | [**getWorkflowRepo**](docs/WorkflowRepositoryApi.md#getworkflowrepo) | **GET** /v1/workflow-definitions/{definition_id}/memory/repo | Get Workflow Repo Handler
+*WorkflowRepositoryApi* | [**getWorkflowRepoBranch**](docs/WorkflowRepositoryApi.md#getworkflowrepobranch) | **GET** /v1/workflow-definitions/{definition_id}/memory/repo/branches/{run_id} | Get Workflow Repo Branch Handler
+*WorkflowRepositoryApi* | [**getWorkflowRepoTree**](docs/WorkflowRepositoryApi.md#getworkflowrepotree) | **GET** /v1/workflow-definitions/{definition_id}/memory/repo/tree | Get Workflow Repo Tree Handler
+*WorkflowRepositoryApi* | [**listWorkflowRepoVersions**](docs/WorkflowRepositoryApi.md#listworkflowrepoversions) | **GET** /v1/workflow-definitions/{definition_id}/memory/repo/versions | List Workflow Repo Versions Handler
+*WorkflowRepositoryApi* | [**recordWorkflowRepoSkippedSave**](docs/WorkflowRepositoryApi.md#recordworkflowreposkippedsave) | **POST** /v1/workflow-definitions/{definition_id}/memory/repo/skipped-saves | Record Workflow Repo Skipped Save Handler
+*WorkflowRepositoryApi* | [**saveWorkflowRepoBranch**](docs/WorkflowRepositoryApi.md#saveworkflowrepobranch) | **POST** /v1/workflow-definitions/{definition_id}/memory/repo/branches/{run_id}/versions | Save Workflow Repo Branch Handler
+*WorkflowRepositoryApi* | [**saveWorkflowRepoVersion**](docs/WorkflowRepositoryApi.md#saveworkflowrepoversion) | **POST** /v1/workflow-definitions/{definition_id}/memory/repo/versions | Save Workflow Repo Version Handler
 *WorkflowRunsApi* | [**cloneWorkflowRun**](docs/WorkflowRunsApi.md#cloneworkflowrunoperation) | **POST** /v1/workflow-runs/{run_id}/clone | Clone Workflow Run Handler
 *WorkflowRunsApi* | [**deleteWorkflowRun**](docs/WorkflowRunsApi.md#deleteworkflowrun) | **DELETE** /v1/workflow-runs/{run_id} | Delete Workflow Run Handler
 *WorkflowRunsApi* | [**getWorkflowRun**](docs/WorkflowRunsApi.md#getworkflowrun) | **GET** /v1/workflow-runs/{run_id} | Get Workflow Run Handler
@@ -571,7 +580,7 @@ All URIs are relative to *http://localhost:8000*
 - [LocationInner](docs/LocationInner.md)
 - [MembershipResponse](docs/MembershipResponse.md)
 - [MemoryBodyResponse](docs/MemoryBodyResponse.md)
-- [MemoryChunkResponse](docs/MemoryChunkResponse.md)
+- [MemoryEntryResponse](docs/MemoryEntryResponse.md)
 - [MemoryKind](docs/MemoryKind.md)
 - [MemoryScope](docs/MemoryScope.md)
 - [MessageRole](docs/MessageRole.md)
@@ -596,10 +605,11 @@ All URIs are relative to *http://localhost:8000*
 - [PaginatedResponseGroupResponse](docs/PaginatedResponseGroupResponse.md)
 - [PaginatedResponseInviteResponse](docs/PaginatedResponseInviteResponse.md)
 - [PaginatedResponseMembershipResponse](docs/PaginatedResponseMembershipResponse.md)
-- [PaginatedResponseMemoryChunkResponse](docs/PaginatedResponseMemoryChunkResponse.md)
+- [PaginatedResponseMemoryEntryResponse](docs/PaginatedResponseMemoryEntryResponse.md)
 - [PaginatedResponsePathPartResponse](docs/PaginatedResponsePathPartResponse.md)
 - [PaginatedResponsePendingMemoryChunkResponse](docs/PaginatedResponsePendingMemoryChunkResponse.md)
 - [PaginatedResponsePermissionResponse](docs/PaginatedResponsePermissionResponse.md)
+- [PaginatedResponseRepoVersionResponse](docs/PaginatedResponseRepoVersionResponse.md)
 - [PaginatedResponseSkillResponse](docs/PaginatedResponseSkillResponse.md)
 - [PaginatedResponseTagResponse](docs/PaginatedResponseTagResponse.md)
 - [PaginatedResponseTenantResponse](docs/PaginatedResponseTenantResponse.md)
@@ -634,8 +644,16 @@ All URIs are relative to *http://localhost:8000*
 - [PolygonReference](docs/PolygonReference.md)
 - [ProposeMemoryChunkRequest](docs/ProposeMemoryChunkRequest.md)
 - [ReasoningPart](docs/ReasoningPart.md)
+- [RecordRepoSaveSkipRequest](docs/RecordRepoSaveSkipRequest.md)
 - [ReferenceType](docs/ReferenceType.md)
 - [ReorderPathPartRequest](docs/ReorderPathPartRequest.md)
+- [RepoBranchResponse](docs/RepoBranchResponse.md)
+- [RepoCommitSummary](docs/RepoCommitSummary.md)
+- [RepoSaveSkipReason](docs/RepoSaveSkipReason.md)
+- [RepoSnapshot](docs/RepoSnapshot.md)
+- [RepoTreeEntry](docs/RepoTreeEntry.md)
+- [RepoTreeResponse](docs/RepoTreeResponse.md)
+- [RepoVersionResponse](docs/RepoVersionResponse.md)
 - [RequestPhoneChangeRequest](docs/RequestPhoneChangeRequest.md)
 - [ResolvedRef](docs/ResolvedRef.md)
 - [ResolvedReferenceInput](docs/ResolvedReferenceInput.md)
@@ -771,6 +789,7 @@ All URIs are relative to *http://localhost:8000*
 - [WorkflowExecutionState](docs/WorkflowExecutionState.md)
 - [WorkflowLeaderboardResponse](docs/WorkflowLeaderboardResponse.md)
 - [WorkflowOutputStatsResponse](docs/WorkflowOutputStatsResponse.md)
+- [WorkflowRepoResponse](docs/WorkflowRepoResponse.md)
 - [WorkflowRunAsset](docs/WorkflowRunAsset.md)
 - [WorkflowRunCallbackRequest](docs/WorkflowRunCallbackRequest.md)
 - [WorkflowRunOrder](docs/WorkflowRunOrder.md)
@@ -813,7 +832,7 @@ and is automatically generated by the
 [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `0.1.0`
-- Package version: `3.16.2`
+- Package version: `3.17.0`
 - Generator version: `7.21.0`
 - Build package: `org.openapitools.codegen.languages.TypeScriptFetchClientCodegen`
 

@@ -14,7 +14,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## appendWorkflowMemoryChunk
 
-> MemoryChunkResponse appendWorkflowMemoryChunk(definitionId, appendMemoryChunkRequest)
+> MemoryEntryResponse appendWorkflowMemoryChunk(definitionId, appendMemoryChunkRequest)
 
 Append Workflow Memory Chunk Handler
 
@@ -66,7 +66,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**MemoryChunkResponse**](MemoryChunkResponse.md)
+[**MemoryEntryResponse**](MemoryEntryResponse.md)
 
 ### Authorization
 
@@ -90,7 +90,7 @@ example().catch(console.error);
 
 ## editWorkflowMemoryChunk
 
-> MemoryChunkResponse editWorkflowMemoryChunk(definitionId, chunkId, editMemoryChunkRequest)
+> MemoryEntryResponse editWorkflowMemoryChunk(definitionId, chunkId, editMemoryChunkRequest)
 
 Edit Workflow Memory Chunk Handler
 
@@ -145,7 +145,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**MemoryChunkResponse**](MemoryChunkResponse.md)
+[**MemoryEntryResponse**](MemoryEntryResponse.md)
 
 ### Authorization
 
@@ -245,7 +245,7 @@ example().catch(console.error);
 
 ## getWorkflowMemoryChunk
 
-> MemoryChunkResponse getWorkflowMemoryChunk(definitionId, chunkId)
+> MemoryEntryResponse getWorkflowMemoryChunk(definitionId, chunkId)
 
 Get Workflow Memory Chunk Handler
 
@@ -297,7 +297,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**MemoryChunkResponse**](MemoryChunkResponse.md)
+[**MemoryEntryResponse**](MemoryEntryResponse.md)
 
 ### Authorization
 
@@ -321,7 +321,7 @@ example().catch(console.error);
 
 ## listWorkflowMemoryChunks
 
-> PaginatedResponseMemoryChunkResponse listWorkflowMemoryChunks(definitionId, limit, offset)
+> PaginatedResponseMemoryEntryResponse listWorkflowMemoryChunks(definitionId, limit, offset)
 
 List Workflow Memory Chunks Handler
 
@@ -376,7 +376,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**PaginatedResponseMemoryChunkResponse**](PaginatedResponseMemoryChunkResponse.md)
+[**PaginatedResponseMemoryEntryResponse**](PaginatedResponseMemoryEntryResponse.md)
 
 ### Authorization
 

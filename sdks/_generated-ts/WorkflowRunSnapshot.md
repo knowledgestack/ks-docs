@@ -14,6 +14,7 @@ Name | Type
 `excludedCommonFiles` | [Array&lt;ExcludedCommonFile&gt;](ExcludedCommonFile.md)
 `userMessage` | string
 `selectedSkillIds` | Array&lt;string&gt;
+`repo` | [RepoSnapshot](RepoSnapshot.md)
 
 ## Example
 
@@ -29,6 +30,7 @@ const example = {
   "excludedCommonFiles": null,
   "userMessage": null,
   "selectedSkillIds": null,
+  "repo": null,
 } satisfies WorkflowRunSnapshot
 
 console.log(example)

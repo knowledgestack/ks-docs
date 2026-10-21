@@ -14,7 +14,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## approveMemoryProposal
 
-> MemoryChunkResponse approveMemoryProposal(chunkId)
+> MemoryEntryResponse approveMemoryProposal(chunkId)
 
 Approve Memory Proposal Handler
 
@@ -63,7 +63,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**MemoryChunkResponse**](MemoryChunkResponse.md)
+[**MemoryEntryResponse**](MemoryEntryResponse.md)
 
 ### Authorization
 

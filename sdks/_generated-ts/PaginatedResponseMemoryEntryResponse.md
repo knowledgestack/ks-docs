@@ -1,26 +1,28 @@
 
-# MemoryChunkResponse
+# PaginatedResponseMemoryEntryResponse
 
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`chunkId` | string
-`kind` | [MemoryKind](MemoryKind.md)
-`body` | string
+`items` | [Array&lt;MemoryEntryResponse&gt;](MemoryEntryResponse.md)
+`total` | number
+`limit` | number
+`offset` | number
 
 ## Example
 
 ```typescript
-import type { MemoryChunkResponse } from '@knowledge-stack/ksapi'
+import type { PaginatedResponseMemoryEntryResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "chunkId": null,
-  "kind": null,
-  "body": null,
-} satisfies MemoryChunkResponse
+  "items": null,
+  "total": null,
+  "limit": null,
+  "offset": null,
+} satisfies PaginatedResponseMemoryEntryResponse
 
 console.log(example)
 
@@ -29,7 +31,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as MemoryChunkResponse
+const exampleParsed = JSON.parse(exampleJSON) as PaginatedResponseMemoryEntryResponse
 console.log(exampleParsed)
 ```
 

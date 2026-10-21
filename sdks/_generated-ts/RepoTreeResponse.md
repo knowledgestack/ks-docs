@@ -1,28 +1,24 @@
 
-# PaginatedResponseMemoryChunkResponse
+# RepoTreeResponse
 
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`items` | [Array&lt;MemoryChunkResponse&gt;](MemoryChunkResponse.md)
-`total` | number
-`limit` | number
-`offset` | number
+`commit` | string
+`entries` | [Array&lt;RepoTreeEntry&gt;](RepoTreeEntry.md)
 
 ## Example
 
 ```typescript
-import type { PaginatedResponseMemoryChunkResponse } from '@knowledge-stack/ksapi'
+import type { RepoTreeResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "items": null,
-  "total": null,
-  "limit": null,
-  "offset": null,
-} satisfies PaginatedResponseMemoryChunkResponse
+  "commit": null,
+  "entries": null,
+} satisfies RepoTreeResponse
 
 console.log(example)
 
@@ -31,7 +27,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as PaginatedResponseMemoryChunkResponse
+const exampleParsed = JSON.parse(exampleJSON) as RepoTreeResponse
 console.log(exampleParsed)
 ```
 

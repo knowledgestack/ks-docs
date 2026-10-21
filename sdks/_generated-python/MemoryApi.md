@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 
 # **approve_memory_proposal**
-> MemoryChunkResponse approve_memory_proposal(chunk_id)
+> MemoryEntryResponse approve_memory_proposal(chunk_id)
 
 Approve Memory Proposal Handler
 
@@ -23,7 +23,7 @@ Approve Memory Proposal Handler
 
 ```python
 import ksapi
-from ksapi.models.memory_chunk_response import MemoryChunkResponse
+from ksapi.models.memory_entry_response import MemoryEntryResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**MemoryChunkResponse**](MemoryChunkResponse.md)
+[**MemoryEntryResponse**](MemoryEntryResponse.md)
 
 ### Authorization
 

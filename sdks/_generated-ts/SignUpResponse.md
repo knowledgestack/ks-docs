@@ -19,6 +19,7 @@ Name | Type
 `department` | string
 `bio` | string
 `avatarUrl` | string
+`languagePreference` | [SupportedLanguage](SupportedLanguage.md)
 `onboardingCompletedAt` | Date
 `joinMethod` | [TenantUserJoinMethod](TenantUserJoinMethod.md)
 `onboardingState` | [OnboardingState](OnboardingState.md)
@@ -48,6 +49,7 @@ const example = {
   "department": null,
   "bio": null,
   "avatarUrl": null,
+  "languagePreference": null,
   "onboardingCompletedAt": null,
   "joinMethod": null,
   "onboardingState": null,

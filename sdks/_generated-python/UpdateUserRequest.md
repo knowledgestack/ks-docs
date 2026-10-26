@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **job_title** | **str** | Job title at the current tenant; omit to leave unchanged, empty string to clear. Directory-synced users cannot set it. | [optional] 
 **department** | **str** | Department at the current tenant; omit to leave unchanged, empty string to clear. Directory-synced users cannot set it. | [optional] 
 **bio** | **str** | About the user at the current tenant, read by the chat agent; omit to leave unchanged, empty string to clear. | [optional] 
+**language_preference** | [**SupportedLanguage**](SupportedLanguage.md) |  | [optional] 
 
 ## Example
 

@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **department** | **str** | User&#39;s department at the current tenant (per-membership) | [optional] 
 **bio** | **str** | What the user wrote about themselves at the current tenant. The chat agent reads it on every turn. | [optional] 
 **avatar_url** | **str** | Presigned URL of the user&#39;s profile photo at the current tenant. Expires after six hours; read GET /v1/users/me again for a fresh one. | [optional] 
+**language_preference** | [**SupportedLanguage**](SupportedLanguage.md) |  | 
 **onboarding_completed_at** | **datetime** | When the user finished onboarding for the current tenant. NULL &#x3D; wizard should be shown. | [optional] 
 **join_method** | [**TenantUserJoinMethod**](TenantUserJoinMethod.md) |  | 
 **onboarding_state** | [**OnboardingState**](OnboardingState.md) | Resume step and guide progress for the current membership. | [optional] 

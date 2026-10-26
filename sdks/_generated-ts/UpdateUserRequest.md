@@ -12,6 +12,7 @@ Name | Type
 `jobTitle` | string
 `department` | string
 `bio` | string
+`languagePreference` | [SupportedLanguage](SupportedLanguage.md)
 
 ## Example
 
@@ -26,6 +27,7 @@ const example = {
   "jobTitle": null,
   "department": null,
   "bio": null,
+  "languagePreference": null,
 } satisfies UpdateUserRequest
 
 console.log(example)

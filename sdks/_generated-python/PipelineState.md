@@ -6,11 +6,12 @@ Pipeline execution state tracking.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**last_stage_retry_attempt** | **int** | Zero-based retry count for the current stage; maximum across fan-out activities. Managed by ingestion. | [optional] [readonly] [default to 0]
 **status** | [**PipelineStatus**](PipelineStatus.md) |  | 
 **last_run_timestamp** | **datetime** | Timestamp of the last pipeline execution attempt (set once when a run starts) | [optional] 
 **last_state_update_timestamp** | **datetime** | Timestamp of the last pipeline state change (set by activities) | [optional] 
-**last_activity** | **str** | Name of the last activity that executed (e.g., &#39;pdf_preparation_activity&#39;) | [optional] 
-**error** | **str** | Error message if pipeline failed | [optional] 
+**last_activity** | **str** | Current ingestion stage, recorded before its activity starts | [optional] 
+**error** | **str** | Latest stage failure; retained during retries and cleared on the next stage or success | [optional] 
 **temporal_workflow_id** | **str** | Temporal workflow ID for tracking the ingestion run | [optional] 
 **chunks_processed** | **int** | Number of chunks processed (for progress tracking) | [optional] 
 **page_dpi** | **int** | DPI used for PDF page screenshots during ingestion | [optional] 

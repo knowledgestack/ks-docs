@@ -16,6 +16,7 @@ Name | Type
 `uploader` | [UserInfo](UserInfo.md)
 `status` | [PipelineStatus](PipelineStatus.md)
 `lastActivity` | string
+`lastStageRetryAttempt` | number
 `error` | string
 `lastRunTimestamp` | Date
 `lastStateUpdateTimestamp` | Date
@@ -37,6 +38,7 @@ const example = {
   "uploader": null,
   "status": null,
   "lastActivity": null,
+  "lastStageRetryAttempt": null,
   "error": null,
   "lastRunTimestamp": null,
   "lastStateUpdateTimestamp": null,

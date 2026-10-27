@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **uploader** | [**UserInfo**](UserInfo.md) |  | 
 **status** | [**PipelineStatus**](PipelineStatus.md) |  | 
 **last_activity** | **str** |  | [optional] 
+**last_stage_retry_attempt** | **int** |  | [optional] [default to 0]
 **error** | **str** |  | [optional] 
 **last_run_timestamp** | **datetime** | When the last run started; the upload time until a run has started | 
 **last_state_update_timestamp** | **datetime** |  | [optional] 

@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 **onboarding_state** | [**OnboardingState**](OnboardingState.md) | Resume step and guide progress for the current membership. | [optional] 
 **invited_by** | [**UserInfo**](UserInfo.md) | Who sent the accepted invite that created the current membership. NULL when the membership did not come from an email invite, and on the sign-in and sign-up responses; read it from GET /v1/users/me. | [optional] 
 **added_by** | [**AddedBy**](AddedBy.md) |  | [optional] 
-**idp_managed_fields** | **List[str]** | Profile fields the identity provider overwrites on every sync, so clients render them read-only. Empty unless directory-managed. | [optional] 
+**idp_managed_fields** | **List[str]** | Profile fields the identity provider owns, so clients render them read-only and updates to them are refused. Empty unless directory-managed. | [optional] 
 **onboarding_enabled** | **bool** | The current tenant&#39;s onboarding switch: true forces the flow on, false hides it, NULL follows the deployment default. | [optional] 
 **invite_rejection** | [**InviteRejection**](InviteRejection.md) |  | [optional] 
 

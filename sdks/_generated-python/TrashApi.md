@@ -15,6 +15,8 @@ Method | HTTP request | Description
 # **bulk_permanently_delete_trash**
 > BulkOperationResponse bulk_permanently_delete_trash(bulk_trash_request)
 
+**Synchronous variant:** `bulk_permanently_delete_trash_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Bulk Permanently Delete Trash Handler
 
 Permanently delete the selected trashed objects (by PDO id), per item.
@@ -57,14 +59,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TrashApi(api_client)
     bulk_trash_request = ksapi.BulkTrashRequest() # BulkTrashRequest | 
 
     try:
         # Bulk Permanently Delete Trash Handler
-        api_response = api_instance.bulk_permanently_delete_trash(bulk_trash_request)
+        api_response = await api_instance.bulk_permanently_delete_trash(bulk_trash_request)
         print("The response of TrashApi->bulk_permanently_delete_trash:\n")
         pprint(api_response)
     except Exception as e:
@@ -105,6 +107,8 @@ Name | Type | Description  | Notes
 
 # **bulk_restore_trash**
 > BulkOperationResponse bulk_restore_trash(bulk_trash_request)
+
+**Synchronous variant:** `bulk_restore_trash_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Bulk Restore Trash Handler
 
@@ -149,14 +153,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TrashApi(api_client)
     bulk_trash_request = ksapi.BulkTrashRequest() # BulkTrashRequest | 
 
     try:
         # Bulk Restore Trash Handler
-        api_response = api_instance.bulk_restore_trash(bulk_trash_request)
+        api_response = await api_instance.bulk_restore_trash(bulk_trash_request)
         print("The response of TrashApi->bulk_restore_trash:\n")
         pprint(api_response)
     except Exception as e:
@@ -198,6 +202,8 @@ Name | Type | Description  | Notes
 # **get_trash_item**
 > TrashItemDetailResponse get_trash_item(path_part_id)
 
+**Synchronous variant:** `get_trash_item_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Trash Item Handler
 
 Fetch a single trash root, with a preview URL for DOCUMENT items.
@@ -236,14 +242,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TrashApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Trashed PathPart ID
 
     try:
         # Get Trash Item Handler
-        api_response = api_instance.get_trash_item(path_part_id)
+        api_response = await api_instance.get_trash_item(path_part_id)
         print("The response of TrashApi->get_trash_item:\n")
         pprint(api_response)
     except Exception as e:
@@ -284,6 +290,8 @@ Name | Type | Description  | Notes
 
 # **list_trash**
 > PaginatedResponseTrashItemResponse list_trash(sort_order=sort_order, sort_dir=sort_dir, deleted_by=deleted_by, part_type=part_type, owner_id=owner_id, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+
+**Synchronous variant:** `list_trash_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Trash Handler
 
@@ -326,7 +334,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TrashApi(api_client)
     sort_order = ksapi.PathOrder() # PathOrder | Sort order (default: LOGICAL = deletion recency) (optional)
@@ -343,7 +351,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Trash Handler
-        api_response = api_instance.list_trash(sort_order=sort_order, sort_dir=sort_dir, deleted_by=deleted_by, part_type=part_type, owner_id=owner_id, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_trash(sort_order=sort_order, sort_dir=sort_dir, deleted_by=deleted_by, part_type=part_type, owner_id=owner_id, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of TrashApi->list_trash:\n")
         pprint(api_response)
     except Exception as e:
@@ -395,6 +403,8 @@ Name | Type | Description  | Notes
 # **permanently_delete_trash_item**
 > permanently_delete_trash_item(path_part_id)
 
+**Synchronous variant:** `permanently_delete_trash_item_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Permanently Delete Trash Item Handler
 
 Permanently delete a top-level trash item.
@@ -432,14 +442,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TrashApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Trashed PathPart ID
 
     try:
         # Permanently Delete Trash Item Handler
-        api_instance.permanently_delete_trash_item(path_part_id)
+        await api_instance.permanently_delete_trash_item(path_part_id)
     except Exception as e:
         print("Exception when calling TrashApi->permanently_delete_trash_item: %s\n" % e)
 ```
@@ -479,6 +489,8 @@ void (empty response body)
 # **restore_trash_item**
 > restore_trash_item(path_part_id)
 
+**Synchronous variant:** `restore_trash_item_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Restore Trash Item Handler
 
 Restore a top-level trash item.
@@ -516,14 +528,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TrashApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Trashed PathPart ID
 
     try:
         # Restore Trash Item Handler
-        api_instance.restore_trash_item(path_part_id)
+        await api_instance.restore_trash_item(path_part_id)
     except Exception as e:
         print("Exception when calling TrashApi->restore_trash_item: %s\n" % e)
 ```

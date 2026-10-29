@@ -15,6 +15,8 @@ Method | HTTP request | Description
 # **create_section**
 > SectionResponse create_section(create_section_request)
 
+**Synchronous variant:** `create_section_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Section Handler
 
 Create a new section.
@@ -59,14 +61,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SectionsApi(api_client)
     create_section_request = ksapi.CreateSectionRequest() # CreateSectionRequest | 
 
     try:
         # Create Section Handler
-        api_response = api_instance.create_section(create_section_request)
+        api_response = await api_instance.create_section(create_section_request)
         print("The response of SectionsApi->create_section:\n")
         pprint(api_response)
     except Exception as e:
@@ -108,6 +110,8 @@ Name | Type | Description  | Notes
 # **delete_section**
 > delete_section(section_id)
 
+**Synchronous variant:** `delete_section_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Section Handler
 
 Delete a section and all its children.
@@ -147,14 +151,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SectionsApi(api_client)
     section_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Section Handler
-        api_instance.delete_section(section_id)
+        await api_instance.delete_section(section_id)
     except Exception as e:
         print("Exception when calling SectionsApi->delete_section: %s\n" % e)
 ```
@@ -193,6 +197,8 @@ void (empty response body)
 
 # **dissolve_section**
 > DissolveSectionResponse dissolve_section(section_id)
+
+**Synchronous variant:** `dissolve_section_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Dissolve Section Handler
 
@@ -236,14 +242,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SectionsApi(api_client)
     section_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Dissolve Section Handler
-        api_response = api_instance.dissolve_section(section_id)
+        api_response = await api_instance.dissolve_section(section_id)
         print("The response of SectionsApi->dissolve_section:\n")
         pprint(api_response)
     except Exception as e:
@@ -285,6 +291,8 @@ Name | Type | Description  | Notes
 # **get_section**
 > SectionResponse get_section(section_id)
 
+**Synchronous variant:** `get_section_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Section Handler
 
 Get a section by its ID.
@@ -323,14 +331,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SectionsApi(api_client)
     section_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Section Handler
-        api_response = api_instance.get_section(section_id)
+        api_response = await api_instance.get_section(section_id)
         print("The response of SectionsApi->get_section:\n")
         pprint(api_response)
     except Exception as e:
@@ -371,6 +379,8 @@ Name | Type | Description  | Notes
 
 # **get_sections_bulk**
 > List[SectionResponse] get_sections_bulk(section_ids=section_ids)
+
+**Synchronous variant:** `get_sections_bulk_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Sections Bulk Handler
 
@@ -413,14 +423,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SectionsApi(api_client)
     section_ids = None # List[UUID] | Section IDs to fetch (max 200) (optional)
 
     try:
         # Get Sections Bulk Handler
-        api_response = api_instance.get_sections_bulk(section_ids=section_ids)
+        api_response = await api_instance.get_sections_bulk(section_ids=section_ids)
         print("The response of SectionsApi->get_sections_bulk:\n")
         pprint(api_response)
     except Exception as e:
@@ -461,6 +471,8 @@ Name | Type | Description  | Notes
 
 # **update_section**
 > SectionResponse update_section(section_id, update_section_request)
+
+**Synchronous variant:** `update_section_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Update Section Handler
 
@@ -508,7 +520,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SectionsApi(api_client)
     section_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -516,7 +528,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Section Handler
-        api_response = api_instance.update_section(section_id, update_section_request)
+        api_response = await api_instance.update_section(section_id, update_section_request)
         print("The response of SectionsApi->update_section:\n")
         pprint(api_response)
     except Exception as e:

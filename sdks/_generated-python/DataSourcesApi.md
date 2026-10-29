@@ -26,6 +26,8 @@ Method | HTTP request | Description
 # **create_data_source**
 > DataSourceResponse create_data_source(create_data_source_request)
 
+**Synchronous variant:** `create_data_source_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Data Source Handler
 
 Create a connector under a writable folder; test the connection first.
@@ -65,14 +67,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     create_data_source_request = ksapi.CreateDataSourceRequest() # CreateDataSourceRequest | 
 
     try:
         # Create Data Source Handler
-        api_response = api_instance.create_data_source(create_data_source_request)
+        api_response = await api_instance.create_data_source(create_data_source_request)
         print("The response of DataSourcesApi->create_data_source:\n")
         pprint(api_response)
     except Exception as e:
@@ -113,6 +115,8 @@ Name | Type | Description  | Notes
 
 # **delete_data_source**
 > delete_data_source(data_source_id)
+
+**Synchronous variant:** `delete_data_source_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Delete Data Source Handler
 
@@ -164,14 +168,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Data Source Handler
-        api_instance.delete_data_source(data_source_id)
+        await api_instance.delete_data_source(data_source_id)
     except Exception as e:
         print("Exception when calling DataSourcesApi->delete_data_source: %s\n" % e)
 ```
@@ -211,6 +215,8 @@ void (empty response body)
 # **delete_data_source_schema**
 > delete_data_source_schema(data_source_id, schema_id)
 
+**Synchronous variant:** `delete_data_source_schema_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Data Source Schema Handler
 
 Un-model a schema and the tables under it (hard-delete the namespace).
@@ -248,7 +254,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -256,7 +262,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Delete Data Source Schema Handler
-        api_instance.delete_data_source_schema(data_source_id, schema_id)
+        await api_instance.delete_data_source_schema(data_source_id, schema_id)
     except Exception as e:
         print("Exception when calling DataSourcesApi->delete_data_source_schema: %s\n" % e)
 ```
@@ -297,6 +303,8 @@ void (empty response body)
 # **delete_data_source_table**
 > delete_data_source_table(data_source_id, table_id)
 
+**Synchronous variant:** `delete_data_source_table_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Data Source Table Handler
 
 Un-model a single table (hard-delete it) and purge its summary point.
@@ -334,7 +342,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -342,7 +350,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Delete Data Source Table Handler
-        api_instance.delete_data_source_table(data_source_id, table_id)
+        await api_instance.delete_data_source_table(data_source_id, table_id)
     except Exception as e:
         print("Exception when calling DataSourcesApi->delete_data_source_table: %s\n" % e)
 ```
@@ -382,6 +390,8 @@ void (empty response body)
 
 # **describe_data_source_tables**
 > DataSourceDescribeResponse describe_data_source_tables(data_source_id)
+
+**Synchronous variant:** `describe_data_source_tables_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Describe Data Source Tables Handler
 
@@ -428,14 +438,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Describe Data Source Tables Handler
-        api_response = api_instance.describe_data_source_tables(data_source_id)
+        api_response = await api_instance.describe_data_source_tables(data_source_id)
         print("The response of DataSourcesApi->describe_data_source_tables:\n")
         pprint(api_response)
     except Exception as e:
@@ -477,6 +487,8 @@ Name | Type | Description  | Notes
 # **get_data_source**
 > DataSourceDetailResponse get_data_source(data_source_id)
 
+**Synchronous variant:** `get_data_source_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Data Source Handler
 
 Describe a connector + the modeled tables the caller can read.
@@ -515,14 +527,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Data Source Handler
-        api_response = api_instance.get_data_source(data_source_id)
+        api_response = await api_instance.get_data_source(data_source_id)
         print("The response of DataSourcesApi->get_data_source:\n")
         pprint(api_response)
     except Exception as e:
@@ -564,6 +576,8 @@ Name | Type | Description  | Notes
 # **get_data_source_catalog**
 > DataSourceCatalogResponse get_data_source_catalog(data_source_id, var_schema=var_schema)
 
+**Synchronous variant:** `get_data_source_catalog_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Data Source Catalog Handler
 
 Live-introspect a schema of the external DB so an admin can pick tables.
@@ -602,7 +616,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -610,7 +624,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Data Source Catalog Handler
-        api_response = api_instance.get_data_source_catalog(data_source_id, var_schema=var_schema)
+        api_response = await api_instance.get_data_source_catalog(data_source_id, var_schema=var_schema)
         print("The response of DataSourcesApi->get_data_source_catalog:\n")
         pprint(api_response)
     except Exception as e:
@@ -653,6 +667,8 @@ Name | Type | Description  | Notes
 # **list_data_source_schemas**
 > DataSourceSchemaListResponse list_data_source_schemas(data_source_id)
 
+**Synchronous variant:** `list_data_source_schemas_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Data Source Schemas Handler
 
 List the source's user namespaces (PG schemas / MySQL databases).
@@ -691,14 +707,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # List Data Source Schemas Handler
-        api_response = api_instance.list_data_source_schemas(data_source_id)
+        api_response = await api_instance.list_data_source_schemas(data_source_id)
         print("The response of DataSourcesApi->list_data_source_schemas:\n")
         pprint(api_response)
     except Exception as e:
@@ -740,6 +756,8 @@ Name | Type | Description  | Notes
 # **model_data_source_table**
 > DataSourceTableResponse model_data_source_table(data_source_id, model_table_request)
 
+**Synchronous variant:** `model_data_source_table_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Model Data Source Table Handler
 
 Model a table under its (auto-created) Schema PDO; auto-introspect columns.
@@ -779,7 +797,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -787,7 +805,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Model Data Source Table Handler
-        api_response = api_instance.model_data_source_table(data_source_id, model_table_request)
+        api_response = await api_instance.model_data_source_table(data_source_id, model_table_request)
         print("The response of DataSourcesApi->model_data_source_table:\n")
         pprint(api_response)
     except Exception as e:
@@ -829,6 +847,8 @@ Name | Type | Description  | Notes
 
 # **model_data_source_tables**
 > BulkModelTablesResponse model_data_source_tables(data_source_id, bulk_model_tables_request)
+
+**Synchronous variant:** `model_data_source_tables_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Model Data Source Tables Handler
 
@@ -875,7 +895,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -883,7 +903,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Model Data Source Tables Handler
-        api_response = api_instance.model_data_source_tables(data_source_id, bulk_model_tables_request)
+        api_response = await api_instance.model_data_source_tables(data_source_id, bulk_model_tables_request)
         print("The response of DataSourcesApi->model_data_source_tables:\n")
         pprint(api_response)
     except Exception as e:
@@ -926,6 +946,8 @@ Name | Type | Description  | Notes
 # **query_data_source**
 > DataSourceQueryResponse query_data_source(data_source_id, data_source_query_request)
 
+**Synchronous variant:** `query_data_source_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Query Data Source Handler
 
 Run a read-only SQL query, gated by per-table path permissions.
@@ -965,7 +987,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -973,7 +995,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Query Data Source Handler
-        api_response = api_instance.query_data_source(data_source_id, data_source_query_request)
+        api_response = await api_instance.query_data_source(data_source_id, data_source_query_request)
         print("The response of DataSourcesApi->query_data_source:\n")
         pprint(api_response)
     except Exception as e:
@@ -1015,6 +1037,8 @@ Name | Type | Description  | Notes
 
 # **search_data_source_tables**
 > SearchTablesResponse search_data_source_tables(search_tables_request)
+
+**Synchronous variant:** `search_data_source_tables_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Search Data Source Tables Handler
 
@@ -1059,14 +1083,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     search_tables_request = ksapi.SearchTablesRequest() # SearchTablesRequest | 
 
     try:
         # Search Data Source Tables Handler
-        api_response = api_instance.search_data_source_tables(search_tables_request)
+        api_response = await api_instance.search_data_source_tables(search_tables_request)
         print("The response of DataSourcesApi->search_data_source_tables:\n")
         pprint(api_response)
     except Exception as e:
@@ -1107,6 +1131,8 @@ Name | Type | Description  | Notes
 
 # **sync_data_source**
 > DataSourceSyncResponse sync_data_source(data_source_id)
+
+**Synchronous variant:** `sync_data_source_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Sync Data Source Handler
 
@@ -1156,14 +1182,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Sync Data Source Handler
-        api_response = api_instance.sync_data_source(data_source_id)
+        api_response = await api_instance.sync_data_source(data_source_id)
         print("The response of DataSourcesApi->sync_data_source:\n")
         pprint(api_response)
     except Exception as e:
@@ -1207,6 +1233,8 @@ Name | Type | Description  | Notes
 # **test_data_source_connection**
 > test_data_source_connection(data_source_id)
 
+**Synchronous variant:** `test_data_source_connection_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Test Data Source Connection Handler
 
 Re-test a saved connector's connection.
@@ -1244,14 +1272,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Test Data Source Connection Handler
-        api_instance.test_data_source_connection(data_source_id)
+        await api_instance.test_data_source_connection(data_source_id)
     except Exception as e:
         print("Exception when calling DataSourcesApi->test_data_source_connection: %s\n" % e)
 ```
@@ -1290,6 +1318,8 @@ void (empty response body)
 
 # **test_data_source_connection_fresh**
 > TestConnectionResponse test_data_source_connection_fresh(test_connection_request)
+
+**Synchronous variant:** `test_data_source_connection_fresh_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Test Data Source Connection Fresh Handler
 
@@ -1333,14 +1363,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     test_connection_request = ksapi.TestConnectionRequest() # TestConnectionRequest | 
 
     try:
         # Test Data Source Connection Fresh Handler
-        api_response = api_instance.test_data_source_connection_fresh(test_connection_request)
+        api_response = await api_instance.test_data_source_connection_fresh(test_connection_request)
         print("The response of DataSourcesApi->test_data_source_connection_fresh:\n")
         pprint(api_response)
     except Exception as e:
@@ -1381,6 +1411,8 @@ Name | Type | Description  | Notes
 
 # **update_data_source**
 > DataSourceResponse update_data_source(data_source_id, update_data_source_request)
+
+**Synchronous variant:** `update_data_source_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Update Data Source Handler
 
@@ -1429,7 +1461,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -1437,7 +1469,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Data Source Handler
-        api_response = api_instance.update_data_source(data_source_id, update_data_source_request)
+        api_response = await api_instance.update_data_source(data_source_id, update_data_source_request)
         print("The response of DataSourcesApi->update_data_source:\n")
         pprint(api_response)
     except Exception as e:
@@ -1480,6 +1512,8 @@ Name | Type | Description  | Notes
 # **update_data_source_table**
 > DataSourceTableResponse update_data_source_table(data_source_id, table_id, update_table_request)
 
+**Synchronous variant:** `update_data_source_table_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Data Source Table Handler
 
 Field-modeling: update the table's column allowlist.
@@ -1519,7 +1553,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DataSourcesApi(api_client)
     data_source_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -1528,7 +1562,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Data Source Table Handler
-        api_response = api_instance.update_data_source_table(data_source_id, table_id, update_table_request)
+        api_response = await api_instance.update_data_source_table(data_source_id, table_id, update_table_request)
         print("The response of DataSourcesApi->update_data_source_table:\n")
         pprint(api_response)
     except Exception as e:

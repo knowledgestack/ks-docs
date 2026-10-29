@@ -17,6 +17,8 @@ Method | HTTP request | Description
 # **create_folder**
 > FolderResponse create_folder(create_folder_request)
 
+**Synchronous variant:** `create_folder_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Folder Handler
 
 Create a new folder.
@@ -59,14 +61,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FoldersApi(api_client)
     create_folder_request = ksapi.CreateFolderRequest() # CreateFolderRequest | 
 
     try:
         # Create Folder Handler
-        api_response = api_instance.create_folder(create_folder_request)
+        api_response = await api_instance.create_folder(create_folder_request)
         print("The response of FoldersApi->create_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -108,6 +110,8 @@ Name | Type | Description  | Notes
 # **delete_folder**
 > delete_folder(folder_id)
 
+**Synchronous variant:** `delete_folder_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Folder Handler
 
 Move a folder and all its contents to trash.
@@ -145,14 +149,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FoldersApi(api_client)
     folder_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Folder Handler
-        api_instance.delete_folder(folder_id)
+        await api_instance.delete_folder(folder_id)
     except Exception as e:
         print("Exception when calling FoldersApi->delete_folder: %s\n" % e)
 ```
@@ -191,6 +195,8 @@ void (empty response body)
 
 # **folder_action**
 > FolderActionResponse folder_action(folder_id, action)
+
+**Synchronous variant:** `folder_action_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Folder Action Handler
 
@@ -234,7 +240,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FoldersApi(api_client)
     folder_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -242,7 +248,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Folder Action Handler
-        api_response = api_instance.folder_action(folder_id, action)
+        api_response = await api_instance.folder_action(folder_id, action)
         print("The response of FoldersApi->folder_action:\n")
         pprint(api_response)
     except Exception as e:
@@ -285,6 +291,8 @@ Name | Type | Description  | Notes
 # **get_folder**
 > FolderResponse get_folder(folder_id, with_tags=with_tags)
 
+**Synchronous variant:** `get_folder_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Folder Handler
 
 ### Example
@@ -321,7 +329,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FoldersApi(api_client)
     folder_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -329,7 +337,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Folder Handler
-        api_response = api_instance.get_folder(folder_id, with_tags=with_tags)
+        api_response = await api_instance.get_folder(folder_id, with_tags=with_tags)
         print("The response of FoldersApi->get_folder:\n")
         pprint(api_response)
     except Exception as e:
@@ -371,6 +379,8 @@ Name | Type | Description  | Notes
 
 # **list_folder_contents**
 > PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat list_folder_contents(folder_id, max_depth=max_depth, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, name_like=name_like, with_tags=with_tags, limit=limit, offset=offset, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+
+**Synchronous variant:** `list_folder_contents_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Folder Contents Handler
 
@@ -430,7 +440,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FoldersApi(api_client)
     folder_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -452,7 +462,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Folder Contents Handler
-        api_response = api_instance.list_folder_contents(folder_id, max_depth=max_depth, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, name_like=name_like, with_tags=with_tags, limit=limit, offset=offset, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_folder_contents(folder_id, max_depth=max_depth, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, name_like=name_like, with_tags=with_tags, limit=limit, offset=offset, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of FoldersApi->list_folder_contents:\n")
         pprint(api_response)
     except Exception as e:
@@ -509,6 +519,8 @@ Name | Type | Description  | Notes
 # **list_folders**
 > PaginatedResponseFolderResponse list_folders(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
 
+**Synchronous variant:** `list_folders_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Folders Handler
 
 List child folders of a parent folder.
@@ -555,7 +567,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FoldersApi(api_client)
     parent_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent PathPart ID (defaults to root) (optional)
@@ -572,7 +584,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Folders Handler
-        api_response = api_instance.list_folders(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_folders(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of FoldersApi->list_folders:\n")
         pprint(api_response)
     except Exception as e:
@@ -623,6 +635,8 @@ Name | Type | Description  | Notes
 
 # **search_items**
 > SearchItemsResponse search_items(name_like, part_type=part_type, sort_order=sort_order, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset, document_type=document_type, owner_id=owner_id, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
+
+**Synchronous variant:** `search_items_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Search Items Handler
 
@@ -676,7 +690,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FoldersApi(api_client)
     name_like = 'name_like_example' # str | Case-insensitive partial name search
@@ -697,7 +711,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Search Items Handler
-        api_response = api_instance.search_items(name_like, part_type=part_type, sort_order=sort_order, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset, document_type=document_type, owner_id=owner_id, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
+        api_response = await api_instance.search_items(name_like, part_type=part_type, sort_order=sort_order, with_tags=with_tags, parent_path_part_id=parent_path_part_id, limit=limit, offset=offset, document_type=document_type, owner_id=owner_id, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
         print("The response of FoldersApi->search_items:\n")
         pprint(api_response)
     except Exception as e:
@@ -753,6 +767,8 @@ Name | Type | Description  | Notes
 # **update_folder**
 > FolderResponse update_folder(folder_id, update_folder_request)
 
+**Synchronous variant:** `update_folder_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Folder Handler
 
 Update a folder (rename, move, and/or toggle Qdrant exclusion).
@@ -798,7 +814,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FoldersApi(api_client)
     folder_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -806,7 +822,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Folder Handler
-        api_response = api_instance.update_folder(folder_id, update_folder_request)
+        api_response = await api_instance.update_folder(folder_id, update_folder_request)
         print("The response of FoldersApi->update_folder:\n")
         pprint(api_response)
     except Exception as e:

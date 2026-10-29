@@ -18,6 +18,8 @@ Method | HTTP request | Description
 # **download_workflow_repo_branch_bundle**
 > bytes download_workflow_repo_branch_bundle(definition_id, run_id, version_id=version_id)
 
+**Synchronous variant:** `download_workflow_repo_branch_bundle_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Download Workflow Repo Branch Bundle Handler
 
 Download a run branch; a named version must belong to that run.
@@ -55,7 +57,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRepositoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -64,7 +66,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Download Workflow Repo Branch Bundle Handler
-        api_response = api_instance.download_workflow_repo_branch_bundle(definition_id, run_id, version_id=version_id)
+        api_response = await api_instance.download_workflow_repo_branch_bundle(definition_id, run_id, version_id=version_id)
         print("The response of WorkflowRepositoryApi->download_workflow_repo_branch_bundle:\n")
         pprint(api_response)
     except Exception as e:
@@ -108,6 +110,8 @@ Name | Type | Description  | Notes
 # **download_workflow_repo_bundle**
 > bytes download_workflow_repo_bundle(definition_id, version_id=version_id)
 
+**Synchronous variant:** `download_workflow_repo_bundle_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Download Workflow Repo Bundle Handler
 
 Download a saved version as a git bundle (what a run clones).
@@ -145,7 +149,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRepositoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -153,7 +157,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Download Workflow Repo Bundle Handler
-        api_response = api_instance.download_workflow_repo_bundle(definition_id, version_id=version_id)
+        api_response = await api_instance.download_workflow_repo_bundle(definition_id, version_id=version_id)
         print("The response of WorkflowRepositoryApi->download_workflow_repo_bundle:\n")
         pprint(api_response)
     except Exception as e:
@@ -196,6 +200,8 @@ Name | Type | Description  | Notes
 # **get_workflow_repo**
 > WorkflowRepoResponse get_workflow_repo(definition_id)
 
+**Synchronous variant:** `get_workflow_repo_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Workflow Repo Handler
 
 The repository's current main: name, head commit and size.
@@ -234,14 +240,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRepositoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Workflow Repo Handler
-        api_response = api_instance.get_workflow_repo(definition_id)
+        api_response = await api_instance.get_workflow_repo(definition_id)
         print("The response of WorkflowRepositoryApi->get_workflow_repo:\n")
         pprint(api_response)
     except Exception as e:
@@ -283,6 +289,8 @@ Name | Type | Description  | Notes
 # **get_workflow_repo_branch**
 > RepoBranchResponse get_workflow_repo_branch(definition_id, run_id)
 
+**Synchronous variant:** `get_workflow_repo_branch_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Workflow Repo Branch Handler
 
 The run's retained branch and whether its latest version reached main.
@@ -321,7 +329,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRepositoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -329,7 +337,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Workflow Repo Branch Handler
-        api_response = api_instance.get_workflow_repo_branch(definition_id, run_id)
+        api_response = await api_instance.get_workflow_repo_branch(definition_id, run_id)
         print("The response of WorkflowRepositoryApi->get_workflow_repo_branch:\n")
         pprint(api_response)
     except Exception as e:
@@ -372,6 +380,8 @@ Name | Type | Description  | Notes
 # **get_workflow_repo_tree**
 > RepoTreeResponse get_workflow_repo_tree(definition_id, commit=commit)
 
+**Synchronous variant:** `get_workflow_repo_tree_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Workflow Repo Tree Handler
 
 File metadata at a saved snapshot head (default: main), path-sorted.
@@ -413,7 +423,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRepositoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -421,7 +431,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Workflow Repo Tree Handler
-        api_response = api_instance.get_workflow_repo_tree(definition_id, commit=commit)
+        api_response = await api_instance.get_workflow_repo_tree(definition_id, commit=commit)
         print("The response of WorkflowRepositoryApi->get_workflow_repo_tree:\n")
         pprint(api_response)
     except Exception as e:
@@ -464,6 +474,8 @@ Name | Type | Description  | Notes
 # **list_workflow_repo_versions**
 > PaginatedResponseRepoVersionResponse list_workflow_repo_versions(definition_id, run_id=run_id, limit=limit, offset=offset)
 
+**Synchronous variant:** `list_workflow_repo_versions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Workflow Repo Versions Handler
 
 Saved versions, newest first: the save log.
@@ -502,7 +514,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRepositoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -512,7 +524,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Workflow Repo Versions Handler
-        api_response = api_instance.list_workflow_repo_versions(definition_id, run_id=run_id, limit=limit, offset=offset)
+        api_response = await api_instance.list_workflow_repo_versions(definition_id, run_id=run_id, limit=limit, offset=offset)
         print("The response of WorkflowRepositoryApi->list_workflow_repo_versions:\n")
         pprint(api_response)
     except Exception as e:
@@ -557,6 +569,8 @@ Name | Type | Description  | Notes
 # **record_workflow_repo_skipped_save**
 > EventResponse record_workflow_repo_skipped_save(definition_id, record_repo_save_skip_request)
 
+**Synchronous variant:** `record_workflow_repo_skipped_save_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Record Workflow Repo Skipped Save Handler
 
 Record on a run that its turn's repository changes were not kept.
@@ -599,7 +613,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRepositoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -607,7 +621,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Record Workflow Repo Skipped Save Handler
-        api_response = api_instance.record_workflow_repo_skipped_save(definition_id, record_repo_save_skip_request)
+        api_response = await api_instance.record_workflow_repo_skipped_save(definition_id, record_repo_save_skip_request)
         print("The response of WorkflowRepositoryApi->record_workflow_repo_skipped_save:\n")
         pprint(api_response)
     except Exception as e:
@@ -650,6 +664,8 @@ Name | Type | Description  | Notes
 # **save_workflow_repo_branch**
 > RepoBranchResponse save_workflow_repo_branch(definition_id, run_id, bundle, expected_version_id=expected_version_id, base_version_id=base_version_id)
 
+**Synchronous variant:** `save_workflow_repo_branch_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Save Workflow Repo Branch Handler
 
 Retain a branch without publishing it to other runs.
@@ -688,7 +704,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRepositoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -699,7 +715,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Save Workflow Repo Branch Handler
-        api_response = api_instance.save_workflow_repo_branch(definition_id, run_id, bundle, expected_version_id=expected_version_id, base_version_id=base_version_id)
+        api_response = await api_instance.save_workflow_repo_branch(definition_id, run_id, bundle, expected_version_id=expected_version_id, base_version_id=base_version_id)
         print("The response of WorkflowRepositoryApi->save_workflow_repo_branch:\n")
         pprint(api_response)
     except Exception as e:
@@ -746,6 +762,8 @@ Name | Type | Description  | Notes
 # **save_workflow_repo_version**
 > RepoVersionResponse save_workflow_repo_version(definition_id, bundle, run_id, expected_version_id=expected_version_id, candidate_version_id=candidate_version_id)
 
+**Synchronous variant:** `save_workflow_repo_version_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Save Workflow Repo Version Handler
 
 Make a bundle the workflow's new main (compare-and-set on the base version).
@@ -788,7 +806,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRepositoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -799,7 +817,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Save Workflow Repo Version Handler
-        api_response = api_instance.save_workflow_repo_version(definition_id, bundle, run_id, expected_version_id=expected_version_id, candidate_version_id=candidate_version_id)
+        api_response = await api_instance.save_workflow_repo_version(definition_id, bundle, run_id, expected_version_id=expected_version_id, candidate_version_id=candidate_version_id)
         print("The response of WorkflowRepositoryApi->save_workflow_repo_version:\n")
         pprint(api_response)
     except Exception as e:

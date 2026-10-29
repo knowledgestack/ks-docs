@@ -12,6 +12,8 @@ Method | HTTP request | Description
 # **create_thread_message**
 > ThreadMessageResponse create_thread_message(thread_id, create_thread_message_request)
 
+**Synchronous variant:** `create_thread_message_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Thread Message Handler
 
 Create a new message in a thread.
@@ -51,7 +53,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ThreadMessagesApi(api_client)
     thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -59,7 +61,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Create Thread Message Handler
-        api_response = api_instance.create_thread_message(thread_id, create_thread_message_request)
+        api_response = await api_instance.create_thread_message(thread_id, create_thread_message_request)
         print("The response of ThreadMessagesApi->create_thread_message:\n")
         pprint(api_response)
     except Exception as e:
@@ -102,6 +104,8 @@ Name | Type | Description  | Notes
 # **get_thread_message**
 > ThreadMessageResponse get_thread_message(thread_id, message_id, with_details=with_details)
 
+**Synchronous variant:** `get_thread_message_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Thread Message Handler
 
 Get a specific message by its ID.
@@ -142,7 +146,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ThreadMessagesApi(api_client)
     thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -151,7 +155,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Thread Message Handler
-        api_response = api_instance.get_thread_message(thread_id, message_id, with_details=with_details)
+        api_response = await api_instance.get_thread_message(thread_id, message_id, with_details=with_details)
         print("The response of ThreadMessagesApi->get_thread_message:\n")
         pprint(api_response)
     except Exception as e:
@@ -194,6 +198,8 @@ Name | Type | Description  | Notes
 
 # **list_thread_messages**
 > PaginatedResponseThreadMessageResponse list_thread_messages(thread_id, before=before, role=role, sort_dir=sort_dir, with_details=with_details, limit=limit, offset=offset)
+
+**Synchronous variant:** `list_thread_messages_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Thread Messages Handler
 
@@ -240,7 +246,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ThreadMessagesApi(api_client)
     thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -253,7 +259,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Thread Messages Handler
-        api_response = api_instance.list_thread_messages(thread_id, before=before, role=role, sort_dir=sort_dir, with_details=with_details, limit=limit, offset=offset)
+        api_response = await api_instance.list_thread_messages(thread_id, before=before, role=role, sort_dir=sort_dir, with_details=with_details, limit=limit, offset=offset)
         print("The response of ThreadMessagesApi->list_thread_messages:\n")
         pprint(api_response)
     except Exception as e:

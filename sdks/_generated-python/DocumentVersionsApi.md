@@ -20,6 +20,8 @@ Method | HTTP request | Description
 # **attach_cited_asset**
 > attach_cited_asset(version_id, file)
 
+**Synchronous variant:** `attach_cited_asset_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Attach Cited Asset Handler
 
 Store the agent's cited copy of a version's source as its cited_source_s3 sibling.
@@ -63,7 +65,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
@@ -71,7 +73,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Attach Cited Asset Handler
-        api_instance.attach_cited_asset(version_id, file)
+        await api_instance.attach_cited_asset(version_id, file)
     except Exception as e:
         print("Exception when calling DocumentVersionsApi->attach_cited_asset: %s\n" % e)
 ```
@@ -111,6 +113,8 @@ void (empty response body)
 
 # **clear_document_version_contents**
 > ClearVersionContentsResponse clear_document_version_contents(version_id)
+
+**Synchronous variant:** `clear_document_version_contents_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Clear Document Version Contents Handler
 
@@ -154,14 +158,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
 
     try:
         # Clear Document Version Contents Handler
-        api_response = api_instance.clear_document_version_contents(version_id)
+        api_response = await api_instance.clear_document_version_contents(version_id)
         print("The response of DocumentVersionsApi->clear_document_version_contents:\n")
         pprint(api_response)
     except Exception as e:
@@ -202,6 +206,8 @@ Name | Type | Description  | Notes
 
 # **create_document_version**
 > DocumentVersionResponse create_document_version(document_id)
+
+**Synchronous variant:** `create_document_version_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Create Document Version Handler
 
@@ -248,14 +254,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     document_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Document ID
 
     try:
         # Create Document Version Handler
-        api_response = api_instance.create_document_version(document_id)
+        api_response = await api_instance.create_document_version(document_id)
         print("The response of DocumentVersionsApi->create_document_version:\n")
         pprint(api_response)
     except Exception as e:
@@ -296,6 +302,8 @@ Name | Type | Description  | Notes
 
 # **delete_document_version**
 > delete_document_version(version_id)
+
+**Synchronous variant:** `delete_document_version_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Delete Document Version Handler
 
@@ -341,14 +349,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
 
     try:
         # Delete Document Version Handler
-        api_instance.delete_document_version(version_id)
+        await api_instance.delete_document_version(version_id)
     except Exception as e:
         print("Exception when calling DocumentVersionsApi->delete_document_version: %s\n" % e)
 ```
@@ -387,6 +395,8 @@ void (empty response body)
 
 # **document_version_action**
 > DocumentVersionActionResponse document_version_action(version_id, action)
+
+**Synchronous variant:** `document_version_action_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Document Version Action Handler
 
@@ -430,7 +440,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
@@ -438,7 +448,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Document Version Action Handler
-        api_response = api_instance.document_version_action(version_id, action)
+        api_response = await api_instance.document_version_action(version_id, action)
         print("The response of DocumentVersionsApi->document_version_action:\n")
         pprint(api_response)
     except Exception as e:
@@ -480,6 +490,8 @@ Name | Type | Description  | Notes
 
 # **download_document_version**
 > DocumentDownloadResponse download_document_version(version_id, artifact=artifact)
+
+**Synchronous variant:** `download_document_version_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Download Document Version Handler
 
@@ -523,7 +535,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
@@ -531,7 +543,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Download Document Version Handler
-        api_response = api_instance.download_document_version(version_id, artifact=artifact)
+        api_response = await api_instance.download_document_version(version_id, artifact=artifact)
         print("The response of DocumentVersionsApi->download_document_version:\n")
         pprint(api_response)
     except Exception as e:
@@ -574,6 +586,8 @@ Name | Type | Description  | Notes
 # **get_document_version**
 > DocumentVersionResponse get_document_version(version_id, include_page_screenshots=include_page_screenshots)
 
+**Synchronous variant:** `get_document_version_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Document Version Handler
 
 ### Example
@@ -610,7 +624,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
@@ -618,7 +632,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Document Version Handler
-        api_response = api_instance.get_document_version(version_id, include_page_screenshots=include_page_screenshots)
+        api_response = await api_instance.get_document_version(version_id, include_page_screenshots=include_page_screenshots)
         print("The response of DocumentVersionsApi->get_document_version:\n")
         pprint(api_response)
     except Exception as e:
@@ -660,6 +674,8 @@ Name | Type | Description  | Notes
 
 # **get_document_version_contents**
 > PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator get_document_version_contents(version_id, section_id=section_id, content_type=content_type, limit=limit, offset=offset)
+
+**Synchronous variant:** `get_document_version_contents_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Document Version Contents Handler
 
@@ -706,7 +722,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
@@ -717,7 +733,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Document Version Contents Handler
-        api_response = api_instance.get_document_version_contents(version_id, section_id=section_id, content_type=content_type, limit=limit, offset=offset)
+        api_response = await api_instance.get_document_version_contents(version_id, section_id=section_id, content_type=content_type, limit=limit, offset=offset)
         print("The response of DocumentVersionsApi->get_document_version_contents:\n")
         pprint(api_response)
     except Exception as e:
@@ -762,6 +778,8 @@ Name | Type | Description  | Notes
 
 # **get_document_version_diff**
 > VersionDiffResponse get_document_version_diff(version_id, from_version_id=from_version_id)
+
+**Synchronous variant:** `get_document_version_diff_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Document Version Diff Handler
 
@@ -808,7 +826,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | The new (right) version ID
@@ -816,7 +834,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Document Version Diff Handler
-        api_response = api_instance.get_document_version_diff(version_id, from_version_id=from_version_id)
+        api_response = await api_instance.get_document_version_diff(version_id, from_version_id=from_version_id)
         print("The response of DocumentVersionsApi->get_document_version_diff:\n")
         pprint(api_response)
     except Exception as e:
@@ -858,6 +876,8 @@ Name | Type | Description  | Notes
 
 # **list_document_versions**
 > PaginatedResponseDocumentVersionResponse list_document_versions(document_id, sort_by=sort_by, sort_dir=sort_dir, uploader_user_id=uploader_user_id, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+
+**Synchronous variant:** `list_document_versions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Document Versions Handler
 
@@ -901,7 +921,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     document_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Document ID to list versions for
@@ -917,7 +937,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Document Versions Handler
-        api_response = api_instance.list_document_versions(document_id, sort_by=sort_by, sort_dir=sort_dir, uploader_user_id=uploader_user_id, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_document_versions(document_id, sort_by=sort_by, sort_dir=sort_dir, uploader_user_id=uploader_user_id, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of DocumentVersionsApi->list_document_versions:\n")
         pprint(api_response)
     except Exception as e:
@@ -967,6 +987,8 @@ Name | Type | Description  | Notes
 
 # **update_document_version_metadata**
 > DocumentVersionResponse update_document_version_metadata(version_id, document_version_metadata_update)
+
+**Synchronous variant:** `update_document_version_metadata_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Update Document Version Metadata Handler
 
@@ -1020,7 +1042,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentVersionsApi(api_client)
     version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | DocumentVersion ID
@@ -1028,7 +1050,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Document Version Metadata Handler
-        api_response = api_instance.update_document_version_metadata(version_id, document_version_metadata_update)
+        api_response = await api_instance.update_document_version_metadata(version_id, document_version_metadata_update)
         print("The response of DocumentVersionsApi->update_document_version_metadata:\n")
         pprint(api_response)
     except Exception as e:

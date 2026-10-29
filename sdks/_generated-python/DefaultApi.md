@@ -11,6 +11,8 @@ Method | HTTP request | Description
 # **health_check**
 > HealthCheckResponse health_check()
 
+**Synchronous variant:** `health_check_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Health Check Handler
 
 Health check endpoint.
@@ -32,13 +34,13 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DefaultApi(api_client)
 
     try:
         # Health Check Handler
-        api_response = api_instance.health_check()
+        api_response = await api_instance.health_check()
         print("The response of DefaultApi->health_check:\n")
         pprint(api_response)
     except Exception as e:
@@ -76,6 +78,8 @@ No authorization required
 # **hello**
 > RootResponse hello()
 
+**Synchronous variant:** `hello_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Root Handler
 
 Root endpoint.
@@ -97,13 +101,13 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DefaultApi(api_client)
 
     try:
         # Root Handler
-        api_response = api_instance.hello()
+        api_response = await api_instance.hello()
         print("The response of DefaultApi->hello:\n")
         pprint(api_response)
     except Exception as e:

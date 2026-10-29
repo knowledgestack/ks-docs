@@ -17,6 +17,8 @@ Method | HTTP request | Description
 # **bulk_rerun_dv_workflows**
 > BulkOperationResponse bulk_rerun_dv_workflows(bulk_rerun_request)
 
+**Synchronous variant:** `bulk_rerun_dv_workflows_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Bulk Rerun Dv Workflows Handler
 
 Re-run ingestion for the selected document versions, reporting per item.
@@ -63,14 +65,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SystemJobsApi(api_client)
     bulk_rerun_request = ksapi.BulkRerunRequest() # BulkRerunRequest | 
 
     try:
         # Bulk Rerun Dv Workflows Handler
-        api_response = api_instance.bulk_rerun_dv_workflows(bulk_rerun_request)
+        api_response = await api_instance.bulk_rerun_dv_workflows(bulk_rerun_request)
         print("The response of SystemJobsApi->bulk_rerun_dv_workflows:\n")
         pprint(api_response)
     except Exception as e:
@@ -111,6 +113,8 @@ Name | Type | Description  | Notes
 
 # **cancel_temporal_workflow**
 > WorkflowCancelResponse cancel_temporal_workflow(workflow_id)
+
+**Synchronous variant:** `cancel_temporal_workflow_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Cancel Temporal Workflow Handler
 
@@ -155,14 +159,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SystemJobsApi(api_client)
     workflow_id = 'workflow_id_example' # str | 
 
     try:
         # Cancel Temporal Workflow Handler
-        api_response = api_instance.cancel_temporal_workflow(workflow_id)
+        api_response = await api_instance.cancel_temporal_workflow(workflow_id)
         print("The response of SystemJobsApi->cancel_temporal_workflow:\n")
         pprint(api_response)
     except Exception as e:
@@ -203,6 +207,8 @@ Name | Type | Description  | Notes
 
 # **dv_workflow_rerun**
 > WorkflowActionResponse dv_workflow_rerun(workflow_id)
+
+**Synchronous variant:** `dv_workflow_rerun_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Dv Workflow Rerun Handler
 
@@ -246,14 +252,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SystemJobsApi(api_client)
     workflow_id = 'workflow_id_example' # str | 
 
     try:
         # Dv Workflow Rerun Handler
-        api_response = api_instance.dv_workflow_rerun(workflow_id)
+        api_response = await api_instance.dv_workflow_rerun(workflow_id)
         print("The response of SystemJobsApi->dv_workflow_rerun:\n")
         pprint(api_response)
     except Exception as e:
@@ -295,6 +301,8 @@ Name | Type | Description  | Notes
 # **get_dv_workflow**
 > WorkflowDetailResponse get_dv_workflow(workflow_id)
 
+**Synchronous variant:** `get_dv_workflow_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Dv Workflow Handler
 
 Get single workflow detail with live Temporal status.
@@ -333,14 +341,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SystemJobsApi(api_client)
     workflow_id = 'workflow_id_example' # str | 
 
     try:
         # Get Dv Workflow Handler
-        api_response = api_instance.get_dv_workflow(workflow_id)
+        api_response = await api_instance.get_dv_workflow(workflow_id)
         print("The response of SystemJobsApi->get_dv_workflow:\n")
         pprint(api_response)
     except Exception as e:
@@ -382,6 +390,8 @@ Name | Type | Description  | Notes
 # **get_temporal_workflow_status**
 > TemporalWorkflowStatusResponse get_temporal_workflow_status(workflow_id)
 
+**Synchronous variant:** `get_temporal_workflow_status_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Temporal Workflow Status Handler
 
 Get live Temporal status for any workflow owned by the caller's tenant.
@@ -420,14 +430,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SystemJobsApi(api_client)
     workflow_id = 'workflow_id_example' # str | 
 
     try:
         # Get Temporal Workflow Status Handler
-        api_response = api_instance.get_temporal_workflow_status(workflow_id)
+        api_response = await api_instance.get_temporal_workflow_status(workflow_id)
         print("The response of SystemJobsApi->get_temporal_workflow_status:\n")
         pprint(api_response)
     except Exception as e:
@@ -468,6 +478,8 @@ Name | Type | Description  | Notes
 
 # **get_zip_ingestion_status**
 > ZipIngestionStatusResponse get_zip_ingestion_status(workflow_id)
+
+**Synchronous variant:** `get_zip_ingestion_status_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Zip Ingestion Status Handler
 
@@ -514,14 +526,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SystemJobsApi(api_client)
     workflow_id = 'workflow_id_example' # str | 
 
     try:
         # Get Zip Ingestion Status Handler
-        api_response = api_instance.get_zip_ingestion_status(workflow_id)
+        api_response = await api_instance.get_zip_ingestion_status(workflow_id)
         print("The response of SystemJobsApi->get_zip_ingestion_status:\n")
         pprint(api_response)
     except Exception as e:
@@ -563,6 +575,8 @@ Name | Type | Description  | Notes
 # **list_dv_workflow_uploaders**
 > PaginatedResponseUserInfo list_dv_workflow_uploaders(username_like=username_like, limit=limit, offset=offset)
 
+**Synchronous variant:** `list_dv_workflow_uploaders_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Dv Workflow Uploaders Handler
 
 People who uploaded a version the caller can list, for the uploader filter.
@@ -603,7 +617,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SystemJobsApi(api_client)
     username_like = 'username_like_example' # str | Case-insensitive substring of the first or last name (optional)
@@ -612,7 +626,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Dv Workflow Uploaders Handler
-        api_response = api_instance.list_dv_workflow_uploaders(username_like=username_like, limit=limit, offset=offset)
+        api_response = await api_instance.list_dv_workflow_uploaders(username_like=username_like, limit=limit, offset=offset)
         print("The response of SystemJobsApi->list_dv_workflow_uploaders:\n")
         pprint(api_response)
     except Exception as e:
@@ -655,6 +669,8 @@ Name | Type | Description  | Notes
 
 # **list_dv_workflows**
 > PaginatedResponseWorkflowSummaryResponse list_dv_workflows(limit=limit, offset=offset, sort_dir=sort_dir, status=status, name_like=name_like, latest_version_only=latest_version_only, uploader_user_id=uploader_user_id, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+
+**Synchronous variant:** `list_dv_workflows_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Dv Workflows Handler
 
@@ -699,7 +715,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SystemJobsApi(api_client)
     limit = 20 # int | Number of items per page (optional) (default to 20)
@@ -716,7 +732,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Dv Workflows Handler
-        api_response = api_instance.list_dv_workflows(limit=limit, offset=offset, sort_dir=sort_dir, status=status, name_like=name_like, latest_version_only=latest_version_only, uploader_user_id=uploader_user_id, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_dv_workflows(limit=limit, offset=offset, sort_dir=sort_dir, status=status, name_like=name_like, latest_version_only=latest_version_only, uploader_user_id=uploader_user_id, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of SystemJobsApi->list_dv_workflows:\n")
         pprint(api_response)
     except Exception as e:

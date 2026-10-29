@@ -10,6 +10,8 @@ Method | HTTP request | Description
 # **get_features**
 > FeaturesResponse get_features()
 
+**Synchronous variant:** `get_features_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Features Handler
 
 Return public feature flags for the frontend.
@@ -31,13 +33,13 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FeaturesApi(api_client)
 
     try:
         # Get Features Handler
-        api_response = api_instance.get_features()
+        api_response = await api_instance.get_features()
         print("The response of FeaturesApi->get_features:\n")
         pprint(api_response)
     except Exception as e:

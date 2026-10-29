@@ -11,6 +11,8 @@ Method | HTTP request | Description
 # **get_path_part_approval**
 > PathPartApprovalResponse get_path_part_approval(path_part_id)
 
+**Synchronous variant:** `get_path_part_approval_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Path Part Approval Handler
 
 Return the current approval audit row for a path_part.
@@ -54,14 +56,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartApprovalsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Path Part Approval Handler
-        api_response = api_instance.get_path_part_approval(path_part_id)
+        api_response = await api_instance.get_path_part_approval(path_part_id)
         print("The response of PathPartApprovalsApi->get_path_part_approval:\n")
         pprint(api_response)
     except Exception as e:
@@ -102,6 +104,8 @@ Name | Type | Description  | Notes
 
 # **set_path_part_approval**
 > PathPartApprovalResponse set_path_part_approval(path_part_id, set_approval_state_request)
+
+**Synchronous variant:** `set_path_part_approval_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Set Path Part Approval Handler
 
@@ -152,7 +156,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartApprovalsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -160,7 +164,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Set Path Part Approval Handler
-        api_response = api_instance.set_path_part_approval(path_part_id, set_approval_state_request)
+        api_response = await api_instance.set_path_part_approval(path_part_id, set_approval_state_request)
         print("The response of PathPartApprovalsApi->set_path_part_approval:\n")
         pprint(api_response)
     except Exception as e:

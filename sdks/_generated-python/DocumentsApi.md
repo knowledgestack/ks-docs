@@ -23,6 +23,8 @@ Method | HTTP request | Description
 # **abort_document_upload**
 > abort_document_upload(x_upload_token)
 
+**Synchronous variant:** `abort_document_upload_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Abort Document Upload Handler
 
 Discard an in-progress resumable upload and its parts.
@@ -60,14 +62,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     x_upload_token = 'x_upload_token_example' # str | 
 
     try:
         # Abort Document Upload Handler
-        api_instance.abort_document_upload(x_upload_token)
+        await api_instance.abort_document_upload(x_upload_token)
     except Exception as e:
         print("Exception when calling DocumentsApi->abort_document_upload: %s\n" % e)
 ```
@@ -106,6 +108,8 @@ void (empty response body)
 
 # **complete_document_upload**
 > IngestDocumentResponse complete_document_upload(complete_upload_request)
+
+**Synchronous variant:** `complete_document_upload_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Complete Document Upload Handler
 
@@ -146,14 +150,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     complete_upload_request = ksapi.CompleteUploadRequest() # CompleteUploadRequest | 
 
     try:
         # Complete Document Upload Handler
-        api_response = api_instance.complete_document_upload(complete_upload_request)
+        api_response = await api_instance.complete_document_upload(complete_upload_request)
         print("The response of DocumentsApi->complete_document_upload:\n")
         pprint(api_response)
     except Exception as e:
@@ -194,6 +198,8 @@ Name | Type | Description  | Notes
 
 # **create_document**
 > DocumentResponse create_document(create_document_request)
+
+**Synchronous variant:** `create_document_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Create Document Handler
 
@@ -237,14 +243,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     create_document_request = ksapi.CreateDocumentRequest() # CreateDocumentRequest | 
 
     try:
         # Create Document Handler
-        api_response = api_instance.create_document(create_document_request)
+        api_response = await api_instance.create_document(create_document_request)
         print("The response of DocumentsApi->create_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -285,6 +291,8 @@ Name | Type | Description  | Notes
 
 # **create_document_upload**
 > CreateUploadResponse create_document_upload(create_upload_request)
+
+**Synchronous variant:** `create_document_upload_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Create Document Upload Handler
 
@@ -330,14 +338,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     create_upload_request = ksapi.CreateUploadRequest() # CreateUploadRequest | 
 
     try:
         # Create Document Upload Handler
-        api_response = api_instance.create_document_upload(create_upload_request)
+        api_response = await api_instance.create_document_upload(create_upload_request)
         print("The response of DocumentsApi->create_document_upload:\n")
         pprint(api_response)
     except Exception as e:
@@ -378,6 +386,8 @@ Name | Type | Description  | Notes
 
 # **delete_document**
 > delete_document(document_id)
+
+**Synchronous variant:** `delete_document_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Delete Document Handler
 
@@ -420,14 +430,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     document_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Document Handler
-        api_instance.delete_document(document_id)
+        await api_instance.delete_document(document_id)
     except Exception as e:
         print("Exception when calling DocumentsApi->delete_document: %s\n" % e)
 ```
@@ -466,6 +476,8 @@ void (empty response body)
 
 # **download_document**
 > DocumentDownloadResponse download_document(document_id, artifact=artifact)
+
+**Synchronous variant:** `download_document_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Download Document Handler
 
@@ -509,7 +521,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     document_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -517,7 +529,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Download Document Handler
-        api_response = api_instance.download_document(document_id, artifact=artifact)
+        api_response = await api_instance.download_document(document_id, artifact=artifact)
         print("The response of DocumentsApi->download_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -560,6 +572,8 @@ Name | Type | Description  | Notes
 # **get_document**
 > DocumentResponse get_document(document_id, with_tags=with_tags)
 
+**Synchronous variant:** `get_document_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Document Handler
 
 ### Example
@@ -596,7 +610,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     document_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -604,7 +618,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Document Handler
-        api_response = api_instance.get_document(document_id, with_tags=with_tags)
+        api_response = await api_instance.get_document(document_id, with_tags=with_tags)
         print("The response of DocumentsApi->get_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -647,6 +661,8 @@ Name | Type | Description  | Notes
 # **get_document_upload_status**
 > UploadStatusResponse get_document_upload_status(x_upload_token)
 
+**Synchronous variant:** `get_document_upload_status_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Document Upload Status Handler
 
 Report which parts S3 already holds so the client resumes the rest.
@@ -685,14 +701,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     x_upload_token = 'x_upload_token_example' # str | 
 
     try:
         # Get Document Upload Status Handler
-        api_response = api_instance.get_document_upload_status(x_upload_token)
+        api_response = await api_instance.get_document_upload_status(x_upload_token)
         print("The response of DocumentsApi->get_document_upload_status:\n")
         pprint(api_response)
     except Exception as e:
@@ -733,6 +749,8 @@ Name | Type | Description  | Notes
 
 # **ingest_document**
 > IngestDocumentResponse ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
+
+**Synchronous variant:** `ingest_document_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Ingest Document Handler
 
@@ -780,7 +798,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     file = None # bytes | 
@@ -797,7 +815,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Ingest Document Handler
-        api_response = api_instance.ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
+        api_response = await api_instance.ingest_document(file, path_part_id, name=name, tag_ids=tag_ids, idempotency_key=idempotency_key, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
         print("The response of DocumentsApi->ingest_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -848,6 +866,8 @@ Name | Type | Description  | Notes
 
 # **ingest_document_version**
 > IngestDocumentResponse ingest_document_version(document_id, file, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
+
+**Synchronous variant:** `ingest_document_version_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Ingest Document Version Handler
 
@@ -907,7 +927,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     document_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Document ID
@@ -921,7 +941,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Ingest Document Version Handler
-        api_response = api_instance.ingest_document_version(document_id, file, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
+        api_response = await api_instance.ingest_document_version(document_id, file, ingestion_mode=ingestion_mode, chunk_type=chunk_type, secondary_taxonomy=secondary_taxonomy, page_dpi=page_dpi, workflow_run_id=workflow_run_id, workflow_definition_id=workflow_definition_id)
         print("The response of DocumentsApi->ingest_document_version:\n")
         pprint(api_response)
     except Exception as e:
@@ -969,6 +989,8 @@ Name | Type | Description  | Notes
 
 # **ingest_zip**
 > IngestZipResponse ingest_zip(file, path_part_id, ingestion_mode=ingestion_mode, tag_ids=tag_ids)
+
+**Synchronous variant:** `ingest_zip_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Ingest Zip Handler
 
@@ -1023,7 +1045,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     file = None # bytes | 
@@ -1033,7 +1055,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Ingest Zip Handler
-        api_response = api_instance.ingest_zip(file, path_part_id, ingestion_mode=ingestion_mode, tag_ids=tag_ids)
+        api_response = await api_instance.ingest_zip(file, path_part_id, ingestion_mode=ingestion_mode, tag_ids=tag_ids)
         print("The response of DocumentsApi->ingest_zip:\n")
         pprint(api_response)
     except Exception as e:
@@ -1077,6 +1099,8 @@ Name | Type | Description  | Notes
 
 # **list_documents**
 > PaginatedResponseDocumentResponse list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, document_type=document_type, duration_min_ms=duration_min_ms, duration_max_ms=duration_max_ms, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+
+**Synchronous variant:** `list_documents_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Documents Handler
 
@@ -1122,7 +1146,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     parent_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent PathPart ID (defaults to root) (optional)
@@ -1142,7 +1166,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Documents Handler
-        api_response = api_instance.list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, document_type=document_type, duration_min_ms=duration_min_ms, duration_max_ms=duration_max_ms, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, document_type=document_type, duration_min_ms=duration_min_ms, duration_max_ms=duration_max_ms, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of DocumentsApi->list_documents:\n")
         pprint(api_response)
     except Exception as e:
@@ -1197,6 +1221,8 @@ Name | Type | Description  | Notes
 # **update_document**
 > DocumentResponse update_document(document_id, update_document_request)
 
+**Synchronous variant:** `update_document_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Document Handler
 
 Update a document (rename, move, change active version, Qdrant exclusion).
@@ -1242,7 +1268,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     document_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -1250,7 +1276,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Document Handler
-        api_response = api_instance.update_document(document_id, update_document_request)
+        api_response = await api_instance.update_document(document_id, update_document_request)
         print("The response of DocumentsApi->update_document:\n")
         pprint(api_response)
     except Exception as e:
@@ -1293,6 +1319,8 @@ Name | Type | Description  | Notes
 # **upload_document_part**
 > UploadPartResponse upload_document_part(part_number, x_upload_token, body)
 
+**Synchronous variant:** `upload_document_part_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Upload Document Part Handler
 
 Upload one part (raw octet-stream body) of a resumable upload.
@@ -1331,7 +1359,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentsApi(api_client)
     part_number = 56 # int | 
@@ -1340,7 +1368,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Upload Document Part Handler
-        api_response = api_instance.upload_document_part(part_number, x_upload_token, body)
+        api_response = await api_instance.upload_document_part(part_number, x_upload_token, body)
         print("The response of DocumentsApi->upload_document_part:\n")
         pprint(api_response)
     except Exception as e:

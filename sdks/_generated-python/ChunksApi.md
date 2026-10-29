@@ -18,6 +18,8 @@ Method | HTTP request | Description
 # **create_chunk**
 > ChunkResponse create_chunk(create_chunk_request)
 
+**Synchronous variant:** `create_chunk_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Chunk Handler
 
 Create a new chunk with content.
@@ -60,14 +62,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     create_chunk_request = ksapi.CreateChunkRequest() # CreateChunkRequest | 
 
     try:
         # Create Chunk Handler
-        api_response = api_instance.create_chunk(create_chunk_request)
+        api_response = await api_instance.create_chunk(create_chunk_request)
         print("The response of ChunksApi->create_chunk:\n")
         pprint(api_response)
     except Exception as e:
@@ -109,6 +111,8 @@ Name | Type | Description  | Notes
 # **delete_chunk**
 > delete_chunk(chunk_id)
 
+**Synchronous variant:** `delete_chunk_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Chunk Handler
 
 Delete a chunk.
@@ -149,14 +153,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Chunk Handler
-        api_instance.delete_chunk(chunk_id)
+        await api_instance.delete_chunk(chunk_id)
     except Exception as e:
         print("Exception when calling ChunksApi->delete_chunk: %s\n" % e)
 ```
@@ -196,6 +200,8 @@ void (empty response body)
 # **get_chunk**
 > ChunkResponse get_chunk(chunk_id, with_document=with_document)
 
+**Synchronous variant:** `get_chunk_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Chunk Handler
 
 Get a chunk by its ID, including content.
@@ -234,7 +240,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -242,7 +248,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Chunk Handler
-        api_response = api_instance.get_chunk(chunk_id, with_document=with_document)
+        api_response = await api_instance.get_chunk(chunk_id, with_document=with_document)
         print("The response of ChunksApi->get_chunk:\n")
         pprint(api_response)
     except Exception as e:
@@ -284,6 +290,8 @@ Name | Type | Description  | Notes
 
 # **get_chunk_neighbors**
 > ChunkNeighborsResponse get_chunk_neighbors(chunk_id, prev=prev, next=next, content_type=content_type, within_section=within_section)
+
+**Synchronous variant:** `get_chunk_neighbors_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Chunk Neighbors Handler
 
@@ -341,7 +349,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -352,7 +360,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Chunk Neighbors Handler
-        api_response = api_instance.get_chunk_neighbors(chunk_id, prev=prev, next=next, content_type=content_type, within_section=within_section)
+        api_response = await api_instance.get_chunk_neighbors(chunk_id, prev=prev, next=next, content_type=content_type, within_section=within_section)
         print("The response of ChunksApi->get_chunk_neighbors:\n")
         pprint(api_response)
     except Exception as e:
@@ -398,6 +406,8 @@ Name | Type | Description  | Notes
 # **get_chunks_bulk**
 > List[ChunkBulkResponse] get_chunks_bulk(chunk_ids=chunk_ids)
 
+**Synchronous variant:** `get_chunks_bulk_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Chunks Bulk Handler
 
 Batch-fetch chunks with their full ancestor path part IDs.
@@ -440,14 +450,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     chunk_ids = None # List[UUID] | Chunk IDs to resolve (max 200) (optional)
 
     try:
         # Get Chunks Bulk Handler
-        api_response = api_instance.get_chunks_bulk(chunk_ids=chunk_ids)
+        api_response = await api_instance.get_chunks_bulk(chunk_ids=chunk_ids)
         print("The response of ChunksApi->get_chunks_bulk:\n")
         pprint(api_response)
     except Exception as e:
@@ -489,6 +499,8 @@ Name | Type | Description  | Notes
 # **get_version_chunk_ids**
 > VersionChunkIdsResponse get_version_chunk_ids(document_version_id)
 
+**Synchronous variant:** `get_version_chunk_ids_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Version Chunk Ids Handler
 
 Get all chunk IDs belonging to a document version.
@@ -529,14 +541,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     document_version_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Document version ID
 
     try:
         # Get Version Chunk Ids Handler
-        api_response = api_instance.get_version_chunk_ids(document_version_id)
+        api_response = await api_instance.get_version_chunk_ids(document_version_id)
         print("The response of ChunksApi->get_version_chunk_ids:\n")
         pprint(api_response)
     except Exception as e:
@@ -577,6 +589,8 @@ Name | Type | Description  | Notes
 
 # **search_chunks**
 > List[ScoredChunkResponse] search_chunks(chunk_search_request)
+
+**Synchronous variant:** `search_chunks_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Search Chunks Handler
 
@@ -628,14 +642,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     chunk_search_request = ksapi.ChunkSearchRequest() # ChunkSearchRequest | 
 
     try:
         # Search Chunks Handler
-        api_response = api_instance.search_chunks(chunk_search_request)
+        api_response = await api_instance.search_chunks(chunk_search_request)
         print("The response of ChunksApi->search_chunks:\n")
         pprint(api_response)
     except Exception as e:
@@ -676,6 +690,8 @@ Name | Type | Description  | Notes
 
 # **update_chunk_content**
 > ChunkResponse update_chunk_content(chunk_id, update_chunk_content_request)
+
+**Synchronous variant:** `update_chunk_content_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Update Chunk Content Handler
 
@@ -719,7 +735,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -727,7 +743,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Chunk Content Handler
-        api_response = api_instance.update_chunk_content(chunk_id, update_chunk_content_request)
+        api_response = await api_instance.update_chunk_content(chunk_id, update_chunk_content_request)
         print("The response of ChunksApi->update_chunk_content:\n")
         pprint(api_response)
     except Exception as e:
@@ -769,6 +785,8 @@ Name | Type | Description  | Notes
 
 # **update_chunk_metadata**
 > ChunkResponse update_chunk_metadata(chunk_id, update_chunk_metadata_request)
+
+**Synchronous variant:** `update_chunk_metadata_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Update Chunk Metadata Handler
 
@@ -813,7 +831,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunksApi(api_client)
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -821,7 +839,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Chunk Metadata Handler
-        api_response = api_instance.update_chunk_metadata(chunk_id, update_chunk_metadata_request)
+        api_response = await api_instance.update_chunk_metadata(chunk_id, update_chunk_metadata_request)
         print("The response of ChunksApi->update_chunk_metadata:\n")
         pprint(api_response)
     except Exception as e:

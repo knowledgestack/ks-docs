@@ -14,6 +14,8 @@ Method | HTTP request | Description
 # **append_workflow_memory_chunk**
 > MemoryEntryResponse append_workflow_memory_chunk(definition_id, append_memory_chunk_request)
 
+**Synchronous variant:** `append_workflow_memory_chunk_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Append Workflow Memory Chunk Handler
 
 ### Example
@@ -51,7 +53,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowMemoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -59,7 +61,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Append Workflow Memory Chunk Handler
-        api_response = api_instance.append_workflow_memory_chunk(definition_id, append_memory_chunk_request)
+        api_response = await api_instance.append_workflow_memory_chunk(definition_id, append_memory_chunk_request)
         print("The response of WorkflowMemoryApi->append_workflow_memory_chunk:\n")
         pprint(api_response)
     except Exception as e:
@@ -102,6 +104,8 @@ Name | Type | Description  | Notes
 # **edit_workflow_memory_chunk**
 > MemoryEntryResponse edit_workflow_memory_chunk(definition_id, chunk_id, edit_memory_chunk_request)
 
+**Synchronous variant:** `edit_workflow_memory_chunk_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Edit Workflow Memory Chunk Handler
 
 ### Example
@@ -139,7 +143,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowMemoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -148,7 +152,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Edit Workflow Memory Chunk Handler
-        api_response = api_instance.edit_workflow_memory_chunk(definition_id, chunk_id, edit_memory_chunk_request)
+        api_response = await api_instance.edit_workflow_memory_chunk(definition_id, chunk_id, edit_memory_chunk_request)
         print("The response of WorkflowMemoryApi->edit_workflow_memory_chunk:\n")
         pprint(api_response)
     except Exception as e:
@@ -192,6 +196,8 @@ Name | Type | Description  | Notes
 # **forget_workflow_memory_chunk**
 > forget_workflow_memory_chunk(definition_id, chunk_id)
 
+**Synchronous variant:** `forget_workflow_memory_chunk_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Forget Workflow Memory Chunk Handler
 
 ### Example
@@ -227,7 +233,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowMemoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -235,7 +241,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Forget Workflow Memory Chunk Handler
-        api_instance.forget_workflow_memory_chunk(definition_id, chunk_id)
+        await api_instance.forget_workflow_memory_chunk(definition_id, chunk_id)
     except Exception as e:
         print("Exception when calling WorkflowMemoryApi->forget_workflow_memory_chunk: %s\n" % e)
 ```
@@ -276,6 +282,8 @@ void (empty response body)
 # **get_workflow_memory_chunk**
 > MemoryEntryResponse get_workflow_memory_chunk(definition_id, chunk_id)
 
+**Synchronous variant:** `get_workflow_memory_chunk_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Workflow Memory Chunk Handler
 
 ### Example
@@ -312,7 +320,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowMemoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -320,7 +328,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Workflow Memory Chunk Handler
-        api_response = api_instance.get_workflow_memory_chunk(definition_id, chunk_id)
+        api_response = await api_instance.get_workflow_memory_chunk(definition_id, chunk_id)
         print("The response of WorkflowMemoryApi->get_workflow_memory_chunk:\n")
         pprint(api_response)
     except Exception as e:
@@ -363,6 +371,8 @@ Name | Type | Description  | Notes
 # **list_workflow_memory_chunks**
 > PaginatedResponseMemoryEntryResponse list_workflow_memory_chunks(definition_id, limit=limit, offset=offset)
 
+**Synchronous variant:** `list_workflow_memory_chunks_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Workflow Memory Chunks Handler
 
 ### Example
@@ -399,7 +409,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowMemoryApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -408,7 +418,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Workflow Memory Chunks Handler
-        api_response = api_instance.list_workflow_memory_chunks(definition_id, limit=limit, offset=offset)
+        api_response = await api_instance.list_workflow_memory_chunks(definition_id, limit=limit, offset=offset)
         print("The response of WorkflowMemoryApi->list_workflow_memory_chunks:\n")
         pprint(api_response)
     except Exception as e:

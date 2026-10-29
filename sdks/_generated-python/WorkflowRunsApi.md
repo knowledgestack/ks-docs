@@ -21,6 +21,8 @@ Method | HTTP request | Description
 # **clone_workflow_run**
 > WorkflowRunResponse clone_workflow_run(run_id, clone_workflow_run_request)
 
+**Synchronous variant:** `clone_workflow_run_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Clone Workflow Run Handler
 
 Clone a started run into a new NOT_STARTED draft.
@@ -66,7 +68,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -74,7 +76,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Clone Workflow Run Handler
-        api_response = api_instance.clone_workflow_run(run_id, clone_workflow_run_request)
+        api_response = await api_instance.clone_workflow_run(run_id, clone_workflow_run_request)
         print("The response of WorkflowRunsApi->clone_workflow_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -117,6 +119,8 @@ Name | Type | Description  | Notes
 # **delete_workflow_run**
 > delete_workflow_run(run_id)
 
+**Synchronous variant:** `delete_workflow_run_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Workflow Run Handler
 
 ### Example
@@ -152,14 +156,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Workflow Run Handler
-        api_instance.delete_workflow_run(run_id)
+        await api_instance.delete_workflow_run(run_id)
     except Exception as e:
         print("Exception when calling WorkflowRunsApi->delete_workflow_run: %s\n" % e)
 ```
@@ -199,6 +203,8 @@ void (empty response body)
 # **get_workflow_run**
 > WorkflowRunResponse get_workflow_run(run_id)
 
+**Synchronous variant:** `get_workflow_run_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Workflow Run Handler
 
 ### Example
@@ -235,14 +241,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Workflow Run Handler
-        api_response = api_instance.get_workflow_run(run_id)
+        api_response = await api_instance.get_workflow_run(run_id)
         print("The response of WorkflowRunsApi->get_workflow_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -283,6 +289,8 @@ Name | Type | Description  | Notes
 
 # **get_workflow_runs_summary**
 > WorkflowRunSummaryResponse get_workflow_runs_summary(since=since, until=until, definition_id=definition_id)
+
+**Synchronous variant:** `get_workflow_runs_summary_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Workflow Runs Summary Handler
 
@@ -326,7 +334,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
@@ -335,7 +343,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Workflow Runs Summary Handler
-        api_response = api_instance.get_workflow_runs_summary(since=since, until=until, definition_id=definition_id)
+        api_response = await api_instance.get_workflow_runs_summary(since=since, until=until, definition_id=definition_id)
         print("The response of WorkflowRunsApi->get_workflow_runs_summary:\n")
         pprint(api_response)
     except Exception as e:
@@ -378,6 +386,8 @@ Name | Type | Description  | Notes
 
 # **list_workflow_runs_for_tenant**
 > PaginatedResponseWorkflowRunResponse list_workflow_runs_for_tenant(state=state, mine=mine, approvable_by_me=approvable_by_me, definition_id=definition_id, owner_id=owner_id, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
+
+**Synchronous variant:** `list_workflow_runs_for_tenant_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Workflow Runs For Tenant Handler
 
@@ -427,7 +437,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     state = [ksapi.WorkflowExecutionState()] # List[WorkflowExecutionState] | Keep only runs in these execution states (repeatable). (optional)
@@ -449,7 +459,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Workflow Runs For Tenant Handler
-        api_response = api_instance.list_workflow_runs_for_tenant(state=state, mine=mine, approvable_by_me=approvable_by_me, definition_id=definition_id, owner_id=owner_id, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
+        api_response = await api_instance.list_workflow_runs_for_tenant(state=state, mine=mine, approvable_by_me=approvable_by_me, definition_id=definition_id, owner_id=owner_id, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
         print("The response of WorkflowRunsApi->list_workflow_runs_for_tenant:\n")
         pprint(api_response)
     except Exception as e:
@@ -506,6 +516,8 @@ Name | Type | Description  | Notes
 # **resume_workflow_run**
 > WorkflowRunResponse resume_workflow_run(run_id)
 
+**Synchronous variant:** `resume_workflow_run_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Resume Workflow Run Handler
 
 Continue a FAILED run in place instead of restarting it.
@@ -553,14 +565,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Resume Workflow Run Handler
-        api_response = api_instance.resume_workflow_run(run_id)
+        api_response = await api_instance.resume_workflow_run(run_id)
         print("The response of WorkflowRunsApi->resume_workflow_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -601,6 +613,8 @@ Name | Type | Description  | Notes
 
 # **retry_workflow_run**
 > WorkflowRunResponse retry_workflow_run(run_id)
+
+**Synchronous variant:** `retry_workflow_run_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Retry Workflow Run Handler
 
@@ -649,14 +663,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Retry Workflow Run Handler
-        api_response = api_instance.retry_workflow_run(run_id)
+        api_response = await api_instance.retry_workflow_run(run_id)
         print("The response of WorkflowRunsApi->retry_workflow_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -697,6 +711,8 @@ Name | Type | Description  | Notes
 
 # **set_workflow_run_approval**
 > WorkflowRunResponse set_workflow_run_approval(run_id, set_workflow_run_approval_request)
+
+**Synchronous variant:** `set_workflow_run_approval_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Set Workflow Run Approval Handler
 
@@ -743,7 +759,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -751,7 +767,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Set Workflow Run Approval Handler
-        api_response = api_instance.set_workflow_run_approval(run_id, set_workflow_run_approval_request)
+        api_response = await api_instance.set_workflow_run_approval(run_id, set_workflow_run_approval_request)
         print("The response of WorkflowRunsApi->set_workflow_run_approval:\n")
         pprint(api_response)
     except Exception as e:
@@ -793,6 +809,8 @@ Name | Type | Description  | Notes
 
 # **start_workflow_run**
 > WorkflowRunResponse start_workflow_run(run_id, start_workflow_run_request=start_workflow_run_request)
+
+**Synchronous variant:** `start_workflow_run_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Start Workflow Run Handler
 
@@ -845,7 +863,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -853,7 +871,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Start Workflow Run Handler
-        api_response = api_instance.start_workflow_run(run_id, start_workflow_run_request=start_workflow_run_request)
+        api_response = await api_instance.start_workflow_run(run_id, start_workflow_run_request=start_workflow_run_request)
         print("The response of WorkflowRunsApi->start_workflow_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -895,6 +913,8 @@ Name | Type | Description  | Notes
 
 # **stop_workflow_run**
 > WorkflowRunResponse stop_workflow_run(run_id)
+
+**Synchronous variant:** `stop_workflow_run_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Stop Workflow Run Handler
 
@@ -945,14 +965,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Stop Workflow Run Handler
-        api_response = api_instance.stop_workflow_run(run_id)
+        api_response = await api_instance.stop_workflow_run(run_id)
         print("The response of WorkflowRunsApi->stop_workflow_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -993,6 +1013,8 @@ Name | Type | Description  | Notes
 
 # **update_workflow_run**
 > WorkflowRunResponse update_workflow_run(run_id, update_workflow_run_request)
+
+**Synchronous variant:** `update_workflow_run_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Update Workflow Run Handler
 
@@ -1044,7 +1066,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -1052,7 +1074,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Workflow Run Handler
-        api_response = api_instance.update_workflow_run(run_id, update_workflow_run_request)
+        api_response = await api_instance.update_workflow_run(run_id, update_workflow_run_request)
         print("The response of WorkflowRunsApi->update_workflow_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -1094,6 +1116,8 @@ Name | Type | Description  | Notes
 
 # **workflow_run_callback**
 > WorkflowCallbackResponse workflow_run_callback(run_id, workflow_run_callback_request)
+
+**Synchronous variant:** `workflow_run_callback_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Workflow Run Callback Handler
 
@@ -1148,7 +1172,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
     run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -1156,7 +1180,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Workflow Run Callback Handler
-        api_response = api_instance.workflow_run_callback(run_id, workflow_run_callback_request)
+        api_response = await api_instance.workflow_run_callback(run_id, workflow_run_callback_request)
         print("The response of WorkflowRunsApi->workflow_run_callback:\n")
         pprint(api_response)
     except Exception as e:

@@ -35,11 +35,9 @@ Below this line is the auto-generated reference content.
 
 # ksapi — Python SDK Quickstart
 
-The official Python client for the Knowledge Stack API. One client authenticates
-with an API key, ingests documents, asks the agent, and streams chat.
-
-The full per-endpoint reference is generated alongside this package under
-[`./docs/`](./docs/).
+The official Python client for the Knowledge Stack API. OpenAPI Generator
+7.26.0 generates one HTTPX2 package with both async and blocking methods.
+The per-endpoint reference is generated alongside the package under `docs/`.
 
 ## Install
 
@@ -47,55 +45,80 @@ The full per-endpoint reference is generated alongside this package under
 pip install ksapi
 ```
 
-## Authenticate
+## Async calls and authentication
 
-Mint an API key (in the app under API Keys, or `POST /v1/api-keys`) and pass it
-as `access_token`. The client sends it as `Authorization: Bearer <key>` on every
-request:
+Mint an API key in the app and pass it as `access_token`. Requests send
+`Authorization: Bearer <key>`. Point the client at your self-hosted deployment:
 
 ```python
+import asyncio
 import ksapi
 from ksapi.api.documents_api import DocumentsApi
 
 config = ksapi.Configuration(
     host="https://api.your-host.example",
-    access_token="sk-user-...",  # your API key
+    access_token="sk-user-...",
 )
-client = ksapi.ApiClient(config)
 
-# Smoke test — list documents you can access
-print(DocumentsApi(client).list_documents(limit=10).total, "documents")
+async def main():
+    async with ksapi.ApiClient(config) as client:
+        page = await DocumentsApi(client).list_documents(limit=10)
+        print(page.total, "documents")
+
+asyncio.run(main())  # In an existing event loop, await main() instead.
 ```
 
-Browser/session callers authenticate with the `ks_uat` cookie instead:
-`ksapi.Configuration(host=..., api_key={"cookieAuth": "<ks_uat value>"})`.
+Browser/session callers can use `Configuration(api_key={"cookieAuth": token},
+host=...)` or `client.set_default_header("Cookie", f"ks_uat={token}")`.
+Reuse the client on its owning event loop, and close it with `async with` or
+`await client.close()` after its requests finish.
 
-## Ingest a document and wait until it's searchable
+## Blocking calls
 
-Ingestion is asynchronous. Upload, then poll until the active version's pipeline
-status is `completed` — at that point the chunks are embedded and searchable:
+The same API classes expose `_sync` variants. Existing blocking integrations
+must rename calls such as `list_documents()` to `list_documents_sync()`:
 
 ```python
-import time
-from ksapi.api.documents_api import DocumentsApi
+from ksapi.sync_helper import run_sync
 
-docs = DocumentsApi(client)
+client = ksapi.ApiClient(config)
+try:
+    page = DocumentsApi(client).list_documents_sync(limit=10)
+    print(page.total, "documents")
+finally:
+    run_sync(client.close())
+```
 
-with open("contract.pdf", "rb") as fh:
-    created = docs.ingest_document(
-        file=fh.read(),
-        path_part_id="<parent-folder-path-part-id>",  # a FOLDER
+The generated sync helper uses a background event loop; closing through that
+helper keeps cleanup on the same loop. `ApiClient` has no synchronous context
+manager. Use separate client instances for sync and async use, and never call
+`_sync` methods from async code: they block the caller's event loop.
+The additional method families are `operation_sync_with_http_info()` and
+`operation_sync_without_preload_content()`.
+
+## Ingest a document and wait until it is searchable
+
+Upload returns before ingestion completes. Poll the active version's pipeline
+status before searching. This example assumes an existing async client:
+
+```python
+from pathlib import Path
+from uuid import UUID
+
+async def ingest(client, parent_path_part_id: UUID):
+    docs = DocumentsApi(client)
+    created = await docs.ingest_document(
+        file=("contract.pdf", Path("contract.pdf").read_bytes()),
+        path_part_id=parent_path_part_id,
         name="contract.pdf",
     )
-
-while True:
-    version = docs.get_document(created.document_id).active_version
-    meta = version.system_metadata
-    status = meta.pipeline_state.status if meta and meta.pipeline_state else None
-    if status in ("completed", "failed"):
-        break
-    time.sleep(2)
-print("ingestion:", status)
+    while True:
+        version = (await docs.get_document(created.document_id)).active_version
+        metadata = version.system_metadata if version else None
+        state = metadata.pipeline_state if metadata else None
+        if state and state.status in ("completed", "failed"):
+            return state.status
+        await asyncio.sleep(2)
 ```
 
 ## Ask the agent
@@ -104,57 +127,58 @@ print("ingestion:", status)
 from ksapi.api.agent_api import AgentApi
 from ksapi.models.ask_request import AskRequest
 
-answer = AgentApi(client).agent_ask(AskRequest(prompt="What are the renewal terms?"))
-print(answer.text)
+async def ask(client):
+    answer = await AgentApi(client).agent_ask(
+        AskRequest(prompt="What are the renewal terms?", output_language="en"),
+        _request_timeout=600.0,
+    )
+    return answer.text
 ```
 
-The answer is written in the tenant's configured language. Pass
-`output_language="en"` or `"zh"` to choose it for one request.
-
-Citation-grounded, multi-turn chat runs through **threads**; each assistant
-message exposes `content.citations`. Stream those tokens live below.
+Use `output_language="zh"` for Simplified Chinese. HTTPX2 request timeouts bound
+individual network phases, not the total operation. Use `asyncio.timeout()`
+when an async caller needs a total deadline. The generator defaults to 300
+seconds per phase; long operations can supply an explicit `_request_timeout`.
+Cancellation stops the local wait; it does not undo an accepted server mutation.
 
 ## Stream chat responses (SSE)
 
-The agent streams over Server-Sent Events at `GET /v1/threads/{thread_id}/stream`.
-The generated `stream_thread()` method buffers the whole response, so consume the
-stream directly — the body is `data: <json>` lines terminated by `data: [DONE]`:
+Generated methods buffer bodies, including `without_preload_content` variants.
+For SSE or large binary downloads, use an HTTPX2 streaming client. Raw responses
+from generated methods are HTTPX2 responses (`status_code`, `content`,
+`await aread()`, `await aclose()`), not urllib3 responses.
 
 ```python
-import httpx
+import httpx2
 
-def stream_thread(host: str, api_key: str, thread_id: str):
+async def stream_thread(host: str, api_key: str, thread_id: str):
     headers = {"Authorization": f"Bearer {api_key}"}
-    with httpx.Client(base_url=host, headers=headers, timeout=60) as http:
-        with http.stream("GET", f"/v1/threads/{thread_id}/stream") as response:
-            for line in response.iter_lines():
+    async with httpx2.AsyncClient(base_url=host, headers=headers, timeout=60) as http:
+        async with http.stream("GET", f"/v1/threads/{thread_id}/stream") as response:
+            response.raise_for_status()
+            async for line in response.aiter_lines():
                 if not line.startswith("data:"):
-                    continue  # skip event:/id:/keepalive lines
+                    continue
                 payload = line[len("data:"):].strip()
                 if payload == "[DONE]":
                     return
-                yield payload  # JSON event — parse with json.loads()
-
-for event in stream_thread(config.host, "sk-user-...", "<thread-id>"):
-    print(event)
+                yield payload
 ```
 
 ## Errors
 
-Every error response keeps `detail` and adds a machine-readable `code` plus the
-`request_id` (also returned as the `x-request-id` header) — quote it to support:
+Generated `ApiException` subclasses expose `status` and the response `body`.
+Error bodies contain `detail`, a machine-readable `code`, and `request_id`;
+branch on the code and quote the request ID when reporting an error.
+Transport failures raise HTTPX2 exceptions such as `httpx2.RequestError`.
 
 ```python
 from ksapi.exceptions import NotFoundException
+from uuid import UUID
 
-try:
-    DocumentsApi(client).get_document("00000000-0000-0000-0000-000000000000")
-except NotFoundException as exc:
-    body = exc.body  # {"detail": ..., "code": "not_found", "request_id": "..."}
-    print(exc.status, body)
+async def lookup(client, document_id: UUID):
+    try:
+        return await DocumentsApi(client).get_document(document_id)
+    except NotFoundException as exc:
+        print(exc.status, exc.body)
 ```
-
-The client raises a typed exception per status: `BadRequestException` (400),
-`UnauthorizedException` (401), `ForbiddenException` (403), `NotFoundException`
-(404), `ConflictException` (409), `UnprocessableEntityException` (422), and
-`ServiceException` (5xx).

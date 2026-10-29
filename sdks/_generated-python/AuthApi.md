@@ -27,6 +27,8 @@ Method | HTTP request | Description
 # **change_phone_number**
 > UserResponse change_phone_number(change_phone_number_request)
 
+**Synchronous variant:** `change_phone_number_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Change Phone Number Handler
 
 Apply a verified phone-number change to the authenticated user.
@@ -69,14 +71,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     change_phone_number_request = ksapi.ChangePhoneNumberRequest() # ChangePhoneNumberRequest | 
 
     try:
         # Change Phone Number Handler
-        api_response = api_instance.change_phone_number(change_phone_number_request)
+        api_response = await api_instance.change_phone_number(change_phone_number_request)
         print("The response of AuthApi->change_phone_number:\n")
         pprint(api_response)
     except Exception as e:
@@ -118,6 +120,8 @@ Name | Type | Description  | Notes
 # **create_password_user**
 > SignUpResponse create_password_user(create_password_user_request)
 
+**Synchronous variant:** `create_password_user_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Password User Handler
 
 ### Example
@@ -138,14 +142,14 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     create_password_user_request = ksapi.CreatePasswordUserRequest() # CreatePasswordUserRequest | 
 
     try:
         # Create Password User Handler
-        api_response = api_instance.create_password_user(create_password_user_request)
+        api_response = await api_instance.create_password_user(create_password_user_request)
         print("The response of AuthApi->create_password_user:\n")
         pprint(api_response)
     except Exception as e:
@@ -187,6 +191,8 @@ No authorization required
 # **create_phone_password_user**
 > UserResponse create_phone_password_user(create_phone_password_user_request)
 
+**Synchronous variant:** `create_phone_password_user_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Phone Password User Handler
 
 Complete phone-based signup using a verified validation code.
@@ -214,14 +220,14 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     create_phone_password_user_request = ksapi.CreatePhonePasswordUserRequest() # CreatePhonePasswordUserRequest | 
 
     try:
         # Create Phone Password User Handler
-        api_response = api_instance.create_phone_password_user(create_phone_password_user_request)
+        api_response = await api_instance.create_phone_password_user(create_phone_password_user_request)
         print("The response of AuthApi->create_phone_password_user:\n")
         pprint(api_response)
     except Exception as e:
@@ -263,6 +269,8 @@ No authorization required
 # **fanwei_directory_sync**
 > DirectorySyncResponse fanwei_directory_sync(tenant_id, authorization=authorization, ks_uat=ks_uat)
 
+**Synchronous variant:** `fanwei_directory_sync_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Directory Sync Handler
 
 Trigger directory synchronization for a FanWei E9 tenant.
@@ -288,7 +296,7 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -297,7 +305,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Directory Sync Handler
-        api_response = api_instance.fanwei_directory_sync(tenant_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = await api_instance.fanwei_directory_sync(tenant_id, authorization=authorization, ks_uat=ks_uat)
         print("The response of AuthApi->fanwei_directory_sync:\n")
         pprint(api_response)
     except Exception as e:
@@ -341,6 +349,8 @@ No authorization required
 # **fanwei_directory_sync_0**
 > DirectorySyncResponse fanwei_directory_sync_0(tenant_id, authorization=authorization, ks_uat=ks_uat)
 
+**Synchronous variant:** `fanwei_directory_sync_0_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Directory Sync Handler
 
 Trigger directory synchronization for a FanWei E9 tenant.
@@ -366,7 +376,7 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -375,7 +385,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Directory Sync Handler
-        api_response = api_instance.fanwei_directory_sync_0(tenant_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = await api_instance.fanwei_directory_sync_0(tenant_id, authorization=authorization, ks_uat=ks_uat)
         print("The response of AuthApi->fanwei_directory_sync_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -419,6 +429,8 @@ No authorization required
 # **initiate_sso**
 > SSOInitiateResponse initiate_sso(provider, invite_id=invite_id, tenant_id=tenant_id)
 
+**Synchronous variant:** `initiate_sso_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Initiate Sso Handler
 
 Initiate SSO with the given provider and tenant ID.
@@ -441,7 +453,7 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     provider = ksapi.IdpType() # IdpType | Provider to initiate SSO with
@@ -450,7 +462,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Initiate Sso Handler
-        api_response = api_instance.initiate_sso(provider, invite_id=invite_id, tenant_id=tenant_id)
+        api_response = await api_instance.initiate_sso(provider, invite_id=invite_id, tenant_id=tenant_id)
         print("The response of AuthApi->initiate_sso:\n")
         pprint(api_response)
     except Exception as e:
@@ -494,6 +506,8 @@ No authorization required
 # **oauth2_callback**
 > SignUpResponse oauth2_callback(provider, code=code, state=state, error=error, error_description=error_description, tenant_id=tenant_id)
 
+**Synchronous variant:** `oauth2_callback_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Oauth2 Callback Handler
 
 Handle OAuth2 callback from the given OAuth client.
@@ -516,7 +530,7 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     provider = ksapi.IdpType() # IdpType | Provider to initiate SSO with
@@ -528,7 +542,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Oauth2 Callback Handler
-        api_response = api_instance.oauth2_callback(provider, code=code, state=state, error=error, error_description=error_description, tenant_id=tenant_id)
+        api_response = await api_instance.oauth2_callback(provider, code=code, state=state, error=error, error_description=error_description, tenant_id=tenant_id)
         print("The response of AuthApi->oauth2_callback:\n")
         pprint(api_response)
     except Exception as e:
@@ -575,6 +589,8 @@ No authorization required
 # **pw_email_verification**
 > EmailSentResponse pw_email_verification(email_verification_request)
 
+**Synchronous variant:** `pw_email_verification_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Pw Email Verification Handler
 
 Send password user email verification email.
@@ -600,14 +616,14 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     email_verification_request = ksapi.EmailVerificationRequest() # EmailVerificationRequest | 
 
     try:
         # Pw Email Verification Handler
-        api_response = api_instance.pw_email_verification(email_verification_request)
+        api_response = await api_instance.pw_email_verification(email_verification_request)
         print("The response of AuthApi->pw_email_verification:\n")
         pprint(api_response)
     except Exception as e:
@@ -649,6 +665,8 @@ No authorization required
 # **pw_phone_verification**
 > PhoneValidationResponse pw_phone_verification(phone_verification_request)
 
+**Synchronous variant:** `pw_phone_verification_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Pw Phone Verification Handler
 
 Send a 6-digit signup verification code to ``phone_number``.
@@ -674,14 +692,14 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     phone_verification_request = ksapi.PhoneVerificationRequest() # PhoneVerificationRequest | 
 
     try:
         # Pw Phone Verification Handler
-        api_response = api_instance.pw_phone_verification(phone_verification_request)
+        api_response = await api_instance.pw_phone_verification(phone_verification_request)
         print("The response of AuthApi->pw_phone_verification:\n")
         pprint(api_response)
     except Exception as e:
@@ -723,6 +741,8 @@ No authorization required
 # **pw_signin**
 > UserResponse pw_signin(sign_in_request)
 
+**Synchronous variant:** `pw_signin_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Signin Handler
 
 Validate password credentials and redirect to callback.
@@ -749,14 +769,14 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     sign_in_request = ksapi.SignInRequest() # SignInRequest | 
 
     try:
         # Signin Handler
-        api_response = api_instance.pw_signin(sign_in_request)
+        api_response = await api_instance.pw_signin(sign_in_request)
         print("The response of AuthApi->pw_signin:\n")
         pprint(api_response)
     except Exception as e:
@@ -798,6 +818,8 @@ No authorization required
 # **refresh_uat**
 > UserResponse refresh_uat(tenant_id=tenant_id)
 
+**Synchronous variant:** `refresh_uat_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Refresh Uat Handler
 
 Refresh or switch the user's active tenant token.
@@ -836,14 +858,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Target tenant ID to switch to. None=refresh current tenant (optional)
 
     try:
         # Refresh Uat Handler
-        api_response = api_instance.refresh_uat(tenant_id=tenant_id)
+        api_response = await api_instance.refresh_uat(tenant_id=tenant_id)
         print("The response of AuthApi->refresh_uat:\n")
         pprint(api_response)
     except Exception as e:
@@ -884,6 +906,8 @@ Name | Type | Description  | Notes
 
 # **request_phone_change**
 > PhoneValidationResponse request_phone_change(request_phone_change_request)
+
+**Synchronous variant:** `request_phone_change_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Request Phone Change Handler
 
@@ -927,14 +951,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     request_phone_change_request = ksapi.RequestPhoneChangeRequest() # RequestPhoneChangeRequest | 
 
     try:
         # Request Phone Change Handler
-        api_response = api_instance.request_phone_change(request_phone_change_request)
+        api_response = await api_instance.request_phone_change(request_phone_change_request)
         print("The response of AuthApi->request_phone_change:\n")
         pprint(api_response)
     except Exception as e:
@@ -976,6 +1000,8 @@ Name | Type | Description  | Notes
 # **reset_password**
 > UserResponse reset_password(password_reset_request)
 
+**Synchronous variant:** `reset_password_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Reset Password Handler
 
 Reset password for the authenticated user
@@ -1015,14 +1041,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     password_reset_request = ksapi.PasswordResetRequest() # PasswordResetRequest | 
 
     try:
         # Reset Password Handler
-        api_response = api_instance.reset_password(password_reset_request)
+        api_response = await api_instance.reset_password(password_reset_request)
         print("The response of AuthApi->reset_password:\n")
         pprint(api_response)
     except Exception as e:
@@ -1064,6 +1090,8 @@ Name | Type | Description  | Notes
 # **reset_password_with_token**
 > UserResponse reset_password_with_token(password_reset_with_token_request)
 
+**Synchronous variant:** `reset_password_with_token_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Reset Password With Token Handler
 
 Reset password with a single-use PasswordResetToken JWT
@@ -1086,14 +1114,14 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     password_reset_with_token_request = ksapi.PasswordResetWithTokenRequest() # PasswordResetWithTokenRequest | 
 
     try:
         # Reset Password With Token Handler
-        api_response = api_instance.reset_password_with_token(password_reset_with_token_request)
+        api_response = await api_instance.reset_password_with_token(password_reset_with_token_request)
         print("The response of AuthApi->reset_password_with_token:\n")
         pprint(api_response)
     except Exception as e:
@@ -1135,6 +1163,8 @@ No authorization required
 # **send_pw_reset_email**
 > ResponseSendPwResetEmail send_pw_reset_email(send_password_reset_request)
 
+**Synchronous variant:** `send_pw_reset_email_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Send Pw Reset Email Handler
 
 Initiate a password reset via the requested ``method``.
@@ -1162,14 +1192,14 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     send_password_reset_request = ksapi.SendPasswordResetRequest() # SendPasswordResetRequest | 
 
     try:
         # Send Pw Reset Email Handler
-        api_response = api_instance.send_pw_reset_email(send_password_reset_request)
+        api_response = await api_instance.send_pw_reset_email(send_password_reset_request)
         print("The response of AuthApi->send_pw_reset_email:\n")
         pprint(api_response)
     except Exception as e:
@@ -1211,6 +1241,8 @@ No authorization required
 # **signout**
 > object signout()
 
+**Synchronous variant:** `signout_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Signout Handler
 
 ### Example
@@ -1229,13 +1261,13 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
 
     try:
         # Signout Handler
-        api_response = api_instance.signout()
+        api_response = await api_instance.signout()
         print("The response of AuthApi->signout:\n")
         pprint(api_response)
     except Exception as e:
@@ -1273,6 +1305,8 @@ No authorization required
 # **sso_signin**
 > ErrorResponse sso_signin(tenant_id, redirect=redirect)
 
+**Synchronous variant:** `sso_signin_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Sso Login Handler
 
 SSO login endpoint.
@@ -1298,7 +1332,7 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -1306,7 +1340,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Sso Login Handler
-        api_response = api_instance.sso_signin(tenant_id, redirect=redirect)
+        api_response = await api_instance.sso_signin(tenant_id, redirect=redirect)
         print("The response of AuthApi->sso_signin:\n")
         pprint(api_response)
     except Exception as e:
@@ -1349,6 +1383,8 @@ No authorization required
 # **validate_pw_reset_code**
 > PasswordResetTokenResponse validate_pw_reset_code(validate_reset_code_request)
 
+**Synchronous variant:** `validate_pw_reset_code_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Validate Reset Code Handler
 
 Validate an SMS reset code and return a single-use reset JWT.
@@ -1371,14 +1407,14 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     validate_reset_code_request = ksapi.ValidateResetCodeRequest() # ValidateResetCodeRequest | 
 
     try:
         # Validate Reset Code Handler
-        api_response = api_instance.validate_pw_reset_code(validate_reset_code_request)
+        api_response = await api_instance.validate_pw_reset_code(validate_reset_code_request)
         print("The response of AuthApi->validate_pw_reset_code:\n")
         pprint(api_response)
     except Exception as e:

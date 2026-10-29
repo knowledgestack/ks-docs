@@ -11,6 +11,8 @@ Method | HTTP request | Description
 # **change_tenant_subscription**
 > CheckoutResponse change_tenant_subscription(tenant_id, change_subscription_request)
 
+**Synchronous variant:** `change_tenant_subscription_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Change Tenant Subscription Handler
 
 Start a subscription change (OWNER only).
@@ -61,7 +63,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SubscriptionsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -69,7 +71,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Change Tenant Subscription Handler
-        api_response = api_instance.change_tenant_subscription(tenant_id, change_subscription_request)
+        api_response = await api_instance.change_tenant_subscription(tenant_id, change_subscription_request)
         print("The response of SubscriptionsApi->change_tenant_subscription:\n")
         pprint(api_response)
     except Exception as e:
@@ -111,6 +113,8 @@ Name | Type | Description  | Notes
 
 # **get_tenant_subscription**
 > TenantSubscriptionResponse get_tenant_subscription(tenant_id)
+
+**Synchronous variant:** `get_tenant_subscription_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Tenant Subscription Handler
 
@@ -164,14 +168,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SubscriptionsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Tenant Subscription Handler
-        api_response = api_instance.get_tenant_subscription(tenant_id)
+        api_response = await api_instance.get_tenant_subscription(tenant_id)
         print("The response of SubscriptionsApi->get_tenant_subscription:\n")
         pprint(api_response)
     except Exception as e:

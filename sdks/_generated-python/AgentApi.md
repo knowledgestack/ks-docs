@@ -11,6 +11,8 @@ Method | HTTP request | Description
 # **agent_ask**
 > AskResponse agent_ask(ask_request)
 
+**Synchronous variant:** `agent_ask_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Agent Ask Handler
 
 Run a one-shot text agent request to completion and return the payload.
@@ -69,14 +71,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AgentApi(api_client)
     ask_request = ksapi.AskRequest() # AskRequest | 
 
     try:
         # Agent Ask Handler
-        api_response = api_instance.agent_ask(ask_request)
+        api_response = await api_instance.agent_ask(ask_request)
         print("The response of AgentApi->agent_ask:\n")
         pprint(api_response)
     except Exception as e:
@@ -117,6 +119,8 @@ Name | Type | Description  | Notes
 
 # **agent_extract**
 > ExtractResponse agent_extract(extract_request)
+
+**Synchronous variant:** `agent_extract_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Agent Extract Handler
 
@@ -167,14 +171,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AgentApi(api_client)
     extract_request = ksapi.ExtractRequest() # ExtractRequest | 
 
     try:
         # Agent Extract Handler
-        api_response = api_instance.agent_extract(extract_request)
+        api_response = await api_instance.agent_extract(extract_request)
         print("The response of AgentApi->agent_extract:\n")
         pprint(api_response)
     except Exception as e:

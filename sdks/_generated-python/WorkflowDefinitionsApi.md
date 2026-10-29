@@ -17,6 +17,8 @@ Method | HTTP request | Description
 # **create_workflow_definition**
 > WorkflowDefinitionResponse create_workflow_definition(create_workflow_definition_request)
 
+**Synchronous variant:** `create_workflow_definition_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Workflow Definition Handler
 
 ### Example
@@ -54,14 +56,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowDefinitionsApi(api_client)
     create_workflow_definition_request = ksapi.CreateWorkflowDefinitionRequest() # CreateWorkflowDefinitionRequest | 
 
     try:
         # Create Workflow Definition Handler
-        api_response = api_instance.create_workflow_definition(create_workflow_definition_request)
+        api_response = await api_instance.create_workflow_definition(create_workflow_definition_request)
         print("The response of WorkflowDefinitionsApi->create_workflow_definition:\n")
         pprint(api_response)
     except Exception as e:
@@ -102,6 +104,8 @@ Name | Type | Description  | Notes
 
 # **create_workflow_run**
 > WorkflowRunResponse create_workflow_run(definition_id, files=files, input_scope=input_scope, idempotency_key=idempotency_key, auto_start=auto_start, user_message=user_message, name=name, selected_skill_ids=selected_skill_ids)
+
+**Synchronous variant:** `create_workflow_run_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Create Workflow Run Handler
 
@@ -153,7 +157,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowDefinitionsApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -167,7 +171,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Create Workflow Run Handler
-        api_response = api_instance.create_workflow_run(definition_id, files=files, input_scope=input_scope, idempotency_key=idempotency_key, auto_start=auto_start, user_message=user_message, name=name, selected_skill_ids=selected_skill_ids)
+        api_response = await api_instance.create_workflow_run(definition_id, files=files, input_scope=input_scope, idempotency_key=idempotency_key, auto_start=auto_start, user_message=user_message, name=name, selected_skill_ids=selected_skill_ids)
         print("The response of WorkflowDefinitionsApi->create_workflow_run:\n")
         pprint(api_response)
     except Exception as e:
@@ -216,6 +220,8 @@ Name | Type | Description  | Notes
 # **delete_workflow_definition**
 > delete_workflow_definition(definition_id)
 
+**Synchronous variant:** `delete_workflow_definition_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Workflow Definition Handler
 
 ### Example
@@ -251,14 +257,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowDefinitionsApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Workflow Definition Handler
-        api_instance.delete_workflow_definition(definition_id)
+        await api_instance.delete_workflow_definition(definition_id)
     except Exception as e:
         print("Exception when calling WorkflowDefinitionsApi->delete_workflow_definition: %s\n" % e)
 ```
@@ -298,6 +304,8 @@ void (empty response body)
 # **get_workflow_definition**
 > WorkflowDefinitionResponse get_workflow_definition(definition_id)
 
+**Synchronous variant:** `get_workflow_definition_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Workflow Definition Handler
 
 ### Example
@@ -334,14 +342,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowDefinitionsApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Workflow Definition Handler
-        api_response = api_instance.get_workflow_definition(definition_id)
+        api_response = await api_instance.get_workflow_definition(definition_id)
         print("The response of WorkflowDefinitionsApi->get_workflow_definition:\n")
         pprint(api_response)
     except Exception as e:
@@ -383,6 +391,8 @@ Name | Type | Description  | Notes
 # **instantiate_workflow_template**
 > WorkflowDefinitionResponse instantiate_workflow_template(template_id, instantiate_workflow_template_request)
 
+**Synchronous variant:** `instantiate_workflow_template_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Instantiate Workflow Template Handler
 
 ### Example
@@ -420,7 +430,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowDefinitionsApi(api_client)
     template_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -428,7 +438,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Instantiate Workflow Template Handler
-        api_response = api_instance.instantiate_workflow_template(template_id, instantiate_workflow_template_request)
+        api_response = await api_instance.instantiate_workflow_template(template_id, instantiate_workflow_template_request)
         print("The response of WorkflowDefinitionsApi->instantiate_workflow_template:\n")
         pprint(api_response)
     except Exception as e:
@@ -471,6 +481,8 @@ Name | Type | Description  | Notes
 # **list_workflow_definitions**
 > PaginatedResponseWorkflowDefinitionResponse list_workflow_definitions(mine=mine, search=search, sort_by=sort_by, sort_dir=sort_dir, is_template=is_template, needs_approval=needs_approval, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
 
+**Synchronous variant:** `list_workflow_definitions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Workflow Definitions Handler
 
 ### Example
@@ -509,7 +521,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowDefinitionsApi(api_client)
     mine = False # bool | Only definitions the caller created (owner). (optional) (default to False)
@@ -529,7 +541,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Workflow Definitions Handler
-        api_response = api_instance.list_workflow_definitions(mine=mine, search=search, sort_by=sort_by, sort_dir=sort_dir, is_template=is_template, needs_approval=needs_approval, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
+        api_response = await api_instance.list_workflow_definitions(mine=mine, search=search, sort_by=sort_by, sort_dir=sort_dir, is_template=is_template, needs_approval=needs_approval, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
         print("The response of WorkflowDefinitionsApi->list_workflow_definitions:\n")
         pprint(api_response)
     except Exception as e:
@@ -584,6 +596,8 @@ Name | Type | Description  | Notes
 # **list_workflow_runs**
 > PaginatedResponseWorkflowRunResponse list_workflow_runs(definition_id, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
 
+**Synchronous variant:** `list_workflow_runs_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Workflow Runs Handler
 
 ### Example
@@ -622,7 +636,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowDefinitionsApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -637,7 +651,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Workflow Runs Handler
-        api_response = api_instance.list_workflow_runs(definition_id, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_workflow_runs(definition_id, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of WorkflowDefinitionsApi->list_workflow_runs:\n")
         pprint(api_response)
     except Exception as e:
@@ -687,6 +701,8 @@ Name | Type | Description  | Notes
 # **update_workflow_definition**
 > WorkflowDefinitionResponse update_workflow_definition(definition_id, update_workflow_definition_request)
 
+**Synchronous variant:** `update_workflow_definition_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Workflow Definition Handler
 
 Update a workflow definition (PUT semantics).
@@ -730,7 +746,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowDefinitionsApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -738,7 +754,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Workflow Definition Handler
-        api_response = api_instance.update_workflow_definition(definition_id, update_workflow_definition_request)
+        api_response = await api_instance.update_workflow_definition(definition_id, update_workflow_definition_request)
         print("The response of WorkflowDefinitionsApi->update_workflow_definition:\n")
         pprint(api_response)
     except Exception as e:

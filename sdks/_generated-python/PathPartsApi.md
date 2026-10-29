@@ -21,6 +21,8 @@ Method | HTTP request | Description
 # **append_path_part_event**
 > EventResponse append_path_part_event(path_part_id, append_event_request)
 
+**Synchronous variant:** `append_path_part_event_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Append Path Part Event Handler
 
 Record an event for a subject path_part from the frontend.
@@ -72,7 +74,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -80,7 +82,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Append Path Part Event Handler
-        api_response = api_instance.append_path_part_event(path_part_id, append_event_request)
+        api_response = await api_instance.append_path_part_event(path_part_id, append_event_request)
         print("The response of PathPartsApi->append_path_part_event:\n")
         pprint(api_response)
     except Exception as e:
@@ -122,6 +124,8 @@ Name | Type | Description  | Notes
 
 # **bulk_remove_path_part_tags**
 > PathPartTagsResponse bulk_remove_path_part_tags(path_part_id, bulk_tag_request)
+
+**Synchronous variant:** `bulk_remove_path_part_tags_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Bulk Remove Path Part Tags Handler
 
@@ -165,7 +169,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -173,7 +177,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Bulk Remove Path Part Tags Handler
-        api_response = api_instance.bulk_remove_path_part_tags(path_part_id, bulk_tag_request)
+        api_response = await api_instance.bulk_remove_path_part_tags(path_part_id, bulk_tag_request)
         print("The response of PathPartsApi->bulk_remove_path_part_tags:\n")
         pprint(api_response)
     except Exception as e:
@@ -215,6 +219,8 @@ Name | Type | Description  | Notes
 
 # **check_path_part_access**
 > AccessCheckResponse check_path_part_access(path_part_id, user_id, capability=capability)
+
+**Synchronous variant:** `check_path_part_access_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Check Path Part Access Handler
 
@@ -263,7 +269,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -272,7 +278,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Check Path Part Access Handler
-        api_response = api_instance.check_path_part_access(path_part_id, user_id, capability=capability)
+        api_response = await api_instance.check_path_part_access(path_part_id, user_id, capability=capability)
         print("The response of PathPartsApi->check_path_part_access:\n")
         pprint(api_response)
     except Exception as e:
@@ -316,6 +322,8 @@ Name | Type | Description  | Notes
 # **get_path_part**
 > PathPartResponse get_path_part(path_part_id)
 
+**Synchronous variant:** `get_path_part_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Path Part Handler
 
 Get a path part by its ID.
@@ -356,14 +364,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Path Part Handler
-        api_response = api_instance.get_path_part(path_part_id)
+        api_response = await api_instance.get_path_part(path_part_id)
         print("The response of PathPartsApi->get_path_part:\n")
         pprint(api_response)
     except Exception as e:
@@ -404,6 +412,8 @@ Name | Type | Description  | Notes
 
 # **get_path_part_ancestry**
 > AncestryResponse get_path_part_ancestry(path_part_id)
+
+**Synchronous variant:** `get_path_part_ancestry_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Path Part Ancestry Handler
 
@@ -447,14 +457,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Path Part Ancestry Handler
-        api_response = api_instance.get_path_part_ancestry(path_part_id)
+        api_response = await api_instance.get_path_part_ancestry(path_part_id)
         print("The response of PathPartsApi->get_path_part_ancestry:\n")
         pprint(api_response)
     except Exception as e:
@@ -496,6 +506,8 @@ Name | Type | Description  | Notes
 # **get_path_part_subtree_chunks**
 > SubtreeChunksResponse get_path_part_subtree_chunks(path_part_id)
 
+**Synchronous variant:** `get_path_part_subtree_chunks_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Path Part Subtree Chunks Handler
 
 Resolve all descendant chunks for a subtree root.
@@ -536,14 +548,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Path Part Subtree Chunks Handler
-        api_response = api_instance.get_path_part_subtree_chunks(path_part_id)
+        api_response = await api_instance.get_path_part_subtree_chunks(path_part_id)
         print("The response of PathPartsApi->get_path_part_subtree_chunks:\n")
         pprint(api_response)
     except Exception as e:
@@ -584,6 +596,8 @@ Name | Type | Description  | Notes
 
 # **get_path_part_tags**
 > PathPartTagsResponse get_path_part_tags(path_part_id, include_inherited=include_inherited)
+
+**Synchronous variant:** `get_path_part_tags_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Path Part Tags Handler
 
@@ -627,7 +641,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -635,7 +649,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Path Part Tags Handler
-        api_response = api_instance.get_path_part_tags(path_part_id, include_inherited=include_inherited)
+        api_response = await api_instance.get_path_part_tags(path_part_id, include_inherited=include_inherited)
         print("The response of PathPartsApi->get_path_part_tags:\n")
         pprint(api_response)
     except Exception as e:
@@ -677,6 +691,8 @@ Name | Type | Description  | Notes
 
 # **list_path_part_events**
 > PaginatedResponseEventResponse list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, include_churn=include_churn, limit=limit, offset=offset)
+
+**Synchronous variant:** `list_path_part_events_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Path Part Events Handler
 
@@ -729,7 +745,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -743,7 +759,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Path Part Events Handler
-        api_response = api_instance.list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, include_churn=include_churn, limit=limit, offset=offset)
+        api_response = await api_instance.list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, include_churn=include_churn, limit=limit, offset=offset)
         print("The response of PathPartsApi->list_path_part_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -791,6 +807,8 @@ Name | Type | Description  | Notes
 
 # **list_path_parts**
 > PaginatedResponsePathPartResponse list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+
+**Synchronous variant:** `list_path_parts_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Path Parts Handler
 
@@ -843,7 +861,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     parent_path_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent PathPart ID (defaults to root) (optional)
@@ -859,7 +877,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Path Parts Handler
-        api_response = api_instance.list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of PathPartsApi->list_path_parts:\n")
         pprint(api_response)
     except Exception as e:
@@ -910,6 +928,8 @@ Name | Type | Description  | Notes
 # **reorder_path_part**
 > PathPartResponse reorder_path_part(path_part_id, reorder_path_part_request)
 
+**Synchronous variant:** `reorder_path_part_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Reorder Path Part Handler
 
 Reorder a path part within its sibling list.
@@ -953,7 +973,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -961,7 +981,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Reorder Path Part Handler
-        api_response = api_instance.reorder_path_part(path_part_id, reorder_path_part_request)
+        api_response = await api_instance.reorder_path_part(path_part_id, reorder_path_part_request)
         print("The response of PathPartsApi->reorder_path_part:\n")
         pprint(api_response)
     except Exception as e:
@@ -1003,6 +1023,8 @@ Name | Type | Description  | Notes
 
 # **set_path_part_tags**
 > PathPartTagsResponse set_path_part_tags(path_part_id, bulk_tag_request)
+
+**Synchronous variant:** `set_path_part_tags_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Set Path Part Tags Handler
 
@@ -1049,7 +1071,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -1057,7 +1079,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Set Path Part Tags Handler
-        api_response = api_instance.set_path_part_tags(path_part_id, bulk_tag_request)
+        api_response = await api_instance.set_path_part_tags(path_part_id, bulk_tag_request)
         print("The response of PathPartsApi->set_path_part_tags:\n")
         pprint(api_response)
     except Exception as e:
@@ -1099,6 +1121,8 @@ Name | Type | Description  | Notes
 
 # **transfer_path_part_owner**
 > TransferOwnerResponse transfer_path_part_owner(path_part_id, transfer_owner_request)
+
+**Synchronous variant:** `transfer_path_part_owner_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Transfer Path Part Owner Handler
 
@@ -1142,7 +1166,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -1150,7 +1174,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Transfer Path Part Owner Handler
-        api_response = api_instance.transfer_path_part_owner(path_part_id, transfer_owner_request)
+        api_response = await api_instance.transfer_path_part_owner(path_part_id, transfer_owner_request)
         print("The response of PathPartsApi->transfer_path_part_owner:\n")
         pprint(api_response)
     except Exception as e:

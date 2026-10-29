@@ -15,6 +15,8 @@ Method | HTTP request | Description
 # **accept_api_connection_disclaimer**
 > ApiConnectionResponse accept_api_connection_disclaimer(connection_id, accept_disclaimer_request)
 
+**Synchronous variant:** `accept_api_connection_disclaimer_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Accept Api Connection Disclaimer Handler
 
 Accept the egress disclaimer (Admin/Owner).
@@ -54,7 +56,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ApiConnectionsApi(api_client)
     connection_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -62,7 +64,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Accept Api Connection Disclaimer Handler
-        api_response = api_instance.accept_api_connection_disclaimer(connection_id, accept_disclaimer_request)
+        api_response = await api_instance.accept_api_connection_disclaimer(connection_id, accept_disclaimer_request)
         print("The response of ApiConnectionsApi->accept_api_connection_disclaimer:\n")
         pprint(api_response)
     except Exception as e:
@@ -105,6 +107,8 @@ Name | Type | Description  | Notes
 # **create_api_connection**
 > ApiConnectionResponse create_api_connection(create_api_connection_request)
 
+**Synchronous variant:** `create_api_connection_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Api Connection Handler
 
 Create a connection under a writable folder (Admin/Owner; egress on).
@@ -144,14 +148,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ApiConnectionsApi(api_client)
     create_api_connection_request = ksapi.CreateApiConnectionRequest() # CreateApiConnectionRequest | 
 
     try:
         # Create Api Connection Handler
-        api_response = api_instance.create_api_connection(create_api_connection_request)
+        api_response = await api_instance.create_api_connection(create_api_connection_request)
         print("The response of ApiConnectionsApi->create_api_connection:\n")
         pprint(api_response)
     except Exception as e:
@@ -193,6 +197,8 @@ Name | Type | Description  | Notes
 # **delete_api_connection**
 > delete_api_connection(connection_id)
 
+**Synchronous variant:** `delete_api_connection_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Api Connection Handler
 
 Move a connection to trash; requires ``can_delete``.
@@ -230,14 +236,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ApiConnectionsApi(api_client)
     connection_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Api Connection Handler
-        api_instance.delete_api_connection(connection_id)
+        await api_instance.delete_api_connection(connection_id)
     except Exception as e:
         print("Exception when calling ApiConnectionsApi->delete_api_connection: %s\n" % e)
 ```
@@ -276,6 +282,8 @@ void (empty response body)
 
 # **execute_api_connection_request**
 > ApiConnectionRequestResponse execute_api_connection_request(connection_id, api_connection_request_request)
+
+**Synchronous variant:** `execute_api_connection_request_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Execute Api Connection Request Handler
 
@@ -316,7 +324,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ApiConnectionsApi(api_client)
     connection_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -324,7 +332,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Execute Api Connection Request Handler
-        api_response = api_instance.execute_api_connection_request(connection_id, api_connection_request_request)
+        api_response = await api_instance.execute_api_connection_request(connection_id, api_connection_request_request)
         print("The response of ApiConnectionsApi->execute_api_connection_request:\n")
         pprint(api_response)
     except Exception as e:
@@ -367,6 +375,8 @@ Name | Type | Description  | Notes
 # **get_api_connection**
 > ApiConnectionResponse get_api_connection(connection_id)
 
+**Synchronous variant:** `get_api_connection_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Api Connection Handler
 
 Get a connection (no secret); requires read access.
@@ -405,14 +415,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ApiConnectionsApi(api_client)
     connection_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Api Connection Handler
-        api_response = api_instance.get_api_connection(connection_id)
+        api_response = await api_instance.get_api_connection(connection_id)
         print("The response of ApiConnectionsApi->get_api_connection:\n")
         pprint(api_response)
     except Exception as e:
@@ -454,6 +464,8 @@ Name | Type | Description  | Notes
 # **update_api_connection**
 > ApiConnectionResponse update_api_connection(connection_id, update_api_connection_request)
 
+**Synchronous variant:** `update_api_connection_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Api Connection Handler
 
 Update a connection; changing its egress envelope needs Admin/Owner.
@@ -493,7 +505,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ApiConnectionsApi(api_client)
     connection_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -501,7 +513,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Api Connection Handler
-        api_response = api_instance.update_api_connection(connection_id, update_api_connection_request)
+        api_response = await api_instance.update_api_connection(connection_id, update_api_connection_request)
         print("The response of ApiConnectionsApi->update_api_connection:\n")
         pprint(api_response)
     except Exception as e:

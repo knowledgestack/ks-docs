@@ -11,6 +11,8 @@ Method | HTTP request | Description
 # **export_audit_events**
 > bytes export_audit_events(actor_user_id=actor_user_id, kind=kind, since=since, until=until, subject_path_part_id=subject_path_part_id, recursive=recursive)
 
+**Synchronous variant:** `export_audit_events_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Export Audit Events Handler
 
 Export the tenant's audit events as a CSV download (admin/owner only).
@@ -55,7 +57,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuditEventsApi(api_client)
     actor_user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter to one actor (optional)
@@ -67,7 +69,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Export Audit Events Handler
-        api_response = api_instance.export_audit_events(actor_user_id=actor_user_id, kind=kind, since=since, until=until, subject_path_part_id=subject_path_part_id, recursive=recursive)
+        api_response = await api_instance.export_audit_events(actor_user_id=actor_user_id, kind=kind, since=since, until=until, subject_path_part_id=subject_path_part_id, recursive=recursive)
         print("The response of AuditEventsApi->export_audit_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -114,6 +116,8 @@ Name | Type | Description  | Notes
 # **list_audit_events**
 > PaginatedResponseEventResponse list_audit_events(actor_user_id=actor_user_id, kind=kind, since=since, until=until, subject_path_part_id=subject_path_part_id, recursive=recursive, sort_dir=sort_dir, limit=limit, offset=offset)
 
+**Synchronous variant:** `list_audit_events_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Audit Events Handler
 
 List the tenant's audit events, newest first (admin/owner only).
@@ -158,7 +162,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuditEventsApi(api_client)
     actor_user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter to one actor (optional)
@@ -173,7 +177,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Audit Events Handler
-        api_response = api_instance.list_audit_events(actor_user_id=actor_user_id, kind=kind, since=since, until=until, subject_path_part_id=subject_path_part_id, recursive=recursive, sort_dir=sort_dir, limit=limit, offset=offset)
+        api_response = await api_instance.list_audit_events(actor_user_id=actor_user_id, kind=kind, since=since, until=until, subject_path_part_id=subject_path_part_id, recursive=recursive, sort_dir=sort_dir, limit=limit, offset=offset)
         print("The response of AuditEventsApi->list_audit_events:\n")
         pprint(api_response)
     except Exception as e:

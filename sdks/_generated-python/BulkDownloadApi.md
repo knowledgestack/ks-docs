@@ -10,6 +10,8 @@ Method | HTTP request | Description
 # **start_bulk_download**
 > bytes start_bulk_download(bulk_download_request)
 
+**Synchronous variant:** `start_bulk_download_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Start Bulk Download Handler
 
 Package the selected folders/documents into one ``.zip`` and stream it.
@@ -54,14 +56,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.BulkDownloadApi(api_client)
     bulk_download_request = ksapi.BulkDownloadRequest() # BulkDownloadRequest | 
 
     try:
         # Start Bulk Download Handler
-        api_response = api_instance.start_bulk_download(bulk_download_request)
+        api_response = await api_instance.start_bulk_download(bulk_download_request)
         print("The response of BulkDownloadApi->start_bulk_download:\n")
         pprint(api_response)
     except Exception as e:

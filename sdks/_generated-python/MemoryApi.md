@@ -14,6 +14,8 @@ Method | HTTP request | Description
 # **approve_memory_proposal**
 > MemoryEntryResponse approve_memory_proposal(chunk_id)
 
+**Synchronous variant:** `approve_memory_proposal_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Approve Memory Proposal Handler
 
 ### Example
@@ -50,14 +52,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.MemoryApi(api_client)
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Approve Memory Proposal Handler
-        api_response = api_instance.approve_memory_proposal(chunk_id)
+        api_response = await api_instance.approve_memory_proposal(chunk_id)
         print("The response of MemoryApi->approve_memory_proposal:\n")
         pprint(api_response)
     except Exception as e:
@@ -99,6 +101,8 @@ Name | Type | Description  | Notes
 # **get_memory_body**
 > MemoryBodyResponse get_memory_body(scope, owner_id)
 
+**Synchronous variant:** `get_memory_body_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Memory Body Handler
 
 ### Example
@@ -136,7 +140,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.MemoryApi(api_client)
     scope = ksapi.MemoryScope() # MemoryScope | 
@@ -144,7 +148,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Memory Body Handler
-        api_response = api_instance.get_memory_body(scope, owner_id)
+        api_response = await api_instance.get_memory_body(scope, owner_id)
         print("The response of MemoryApi->get_memory_body:\n")
         pprint(api_response)
     except Exception as e:
@@ -187,6 +191,8 @@ Name | Type | Description  | Notes
 # **list_memory_proposals**
 > PaginatedResponsePendingMemoryChunkResponse list_memory_proposals(limit=limit, offset=offset)
 
+**Synchronous variant:** `list_memory_proposals_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Memory Proposals Handler
 
 ### Example
@@ -223,7 +229,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.MemoryApi(api_client)
     limit = 20 # int | Number of items per page (optional) (default to 20)
@@ -231,7 +237,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Memory Proposals Handler
-        api_response = api_instance.list_memory_proposals(limit=limit, offset=offset)
+        api_response = await api_instance.list_memory_proposals(limit=limit, offset=offset)
         print("The response of MemoryApi->list_memory_proposals:\n")
         pprint(api_response)
     except Exception as e:
@@ -274,6 +280,8 @@ Name | Type | Description  | Notes
 # **propose_memory_chunk**
 > PendingMemoryChunkResponse propose_memory_chunk(propose_memory_chunk_request)
 
+**Synchronous variant:** `propose_memory_chunk_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Propose Memory Chunk Handler
 
 ### Example
@@ -311,14 +319,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.MemoryApi(api_client)
     propose_memory_chunk_request = ksapi.ProposeMemoryChunkRequest() # ProposeMemoryChunkRequest | 
 
     try:
         # Propose Memory Chunk Handler
-        api_response = api_instance.propose_memory_chunk(propose_memory_chunk_request)
+        api_response = await api_instance.propose_memory_chunk(propose_memory_chunk_request)
         print("The response of MemoryApi->propose_memory_chunk:\n")
         pprint(api_response)
     except Exception as e:
@@ -360,6 +368,8 @@ Name | Type | Description  | Notes
 # **reject_memory_proposal**
 > reject_memory_proposal(chunk_id)
 
+**Synchronous variant:** `reject_memory_proposal_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Reject Memory Proposal Handler
 
 ### Example
@@ -395,14 +405,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.MemoryApi(api_client)
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Reject Memory Proposal Handler
-        api_instance.reject_memory_proposal(chunk_id)
+        await api_instance.reject_memory_proposal(chunk_id)
     except Exception as e:
         print("Exception when calling MemoryApi->reject_memory_proposal: %s\n" % e)
 ```

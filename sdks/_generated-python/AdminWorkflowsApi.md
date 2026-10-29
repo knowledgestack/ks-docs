@@ -14,6 +14,8 @@ Method | HTTP request | Description
 # **get_admin_workflow_by_hour**
 > HourHistogramResponse get_admin_workflow_by_hour(timezone=timezone, definition_id=definition_id, since=since, until=until)
 
+**Synchronous variant:** `get_admin_workflow_by_hour_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Admin Workflow By Hour Handler
 
 Runs per hour-of-day (0-23) in the resolved timezone.
@@ -52,7 +54,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
     timezone = 'timezone_example' # str | IANA tz override; defaults to tenant setting. (optional)
@@ -62,7 +64,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Admin Workflow By Hour Handler
-        api_response = api_instance.get_admin_workflow_by_hour(timezone=timezone, definition_id=definition_id, since=since, until=until)
+        api_response = await api_instance.get_admin_workflow_by_hour(timezone=timezone, definition_id=definition_id, since=since, until=until)
         print("The response of AdminWorkflowsApi->get_admin_workflow_by_hour:\n")
         pprint(api_response)
     except Exception as e:
@@ -107,6 +109,8 @@ Name | Type | Description  | Notes
 # **get_admin_workflow_leaderboard**
 > WorkflowLeaderboardResponse get_admin_workflow_leaderboard(limit=limit, since=since, until=until)
 
+**Synchronous variant:** `get_admin_workflow_leaderboard_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Admin Workflow Leaderboard Handler
 
 Top workflows and top run owners by run count.
@@ -145,7 +149,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
     limit = 10 # int | Top-N per leaderboard. (optional) (default to 10)
@@ -154,7 +158,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Admin Workflow Leaderboard Handler
-        api_response = api_instance.get_admin_workflow_leaderboard(limit=limit, since=since, until=until)
+        api_response = await api_instance.get_admin_workflow_leaderboard(limit=limit, since=since, until=until)
         print("The response of AdminWorkflowsApi->get_admin_workflow_leaderboard:\n")
         pprint(api_response)
     except Exception as e:
@@ -198,6 +202,8 @@ Name | Type | Description  | Notes
 # **get_admin_workflow_output_stats**
 > WorkflowOutputStatsResponse get_admin_workflow_output_stats(since=since, until=until)
 
+**Synchronous variant:** `get_admin_workflow_output_stats_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Admin Workflow Output Stats Handler
 
 Average output DOCUMENTs generated per workflow definition (completed runs).
@@ -236,7 +242,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
     since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
@@ -244,7 +250,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Admin Workflow Output Stats Handler
-        api_response = api_instance.get_admin_workflow_output_stats(since=since, until=until)
+        api_response = await api_instance.get_admin_workflow_output_stats(since=since, until=until)
         print("The response of AdminWorkflowsApi->get_admin_workflow_output_stats:\n")
         pprint(api_response)
     except Exception as e:
@@ -287,6 +293,8 @@ Name | Type | Description  | Notes
 # **get_admin_workflow_summary**
 > WorkflowRunSummaryResponse get_admin_workflow_summary(definition_id=definition_id, since=since, until=until)
 
+**Synchronous variant:** `get_admin_workflow_summary_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Admin Workflow Summary Handler
 
 Tenant-wide run health: counts, failure rate, durations, approval backlog.
@@ -325,7 +333,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope all numbers to one workflow. (optional)
@@ -334,7 +342,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Admin Workflow Summary Handler
-        api_response = api_instance.get_admin_workflow_summary(definition_id=definition_id, since=since, until=until)
+        api_response = await api_instance.get_admin_workflow_summary(definition_id=definition_id, since=since, until=until)
         print("The response of AdminWorkflowsApi->get_admin_workflow_summary:\n")
         pprint(api_response)
     except Exception as e:
@@ -378,6 +386,8 @@ Name | Type | Description  | Notes
 # **get_admin_workflow_timeseries**
 > RunTimeseriesResponse get_admin_workflow_timeseries(timezone=timezone, definition_id=definition_id, since=since, until=until, bucket=bucket)
 
+**Synchronous variant:** `get_admin_workflow_timeseries_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Admin Workflow Timeseries Handler
 
 Run counts bucketed over time, in the resolved timezone.
@@ -417,7 +427,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
     timezone = 'timezone_example' # str | IANA tz override; defaults to tenant setting. (optional)
@@ -428,7 +438,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Admin Workflow Timeseries Handler
-        api_response = api_instance.get_admin_workflow_timeseries(timezone=timezone, definition_id=definition_id, since=since, until=until, bucket=bucket)
+        api_response = await api_instance.get_admin_workflow_timeseries(timezone=timezone, definition_id=definition_id, since=since, until=until, bucket=bucket)
         print("The response of AdminWorkflowsApi->get_admin_workflow_timeseries:\n")
         pprint(api_response)
     except Exception as e:

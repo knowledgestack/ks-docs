@@ -21,6 +21,8 @@ Method | HTTP request | Description
 # **activate_tenant_user**
 > TenantUserResponse activate_tenant_user(tenant_id, user_id)
 
+**Synchronous variant:** `activate_tenant_user_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Activate Tenant User Handler
 
 Reactivate a deactivated tenant user.
@@ -59,7 +61,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -67,7 +69,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Activate Tenant User Handler
-        api_response = api_instance.activate_tenant_user(tenant_id, user_id)
+        api_response = await api_instance.activate_tenant_user(tenant_id, user_id)
         print("The response of TenantsApi->activate_tenant_user:\n")
         pprint(api_response)
     except Exception as e:
@@ -110,6 +112,8 @@ Name | Type | Description  | Notes
 # **deactivate_tenant_user**
 > TenantUserResponse deactivate_tenant_user(tenant_id, user_id)
 
+**Synchronous variant:** `deactivate_tenant_user_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Deactivate Tenant User Handler
 
 Deactivate a tenant user (soft delete).
@@ -151,7 +155,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -159,7 +163,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Deactivate Tenant User Handler
-        api_response = api_instance.deactivate_tenant_user(tenant_id, user_id)
+        api_response = await api_instance.deactivate_tenant_user(tenant_id, user_id)
         print("The response of TenantsApi->deactivate_tenant_user:\n")
         pprint(api_response)
     except Exception as e:
@@ -201,6 +205,8 @@ Name | Type | Description  | Notes
 
 # **delete_tenant**
 > delete_tenant(tenant_id)
+
+**Synchronous variant:** `delete_tenant_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Delete Tenant
 
@@ -246,14 +252,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Tenant
-        api_instance.delete_tenant(tenant_id)
+        await api_instance.delete_tenant(tenant_id)
     except Exception as e:
         print("Exception when calling TenantsApi->delete_tenant: %s\n" % e)
 ```
@@ -292,6 +298,8 @@ void (empty response body)
 
 # **delete_tenant_logo**
 > TenantResponse delete_tenant_logo(tenant_id, logo_type=logo_type)
+
+**Synchronous variant:** `delete_tenant_logo_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Delete Tenant Logo
 
@@ -334,7 +342,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -342,7 +350,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Delete Tenant Logo
-        api_response = api_instance.delete_tenant_logo(tenant_id, logo_type=logo_type)
+        api_response = await api_instance.delete_tenant_logo(tenant_id, logo_type=logo_type)
         print("The response of TenantsApi->delete_tenant_logo:\n")
         pprint(api_response)
     except Exception as e:
@@ -385,6 +393,8 @@ Name | Type | Description  | Notes
 # **delete_tenant_user**
 > delete_tenant_user(tenant_id, user_id)
 
+**Synchronous variant:** `delete_tenant_user_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Tenant User Handler
 
 Remove a user from a tenant (hard delete).
@@ -425,7 +435,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -433,7 +443,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Delete Tenant User Handler
-        api_instance.delete_tenant_user(tenant_id, user_id)
+        await api_instance.delete_tenant_user(tenant_id, user_id)
     except Exception as e:
         print("Exception when calling TenantsApi->delete_tenant_user: %s\n" % e)
 ```
@@ -473,6 +483,8 @@ void (empty response body)
 
 # **get_tenant**
 > TenantResponse get_tenant(tenant_id)
+
+**Synchronous variant:** `get_tenant_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Tenant
 
@@ -514,14 +526,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Tenant
-        api_response = api_instance.get_tenant(tenant_id)
+        api_response = await api_instance.get_tenant(tenant_id)
         print("The response of TenantsApi->get_tenant:\n")
         pprint(api_response)
     except Exception as e:
@@ -562,6 +574,8 @@ Name | Type | Description  | Notes
 
 # **get_tenant_quota_state**
 > TenantQuotaStateResponse get_tenant_quota_state(tenant_id)
+
+**Synchronous variant:** `get_tenant_quota_state_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Tenant Quota State Handler
 
@@ -604,14 +618,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Tenant Quota State Handler
-        api_response = api_instance.get_tenant_quota_state(tenant_id)
+        api_response = await api_instance.get_tenant_quota_state(tenant_id)
         print("The response of TenantsApi->get_tenant_quota_state:\n")
         pprint(api_response)
     except Exception as e:
@@ -652,6 +666,8 @@ Name | Type | Description  | Notes
 
 # **list_tenant_users**
 > PaginatedResponseTenantUserResponse list_tenant_users(tenant_id, sort_by=sort_by, sort_dir=sort_dir, role=role, username_like=username_like, active_only=active_only, limit=limit, offset=offset)
+
+**Synchronous variant:** `list_tenant_users_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Tenant Users
 
@@ -696,7 +712,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -710,7 +726,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Tenant Users
-        api_response = api_instance.list_tenant_users(tenant_id, sort_by=sort_by, sort_dir=sort_dir, role=role, username_like=username_like, active_only=active_only, limit=limit, offset=offset)
+        api_response = await api_instance.list_tenant_users(tenant_id, sort_by=sort_by, sort_dir=sort_dir, role=role, username_like=username_like, active_only=active_only, limit=limit, offset=offset)
         print("The response of TenantsApi->list_tenant_users:\n")
         pprint(api_response)
     except Exception as e:
@@ -759,6 +775,8 @@ Name | Type | Description  | Notes
 # **list_tenants**
 > PaginatedResponseTenantResponse list_tenants(limit=limit, offset=offset)
 
+**Synchronous variant:** `list_tenants_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Tenants
 
 List all tenants the current user belongs to.
@@ -797,7 +815,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     limit = 20 # int | Number of items per page (optional) (default to 20)
@@ -805,7 +823,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Tenants
-        api_response = api_instance.list_tenants(limit=limit, offset=offset)
+        api_response = await api_instance.list_tenants(limit=limit, offset=offset)
         print("The response of TenantsApi->list_tenants:\n")
         pprint(api_response)
     except Exception as e:
@@ -848,6 +866,8 @@ Name | Type | Description  | Notes
 # **update_tenant**
 > TenantResponse update_tenant(tenant_id, update_tenant_request)
 
+**Synchronous variant:** `update_tenant_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Tenant
 
 Update tenant configuration.
@@ -889,7 +909,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -897,7 +917,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Tenant
-        api_response = api_instance.update_tenant(tenant_id, update_tenant_request)
+        api_response = await api_instance.update_tenant(tenant_id, update_tenant_request)
         print("The response of TenantsApi->update_tenant:\n")
         pprint(api_response)
     except Exception as e:
@@ -940,6 +960,8 @@ Name | Type | Description  | Notes
 # **update_tenant_user**
 > TenantUserResponse update_tenant_user(tenant_id, user_id, tenant_user_edit_request)
 
+**Synchronous variant:** `update_tenant_user_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Tenant User
 
 Update a user's role and optional profile fields in a tenant.
@@ -981,7 +1003,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -990,7 +1012,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Tenant User
-        api_response = api_instance.update_tenant_user(tenant_id, user_id, tenant_user_edit_request)
+        api_response = await api_instance.update_tenant_user(tenant_id, user_id, tenant_user_edit_request)
         print("The response of TenantsApi->update_tenant_user:\n")
         pprint(api_response)
     except Exception as e:
@@ -1034,6 +1056,8 @@ Name | Type | Description  | Notes
 # **upload_tenant_logo**
 > TenantResponse upload_tenant_logo(tenant_id, file, logo_type=logo_type)
 
+**Synchronous variant:** `upload_tenant_logo_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Upload Tenant Logo
 
 Upload a branding logo (primary, dark-mode variant, or favicon).
@@ -1076,7 +1100,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -1085,7 +1109,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Upload Tenant Logo
-        api_response = api_instance.upload_tenant_logo(tenant_id, file, logo_type=logo_type)
+        api_response = await api_instance.upload_tenant_logo(tenant_id, file, logo_type=logo_type)
         print("The response of TenantsApi->upload_tenant_logo:\n")
         pprint(api_response)
     except Exception as e:

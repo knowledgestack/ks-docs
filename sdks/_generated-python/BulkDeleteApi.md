@@ -10,6 +10,8 @@ Method | HTTP request | Description
 # **bulk_delete**
 > BulkOperationResponse bulk_delete(bulk_delete_request)
 
+**Synchronous variant:** `bulk_delete_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Bulk Delete Handler
 
 Move the selected folders and documents to Trash, reporting per item.
@@ -54,14 +56,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.BulkDeleteApi(api_client)
     bulk_delete_request = ksapi.BulkDeleteRequest() # BulkDeleteRequest | 
 
     try:
         # Bulk Delete Handler
-        api_response = api_instance.bulk_delete(bulk_delete_request)
+        api_response = await api_instance.bulk_delete(bulk_delete_request)
         print("The response of BulkDeleteApi->bulk_delete:\n")
         pprint(api_response)
     except Exception as e:

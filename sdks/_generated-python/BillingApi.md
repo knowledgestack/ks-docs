@@ -10,6 +10,8 @@ Method | HTTP request | Description
 # **list_billing_payments**
 > PaginatedResponseBillingPaymentResponse list_billing_payments(tenant_id, limit=limit, offset=offset)
 
+**Synchronous variant:** `list_billing_payments_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Billing Payments Handler
 
 Newest-first payment history for the tenant (OWNER/ADMIN only).
@@ -52,7 +54,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.BillingApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -61,7 +63,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Billing Payments Handler
-        api_response = api_instance.list_billing_payments(tenant_id, limit=limit, offset=offset)
+        api_response = await api_instance.list_billing_payments(tenant_id, limit=limit, offset=offset)
         print("The response of BillingApi->list_billing_payments:\n")
         pprint(api_response)
     except Exception as e:

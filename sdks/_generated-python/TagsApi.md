@@ -14,6 +14,8 @@ Method | HTTP request | Description
 # **create_tag**
 > TagResponse create_tag(create_tag_request)
 
+**Synchronous variant:** `create_tag_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Tag Handler
 
 Create a new tag for the current tenant. Requires ADMIN or OWNER role.
@@ -53,14 +55,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TagsApi(api_client)
     create_tag_request = ksapi.CreateTagRequest() # CreateTagRequest | 
 
     try:
         # Create Tag Handler
-        api_response = api_instance.create_tag(create_tag_request)
+        api_response = await api_instance.create_tag(create_tag_request)
         print("The response of TagsApi->create_tag:\n")
         pprint(api_response)
     except Exception as e:
@@ -102,6 +104,8 @@ Name | Type | Description  | Notes
 # **delete_tag**
 > delete_tag(tag_id)
 
+**Synchronous variant:** `delete_tag_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Tag Handler
 
 Delete a tag and all its path_part associations. Requires ADMIN or OWNER role.
@@ -139,14 +143,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TagsApi(api_client)
     tag_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Tag Handler
-        api_instance.delete_tag(tag_id)
+        await api_instance.delete_tag(tag_id)
     except Exception as e:
         print("Exception when calling TagsApi->delete_tag: %s\n" % e)
 ```
@@ -186,6 +190,8 @@ void (empty response body)
 # **get_tag**
 > TagResponse get_tag(tag_id)
 
+**Synchronous variant:** `get_tag_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Tag Handler
 
 Get a tag by its ID.
@@ -224,14 +230,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TagsApi(api_client)
     tag_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Tag Handler
-        api_response = api_instance.get_tag(tag_id)
+        api_response = await api_instance.get_tag(tag_id)
         print("The response of TagsApi->get_tag:\n")
         pprint(api_response)
     except Exception as e:
@@ -273,6 +279,8 @@ Name | Type | Description  | Notes
 # **list_tags**
 > PaginatedResponseTagResponse list_tags(sort_by=sort_by, sort_dir=sort_dir, name_like=name_like, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
 
+**Synchronous variant:** `list_tags_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Tags Handler
 
 List all tags for the current tenant.
@@ -313,7 +321,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TagsApi(api_client)
     sort_by = ksapi.TagOrder() # TagOrder | Field to sort tags by (default: NAME) (optional)
@@ -328,7 +336,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Tags Handler
-        api_response = api_instance.list_tags(sort_by=sort_by, sort_dir=sort_dir, name_like=name_like, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_tags(sort_by=sort_by, sort_dir=sort_dir, name_like=name_like, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of TagsApi->list_tags:\n")
         pprint(api_response)
     except Exception as e:
@@ -378,6 +386,8 @@ Name | Type | Description  | Notes
 # **update_tag**
 > TagResponse update_tag(tag_id, update_tag_request)
 
+**Synchronous variant:** `update_tag_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Tag Handler
 
 Update a tag (name, color, and/or description). Requires ADMIN or OWNER role.
@@ -417,7 +427,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TagsApi(api_client)
     tag_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -425,7 +435,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Tag Handler
-        api_response = api_instance.update_tag(tag_id, update_tag_request)
+        api_response = await api_instance.update_tag(tag_id, update_tag_request)
         print("The response of TagsApi->update_tag:\n")
         pprint(api_response)
     except Exception as e:

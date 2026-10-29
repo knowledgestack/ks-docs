@@ -24,6 +24,8 @@ Method | HTTP request | Description
 # **activate_skill_version**
 > SkillResponse activate_skill_version(skill_id, version_id, activate_skill_version_request)
 
+**Synchronous variant:** `activate_skill_version_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Activate Skill Version Handler
 
 Activate a published version, restoring the working copy to it.
@@ -65,7 +67,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     skill_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -74,7 +76,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Activate Skill Version Handler
-        api_response = api_instance.activate_skill_version(skill_id, version_id, activate_skill_version_request)
+        api_response = await api_instance.activate_skill_version(skill_id, version_id, activate_skill_version_request)
         print("The response of SkillsApi->activate_skill_version:\n")
         pprint(api_response)
     except Exception as e:
@@ -118,6 +120,8 @@ Name | Type | Description  | Notes
 # **checkin_skill**
 > checkin_skill(skill_id)
 
+**Synchronous variant:** `checkin_skill_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Checkin Skill Handler
 
 Release the skill's checkout so another author can edit it.
@@ -155,14 +159,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     skill_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Checkin Skill Handler
-        api_instance.checkin_skill(skill_id)
+        await api_instance.checkin_skill(skill_id)
     except Exception as e:
         print("Exception when calling SkillsApi->checkin_skill: %s\n" % e)
 ```
@@ -201,6 +205,8 @@ void (empty response body)
 
 # **checkout_skill**
 > SkillResponse checkout_skill(skill_id)
+
+**Synchronous variant:** `checkout_skill_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Checkout Skill Handler
 
@@ -243,14 +249,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     skill_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Checkout Skill Handler
-        api_response = api_instance.checkout_skill(skill_id)
+        api_response = await api_instance.checkout_skill(skill_id)
         print("The response of SkillsApi->checkout_skill:\n")
         pprint(api_response)
     except Exception as e:
@@ -292,6 +298,8 @@ Name | Type | Description  | Notes
 # **create_skill**
 > SkillResponse create_skill(create_skill_request)
 
+**Synchronous variant:** `create_skill_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Skill Handler
 
 Author a skill (JSON) under /agents/skills; requires can_write there.
@@ -331,14 +339,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     create_skill_request = ksapi.CreateSkillRequest() # CreateSkillRequest | 
 
     try:
         # Create Skill Handler
-        api_response = api_instance.create_skill(create_skill_request)
+        api_response = await api_instance.create_skill(create_skill_request)
         print("The response of SkillsApi->create_skill:\n")
         pprint(api_response)
     except Exception as e:
@@ -380,6 +388,8 @@ Name | Type | Description  | Notes
 # **delete_skill**
 > delete_skill(skill_id)
 
+**Synchronous variant:** `delete_skill_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Skill Handler
 
 Soft-delete a skill; requires can_delete; 409 if another holds checkout.
@@ -417,14 +427,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     skill_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Skill Handler
-        api_instance.delete_skill(skill_id)
+        await api_instance.delete_skill(skill_id)
     except Exception as e:
         print("Exception when calling SkillsApi->delete_skill: %s\n" % e)
 ```
@@ -463,6 +473,8 @@ void (empty response body)
 
 # **discard_skill_draft**
 > SkillResponse discard_skill_draft(skill_id)
+
+**Synchronous variant:** `discard_skill_draft_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Discard Skill Draft Handler
 
@@ -504,14 +516,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     skill_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Discard Skill Draft Handler
-        api_response = api_instance.discard_skill_draft(skill_id)
+        api_response = await api_instance.discard_skill_draft(skill_id)
         print("The response of SkillsApi->discard_skill_draft:\n")
         pprint(api_response)
     except Exception as e:
@@ -553,6 +565,8 @@ Name | Type | Description  | Notes
 # **export_skill**
 > object export_skill(skill_id)
 
+**Synchronous variant:** `export_skill_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Export Skill Handler
 
 Download the active published version as a self-contained ZIP for sharing.
@@ -590,14 +604,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     skill_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Export Skill Handler
-        api_response = api_instance.export_skill(skill_id)
+        api_response = await api_instance.export_skill(skill_id)
         print("The response of SkillsApi->export_skill:\n")
         pprint(api_response)
     except Exception as e:
@@ -639,6 +653,8 @@ Name | Type | Description  | Notes
 # **export_skills**
 > bytes export_skills(export_skills_request)
 
+**Synchronous variant:** `export_skills_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Export Skills Handler
 
 Download several skills' active versions as one ZIP; needs can_read on each.
@@ -677,14 +693,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     export_skills_request = ksapi.ExportSkillsRequest() # ExportSkillsRequest | 
 
     try:
         # Export Skills Handler
-        api_response = api_instance.export_skills(export_skills_request)
+        api_response = await api_instance.export_skills(export_skills_request)
         print("The response of SkillsApi->export_skills:\n")
         pprint(api_response)
     except Exception as e:
@@ -726,6 +742,8 @@ Name | Type | Description  | Notes
 # **get_skill**
 > SkillResponse get_skill(skill_id, include_file_contents=include_file_contents)
 
+**Synchronous variant:** `get_skill_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Skill Handler
 
 Skill detail: SKILL.md, file paths (+ contents on request), perms.
@@ -764,7 +782,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     skill_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -772,7 +790,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Skill Handler
-        api_response = api_instance.get_skill(skill_id, include_file_contents=include_file_contents)
+        api_response = await api_instance.get_skill(skill_id, include_file_contents=include_file_contents)
         print("The response of SkillsApi->get_skill:\n")
         pprint(api_response)
     except Exception as e:
@@ -815,6 +833,8 @@ Name | Type | Description  | Notes
 # **import_skill**
 > SkillResponse import_skill(file)
 
+**Synchronous variant:** `import_skill_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Import Skill Handler
 
 Create a skill from an uploaded ZIP or tarball (works across tenants).
@@ -853,14 +873,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     file = None # bytes | 
 
     try:
         # Import Skill Handler
-        api_response = api_instance.import_skill(file)
+        api_response = await api_instance.import_skill(file)
         print("The response of SkillsApi->import_skill:\n")
         pprint(api_response)
     except Exception as e:
@@ -902,6 +922,8 @@ Name | Type | Description  | Notes
 # **list_skill_versions**
 > List[SkillVersionResponse] list_skill_versions(skill_id)
 
+**Synchronous variant:** `list_skill_versions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Skill Versions Handler
 
 List a skill's published versions, newest first.
@@ -940,14 +962,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     skill_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # List Skill Versions Handler
-        api_response = api_instance.list_skill_versions(skill_id)
+        api_response = await api_instance.list_skill_versions(skill_id)
         print("The response of SkillsApi->list_skill_versions:\n")
         pprint(api_response)
     except Exception as e:
@@ -989,6 +1011,8 @@ Name | Type | Description  | Notes
 # **list_skills**
 > PaginatedResponseSkillResponse list_skills(sort_by=sort_by, search=search, limit=limit, offset=offset, sort_dir=sort_dir)
 
+**Synchronous variant:** `list_skills_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Skills Handler
 
 List readable skills: paginated, sortable both ways, name-searchable.
@@ -1029,7 +1053,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     sort_by = ksapi.SkillOrder() # SkillOrder | Field to sort skills by (default: CREATED_AT) (optional)
@@ -1040,7 +1064,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Skills Handler
-        api_response = api_instance.list_skills(sort_by=sort_by, search=search, limit=limit, offset=offset, sort_dir=sort_dir)
+        api_response = await api_instance.list_skills(sort_by=sort_by, search=search, limit=limit, offset=offset, sort_dir=sort_dir)
         print("The response of SkillsApi->list_skills:\n")
         pprint(api_response)
     except Exception as e:
@@ -1086,6 +1110,8 @@ Name | Type | Description  | Notes
 # **publish_skill_version**
 > SkillResponse publish_skill_version(skill_id)
 
+**Synchronous variant:** `publish_skill_version_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Publish Skill Version Handler
 
 Snapshot the working copy into a new immutable version and activate it.
@@ -1127,14 +1153,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     skill_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Publish Skill Version Handler
-        api_response = api_instance.publish_skill_version(skill_id)
+        api_response = await api_instance.publish_skill_version(skill_id)
         print("The response of SkillsApi->publish_skill_version:\n")
         pprint(api_response)
     except Exception as e:
@@ -1175,6 +1201,8 @@ Name | Type | Description  | Notes
 
 # **search_skills**
 > SearchSkillsResponse search_skills(search_skills_request)
+
+**Synchronous variant:** `search_skills_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Search Skills Handler
 
@@ -1220,14 +1248,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     search_skills_request = ksapi.SearchSkillsRequest() # SearchSkillsRequest | 
 
     try:
         # Search Skills Handler
-        api_response = api_instance.search_skills(search_skills_request)
+        api_response = await api_instance.search_skills(search_skills_request)
         print("The response of SkillsApi->search_skills:\n")
         pprint(api_response)
     except Exception as e:
@@ -1269,6 +1297,8 @@ Name | Type | Description  | Notes
 # **update_skill**
 > SkillResponse update_skill(skill_id, update_skill_request)
 
+**Synchronous variant:** `update_skill_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Skill Handler
 
 Edit the working copy in place; requires can_write + a held checkout.
@@ -1308,7 +1338,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.SkillsApi(api_client)
     skill_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -1316,7 +1346,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Skill Handler
-        api_response = api_instance.update_skill(skill_id, update_skill_request)
+        api_response = await api_instance.update_skill(skill_id, update_skill_request)
         print("The response of SkillsApi->update_skill:\n")
         pprint(api_response)
     except Exception as e:

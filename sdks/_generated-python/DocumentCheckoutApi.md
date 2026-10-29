@@ -12,6 +12,8 @@ Method | HTTP request | Description
 # **acquire_document_checkout**
 > DocumentCheckoutResponse acquire_document_checkout(document_id, force=force)
 
+**Synchronous variant:** `acquire_document_checkout_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Acquire Document Checkout Handler
 
 Acquire a write lock on the document.
@@ -57,7 +59,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentCheckoutApi(api_client)
     document_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Document ID
@@ -65,7 +67,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Acquire Document Checkout Handler
-        api_response = api_instance.acquire_document_checkout(document_id, force=force)
+        api_response = await api_instance.acquire_document_checkout(document_id, force=force)
         print("The response of DocumentCheckoutApi->acquire_document_checkout:\n")
         pprint(api_response)
     except Exception as e:
@@ -107,6 +109,8 @@ Name | Type | Description  | Notes
 
 # **get_document_checkout**
 > DocumentCheckoutResponse get_document_checkout(document_id)
+
+**Synchronous variant:** `get_document_checkout_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Document Checkout Handler
 
@@ -150,14 +154,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentCheckoutApi(api_client)
     document_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Document ID
 
     try:
         # Get Document Checkout Handler
-        api_response = api_instance.get_document_checkout(document_id)
+        api_response = await api_instance.get_document_checkout(document_id)
         print("The response of DocumentCheckoutApi->get_document_checkout:\n")
         pprint(api_response)
     except Exception as e:
@@ -198,6 +202,8 @@ Name | Type | Description  | Notes
 
 # **release_document_checkout**
 > release_document_checkout(document_id)
+
+**Synchronous variant:** `release_document_checkout_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Release Document Checkout Handler
 
@@ -241,14 +247,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DocumentCheckoutApi(api_client)
     document_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Document ID
 
     try:
         # Release Document Checkout Handler
-        api_instance.release_document_checkout(document_id)
+        await api_instance.release_document_checkout(document_id)
     except Exception as e:
         print("Exception when calling DocumentCheckoutApi->release_document_checkout: %s\n" % e)
 ```

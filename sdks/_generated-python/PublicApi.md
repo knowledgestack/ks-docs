@@ -10,6 +10,8 @@ Method | HTTP request | Description
 # **list_public_subscriptions**
 > List[SubscriptionPlanResponse] list_public_subscriptions()
 
+**Synchronous variant:** `list_public_subscriptions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Public Subscriptions Handler
 
 List publicly-visible subscription plans (no authentication required).
@@ -36,13 +38,13 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PublicApi(api_client)
 
     try:
         # List Public Subscriptions Handler
-        api_response = api_instance.list_public_subscriptions()
+        api_response = await api_instance.list_public_subscriptions()
         print("The response of PublicApi->list_public_subscriptions:\n")
         pprint(api_response)
     except Exception as e:

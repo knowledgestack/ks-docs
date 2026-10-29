@@ -15,6 +15,8 @@ Method | HTTP request | Description
 # **accept_invite**
 > AcceptInviteResponse accept_invite(invite_id)
 
+**Synchronous variant:** `accept_invite_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Accept Invite
 
 Accept an invite OR a tenant invite-link.
@@ -66,14 +68,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.InvitesApi(api_client)
     invite_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Either an Invite ID (traditional per-email invite) OR a Tenant ID (when the tenant has ``invite_link.enabled``). Tenant lookup is tried first.
 
     try:
         # Accept Invite
-        api_response = api_instance.accept_invite(invite_id)
+        api_response = await api_instance.accept_invite(invite_id)
         print("The response of InvitesApi->accept_invite:\n")
         pprint(api_response)
     except Exception as e:
@@ -114,6 +116,8 @@ Name | Type | Description  | Notes
 
 # **create_invite**
 > InviteResponse create_invite(invite_user_request)
+
+**Synchronous variant:** `create_invite_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Create Invite
 
@@ -157,14 +161,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.InvitesApi(api_client)
     invite_user_request = ksapi.InviteUserRequest() # InviteUserRequest | 
 
     try:
         # Create Invite
-        api_response = api_instance.create_invite(invite_user_request)
+        api_response = await api_instance.create_invite(invite_user_request)
         print("The response of InvitesApi->create_invite:\n")
         pprint(api_response)
     except Exception as e:
@@ -206,6 +210,8 @@ Name | Type | Description  | Notes
 # **delete_invite**
 > delete_invite(invite_id)
 
+**Synchronous variant:** `delete_invite_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Invite
 
 Hard-delete an invite (admin/owner only).
@@ -245,14 +251,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.InvitesApi(api_client)
     invite_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Invite
-        api_instance.delete_invite(invite_id)
+        await api_instance.delete_invite(invite_id)
     except Exception as e:
         print("Exception when calling InvitesApi->delete_invite: %s\n" % e)
 ```
@@ -291,6 +297,8 @@ void (empty response body)
 
 # **list_invites**
 > PaginatedResponseInviteResponse list_invites(email=email, status=status, role=role, invited_by=invited_by, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+
+**Synchronous variant:** `list_invites_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Invites Handler
 
@@ -337,7 +345,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.InvitesApi(api_client)
     email = 'email_example' # str | Filter by email (case-insensitive partial match) (optional)
@@ -355,7 +363,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Invites Handler
-        api_response = api_instance.list_invites(email=email, status=status, role=role, invited_by=invited_by, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_invites(email=email, status=status, role=role, invited_by=invited_by, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of InvitesApi->list_invites:\n")
         pprint(api_response)
     except Exception as e:
@@ -408,6 +416,8 @@ Name | Type | Description  | Notes
 # **preview_invite**
 > InvitePreviewResponse preview_invite(invite_id)
 
+**Synchronous variant:** `preview_invite_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Preview Invite Handler
 
 Unauthenticated; the invite id in the emailed link is the only credential.
@@ -429,14 +439,14 @@ configuration = ksapi.Configuration(
 
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.InvitesApi(api_client)
     invite_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Preview Invite Handler
-        api_response = api_instance.preview_invite(invite_id)
+        api_response = await api_instance.preview_invite(invite_id)
         print("The response of InvitesApi->preview_invite:\n")
         pprint(api_response)
     except Exception as e:
@@ -477,6 +487,8 @@ No authorization required
 
 # **update_invite**
 > InviteResponse update_invite(invite_id, update_invite_request)
+
+**Synchronous variant:** `update_invite_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Update Invite Handler
 
@@ -520,7 +532,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.InvitesApi(api_client)
     invite_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -528,7 +540,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Invite Handler
-        api_response = api_instance.update_invite(invite_id, update_invite_request)
+        api_response = await api_instance.update_invite(invite_id, update_invite_request)
         print("The response of InvitesApi->update_invite:\n")
         pprint(api_response)
     except Exception as e:

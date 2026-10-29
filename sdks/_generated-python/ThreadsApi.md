@@ -16,6 +16,8 @@ Method | HTTP request | Description
 # **create_thread**
 > ThreadResponse create_thread(create_thread_request)
 
+**Synchronous variant:** `create_thread_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Thread Handler
 
 Create a new thread.
@@ -62,14 +64,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ThreadsApi(api_client)
     create_thread_request = ksapi.CreateThreadRequest() # CreateThreadRequest | 
 
     try:
         # Create Thread Handler
-        api_response = api_instance.create_thread(create_thread_request)
+        api_response = await api_instance.create_thread(create_thread_request)
         print("The response of ThreadsApi->create_thread:\n")
         pprint(api_response)
     except Exception as e:
@@ -110,6 +112,8 @@ Name | Type | Description  | Notes
 
 # **delete_thread**
 > delete_thread(thread_id)
+
+**Synchronous variant:** `delete_thread_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Delete Thread Handler
 
@@ -152,14 +156,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ThreadsApi(api_client)
     thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Thread Handler
-        api_instance.delete_thread(thread_id)
+        await api_instance.delete_thread(thread_id)
     except Exception as e:
         print("Exception when calling ThreadsApi->delete_thread: %s\n" % e)
 ```
@@ -199,6 +203,8 @@ void (empty response body)
 # **get_thread**
 > ThreadResponse get_thread(thread_id)
 
+**Synchronous variant:** `get_thread_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Thread Handler
 
 Get a thread by its thread ID.
@@ -237,14 +243,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ThreadsApi(api_client)
     thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Thread Handler
-        api_response = api_instance.get_thread(thread_id)
+        api_response = await api_instance.get_thread(thread_id)
         print("The response of ThreadsApi->get_thread:\n")
         pprint(api_response)
     except Exception as e:
@@ -285,6 +291,8 @@ Name | Type | Description  | Notes
 
 # **list_threads**
 > PaginatedResponseThreadResponse list_threads(parent_path_part_id=parent_path_part_id, sort_by=sort_by, sort_dir=sort_dir, title_like=title_like, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+
+**Synchronous variant:** `list_threads_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Threads Handler
 
@@ -329,7 +337,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ThreadsApi(api_client)
     parent_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent PathPart ID. Omit to list user's conversation threads. (optional)
@@ -345,7 +353,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Threads Handler
-        api_response = api_instance.list_threads(parent_path_part_id=parent_path_part_id, sort_by=sort_by, sort_dir=sort_dir, title_like=title_like, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_threads(parent_path_part_id=parent_path_part_id, sort_by=sort_by, sort_dir=sort_dir, title_like=title_like, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of ThreadsApi->list_threads:\n")
         pprint(api_response)
     except Exception as e:
@@ -395,6 +403,8 @@ Name | Type | Description  | Notes
 
 # **send_user_message**
 > UserMessageResponse send_user_message(thread_id, user_message_request)
+
+**Synchronous variant:** `send_user_message_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Send User Message Handler
 
@@ -448,7 +458,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ThreadsApi(api_client)
     thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -456,7 +466,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Send User Message Handler
-        api_response = api_instance.send_user_message(thread_id, user_message_request)
+        api_response = await api_instance.send_user_message(thread_id, user_message_request)
         print("The response of ThreadsApi->send_user_message:\n")
         pprint(api_response)
     except Exception as e:
@@ -499,6 +509,8 @@ Name | Type | Description  | Notes
 # **stream_thread**
 > stream_thread(thread_id, last_message_id=last_message_id, last_entry_id=last_entry_id)
 
+**Synchronous variant:** `stream_thread_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Stream Thread Handler
 
 SSE endpoint for streaming thread messages.
@@ -539,7 +551,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ThreadsApi(api_client)
     thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -548,7 +560,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Stream Thread Handler
-        api_instance.stream_thread(thread_id, last_message_id=last_message_id, last_entry_id=last_entry_id)
+        await api_instance.stream_thread(thread_id, last_message_id=last_message_id, last_entry_id=last_entry_id)
     except Exception as e:
         print("Exception when calling ThreadsApi->stream_thread: %s\n" % e)
 ```
@@ -590,6 +602,8 @@ void (empty response body)
 # **update_thread**
 > ThreadResponse update_thread(thread_id, update_thread_request)
 
+**Synchronous variant:** `update_thread_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Thread Handler
 
 Update a thread's title and/or parent_thread_id.
@@ -629,7 +643,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ThreadsApi(api_client)
     thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -637,7 +651,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Thread Handler
-        api_response = api_instance.update_thread(thread_id, update_thread_request)
+        api_response = await api_instance.update_thread(thread_id, update_thread_request)
         print("The response of ThreadsApi->update_thread:\n")
         pprint(api_response)
     except Exception as e:

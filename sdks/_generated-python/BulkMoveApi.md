@@ -10,6 +10,8 @@ Method | HTTP request | Description
 # **bulk_move**
 > BulkOperationResponse bulk_move(bulk_move_request)
 
+**Synchronous variant:** `bulk_move_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Bulk Move Handler
 
 Move the selected folders and documents into ``target_folder_id``.
@@ -56,14 +58,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.BulkMoveApi(api_client)
     bulk_move_request = ksapi.BulkMoveRequest() # BulkMoveRequest | 
 
     try:
         # Bulk Move Handler
-        api_response = api_instance.bulk_move(bulk_move_request)
+        api_response = await api_instance.bulk_move(bulk_move_request)
         print("The response of BulkMoveApi->bulk_move:\n")
         pprint(api_response)
     except Exception as e:

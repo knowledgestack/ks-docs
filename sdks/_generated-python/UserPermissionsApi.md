@@ -15,6 +15,8 @@ Method | HTTP request | Description
 # **bulk_grant_user_permissions**
 > BulkGrantResponse bulk_grant_user_permissions(bulk_grant_request)
 
+**Synchronous variant:** `bulk_grant_user_permissions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Bulk Grant User Permissions Handler
 
 Grant many (user, object, capability) permissions (admin/owner only).
@@ -59,14 +61,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UserPermissionsApi(api_client)
     bulk_grant_request = ksapi.BulkGrantRequest() # BulkGrantRequest | 
 
     try:
         # Bulk Grant User Permissions Handler
-        api_response = api_instance.bulk_grant_user_permissions(bulk_grant_request)
+        api_response = await api_instance.bulk_grant_user_permissions(bulk_grant_request)
         print("The response of UserPermissionsApi->bulk_grant_user_permissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -107,6 +109,8 @@ Name | Type | Description  | Notes
 
 # **bulk_revoke_user_permissions**
 > BulkOperationResponse bulk_revoke_user_permissions(bulk_revoke_request)
+
+**Synchronous variant:** `bulk_revoke_user_permissions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Bulk Revoke User Permissions Handler
 
@@ -149,14 +153,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UserPermissionsApi(api_client)
     bulk_revoke_request = ksapi.BulkRevokeRequest() # BulkRevokeRequest | 
 
     try:
         # Bulk Revoke User Permissions Handler
-        api_response = api_instance.bulk_revoke_user_permissions(bulk_revoke_request)
+        api_response = await api_instance.bulk_revoke_user_permissions(bulk_revoke_request)
         print("The response of UserPermissionsApi->bulk_revoke_user_permissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -198,6 +202,8 @@ Name | Type | Description  | Notes
 # **create_user_permission**
 > PermissionResponse create_user_permission(create_permission_request)
 
+**Synchronous variant:** `create_user_permission_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create User Permission Handler
 
 Create a path permission for a user in a tenant (admin/owner only).
@@ -237,14 +243,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UserPermissionsApi(api_client)
     create_permission_request = ksapi.CreatePermissionRequest() # CreatePermissionRequest | 
 
     try:
         # Create User Permission Handler
-        api_response = api_instance.create_user_permission(create_permission_request)
+        api_response = await api_instance.create_user_permission(create_permission_request)
         print("The response of UserPermissionsApi->create_user_permission:\n")
         pprint(api_response)
     except Exception as e:
@@ -286,6 +292,8 @@ Name | Type | Description  | Notes
 # **delete_user_permission**
 > delete_user_permission(permission_id, tenant_id)
 
+**Synchronous variant:** `delete_user_permission_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete User Permission Handler
 
 Delete a path permission (admin/owner only).
@@ -323,7 +331,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UserPermissionsApi(api_client)
     permission_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -331,7 +339,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Delete User Permission Handler
-        api_instance.delete_user_permission(permission_id, tenant_id)
+        await api_instance.delete_user_permission(permission_id, tenant_id)
     except Exception as e:
         print("Exception when calling UserPermissionsApi->delete_user_permission: %s\n" % e)
 ```
@@ -371,6 +379,8 @@ void (empty response body)
 
 # **list_user_permissions**
 > PaginatedResponsePermissionResponse list_user_permissions(tenant_id, user_id, sort_by=sort_by, sort_dir=sort_dir, capability=capability, limit=limit, offset=offset)
+
+**Synchronous variant:** `list_user_permissions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List User Permissions Handler
 
@@ -413,7 +423,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UserPermissionsApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Tenant ID to list permissions for
@@ -426,7 +436,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List User Permissions Handler
-        api_response = api_instance.list_user_permissions(tenant_id, user_id, sort_by=sort_by, sort_dir=sort_dir, capability=capability, limit=limit, offset=offset)
+        api_response = await api_instance.list_user_permissions(tenant_id, user_id, sort_by=sort_by, sort_dir=sort_dir, capability=capability, limit=limit, offset=offset)
         print("The response of UserPermissionsApi->list_user_permissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -474,6 +484,8 @@ Name | Type | Description  | Notes
 # **update_user_permission**
 > PermissionResponse update_user_permission(permission_id, tenant_id, update_permission_request)
 
+**Synchronous variant:** `update_user_permission_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update User Permission Handler
 
 Update a path permission (admin/owner only).
@@ -513,7 +525,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UserPermissionsApi(api_client)
     permission_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -522,7 +534,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update User Permission Handler
-        api_response = api_instance.update_user_permission(permission_id, tenant_id, update_permission_request)
+        api_response = await api_instance.update_user_permission(permission_id, tenant_id, update_permission_request)
         print("The response of UserPermissionsApi->update_user_permission:\n")
         pprint(api_response)
     except Exception as e:

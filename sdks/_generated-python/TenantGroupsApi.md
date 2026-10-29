@@ -22,6 +22,8 @@ Method | HTTP request | Description
 # **add_group_member**
 > MembershipResponse add_group_member(group_id, add_member_request)
 
+**Synchronous variant:** `add_group_member_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Add Group Member Handler
 
 Add a user to a group (admin/owner only).
@@ -61,7 +63,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -69,7 +71,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Add Group Member Handler
-        api_response = api_instance.add_group_member(group_id, add_member_request)
+        api_response = await api_instance.add_group_member(group_id, add_member_request)
         print("The response of TenantGroupsApi->add_group_member:\n")
         pprint(api_response)
     except Exception as e:
@@ -112,6 +114,8 @@ Name | Type | Description  | Notes
 # **create_group_permission**
 > GroupPermissionResponse create_group_permission(group_id, create_group_permission_request)
 
+**Synchronous variant:** `create_group_permission_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Group Permission Handler
 
 Create a path permission for a group (admin/owner only).
@@ -151,7 +155,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -159,7 +163,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Create Group Permission Handler
-        api_response = api_instance.create_group_permission(group_id, create_group_permission_request)
+        api_response = await api_instance.create_group_permission(group_id, create_group_permission_request)
         print("The response of TenantGroupsApi->create_group_permission:\n")
         pprint(api_response)
     except Exception as e:
@@ -202,6 +206,8 @@ Name | Type | Description  | Notes
 # **create_tenant_group**
 > GroupResponse create_tenant_group(create_group_request)
 
+**Synchronous variant:** `create_tenant_group_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Tenant Group Handler
 
 Create a new tenant group (admin/owner only).
@@ -241,14 +247,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     create_group_request = ksapi.CreateGroupRequest() # CreateGroupRequest | 
 
     try:
         # Create Tenant Group Handler
-        api_response = api_instance.create_tenant_group(create_group_request)
+        api_response = await api_instance.create_tenant_group(create_group_request)
         print("The response of TenantGroupsApi->create_tenant_group:\n")
         pprint(api_response)
     except Exception as e:
@@ -290,6 +296,8 @@ Name | Type | Description  | Notes
 # **delete_group_permission**
 > delete_group_permission(group_id, permission_id)
 
+**Synchronous variant:** `delete_group_permission_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Group Permission Handler
 
 Delete a path permission from a group (admin/owner only).
@@ -327,7 +335,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -335,7 +343,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Delete Group Permission Handler
-        api_instance.delete_group_permission(group_id, permission_id)
+        await api_instance.delete_group_permission(group_id, permission_id)
     except Exception as e:
         print("Exception when calling TenantGroupsApi->delete_group_permission: %s\n" % e)
 ```
@@ -376,6 +384,8 @@ void (empty response body)
 # **delete_tenant_group**
 > delete_tenant_group(group_id)
 
+**Synchronous variant:** `delete_tenant_group_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Tenant Group Handler
 
 Delete a tenant group (admin/owner only).
@@ -413,14 +423,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Tenant Group Handler
-        api_instance.delete_tenant_group(group_id)
+        await api_instance.delete_tenant_group(group_id)
     except Exception as e:
         print("Exception when calling TenantGroupsApi->delete_tenant_group: %s\n" % e)
 ```
@@ -460,6 +470,8 @@ void (empty response body)
 # **get_tenant_group**
 > GroupResponse get_tenant_group(group_id)
 
+**Synchronous variant:** `get_tenant_group_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Tenant Group Handler
 
 Get a tenant group by ID (group member or admin/owner).
@@ -498,14 +510,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Tenant Group Handler
-        api_response = api_instance.get_tenant_group(group_id)
+        api_response = await api_instance.get_tenant_group(group_id)
         print("The response of TenantGroupsApi->get_tenant_group:\n")
         pprint(api_response)
     except Exception as e:
@@ -547,6 +559,8 @@ Name | Type | Description  | Notes
 # **list_group_members**
 > PaginatedResponseMembershipResponse list_group_members(group_id, sort_by=sort_by, sort_dir=sort_dir, username_like=username_like, limit=limit, offset=offset)
 
+**Synchronous variant:** `list_group_members_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Group Members Handler
 
 List members of a group (group members or admin/owner).
@@ -587,7 +601,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -599,7 +613,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Group Members Handler
-        api_response = api_instance.list_group_members(group_id, sort_by=sort_by, sort_dir=sort_dir, username_like=username_like, limit=limit, offset=offset)
+        api_response = await api_instance.list_group_members(group_id, sort_by=sort_by, sort_dir=sort_dir, username_like=username_like, limit=limit, offset=offset)
         print("The response of TenantGroupsApi->list_group_members:\n")
         pprint(api_response)
     except Exception as e:
@@ -646,6 +660,8 @@ Name | Type | Description  | Notes
 # **list_group_permissions**
 > PaginatedResponseGroupPermissionResponse list_group_permissions(group_id, sort_by=sort_by, sort_dir=sort_dir, capability=capability, limit=limit, offset=offset)
 
+**Synchronous variant:** `list_group_permissions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Group Permissions Handler
 
 List path permissions for a group (group member or admin/owner).
@@ -687,7 +703,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -699,7 +715,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Group Permissions Handler
-        api_response = api_instance.list_group_permissions(group_id, sort_by=sort_by, sort_dir=sort_dir, capability=capability, limit=limit, offset=offset)
+        api_response = await api_instance.list_group_permissions(group_id, sort_by=sort_by, sort_dir=sort_dir, capability=capability, limit=limit, offset=offset)
         print("The response of TenantGroupsApi->list_group_permissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -746,6 +762,8 @@ Name | Type | Description  | Notes
 # **list_my_groups**
 > List[GroupResponse] list_my_groups()
 
+**Synchronous variant:** `list_my_groups_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List My Groups Handler
 
 List groups the current user belongs to.
@@ -784,13 +802,13 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
 
     try:
         # List My Groups Handler
-        api_response = api_instance.list_my_groups()
+        api_response = await api_instance.list_my_groups()
         print("The response of TenantGroupsApi->list_my_groups:\n")
         pprint(api_response)
     except Exception as e:
@@ -827,6 +845,8 @@ This endpoint does not need any parameter.
 
 # **list_tenant_groups**
 > PaginatedResponseGroupResponse list_tenant_groups(sort_by=sort_by, sort_dir=sort_dir, name_like=name_like, has_user_ids=has_user_ids, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+
+**Synchronous variant:** `list_tenant_groups_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Tenant Groups Handler
 
@@ -870,7 +890,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     sort_by = ksapi.TenantGroupOrder() # TenantGroupOrder | Field to sort groups by (default: NAME) (optional)
@@ -886,7 +906,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Tenant Groups Handler
-        api_response = api_instance.list_tenant_groups(sort_by=sort_by, sort_dir=sort_dir, name_like=name_like, has_user_ids=has_user_ids, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_tenant_groups(sort_by=sort_by, sort_dir=sort_dir, name_like=name_like, has_user_ids=has_user_ids, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of TenantGroupsApi->list_tenant_groups:\n")
         pprint(api_response)
     except Exception as e:
@@ -937,6 +957,8 @@ Name | Type | Description  | Notes
 # **remove_group_member**
 > remove_group_member(group_id, user_id)
 
+**Synchronous variant:** `remove_group_member_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Remove Group Member Handler
 
 Remove a user from a group (admin/owner only).
@@ -974,7 +996,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -982,7 +1004,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Remove Group Member Handler
-        api_instance.remove_group_member(group_id, user_id)
+        await api_instance.remove_group_member(group_id, user_id)
     except Exception as e:
         print("Exception when calling TenantGroupsApi->remove_group_member: %s\n" % e)
 ```
@@ -1023,6 +1045,8 @@ void (empty response body)
 # **update_group_permission**
 > GroupPermissionResponse update_group_permission(group_id, permission_id, update_group_permission_request)
 
+**Synchronous variant:** `update_group_permission_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Group Permission Handler
 
 Update a path permission for a group (admin/owner only).
@@ -1062,7 +1086,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -1071,7 +1095,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Group Permission Handler
-        api_response = api_instance.update_group_permission(group_id, permission_id, update_group_permission_request)
+        api_response = await api_instance.update_group_permission(group_id, permission_id, update_group_permission_request)
         print("The response of TenantGroupsApi->update_group_permission:\n")
         pprint(api_response)
     except Exception as e:
@@ -1115,6 +1139,8 @@ Name | Type | Description  | Notes
 # **update_tenant_group**
 > GroupResponse update_tenant_group(group_id, update_group_request)
 
+**Synchronous variant:** `update_tenant_group_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Tenant Group Handler
 
 Update a tenant group (admin/owner only).
@@ -1154,7 +1180,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -1162,7 +1188,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Update Tenant Group Handler
-        api_response = api_instance.update_tenant_group(group_id, update_group_request)
+        api_response = await api_instance.update_tenant_group(group_id, update_group_request)
         print("The response of TenantGroupsApi->update_tenant_group:\n")
         pprint(api_response)
     except Exception as e:

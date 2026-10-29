@@ -11,6 +11,8 @@ Method | HTTP request | Description
 # **get_admin_kb_summary**
 > KbSummaryResponse get_admin_kb_summary()
 
+**Synchronous variant:** `get_admin_kb_summary_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Admin Kb Summary Handler
 
 Point-in-time knowledge-base totals for the tenant.
@@ -49,13 +51,13 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminKbApi(api_client)
 
     try:
         # Get Admin Kb Summary Handler
-        api_response = api_instance.get_admin_kb_summary()
+        api_response = await api_instance.get_admin_kb_summary()
         print("The response of AdminKbApi->get_admin_kb_summary:\n")
         pprint(api_response)
     except Exception as e:
@@ -92,6 +94,8 @@ This endpoint does not need any parameter.
 
 # **get_admin_kb_timeseries**
 > KbTimeseriesResponse get_admin_kb_timeseries(metric, timezone=timezone, since=since, until=until, bucket=bucket)
+
+**Synchronous variant:** `get_admin_kb_timeseries_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Admin Kb Timeseries Handler
 
@@ -133,7 +137,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminKbApi(api_client)
     metric = ksapi.KbMetric() # KbMetric | Which KB metric to bucket.
@@ -144,7 +148,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Admin Kb Timeseries Handler
-        api_response = api_instance.get_admin_kb_timeseries(metric, timezone=timezone, since=since, until=until, bucket=bucket)
+        api_response = await api_instance.get_admin_kb_timeseries(metric, timezone=timezone, since=since, until=until, bucket=bucket)
         print("The response of AdminKbApi->get_admin_kb_timeseries:\n")
         pprint(api_response)
     except Exception as e:

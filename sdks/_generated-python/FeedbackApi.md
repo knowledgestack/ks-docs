@@ -12,6 +12,8 @@ Method | HTTP request | Description
 # **delete_feedback**
 > delete_feedback(feedback_id)
 
+**Synchronous variant:** `delete_feedback_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Feedback Handler
 
 Delete a feedback entry.
@@ -54,14 +56,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FeedbackApi(api_client)
     feedback_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Feedback Handler
-        api_instance.delete_feedback(feedback_id)
+        await api_instance.delete_feedback(feedback_id)
     except Exception as e:
         print("Exception when calling FeedbackApi->delete_feedback: %s\n" % e)
 ```
@@ -100,6 +102,8 @@ void (empty response body)
 
 # **list_feedback**
 > PaginatedResponseFeedbackEventResponse list_feedback(target_type=target_type, target_id=target_id, rating=rating, mine=mine, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+
+**Synchronous variant:** `list_feedback_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Feedback Handler
 
@@ -146,7 +150,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FeedbackApi(api_client)
     target_type = ksapi.FeedbackTargetType() # FeedbackTargetType |  (optional)
@@ -164,7 +168,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # List Feedback Handler
-        api_response = api_instance.list_feedback(target_type=target_type, target_id=target_id, rating=rating, mine=mine, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_feedback(target_type=target_type, target_id=target_id, rating=rating, mine=mine, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
         print("The response of FeedbackApi->list_feedback:\n")
         pprint(api_response)
     except Exception as e:
@@ -217,6 +221,8 @@ Name | Type | Description  | Notes
 # **submit_feedback**
 > FeedbackEventResponse submit_feedback(submit_feedback_request)
 
+**Synchronous variant:** `submit_feedback_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Submit Feedback Handler
 
 Create or update feedback on a knowledge entity (upsert).
@@ -259,14 +265,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.FeedbackApi(api_client)
     submit_feedback_request = ksapi.SubmitFeedbackRequest() # SubmitFeedbackRequest | 
 
     try:
         # Submit Feedback Handler
-        api_response = api_instance.submit_feedback(submit_feedback_request)
+        api_response = await api_instance.submit_feedback(submit_feedback_request)
         print("The response of FeedbackApi->submit_feedback:\n")
         pprint(api_response)
     except Exception as e:

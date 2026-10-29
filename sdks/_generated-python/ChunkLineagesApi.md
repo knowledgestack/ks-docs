@@ -12,6 +12,8 @@ Method | HTTP request | Description
 # **create_chunk_lineage**
 > List[ChunkLineageResponse] create_chunk_lineage(create_chunk_lineage_request)
 
+**Synchronous variant:** `create_chunk_lineage_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Chunk Lineage Handler
 
 Batch-create lineage edges for a child chunk.
@@ -54,14 +56,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunkLineagesApi(api_client)
     create_chunk_lineage_request = ksapi.CreateChunkLineageRequest() # CreateChunkLineageRequest | 
 
     try:
         # Create Chunk Lineage Handler
-        api_response = api_instance.create_chunk_lineage(create_chunk_lineage_request)
+        api_response = await api_instance.create_chunk_lineage(create_chunk_lineage_request)
         print("The response of ChunkLineagesApi->create_chunk_lineage:\n")
         pprint(api_response)
     except Exception as e:
@@ -103,6 +105,8 @@ Name | Type | Description  | Notes
 # **delete_chunk_lineage**
 > delete_chunk_lineage(parent_chunk_id, chunk_id)
 
+**Synchronous variant:** `delete_chunk_lineage_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Chunk Lineage Handler
 
 Delete a single lineage edge between parent and child chunks.
@@ -140,7 +144,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunkLineagesApi(api_client)
     parent_chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent chunk ID
@@ -148,7 +152,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Delete Chunk Lineage Handler
-        api_instance.delete_chunk_lineage(parent_chunk_id, chunk_id)
+        await api_instance.delete_chunk_lineage(parent_chunk_id, chunk_id)
     except Exception as e:
         print("Exception when calling ChunkLineagesApi->delete_chunk_lineage: %s\n" % e)
 ```
@@ -188,6 +192,8 @@ void (empty response body)
 
 # **get_chunk_lineage**
 > LineageGraphResponse get_chunk_lineage(chunk_id, max_depth=max_depth)
+
+**Synchronous variant:** `get_chunk_lineage_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Chunk Lineage Handler
 
@@ -230,7 +236,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ChunkLineagesApi(api_client)
     chunk_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
@@ -238,7 +244,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Chunk Lineage Handler
-        api_response = api_instance.get_chunk_lineage(chunk_id, max_depth=max_depth)
+        api_response = await api_instance.get_chunk_lineage(chunk_id, max_depth=max_depth)
         print("The response of ChunkLineagesApi->get_chunk_lineage:\n")
         pprint(api_response)
     except Exception as e:

@@ -16,6 +16,8 @@ Method | HTTP request | Description
 # **delete_my_avatar**
 > UserResponse delete_my_avatar()
 
+**Synchronous variant:** `delete_my_avatar_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete My Avatar Handler
 
 Remove the profile photo for the current tenant. No photo is a no-op.
@@ -54,13 +56,13 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
 
     try:
         # Delete My Avatar Handler
-        api_response = api_instance.delete_my_avatar()
+        api_response = await api_instance.delete_my_avatar()
         print("The response of UsersApi->delete_my_avatar:\n")
         pprint(api_response)
     except Exception as e:
@@ -97,6 +99,8 @@ This endpoint does not need any parameter.
 
 # **get_me**
 > UserResponse get_me()
+
+**Synchronous variant:** `get_me_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Me Handler
 
@@ -139,13 +143,13 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
 
     try:
         # Get Me Handler
-        api_response = api_instance.get_me()
+        api_response = await api_instance.get_me()
         print("The response of UsersApi->get_me:\n")
         pprint(api_response)
     except Exception as e:
@@ -182,6 +186,8 @@ This endpoint does not need any parameter.
 
 # **request_access**
 > AccessRequestResponse request_access()
+
+**Synchronous variant:** `request_access_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Request Access Handler
 
@@ -221,13 +227,13 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
 
     try:
         # Request Access Handler
-        api_response = api_instance.request_access()
+        api_response = await api_instance.request_access()
         print("The response of UsersApi->request_access:\n")
         pprint(api_response)
     except Exception as e:
@@ -264,6 +270,8 @@ This endpoint does not need any parameter.
 
 # **skip_onboarding**
 > UserResponse skip_onboarding()
+
+**Synchronous variant:** `skip_onboarding_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Skip Onboarding Handler
 
@@ -307,13 +315,13 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
 
     try:
         # Skip Onboarding Handler
-        api_response = api_instance.skip_onboarding()
+        api_response = await api_instance.skip_onboarding()
         print("The response of UsersApi->skip_onboarding:\n")
         pprint(api_response)
     except Exception as e:
@@ -350,6 +358,8 @@ This endpoint does not need any parameter.
 
 # **update_me**
 > UserResponse update_me(update_user_request)
+
+**Synchronous variant:** `update_me_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Update Me Handler
 
@@ -392,14 +402,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
     update_user_request = ksapi.UpdateUserRequest() # UpdateUserRequest | 
 
     try:
         # Update Me Handler
-        api_response = api_instance.update_me(update_user_request)
+        api_response = await api_instance.update_me(update_user_request)
         print("The response of UsersApi->update_me:\n")
         pprint(api_response)
     except Exception as e:
@@ -441,6 +451,8 @@ Name | Type | Description  | Notes
 # **update_onboarding_state**
 > UserResponse update_onboarding_state(onboarding_state_update)
 
+**Synchronous variant:** `update_onboarding_state_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Update Onboarding State Handler
 
 ### Example
@@ -478,14 +490,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
     onboarding_state_update = ksapi.OnboardingStateUpdate() # OnboardingStateUpdate | 
 
     try:
         # Update Onboarding State Handler
-        api_response = api_instance.update_onboarding_state(onboarding_state_update)
+        api_response = await api_instance.update_onboarding_state(onboarding_state_update)
         print("The response of UsersApi->update_onboarding_state:\n")
         pprint(api_response)
     except Exception as e:
@@ -527,6 +539,8 @@ Name | Type | Description  | Notes
 # **upload_my_avatar**
 > UserResponse upload_my_avatar(file)
 
+**Synchronous variant:** `upload_my_avatar_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Upload My Avatar Handler
 
 Set the profile photo for the current tenant. PNG, JPEG, WebP or GIF, at most 2 MB and 4096 px per side; the format is read from the bytes, not the content type.
@@ -565,14 +579,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.UsersApi(api_client)
     file = None # bytes | 
 
     try:
         # Upload My Avatar Handler
-        api_response = api_instance.upload_my_avatar(file)
+        api_response = await api_instance.upload_my_avatar(file)
         print("The response of UsersApi->upload_my_avatar:\n")
         pprint(api_response)
     except Exception as e:

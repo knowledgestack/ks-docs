@@ -10,6 +10,8 @@ Method | HTTP request | Description
 # **create_transcription**
 > TranscriptionResponse create_transcription(file, language=language)
 
+**Synchronous variant:** `create_transcription_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Transcription Handler
 
 Transcribe a short spoken clip to text.
@@ -67,7 +69,7 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TranscriptionsApi(api_client)
     file = None # bytes | The audio clip. Accepts what a browser records (audio/webm, audio/ogg, audio/mp4) plus audio/mpeg, audio/wav and audio/flac. Re-encoded server-side, so the container does not have to match the backend.
@@ -75,7 +77,7 @@ with ksapi.ApiClient(configuration) as api_client:
 
     try:
         # Create Transcription Handler
-        api_response = api_instance.create_transcription(file, language=language)
+        api_response = await api_instance.create_transcription(file, language=language)
         print("The response of TranscriptionsApi->create_transcription:\n")
         pprint(api_response)
     except Exception as e:

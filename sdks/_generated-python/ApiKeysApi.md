@@ -13,6 +13,8 @@ Method | HTTP request | Description
 # **create_api_key**
 > CreateApiKeyResponse create_api_key(create_api_key_request)
 
+**Synchronous variant:** `create_api_key_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Create Api Key Handler
 
 Create a new API key. The full key is returned only once.
@@ -46,14 +48,14 @@ configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['cookieAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ApiKeysApi(api_client)
     create_api_key_request = ksapi.CreateApiKeyRequest() # CreateApiKeyRequest | 
 
     try:
         # Create Api Key Handler
-        api_response = api_instance.create_api_key(create_api_key_request)
+        api_response = await api_instance.create_api_key(create_api_key_request)
         print("The response of ApiKeysApi->create_api_key:\n")
         pprint(api_response)
     except Exception as e:
@@ -95,6 +97,8 @@ Name | Type | Description  | Notes
 # **delete_api_key**
 > delete_api_key(api_key_id)
 
+**Synchronous variant:** `delete_api_key_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Delete Api Key Handler
 
 Delete an API key.
@@ -126,14 +130,14 @@ configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['cookieAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ApiKeysApi(api_client)
     api_key_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Delete Api Key Handler
-        api_instance.delete_api_key(api_key_id)
+        await api_instance.delete_api_key(api_key_id)
     except Exception as e:
         print("Exception when calling ApiKeysApi->delete_api_key: %s\n" % e)
 ```
@@ -173,6 +177,8 @@ void (empty response body)
 # **get_api_key**
 > ApiKeyResponse get_api_key(api_key_id)
 
+**Synchronous variant:** `get_api_key_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Get Api Key Handler
 
 Get a single API key by ID.
@@ -205,14 +211,14 @@ configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['cookieAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ApiKeysApi(api_client)
     api_key_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Get Api Key Handler
-        api_response = api_instance.get_api_key(api_key_id)
+        api_response = await api_instance.get_api_key(api_key_id)
         print("The response of ApiKeysApi->get_api_key:\n")
         pprint(api_response)
     except Exception as e:
@@ -254,6 +260,8 @@ Name | Type | Description  | Notes
 # **list_api_keys**
 > List[ApiKeyResponse] list_api_keys()
 
+**Synchronous variant:** `list_api_keys_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 List Api Keys Handler
 
 List all API keys for the current user.
@@ -286,13 +294,13 @@ configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['cookieAuth'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.ApiKeysApi(api_client)
 
     try:
         # List Api Keys Handler
-        api_response = api_instance.list_api_keys()
+        api_response = await api_instance.list_api_keys()
         print("The response of ApiKeysApi->list_api_keys:\n")
         pprint(api_response)
     except Exception as e:

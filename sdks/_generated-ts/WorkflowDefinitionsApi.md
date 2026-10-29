@@ -117,21 +117,21 @@ async function example() {
 
   const body = {
     // string
-    definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    definitionId: '38400000-8cf0-11bd-b23e-10b96e4ef00d',
     // Array<Blob> | DEPRECATED — do not send files here. Carrying file bytes on run creation makes the call block on synchronous S3 upload (the ~30s \\\'Create run\\\' wait). Instead create an empty draft (omit this field), then upload each file to the run\\\'s ``inputs/`` folder via ``POST /v1/documents/ingest`` with ``path_part_id`` set to the run\\\'s ``inputs_path_part_id``; that path ingests asynchronously and auto-syncs the run\\\'s state. This field will be removed once the FE has migrated. (optional)
-    files: /path/to/file.txt,
+    files: [new Blob(['example file content'], { type: 'application/octet-stream' })],
     // string | JSON array of ``DOCUMENT`` or ``FOLDER`` path_part UUIDs referenced from the existing knowledge base, pinned onto the new draft\\\'s input scope. Optional — omit for an empty draft and add references later via PATCH. (optional)
-    inputScope: inputScope_example,
+    inputScope: 'inputScope_example',
     // string | Optional key to prevent duplicate runs from retries. (optional)
-    idempotencyKey: idempotencyKey_example,
+    idempotencyKey: 'idempotencyKey_example',
     // boolean | When true, the run starts itself once its ``inputs/`` uploads finish ingesting — eliminating the separate Start call. If an upload\\\'s ingestion fails, the run is marked FAILED. Default false (two-step flow). Arm only after all uploads are queued; a synchronously-completing first upload would otherwise start the run before later uploads are added. (optional)
     autoStart: true,
     // string | Optional note carried to the auto-start dispatch (the equivalent of the Start endpoint\\\'s ``user_message`` for a self-starting run). Applied only when ``auto_start`` fires. (optional)
-    userMessage: userMessage_example,
+    userMessage: 'userMessage_example',
     // string | Optional display name for the run. Omit to default to the run\\\'s UUID; rename later via PATCH. Must be unique among sibling runs under this definition\\\'s ``runs/`` folder — a collision returns 409. (optional)
-    name: name_example,
+    name: 'name_example',
     // string | JSON array of SKILL PDO UUIDs to force-load into this run ON TOP of the definition\\\'s prefill — the run\\\'s skills are the definition\\\'s list plus these additions. Each must be a SKILL the caller can read (else 400/403). Optional; omit to run with just the definition\\\'s skills. (optional)
-    selectedSkillIds: selectedSkillIds_example,
+    selectedSkillIds: 'selectedSkillIds_example',
   } satisfies CreateWorkflowRunRequest;
 
   try {

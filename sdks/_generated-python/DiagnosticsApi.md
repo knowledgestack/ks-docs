@@ -11,6 +11,8 @@ Method | HTTP request | Description
 # **compute_thread_diagnostics**
 > DiagnosticsResponse compute_thread_diagnostics(thread_id)
 
+**Synchronous variant:** `compute_thread_diagnostics_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Compute Thread Diagnostics Handler
 
 Stats and trace links for every turn; a run's thread answers as its run.
@@ -49,14 +51,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DiagnosticsApi(api_client)
     thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Compute Thread Diagnostics Handler
-        api_response = api_instance.compute_thread_diagnostics(thread_id)
+        api_response = await api_instance.compute_thread_diagnostics(thread_id)
         print("The response of DiagnosticsApi->compute_thread_diagnostics:\n")
         pprint(api_response)
     except Exception as e:
@@ -98,6 +100,8 @@ Name | Type | Description  | Notes
 # **compute_workflow_run_diagnostics**
 > DiagnosticsResponse compute_workflow_run_diagnostics(run_id)
 
+**Synchronous variant:** `compute_workflow_run_diagnostics_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
 Compute Workflow Run Diagnostics Handler
 
 Stats and trace links for the run's attempts and every turn in its thread.
@@ -136,14 +140,14 @@ configuration = ksapi.Configuration(
 )
 
 # Enter a context with an instance of the API client
-with ksapi.ApiClient(configuration) as api_client:
+async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.DiagnosticsApi(api_client)
     run_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
 
     try:
         # Compute Workflow Run Diagnostics Handler
-        api_response = api_instance.compute_workflow_run_diagnostics(run_id)
+        api_response = await api_instance.compute_workflow_run_diagnostics(run_id)
         print("The response of DiagnosticsApi->compute_workflow_run_diagnostics:\n")
         pprint(api_response)
     except Exception as e:

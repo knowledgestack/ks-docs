@@ -7,6 +7,9 @@
 Name | Type
 ------------ | -------------
 `chunkId` | string
+`documentVersionId` | string
+`sheetName` | string
+`cellRanges` | Array&lt;string&gt;
 `quote` | string
 `startChar` | number
 `length` | number
@@ -21,6 +24,9 @@ import type { Citation } from '@knowledge-stack/ksapi'
 // TODO: Update the object below with actual values
 const example = {
   "chunkId": null,
+  "documentVersionId": null,
+  "sheetName": null,
+  "cellRanges": null,
   "quote": null,
   "startChar": null,
   "length": null,

@@ -8,13 +8,15 @@ Citation with optional document context, populated at read time.
 Name | Type
 ------------ | -------------
 `chunkId` | string
+`documentVersionId` | string
+`sheetName` | string
+`cellRanges` | Array&lt;string&gt;
 `quote` | string
 `startChar` | number
 `length` | number
 `startMs` | number
 `endMs` | number
 `documentId` | string
-`documentVersionId` | string
 `documentName` | string
 `versionNumber` | number
 `pathPartId` | string
@@ -28,13 +30,15 @@ import type { EnrichedCitation } from '@knowledge-stack/ksapi'
 // TODO: Update the object below with actual values
 const example = {
   "chunkId": null,
+  "documentVersionId": null,
+  "sheetName": null,
+  "cellRanges": null,
   "quote": null,
   "startChar": null,
   "length": null,
   "startMs": null,
   "endMs": null,
   "documentId": null,
-  "documentVersionId": null,
   "documentName": null,
   "versionNumber": null,
   "pathPartId": null,

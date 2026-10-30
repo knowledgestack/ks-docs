@@ -6,14 +6,16 @@ Citation with optional document context, populated at read time.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**chunk_id** | **UUID** |  | 
-**quote** | **str** | The quote from the chunk | 
-**start_char** | **int** | The 0-based start character of the quote in the chunk | 
-**length** | **int** | The length of the quote | 
+**chunk_id** | **UUID** | Chunk source; absent for Excel selections | [optional] 
+**document_version_id** | **UUID** |  | [optional] 
+**sheet_name** | **str** | Exact Excel worksheet name | [optional] 
+**cell_ranges** | **List[str]** | Ordered A1 cells/rectangles on one worksheet | [optional] 
+**quote** | **str** | The quote from the chunk; empty for Excel | [optional] [default to '']
+**start_char** | **int** | The 0-based start character of the quote in the chunk | [optional] [default to 0]
+**length** | **int** | Quote length; positive for chunks, zero for Excel | [optional] [default to 0]
 **start_ms** | **int** | Start time (ms) of the cited chunk in the source media, for AUDIO/VIDEO — lets the client deep-link playback to the moment. None for non-media chunks. | [optional] 
 **end_ms** | **int** | End time (ms) of the cited chunk in the source media (AUDIO/VIDEO); None for non-media chunks. | [optional] 
 **document_id** | **UUID** |  | [optional] 
-**document_version_id** | **UUID** |  | [optional] 
 **document_name** | **str** |  | [optional] 
 **version_number** | **int** |  | [optional] 
 **path_part_id** | **UUID** |  | [optional] 

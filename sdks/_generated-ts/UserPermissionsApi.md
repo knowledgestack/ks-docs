@@ -19,7 +19,7 @@ All URIs are relative to *http://localhost:8000*
 
 Bulk Grant User Permissions Handler
 
-Grant many (user, object, capability) permissions (admin/owner only).  Each grant is applied in its own transaction, reporting a per-item outcome keyed on the (user_id, object_id) pair: a missing/trashed object or a user not in the tenant is &#x60;&#x60;not_found&#x60;&#x60;, hitting the per-user cap is &#x60;&#x60;permission_limit&#x60;&#x60;, and an already-covered grant is &#x60;&#x60;subsumed&#x60;&#x60;.
+Grant many (user, object, flags) permissions (admin/owner or scoped permission manager).  Each grant is applied in its own transaction, reporting a per-item outcome keyed on the (user_id, object_id) pair: a missing/trashed object or a user not in the tenant is &#x60;&#x60;not_found&#x60;&#x60;, hitting the per-user cap is &#x60;&#x60;permission_limit&#x60;&#x60;, and an already-covered grant is &#x60;&#x60;subsumed&#x60;&#x60;.
 
 ### Example
 
@@ -94,7 +94,7 @@ example().catch(console.error);
 
 Bulk Revoke User Permissions Handler
 
-Revoke many permissions by their ids (admin/owner only), per item.  A permission id not found in the tenant lands in &#x60;&#x60;failed&#x60;&#x60; as &#x60;&#x60;not_found&#x60;&#x60;.
+Revoke many permissions by their ids (admin/owner or scoped permission manager), per item.  A permission id not found in the tenant lands in &#x60;&#x60;failed&#x60;&#x60; as &#x60;&#x60;not_found&#x60;&#x60;.
 
 ### Example
 
@@ -169,7 +169,7 @@ example().catch(console.error);
 
 Create User Permission Handler
 
-Create a path permission for a user in a tenant (admin/owner only).
+Create a path permission for a user in a tenant (admin/owner or scoped permission manager).
 
 ### Example
 
@@ -244,7 +244,7 @@ example().catch(console.error);
 
 Delete User Permission Handler
 
-Delete a path permission (admin/owner only).
+Delete a path permission (admin/owner or scoped permission manager).
 
 ### Example
 
@@ -318,11 +318,11 @@ example().catch(console.error);
 
 ## listUserPermissions
 
-> PaginatedResponsePermissionResponse listUserPermissions(tenantId, userId, sortBy, sortDir, capability, limit, offset)
+> PaginatedResponsePermissionResponse listUserPermissions(tenantId, userId, sortBy, sortDir, canRead, canWrite, canDelete, canApprove, canGrantPermissions, limit, offset)
 
 List User Permissions Handler
 
-List path permissions for a user in a tenant (admin/owner only).
+List path permissions for a user in a tenant (admin/owner or scoped permission manager).
 
 ### Example
 
@@ -352,8 +352,16 @@ async function example() {
     sortBy: ...,
     // SortDirection | Sort direction; overrides the field\'s natural default (optional)
     sortDir: ...,
-    // PermissionCapability | Filter to a single capability level (optional)
-    capability: ...,
+    // boolean | Filter grants by can_read (optional)
+    canRead: true,
+    // boolean | Filter grants by can_write (optional)
+    canWrite: true,
+    // boolean | Filter grants by can_delete (optional)
+    canDelete: true,
+    // boolean | Filter grants by can_approve (optional)
+    canApprove: true,
+    // boolean | Filter grants by can_grant_permissions (optional)
+    canGrantPermissions: true,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -379,9 +387,13 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` | Tenant ID to list permissions for | [Defaults to `undefined`] |
 | **userId** | `string` | User ID to list permissions for | [Defaults to `undefined`] |
-| **sortBy** | `UserPermissionOrder` | Field to sort permissions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, CAPABILITY] |
+| **sortBy** | `UserPermissionOrder` | Field to sort permissions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, CAN_READ, CAN_WRITE, CAN_DELETE, CAN_APPROVE, CAN_GRANT_PERMISSIONS] |
 | **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
-| **capability** | `PermissionCapability` | Filter to a single capability level | [Optional] [Defaults to `undefined`] [Enum: READ_ONLY, READ_WRITE, READ_WRITE_DELETE] |
+| **canRead** | `boolean` | Filter grants by can_read | [Optional] [Defaults to `undefined`] |
+| **canWrite** | `boolean` | Filter grants by can_write | [Optional] [Defaults to `undefined`] |
+| **canDelete** | `boolean` | Filter grants by can_delete | [Optional] [Defaults to `undefined`] |
+| **canApprove** | `boolean` | Filter grants by can_approve | [Optional] [Defaults to `undefined`] |
+| **canGrantPermissions** | `boolean` | Filter grants by can_grant_permissions | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 
@@ -415,7 +427,7 @@ example().catch(console.error);
 
 Update User Permission Handler
 
-Update a path permission (admin/owner only).
+Update a path permission (admin/owner or scoped permission manager).
 
 ### Example
 

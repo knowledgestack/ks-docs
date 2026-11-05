@@ -1,7 +1,7 @@
 
 # YidingConfig
 
-What a customer supplies for a YiDing sync: the summary plus the secret.
+What a customer supplies for a YiDing sync.  The stored summary, plus the two things a caller supplies that are not part of it: the secret, and the recurrence — which is a ``data_source`` column now rather than a key in this config.
 
 ## Properties
 
@@ -10,9 +10,9 @@ Name | Type
 `username` | string
 `businessId` | string
 `startDate` | Date
-`cron` | string
 `baseUrl` | string
 `password` | string
+`cron` | string
 
 ## Example
 
@@ -24,9 +24,9 @@ const example = {
   "username": null,
   "businessId": null,
   "startDate": null,
-  "cron": null,
   "baseUrl": null,
   "password": null,
+  "cron": null,
 } satisfies YidingConfig
 
 console.log(example)

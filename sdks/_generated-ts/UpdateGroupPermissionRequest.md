@@ -6,9 +6,12 @@
 
 Name | Type
 ------------ | -------------
-`pathPartId` | string
-`capability` | [PermissionCapability](PermissionCapability.md)
+`canRead` | boolean
+`canWrite` | boolean
+`canDelete` | boolean
 `canApprove` | boolean
+`canGrantPermissions` | boolean
+`pathPartId` | string
 
 ## Example
 
@@ -17,9 +20,12 @@ import type { UpdateGroupPermissionRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "pathPartId": null,
-  "capability": null,
+  "canRead": null,
+  "canWrite": null,
+  "canDelete": null,
   "canApprove": null,
+  "canGrantPermissions": null,
+  "pathPartId": null,
 } satisfies UpdateGroupPermissionRequest
 
 console.log(example)

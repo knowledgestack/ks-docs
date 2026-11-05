@@ -54,7 +54,7 @@ Below this line is auto-generated reference content.
 
 ---
 
-# @knowledge-stack/ksapi@3.21.1
+# @knowledge-stack/ksapi@3.25.2
 
 A TypeScript SDK client for the localhost API.
 
@@ -211,6 +211,25 @@ All URIs are relative to *http://localhost:8000*
 *DocumentsApi* | [**listDocuments**](docs/DocumentsApi.md#listdocuments) | **GET** /v1/documents | List Documents Handler
 *DocumentsApi* | [**updateDocument**](docs/DocumentsApi.md#updatedocumentoperation) | **PATCH** /v1/documents/{document_id} | Update Document Handler
 *DocumentsApi* | [**uploadDocumentPart**](docs/DocumentsApi.md#uploaddocumentpart) | **PUT** /v1/documents/uploads/parts/{part_number} | Upload Document Part Handler
+*EmailConnectorsApi* | [**completeEmailConnectorAuthorization**](docs/EmailConnectorsApi.md#completeemailconnectorauthorization) | **POST** /v1/email-connectors/callback | Complete Email Connector Authorization Handler
+*EmailConnectorsApi* | [**emailRemoved**](docs/EmailConnectorsApi.md#emailremovedoperation) | **POST** /v1/email-connectors/{data_source_id}/removed | Email Removed Handler
+*EmailConnectorsApi* | [**emailStoredIds**](docs/EmailConnectorsApi.md#emailstoredidsoperation) | **POST** /v1/email-connectors/{data_source_id}/stored-ids | Email Stored Ids Handler
+*EmailConnectorsApi* | [**mintEmailAccessToken**](docs/EmailConnectorsApi.md#mintemailaccesstoken) | **POST** /v1/email-connectors/{data_source_id}/access-token | Mint Email Access Token Handler
+*EmailConnectorsApi* | [**recordEmailDeltaLink**](docs/EmailConnectorsApi.md#recordemaildeltalink) | **POST** /v1/email-connectors/{data_source_id}/delta-link | Record Email Delta Link Handler
+*EmailConnectorsApi* | [**recordEmailUnfinished**](docs/EmailConnectorsApi.md#recordemailunfinished) | **POST** /v1/email-connectors/{data_source_id}/unfinished | Record Email Unfinished Handler
+*EmailConnectorsApi* | [**startEmailConnectorAuthorization**](docs/EmailConnectorsApi.md#startemailconnectorauthorization) | **POST** /v1/email-connectors/{data_source_id}/authorize | Start Email Connector Authorization Handler
+*EmailConnectorsApi* | [**syncEmailConnector**](docs/EmailConnectorsApi.md#syncemailconnector) | **POST** /v1/email-connectors/{data_source_id}/sync | Sync Email Connector Handler
+*EmailConnectorsApi* | [**testEmailConnector**](docs/EmailConnectorsApi.md#testemailconnector) | **POST** /v1/email-connectors/{data_source_id}/test | Test Email Connector Handler
+*EmailMessagesApi* | [**createEmailMessage**](docs/EmailMessagesApi.md#createemailmessage) | **POST** /v1/email-messages | Create Email Message Handler
+*EmailMessagesApi* | [**deleteEmailMessage**](docs/EmailMessagesApi.md#deleteemailmessage) | **DELETE** /v1/email-messages/{message_id} | Delete Email Message Handler
+*EmailMessagesApi* | [**getEmailMessage**](docs/EmailMessagesApi.md#getemailmessage) | **GET** /v1/email-messages/{message_id} | Get Email Message Handler
+*EmailMessagesApi* | [**listEmailMessages**](docs/EmailMessagesApi.md#listemailmessages) | **GET** /v1/email-messages | List Email Messages Handler
+*EmailMessagesApi* | [**updateEmailMessage**](docs/EmailMessagesApi.md#updateemailmessageoperation) | **PATCH** /v1/email-messages/{message_id} | Update Email Message Handler
+*EmailThreadsApi* | [**createEmailThread**](docs/EmailThreadsApi.md#createemailthreadoperation) | **POST** /v1/email-threads | Create Email Thread Handler
+*EmailThreadsApi* | [**deleteEmailThread**](docs/EmailThreadsApi.md#deleteemailthread) | **DELETE** /v1/email-threads/{thread_id} | Delete Email Thread Handler
+*EmailThreadsApi* | [**getEmailThread**](docs/EmailThreadsApi.md#getemailthread) | **GET** /v1/email-threads/{thread_id} | Get Email Thread Handler
+*EmailThreadsApi* | [**listEmailThreads**](docs/EmailThreadsApi.md#listemailthreads) | **GET** /v1/email-threads | List Email Threads Handler
+*EmailThreadsApi* | [**updateEmailThread**](docs/EmailThreadsApi.md#updateemailthreadoperation) | **PATCH** /v1/email-threads/{thread_id} | Update Email Thread Handler
 *FeaturesApi* | [**getFeatures**](docs/FeaturesApi.md#getfeatures) | **GET** /v1/features | Get Features Handler
 *FeedbackApi* | [**deleteFeedback**](docs/FeedbackApi.md#deletefeedback) | **DELETE** /v1/feedback/{feedback_id} | Delete Feedback Handler
 *FeedbackApi* | [**listFeedback**](docs/FeedbackApi.md#listfeedback) | **GET** /v1/feedback | List Feedback Handler
@@ -229,6 +248,13 @@ All URIs are relative to *http://localhost:8000*
 *InvitesApi* | [**listInvites**](docs/InvitesApi.md#listinvites) | **GET** /v1/invites | List Invites Handler
 *InvitesApi* | [**previewInvite**](docs/InvitesApi.md#previewinvite) | **GET** /v1/invites/{invite_id}/preview | Preview Invite Handler
 *InvitesApi* | [**updateInvite**](docs/InvitesApi.md#updateinviteoperation) | **PATCH** /v1/invites/{invite_id} | Update Invite Handler
+*MailCredentialsApi* | [**createMailCredential**](docs/MailCredentialsApi.md#createmailcredentialoperation) | **POST** /v1/mail-credentials | Create Mail Credential Handler
+*MailCredentialsApi* | [**getMailCredential**](docs/MailCredentialsApi.md#getmailcredential) | **GET** /v1/mail-credentials/{credential_id} | Get Mail Credential Handler
+*MailCredentialsApi* | [**listMailCredentialOptions**](docs/MailCredentialsApi.md#listmailcredentialoptions) | **GET** /v1/mail-credentials/options | List Mail Credential Options Handler
+*MailCredentialsApi* | [**listMailCredentials**](docs/MailCredentialsApi.md#listmailcredentials) | **GET** /v1/mail-credentials | List Mail Credentials Handler
+*MailCredentialsApi* | [**retireMailCredential**](docs/MailCredentialsApi.md#retiremailcredential) | **DELETE** /v1/mail-credentials/{credential_id} | Retire Mail Credential Handler
+*MailCredentialsApi* | [**rotateMailCredential**](docs/MailCredentialsApi.md#rotatemailcredentialoperation) | **POST** /v1/mail-credentials/{credential_id}/rotate | Rotate Mail Credential Handler
+*MailCredentialsApi* | [**updateMailCredential**](docs/MailCredentialsApi.md#updatemailcredentialoperation) | **PATCH** /v1/mail-credentials/{credential_id} | Update Mail Credential Handler
 *MemoryApi* | [**approveMemoryProposal**](docs/MemoryApi.md#approvememoryproposal) | **POST** /v1/memory/proposals/{chunk_id}/approve | Approve Memory Proposal Handler
 *MemoryApi* | [**getMemoryBody**](docs/MemoryApi.md#getmemorybody) | **GET** /v1/memory/body | Get Memory Body Handler
 *MemoryApi* | [**listMemoryProposals**](docs/MemoryApi.md#listmemoryproposals) | **GET** /v1/memory/proposals | List Memory Proposals Handler
@@ -447,9 +473,12 @@ All URIs are relative to *http://localhost:8000*
 - [ColumnConfig](docs/ColumnConfig.md)
 - [ColumnReference](docs/ColumnReference.md)
 - [CommonFileExclusionReason](docs/CommonFileExclusionReason.md)
+- [CompleteAuthorizationRequest](docs/CompleteAuthorizationRequest.md)
+- [CompleteAuthorizationResponse](docs/CompleteAuthorizationResponse.md)
 - [CompleteUploadRequest](docs/CompleteUploadRequest.md)
 - [ConnectionConfig](docs/ConnectionConfig.md)
 - [ConnectionSummary](docs/ConnectionSummary.md)
+- [ConnectorSyncStatus](docs/ConnectorSyncStatus.md)
 - [ContentsSortOrder](docs/ContentsSortOrder.md)
 - [CreateApiConnectionRequest](docs/CreateApiConnectionRequest.md)
 - [CreateApiKeyRequest](docs/CreateApiKeyRequest.md)
@@ -458,9 +487,12 @@ All URIs are relative to *http://localhost:8000*
 - [CreateChunkRequest](docs/CreateChunkRequest.md)
 - [CreateDataSourceRequest](docs/CreateDataSourceRequest.md)
 - [CreateDocumentRequest](docs/CreateDocumentRequest.md)
+- [CreateEmailMessageResponse](docs/CreateEmailMessageResponse.md)
+- [CreateEmailThreadRequest](docs/CreateEmailThreadRequest.md)
 - [CreateFolderRequest](docs/CreateFolderRequest.md)
 - [CreateGroupPermissionRequest](docs/CreateGroupPermissionRequest.md)
 - [CreateGroupRequest](docs/CreateGroupRequest.md)
+- [CreateMailCredentialRequest](docs/CreateMailCredentialRequest.md)
 - [CreatePasswordUserRequest](docs/CreatePasswordUserRequest.md)
 - [CreatePermissionRequest](docs/CreatePermissionRequest.md)
 - [CreatePhonePasswordUserRequest](docs/CreatePhonePasswordUserRequest.md)
@@ -472,6 +504,7 @@ All URIs are relative to *http://localhost:8000*
 - [CreateUploadRequest](docs/CreateUploadRequest.md)
 - [CreateUploadResponse](docs/CreateUploadResponse.md)
 - [CreateWorkflowDefinitionRequest](docs/CreateWorkflowDefinitionRequest.md)
+- [CurrentUserResponse](docs/CurrentUserResponse.md)
 - [DataSourceCatalogResponse](docs/DataSourceCatalogResponse.md)
 - [DataSourceDescribeResponse](docs/DataSourceDescribeResponse.md)
 - [DataSourceDetailResponse](docs/DataSourceDetailResponse.md)
@@ -515,7 +548,26 @@ All URIs are relative to *http://localhost:8000*
 - [DocxParagraphAnchorOutput](docs/DocxParagraphAnchorOutput.md)
 - [DownloadArtifact](docs/DownloadArtifact.md)
 - [EditMemoryChunkRequest](docs/EditMemoryChunkRequest.md)
+- [EmailAccessToken](docs/EmailAccessToken.md)
+- [EmailAttachmentError](docs/EmailAttachmentError.md)
+- [EmailAttachmentResponse](docs/EmailAttachmentResponse.md)
+- [EmailConfigChange](docs/EmailConfigChange.md)
+- [EmailConfigSummary](docs/EmailConfigSummary.md)
+- [EmailDeltaLinkRequest](docs/EmailDeltaLinkRequest.md)
+- [EmailMessageDetailResponse](docs/EmailMessageDetailResponse.md)
+- [EmailMessageOrder](docs/EmailMessageOrder.md)
+- [EmailMessageResponse](docs/EmailMessageResponse.md)
+- [EmailRemovedRequest](docs/EmailRemovedRequest.md)
+- [EmailRemovedResponse](docs/EmailRemovedResponse.md)
 - [EmailSentResponse](docs/EmailSentResponse.md)
+- [EmailStoredIdsRequest](docs/EmailStoredIdsRequest.md)
+- [EmailStoredIdsResponse](docs/EmailStoredIdsResponse.md)
+- [EmailSyncConfig](docs/EmailSyncConfig.md)
+- [EmailSyncProgress](docs/EmailSyncProgress.md)
+- [EmailThreadLastMessage](docs/EmailThreadLastMessage.md)
+- [EmailThreadOrder](docs/EmailThreadOrder.md)
+- [EmailThreadResponse](docs/EmailThreadResponse.md)
+- [EmailUnfinishedRequest](docs/EmailUnfinishedRequest.md)
 - [EmailVerificationRequest](docs/EmailVerificationRequest.md)
 - [EnrichedCitation](docs/EnrichedCitation.md)
 - [EnrichedThreadMessageContent](docs/EnrichedThreadMessageContent.md)
@@ -578,6 +630,9 @@ All URIs are relative to *http://localhost:8000*
 - [LineageGraphResponse](docs/LineageGraphResponse.md)
 - [LineageNodeResponse](docs/LineageNodeResponse.md)
 - [LocationInner](docs/LocationInner.md)
+- [MailCredentialListResponse](docs/MailCredentialListResponse.md)
+- [MailCredentialOption](docs/MailCredentialOption.md)
+- [MailCredentialResponse](docs/MailCredentialResponse.md)
 - [MembershipResponse](docs/MembershipResponse.md)
 - [MemoryBodyResponse](docs/MemoryBodyResponse.md)
 - [MemoryEntryResponse](docs/MemoryEntryResponse.md)
@@ -598,6 +653,8 @@ All URIs are relative to *http://localhost:8000*
 - [PaginatedResponseBillingPaymentResponse](docs/PaginatedResponseBillingPaymentResponse.md)
 - [PaginatedResponseDocumentResponse](docs/PaginatedResponseDocumentResponse.md)
 - [PaginatedResponseDocumentVersionResponse](docs/PaginatedResponseDocumentVersionResponse.md)
+- [PaginatedResponseEmailMessageResponse](docs/PaginatedResponseEmailMessageResponse.md)
+- [PaginatedResponseEmailThreadResponse](docs/PaginatedResponseEmailThreadResponse.md)
 - [PaginatedResponseEventResponse](docs/PaginatedResponseEventResponse.md)
 - [PaginatedResponseFeedbackEventResponse](docs/PaginatedResponseFeedbackEventResponse.md)
 - [PaginatedResponseFolderResponse](docs/PaginatedResponseFolderResponse.md)
@@ -633,7 +690,7 @@ All URIs are relative to *http://localhost:8000*
 - [PathPartResponse](docs/PathPartResponse.md)
 - [PathPartTagsResponse](docs/PathPartTagsResponse.md)
 - [PendingMemoryChunkResponse](docs/PendingMemoryChunkResponse.md)
-- [PermissionCapability](docs/PermissionCapability.md)
+- [PermissionAction](docs/PermissionAction.md)
 - [PermissionResponse](docs/PermissionResponse.md)
 - [PhoneValidationResponse](docs/PhoneValidationResponse.md)
 - [PhoneVerificationRequest](docs/PhoneVerificationRequest.md)
@@ -659,8 +716,11 @@ All URIs are relative to *http://localhost:8000*
 - [ResolvedReferenceInput](docs/ResolvedReferenceInput.md)
 - [ResolvedReferenceOutput](docs/ResolvedReferenceOutput.md)
 - [ResponseSendPwResetEmail](docs/ResponseSendPwResetEmail.md)
+- [RetireMailCredentialResponse](docs/RetireMailCredentialResponse.md)
 - [RevisionEdit](docs/RevisionEdit.md)
 - [RootResponse](docs/RootResponse.md)
+- [RotateMailCredentialRequest](docs/RotateMailCredentialRequest.md)
+- [RotateMailCredentialResponse](docs/RotateMailCredentialResponse.md)
 - [RunFolder](docs/RunFolder.md)
 - [RunFolderRef](docs/RunFolderRef.md)
 - [RunTimeseriesResponse](docs/RunTimeseriesResponse.md)
@@ -696,6 +756,7 @@ All URIs are relative to *http://localhost:8000*
 - [SortDirection](docs/SortDirection.md)
 - [SourceConfigSummary](docs/SourceConfigSummary.md)
 - [SourceType](docs/SourceType.md)
+- [StartAuthorizationResponse](docs/StartAuthorizationResponse.md)
 - [StartWorkflowRunRequest](docs/StartWorkflowRunRequest.md)
 - [Step](docs/Step.md)
 - [StepKind](docs/StepKind.md)
@@ -746,15 +807,19 @@ All URIs are relative to *http://localhost:8000*
 - [TransferOwnerResponse](docs/TransferOwnerResponse.md)
 - [TrashItemDetailResponse](docs/TrashItemDetailResponse.md)
 - [TrashItemResponse](docs/TrashItemResponse.md)
+- [UnfinishedMail](docs/UnfinishedMail.md)
 - [UpdateApiConnectionRequest](docs/UpdateApiConnectionRequest.md)
 - [UpdateChunkContentRequest](docs/UpdateChunkContentRequest.md)
 - [UpdateChunkMetadataRequest](docs/UpdateChunkMetadataRequest.md)
 - [UpdateDataSourceRequest](docs/UpdateDataSourceRequest.md)
 - [UpdateDocumentRequest](docs/UpdateDocumentRequest.md)
+- [UpdateEmailMessageRequest](docs/UpdateEmailMessageRequest.md)
+- [UpdateEmailThreadRequest](docs/UpdateEmailThreadRequest.md)
 - [UpdateFolderRequest](docs/UpdateFolderRequest.md)
 - [UpdateGroupPermissionRequest](docs/UpdateGroupPermissionRequest.md)
 - [UpdateGroupRequest](docs/UpdateGroupRequest.md)
 - [UpdateInviteRequest](docs/UpdateInviteRequest.md)
+- [UpdateMailCredentialRequest](docs/UpdateMailCredentialRequest.md)
 - [UpdatePermissionRequest](docs/UpdatePermissionRequest.md)
 - [UpdateSectionRequest](docs/UpdateSectionRequest.md)
 - [UpdateSkillRequest](docs/UpdateSkillRequest.md)
@@ -832,7 +897,7 @@ and is automatically generated by the
 [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `0.1.0`
-- Package version: `3.21.1`
+- Package version: `3.25.2`
 - Generator version: `7.26.0`
 - Build package: `org.openapitools.codegen.languages.TypeScriptFetchClientCodegen`
 

@@ -16,7 +16,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## deleteMyAvatar
 
-> UserResponse deleteMyAvatar()
+> CurrentUserResponse deleteMyAvatar()
 
 Delete My Avatar Handler
 
@@ -59,7 +59,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**CurrentUserResponse**](CurrentUserResponse.md)
 
 ### Authorization
 
@@ -82,7 +82,7 @@ This endpoint does not need any parameter.
 
 ## getMe
 
-> UserResponse getMe()
+> CurrentUserResponse getMe()
 
 Get Me Handler
 
@@ -125,7 +125,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**CurrentUserResponse**](CurrentUserResponse.md)
 
 ### Authorization
 
@@ -214,7 +214,7 @@ This endpoint does not need any parameter.
 
 ## skipOnboarding
 
-> UserResponse skipOnboarding()
+> CurrentUserResponse skipOnboarding()
 
 Skip Onboarding Handler
 
@@ -257,7 +257,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**CurrentUserResponse**](CurrentUserResponse.md)
 
 ### Authorization
 
@@ -280,7 +280,7 @@ This endpoint does not need any parameter.
 
 ## updateMe
 
-> UserResponse updateMe(updateUserRequest)
+> CurrentUserResponse updateMe(updateUserRequest)
 
 Update Me Handler
 
@@ -331,7 +331,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**CurrentUserResponse**](CurrentUserResponse.md)
 
 ### Authorization
 
@@ -355,7 +355,7 @@ example().catch(console.error);
 
 ## updateOnboardingState
 
-> UserResponse updateOnboardingState(onboardingStateUpdate)
+> CurrentUserResponse updateOnboardingState(onboardingStateUpdate)
 
 Update Onboarding State Handler
 
@@ -404,7 +404,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**CurrentUserResponse**](CurrentUserResponse.md)
 
 ### Authorization
 
@@ -428,7 +428,7 @@ example().catch(console.error);
 
 ## uploadMyAvatar
 
-> UserResponse uploadMyAvatar(file)
+> CurrentUserResponse uploadMyAvatar(file)
 
 Upload My Avatar Handler
 
@@ -479,7 +479,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**CurrentUserResponse**](CurrentUserResponse.md)
 
 ### Authorization
 

@@ -1,7 +1,7 @@
 
 # CreateDataSourceRequest
 
-Create a connector under a folder the caller can write to.
+Create a connector under a folder the caller can write to.  ``name`` is the one thing a mailbox does not take: it is named after the address it syncs, because a second name for it would only ever disagree with the mailbox. Where it goes is still the caller\'s, as it is for every other connector — the folder a connector hangs in is what decides who can read what hangs under it, so a personal mailbox and an organization\'s belong in different places.
 
 ## Properties
 
@@ -13,6 +13,8 @@ Name | Type
 `engine` | [DataSourceEngine](DataSourceEngine.md)
 `connectionConfig` | [ConnectionConfig](ConnectionConfig.md)
 `sourceConfig` | [YidingConfig](YidingConfig.md)
+`mailCredentialId` | string
+`emailConfig` | [EmailSyncConfig](EmailSyncConfig.md)
 
 ## Example
 
@@ -27,6 +29,8 @@ const example = {
   "engine": null,
   "connectionConfig": null,
   "sourceConfig": null,
+  "mailCredentialId": null,
+  "emailConfig": null,
 } satisfies CreateDataSourceRequest
 
 console.log(example)

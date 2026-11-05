@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 
 # **delete_my_avatar**
-> UserResponse delete_my_avatar()
+> CurrentUserResponse delete_my_avatar()
 
 **Synchronous variant:** `delete_my_avatar_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -29,7 +29,7 @@ Remove the profile photo for the current tenant. No photo is a no-op.
 
 ```python
 import ksapi
-from ksapi.models.user_response import UserResponse
+from ksapi.models.current_user_response import CurrentUserResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -77,7 +77,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**CurrentUserResponse**](CurrentUserResponse.md)
 
 ### Authorization
 
@@ -98,7 +98,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_me**
-> UserResponse get_me()
+> CurrentUserResponse get_me()
 
 **Synchronous variant:** `get_me_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -116,7 +116,7 @@ Returns the authenticated user's profile along with their current tenant ID
 
 ```python
 import ksapi
-from ksapi.models.user_response import UserResponse
+from ksapi.models.current_user_response import CurrentUserResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -164,7 +164,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**CurrentUserResponse**](CurrentUserResponse.md)
 
 ### Authorization
 
@@ -269,7 +269,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **skip_onboarding**
-> UserResponse skip_onboarding()
+> CurrentUserResponse skip_onboarding()
 
 **Synchronous variant:** `skip_onboarding_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -288,7 +288,7 @@ it is NULL).
 
 ```python
 import ksapi
-from ksapi.models.user_response import UserResponse
+from ksapi.models.current_user_response import CurrentUserResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -336,7 +336,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**CurrentUserResponse**](CurrentUserResponse.md)
 
 ### Authorization
 
@@ -357,7 +357,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_me**
-> UserResponse update_me(update_user_request)
+> CurrentUserResponse update_me(update_user_request)
 
 **Synchronous variant:** `update_me_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -374,8 +374,8 @@ When updating default_tenant_id, the user must belong to the specified tenant.
 
 ```python
 import ksapi
+from ksapi.models.current_user_response import CurrentUserResponse
 from ksapi.models.update_user_request import UpdateUserRequest
-from ksapi.models.user_response import UserResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -427,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**CurrentUserResponse**](CurrentUserResponse.md)
 
 ### Authorization
 
@@ -449,7 +449,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_onboarding_state**
-> UserResponse update_onboarding_state(onboarding_state_update)
+> CurrentUserResponse update_onboarding_state(onboarding_state_update)
 
 **Synchronous variant:** `update_onboarding_state_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -462,8 +462,8 @@ Update Onboarding State Handler
 
 ```python
 import ksapi
+from ksapi.models.current_user_response import CurrentUserResponse
 from ksapi.models.onboarding_state_update import OnboardingStateUpdate
-from ksapi.models.user_response import UserResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -515,7 +515,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**CurrentUserResponse**](CurrentUserResponse.md)
 
 ### Authorization
 
@@ -537,7 +537,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upload_my_avatar**
-> UserResponse upload_my_avatar(file)
+> CurrentUserResponse upload_my_avatar(file)
 
 **Synchronous variant:** `upload_my_avatar_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -552,7 +552,7 @@ Set the profile photo for the current tenant. PNG, JPEG, WebP or GIF, at most 2 
 
 ```python
 import ksapi
-from ksapi.models.user_response import UserResponse
+from ksapi.models.current_user_response import CurrentUserResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -604,7 +604,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserResponse**](UserResponse.md)
+[**CurrentUserResponse**](CurrentUserResponse.md)
 
 ### Authorization
 

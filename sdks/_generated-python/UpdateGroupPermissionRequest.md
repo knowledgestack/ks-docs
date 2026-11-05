@@ -5,9 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**can_read** | **bool** | Set read access; omitted or null leaves the stored flag unchanged. | [optional] 
+**can_write** | **bool** | Set write access; requires read in the resulting grant. Omitted or null leaves the stored flag unchanged. | [optional] 
+**can_delete** | **bool** | Set delete access; requires read and write in the resulting grant. Omitted or null leaves the stored flag unchanged. | [optional] 
+**can_approve** | **bool** | Set approval access; requires read in the resulting grant. Omitted or null leaves the stored flag unchanged. | [optional] 
+**can_grant_permissions** | **bool** | Set subtree permission management; requires all four flags. Omitted or null retains the stored value. | [optional] 
 **path_part_id** | **UUID** |  | [optional] 
-**capability** | [**PermissionCapability**](PermissionCapability.md) |  | [optional] 
-**can_approve** | **bool** |  | [optional] 
 
 ## Example
 

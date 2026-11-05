@@ -33,6 +33,8 @@ async function example() {
   const config = new Configuration({ 
     // To configure API key authorization: cookieAuth
     apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
   });
   const api = new ApiKeysApi(config);
 
@@ -66,7 +68,7 @@ example().catch(console.error);
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -106,6 +108,8 @@ async function example() {
   const config = new Configuration({ 
     // To configure API key authorization: cookieAuth
     apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
   });
   const api = new ApiKeysApi(config);
 
@@ -139,7 +143,7 @@ example().catch(console.error);
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -179,6 +183,8 @@ async function example() {
   const config = new Configuration({ 
     // To configure API key authorization: cookieAuth
     apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
   });
   const api = new ApiKeysApi(config);
 
@@ -212,7 +218,7 @@ example().catch(console.error);
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -252,6 +258,8 @@ async function example() {
   const config = new Configuration({ 
     // To configure API key authorization: cookieAuth
     apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
   });
   const api = new ApiKeysApi(config);
 
@@ -277,7 +285,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

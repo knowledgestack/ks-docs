@@ -59,6 +59,13 @@ Name | Type
 `sourceType` | [SourceType](SourceType.md)
 `connectionSummary` | [ConnectionSummary](ConnectionSummary.md)
 `sourceConfig` | [SourceConfigSummary](SourceConfigSummary.md)
+`emailConfig` | [EmailConfigSummary](EmailConfigSummary.md)
+`mailboxAddress` | string
+`mailCredential` | [MailCredentialOption](MailCredentialOption.md)
+`emailProgress` | [EmailSyncProgress](EmailSyncProgress.md)
+`syncStatus` | [ConnectorSyncStatus](ConnectorSyncStatus.md)
+`syncCron` | string
+`lastSyncError` | string
 `dataSourceId` | string
 `schemaName` | string
 `isDefault` | boolean
@@ -77,6 +84,23 @@ Name | Type
 `files` | [Array&lt;SkillFile&gt;](SkillFile.md)
 `fileDocuments` | [Array&lt;SkillFileDocument&gt;](SkillFileDocument.md)
 `hasUnpublishedChanges` | boolean
+`sourceConversationId` | string
+`title` | string
+`messageCount` | number
+`participants` | Array&lt;string&gt;
+`hasAttachments` | boolean
+`attachmentNames` | Array&lt;string&gt;
+`attachmentCount` | number
+`lastMessageAt` | Date
+`lastMessage` | [EmailThreadLastMessage](EmailThreadLastMessage.md)
+`externalMessageId` | string
+`externalSourceFolder` | string
+`preview` | string
+`sentAt` | Date
+`sender` | string
+`recipients` | Array&lt;string&gt;
+`ccRecipients` | Array&lt;string&gt;
+`bccRecipients` | Array&lt;string&gt;
 
 ## Example
 
@@ -138,6 +162,13 @@ const example = {
   "sourceType": null,
   "connectionSummary": null,
   "sourceConfig": null,
+  "emailConfig": null,
+  "mailboxAddress": null,
+  "mailCredential": null,
+  "emailProgress": null,
+  "syncStatus": null,
+  "syncCron": null,
+  "lastSyncError": null,
   "dataSourceId": null,
   "schemaName": null,
   "isDefault": null,
@@ -156,6 +187,23 @@ const example = {
   "files": null,
   "fileDocuments": null,
   "hasUnpublishedChanges": null,
+  "sourceConversationId": null,
+  "title": null,
+  "messageCount": null,
+  "participants": null,
+  "hasAttachments": null,
+  "attachmentNames": null,
+  "attachmentCount": null,
+  "lastMessageAt": null,
+  "lastMessage": null,
+  "externalMessageId": null,
+  "externalSourceFolder": null,
+  "preview": null,
+  "sentAt": null,
+  "sender": null,
+  "recipients": null,
+  "ccRecipients": null,
+  "bccRecipients": null,
 } satisfies FolderResponseOrDocumentResponseOrWorkflowDefinitionResponseOrWorkflowRunResponseOrDataSourceResponseOrDataSourceSchemaR
 
 console.log(example)

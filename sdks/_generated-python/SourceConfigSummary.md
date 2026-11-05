@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **username** | **str** | The account the crawler signs in to the panel as | 
 **business_id** | **str** | The panel&#39;s own id for the shop. Only the customer list is scoped by it — orders follow the logged-in account — but it answers a wrong one with a 500, so an empty value fails the crawl, not just that page. | 
 **start_date** | **date** | First dining day to sync; earlier orders are not fetched | 
-**cron** | **str** | Crawl recurrence, in the tenant&#39;s timezone | 
 **base_url** | **str** | Root of the YiDing admin panel the crawler signs in to | [optional] [default to 'https://admin.zhidianfan.com/seller_resv_sys']
 
 ## Example

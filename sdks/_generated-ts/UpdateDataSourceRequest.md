@@ -12,6 +12,7 @@ Name | Type
 `connectionConfig` | [ConnectionConfig](ConnectionConfig.md)
 `sourceConfig` | [YidingConfigChange](YidingConfigChange.md)
 `syncState` | [YidingCursor](YidingCursor.md)
+`emailConfig` | [EmailConfigChange](EmailConfigChange.md)
 
 ## Example
 
@@ -25,6 +26,7 @@ const example = {
   "connectionConfig": null,
   "sourceConfig": null,
   "syncState": null,
+  "emailConfig": null,
 } satisfies UpdateDataSourceRequest
 
 console.log(example)

@@ -1,16 +1,19 @@
 
 # BulkGrantItem
 
-One requested grant: a capability on an object (PDO id) for a user.
+One requested grant: permission flags on an object (PDO id) for a user.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
+`canRead` | boolean
+`canWrite` | boolean
+`canDelete` | boolean
+`canApprove` | boolean
+`canGrantPermissions` | boolean
 `userId` | string
 `objectId` | string
-`capability` | [PermissionCapability](PermissionCapability.md)
-`canApprove` | boolean
 
 ## Example
 
@@ -19,10 +22,13 @@ import type { BulkGrantItem } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
+  "canRead": null,
+  "canWrite": null,
+  "canDelete": null,
+  "canApprove": null,
+  "canGrantPermissions": null,
   "userId": null,
   "objectId": null,
-  "capability": null,
-  "canApprove": null,
 } satisfies BulkGrantItem
 
 console.log(example)

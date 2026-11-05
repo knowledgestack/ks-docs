@@ -30,7 +30,7 @@ All URIs are relative to *http://localhost:8000*
 
 Create Data Source Handler
 
-Create a connector under a writable folder; test the connection first.
+Create a connector under a writable folder; test the connection first.  A mailbox is placed like any other connector and named like one: &#x60;&#x60;name&#x60;&#x60; is required for every kind, and on a mailbox it is a label of the caller\&#39;s choosing — the address comes back from the consent and is reported beside it rather than used as the name.
 
 ### Example
 
@@ -105,7 +105,7 @@ example().catch(console.error);
 
 Delete Data Source Handler
 
-Move a connector and its schemas/tables to trash.  Soft-delete via the path_part subtree (schemas + tables are children, so they trash with it). Each modeled table\&#39;s summary Qdrant point carries that table\&#39;s path_part, so the set-trashed workflow flips it to trashed too — keeping trashed tables out of the agent\&#39;s table search (best-effort, mirrors the document delete path).  A YIDINGSYNC connector also owns a daily crawl schedule, which is removed here: left behind, it would fire every night at a connector that is gone. The check is not redundant — unlike the best-effort trash sync above, &#x60;&#x60;delete_connector_schedule&#x60;&#x60; re-raises anything that is not NOT_FOUND, so calling it for a DIRECT connector would put a Temporal outage in the way of a delete that never needed Temporal at all.
+Move a connector and its schemas/tables to trash.  Soft-delete via the path_part subtree (schemas + tables are children, so they trash with it). Each modeled table\&#39;s summary Qdrant point carries that table\&#39;s path_part, so the set-trashed workflow flips it to trashed too — keeping trashed tables out of the agent\&#39;s table search (best-effort, mirrors the document delete path).  A crawler-fed connector also owns a crawl schedule, which is removed here: left behind, it would keep firing at a connector that is gone. Which kinds own one is &#x60;&#x60;has_crawl_schedule&#x60;&#x60;, the same question asked when arming it — a mailbox arms its recurrence from the OAuth callback, so keying this on one source type would leave mailbox schedules behind.
 
 ### Example
 
@@ -1175,7 +1175,7 @@ example().catch(console.error);
 
 Update Data Source Handler
 
-Rename, move, and/or re-credential a connector.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector (and on the destination folder for a move); supplying &#x60;&#x60;connection_config&#x60;&#x60; additionally requires OWNER/ADMIN. Fresh &#x60;&#x60;connection_config&#x60;&#x60; is re-validated against the DB before persisting (bad creds → 400, consistent with create); creds are never echoed back. &#x60;&#x60;engine&#x60;&#x60; is immutable. A fresh &#x60;&#x60;source_config&#x60;&#x60; re-arms the crawl schedule, so changing &#x60;&#x60;cron&#x60;&#x60; takes effect immediately rather than at the next provisioning.
+Rename, move, and/or re-credential a connector.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector (and on the destination folder for a move). A fresh &#x60;&#x60;connection_config&#x60;&#x60; takes that same write access and no tenant role. Fresh &#x60;&#x60;connection_config&#x60;&#x60; is re-validated against the DB before persisting (bad creds → 400, consistent with create); creds are never echoed back. &#x60;&#x60;engine&#x60;&#x60; is immutable. A fresh &#x60;&#x60;source_config&#x60;&#x60; re-arms the crawl schedule, so changing &#x60;&#x60;cron&#x60;&#x60; takes effect immediately rather than at the next provisioning.
 
 ### Example
 

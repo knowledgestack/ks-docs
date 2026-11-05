@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **last_synced_order_ts** | **datetime** | Seating time of the last order read | [optional] 
 **last_synced_user_ts** | **datetime** | When the customer list was last refreshed | [optional] 
+**last_sync_error** | **str** | What the last crawl had to report, in the source&#39;s own words. Not only failures — a run that connected and worked but could not store everything it saw reports success with this set. | [optional] 
 
 ## Example
 

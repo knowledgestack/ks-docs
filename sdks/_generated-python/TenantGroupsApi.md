@@ -118,7 +118,7 @@ Name | Type | Description  | Notes
 
 Create Group Permission Handler
 
-Create a path permission for a group (admin/owner only).
+Create a path permission for a group (admin/owner or scoped permission manager).
 
 ### Example
 
@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
 
 Delete Group Permission Handler
 
-Delete a path permission from a group (admin/owner only).
+Delete a path permission from a group (admin/owner or scoped permission manager).
 
 ### Example
 
@@ -474,7 +474,7 @@ void (empty response body)
 
 Get Tenant Group Handler
 
-Get a tenant group by ID (group member or admin/owner).
+Get a tenant group (member, admin/owner, or permission manager).
 
 ### Example
 
@@ -563,7 +563,7 @@ Name | Type | Description  | Notes
 
 List Group Members Handler
 
-List members of a group (group members or admin/owner).
+List group members (member, admin/owner, or permission manager).
 
 ### Example
 
@@ -658,13 +658,13 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_group_permissions**
-> PaginatedResponseGroupPermissionResponse list_group_permissions(group_id, sort_by=sort_by, sort_dir=sort_dir, capability=capability, limit=limit, offset=offset)
+> PaginatedResponseGroupPermissionResponse list_group_permissions(group_id, sort_by=sort_by, sort_dir=sort_dir, can_read=can_read, can_write=can_write, can_delete=can_delete, can_approve=can_approve, can_grant_permissions=can_grant_permissions, limit=limit, offset=offset)
 
 **Synchronous variant:** `list_group_permissions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List Group Permissions Handler
 
-List path permissions for a group (group member or admin/owner).
+List group grants; non-member managers see only their managed subtrees.
 
 ### Example
 
@@ -675,7 +675,6 @@ List path permissions for a group (group member or admin/owner).
 import ksapi
 from ksapi.models.group_permission_order import GroupPermissionOrder
 from ksapi.models.paginated_response_group_permission_response import PaginatedResponseGroupPermissionResponse
-from ksapi.models.permission_capability import PermissionCapability
 from ksapi.models.sort_direction import SortDirection
 from ksapi.rest import ApiException
 from pprint import pprint
@@ -709,13 +708,17 @@ async with ksapi.ApiClient(configuration) as api_client:
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     sort_by = ksapi.GroupPermissionOrder() # GroupPermissionOrder | Field to sort permissions by (default: CREATED_AT) (optional)
     sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
-    capability = ksapi.PermissionCapability() # PermissionCapability | Filter to permissions with this capability (optional)
+    can_read = True # bool | Filter grants by can_read (optional)
+    can_write = True # bool | Filter grants by can_write (optional)
+    can_delete = True # bool | Filter grants by can_delete (optional)
+    can_approve = True # bool | Filter grants by can_approve (optional)
+    can_grant_permissions = True # bool | Filter grants by can_grant_permissions (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
 
     try:
         # List Group Permissions Handler
-        api_response = await api_instance.list_group_permissions(group_id, sort_by=sort_by, sort_dir=sort_dir, capability=capability, limit=limit, offset=offset)
+        api_response = await api_instance.list_group_permissions(group_id, sort_by=sort_by, sort_dir=sort_dir, can_read=can_read, can_write=can_write, can_delete=can_delete, can_approve=can_approve, can_grant_permissions=can_grant_permissions, limit=limit, offset=offset)
         print("The response of TenantGroupsApi->list_group_permissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -732,7 +735,11 @@ Name | Type | Description  | Notes
  **group_id** | **UUID**|  | 
  **sort_by** | [**GroupPermissionOrder**](.md)| Field to sort permissions by (default: CREATED_AT) | [optional] 
  **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
- **capability** | [**PermissionCapability**](.md)| Filter to permissions with this capability | [optional] 
+ **can_read** | **bool**| Filter grants by can_read | [optional] 
+ **can_write** | **bool**| Filter grants by can_write | [optional] 
+ **can_delete** | **bool**| Filter grants by can_delete | [optional] 
+ **can_approve** | **bool**| Filter grants by can_approve | [optional] 
+ **can_grant_permissions** | **bool**| Filter grants by can_grant_permissions | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
 
@@ -852,7 +859,7 @@ List Tenant Groups Handler
 
 List tenant groups.
 
-Admin/owner see all groups; other members see only groups they belong to.
+Admin/owner and permission managers see all groups; other members see their own.
 
 ### Example
 
@@ -1049,7 +1056,7 @@ void (empty response body)
 
 Update Group Permission Handler
 
-Update a path permission for a group (admin/owner only).
+Update a path permission for a group (admin/owner or scoped permission manager).
 
 ### Example
 

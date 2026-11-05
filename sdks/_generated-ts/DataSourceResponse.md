@@ -18,6 +18,13 @@ Name | Type
 `sourceType` | [SourceType](SourceType.md)
 `connectionSummary` | [ConnectionSummary](ConnectionSummary.md)
 `sourceConfig` | [SourceConfigSummary](SourceConfigSummary.md)
+`emailConfig` | [EmailConfigSummary](EmailConfigSummary.md)
+`mailboxAddress` | string
+`mailCredential` | [MailCredentialOption](MailCredentialOption.md)
+`emailProgress` | [EmailSyncProgress](EmailSyncProgress.md)
+`syncStatus` | [ConnectorSyncStatus](ConnectorSyncStatus.md)
+`syncCron` | string
+`lastSyncError` | string
 `approvalState` | [PathPartApprovalState](PathPartApprovalState.md)
 `owner` | [UserInfo](UserInfo.md)
 `permissions` | [ItemPermissions](ItemPermissions.md)
@@ -42,6 +49,13 @@ const example = {
   "sourceType": null,
   "connectionSummary": null,
   "sourceConfig": null,
+  "emailConfig": null,
+  "mailboxAddress": null,
+  "mailCredential": null,
+  "emailProgress": null,
+  "syncStatus": null,
+  "syncCron": null,
+  "lastSyncError": null,
   "approvalState": null,
   "owner": null,
   "permissions": null,

@@ -13,10 +13,17 @@ Name | Type | Description | Notes
 **materialized_path** | **str** | Full materialized path from root | 
 **tenant_id** | **UUID** |  | 
 **name** | **str** |  | 
-**engine** | [**DataSourceEngine**](DataSourceEngine.md) |  | 
+**engine** | [**DataSourceEngine**](DataSourceEngine.md) |  | [optional] 
 **source_type** | [**SourceType**](SourceType.md) |  | 
 **connection_summary** | [**ConnectionSummary**](ConnectionSummary.md) | Where the connector points, without the password. Null on a YIDINGSYNC connector until provisioning has built its database, so polling this is how the UI learns the sync is ready. | [optional] 
-**source_config** | [**SourceConfigSummary**](SourceConfigSummary.md) | A YIDINGSYNC connector&#39;s crawler config without the password: which shop, from when, and the crawl recurrence. Null on DIRECT. | [optional] 
+**source_config** | [**SourceConfigSummary**](SourceConfigSummary.md) | A YIDINGSYNC connector&#39;s crawler config without the password: which shop, from when, and the crawl recurrence. Null on DIRECT and on EMAIL, which reports through email_config. | [optional] 
+**email_config** | [**EmailConfigSummary**](EmailConfigSummary.md) | An EMAIL connector&#39;s folder list and cron; null otherwise | [optional] 
+**mailbox_address** | **str** | The mailbox an EMAIL connector syncs; null otherwise, and null on a mailbox connector until its first consent lands, because the address is read out of the id token rather than typed. From then on it is fixed: a later sign-in as another account is refused rather than stored, so this is the mailbox whose mail is in the tree. The connector&#39;s own &#x60;&#x60;name&#x60;&#x60; is a separate label of the caller&#39;s choosing; show both. | [optional] 
+**mail_credential** | [**MailCredentialOption**](MailCredentialOption.md) | The app registration this mailbox authenticates with; null on a connector that is not a mailbox. Name and provider only: the ids are the admin&#39;s business and the secret is nobody&#39;s | [optional] 
+**email_progress** | [**EmailSyncProgress**](EmailSyncProgress.md) | When an EMAIL connector last reported in; null otherwise. Read with sync_status, which says whether it is healthy rather than whether it is still moving. | [optional] 
+**sync_status** | [**ConnectorSyncStatus**](ConnectorSyncStatus.md) |  | 
+**sync_cron** | **str** | How often this connector is crawled, as a cron expression in the tenant&#39;s timezone. Absent on a source nothing crawls. | [optional] 
+**last_sync_error** | **str** | Why the last crawl ended badly | [optional] 
 **approval_state** | [**PathPartApprovalState**](PathPartApprovalState.md) |  | 
 **owner** | [**UserInfo**](UserInfo.md) | Current owner (creator) of the connector, or null if unowned. | [optional] 
 **permissions** | [**ItemPermissions**](ItemPermissions.md) |  | 

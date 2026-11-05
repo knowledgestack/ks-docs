@@ -6,11 +6,14 @@
 
 Name | Type
 ------------ | -------------
+`canRead` | boolean
+`canWrite` | boolean
+`canDelete` | boolean
+`canApprove` | boolean
+`canGrantPermissions` | boolean
 `tenantId` | string
 `userId` | string
 `pathPartId` | string
-`capability` | [PermissionCapability](PermissionCapability.md)
-`canApprove` | boolean
 
 ## Example
 
@@ -19,11 +22,14 @@ import type { CreatePermissionRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
+  "canRead": null,
+  "canWrite": null,
+  "canDelete": null,
+  "canApprove": null,
+  "canGrantPermissions": null,
   "tenantId": null,
   "userId": null,
   "pathPartId": null,
-  "capability": null,
-  "canApprove": null,
 } satisfies CreatePermissionRequest
 
 console.log(example)

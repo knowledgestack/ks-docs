@@ -1,21 +1,24 @@
 
-# PermissionCapability
+# RotateMailCredentialResponse
 
-Path access capability, a strict ladder: read < write < delete.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
+`mailboxesAffected` | number
+`reauthCleared` | number
 
 ## Example
 
 ```typescript
-import type { PermissionCapability } from '@knowledge-stack/ksapi'
+import type { RotateMailCredentialResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-} satisfies PermissionCapability
+  "mailboxesAffected": null,
+  "reauthCleared": null,
+} satisfies RotateMailCredentialResponse
 
 console.log(example)
 
@@ -24,7 +27,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as PermissionCapability
+const exampleParsed = JSON.parse(exampleJSON) as RotateMailCredentialResponse
 console.log(exampleParsed)
 ```
 

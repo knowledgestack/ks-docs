@@ -1,15 +1,16 @@
 # ItemPermissions
 
-Caller's authorization on an item: whether an action is permitted.  Authorization only — not whether it will currently succeed. An authorized write/delete can still be refused by transient state on the same response: a run's ``execution_state`` (e.g. not IN_PROGRESS to delete), a ``system_managed`` item, or a document that is ``approval_state``-sealed or checked out by another user (see authorization.md §5.6). Ladder: ``can_delete`` ⟹ ``can_write`` ⟹ ``can_read``; ``can_approve`` is orthogonal and always false for agents.
+Caller's authorization on an item: whether an action is permitted.  Authorization only — not whether it will currently succeed. An authorized write/delete can still be refused by transient state on the same response: a run's ``execution_state`` (e.g. not IN_PROGRESS to delete), a ``system_managed`` item, or a document that is ``approval_state``-sealed or checked out by another user. Stored path grants require delete → write → read; approval requires read independently of write/delete. Workflow-run permissions also use ownership rules. ``can_approve`` is always false for agents.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**can_read** | **bool** | False only on a navigation-ancestor row (visible to traverse, not open). | 
+**can_read** | **bool** | Authorized to read content; navigation visibility alone does not grant read. | 
 **can_write** | **bool** | Authorized to create/update. Run: triggerer-or-admin, not path-based. | 
 **can_delete** | **bool** | Authorized to delete. Run: triggerer-or-admin. | 
 **can_approve** | **bool** | Authorized to approve/unapprove. Always false for agents (assumed). | 
+**can_grant_permissions** | **bool** | Authorized to manage user and group grants on this subtree. | 
 
 ## Example
 

@@ -673,7 +673,7 @@ List Tenant Users
 
 List members of a tenant with pagination.
 
-Requires OWNER or ADMIN membership in the tenant.
+Requires OWNER, ADMIN, or a path management grant in the tenant.
 
 ### Example
 

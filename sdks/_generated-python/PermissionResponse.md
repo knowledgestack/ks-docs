@@ -10,8 +10,11 @@ Name | Type | Description | Notes
 **user_id** | **UUID** |  | 
 **path_part_id** | **UUID** |  | 
 **materialized_path** | **str** |  | 
-**capability** | [**PermissionCapability**](PermissionCapability.md) |  | 
+**can_read** | **bool** |  | 
+**can_write** | **bool** |  | 
+**can_delete** | **bool** |  | 
 **can_approve** | **bool** |  | 
+**can_grant_permissions** | **bool** |  | 
 **created_at** | **datetime** |  | 
 **updated_at** | **datetime** |  | 
 

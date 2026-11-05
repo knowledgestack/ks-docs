@@ -177,11 +177,11 @@ example().catch(console.error);
 
 ## checkPathPartAccess
 
-> AccessCheckResponse checkPathPartAccess(pathPartId, userId, capability)
+> AccessCheckResponse checkPathPartAccess(pathPartId, userId, action)
 
 Check Path Part Access Handler
 
-Explain whether &#x60;&#x60;user_id&#x60;&#x60; has &#x60;&#x60;capability&#x60;&#x60; on a path part.  ADMIN/OWNER-only introspection: resolves the target user\&#39;s effective permissions and reports the decision plus the reason (the matching grant path, or a role bypass). OWNER/ADMIN targets bypass path checks by role, so they are always allowed.  404 if the path part does not exist or the target user is not a member of this tenant.
+Explain whether &#x60;&#x60;user_id&#x60;&#x60; has &#x60;&#x60;action&#x60;&#x60; on a path part.  ADMIN/OWNER or scoped-manager introspection: resolves the target user\&#39;s effective permissions and reports the decision plus the reason (the matching grant path, or a role bypass). OWNER/ADMIN targets bypass path checks by role, so they are always allowed.  404 if the path part does not exist or the target user is not a member of this tenant.
 
 ### Example
 
@@ -207,8 +207,8 @@ async function example() {
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | The user whose access is being explained
     userId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // PermissionCapability | Capability to check (READ_ONLY or READ_WRITE) (optional)
-    capability: ...,
+    // PermissionAction | Independent action to check: read, write, delete, approve, or grant_permissions (optional)
+    action: ...,
   } satisfies CheckPathPartAccessRequest;
 
   try {
@@ -230,7 +230,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **pathPartId** | `string` |  | [Defaults to `undefined`] |
 | **userId** | `string` | The user whose access is being explained | [Defaults to `undefined`] |
-| **capability** | `PermissionCapability` | Capability to check (READ_ONLY or READ_WRITE) | [Optional] [Defaults to `undefined`] [Enum: READ_ONLY, READ_WRITE, READ_WRITE_DELETE] |
+| **action** | `PermissionAction` | Independent action to check: read, write, delete, approve, or grant_permissions | [Optional] [Defaults to `undefined`] [Enum: read, write, delete, approve, grant_permissions] |
 
 ### Return type
 

@@ -104,7 +104,7 @@ example().catch(console.error);
 
 Create Group Permission Handler
 
-Create a path permission for a group (admin/owner only).
+Create a path permission for a group (admin/owner or scoped permission manager).
 
 ### Example
 
@@ -257,7 +257,7 @@ example().catch(console.error);
 
 Delete Group Permission Handler
 
-Delete a path permission from a group (admin/owner only).
+Delete a path permission from a group (admin/owner or scoped permission manager).
 
 ### Example
 
@@ -410,7 +410,7 @@ example().catch(console.error);
 
 Get Tenant Group Handler
 
-Get a tenant group by ID (group member or admin/owner).
+Get a tenant group (member, admin/owner, or permission manager).
 
 ### Example
 
@@ -485,7 +485,7 @@ example().catch(console.error);
 
 List Group Members Handler
 
-List members of a group (group members or admin/owner).
+List group members (member, admin/owner, or permission manager).
 
 ### Example
 
@@ -571,11 +571,11 @@ example().catch(console.error);
 
 ## listGroupPermissions
 
-> PaginatedResponseGroupPermissionResponse listGroupPermissions(groupId, sortBy, sortDir, capability, limit, offset)
+> PaginatedResponseGroupPermissionResponse listGroupPermissions(groupId, sortBy, sortDir, canRead, canWrite, canDelete, canApprove, canGrantPermissions, limit, offset)
 
 List Group Permissions Handler
 
-List path permissions for a group (group member or admin/owner).
+List group grants; non-member managers see only their managed subtrees.
 
 ### Example
 
@@ -603,8 +603,16 @@ async function example() {
     sortBy: ...,
     // SortDirection | Sort direction; overrides the field\'s natural default (optional)
     sortDir: ...,
-    // PermissionCapability | Filter to permissions with this capability (optional)
-    capability: ...,
+    // boolean | Filter grants by can_read (optional)
+    canRead: true,
+    // boolean | Filter grants by can_write (optional)
+    canWrite: true,
+    // boolean | Filter grants by can_delete (optional)
+    canDelete: true,
+    // boolean | Filter grants by can_approve (optional)
+    canApprove: true,
+    // boolean | Filter grants by can_grant_permissions (optional)
+    canGrantPermissions: true,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -629,9 +637,13 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | `string` |  | [Defaults to `undefined`] |
-| **sortBy** | `GroupPermissionOrder` | Field to sort permissions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, CAPABILITY] |
+| **sortBy** | `GroupPermissionOrder` | Field to sort permissions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, CAN_READ, CAN_WRITE, CAN_DELETE, CAN_APPROVE, CAN_GRANT_PERMISSIONS] |
 | **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
-| **capability** | `PermissionCapability` | Filter to permissions with this capability | [Optional] [Defaults to `undefined`] [Enum: READ_ONLY, READ_WRITE, READ_WRITE_DELETE] |
+| **canRead** | `boolean` | Filter grants by can_read | [Optional] [Defaults to `undefined`] |
+| **canWrite** | `boolean` | Filter grants by can_write | [Optional] [Defaults to `undefined`] |
+| **canDelete** | `boolean` | Filter grants by can_delete | [Optional] [Defaults to `undefined`] |
+| **canApprove** | `boolean` | Filter grants by can_approve | [Optional] [Defaults to `undefined`] |
+| **canGrantPermissions** | `boolean` | Filter grants by can_grant_permissions | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 
@@ -731,7 +743,7 @@ This endpoint does not need any parameter.
 
 List Tenant Groups Handler
 
-List tenant groups.  Admin/owner see all groups; other members see only groups they belong to.
+List tenant groups.  Admin/owner and permission managers see all groups; other members see their own.
 
 ### Example
 
@@ -911,7 +923,7 @@ example().catch(console.error);
 
 Update Group Permission Handler
 
-Update a path permission for a group (admin/owner only).
+Update a path permission for a group (admin/owner or scoped permission manager).
 
 ### Example
 

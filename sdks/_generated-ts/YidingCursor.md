@@ -9,6 +9,7 @@ Name | Type
 ------------ | -------------
 `lastSyncedOrderTs` | Date
 `lastSyncedUserTs` | Date
+`lastSyncError` | string
 
 ## Example
 
@@ -19,6 +20,7 @@ import type { YidingCursor } from '@knowledge-stack/ksapi'
 const example = {
   "lastSyncedOrderTs": null,
   "lastSyncedUserTs": null,
+  "lastSyncError": null,
 } satisfies YidingCursor
 
 console.log(example)

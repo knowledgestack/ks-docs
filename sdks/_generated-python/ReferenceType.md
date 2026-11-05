@@ -31,6 +31,10 @@
 
 * `SKILL` (value: `'SKILL'`)
 
+* `EMAIL_THREAD` (value: `'EMAIL_THREAD'`)
+
+* `EMAIL_MESSAGE` (value: `'EMAIL_MESSAGE'`)
+
 * `IMAGE` (value: `'image'`)
 
 * `MEMORY` (value: `'memory'`)

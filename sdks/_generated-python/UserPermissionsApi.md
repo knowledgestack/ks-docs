@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 Bulk Grant User Permissions Handler
 
-Grant many (user, object, capability) permissions (admin/owner only).
+Grant many (user, object, flags) permissions (admin/owner or scoped permission manager).
 
 Each grant is applied in its own transaction, reporting a per-item outcome
 keyed on the (user_id, object_id) pair: a missing/trashed object or a user
@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 
 Bulk Revoke User Permissions Handler
 
-Revoke many permissions by their ids (admin/owner only), per item.
+Revoke many permissions by their ids (admin/owner or scoped permission manager), per item.
 
 A permission id not found in the tenant lands in ``failed`` as ``not_found``.
 
@@ -206,7 +206,7 @@ Name | Type | Description  | Notes
 
 Create User Permission Handler
 
-Create a path permission for a user in a tenant (admin/owner only).
+Create a path permission for a user in a tenant (admin/owner or scoped permission manager).
 
 ### Example
 
@@ -296,7 +296,7 @@ Name | Type | Description  | Notes
 
 Delete User Permission Handler
 
-Delete a path permission (admin/owner only).
+Delete a path permission (admin/owner or scoped permission manager).
 
 ### Example
 
@@ -378,13 +378,13 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_user_permissions**
-> PaginatedResponsePermissionResponse list_user_permissions(tenant_id, user_id, sort_by=sort_by, sort_dir=sort_dir, capability=capability, limit=limit, offset=offset)
+> PaginatedResponsePermissionResponse list_user_permissions(tenant_id, user_id, sort_by=sort_by, sort_dir=sort_dir, can_read=can_read, can_write=can_write, can_delete=can_delete, can_approve=can_approve, can_grant_permissions=can_grant_permissions, limit=limit, offset=offset)
 
 **Synchronous variant:** `list_user_permissions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 List User Permissions Handler
 
-List path permissions for a user in a tenant (admin/owner only).
+List path permissions for a user in a tenant (admin/owner or scoped permission manager).
 
 ### Example
 
@@ -394,7 +394,6 @@ List path permissions for a user in a tenant (admin/owner only).
 ```python
 import ksapi
 from ksapi.models.paginated_response_permission_response import PaginatedResponsePermissionResponse
-from ksapi.models.permission_capability import PermissionCapability
 from ksapi.models.sort_direction import SortDirection
 from ksapi.models.user_permission_order import UserPermissionOrder
 from ksapi.rest import ApiException
@@ -430,13 +429,17 @@ async with ksapi.ApiClient(configuration) as api_client:
     user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | User ID to list permissions for
     sort_by = ksapi.UserPermissionOrder() # UserPermissionOrder | Field to sort permissions by (default: CREATED_AT) (optional)
     sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
-    capability = ksapi.PermissionCapability() # PermissionCapability | Filter to a single capability level (optional)
+    can_read = True # bool | Filter grants by can_read (optional)
+    can_write = True # bool | Filter grants by can_write (optional)
+    can_delete = True # bool | Filter grants by can_delete (optional)
+    can_approve = True # bool | Filter grants by can_approve (optional)
+    can_grant_permissions = True # bool | Filter grants by can_grant_permissions (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
 
     try:
         # List User Permissions Handler
-        api_response = await api_instance.list_user_permissions(tenant_id, user_id, sort_by=sort_by, sort_dir=sort_dir, capability=capability, limit=limit, offset=offset)
+        api_response = await api_instance.list_user_permissions(tenant_id, user_id, sort_by=sort_by, sort_dir=sort_dir, can_read=can_read, can_write=can_write, can_delete=can_delete, can_approve=can_approve, can_grant_permissions=can_grant_permissions, limit=limit, offset=offset)
         print("The response of UserPermissionsApi->list_user_permissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -454,7 +457,11 @@ Name | Type | Description  | Notes
  **user_id** | **UUID**| User ID to list permissions for | 
  **sort_by** | [**UserPermissionOrder**](.md)| Field to sort permissions by (default: CREATED_AT) | [optional] 
  **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
- **capability** | [**PermissionCapability**](.md)| Filter to a single capability level | [optional] 
+ **can_read** | **bool**| Filter grants by can_read | [optional] 
+ **can_write** | **bool**| Filter grants by can_write | [optional] 
+ **can_delete** | **bool**| Filter grants by can_delete | [optional] 
+ **can_approve** | **bool**| Filter grants by can_approve | [optional] 
+ **can_grant_permissions** | **bool**| Filter grants by can_grant_permissions | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
 
@@ -488,7 +495,7 @@ Name | Type | Description  | Notes
 
 Update User Permission Handler
 
-Update a path permission (admin/owner only).
+Update a path permission (admin/owner or scoped permission manager).
 
 ### Example
 

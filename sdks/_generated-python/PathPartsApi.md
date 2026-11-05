@@ -218,15 +218,15 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **check_path_part_access**
-> AccessCheckResponse check_path_part_access(path_part_id, user_id, capability=capability)
+> AccessCheckResponse check_path_part_access(path_part_id, user_id, action=action)
 
 **Synchronous variant:** `check_path_part_access_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Check Path Part Access Handler
 
-Explain whether ``user_id`` has ``capability`` on a path part.
+Explain whether ``user_id`` has ``action`` on a path part.
 
-ADMIN/OWNER-only introspection: resolves the target user's effective
+ADMIN/OWNER or scoped-manager introspection: resolves the target user's effective
 permissions and reports the decision plus the reason (the matching
 grant path, or a role bypass). OWNER/ADMIN targets bypass path checks
 by role, so they are always allowed.
@@ -242,7 +242,7 @@ member of this tenant.
 ```python
 import ksapi
 from ksapi.models.access_check_response import AccessCheckResponse
-from ksapi.models.permission_capability import PermissionCapability
+from ksapi.models.permission_action import PermissionAction
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -274,11 +274,11 @@ async with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | The user whose access is being explained
-    capability = ksapi.PermissionCapability() # PermissionCapability | Capability to check (READ_ONLY or READ_WRITE) (optional)
+    action = ksapi.PermissionAction() # PermissionAction | Independent action to check: read, write, delete, approve, or grant_permissions (optional)
 
     try:
         # Check Path Part Access Handler
-        api_response = await api_instance.check_path_part_access(path_part_id, user_id, capability=capability)
+        api_response = await api_instance.check_path_part_access(path_part_id, user_id, action=action)
         print("The response of PathPartsApi->check_path_part_access:\n")
         pprint(api_response)
     except Exception as e:
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path_part_id** | **UUID**|  | 
  **user_id** | **UUID**| The user whose access is being explained | 
- **capability** | [**PermissionCapability**](.md)| Capability to check (READ_ONLY or READ_WRITE) | [optional] 
+ **action** | [**PermissionAction**](.md)| Independent action to check: read, write, delete, approve, or grant_permissions | [optional] 
 
 ### Return type
 

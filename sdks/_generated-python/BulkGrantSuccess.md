@@ -9,8 +9,11 @@ Name | Type | Description | Notes
 **user_id** | **UUID** |  | 
 **object_id** | **UUID** |  | 
 **permission_id** | **UUID** |  | 
-**capability** | [**PermissionCapability**](PermissionCapability.md) |  | 
+**can_read** | **bool** |  | 
+**can_write** | **bool** |  | 
+**can_delete** | **bool** |  | 
 **can_approve** | **bool** |  | 
+**can_grant_permissions** | **bool** |  | 
 
 ## Example
 

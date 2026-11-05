@@ -1,6 +1,6 @@
 # BulkGrantRequest
 
-Grant many (user, object, capability) permissions in one request.
+Grant many (user, object, flags) permissions in one request.
 
 ## Properties
 

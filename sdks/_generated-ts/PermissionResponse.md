@@ -11,8 +11,11 @@ Name | Type
 `userId` | string
 `pathPartId` | string
 `materializedPath` | string
-`capability` | [PermissionCapability](PermissionCapability.md)
+`canRead` | boolean
+`canWrite` | boolean
+`canDelete` | boolean
 `canApprove` | boolean
+`canGrantPermissions` | boolean
 `createdAt` | Date
 `updatedAt` | Date
 
@@ -28,8 +31,11 @@ const example = {
   "userId": null,
   "pathPartId": null,
   "materializedPath": null,
-  "capability": null,
+  "canRead": null,
+  "canWrite": null,
+  "canDelete": null,
   "canApprove": null,
+  "canGrantPermissions": null,
   "createdAt": null,
   "updatedAt": null,
 } satisfies PermissionResponse

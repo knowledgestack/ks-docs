@@ -1,15 +1,18 @@
 # BulkGrantItem
 
-One requested grant: a capability on an object (PDO id) for a user.
+One requested grant: permission flags on an object (PDO id) for a user.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**can_read** | **bool** | Grant read access to the target subtree. | [optional] [default to False]
+**can_write** | **bool** | Grant write access; requires can_read&#x3D;true. | [optional] [default to False]
+**can_delete** | **bool** | Grant delete access; requires can_read&#x3D;true and can_write&#x3D;true. | [optional] [default to False]
+**can_approve** | **bool** | Grant approval access; requires can_read&#x3D;true, independently of write and delete. | [optional] [default to False]
+**can_grant_permissions** | **bool** | Manage subtree permissions; requires all four content flags. | [optional] [default to False]
 **user_id** | **UUID** |  | 
 **object_id** | **UUID** |  | 
-**capability** | [**PermissionCapability**](PermissionCapability.md) |  | 
-**can_approve** | **bool** |  | [optional] [default to False]
 
 ## Example
 

@@ -22,6 +22,7 @@ Create a new API key. The full key is returned only once.
 ### Example
 
 * Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -46,6 +47,11 @@ configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with ksapi.ApiClient(configuration) as api_client:
@@ -77,7 +83,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -106,6 +112,7 @@ Delete an API key.
 ### Example
 
 * Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -128,6 +135,11 @@ configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with ksapi.ApiClient(configuration) as api_client:
@@ -157,7 +169,7 @@ void (empty response body)
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -186,6 +198,7 @@ Get a single API key by ID.
 ### Example
 
 * Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -209,6 +222,11 @@ configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with ksapi.ApiClient(configuration) as api_client:
@@ -240,7 +258,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -269,6 +287,7 @@ List all API keys for the current user.
 ### Example
 
 * Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -292,6 +311,11 @@ configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
 
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with ksapi.ApiClient(configuration) as api_client:
@@ -319,7 +343,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth)
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

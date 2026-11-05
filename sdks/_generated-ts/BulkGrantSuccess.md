@@ -10,8 +10,11 @@ Name | Type
 `userId` | string
 `objectId` | string
 `permissionId` | string
-`capability` | [PermissionCapability](PermissionCapability.md)
+`canRead` | boolean
+`canWrite` | boolean
+`canDelete` | boolean
 `canApprove` | boolean
+`canGrantPermissions` | boolean
 
 ## Example
 
@@ -23,8 +26,11 @@ const example = {
   "userId": null,
   "objectId": null,
   "permissionId": null,
-  "capability": null,
+  "canRead": null,
+  "canWrite": null,
+  "canDelete": null,
   "canApprove": null,
+  "canGrantPermissions": null,
 } satisfies BulkGrantSuccess
 
 console.log(example)

@@ -6,7 +6,7 @@ Result of an admin access-check for a target user on a path part.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**allowed** | **bool** | Whether the user has the capability | 
+**allowed** | **bool** | Whether the user has the requested action | 
 **reason** | **str** | Why access was granted or denied | 
 **matched_path** | **str** | The permission path that granted access (None if denied or role bypass) | [optional] 
 

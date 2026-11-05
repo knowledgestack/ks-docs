@@ -10,7 +10,6 @@ Name | Type
 `username` | string
 `businessId` | string
 `startDate` | Date
-`cron` | string
 `baseUrl` | string
 
 ## Example
@@ -23,7 +22,6 @@ const example = {
   "username": null,
   "businessId": null,
   "startDate": null,
-  "cron": null,
   "baseUrl": null,
 } satisfies SourceConfigSummary
 

@@ -561,7 +561,7 @@ example().catch(console.error);
 
 ## listPathPartEvents
 
-> PaginatedResponseEventResponse listPathPartEvents(pathPartId, kind, since, until, recursive, includeChurn, limit, offset)
+> PaginatedResponseEventResponse listPathPartEvents(pathPartId, kind, recursive, includeChurn, limit, offset, since, until)
 
 List Path Part Events Handler
 
@@ -591,10 +591,6 @@ async function example() {
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | Filter to a single event kind (optional)
     kind: kind_example,
-    // Date | Only events at or after this timestamp (optional)
-    since: 2013-10-20T19:20:30+01:00,
-    // Date | Only events strictly before this timestamp (optional)
-    until: 2013-10-20T19:20:30+01:00,
     // boolean | Include events from descendant path_parts as well as the subject itself (optional)
     recursive: true,
     // boolean | Include intra-document churn hidden by default (raw chunk/section edits, version-metadata updates, and the v0 version-created row). Off by default so one upload / one logical edit shows as one event; ignored when an explicit kind is set. (optional)
@@ -603,6 +599,10 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // Date | Window start (inclusive). Omit for the endpoint\'s default range. (optional)
+    since: 2013-10-20T19:20:30+01:00,
+    // Date | Window end. Omit for no explicit upper bound; see the endpoint\'s boundary semantics. (optional)
+    until: 2013-10-20T19:20:30+01:00,
   } satisfies ListPathPartEventsRequest;
 
   try {
@@ -624,12 +624,12 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **pathPartId** | `string` |  | [Defaults to `undefined`] |
 | **kind** | `string` | Filter to a single event kind | [Optional] [Defaults to `undefined`] |
-| **since** | `Date` | Only events at or after this timestamp | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Only events strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **recursive** | `boolean` | Include events from descendant path_parts as well as the subject itself | [Optional] [Defaults to `false`] |
 | **includeChurn** | `boolean` | Include intra-document churn hidden by default (raw chunk/section edits, version-metadata updates, and the v0 version-created row). Off by default so one upload / one logical edit shows as one event; ignored when an explicit kind is set. | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **since** | `Date` | Window start (inclusive). Omit for the endpoint\&#39;s default range. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end. Omit for no explicit upper bound; see the endpoint\&#39;s boundary semantics. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -657,7 +657,7 @@ example().catch(console.error);
 
 ## listPathParts
 
-> PaginatedResponsePathPartResponse listPathParts(parentPathId, maxDepth, sortOrder, sortDir, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponsePathPartResponse listPathParts(parentPathId, maxDepth, sortOrder, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, sortDir)
 
 List Path Parts Handler
 
@@ -689,8 +689,6 @@ async function example() {
     maxDepth: 56,
     // PathOrder | Sort order for results (default: LOGICAL) (optional)
     sortOrder: ...,
-    // SortDirection | Sort direction; overrides the column\'s natural default (optional)
-    sortDir: ...,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -703,6 +701,8 @@ async function example() {
     updatedAfter: 2013-10-20T19:20:30+01:00,
     // Date | Only items updated strictly before this timestamp (optional)
     updatedBefore: 2013-10-20T19:20:30+01:00,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListPathPartsRequest;
 
   try {
@@ -725,13 +725,13 @@ example().catch(console.error);
 | **parentPathId** | `string` | Parent PathPart ID (defaults to root) | [Optional] [Defaults to `undefined`] |
 | **maxDepth** | `number` | Maximum depth to traverse (1 &#x3D; direct children, default: 1) | [Optional] [Defaults to `1`] |
 | **sortOrder** | `PathOrder` | Sort order for results (default: LOGICAL) | [Optional] [Defaults to `undefined`] [Enum: LOGICAL, NAME, UPDATED_AT, CREATED_AT] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the column\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 | **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

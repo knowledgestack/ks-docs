@@ -557,7 +557,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_group_members**
-> PaginatedResponseMembershipResponse list_group_members(group_id, sort_by=sort_by, sort_dir=sort_dir, username_like=username_like, limit=limit, offset=offset)
+> PaginatedResponseMembershipResponse list_group_members(group_id, sort_by=sort_by, username_like=username_like, limit=limit, offset=offset, sort_dir=sort_dir)
 
 **Synchronous variant:** `list_group_members_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -606,14 +606,14 @@ async with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     sort_by = ksapi.GroupMemberOrder() # GroupMemberOrder | Field to sort members by (default: ADDED_AT) (optional)
-    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
     username_like = 'username_like_example' # str | Case-insensitive substring filter on member name (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction (ASC or DESC); overrides the field's natural default. Every sort field supports both directions. (optional)
 
     try:
         # List Group Members Handler
-        api_response = await api_instance.list_group_members(group_id, sort_by=sort_by, sort_dir=sort_dir, username_like=username_like, limit=limit, offset=offset)
+        api_response = await api_instance.list_group_members(group_id, sort_by=sort_by, username_like=username_like, limit=limit, offset=offset, sort_dir=sort_dir)
         print("The response of TenantGroupsApi->list_group_members:\n")
         pprint(api_response)
     except Exception as e:
@@ -629,10 +629,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **UUID**|  | 
  **sort_by** | [**GroupMemberOrder**](.md)| Field to sort members by (default: ADDED_AT) | [optional] 
- **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
  **username_like** | **str**| Case-insensitive substring filter on member name | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **sort_dir** | [**SortDirection**](.md)| Sort direction (ASC or DESC); overrides the field&#39;s natural default. Every sort field supports both directions. | [optional] 
 
 ### Return type
 
@@ -658,7 +658,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_group_permissions**
-> PaginatedResponseGroupPermissionResponse list_group_permissions(group_id, sort_by=sort_by, sort_dir=sort_dir, can_read=can_read, can_write=can_write, can_delete=can_delete, can_approve=can_approve, can_grant_permissions=can_grant_permissions, limit=limit, offset=offset)
+> PaginatedResponseGroupPermissionResponse list_group_permissions(group_id, sort_by=sort_by, can_read=can_read, can_write=can_write, can_delete=can_delete, can_approve=can_approve, can_grant_permissions=can_grant_permissions, limit=limit, offset=offset, sort_dir=sort_dir)
 
 **Synchronous variant:** `list_group_permissions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -707,7 +707,6 @@ async with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.TenantGroupsApi(api_client)
     group_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     sort_by = ksapi.GroupPermissionOrder() # GroupPermissionOrder | Field to sort permissions by (default: CREATED_AT) (optional)
-    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
     can_read = True # bool | Filter grants by can_read (optional)
     can_write = True # bool | Filter grants by can_write (optional)
     can_delete = True # bool | Filter grants by can_delete (optional)
@@ -715,10 +714,11 @@ async with ksapi.ApiClient(configuration) as api_client:
     can_grant_permissions = True # bool | Filter grants by can_grant_permissions (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction (ASC or DESC); overrides the field's natural default. Every sort field supports both directions. (optional)
 
     try:
         # List Group Permissions Handler
-        api_response = await api_instance.list_group_permissions(group_id, sort_by=sort_by, sort_dir=sort_dir, can_read=can_read, can_write=can_write, can_delete=can_delete, can_approve=can_approve, can_grant_permissions=can_grant_permissions, limit=limit, offset=offset)
+        api_response = await api_instance.list_group_permissions(group_id, sort_by=sort_by, can_read=can_read, can_write=can_write, can_delete=can_delete, can_approve=can_approve, can_grant_permissions=can_grant_permissions, limit=limit, offset=offset, sort_dir=sort_dir)
         print("The response of TenantGroupsApi->list_group_permissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -734,7 +734,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **UUID**|  | 
  **sort_by** | [**GroupPermissionOrder**](.md)| Field to sort permissions by (default: CREATED_AT) | [optional] 
- **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
  **can_read** | **bool**| Filter grants by can_read | [optional] 
  **can_write** | **bool**| Filter grants by can_write | [optional] 
  **can_delete** | **bool**| Filter grants by can_delete | [optional] 
@@ -742,6 +741,7 @@ Name | Type | Description  | Notes
  **can_grant_permissions** | **bool**| Filter grants by can_grant_permissions | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **sort_dir** | [**SortDirection**](.md)| Sort direction (ASC or DESC); overrides the field&#39;s natural default. Every sort field supports both directions. | [optional] 
 
 ### Return type
 
@@ -851,7 +851,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_tenant_groups**
-> PaginatedResponseGroupResponse list_tenant_groups(sort_by=sort_by, sort_dir=sort_dir, name_like=name_like, has_user_ids=has_user_ids, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+> PaginatedResponseGroupResponse list_tenant_groups(sort_by=sort_by, name_like=name_like, has_user_ids=has_user_ids, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, sort_dir=sort_dir)
 
 **Synchronous variant:** `list_tenant_groups_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -901,7 +901,6 @@ async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.TenantGroupsApi(api_client)
     sort_by = ksapi.TenantGroupOrder() # TenantGroupOrder | Field to sort groups by (default: NAME) (optional)
-    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
     name_like = 'name_like_example' # str | Case-insensitive substring filter on name (optional)
     has_user_ids = None # List[UUID] | Only groups containing ALL of these user ids (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
@@ -910,10 +909,11 @@ async with ksapi.ApiClient(configuration) as api_client:
     created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
     updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
     updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction (ASC or DESC); overrides the field's natural default. Every sort field supports both directions. (optional)
 
     try:
         # List Tenant Groups Handler
-        api_response = await api_instance.list_tenant_groups(sort_by=sort_by, sort_dir=sort_dir, name_like=name_like, has_user_ids=has_user_ids, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_tenant_groups(sort_by=sort_by, name_like=name_like, has_user_ids=has_user_ids, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, sort_dir=sort_dir)
         print("The response of TenantGroupsApi->list_tenant_groups:\n")
         pprint(api_response)
     except Exception as e:
@@ -928,7 +928,6 @@ async with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **sort_by** | [**TenantGroupOrder**](.md)| Field to sort groups by (default: NAME) | [optional] 
- **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
  **name_like** | **str**| Case-insensitive substring filter on name | [optional] 
  **has_user_ids** | [**List[UUID]**](UUID.md)| Only groups containing ALL of these user ids | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
@@ -937,6 +936,7 @@ Name | Type | Description  | Notes
  **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
  **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
  **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction (ASC or DESC); overrides the field&#39;s natural default. Every sort field supports both directions. | [optional] 
 
 ### Return type
 

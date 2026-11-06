@@ -321,7 +321,7 @@ example().catch(console.error);
 
 ## listFolderContents
 
-> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat listFolderContents(folderId, maxDepth, sortOrder, sortDir, ownerId, nameLike, withTags, limit, offset, approvalState, includeTagIds, excludeTagIds, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat listFolderContents(folderId, maxDepth, sortOrder, ownerId, nameLike, withTags, limit, offset, approvalState, includeTagIds, excludeTagIds, createdAfter, createdBefore, updatedAfter, updatedBefore, sortDir)
 
 List Folder Contents Handler
 
@@ -353,8 +353,6 @@ async function example() {
     maxDepth: 56,
     // ContentsSortOrder | Sort order for results (default: LOGICAL) (optional)
     sortOrder: ...,
-    // SortDirection | Sort direction; overrides the column\'s natural default (optional)
-    sortDir: ...,
     // string | Filter to items owned by this user (optional)
     ownerId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | Case-insensitive substring filter on the item name (optional)
@@ -379,6 +377,8 @@ async function example() {
     updatedAfter: 2013-10-20T19:20:30+01:00,
     // Date | Only items updated strictly before this timestamp (optional)
     updatedBefore: 2013-10-20T19:20:30+01:00,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListFolderContentsRequest;
 
   try {
@@ -401,7 +401,6 @@ example().catch(console.error);
 | **folderId** | `string` |  | [Defaults to `undefined`] |
 | **maxDepth** | `number` | Maximum depth to traverse (1&#x3D;direct children, default: 1) | [Optional] [Defaults to `1`] |
 | **sortOrder** | `ContentsSortOrder` | Sort order for results (default: LOGICAL) | [Optional] [Defaults to `undefined`] [Enum: LOGICAL, NAME, UPDATED_AT, CREATED_AT, STATUS, OWNER, TAGS] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the column\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **ownerId** | `string` | Filter to items owned by this user | [Optional] [Defaults to `undefined`] |
 | **nameLike** | `string` | Case-insensitive substring filter on the item name | [Optional] [Defaults to `undefined`] |
 | **withTags** | `boolean` | Include tag IDs for each item (default: false) | [Optional] [Defaults to `false`] |
@@ -414,6 +413,7 @@ example().catch(console.error);
 | **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 
@@ -441,7 +441,7 @@ example().catch(console.error);
 
 ## listFolders
 
-> PaginatedResponseFolderResponse listFolders(parentPathPartId, sortOrder, sortDir, ownerId, withTags, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseFolderResponse listFolders(parentPathPartId, sortOrder, ownerId, withTags, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, sortDir)
 
 List Folders Handler
 
@@ -471,8 +471,6 @@ async function example() {
     parentPathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // PathOrder | Sort order for results (default: LOGICAL) (optional)
     sortOrder: ...,
-    // SortDirection | Sort direction; overrides the column\'s natural default (optional)
-    sortDir: ...,
     // string | Filter to folders owned by this user (optional)
     ownerId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // boolean | Include tags in the response (default: false) (optional)
@@ -489,6 +487,8 @@ async function example() {
     updatedAfter: 2013-10-20T19:20:30+01:00,
     // Date | Only items updated strictly before this timestamp (optional)
     updatedBefore: 2013-10-20T19:20:30+01:00,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListFoldersRequest;
 
   try {
@@ -510,7 +510,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **parentPathPartId** | `string` | Parent PathPart ID (defaults to root) | [Optional] [Defaults to `undefined`] |
 | **sortOrder** | `PathOrder` | Sort order for results (default: LOGICAL) | [Optional] [Defaults to `undefined`] [Enum: LOGICAL, NAME, UPDATED_AT, CREATED_AT] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the column\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **ownerId** | `string` | Filter to folders owned by this user | [Optional] [Defaults to `undefined`] |
 | **withTags** | `boolean` | Include tags in the response (default: false) | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
@@ -519,6 +518,7 @@ example().catch(console.error);
 | **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

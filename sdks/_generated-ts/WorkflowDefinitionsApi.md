@@ -408,7 +408,7 @@ example().catch(console.error);
 
 ## listWorkflowDefinitions
 
-> PaginatedResponseWorkflowDefinitionResponse listWorkflowDefinitions(mine, search, sortBy, sortDir, isTemplate, needsApproval, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, includeTagIds, excludeTagIds)
+> PaginatedResponseWorkflowDefinitionResponse listWorkflowDefinitions(mine, search, sortBy, isTemplate, needsApproval, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, includeTagIds, excludeTagIds, sortDir)
 
 List Workflow Definitions Handler
 
@@ -438,8 +438,6 @@ async function example() {
     search: search_example,
     // WorkflowDefinitionOrder | Field to sort definitions by (default: CREATED_AT) (optional)
     sortBy: ...,
-    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
-    sortDir: ...,
     // boolean (optional)
     isTemplate: true,
     // boolean | Only definitions with a run awaiting approval. (optional)
@@ -460,6 +458,8 @@ async function example() {
     includeTagIds: ...,
     // Array<string> | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. (optional)
     excludeTagIds: ...,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListWorkflowDefinitionsRequest;
 
   try {
@@ -482,7 +482,6 @@ example().catch(console.error);
 | **mine** | `boolean` | Only definitions the caller created (owner). | [Optional] [Defaults to `false`] |
 | **search** | `string` | Case-insensitive substring over name and description. | [Optional] [Defaults to `undefined`] |
 | **sortBy** | `WorkflowDefinitionOrder` | Field to sort definitions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, UPDATED_AT, NAME] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **isTemplate** | `boolean` |  | [Optional] [Defaults to `false`] |
 | **needsApproval** | `boolean` | Only definitions with a run awaiting approval. | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
@@ -493,6 +492,7 @@ example().catch(console.error);
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **includeTagIds** | `Array<string>` | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). | [Optional] |
 | **excludeTagIds** | `Array<string>` | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. | [Optional] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 
@@ -520,7 +520,7 @@ example().catch(console.error);
 
 ## listWorkflowRuns
 
-> PaginatedResponseWorkflowRunResponse listWorkflowRuns(definitionId, sortBy, sortDir, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseWorkflowRunResponse listWorkflowRuns(definitionId, sortBy, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, sortDir)
 
 List Workflow Runs Handler
 
@@ -548,8 +548,6 @@ async function example() {
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // WorkflowRunOrder | Field to sort runs by (default: STARTED_AT) (optional)
     sortBy: ...,
-    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
-    sortDir: ...,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -562,6 +560,8 @@ async function example() {
     updatedAfter: 2013-10-20T19:20:30+01:00,
     // Date | Only items updated strictly before this timestamp (optional)
     updatedBefore: 2013-10-20T19:20:30+01:00,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListWorkflowRunsRequest;
 
   try {
@@ -583,13 +583,13 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **definitionId** | `string` |  | [Defaults to `undefined`] |
 | **sortBy** | `WorkflowRunOrder` | Field to sort runs by (default: STARTED_AT) | [Optional] [Defaults to `undefined`] [Enum: STARTED_AT, CREATED_AT, COMPLETED_AT] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 | **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

@@ -720,7 +720,7 @@ example().catch(console.error);
 
 ## listDocumentVersions
 
-> PaginatedResponseDocumentVersionResponse listDocumentVersions(documentId, sortBy, sortDir, uploaderUserId, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseDocumentVersionResponse listDocumentVersions(documentId, sortBy, uploaderUserId, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, sortDir)
 
 List Document Versions Handler
 
@@ -750,8 +750,6 @@ async function example() {
     documentId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // DocumentVersionOrder | Field to sort versions by (default: VERSION) (optional)
     sortBy: ...,
-    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
-    sortDir: ...,
     // string | Filter to versions created by this user (optional)
     uploaderUserId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // number | Number of items per page (optional)
@@ -766,6 +764,8 @@ async function example() {
     updatedAfter: 2013-10-20T19:20:30+01:00,
     // Date | Only items updated strictly before this timestamp (optional)
     updatedBefore: 2013-10-20T19:20:30+01:00,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListDocumentVersionsRequest;
 
   try {
@@ -787,7 +787,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **documentId** | `string` | Document ID to list versions for | [Defaults to `undefined`] |
 | **sortBy** | `DocumentVersionOrder` | Field to sort versions by (default: VERSION) | [Optional] [Defaults to `undefined`] [Enum: VERSION, CREATED_AT] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **uploaderUserId** | `string` | Filter to versions created by this user | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
@@ -795,6 +794,7 @@ example().catch(console.error);
 | **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

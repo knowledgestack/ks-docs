@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **export_audit_events**
-> bytes export_audit_events(actor_user_id=actor_user_id, kind=kind, since=since, until=until, subject_path_part_id=subject_path_part_id, recursive=recursive)
+> bytes export_audit_events(actor_user_id=actor_user_id, kind=kind, subject_path_part_id=subject_path_part_id, recursive=recursive, since=since, until=until)
 
 **Synchronous variant:** `export_audit_events_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -62,14 +62,14 @@ async with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.AuditEventsApi(api_client)
     actor_user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter to one actor (optional)
     kind = 'kind_example' # str | Filter to one event kind (optional)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Only events at or after this timestamp (from). Omit to export the entire audit log. Must not be in the future or after `until`. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. (optional)
     subject_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope to one document/folder/run subject (optional)
     recursive = False # bool | Include the subject's descendants (needs subject) (optional) (default to False)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Omit for the endpoint's default range. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. Omit for no explicit upper bound; see the endpoint's boundary semantics. (optional)
 
     try:
         # Export Audit Events Handler
-        api_response = await api_instance.export_audit_events(actor_user_id=actor_user_id, kind=kind, since=since, until=until, subject_path_part_id=subject_path_part_id, recursive=recursive)
+        api_response = await api_instance.export_audit_events(actor_user_id=actor_user_id, kind=kind, subject_path_part_id=subject_path_part_id, recursive=recursive, since=since, until=until)
         print("The response of AuditEventsApi->export_audit_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -85,10 +85,10 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **actor_user_id** | **UUID**| Filter to one actor | [optional] 
  **kind** | **str**| Filter to one event kind | [optional] 
- **since** | **datetime**| Only events at or after this timestamp (from). Omit to export the entire audit log. Must not be in the future or after &#x60;until&#x60;. | [optional] 
- **until** | **datetime**| Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. | [optional] 
  **subject_path_part_id** | **UUID**| Scope to one document/folder/run subject | [optional] 
  **recursive** | **bool**| Include the subject&#39;s descendants (needs subject) | [optional] [default to False]
+ **since** | **datetime**| Window start (inclusive). Omit for the endpoint&#39;s default range. | [optional] 
+ **until** | **datetime**| Window end. Omit for no explicit upper bound; see the endpoint&#39;s boundary semantics. | [optional] 
 
 ### Return type
 
@@ -114,7 +114,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_audit_events**
-> PaginatedResponseEventResponse list_audit_events(actor_user_id=actor_user_id, kind=kind, since=since, until=until, subject_path_part_id=subject_path_part_id, recursive=recursive, sort_dir=sort_dir, limit=limit, offset=offset)
+> PaginatedResponseEventResponse list_audit_events(actor_user_id=actor_user_id, kind=kind, subject_path_part_id=subject_path_part_id, recursive=recursive, limit=limit, offset=offset, sort_dir=sort_dir, since=since, until=until)
 
 **Synchronous variant:** `list_audit_events_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -167,17 +167,17 @@ async with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.AuditEventsApi(api_client)
     actor_user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter to one actor (optional)
     kind = 'kind_example' # str | Filter to one event kind (optional)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Only events at or after this timestamp (from). Omit for no lower bound. Must not be in the future or after `until`. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. (optional)
     subject_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope to one document/folder/run subject (optional)
     recursive = False # bool | Include the subject's descendants (needs subject) (optional) (default to False)
-    sort_dir = ksapi.SortDirection() # SortDirection | Sort by timestamp (default: DESC, newest first) (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction (ASC or DESC); overrides the field's natural default. Every sort field supports both directions. (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Omit for the endpoint's default range. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. Omit for no explicit upper bound; see the endpoint's boundary semantics. (optional)
 
     try:
         # List Audit Events Handler
-        api_response = await api_instance.list_audit_events(actor_user_id=actor_user_id, kind=kind, since=since, until=until, subject_path_part_id=subject_path_part_id, recursive=recursive, sort_dir=sort_dir, limit=limit, offset=offset)
+        api_response = await api_instance.list_audit_events(actor_user_id=actor_user_id, kind=kind, subject_path_part_id=subject_path_part_id, recursive=recursive, limit=limit, offset=offset, sort_dir=sort_dir, since=since, until=until)
         print("The response of AuditEventsApi->list_audit_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -193,13 +193,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **actor_user_id** | **UUID**| Filter to one actor | [optional] 
  **kind** | **str**| Filter to one event kind | [optional] 
- **since** | **datetime**| Only events at or after this timestamp (from). Omit for no lower bound. Must not be in the future or after &#x60;until&#x60;. | [optional] 
- **until** | **datetime**| Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. | [optional] 
  **subject_path_part_id** | **UUID**| Scope to one document/folder/run subject | [optional] 
  **recursive** | **bool**| Include the subject&#39;s descendants (needs subject) | [optional] [default to False]
- **sort_dir** | [**SortDirection**](.md)| Sort by timestamp (default: DESC, newest first) | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **sort_dir** | [**SortDirection**](.md)| Sort direction (ASC or DESC); overrides the field&#39;s natural default. Every sort field supports both directions. | [optional] 
+ **since** | **datetime**| Window start (inclusive). Omit for the endpoint&#39;s default range. | [optional] 
+ **until** | **datetime**| Window end. Omit for no explicit upper bound; see the endpoint&#39;s boundary semantics. | [optional] 
 
 ### Return type
 

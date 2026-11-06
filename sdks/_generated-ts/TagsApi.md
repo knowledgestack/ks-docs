@@ -239,7 +239,7 @@ example().catch(console.error);
 
 ## listTags
 
-> PaginatedResponseTagResponse listTags(sortBy, sortDir, nameLike, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseTagResponse listTags(sortBy, nameLike, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, sortDir)
 
 List Tags Handler
 
@@ -267,8 +267,6 @@ async function example() {
   const body = {
     // TagOrder | Field to sort tags by (default: NAME) (optional)
     sortBy: ...,
-    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
-    sortDir: ...,
     // string | Case-insensitive substring filter on name (optional)
     nameLike: nameLike_example,
     // number | Number of items per page (optional)
@@ -283,6 +281,8 @@ async function example() {
     updatedAfter: 2013-10-20T19:20:30+01:00,
     // Date | Only items updated strictly before this timestamp (optional)
     updatedBefore: 2013-10-20T19:20:30+01:00,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListTagsRequest;
 
   try {
@@ -303,7 +303,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **sortBy** | `TagOrder` | Field to sort tags by (default: NAME) | [Optional] [Defaults to `undefined`] [Enum: NAME, CREATED_AT] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **nameLike** | `string` | Case-insensitive substring filter on name | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
@@ -311,6 +310,7 @@ example().catch(console.error);
 | **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

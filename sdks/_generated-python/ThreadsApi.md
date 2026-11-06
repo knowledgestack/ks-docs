@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_threads**
-> PaginatedResponseThreadResponse list_threads(parent_path_part_id=parent_path_part_id, sort_by=sort_by, sort_dir=sort_dir, title_like=title_like, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+> PaginatedResponseThreadResponse list_threads(parent_path_part_id=parent_path_part_id, sort_by=sort_by, title_like=title_like, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, sort_dir=sort_dir)
 
 **Synchronous variant:** `list_threads_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -342,7 +342,6 @@ async with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.ThreadsApi(api_client)
     parent_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent PathPart ID. Omit to list user's conversation threads. (optional)
     sort_by = ksapi.ThreadOrder() # ThreadOrder | Field to sort threads by (default: CREATED_AT) (optional)
-    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
     title_like = 'title_like_example' # str | Case-insensitive substring filter on title (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
@@ -350,10 +349,11 @@ async with ksapi.ApiClient(configuration) as api_client:
     created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
     updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
     updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction (ASC or DESC); overrides the field's natural default. Every sort field supports both directions. (optional)
 
     try:
         # List Threads Handler
-        api_response = await api_instance.list_threads(parent_path_part_id=parent_path_part_id, sort_by=sort_by, sort_dir=sort_dir, title_like=title_like, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_threads(parent_path_part_id=parent_path_part_id, sort_by=sort_by, title_like=title_like, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, sort_dir=sort_dir)
         print("The response of ThreadsApi->list_threads:\n")
         pprint(api_response)
     except Exception as e:
@@ -369,7 +369,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **parent_path_part_id** | **UUID**| Parent PathPart ID. Omit to list user&#39;s conversation threads. | [optional] 
  **sort_by** | [**ThreadOrder**](.md)| Field to sort threads by (default: CREATED_AT) | [optional] 
- **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
  **title_like** | **str**| Case-insensitive substring filter on title | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
@@ -377,6 +376,7 @@ Name | Type | Description  | Notes
  **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
  **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
  **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction (ASC or DESC); overrides the field&#39;s natural default. Every sort field supports both directions. | [optional] 
 
 ### Return type
 

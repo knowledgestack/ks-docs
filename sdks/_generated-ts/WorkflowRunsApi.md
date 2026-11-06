@@ -245,7 +245,7 @@ example().catch(console.error);
 
 ## getWorkflowRunsSummary
 
-> WorkflowRunSummaryResponse getWorkflowRunsSummary(since, until, definitionId)
+> WorkflowRunSummaryResponse getWorkflowRunsSummary(definitionId, since, until)
 
 Get Workflow Runs Summary Handler
 
@@ -271,12 +271,12 @@ async function example() {
   const api = new WorkflowRunsApi(config);
 
   const body = {
-    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
-    since: 2013-10-20T19:20:30+01:00,
-    // Date | Window end (inclusive). Defaults to open-ended. (optional)
-    until: 2013-10-20T19:20:30+01:00,
     // string | Scope all numbers to one workflow (requires read). (optional)
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // Date | Window start (inclusive). Omit for the endpoint\'s default range. (optional)
+    since: 2013-10-20T19:20:30+01:00,
+    // Date | Window end. Omit for no explicit upper bound; see the endpoint\'s boundary semantics. (optional)
+    until: 2013-10-20T19:20:30+01:00,
   } satisfies GetWorkflowRunsSummaryRequest;
 
   try {
@@ -296,9 +296,9 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Window end (inclusive). Defaults to open-ended. | [Optional] [Defaults to `undefined`] |
 | **definitionId** | `string` | Scope all numbers to one workflow (requires read). | [Optional] [Defaults to `undefined`] |
+| **since** | `Date` | Window start (inclusive). Omit for the endpoint\&#39;s default range. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end. Omit for no explicit upper bound; see the endpoint\&#39;s boundary semantics. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -326,7 +326,7 @@ example().catch(console.error);
 
 ## listWorkflowRunsForTenant
 
-> PaginatedResponseWorkflowRunResponse listWorkflowRunsForTenant(state, mine, approvableByMe, definitionId, ownerId, sortBy, sortDir, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, approvalState, includeTagIds, excludeTagIds)
+> PaginatedResponseWorkflowRunResponse listWorkflowRunsForTenant(state, mine, approvableByMe, definitionId, ownerId, sortBy, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, approvalState, includeTagIds, excludeTagIds, sortDir)
 
 List Workflow Runs For Tenant Handler
 
@@ -364,8 +364,6 @@ async function example() {
     ownerId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // WorkflowRunOrder | Field to sort runs by (default: STARTED_AT) (optional)
     sortBy: ...,
-    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
-    sortDir: ...,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -384,6 +382,8 @@ async function example() {
     includeTagIds: ...,
     // Array<string> | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. (optional)
     excludeTagIds: ...,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListWorkflowRunsForTenantRequest;
 
   try {
@@ -409,7 +409,6 @@ example().catch(console.error);
 | **definitionId** | `string` | Only runs under this workflow definition. | [Optional] [Defaults to `undefined`] |
 | **ownerId** | `string` | Only runs created by this user. | [Optional] [Defaults to `undefined`] |
 | **sortBy** | `WorkflowRunOrder` | Field to sort runs by (default: STARTED_AT) | [Optional] [Defaults to `undefined`] [Enum: STARTED_AT, CREATED_AT, COMPLETED_AT] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 | **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
@@ -419,6 +418,7 @@ example().catch(console.error);
 | **approvalState** | `Array<PathPartApprovalState>` | Keep only items in these approval states (repeatable): not_required, pending, approved. | [Optional] |
 | **includeTagIds** | `Array<string>` | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). | [Optional] |
 | **excludeTagIds** | `Array<string>` | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. | [Optional] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

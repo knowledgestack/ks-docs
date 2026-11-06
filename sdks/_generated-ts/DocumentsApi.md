@@ -912,7 +912,7 @@ example().catch(console.error);
 
 ## listDocuments
 
-> PaginatedResponseDocumentResponse listDocuments(parentPathPartId, sortOrder, sortDir, ownerId, documentType, durationMinMs, durationMaxMs, withTags, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseDocumentResponse listDocuments(parentPathPartId, sortOrder, ownerId, documentType, durationMinMs, durationMaxMs, withTags, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, sortDir)
 
 List Documents Handler
 
@@ -942,8 +942,6 @@ async function example() {
     parentPathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // PathOrder | Sort order for results (default: LOGICAL) (optional)
     sortOrder: ...,
-    // SortDirection | Sort direction; overrides the column\'s natural default (optional)
-    sortDir: ...,
     // string | Filter to documents owned by this user (optional)
     ownerId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // DocumentType | Filter to documents of this type (optional)
@@ -966,6 +964,8 @@ async function example() {
     updatedAfter: 2013-10-20T19:20:30+01:00,
     // Date | Only items updated strictly before this timestamp (optional)
     updatedBefore: 2013-10-20T19:20:30+01:00,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListDocumentsRequest;
 
   try {
@@ -987,7 +987,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **parentPathPartId** | `string` | Parent PathPart ID (defaults to root) | [Optional] [Defaults to `undefined`] |
 | **sortOrder** | `PathOrder` | Sort order for results (default: LOGICAL) | [Optional] [Defaults to `undefined`] [Enum: LOGICAL, NAME, UPDATED_AT, CREATED_AT] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the column\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **ownerId** | `string` | Filter to documents owned by this user | [Optional] [Defaults to `undefined`] |
 | **documentType** | `DocumentType` | Filter to documents of this type | [Optional] [Defaults to `undefined`] [Enum: PDF, DOCX, PLAINTEXT, IMAGE, XLSX, CSV, PPTX, JSON, YAML, CODE, AUDIO, VIDEO, EMAIL, UNKNOWN] |
 | **durationMinMs** | `number` | Only media whose active version is at least this long (milliseconds). Non-media documents have no duration and are excluded. | [Optional] [Defaults to `undefined`] |
@@ -999,6 +998,7 @@ example().catch(console.error);
 | **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

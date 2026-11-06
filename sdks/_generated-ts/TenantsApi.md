@@ -558,7 +558,7 @@ example().catch(console.error);
 
 ## listTenantUsers
 
-> PaginatedResponseTenantUserResponse listTenantUsers(tenantId, sortBy, sortDir, role, usernameLike, activeOnly, limit, offset)
+> PaginatedResponseTenantUserResponse listTenantUsers(tenantId, sortBy, role, usernameLike, activeOnly, limit, offset, sortDir)
 
 List Tenant Users
 
@@ -588,8 +588,6 @@ async function example() {
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // TenantUserOrder | Field to sort members by (default: active-first) (optional)
     sortBy: ...,
-    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
-    sortDir: ...,
     // TenantUserRole | Filter to members with this role (optional)
     role: ...,
     // string | Case-insensitive substring filter on first/last name (optional)
@@ -600,6 +598,8 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListTenantUsersRequest;
 
   try {
@@ -621,12 +621,12 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
 | **sortBy** | `TenantUserOrder` | Field to sort members by (default: active-first) | [Optional] [Defaults to `undefined`] [Enum: ADDED_AT, USERNAME, ROLE] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **role** | `TenantUserRole` | Filter to members with this role | [Optional] [Defaults to `undefined`] [Enum: USER, OWNER, ADMIN] |
 | **usernameLike** | `string` | Case-insensitive substring filter on first/last name | [Optional] [Defaults to `undefined`] |
 | **activeOnly** | `boolean` | Exclude deactivated members | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

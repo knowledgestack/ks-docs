@@ -1098,7 +1098,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_documents**
-> PaginatedResponseDocumentResponse list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, document_type=document_type, duration_min_ms=duration_min_ms, duration_max_ms=duration_max_ms, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+> PaginatedResponseDocumentResponse list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, owner_id=owner_id, document_type=document_type, duration_min_ms=duration_min_ms, duration_max_ms=duration_max_ms, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, sort_dir=sort_dir)
 
 **Synchronous variant:** `list_documents_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -1151,7 +1151,6 @@ async with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.DocumentsApi(api_client)
     parent_path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent PathPart ID (defaults to root) (optional)
     sort_order = ksapi.PathOrder() # PathOrder | Sort order for results (default: LOGICAL) (optional)
-    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the column's natural default (optional)
     owner_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Filter to documents owned by this user (optional)
     document_type = ksapi.DocumentType() # DocumentType | Filter to documents of this type (optional)
     duration_min_ms = 56 # int | Only media whose active version is at least this long (milliseconds). Non-media documents have no duration and are excluded. (optional)
@@ -1163,10 +1162,11 @@ async with ksapi.ApiClient(configuration) as api_client:
     created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
     updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
     updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction (ASC or DESC); overrides the field's natural default. Every sort field supports both directions. (optional)
 
     try:
         # List Documents Handler
-        api_response = await api_instance.list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, sort_dir=sort_dir, owner_id=owner_id, document_type=document_type, duration_min_ms=duration_min_ms, duration_max_ms=duration_max_ms, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_documents(parent_path_part_id=parent_path_part_id, sort_order=sort_order, owner_id=owner_id, document_type=document_type, duration_min_ms=duration_min_ms, duration_max_ms=duration_max_ms, with_tags=with_tags, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, sort_dir=sort_dir)
         print("The response of DocumentsApi->list_documents:\n")
         pprint(api_response)
     except Exception as e:
@@ -1182,7 +1182,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **parent_path_part_id** | **UUID**| Parent PathPart ID (defaults to root) | [optional] 
  **sort_order** | [**PathOrder**](.md)| Sort order for results (default: LOGICAL) | [optional] 
- **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the column&#39;s natural default | [optional] 
  **owner_id** | **UUID**| Filter to documents owned by this user | [optional] 
  **document_type** | [**DocumentType**](.md)| Filter to documents of this type | [optional] 
  **duration_min_ms** | **int**| Only media whose active version is at least this long (milliseconds). Non-media documents have no duration and are excluded. | [optional] 
@@ -1194,6 +1193,7 @@ Name | Type | Description  | Notes
  **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
  **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
  **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction (ASC or DESC); overrides the field&#39;s natural default. Every sort field supports both directions. | [optional] 
 
 ### Return type
 

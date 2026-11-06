@@ -238,11 +238,11 @@ No authorization required
 
 ## fanweiDirectorySync
 
-> DirectorySyncResponse fanweiDirectorySync(tenantId, authorization, ksUat)
+> DirectorySyncResponse fanweiDirectorySync(tenantId)
 
 Directory Sync Handler
 
-Trigger directory synchronization for a FanWei E9 tenant.  Accepts either: - A logged-in OWNER/ADMIN user (via UAT cookie) - An admin API key (via Authorization: Bearer header)
+Trigger directory sync as an authenticated OWNER/ADMIN of this tenant.
 
 ### Example
 
@@ -255,15 +255,17 @@ import type { FanweiDirectorySyncRequest } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new AuthApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new AuthApi(config);
 
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies FanweiDirectorySyncRequest;
 
   try {
@@ -284,8 +286,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -293,7 +293,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -313,11 +313,11 @@ No authorization required
 
 ## fanweiDirectorySync_0
 
-> DirectorySyncResponse fanweiDirectorySync_0(tenantId, authorization, ksUat)
+> DirectorySyncResponse fanweiDirectorySync_0(tenantId)
 
 Directory Sync Handler
 
-Trigger directory synchronization for a FanWei E9 tenant.  Accepts either: - A logged-in OWNER/ADMIN user (via UAT cookie) - An admin API key (via Authorization: Bearer header)
+Trigger directory sync as an authenticated OWNER/ADMIN of this tenant.
 
 ### Example
 
@@ -330,15 +330,17 @@ import type { FanweiDirectorySync0Request } from '@knowledge-stack/ksapi';
 
 async function example() {
   console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
-  const api = new AuthApi();
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new AuthApi(config);
 
   const body = {
     // string
     tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // string (optional)
-    authorization: authorization_example,
-    // string (optional)
-    ksUat: ksUat_example,
   } satisfies FanweiDirectorySync0Request;
 
   try {
@@ -359,8 +361,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **tenantId** | `string` |  | [Defaults to `undefined`] |
-| **authorization** | `string` |  | [Optional] [Defaults to `undefined`] |
-| **ksUat** | `string` |  | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -368,7 +368,7 @@ example().catch(console.error);
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

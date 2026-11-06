@@ -44,9 +44,9 @@ async function example() {
     timezone: timezone_example,
     // string | Scope to one workflow. (optional)
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
+    // Date | Window start (inclusive). Omit for the endpoint\'s default range. (optional)
     since: 2013-10-20T19:20:30+01:00,
-    // Date | Window end (inclusive). (optional)
+    // Date | Window end. Omit for no explicit upper bound; see the endpoint\'s boundary semantics. (optional)
     until: 2013-10-20T19:20:30+01:00,
   } satisfies GetAdminWorkflowByHourRequest;
 
@@ -69,8 +69,8 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **timezone** | `string` | IANA tz override; defaults to tenant setting. | [Optional] [Defaults to `undefined`] |
 | **definitionId** | `string` | Scope to one workflow. | [Optional] [Defaults to `undefined`] |
-| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Window end (inclusive). | [Optional] [Defaults to `undefined`] |
+| **since** | `Date` | Window start (inclusive). Omit for the endpoint\&#39;s default range. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end. Omit for no explicit upper bound; see the endpoint\&#39;s boundary semantics. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -126,9 +126,9 @@ async function example() {
   const body = {
     // number | Top-N per leaderboard. (optional)
     limit: 56,
-    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
+    // Date | Window start (inclusive). Omit for the endpoint\'s default range. (optional)
     since: 2013-10-20T19:20:30+01:00,
-    // Date | Window end (inclusive). (optional)
+    // Date | Window end. Omit for no explicit upper bound; see the endpoint\'s boundary semantics. (optional)
     until: 2013-10-20T19:20:30+01:00,
   } satisfies GetAdminWorkflowLeaderboardRequest;
 
@@ -150,8 +150,8 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **limit** | `number` | Top-N per leaderboard. | [Optional] [Defaults to `10`] |
-| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Window end (inclusive). | [Optional] [Defaults to `undefined`] |
+| **since** | `Date` | Window start (inclusive). Omit for the endpoint\&#39;s default range. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end. Omit for no explicit upper bound; see the endpoint\&#39;s boundary semantics. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -205,9 +205,9 @@ async function example() {
   const api = new AdminWorkflowsApi(config);
 
   const body = {
-    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
+    // Date | Window start (inclusive). Omit for the endpoint\'s default range. (optional)
     since: 2013-10-20T19:20:30+01:00,
-    // Date | Window end (inclusive). (optional)
+    // Date | Window end. Omit for no explicit upper bound; see the endpoint\'s boundary semantics. (optional)
     until: 2013-10-20T19:20:30+01:00,
   } satisfies GetAdminWorkflowOutputStatsRequest;
 
@@ -228,8 +228,8 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Window end (inclusive). | [Optional] [Defaults to `undefined`] |
+| **since** | `Date` | Window start (inclusive). Omit for the endpoint\&#39;s default range. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end. Omit for no explicit upper bound; see the endpoint\&#39;s boundary semantics. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -285,9 +285,9 @@ async function example() {
   const body = {
     // string | Scope all numbers to one workflow. (optional)
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
+    // Date | Window start (inclusive). Omit for the endpoint\'s default range. (optional)
     since: 2013-10-20T19:20:30+01:00,
-    // Date | Window end (inclusive). (optional)
+    // Date | Window end. Omit for no explicit upper bound; see the endpoint\'s boundary semantics. (optional)
     until: 2013-10-20T19:20:30+01:00,
   } satisfies GetAdminWorkflowSummaryRequest;
 
@@ -309,8 +309,8 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **definitionId** | `string` | Scope all numbers to one workflow. | [Optional] [Defaults to `undefined`] |
-| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Window end (inclusive). | [Optional] [Defaults to `undefined`] |
+| **since** | `Date` | Window start (inclusive). Omit for the endpoint\&#39;s default range. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end. Omit for no explicit upper bound; see the endpoint\&#39;s boundary semantics. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -338,7 +338,7 @@ example().catch(console.error);
 
 ## getAdminWorkflowTimeseries
 
-> RunTimeseriesResponse getAdminWorkflowTimeseries(timezone, definitionId, since, until, bucket)
+> RunTimeseriesResponse getAdminWorkflowTimeseries(timezone, definitionId, bucket, since, until)
 
 Get Admin Workflow Timeseries Handler
 
@@ -368,12 +368,12 @@ async function example() {
     timezone: timezone_example,
     // string | Scope to one workflow. (optional)
     definitionId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
-    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
-    since: 2013-10-20T19:20:30+01:00,
-    // Date | Window end (inclusive). (optional)
-    until: 2013-10-20T19:20:30+01:00,
     // TimeBucket | Bucket size. (optional)
     bucket: ...,
+    // Date | Window start (inclusive). Omit for the endpoint\'s default range. (optional)
+    since: 2013-10-20T19:20:30+01:00,
+    // Date | Window end. Omit for no explicit upper bound; see the endpoint\'s boundary semantics. (optional)
+    until: 2013-10-20T19:20:30+01:00,
   } satisfies GetAdminWorkflowTimeseriesRequest;
 
   try {
@@ -395,9 +395,9 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **timezone** | `string` | IANA tz override; defaults to tenant setting. | [Optional] [Defaults to `undefined`] |
 | **definitionId** | `string` | Scope to one workflow. | [Optional] [Defaults to `undefined`] |
-| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Window end (inclusive). | [Optional] [Defaults to `undefined`] |
 | **bucket** | `TimeBucket` | Bucket size. | [Optional] [Defaults to `undefined`] [Enum: hour, day, week, month] |
+| **since** | `Date` | Window start (inclusive). Omit for the endpoint\&#39;s default range. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end. Omit for no explicit upper bound; see the endpoint\&#39;s boundary semantics. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 

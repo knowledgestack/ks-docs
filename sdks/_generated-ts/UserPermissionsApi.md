@@ -318,7 +318,7 @@ example().catch(console.error);
 
 ## listUserPermissions
 
-> PaginatedResponsePermissionResponse listUserPermissions(tenantId, userId, sortBy, sortDir, canRead, canWrite, canDelete, canApprove, canGrantPermissions, limit, offset)
+> PaginatedResponsePermissionResponse listUserPermissions(tenantId, userId, sortBy, canRead, canWrite, canDelete, canApprove, canGrantPermissions, limit, offset, sortDir)
 
 List User Permissions Handler
 
@@ -350,8 +350,6 @@ async function example() {
     userId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // UserPermissionOrder | Field to sort permissions by (default: CREATED_AT) (optional)
     sortBy: ...,
-    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
-    sortDir: ...,
     // boolean | Filter grants by can_read (optional)
     canRead: true,
     // boolean | Filter grants by can_write (optional)
@@ -366,6 +364,8 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListUserPermissionsRequest;
 
   try {
@@ -388,7 +388,6 @@ example().catch(console.error);
 | **tenantId** | `string` | Tenant ID to list permissions for | [Defaults to `undefined`] |
 | **userId** | `string` | User ID to list permissions for | [Defaults to `undefined`] |
 | **sortBy** | `UserPermissionOrder` | Field to sort permissions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, CAN_READ, CAN_WRITE, CAN_DELETE, CAN_APPROVE, CAN_GRANT_PERMISSIONS] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **canRead** | `boolean` | Filter grants by can_read | [Optional] [Defaults to `undefined`] |
 | **canWrite** | `boolean` | Filter grants by can_write | [Optional] [Defaults to `undefined`] |
 | **canDelete** | `boolean` | Filter grants by can_delete | [Optional] [Defaults to `undefined`] |
@@ -396,6 +395,7 @@ example().catch(console.error);
 | **canGrantPermissions** | `boolean` | Filter grants by can_grant_permissions | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

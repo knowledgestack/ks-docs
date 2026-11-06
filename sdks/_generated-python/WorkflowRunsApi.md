@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_workflow_runs_summary**
-> WorkflowRunSummaryResponse get_workflow_runs_summary(since=since, until=until, definition_id=definition_id)
+> WorkflowRunSummaryResponse get_workflow_runs_summary(definition_id=definition_id, since=since, until=until)
 
 **Synchronous variant:** `get_workflow_runs_summary_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -337,13 +337,13 @@ configuration = ksapi.Configuration(
 async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.WorkflowRunsApi(api_client)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Window end (inclusive). Defaults to open-ended. (optional)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope all numbers to one workflow (requires read). (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Omit for the endpoint's default range. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. Omit for no explicit upper bound; see the endpoint's boundary semantics. (optional)
 
     try:
         # Get Workflow Runs Summary Handler
-        api_response = await api_instance.get_workflow_runs_summary(since=since, until=until, definition_id=definition_id)
+        api_response = await api_instance.get_workflow_runs_summary(definition_id=definition_id, since=since, until=until)
         print("The response of WorkflowRunsApi->get_workflow_runs_summary:\n")
         pprint(api_response)
     except Exception as e:
@@ -357,9 +357,9 @@ async with ksapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **since** | **datetime**| Window start (inclusive). Defaults to 7 days ago. | [optional] 
- **until** | **datetime**| Window end (inclusive). Defaults to open-ended. | [optional] 
  **definition_id** | **UUID**| Scope all numbers to one workflow (requires read). | [optional] 
+ **since** | **datetime**| Window start (inclusive). Omit for the endpoint&#39;s default range. | [optional] 
+ **until** | **datetime**| Window end. Omit for no explicit upper bound; see the endpoint&#39;s boundary semantics. | [optional] 
 
 ### Return type
 
@@ -385,7 +385,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_workflow_runs_for_tenant**
-> PaginatedResponseWorkflowRunResponse list_workflow_runs_for_tenant(state=state, mine=mine, approvable_by_me=approvable_by_me, definition_id=definition_id, owner_id=owner_id, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
+> PaginatedResponseWorkflowRunResponse list_workflow_runs_for_tenant(state=state, mine=mine, approvable_by_me=approvable_by_me, definition_id=definition_id, owner_id=owner_id, sort_by=sort_by, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids, sort_dir=sort_dir)
 
 **Synchronous variant:** `list_workflow_runs_for_tenant_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -446,7 +446,6 @@ async with ksapi.ApiClient(configuration) as api_client:
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Only runs under this workflow definition. (optional)
     owner_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Only runs created by this user. (optional)
     sort_by = ksapi.WorkflowRunOrder() # WorkflowRunOrder | Field to sort runs by (default: STARTED_AT) (optional)
-    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
     created_after = '2013-10-20T19:20:30+01:00' # datetime | Only items created at or after this timestamp (inclusive) (optional)
@@ -456,10 +455,11 @@ async with ksapi.ApiClient(configuration) as api_client:
     approval_state = [ksapi.PathPartApprovalState()] # List[PathPartApprovalState] | Keep only items in these approval states (repeatable): not_required, pending, approved. (optional)
     include_tag_ids = None # List[UUID] | Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). (optional)
     exclude_tag_ids = None # List[UUID] | Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction (ASC or DESC); overrides the field's natural default. Every sort field supports both directions. (optional)
 
     try:
         # List Workflow Runs For Tenant Handler
-        api_response = await api_instance.list_workflow_runs_for_tenant(state=state, mine=mine, approvable_by_me=approvable_by_me, definition_id=definition_id, owner_id=owner_id, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids)
+        api_response = await api_instance.list_workflow_runs_for_tenant(state=state, mine=mine, approvable_by_me=approvable_by_me, definition_id=definition_id, owner_id=owner_id, sort_by=sort_by, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, approval_state=approval_state, include_tag_ids=include_tag_ids, exclude_tag_ids=exclude_tag_ids, sort_dir=sort_dir)
         print("The response of WorkflowRunsApi->list_workflow_runs_for_tenant:\n")
         pprint(api_response)
     except Exception as e:
@@ -479,7 +479,6 @@ Name | Type | Description  | Notes
  **definition_id** | **UUID**| Only runs under this workflow definition. | [optional] 
  **owner_id** | **UUID**| Only runs created by this user. | [optional] 
  **sort_by** | [**WorkflowRunOrder**](.md)| Field to sort runs by (default: STARTED_AT) | [optional] 
- **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
  **created_after** | **datetime**| Only items created at or after this timestamp (inclusive) | [optional] 
@@ -489,6 +488,7 @@ Name | Type | Description  | Notes
  **approval_state** | [**List[PathPartApprovalState]**](PathPartApprovalState.md)| Keep only items in these approval states (repeatable): not_required, pending, approved. | [optional] 
  **include_tag_ids** | [**List[UUID]**](UUID.md)| Keep only items that carry at least one of these tags on the item itself or any ancestor folder (repeatable, OR / tag inheritance). | [optional] 
  **exclude_tag_ids** | [**List[UUID]**](UUID.md)| Drop items that carry any of these tags on the item itself or any ancestor folder (repeatable). Takes precedence over include_tag_ids. | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction (ASC or DESC); overrides the field&#39;s natural default. Every sort field supports both directions. | [optional] 
 
 ### Return type
 

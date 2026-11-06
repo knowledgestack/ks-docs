@@ -690,7 +690,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_path_part_events**
-> PaginatedResponseEventResponse list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, include_churn=include_churn, limit=limit, offset=offset)
+> PaginatedResponseEventResponse list_path_part_events(path_part_id, kind=kind, recursive=recursive, include_churn=include_churn, limit=limit, offset=offset, since=since, until=until)
 
 **Synchronous variant:** `list_path_part_events_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -750,16 +750,16 @@ async with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     kind = 'kind_example' # str | Filter to a single event kind (optional)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Only events at or after this timestamp (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Only events strictly before this timestamp (optional)
     recursive = False # bool | Include events from descendant path_parts as well as the subject itself (optional) (default to False)
     include_churn = False # bool | Include intra-document churn hidden by default (raw chunk/section edits, version-metadata updates, and the v0 version-created row). Off by default so one upload / one logical edit shows as one event; ignored when an explicit kind is set. (optional) (default to False)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Omit for the endpoint's default range. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. Omit for no explicit upper bound; see the endpoint's boundary semantics. (optional)
 
     try:
         # List Path Part Events Handler
-        api_response = await api_instance.list_path_part_events(path_part_id, kind=kind, since=since, until=until, recursive=recursive, include_churn=include_churn, limit=limit, offset=offset)
+        api_response = await api_instance.list_path_part_events(path_part_id, kind=kind, recursive=recursive, include_churn=include_churn, limit=limit, offset=offset, since=since, until=until)
         print("The response of PathPartsApi->list_path_part_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -775,12 +775,12 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path_part_id** | **UUID**|  | 
  **kind** | **str**| Filter to a single event kind | [optional] 
- **since** | **datetime**| Only events at or after this timestamp | [optional] 
- **until** | **datetime**| Only events strictly before this timestamp | [optional] 
  **recursive** | **bool**| Include events from descendant path_parts as well as the subject itself | [optional] [default to False]
  **include_churn** | **bool**| Include intra-document churn hidden by default (raw chunk/section edits, version-metadata updates, and the v0 version-created row). Off by default so one upload / one logical edit shows as one event; ignored when an explicit kind is set. | [optional] [default to False]
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **since** | **datetime**| Window start (inclusive). Omit for the endpoint&#39;s default range. | [optional] 
+ **until** | **datetime**| Window end. Omit for no explicit upper bound; see the endpoint&#39;s boundary semantics. | [optional] 
 
 ### Return type
 
@@ -806,7 +806,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_path_parts**
-> PaginatedResponsePathPartResponse list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+> PaginatedResponsePathPartResponse list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, sort_dir=sort_dir)
 
 **Synchronous variant:** `list_path_parts_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -867,17 +867,17 @@ async with ksapi.ApiClient(configuration) as api_client:
     parent_path_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Parent PathPart ID (defaults to root) (optional)
     max_depth = 1 # int | Maximum depth to traverse (1 = direct children, default: 1) (optional) (default to 1)
     sort_order = ksapi.PathOrder() # PathOrder | Sort order for results (default: LOGICAL) (optional)
-    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the column's natural default (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
     created_after = '2013-10-20T19:20:30+01:00' # datetime | Only items created at or after this timestamp (inclusive) (optional)
     created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
     updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
     updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction (ASC or DESC); overrides the field's natural default. Every sort field supports both directions. (optional)
 
     try:
         # List Path Parts Handler
-        api_response = await api_instance.list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_path_parts(parent_path_id=parent_path_id, max_depth=max_depth, sort_order=sort_order, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, sort_dir=sort_dir)
         print("The response of PathPartsApi->list_path_parts:\n")
         pprint(api_response)
     except Exception as e:
@@ -894,13 +894,13 @@ Name | Type | Description  | Notes
  **parent_path_id** | **UUID**| Parent PathPart ID (defaults to root) | [optional] 
  **max_depth** | **int**| Maximum depth to traverse (1 &#x3D; direct children, default: 1) | [optional] [default to 1]
  **sort_order** | [**PathOrder**](.md)| Sort order for results (default: LOGICAL) | [optional] 
- **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the column&#39;s natural default | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
  **created_after** | **datetime**| Only items created at or after this timestamp (inclusive) | [optional] 
  **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
  **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
  **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction (ASC or DESC); overrides the field&#39;s natural default. Every sort field supports both directions. | [optional] 
 
 ### Return type
 

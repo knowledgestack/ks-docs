@@ -197,7 +197,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_thread_messages**
-> PaginatedResponseThreadMessageResponse list_thread_messages(thread_id, before=before, role=role, sort_dir=sort_dir, with_details=with_details, limit=limit, offset=offset)
+> PaginatedResponseThreadMessageResponse list_thread_messages(thread_id, before=before, role=role, with_details=with_details, limit=limit, offset=offset, sort_dir=sort_dir)
 
 **Synchronous variant:** `list_thread_messages_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -252,14 +252,14 @@ async with ksapi.ApiClient(configuration) as api_client:
     thread_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
     before = '2013-10-20T19:20:30+01:00' # datetime | Cursor for keyset pagination: only return messages with created_at < this value (optional)
     role = ksapi.MessageRole() # MessageRole | Filter messages by role (USER, ASSISTANT, SYSTEM) (optional)
-    sort_dir = ksapi.SortDirection() # SortDirection | ASC for oldest-first; default/DESC keeps newest-first (optional)
     with_details = True # bool | Include execution steps in response (default true) (optional) (default to True)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction (ASC or DESC); overrides the field's natural default. Every sort field supports both directions. (optional)
 
     try:
         # List Thread Messages Handler
-        api_response = await api_instance.list_thread_messages(thread_id, before=before, role=role, sort_dir=sort_dir, with_details=with_details, limit=limit, offset=offset)
+        api_response = await api_instance.list_thread_messages(thread_id, before=before, role=role, with_details=with_details, limit=limit, offset=offset, sort_dir=sort_dir)
         print("The response of ThreadMessagesApi->list_thread_messages:\n")
         pprint(api_response)
     except Exception as e:
@@ -276,10 +276,10 @@ Name | Type | Description  | Notes
  **thread_id** | **UUID**|  | 
  **before** | **datetime**| Cursor for keyset pagination: only return messages with created_at &lt; this value | [optional] 
  **role** | [**MessageRole**](.md)| Filter messages by role (USER, ASSISTANT, SYSTEM) | [optional] 
- **sort_dir** | [**SortDirection**](.md)| ASC for oldest-first; default/DESC keeps newest-first | [optional] 
  **with_details** | **bool**| Include execution steps in response (default true) | [optional] [default to True]
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **sort_dir** | [**SortDirection**](.md)| Sort direction (ASC or DESC); overrides the field&#39;s natural default. Every sort field supports both directions. | [optional] 
 
 ### Return type
 

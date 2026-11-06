@@ -378,7 +378,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_user_permissions**
-> PaginatedResponsePermissionResponse list_user_permissions(tenant_id, user_id, sort_by=sort_by, sort_dir=sort_dir, can_read=can_read, can_write=can_write, can_delete=can_delete, can_approve=can_approve, can_grant_permissions=can_grant_permissions, limit=limit, offset=offset)
+> PaginatedResponsePermissionResponse list_user_permissions(tenant_id, user_id, sort_by=sort_by, can_read=can_read, can_write=can_write, can_delete=can_delete, can_approve=can_approve, can_grant_permissions=can_grant_permissions, limit=limit, offset=offset, sort_dir=sort_dir)
 
 **Synchronous variant:** `list_user_permissions_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -428,7 +428,6 @@ async with ksapi.ApiClient(configuration) as api_client:
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Tenant ID to list permissions for
     user_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | User ID to list permissions for
     sort_by = ksapi.UserPermissionOrder() # UserPermissionOrder | Field to sort permissions by (default: CREATED_AT) (optional)
-    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
     can_read = True # bool | Filter grants by can_read (optional)
     can_write = True # bool | Filter grants by can_write (optional)
     can_delete = True # bool | Filter grants by can_delete (optional)
@@ -436,10 +435,11 @@ async with ksapi.ApiClient(configuration) as api_client:
     can_grant_permissions = True # bool | Filter grants by can_grant_permissions (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction (ASC or DESC); overrides the field's natural default. Every sort field supports both directions. (optional)
 
     try:
         # List User Permissions Handler
-        api_response = await api_instance.list_user_permissions(tenant_id, user_id, sort_by=sort_by, sort_dir=sort_dir, can_read=can_read, can_write=can_write, can_delete=can_delete, can_approve=can_approve, can_grant_permissions=can_grant_permissions, limit=limit, offset=offset)
+        api_response = await api_instance.list_user_permissions(tenant_id, user_id, sort_by=sort_by, can_read=can_read, can_write=can_write, can_delete=can_delete, can_approve=can_approve, can_grant_permissions=can_grant_permissions, limit=limit, offset=offset, sort_dir=sort_dir)
         print("The response of UserPermissionsApi->list_user_permissions:\n")
         pprint(api_response)
     except Exception as e:
@@ -456,7 +456,6 @@ Name | Type | Description  | Notes
  **tenant_id** | **UUID**| Tenant ID to list permissions for | 
  **user_id** | **UUID**| User ID to list permissions for | 
  **sort_by** | [**UserPermissionOrder**](.md)| Field to sort permissions by (default: CREATED_AT) | [optional] 
- **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
  **can_read** | **bool**| Filter grants by can_read | [optional] 
  **can_write** | **bool**| Filter grants by can_write | [optional] 
  **can_delete** | **bool**| Filter grants by can_delete | [optional] 
@@ -464,6 +463,7 @@ Name | Type | Description  | Notes
  **can_grant_permissions** | **bool**| Filter grants by can_grant_permissions | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
+ **sort_dir** | [**SortDirection**](.md)| Sort direction (ASC or DESC); overrides the field&#39;s natural default. Every sort field supports both directions. | [optional] 
 
 ### Return type
 

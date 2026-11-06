@@ -481,7 +481,7 @@ example().catch(console.error);
 
 ## listGroupMembers
 
-> PaginatedResponseMembershipResponse listGroupMembers(groupId, sortBy, sortDir, usernameLike, limit, offset)
+> PaginatedResponseMembershipResponse listGroupMembers(groupId, sortBy, usernameLike, limit, offset, sortDir)
 
 List Group Members Handler
 
@@ -511,14 +511,14 @@ async function example() {
     groupId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // GroupMemberOrder | Field to sort members by (default: ADDED_AT) (optional)
     sortBy: ...,
-    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
-    sortDir: ...,
     // string | Case-insensitive substring filter on member name (optional)
     usernameLike: usernameLike_example,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListGroupMembersRequest;
 
   try {
@@ -540,10 +540,10 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | `string` |  | [Defaults to `undefined`] |
 | **sortBy** | `GroupMemberOrder` | Field to sort members by (default: ADDED_AT) | [Optional] [Defaults to `undefined`] [Enum: ADDED_AT, USERNAME] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **usernameLike** | `string` | Case-insensitive substring filter on member name | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 
@@ -571,7 +571,7 @@ example().catch(console.error);
 
 ## listGroupPermissions
 
-> PaginatedResponseGroupPermissionResponse listGroupPermissions(groupId, sortBy, sortDir, canRead, canWrite, canDelete, canApprove, canGrantPermissions, limit, offset)
+> PaginatedResponseGroupPermissionResponse listGroupPermissions(groupId, sortBy, canRead, canWrite, canDelete, canApprove, canGrantPermissions, limit, offset, sortDir)
 
 List Group Permissions Handler
 
@@ -601,8 +601,6 @@ async function example() {
     groupId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // GroupPermissionOrder | Field to sort permissions by (default: CREATED_AT) (optional)
     sortBy: ...,
-    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
-    sortDir: ...,
     // boolean | Filter grants by can_read (optional)
     canRead: true,
     // boolean | Filter grants by can_write (optional)
@@ -617,6 +615,8 @@ async function example() {
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListGroupPermissionsRequest;
 
   try {
@@ -638,7 +638,6 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **groupId** | `string` |  | [Defaults to `undefined`] |
 | **sortBy** | `GroupPermissionOrder` | Field to sort permissions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, CAN_READ, CAN_WRITE, CAN_DELETE, CAN_APPROVE, CAN_GRANT_PERMISSIONS] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **canRead** | `boolean` | Filter grants by can_read | [Optional] [Defaults to `undefined`] |
 | **canWrite** | `boolean` | Filter grants by can_write | [Optional] [Defaults to `undefined`] |
 | **canDelete** | `boolean` | Filter grants by can_delete | [Optional] [Defaults to `undefined`] |
@@ -646,6 +645,7 @@ example().catch(console.error);
 | **canGrantPermissions** | `boolean` | Filter grants by can_grant_permissions | [Optional] [Defaults to `undefined`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 
@@ -739,7 +739,7 @@ This endpoint does not need any parameter.
 
 ## listTenantGroups
 
-> PaginatedResponseGroupResponse listTenantGroups(sortBy, sortDir, nameLike, hasUserIds, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseGroupResponse listTenantGroups(sortBy, nameLike, hasUserIds, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, sortDir)
 
 List Tenant Groups Handler
 
@@ -767,8 +767,6 @@ async function example() {
   const body = {
     // TenantGroupOrder | Field to sort groups by (default: NAME) (optional)
     sortBy: ...,
-    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
-    sortDir: ...,
     // string | Case-insensitive substring filter on name (optional)
     nameLike: nameLike_example,
     // Array<string> | Only groups containing ALL of these user ids (optional)
@@ -785,6 +783,8 @@ async function example() {
     updatedAfter: 2013-10-20T19:20:30+01:00,
     // Date | Only items updated strictly before this timestamp (optional)
     updatedBefore: 2013-10-20T19:20:30+01:00,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListTenantGroupsRequest;
 
   try {
@@ -805,7 +805,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **sortBy** | `TenantGroupOrder` | Field to sort groups by (default: NAME) | [Optional] [Defaults to `undefined`] [Enum: NAME, CREATED_AT] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **nameLike** | `string` | Case-insensitive substring filter on name | [Optional] [Defaults to `undefined`] |
 | **hasUserIds** | `Array<string>` | Only groups containing ALL of these user ids | [Optional] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
@@ -814,6 +813,7 @@ example().catch(console.error);
 | **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

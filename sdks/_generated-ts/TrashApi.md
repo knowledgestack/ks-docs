@@ -240,7 +240,7 @@ example().catch(console.error);
 
 ## listTrash
 
-> PaginatedResponseTrashItemResponse listTrash(sortOrder, sortDir, deletedBy, partType, ownerId, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseTrashItemResponse listTrash(sortOrder, deletedBy, partType, ownerId, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, sortDir)
 
 List Trash Handler
 
@@ -268,8 +268,6 @@ async function example() {
   const body = {
     // PathOrder | Sort order (default: LOGICAL = deletion recency) (optional)
     sortOrder: ...,
-    // SortDirection | Sort direction; overrides the column\'s natural default (optional)
-    sortDir: ...,
     // string | Filter to items deleted by this user (optional)
     deletedBy: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // Array<PartType> | Filter to these path-part types (folders, documents, ...) (optional)
@@ -288,6 +286,8 @@ async function example() {
     updatedAfter: 2013-10-20T19:20:30+01:00,
     // Date | Only items updated strictly before this timestamp (optional)
     updatedBefore: 2013-10-20T19:20:30+01:00,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListTrashRequest;
 
   try {
@@ -308,7 +308,6 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **sortOrder** | `PathOrder` | Sort order (default: LOGICAL &#x3D; deletion recency) | [Optional] [Defaults to `undefined`] [Enum: LOGICAL, NAME, UPDATED_AT, CREATED_AT] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the column\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **deletedBy** | `string` | Filter to items deleted by this user | [Optional] [Defaults to `undefined`] |
 | **partType** | `Array<PartType>` | Filter to these path-part types (folders, documents, ...) | [Optional] |
 | **ownerId** | `string` | Filter to items owned (created) by this user | [Optional] [Defaults to `undefined`] |
@@ -318,6 +317,7 @@ example().catch(console.error);
 | **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

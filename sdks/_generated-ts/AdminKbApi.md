@@ -77,7 +77,7 @@ This endpoint does not need any parameter.
 
 ## getAdminKbTimeseries
 
-> KbTimeseriesResponse getAdminKbTimeseries(metric, timezone, since, until, bucket)
+> KbTimeseriesResponse getAdminKbTimeseries(metric, timezone, bucket, since, until)
 
 Get Admin Kb Timeseries Handler
 
@@ -107,12 +107,12 @@ async function example() {
     metric: ...,
     // string | IANA tz override; defaults to tenant setting. (optional)
     timezone: timezone_example,
-    // Date | Window start (inclusive). Defaults to 7 days ago. (optional)
-    since: 2013-10-20T19:20:30+01:00,
-    // Date | Window end (inclusive). (optional)
-    until: 2013-10-20T19:20:30+01:00,
     // TimeBucket | Bucket size. (optional)
     bucket: ...,
+    // Date | Window start (inclusive). Omit for the endpoint\'s default range. (optional)
+    since: 2013-10-20T19:20:30+01:00,
+    // Date | Window end. Omit for no explicit upper bound; see the endpoint\'s boundary semantics. (optional)
+    until: 2013-10-20T19:20:30+01:00,
   } satisfies GetAdminKbTimeseriesRequest;
 
   try {
@@ -134,9 +134,9 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **metric** | `KbMetric` | Which KB metric to bucket. | [Defaults to `undefined`] [Enum: document_uploads, ingestion_completed, ingestion_failed, message, search] |
 | **timezone** | `string` | IANA tz override; defaults to tenant setting. | [Optional] [Defaults to `undefined`] |
-| **since** | `Date` | Window start (inclusive). Defaults to 7 days ago. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Window end (inclusive). | [Optional] [Defaults to `undefined`] |
 | **bucket** | `TimeBucket` | Bucket size. | [Optional] [Defaults to `undefined`] [Enum: hour, day, week, month] |
+| **since** | `Date` | Window start (inclusive). Omit for the endpoint\&#39;s default range. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end. Omit for no explicit upper bound; see the endpoint\&#39;s boundary semantics. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 

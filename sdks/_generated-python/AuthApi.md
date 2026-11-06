@@ -267,20 +267,18 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **fanwei_directory_sync**
-> DirectorySyncResponse fanwei_directory_sync(tenant_id, authorization=authorization, ks_uat=ks_uat)
+> DirectorySyncResponse fanwei_directory_sync(tenant_id)
 
 **Synchronous variant:** `fanwei_directory_sync_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Directory Sync Handler
 
-Trigger directory synchronization for a FanWei E9 tenant.
-
-Accepts either:
-- A logged-in OWNER/ADMIN user (via UAT cookie)
-- An admin API key (via Authorization: Bearer header)
+Trigger directory sync as an authenticated OWNER/ADMIN of this tenant.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -294,18 +292,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Directory Sync Handler
-        api_response = await api_instance.fanwei_directory_sync(tenant_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = await api_instance.fanwei_directory_sync(tenant_id)
         print("The response of AuthApi->fanwei_directory_sync:\n")
         pprint(api_response)
     except Exception as e:
@@ -320,8 +331,6 @@ async with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tenant_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -329,7 +338,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -347,20 +356,18 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **fanwei_directory_sync_0**
-> DirectorySyncResponse fanwei_directory_sync_0(tenant_id, authorization=authorization, ks_uat=ks_uat)
+> DirectorySyncResponse fanwei_directory_sync_0(tenant_id)
 
 **Synchronous variant:** `fanwei_directory_sync_0_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Directory Sync Handler
 
-Trigger directory synchronization for a FanWei E9 tenant.
-
-Accepts either:
-- A logged-in OWNER/ADMIN user (via UAT cookie)
-- An admin API key (via Authorization: Bearer header)
+Trigger directory sync as an authenticated OWNER/ADMIN of this tenant.
 
 ### Example
 
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
 
 ```python
 import ksapi
@@ -374,18 +381,31 @@ configuration = ksapi.Configuration(
     host = "http://localhost:8000"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AuthApi(api_client)
     tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
-    authorization = 'authorization_example' # str |  (optional)
-    ks_uat = 'ks_uat_example' # str |  (optional)
 
     try:
         # Directory Sync Handler
-        api_response = await api_instance.fanwei_directory_sync_0(tenant_id, authorization=authorization, ks_uat=ks_uat)
+        api_response = await api_instance.fanwei_directory_sync_0(tenant_id)
         print("The response of AuthApi->fanwei_directory_sync_0:\n")
         pprint(api_response)
     except Exception as e:
@@ -400,8 +420,6 @@ async with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **tenant_id** | **UUID**|  | 
- **authorization** | **str**|  | [optional] 
- **ks_uat** | **str**|  | [optional] 
 
 ### Return type
 
@@ -409,7 +427,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

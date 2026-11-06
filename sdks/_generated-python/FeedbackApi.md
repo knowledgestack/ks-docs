@@ -101,7 +101,7 @@ void (empty response body)
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_feedback**
-> PaginatedResponseFeedbackEventResponse list_feedback(target_type=target_type, target_id=target_id, rating=rating, mine=mine, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+> PaginatedResponseFeedbackEventResponse list_feedback(target_type=target_type, target_id=target_id, rating=rating, mine=mine, sort_by=sort_by, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, sort_dir=sort_dir)
 
 **Synchronous variant:** `list_feedback_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -158,17 +158,17 @@ async with ksapi.ApiClient(configuration) as api_client:
     rating = ksapi.FeedbackRating() # FeedbackRating |  (optional)
     mine = False # bool | Only the caller's own feedback, whatever their role, so an owner or admin reading a thread sees their own vote on each message. (optional) (default to False)
     sort_by = ksapi.FeedbackOrder() # FeedbackOrder | Field to sort feedback by (default: CREATED_AT) (optional)
-    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction; overrides the field's natural default (optional)
     limit = 20 # int | Number of items per page (optional) (default to 20)
     offset = 0 # int | Number of items to skip (optional) (default to 0)
     created_after = '2013-10-20T19:20:30+01:00' # datetime | Only items created at or after this timestamp (inclusive) (optional)
     created_before = '2013-10-20T19:20:30+01:00' # datetime | Only items created strictly before this timestamp (optional)
     updated_after = '2013-10-20T19:20:30+01:00' # datetime | Only items updated at or after this timestamp (inclusive) (optional)
     updated_before = '2013-10-20T19:20:30+01:00' # datetime | Only items updated strictly before this timestamp (optional)
+    sort_dir = ksapi.SortDirection() # SortDirection | Sort direction (ASC or DESC); overrides the field's natural default. Every sort field supports both directions. (optional)
 
     try:
         # List Feedback Handler
-        api_response = await api_instance.list_feedback(target_type=target_type, target_id=target_id, rating=rating, mine=mine, sort_by=sort_by, sort_dir=sort_dir, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before)
+        api_response = await api_instance.list_feedback(target_type=target_type, target_id=target_id, rating=rating, mine=mine, sort_by=sort_by, limit=limit, offset=offset, created_after=created_after, created_before=created_before, updated_after=updated_after, updated_before=updated_before, sort_dir=sort_dir)
         print("The response of FeedbackApi->list_feedback:\n")
         pprint(api_response)
     except Exception as e:
@@ -187,13 +187,13 @@ Name | Type | Description  | Notes
  **rating** | [**FeedbackRating**](.md)|  | [optional] 
  **mine** | **bool**| Only the caller&#39;s own feedback, whatever their role, so an owner or admin reading a thread sees their own vote on each message. | [optional] [default to False]
  **sort_by** | [**FeedbackOrder**](.md)| Field to sort feedback by (default: CREATED_AT) | [optional] 
- **sort_dir** | [**SortDirection**](.md)| Sort direction; overrides the field&#39;s natural default | [optional] 
  **limit** | **int**| Number of items per page | [optional] [default to 20]
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
  **created_after** | **datetime**| Only items created at or after this timestamp (inclusive) | [optional] 
  **created_before** | **datetime**| Only items created strictly before this timestamp | [optional] 
  **updated_after** | **datetime**| Only items updated at or after this timestamp (inclusive) | [optional] 
  **updated_before** | **datetime**| Only items updated strictly before this timestamp | [optional] 
+ **sort_dir** | [**SortDirection**](.md)| Sort direction (ASC or DESC); overrides the field&#39;s natural default. Every sort field supports both directions. | [optional] 
 
 ### Return type
 

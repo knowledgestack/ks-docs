@@ -240,7 +240,7 @@ example().catch(console.error);
 
 ## listInvites
 
-> PaginatedResponseInviteResponse listInvites(email, status, role, invitedBy, sortBy, sortDir, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore)
+> PaginatedResponseInviteResponse listInvites(email, status, role, invitedBy, sortBy, limit, offset, createdAfter, createdBefore, updatedAfter, updatedBefore, sortDir)
 
 List Invites Handler
 
@@ -276,8 +276,6 @@ async function example() {
     invitedBy: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // InviteOrder | Field to sort invites by (default: CREATED_AT) (optional)
     sortBy: ...,
-    // SortDirection | Sort direction; overrides the field\'s natural default (optional)
-    sortDir: ...,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
@@ -290,6 +288,8 @@ async function example() {
     updatedAfter: 2013-10-20T19:20:30+01:00,
     // Date | Only items updated strictly before this timestamp (optional)
     updatedBefore: 2013-10-20T19:20:30+01:00,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListInvitesRequest;
 
   try {
@@ -314,13 +314,13 @@ example().catch(console.error);
 | **role** | `TenantUserRole` | Filter by invite role | [Optional] [Defaults to `undefined`] [Enum: USER, OWNER, ADMIN] |
 | **invitedBy** | `string` | Filter to invites sent by this user | [Optional] [Defaults to `undefined`] |
 | **sortBy** | `InviteOrder` | Field to sort invites by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, EXPIRES_AT] |
-| **sortDir** | `SortDirection` | Sort direction; overrides the field\&#39;s natural default | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
 | **createdAfter** | `Date` | Only items created at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **createdBefore** | `Date` | Only items created strictly before this timestamp | [Optional] [Defaults to `undefined`] |
 | **updatedAfter** | `Date` | Only items updated at or after this timestamp (inclusive) | [Optional] [Defaults to `undefined`] |
 | **updatedBefore** | `Date` | Only items updated strictly before this timestamp | [Optional] [Defaults to `undefined`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

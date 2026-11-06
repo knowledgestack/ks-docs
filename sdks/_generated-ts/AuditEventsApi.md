@@ -11,7 +11,7 @@ All URIs are relative to *http://localhost:8000*
 
 ## exportAuditEvents
 
-> Blob exportAuditEvents(actorUserId, kind, since, until, subjectPathPartId, recursive)
+> Blob exportAuditEvents(actorUserId, kind, subjectPathPartId, recursive, since, until)
 
 Export Audit Events Handler
 
@@ -41,14 +41,14 @@ async function example() {
     actorUserId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | Filter to one event kind (optional)
     kind: kind_example,
-    // Date | Only events at or after this timestamp (from). Omit to export the entire audit log. Must not be in the future or after `until`. (optional)
-    since: 2013-10-20T19:20:30+01:00,
-    // Date | Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. (optional)
-    until: 2013-10-20T19:20:30+01:00,
     // string | Scope to one document/folder/run subject (optional)
     subjectPathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // boolean | Include the subject\'s descendants (needs subject) (optional)
     recursive: true,
+    // Date | Window start (inclusive). Omit for the endpoint\'s default range. (optional)
+    since: 2013-10-20T19:20:30+01:00,
+    // Date | Window end. Omit for no explicit upper bound; see the endpoint\'s boundary semantics. (optional)
+    until: 2013-10-20T19:20:30+01:00,
   } satisfies ExportAuditEventsRequest;
 
   try {
@@ -70,10 +70,10 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **actorUserId** | `string` | Filter to one actor | [Optional] [Defaults to `undefined`] |
 | **kind** | `string` | Filter to one event kind | [Optional] [Defaults to `undefined`] |
-| **since** | `Date` | Only events at or after this timestamp (from). Omit to export the entire audit log. Must not be in the future or after &#x60;until&#x60;. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. | [Optional] [Defaults to `undefined`] |
 | **subjectPathPartId** | `string` | Scope to one document/folder/run subject | [Optional] [Defaults to `undefined`] |
 | **recursive** | `boolean` | Include the subject\&#39;s descendants (needs subject) | [Optional] [Defaults to `false`] |
+| **since** | `Date` | Window start (inclusive). Omit for the endpoint\&#39;s default range. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end. Omit for no explicit upper bound; see the endpoint\&#39;s boundary semantics. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 
@@ -101,7 +101,7 @@ example().catch(console.error);
 
 ## listAuditEvents
 
-> PaginatedResponseEventResponse listAuditEvents(actorUserId, kind, since, until, subjectPathPartId, recursive, sortDir, limit, offset)
+> PaginatedResponseEventResponse listAuditEvents(actorUserId, kind, subjectPathPartId, recursive, limit, offset, sortDir, since, until)
 
 List Audit Events Handler
 
@@ -131,20 +131,20 @@ async function example() {
     actorUserId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // string | Filter to one event kind (optional)
     kind: kind_example,
-    // Date | Only events at or after this timestamp (from). Omit for no lower bound. Must not be in the future or after `until`. (optional)
-    since: 2013-10-20T19:20:30+01:00,
-    // Date | Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. (optional)
-    until: 2013-10-20T19:20:30+01:00,
     // string | Scope to one document/folder/run subject (optional)
     subjectPathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
     // boolean | Include the subject\'s descendants (needs subject) (optional)
     recursive: true,
-    // SortDirection | Sort by timestamp (default: DESC, newest first) (optional)
-    sortDir: ...,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
+    // Date | Window start (inclusive). Omit for the endpoint\'s default range. (optional)
+    since: 2013-10-20T19:20:30+01:00,
+    // Date | Window end. Omit for no explicit upper bound; see the endpoint\'s boundary semantics. (optional)
+    until: 2013-10-20T19:20:30+01:00,
   } satisfies ListAuditEventsRequest;
 
   try {
@@ -166,13 +166,13 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **actorUserId** | `string` | Filter to one actor | [Optional] [Defaults to `undefined`] |
 | **kind** | `string` | Filter to one event kind | [Optional] [Defaults to `undefined`] |
-| **since** | `Date` | Only events at or after this timestamp (from). Omit for no lower bound. Must not be in the future or after &#x60;until&#x60;. | [Optional] [Defaults to `undefined`] |
-| **until** | `Date` | Only events strictly before this timestamp (to). Omit for no upper bound. Must not be in the future. | [Optional] [Defaults to `undefined`] |
 | **subjectPathPartId** | `string` | Scope to one document/folder/run subject | [Optional] [Defaults to `undefined`] |
 | **recursive** | `boolean` | Include the subject\&#39;s descendants (needs subject) | [Optional] [Defaults to `false`] |
-| **sortDir** | `SortDirection` | Sort by timestamp (default: DESC, newest first) | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
+| **since** | `Date` | Window start (inclusive). Omit for the endpoint\&#39;s default range. | [Optional] [Defaults to `undefined`] |
+| **until** | `Date` | Window end. Omit for no explicit upper bound; see the endpoint\&#39;s boundary semantics. | [Optional] [Defaults to `undefined`] |
 
 ### Return type
 

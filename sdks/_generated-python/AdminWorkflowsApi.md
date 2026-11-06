@@ -59,8 +59,8 @@ async with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.AdminWorkflowsApi(api_client)
     timezone = 'timezone_example' # str | IANA tz override; defaults to tenant setting. (optional)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope to one workflow. (optional)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Window end (inclusive). (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Omit for the endpoint's default range. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. Omit for no explicit upper bound; see the endpoint's boundary semantics. (optional)
 
     try:
         # Get Admin Workflow By Hour Handler
@@ -80,8 +80,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timezone** | **str**| IANA tz override; defaults to tenant setting. | [optional] 
  **definition_id** | **UUID**| Scope to one workflow. | [optional] 
- **since** | **datetime**| Window start (inclusive). Defaults to 7 days ago. | [optional] 
- **until** | **datetime**| Window end (inclusive). | [optional] 
+ **since** | **datetime**| Window start (inclusive). Omit for the endpoint&#39;s default range. | [optional] 
+ **until** | **datetime**| Window end. Omit for no explicit upper bound; see the endpoint&#39;s boundary semantics. | [optional] 
 
 ### Return type
 
@@ -153,8 +153,8 @@ async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
     limit = 10 # int | Top-N per leaderboard. (optional) (default to 10)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Window end (inclusive). (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Omit for the endpoint's default range. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. Omit for no explicit upper bound; see the endpoint's boundary semantics. (optional)
 
     try:
         # Get Admin Workflow Leaderboard Handler
@@ -173,8 +173,8 @@ async with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Top-N per leaderboard. | [optional] [default to 10]
- **since** | **datetime**| Window start (inclusive). Defaults to 7 days ago. | [optional] 
- **until** | **datetime**| Window end (inclusive). | [optional] 
+ **since** | **datetime**| Window start (inclusive). Omit for the endpoint&#39;s default range. | [optional] 
+ **until** | **datetime**| Window end. Omit for no explicit upper bound; see the endpoint&#39;s boundary semantics. | [optional] 
 
 ### Return type
 
@@ -245,8 +245,8 @@ configuration = ksapi.Configuration(
 async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Window end (inclusive). (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Omit for the endpoint's default range. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. Omit for no explicit upper bound; see the endpoint's boundary semantics. (optional)
 
     try:
         # Get Admin Workflow Output Stats Handler
@@ -264,8 +264,8 @@ async with ksapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **since** | **datetime**| Window start (inclusive). Defaults to 7 days ago. | [optional] 
- **until** | **datetime**| Window end (inclusive). | [optional] 
+ **since** | **datetime**| Window start (inclusive). Omit for the endpoint&#39;s default range. | [optional] 
+ **until** | **datetime**| Window end. Omit for no explicit upper bound; see the endpoint&#39;s boundary semantics. | [optional] 
 
 ### Return type
 
@@ -337,8 +337,8 @@ async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.AdminWorkflowsApi(api_client)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope all numbers to one workflow. (optional)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Window end (inclusive). (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Omit for the endpoint's default range. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. Omit for no explicit upper bound; see the endpoint's boundary semantics. (optional)
 
     try:
         # Get Admin Workflow Summary Handler
@@ -357,8 +357,8 @@ async with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **definition_id** | **UUID**| Scope all numbers to one workflow. | [optional] 
- **since** | **datetime**| Window start (inclusive). Defaults to 7 days ago. | [optional] 
- **until** | **datetime**| Window end (inclusive). | [optional] 
+ **since** | **datetime**| Window start (inclusive). Omit for the endpoint&#39;s default range. | [optional] 
+ **until** | **datetime**| Window end. Omit for no explicit upper bound; see the endpoint&#39;s boundary semantics. | [optional] 
 
 ### Return type
 
@@ -384,7 +384,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_admin_workflow_timeseries**
-> RunTimeseriesResponse get_admin_workflow_timeseries(timezone=timezone, definition_id=definition_id, since=since, until=until, bucket=bucket)
+> RunTimeseriesResponse get_admin_workflow_timeseries(timezone=timezone, definition_id=definition_id, bucket=bucket, since=since, until=until)
 
 **Synchronous variant:** `get_admin_workflow_timeseries_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
@@ -432,13 +432,13 @@ async with ksapi.ApiClient(configuration) as api_client:
     api_instance = ksapi.AdminWorkflowsApi(api_client)
     timezone = 'timezone_example' # str | IANA tz override; defaults to tenant setting. (optional)
     definition_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | Scope to one workflow. (optional)
-    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Defaults to 7 days ago. (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | Window end (inclusive). (optional)
     bucket = ksapi.TimeBucket() # TimeBucket | Bucket size. (optional)
+    since = '2013-10-20T19:20:30+01:00' # datetime | Window start (inclusive). Omit for the endpoint's default range. (optional)
+    until = '2013-10-20T19:20:30+01:00' # datetime | Window end. Omit for no explicit upper bound; see the endpoint's boundary semantics. (optional)
 
     try:
         # Get Admin Workflow Timeseries Handler
-        api_response = await api_instance.get_admin_workflow_timeseries(timezone=timezone, definition_id=definition_id, since=since, until=until, bucket=bucket)
+        api_response = await api_instance.get_admin_workflow_timeseries(timezone=timezone, definition_id=definition_id, bucket=bucket, since=since, until=until)
         print("The response of AdminWorkflowsApi->get_admin_workflow_timeseries:\n")
         pprint(api_response)
     except Exception as e:
@@ -454,9 +454,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **timezone** | **str**| IANA tz override; defaults to tenant setting. | [optional] 
  **definition_id** | **UUID**| Scope to one workflow. | [optional] 
- **since** | **datetime**| Window start (inclusive). Defaults to 7 days ago. | [optional] 
- **until** | **datetime**| Window end (inclusive). | [optional] 
  **bucket** | [**TimeBucket**](.md)| Bucket size. | [optional] 
+ **since** | **datetime**| Window start (inclusive). Omit for the endpoint&#39;s default range. | [optional] 
+ **until** | **datetime**| Window end. Omit for no explicit upper bound; see the endpoint&#39;s boundary semantics. | [optional] 
 
 ### Return type
 

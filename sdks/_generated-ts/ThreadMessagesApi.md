@@ -171,7 +171,7 @@ example().catch(console.error);
 
 ## listThreadMessages
 
-> PaginatedResponseThreadMessageResponse listThreadMessages(threadId, before, role, sortDir, withDetails, limit, offset)
+> PaginatedResponseThreadMessageResponse listThreadMessages(threadId, before, role, withDetails, limit, offset, sortDir)
 
 List Thread Messages Handler
 
@@ -203,14 +203,14 @@ async function example() {
     before: 2013-10-20T19:20:30+01:00,
     // MessageRole | Filter messages by role (USER, ASSISTANT, SYSTEM) (optional)
     role: ...,
-    // SortDirection | ASC for oldest-first; default/DESC keeps newest-first (optional)
-    sortDir: ...,
     // boolean | Include execution steps in response (default true) (optional)
     withDetails: true,
     // number | Number of items per page (optional)
     limit: 56,
     // number | Number of items to skip (optional)
     offset: 56,
+    // SortDirection | Sort direction (ASC or DESC); overrides the field\'s natural default. Every sort field supports both directions. (optional)
+    sortDir: ...,
   } satisfies ListThreadMessagesRequest;
 
   try {
@@ -233,10 +233,10 @@ example().catch(console.error);
 | **threadId** | `string` |  | [Defaults to `undefined`] |
 | **before** | `Date` | Cursor for keyset pagination: only return messages with created_at &lt; this value | [Optional] [Defaults to `undefined`] |
 | **role** | `MessageRole` | Filter messages by role (USER, ASSISTANT, SYSTEM) | [Optional] [Defaults to `undefined`] [Enum: USER, ASSISTANT, SYSTEM] |
-| **sortDir** | `SortDirection` | ASC for oldest-first; default/DESC keeps newest-first | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 | **withDetails** | `boolean` | Include execution steps in response (default true) | [Optional] [Defaults to `true`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |
 | **offset** | `number` | Number of items to skip | [Optional] [Defaults to `0`] |
+| **sortDir** | `SortDirection` | Sort direction (ASC or DESC); overrides the field\&#39;s natural default. Every sort field supports both directions. | [Optional] [Defaults to `undefined`] [Enum: ASC, DESC] |
 
 ### Return type
 

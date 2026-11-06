@@ -308,6 +308,10 @@ for the whole page by one aggregate. A caller reading those per
 conversation instead is a request per row, which is what makes a fifty-row
 page slow.
 
+Nonempty subject or source-folder filters limit every role to readable /shared
+and personal paths. Empty string filters are inactive. Unfiltered browsing
+retains ordinary read access.
+
 ### Example
 
 * Api Key Authentication (cookieAuth):

@@ -1024,7 +1024,7 @@ example().catch(console.error);
 
 Search Skills Handler
 
-Find skills by the meaning of their routing card (agent discovery).  Dense semantic search over each skill\&#39;s &#x60;&#x60;name + description&#x60;&#x60; card, scoped to the tenant. Fail-closed: hits are re-loaded tenant-scoped from Postgres (the authority — a mis-scoped Qdrant hit can\&#39;t leak another tenant\&#39;s skill) and any the caller cannot read are dropped.
+Find skills by the meaning of their routing card (agent discovery).  Dense semantic search over readable &#x60;&#x60;/agents/skills&#x60;&#x60; subtrees, with read permissions applied before ranking. Hits are re-loaded tenant-scoped from Postgres (the authority — a mis-scoped Qdrant hit can\&#39;t leak another tenant\&#39;s skill) and any the caller cannot read are dropped.
 
 ### Example
 

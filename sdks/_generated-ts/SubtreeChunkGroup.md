@@ -1,13 +1,14 @@
 
 # SubtreeChunkGroup
 
-A group of chunks sharing identical path_part_ids and tag_ids.  Used by PathPartCRUDService.resolve_subtree_chunks to batch downstream Qdrant set_payload calls.
+Hierarchy payload shared by chunk, table and skill points in a subtree.  The legacy name and chunk_ids field are retained for existing clients.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
 `chunkIds` | Array&lt;string&gt;
+`pointIds` | Array&lt;string&gt;
 `pathPartIds` | Array&lt;string&gt;
 `tagIds` | Array&lt;string&gt;
 
@@ -19,6 +20,7 @@ import type { SubtreeChunkGroup } from '@knowledge-stack/ksapi'
 // TODO: Update the object below with actual values
 const example = {
   "chunkIds": null,
+  "pointIds": null,
   "pathPartIds": null,
   "tagIds": null,
 } satisfies SubtreeChunkGroup

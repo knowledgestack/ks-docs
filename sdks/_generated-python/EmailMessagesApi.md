@@ -306,6 +306,10 @@ them; bodies and attachments stay with ``POST /v1/chunks/search``, where
 meaning. Scope that search to one mailbox or one folder by passing its
 path part id as ``parent_path_ids``.
 
+Nonempty subject or metadata filters limit every role to readable /shared and
+personal paths. Empty string filters are inactive. Unfiltered browsing and
+direct ID reads retain ordinary read access.
+
 ### Example
 
 * Api Key Authentication (cookieAuth):

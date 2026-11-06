@@ -1,6 +1,6 @@
 # SubtreeChunksResponse
 
-Response for subtree resolution.
+Chunk and table point groups; legacy endpoint/model names are retained.
 
 ## Properties
 

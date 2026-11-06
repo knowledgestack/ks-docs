@@ -268,7 +268,7 @@ example().catch(console.error);
 
 List Email Messages Handler
 
-List mail under one node, or anywhere under one subtree, oldest first.  The metadata filters are matched exactly, in SQL. A chunk\&#39;s text never holds the sender or the send time, so no amount of vector search reaches them; bodies and attachments stay with &#x60;&#x60;POST /v1/chunks/search&#x60;&#x60;, where &#x60;&#x60;hybrid_profile&#x3D;sparse&#x60;&#x60; matches exact tokens and &#x60;&#x60;dense&#x60;&#x60; matches meaning. Scope that search to one mailbox or one folder by passing its path part id as &#x60;&#x60;parent_path_ids&#x60;&#x60;.
+List mail under one node, or anywhere under one subtree, oldest first.  The metadata filters are matched exactly, in SQL. A chunk\&#39;s text never holds the sender or the send time, so no amount of vector search reaches them; bodies and attachments stay with &#x60;&#x60;POST /v1/chunks/search&#x60;&#x60;, where &#x60;&#x60;hybrid_profile&#x3D;sparse&#x60;&#x60; matches exact tokens and &#x60;&#x60;dense&#x60;&#x60; matches meaning. Scope that search to one mailbox or one folder by passing its path part id as &#x60;&#x60;parent_path_ids&#x60;&#x60;.  Nonempty subject or metadata filters limit every role to readable /shared and personal paths. Empty string filters are inactive. Unfiltered browsing and direct ID reads retain ordinary read access.
 
 ### Example
 

@@ -1208,8 +1208,8 @@ Search Skills Handler
 
 Find skills by the meaning of their routing card (agent discovery).
 
-Dense semantic search over each skill's ``name + description`` card, scoped
-to the tenant. Fail-closed: hits are re-loaded tenant-scoped from Postgres
+Dense semantic search over readable ``/agents/skills`` subtrees, with read
+permissions applied before ranking. Hits are re-loaded tenant-scoped from Postgres
 (the authority — a mis-scoped Qdrant hit can't leak another tenant's skill)
 and any the caller cannot read are dropped.
 

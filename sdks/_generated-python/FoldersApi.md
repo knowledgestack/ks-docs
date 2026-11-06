@@ -400,6 +400,10 @@ filters, and the STATUS/OWNER/TAGS sorts apply to the direct-children
 listing only (``max_depth=1``); combining them with a deeper traversal is a
 400.
 
+Name, owner, timestamp, tag or approval filters restrict discovery to readable
+/shared and personal paths for every role, including counts and pagination.
+Unfiltered browsing retains ordinary read access.
+
 This is the preferred way to list folder contents when you need document metadata.
 For generic path traversal of folders only, use GET /path-parts.
 
@@ -531,6 +535,9 @@ If parent_path_part_id is not provided, lists top-level folders.
 At root level, the /users folder is hidden and replaced with the current
 user's personal folder (/users/{user_id}) displayed as "Private".
 
+Owner or timestamp filters restrict discovery to readable /shared and personal
+paths for every role. Unfiltered browsing retains ordinary read access.
+
 ### Example
 
 * Api Key Authentication (cookieAuth):
@@ -640,14 +647,15 @@ Name | Type | Description  | Notes
 
 Search Items Handler
 
-Search for folders, documents, connectors, workflows and skills.
+Search for folders, documents, connectors and workflows.
 
 Every word of the query must appear in the item's name or in a folder on
 the way to it; items named after the query rank above items that merely
 sit in a folder named after it. Matching is case-insensitive and served by
 trigram indexes, with a typo-tolerant fallback on names when nothing
 matches strictly. Results are filtered by the current user's path
-permissions.
+permissions and limited to /shared and the caller's personal folder for
+every role. An explicit parent scope only narrows those discovery roots.
 
 Owner, document type, timestamp and tag filters narrow both the page and
 ``counts_by_type``; ``part_type`` narrows the page only, so the chips keep

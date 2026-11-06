@@ -325,7 +325,7 @@ example().catch(console.error);
 
 List Folder Contents Handler
 
-List all contents (folders and documents) under a folder.  Returns a discriminated union of FolderResponse and DocumentResponse items, distinguished by the &#x60;part_type&#x60; field (\&quot;FOLDER\&quot; or \&quot;DOCUMENT\&quot;).  When with_tags&#x3D;true, each item includes a tags field with the full tag objects.  &#x60;&#x60;approval_state&#x60;&#x60; / &#x60;&#x60;include_tag_ids&#x60;&#x60; / &#x60;&#x60;exclude_tag_ids&#x60;&#x60; filter the result at the path_part layer: approval state on the item, tags matched by self-or-ancestor inheritance (include &#x3D; OR, exclude wins).  &#x60;&#x60;sort_dir&#x60;&#x60;, &#x60;&#x60;owner_id&#x60;&#x60;, &#x60;&#x60;name_like&#x60;&#x60;, the created_at/updated_at range filters, and the STATUS/OWNER/TAGS sorts apply to the direct-children listing only (&#x60;&#x60;max_depth&#x3D;1&#x60;&#x60;); combining them with a deeper traversal is a 400.  This is the preferred way to list folder contents when you need document metadata. For generic path traversal of folders only, use GET /path-parts.
+List all contents (folders and documents) under a folder.  Returns a discriminated union of FolderResponse and DocumentResponse items, distinguished by the &#x60;part_type&#x60; field (\&quot;FOLDER\&quot; or \&quot;DOCUMENT\&quot;).  When with_tags&#x3D;true, each item includes a tags field with the full tag objects.  &#x60;&#x60;approval_state&#x60;&#x60; / &#x60;&#x60;include_tag_ids&#x60;&#x60; / &#x60;&#x60;exclude_tag_ids&#x60;&#x60; filter the result at the path_part layer: approval state on the item, tags matched by self-or-ancestor inheritance (include &#x3D; OR, exclude wins).  &#x60;&#x60;sort_dir&#x60;&#x60;, &#x60;&#x60;owner_id&#x60;&#x60;, &#x60;&#x60;name_like&#x60;&#x60;, the created_at/updated_at range filters, and the STATUS/OWNER/TAGS sorts apply to the direct-children listing only (&#x60;&#x60;max_depth&#x3D;1&#x60;&#x60;); combining them with a deeper traversal is a 400.  Name, owner, timestamp, tag or approval filters restrict discovery to readable /shared and personal paths for every role, including counts and pagination. Unfiltered browsing retains ordinary read access.  This is the preferred way to list folder contents when you need document metadata. For generic path traversal of folders only, use GET /path-parts.
 
 ### Example
 
@@ -445,7 +445,7 @@ example().catch(console.error);
 
 List Folders Handler
 
-List child folders of a parent folder.  Returns only direct child folders (depth&#x3D;1) of the specified parent. If parent_path_part_id is not provided, lists top-level folders.  At root level, the /users folder is hidden and replaced with the current user\&#39;s personal folder (/users/{user_id}) displayed as \&quot;Private\&quot;.
+List child folders of a parent folder.  Returns only direct child folders (depth&#x3D;1) of the specified parent. If parent_path_part_id is not provided, lists top-level folders.  At root level, the /users folder is hidden and replaced with the current user\&#39;s personal folder (/users/{user_id}) displayed as \&quot;Private\&quot;.  Owner or timestamp filters restrict discovery to readable /shared and personal paths for every role. Unfiltered browsing retains ordinary read access.
 
 ### Example
 
@@ -550,7 +550,7 @@ example().catch(console.error);
 
 Search Items Handler
 
-Search for folders, documents, connectors, workflows and skills.  Every word of the query must appear in the item\&#39;s name or in a folder on the way to it; items named after the query rank above items that merely sit in a folder named after it. Matching is case-insensitive and served by trigram indexes, with a typo-tolerant fallback on names when nothing matches strictly. Results are filtered by the current user\&#39;s path permissions.  Owner, document type, timestamp and tag filters narrow both the page and &#x60;&#x60;counts_by_type&#x60;&#x60;; &#x60;&#x60;part_type&#x60;&#x60; narrows the page only, so the chips keep every type\&#39;s count.
+Search for folders, documents, connectors and workflows.  Every word of the query must appear in the item\&#39;s name or in a folder on the way to it; items named after the query rank above items that merely sit in a folder named after it. Matching is case-insensitive and served by trigram indexes, with a typo-tolerant fallback on names when nothing matches strictly. Results are filtered by the current user\&#39;s path permissions and limited to /shared and the caller\&#39;s personal folder for every role. An explicit parent scope only narrows those discovery roots.  Owner, document type, timestamp and tag filters narrow both the page and &#x60;&#x60;counts_by_type&#x60;&#x60;; &#x60;&#x60;part_type&#x60;&#x60; narrows the page only, so the chips keep every type\&#39;s count.
 
 ### Example
 

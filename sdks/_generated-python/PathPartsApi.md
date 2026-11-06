@@ -504,15 +504,17 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_path_part_subtree_chunks**
-> SubtreeChunksResponse get_path_part_subtree_chunks(path_part_id)
+> SubtreeChunksResponse get_path_part_subtree_chunks(path_part_id, include_chunks=include_chunks)
 
 **Synchronous variant:** `get_path_part_subtree_chunks_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
 Get Path Part Subtree Chunks Handler
 
-Resolve all descendant chunks for a subtree root.
+Resolve hierarchy metadata for chunk, table and skill points in this subtree.
 
-Returns chunks grouped by identical (path_part_ids, tag_ids) tuples.
+Groups include the root itself when it has a point. Use point_ids for Qdrant
+updates; chunk_ids remains the chunk-only subset for existing clients.
+Restore repair sets include_chunks=false to avoid rewriting document chunks.
 
 ### Example
 
@@ -552,10 +554,11 @@ async with ksapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = ksapi.PathPartsApi(api_client)
     path_part_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    include_chunks = True # bool | Include document chunks; false resolves table/skill cards only (optional) (default to True)
 
     try:
         # Get Path Part Subtree Chunks Handler
-        api_response = await api_instance.get_path_part_subtree_chunks(path_part_id)
+        api_response = await api_instance.get_path_part_subtree_chunks(path_part_id, include_chunks=include_chunks)
         print("The response of PathPartsApi->get_path_part_subtree_chunks:\n")
         pprint(api_response)
     except Exception as e:
@@ -570,6 +573,7 @@ async with ksapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **path_part_id** | **UUID**|  | 
+ **include_chunks** | **bool**| Include document chunks; false resolves table/skill cards only | [optional] [default to True]
 
 ### Return type
 
@@ -824,6 +828,9 @@ WORKFLOW_DEFINITION, and WORKFLOW_RUN path parts.
 
 For listing folder contents that includes documents with enriched metadata,
 use GET /folders/{folder_id}/contents instead.
+
+Timestamp filters restrict discovery to readable /shared and personal paths
+for every role. Unfiltered browsing retains ordinary read access.
 
 ### Example
 

@@ -336,7 +336,7 @@ example().catch(console.error);
 
 Describe Data Source Tables Handler
 
-Summarize + embed each modeled table so the agent can find it by meaning.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector. Writes one dense Qdrant point per table (&#x60;&#x60;object_kind&#x3D;table_description&#x60;&#x60;) so the agent\&#39;s table search surfaces the right table across the corpus, while users never see the summaries in ordinary chunk search. Content-hash gated: a table whose summary + exposed columns are unchanged makes no LLM/embedding call, so a repeat call is cheap.
+Summarize + embed each modeled table so the agent can find it by meaning.  Requires &#x60;&#x60;can_write&#x60;&#x60; on the connector. Writes one dense Qdrant point per table (&#x60;&#x60;object_kind&#x3D;table_description&#x60;&#x60;) so the agent\&#39;s table search surfaces the right table across the corpus, while users never see the summaries in ordinary chunk search. Content-hash gated: a table whose summary + exposed columns are unchanged makes no LLM/embedding call when its point exists. Unchanged content still refreshes the common hierarchy payload. Missing points are re-embedded from stored summaries without regenerating those summaries. Effectively excluded tables skip model/index work.
 
 ### Example
 
@@ -873,7 +873,7 @@ example().catch(console.error);
 
 Search Data Source Tables Handler
 
-Find modeled tables by the meaning of their summaries (agent discovery).  Dense semantic search over each table\&#39;s summary, scoped to the tenant (optionally one connector). Only tables the caller can read are returned; users never see these summaries in ordinary chunk search.
+Find modeled tables by the meaning of their summaries (agent discovery).  Dense semantic search over each table\&#39;s summary within /shared and the caller\&#39;s personal folder, for every role (optionally one connector). Read permissions further narrow discovery before ranking and on hydration; users never see these summaries in ordinary chunk search.  The Qdrant query uses the configured retrieval timeout after query embedding. A timeout returns 503 without partial results.
 
 ### Example
 

@@ -408,11 +408,11 @@ example().catch(console.error);
 
 ## getPathPartSubtreeChunks
 
-> SubtreeChunksResponse getPathPartSubtreeChunks(pathPartId)
+> SubtreeChunksResponse getPathPartSubtreeChunks(pathPartId, includeChunks)
 
 Get Path Part Subtree Chunks Handler
 
-Resolve all descendant chunks for a subtree root.  Returns chunks grouped by identical (path_part_ids, tag_ids) tuples.
+Resolve hierarchy metadata for chunk, table and skill points in this subtree.  Groups include the root itself when it has a point. Use point_ids for Qdrant updates; chunk_ids remains the chunk-only subset for existing clients. Restore repair sets include_chunks&#x3D;false to avoid rewriting document chunks.
 
 ### Example
 
@@ -436,6 +436,8 @@ async function example() {
   const body = {
     // string
     pathPartId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+    // boolean | Include document chunks; false resolves table/skill cards only (optional)
+    includeChunks: true,
   } satisfies GetPathPartSubtreeChunksRequest;
 
   try {
@@ -456,6 +458,7 @@ example().catch(console.error);
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **pathPartId** | `string` |  | [Defaults to `undefined`] |
+| **includeChunks** | `boolean` | Include document chunks; false resolves table/skill cards only | [Optional] [Defaults to `true`] |
 
 ### Return type
 
@@ -661,7 +664,7 @@ example().catch(console.error);
 
 List Path Parts Handler
 
-List path parts under a parent with traversal.  This is a generic endpoint for traversing the path hierarchy. It returns the navigable, container-like nodes of the tree: FOLDER, WORKFLOW_DEFINITION, and WORKFLOW_RUN path parts.  - If parent_path_id is not provided, lists contents of the root folder. - max_depth controls how deep to traverse (1 &#x3D; direct children only). - sort_order controls the ordering: LOGICAL (linked-list), NAME, UPDATED_AT, CREATED_AT.  For listing folder contents that includes documents with enriched metadata, use GET /folders/{folder_id}/contents instead.
+List path parts under a parent with traversal.  This is a generic endpoint for traversing the path hierarchy. It returns the navigable, container-like nodes of the tree: FOLDER, WORKFLOW_DEFINITION, and WORKFLOW_RUN path parts.  - If parent_path_id is not provided, lists contents of the root folder. - max_depth controls how deep to traverse (1 &#x3D; direct children only). - sort_order controls the ordering: LOGICAL (linked-list), NAME, UPDATED_AT, CREATED_AT.  For listing folder contents that includes documents with enriched metadata, use GET /folders/{folder_id}/contents instead.  Timestamp filters restrict discovery to readable /shared and personal paths for every role. Unfiltered browsing retains ordinary read access.
 
 ### Example
 

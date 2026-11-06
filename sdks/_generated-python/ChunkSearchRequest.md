@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **hybrid_profile** | [**HybridSearchProfile**](HybridSearchProfile.md) |  | [optional] 
 **dense_weight** | **float** | Optional explicit weight for the dense branch. Must be provided together with sparse_weight and overrides hybrid_profile. | [optional] 
 **sparse_weight** | **float** | Optional explicit weight for the sparse branch. Must be provided together with dense_weight and overrides hybrid_profile. | [optional] 
-**parent_path_ids** | **List[UUID]** | Path part IDs to search within (non-CHUNK types). Defaults to tenant&#39;s /shared. | [optional] 
+**parent_path_ids** | **List[UUID]** | Path part IDs to search within (non-CHUNK types). Defaults to /shared and the caller&#39;s personal folder. Explicit paths narrow this scope and remain subject to read permissions for every role. | [optional] 
 **tag_ids** | **List[UUID]** | Filter by tag IDs (AND logic — chunks must have ALL specified tags) | [optional] 
 **chunk_types** | [**List[ChunkType]**](ChunkType.md) | Filter by chunk types (TEXT, TABLE, IMAGE, HTML, UNKNOWN). Only chunks matching one of the listed types are returned. | [optional] 
 **ingestion_time_after** | **datetime** | Only chunks ingested after this timestamp | [optional] 

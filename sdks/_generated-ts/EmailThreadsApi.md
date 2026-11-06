@@ -244,7 +244,7 @@ example().catch(console.error);
 
 List Email Threads Handler
 
-List a folder\&#39;s conversations, newest first by default.  Each row carries what a collapsed conversation shows — participants, the message count, a paperclip and the latest mail\&#39;s opening line — computed for the whole page by one aggregate. A caller reading those per conversation instead is a request per row, which is what makes a fifty-row page slow.
+List a folder\&#39;s conversations, newest first by default.  Each row carries what a collapsed conversation shows — participants, the message count, a paperclip and the latest mail\&#39;s opening line — computed for the whole page by one aggregate. A caller reading those per conversation instead is a request per row, which is what makes a fifty-row page slow.  Nonempty subject or source-folder filters limit every role to readable /shared and personal paths. Empty string filters are inactive. Unfiltered browsing retains ordinary read access.
 
 ### Example
 

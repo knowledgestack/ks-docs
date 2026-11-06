@@ -405,8 +405,10 @@ Requires ``can_write`` on the connector. Writes one dense Qdrant point per
 table (``object_kind=table_description``) so the agent's table search
 surfaces the right table across the corpus, while users never see the
 summaries in ordinary chunk search. Content-hash gated: a table whose
-summary + exposed columns are unchanged makes no LLM/embedding call, so a
-repeat call is cheap.
+summary + exposed columns are unchanged makes no LLM/embedding call when its
+point exists. Unchanged content still refreshes the common hierarchy payload.
+Missing points are re-embedded from stored summaries without regenerating
+those summaries. Effectively excluded tables skip model/index work.
 
 ### Example
 
@@ -1048,9 +1050,13 @@ Search Data Source Tables Handler
 
 Find modeled tables by the meaning of their summaries (agent discovery).
 
-Dense semantic search over each table's summary, scoped to the tenant
-(optionally one connector). Only tables the caller can read are returned;
+Dense semantic search over each table's summary within /shared and the
+caller's personal folder, for every role (optionally one connector).
+Read permissions further narrow discovery before ranking and on hydration;
 users never see these summaries in ordinary chunk search.
+
+The Qdrant query uses the configured retrieval timeout after query embedding.
+A timeout returns 503 without partial results.
 
 ### Example
 

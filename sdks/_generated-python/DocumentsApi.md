@@ -1109,6 +1109,10 @@ List documents in a folder.
 Returns only direct child documents (depth=1) of the specified parent folder.
 If parent_path_part_id is not provided, lists top-level documents.
 
+Owner, timestamp, type or duration filters restrict discovery to readable
+/shared and personal paths for every role. Unfiltered browsing retains
+ordinary read access.
+
 ### Example
 
 * Api Key Authentication (cookieAuth):

@@ -1,12 +1,13 @@
 # SubtreeChunkGroup
 
-A group of chunks sharing identical path_part_ids and tag_ids.  Used by PathPartCRUDService.resolve_subtree_chunks to batch downstream Qdrant set_payload calls.
+Hierarchy payload shared by chunk, table and skill points in a subtree.  The legacy name and chunk_ids field are retained for existing clients.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **chunk_ids** | **List[UUID]** |  | 
+**point_ids** | **List[UUID]** | Qdrant point IDs: the PDO UUIDs of chunks, tables and skills. Use chunk_ids when absent in a legacy response. | [optional] 
 **path_part_ids** | **List[UUID]** |  | 
 **tag_ids** | **List[UUID]** |  | 
 

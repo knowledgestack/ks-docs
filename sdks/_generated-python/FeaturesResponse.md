@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **microsoft_login_enabled** | **bool** |  | 
 **github_login_enabled** | **bool** |  | 
 **sms_login_enabled** | **bool** |  | 
+**streaming_dictation_max_seconds** | **float** | Streaming dictation duration limit in seconds from first audio; -1 when streaming dictation is not configured. | 
 **default_frontend_language** | [**SupportedLanguage**](SupportedLanguage.md) |  | 
 **upload** | [**UploadConstraints**](UploadConstraints.md) |  | 
 **data_source_engines** | [**List[DataSourceEngine]**](DataSourceEngine.md) |  | 

@@ -10,6 +10,7 @@ Name | Type
 `microsoftLoginEnabled` | boolean
 `githubLoginEnabled` | boolean
 `smsLoginEnabled` | boolean
+`streamingDictationMaxSeconds` | number
 `defaultFrontendLanguage` | [SupportedLanguage](SupportedLanguage.md)
 `upload` | [UploadConstraints](UploadConstraints.md)
 `dataSourceEngines` | [Array&lt;DataSourceEngine&gt;](DataSourceEngine.md)
@@ -25,6 +26,7 @@ const example = {
   "microsoftLoginEnabled": null,
   "githubLoginEnabled": null,
   "smsLoginEnabled": null,
+  "streamingDictationMaxSeconds": null,
   "defaultFrontendLanguage": null,
   "upload": null,
   "dataSourceEngines": null,

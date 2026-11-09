@@ -10,6 +10,7 @@ Method | HTTP request | Description
 [**delete_tenant_logo**](TenantsApi.md#delete_tenant_logo) | **DELETE** /v1/tenants/{tenant_id}/branding/logo | Delete Tenant Logo
 [**delete_tenant_user**](TenantsApi.md#delete_tenant_user) | **DELETE** /v1/tenants/{tenant_id}/users/{user_id} | Delete Tenant User Handler
 [**get_tenant**](TenantsApi.md#get_tenant) | **GET** /v1/tenants/{tenant_id} | Get Tenant
+[**get_tenant_plan**](TenantsApi.md#get_tenant_plan) | **GET** /v1/tenants/{tenant_id}/plan | Get Tenant Plan Handler
 [**get_tenant_quota_state**](TenantsApi.md#get_tenant_quota_state) | **GET** /v1/tenants/{tenant_id}/quota | Get Tenant Quota State Handler
 [**list_tenant_users**](TenantsApi.md#list_tenant_users) | **GET** /v1/tenants/{tenant_id}/users | List Tenant Users
 [**list_tenants**](TenantsApi.md#list_tenants) | **GET** /v1/tenants | List Tenants
@@ -212,12 +213,10 @@ Delete Tenant
 
 Delete a tenant.
 
-Requires OWNER role in the tenant. Refused (409) while a
-provider-billed subscription is live — deleting the tenant would
-not stop Stripe/Ping++ from charging for it; the OWNER must
-downgrade to free (or let the prepay period expire) first.
-Deletes the tenant's LiteLLM team/keys and S3 bucket after the DB
-transaction commits.
+Requires OWNER role in the tenant. Refused (409) while a provider
+subscription is live; the OWNER cancels it in the billing portal first.
+Deletes the tenant's LiteLLM team/keys and S3 bucket after the delete
+commits.
 
 ### Example
 
@@ -572,17 +571,20 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_tenant_quota_state**
-> TenantQuotaStateResponse get_tenant_quota_state(tenant_id)
+# **get_tenant_plan**
+> TenantPlanResponse get_tenant_plan(tenant_id)
 
-**Synchronous variant:** `get_tenant_quota_state_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+**Synchronous variant:** `get_tenant_plan_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
 
-Get Tenant Quota State Handler
+Get Tenant Plan Handler
 
-Read the tenant's current quota state across all metered caps + seats.
+The tenant's plan in force, public or private, with what it grants.
 
-Any active member of the tenant can read. Read-only — does not mutate
-quota state.
+Any active member can read. ``billed`` says whether a billing subscription
+sets the plan (change it in the billing portal) rather than an operator's
+contract or free. Once an unpaid renewal's grace has run out this is the
+free plan with one seat, as the meter charges. ``GET /v1/plans`` lists the
+public plans the tenant can buy.
 
 ### Example
 
@@ -591,7 +593,100 @@ quota state.
 
 ```python
 import ksapi
-from ksapi.models.tenant_quota_state_response import TenantQuotaStateResponse
+from ksapi.models.tenant_plan_response import TenantPlanResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.TenantsApi(api_client)
+    tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+
+    try:
+        # Get Tenant Plan Handler
+        api_response = await api_instance.get_tenant_plan(tenant_id)
+        print("The response of TenantsApi->get_tenant_plan:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling TenantsApi->get_tenant_plan: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenant_id** | **UUID**|  | 
+
+### Return type
+
+[**TenantPlanResponse**](TenantPlanResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_tenant_quota_state**
+> TenantQuotaResponse get_tenant_quota_state(tenant_id)
+
+**Synchronous variant:** `get_tenant_quota_state_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
+Get Tenant Quota State Handler
+
+Read the tenant's metered entitlements and seats under the plan in force.
+
+Any active member of the tenant can read. Entries are keyed by entitlement
+key (audio and video in seconds). A read writes nothing: an allowance not
+yet granted this window is reported at the size the first charge grants.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.tenant_quota_response import TenantQuotaResponse
 from ksapi.rest import ApiException
 from pprint import pprint
 
@@ -643,7 +738,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**TenantQuotaStateResponse**](TenantQuotaStateResponse.md)
+[**TenantQuotaResponse**](TenantQuotaResponse.md)
 
 ### Authorization
 

@@ -15,7 +15,7 @@ All URIs are relative to *http://localhost:8000*
 
 Agent Ask Handler
 
-Run a one-shot text agent request to completion and return the payload.  The request blocks until the underlying Temporal workflow finishes. Clients should set a generous HTTP timeout to accommodate tool-heavy runs.  Quota: consumes one MESSAGE before &#x60;&#x60;start_workflow&#x60;&#x60;. Refund semantics distinguish cause:  * **Cancellation** (client disconnect → &#x60;&#x60;asyncio.CancelledError&#x60;&#x60;,   OR explicit &#x60;&#x60;DELETE /v1/system-jobs/{id}&#x60;&#x60; while we await   &#x60;&#x60;handle.result()&#x60;&#x60; → Temporal-wrapped &#x60;&#x60;CancelledError&#x60;&#x60;)   → **NO REFUND.** The user walked away or actively cancelled;   that\&#39;s their volition. We still best-effort cancel the   workflow so the agent stops burning LLM tokens, but the   consume stays charged. Detection uses   &#x60;&#x60;temporalio.exceptions.is_cancelled_exception&#x60;&#x60; which spans   both forms. * Any other exception (pre-enqueue &#x60;&#x60;start_workflow&#x60;&#x60; raise,   Temporal failure, workflow-internal error) → **REFUND.** Server   / our-problem failures don\&#39;t bill the user.
+Run a one-shot text agent request to completion and return its text.  Blocks until the run finishes; set a generous HTTP timeout. Charges one &#x60;&#x60;meter.agent.message&#x60;&#x60;: a server-side failure is released, a cancellation (client disconnect or &#x60;&#x60;DELETE /v1/system-jobs/{id}&#x60;&#x60;) stays charged.
 
 ### Example
 
@@ -90,7 +90,7 @@ example().catch(console.error);
 
 Agent Extract Handler
 
-Run a one-shot structured extraction request and return the payload.  Validates the schema input on the route side (DOCUMENT → active version → valid JSON object) BEFORE consuming quota or starting the workflow. Bad schema → 400 with no quota debit. The workflow activity trusts the input and does not re-validate.  Quota: consumes one MESSAGE before &#x60;&#x60;start_workflow&#x60;&#x60;. Refunds on any failure between consume and &#x60;&#x60;handle.result()&#x60;&#x60; returning — pre-enqueue &#x60;&#x60;start_workflow&#x60;&#x60; raises and post-enqueue workflow failures both refund.
+Run a one-shot structured extraction and return the extracted object.  The schema (a stored DOCUMENT or &#x60;&#x60;output_schema&#x60;&#x60;) is validated first: bad input is a 400 that charges nothing. Otherwise charges one &#x60;&#x60;meter.agent.message&#x60;&#x60;, released on a server-side failure; a cancellation stays charged.
 
 ### Example
 

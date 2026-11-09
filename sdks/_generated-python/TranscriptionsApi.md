@@ -26,9 +26,16 @@ to mono 16 kHz mp3, so any listed container works.
 
 Limits: **25 MiB** and **5 min** per clip.
 
+**Quota.** Each clip consumes `meter.kb.audio_second`: its duration rounded
+up to whole seconds, charged before the speech backend is called and
+released if transcription fails. A rejected clip (413/415/422) is not
+charged.
+
 Errors, all carrying the standard `code`/`request_id` body:
+`403` `feature_not_available`, the plan does not include audio ·
 `413` clip over either limit · `415` content type not accepted ·
 `422` empty clip, or audio that could not be decoded ·
+`429` `quota_exceeded`, the audio-second allowance is spent ·
 `503` the speech backend is unreachable or unconfigured.
 
 The audio is held for one ASR call and never persisted; the transcript is

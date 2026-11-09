@@ -1,7 +1,7 @@
 
-# BillingSystem
+# EntitlementKey
 
-External payment platform a subscription or payment is linked to.  ``STRIPE`` serves North America; ``PING_PP`` (Ping++, a mainland-China payment aggregator fronting Alipay + WeChat Pay) serves China. Rows with no external billing linkage (free / admin-issued / synthetic fall-back subscriptions) carry NULL instead of a value.
+Natural key of ``knowledgestack.entitlement_definition``.  ``toggle.*`` is switched on by a plan; ``meter.*`` is counted against a limit. A plan without a row for a key does not grant it.
 
 ## Properties
 
@@ -11,11 +11,11 @@ Name | Type
 ## Example
 
 ```typescript
-import type { BillingSystem } from '@knowledge-stack/ksapi'
+import type { EntitlementKey } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-} satisfies BillingSystem
+} satisfies EntitlementKey
 
 console.log(example)
 
@@ -24,7 +24,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as BillingSystem
+const exampleParsed = JSON.parse(exampleJSON) as EntitlementKey
 console.log(exampleParsed)
 ```
 

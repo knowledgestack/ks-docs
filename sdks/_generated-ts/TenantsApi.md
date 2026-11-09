@@ -10,6 +10,7 @@ All URIs are relative to *http://localhost:8000*
 | [**deleteTenantLogo**](TenantsApi.md#deletetenantlogo) | **DELETE** /v1/tenants/{tenant_id}/branding/logo | Delete Tenant Logo |
 | [**deleteTenantUser**](TenantsApi.md#deletetenantuser) | **DELETE** /v1/tenants/{tenant_id}/users/{user_id} | Delete Tenant User Handler |
 | [**getTenant**](TenantsApi.md#gettenant) | **GET** /v1/tenants/{tenant_id} | Get Tenant |
+| [**getTenantPlan**](TenantsApi.md#gettenantplan) | **GET** /v1/tenants/{tenant_id}/plan | Get Tenant Plan Handler |
 | [**getTenantQuotaState**](TenantsApi.md#gettenantquotastate) | **GET** /v1/tenants/{tenant_id}/quota | Get Tenant Quota State Handler |
 | [**listTenantUsers**](TenantsApi.md#listtenantusers) | **GET** /v1/tenants/{tenant_id}/users | List Tenant Users |
 | [**listTenants**](TenantsApi.md#listtenants) | **GET** /v1/tenants | List Tenants |
@@ -181,7 +182,7 @@ example().catch(console.error);
 
 Delete Tenant
 
-Delete a tenant.  Requires OWNER role in the tenant. Refused (409) while a provider-billed subscription is live — deleting the tenant would not stop Stripe/Ping++ from charging for it; the OWNER must downgrade to free (or let the prepay period expire) first. Deletes the tenant\&#39;s LiteLLM team/keys and S3 bucket after the DB transaction commits.
+Delete a tenant.  Requires OWNER role in the tenant. Refused (409) while a provider subscription is live; the OWNER cancels it in the billing portal first. Deletes the tenant\&#39;s LiteLLM team/keys and S3 bucket after the delete commits.
 
 ### Example
 
@@ -481,13 +482,88 @@ example().catch(console.error);
 [[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
 
 
+## getTenantPlan
+
+> TenantPlanResponse getTenantPlan(tenantId)
+
+Get Tenant Plan Handler
+
+The tenant\&#39;s plan in force, public or private, with what it grants.  Any active member can read. &#x60;&#x60;billed&#x60;&#x60; says whether a billing subscription sets the plan (change it in the billing portal) rather than an operator\&#39;s contract or free. Once an unpaid renewal\&#39;s grace has run out this is the free plan with one seat, as the meter charges. &#x60;&#x60;GET /v1/plans&#x60;&#x60; lists the public plans the tenant can buy.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  TenantsApi,
+} from '@knowledge-stack/ksapi';
+import type { GetTenantPlanRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new TenantsApi(config);
+
+  const body = {
+    // string
+    tenantId: 38400000-8cf0-11bd-b23e-10b96e4ef00d,
+  } satisfies GetTenantPlanRequest;
+
+  try {
+    const data = await api.getTenantPlan(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **tenantId** | `string` |  | [Defaults to `undefined`] |
+
+### Return type
+
+[**TenantPlanResponse**](TenantPlanResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
 ## getTenantQuotaState
 
-> TenantQuotaStateResponse getTenantQuotaState(tenantId)
+> TenantQuotaResponse getTenantQuotaState(tenantId)
 
 Get Tenant Quota State Handler
 
-Read the tenant\&#39;s current quota state across all metered caps + seats.  Any active member of the tenant can read. Read-only — does not mutate quota state.
+Read the tenant\&#39;s metered entitlements and seats under the plan in force.  Any active member of the tenant can read. Entries are keyed by entitlement key (audio and video in seconds). A read writes nothing: an allowance not yet granted this window is reported at the size the first charge grants.
 
 ### Example
 
@@ -534,7 +610,7 @@ example().catch(console.error);
 
 ### Return type
 
-[**TenantQuotaStateResponse**](TenantQuotaStateResponse.md)
+[**TenantQuotaResponse**](TenantQuotaResponse.md)
 
 ### Authorization
 

@@ -1,28 +1,25 @@
 
-# PaginatedResponseBillingPaymentResponse
+# EntitlementUsage
 
+Units used and the cap they count against.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`items` | [Array&lt;BillingPaymentResponse&gt;](BillingPaymentResponse.md)
-`total` | number
+`used` | number
 `limit` | number
-`offset` | number
 
 ## Example
 
 ```typescript
-import type { PaginatedResponseBillingPaymentResponse } from '@knowledge-stack/ksapi'
+import type { EntitlementUsage } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "items": null,
-  "total": null,
+  "used": null,
   "limit": null,
-  "offset": null,
-} satisfies PaginatedResponseBillingPaymentResponse
+} satisfies EntitlementUsage
 
 console.log(example)
 
@@ -31,7 +28,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as PaginatedResponseBillingPaymentResponse
+const exampleParsed = JSON.parse(exampleJSON) as EntitlementUsage
 console.log(exampleParsed)
 ```
 

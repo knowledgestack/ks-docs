@@ -1,21 +1,23 @@
 
-# CheckoutAction
+# TopupCheckoutRequest
 
-What the client must do next after a subscription-change request.
+Buy one top-up product (with Stripe, the Price\'s lookup key).
 
 ## Properties
 
 Name | Type
 ------------ | -------------
+`topupKey` | string
 
 ## Example
 
 ```typescript
-import type { CheckoutAction } from '@knowledge-stack/ksapi'
+import type { TopupCheckoutRequest } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-} satisfies CheckoutAction
+  "topupKey": null,
+} satisfies TopupCheckoutRequest
 
 console.log(example)
 
@@ -24,7 +26,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as CheckoutAction
+const exampleParsed = JSON.parse(exampleJSON) as TopupCheckoutRequest
 console.log(exampleParsed)
 ```
 

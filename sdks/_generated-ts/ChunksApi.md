@@ -487,7 +487,7 @@ example().catch(console.error);
 
 Search Chunks Handler
 
-Search over chunks using dense vector, BM25 full-text, or hybrid retrieval.  Combines search with path-based authorization and optional metadata filters. Uses Qdrant for retrieval and hydrates the matched chunks from Postgres.  **Billing note.** SEARCH consume runs *before* path-permission resolution. A request that resolves to an empty permission set (caller has read access to nothing in the requested scope) returns &#x60;&#x60;[]&#x60;&#x60; cleanly — without raising — so it is **not** refunded. This is intentional: differential billing for a no-results case would leak access shape to the caller. Callers concerned about charged no-op searches should validate path access client-side first.
+Search over chunks using dense vector, BM25 full-text, or hybrid retrieval.  Combines search with path-based authorization and optional metadata filters. Uses Qdrant for retrieval and hydrates the matched chunks from Postgres.  **Billing note.** The &#x60;&#x60;meter.kb.search&#x60;&#x60; charge runs *before* path-permission resolution. A request that resolves to an empty permission set (caller has read access to nothing in the requested scope) returns &#x60;&#x60;[]&#x60;&#x60; cleanly — without raising — so it is **not** released. This is intentional: differential billing for a no-results case would leak access shape to the caller. Callers concerned about charged no-op searches should validate path access client-side first.
 
 ### Example
 

@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **idp_config** | **Dict[str, object]** | External IdP configuration | [optional] 
 **settings** | [**TenantSettingsResponse**](TenantSettingsResponse.md) |  | 
 **branding** | [**TenantBrandingResponse**](TenantBrandingResponse.md) |  | [optional] 
-**seats** | **int** | Maximum active members allowed for this tenant. | 
-**subscription_id** | **UUID** | FK to the subscription plan governing the tenant&#39;s caps. Resolve &#x60;&#x60;GET /public/subscriptions&#x60;&#x60; to display plan name and limits. | 
+**num_seats** | **int** | Seats sold under the plan in force, one once a lapsed plan&#39;s grace ran out: the multiplier of seat-scaled allowances. The member cap is the plan&#39;s seat limit. | 
+**plan_id** | **UUID** | The plan in force (a plan_definition id): free once a lapsed plan&#39;s renewal grace ran out. | 
 
 ## Example
 

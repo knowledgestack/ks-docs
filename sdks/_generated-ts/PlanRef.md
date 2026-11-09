@@ -1,25 +1,25 @@
 
-# TenantQuotaStateResponse
+# PlanRef
 
-Tenant\'s current quota state across all enforced caps.
+A plan by id, with its name to show.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`metered` | [Array&lt;MeteredQuotaStatus&gt;](MeteredQuotaStatus.md)
-`seats` | [SeatQuotaStatus](SeatQuotaStatus.md)
+`id` | string
+`name` | string
 
 ## Example
 
 ```typescript
-import type { TenantQuotaStateResponse } from '@knowledge-stack/ksapi'
+import type { PlanRef } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "metered": null,
-  "seats": null,
-} satisfies TenantQuotaStateResponse
+  "id": null,
+  "name": null,
+} satisfies PlanRef
 
 console.log(example)
 
@@ -28,7 +28,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as TenantQuotaStateResponse
+const exampleParsed = JSON.parse(exampleJSON) as PlanRef
 console.log(exampleParsed)
 ```
 

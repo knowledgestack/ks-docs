@@ -7,7 +7,7 @@ Live seat count for the tenant.  ``used`` is the number of active (non-deactivat
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **used** | **int** | Active seats currently consumed | 
-**limit** | **int** | Maximum seats permitted for the tenant | 
+**limit** | **int** | Seat cap under the plan in force; new members stop here. | 
 
 ## Example
 

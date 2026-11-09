@@ -1,15 +1,12 @@
-# UsageMetric
+# EntitlementKind
 
+A ``TOGGLE`` refuses with 403 while off; a ``LIMIT`` refuses with 429 once spent.
 
 ## Enum
 
-* `PAGE` (value: `'PAGE'`)
+* `TOGGLE` (value: `'toggle'`)
 
-* `SEARCH` (value: `'SEARCH'`)
-
-* `MESSAGE` (value: `'MESSAGE'`)
-
-* `MEDIA_MINUTE` (value: `'MEDIA_MINUTE'`)
+* `LIMIT` (value: `'limit'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

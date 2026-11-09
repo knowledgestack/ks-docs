@@ -22,7 +22,7 @@ Name | Type
 `dataSourcesTotal` | number
 `dataSourceTablesTotal` | number
 `documentsCheckedOut` | number
-`quota` | [Array&lt;MeteredQuotaStatus&gt;](MeteredQuotaStatus.md)
+`quota` | [Array&lt;EntitlementQuotaStatus&gt;](EntitlementQuotaStatus.md)
 `feedbackUp` | number
 `feedbackDown` | number
 

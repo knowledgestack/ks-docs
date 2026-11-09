@@ -1,33 +1,21 @@
 
-# MeteredQuotaStatus
+# EntitlementKind
 
-Per-metric usage snapshot for the active period.
+A ``TOGGLE`` refuses with 403 while off; a ``LIMIT`` refuses with 429 once spent.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
-`metric` | [UsageMetric](UsageMetric.md)
-`used` | number
-`limit` | number
-`periodStart` | Date
-`periodEnd` | Date
-`additionalBalance` | number
 
 ## Example
 
 ```typescript
-import type { MeteredQuotaStatus } from '@knowledge-stack/ksapi'
+import type { EntitlementKind } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-  "metric": null,
-  "used": null,
-  "limit": null,
-  "periodStart": null,
-  "periodEnd": null,
-  "additionalBalance": null,
-} satisfies MeteredQuotaStatus
+} satisfies EntitlementKind
 
 console.log(example)
 
@@ -36,7 +24,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as MeteredQuotaStatus
+const exampleParsed = JSON.parse(exampleJSON) as EntitlementKind
 console.log(exampleParsed)
 ```
 

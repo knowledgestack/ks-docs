@@ -599,10 +599,10 @@ Search over chunks using dense vector, BM25 full-text, or hybrid retrieval.
 Combines search with path-based authorization and optional metadata filters.
 Uses Qdrant for retrieval and hydrates the matched chunks from Postgres.
 
-**Billing note.** SEARCH consume runs *before* path-permission
+**Billing note.** The ``meter.kb.search`` charge runs *before* path-permission
 resolution. A request that resolves to an empty permission set
 (caller has read access to nothing in the requested scope) returns
-``[]`` cleanly — without raising — so it is **not** refunded. This
+``[]`` cleanly — without raising — so it is **not** released. This
 is intentional: differential billing for a no-results case would
 leak access shape to the caller. Callers concerned about charged
 no-op searches should validate path access client-side first.

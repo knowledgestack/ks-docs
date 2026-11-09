@@ -29,7 +29,7 @@ Name | Type
 `informationStatistics` | [InformationStatistics](InformationStatistics.md)
 `quotaCharged` | boolean
 `quotaPageCount` | number
-`quotaMediaMinutes` | number
+`quotaMediaSeconds` | number
 `quotaIdempotencyKey` | string
 `fileMd5` | string
 `idempotencyKey` | string
@@ -63,7 +63,7 @@ const example = {
   "informationStatistics": null,
   "quotaCharged": null,
   "quotaPageCount": null,
-  "quotaMediaMinutes": null,
+  "quotaMediaSeconds": null,
   "quotaIdempotencyKey": null,
   "fileMd5": null,
   "idempotencyKey": null,

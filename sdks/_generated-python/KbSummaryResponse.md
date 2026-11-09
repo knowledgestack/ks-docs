@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **data_sources_total** | **int** |  | 
 **data_source_tables_total** | **int** |  | 
 **documents_checked_out** | **int** |  | 
-**quota** | [**List[MeteredQuotaStatus]**](MeteredQuotaStatus.md) | Current-period usage vs limit per metered resource. | 
+**quota** | [**List[EntitlementQuotaStatus]**](EntitlementQuotaStatus.md) | Current-window usage vs limit per metered entitlement. | 
 **feedback_up** | **int** |  | 
 **feedback_down** | **int** |  | 
 

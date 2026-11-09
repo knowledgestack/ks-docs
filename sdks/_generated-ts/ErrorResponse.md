@@ -10,6 +10,7 @@ Name | Type
 `detail` | string
 `code` | string
 `requestId` | string
+`entitlement` | [EntitlementError](EntitlementError.md)
 
 ## Example
 
@@ -21,6 +22,7 @@ const example = {
   "detail": null,
   "code": null,
   "requestId": null,
+  "entitlement": null,
 } satisfies ErrorResponse
 
 console.log(example)

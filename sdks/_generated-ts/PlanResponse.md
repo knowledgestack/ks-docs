@@ -1,20 +1,33 @@
 
-# UsageMetric
+# PlanResponse
 
+A plan and every key it grants; a key it does not grant is absent.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
+`id` | string
+`name` | string
+`description` | string
+`_public` | boolean
+`deletedAt` | Date
+`entitlements` | [Array&lt;PlanEntitlementResponse&gt;](PlanEntitlementResponse.md)
 
 ## Example
 
 ```typescript
-import type { UsageMetric } from '@knowledge-stack/ksapi'
+import type { PlanResponse } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-} satisfies UsageMetric
+  "id": null,
+  "name": null,
+  "description": null,
+  "_public": null,
+  "deletedAt": null,
+  "entitlements": null,
+} satisfies PlanResponse
 
 console.log(example)
 
@@ -23,7 +36,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as UsageMetric
+const exampleParsed = JSON.parse(exampleJSON) as PlanResponse
 console.log(exampleParsed)
 ```
 

@@ -54,7 +54,7 @@ Below this line is auto-generated reference content.
 
 ---
 
-# @knowledge-stack/ksapi@3.29.1
+# @knowledge-stack/ksapi@3.30.0
 
 A TypeScript SDK client for the localhost API.
 
@@ -146,7 +146,10 @@ All URIs are relative to *http://localhost:8000*
 *AuthApi* | [**signout**](docs/AuthApi.md#signout) | **POST** /v1/auth/signout | Signout Handler
 *AuthApi* | [**ssoSignin**](docs/AuthApi.md#ssosignin) | **GET** /v1/auth/sso/{tenant_id}/signin | Sso Login Handler
 *AuthApi* | [**validatePwResetCode**](docs/AuthApi.md#validatepwresetcode) | **POST** /v1/auth/pw/validate_reset_code | Validate Reset Code Handler
-*BillingApi* | [**listBillingPayments**](docs/BillingApi.md#listbillingpayments) | **GET** /v1/tenants/{tenant_id}/billing/payments | List Billing Payments Handler
+*BillingApi* | [**createBillingPortal**](docs/BillingApi.md#createbillingportal) | **POST** /v1/tenants/{tenant_id}/billing/portal | Create Billing Portal Handler
+*BillingApi* | [**createPlanCheckout**](docs/BillingApi.md#createplancheckout) | **POST** /v1/tenants/{tenant_id}/billing/checkout | Create Plan Checkout Handler
+*BillingApi* | [**createTopupCheckout**](docs/BillingApi.md#createtopupcheckout) | **POST** /v1/tenants/{tenant_id}/billing/topups | Create Topup Checkout Handler
+*BillingApi* | [**listPlans**](docs/BillingApi.md#listplans) | **GET** /v1/plans | List Plans Handler
 *BulkDeleteApi* | [**bulkDelete**](docs/BulkDeleteApi.md#bulkdeleteoperation) | **POST** /v1/bulk-delete | Bulk Delete Handler
 *BulkDownloadApi* | [**startBulkDownload**](docs/BulkDownloadApi.md#startbulkdownload) | **POST** /v1/bulk-download | Start Bulk Download Handler
 *BulkMoveApi* | [**bulkMove**](docs/BulkMoveApi.md#bulkmoveoperation) | **POST** /v1/bulk-move | Bulk Move Handler
@@ -274,7 +277,6 @@ All URIs are relative to *http://localhost:8000*
 *PathPartsApi* | [**reorderPathPart**](docs/PathPartsApi.md#reorderpathpartoperation) | **POST** /v1/path-parts/{path_part_id}/reorder | Reorder Path Part Handler
 *PathPartsApi* | [**setPathPartTags**](docs/PathPartsApi.md#setpathparttags) | **POST** /v1/path-parts/{path_part_id}/tags | Set Path Part Tags Handler
 *PathPartsApi* | [**transferPathPartOwner**](docs/PathPartsApi.md#transferpathpartowner) | **PUT** /v1/path-parts/{path_part_id}/owner | Transfer Path Part Owner Handler
-*PublicApi* | [**listPublicSubscriptions**](docs/PublicApi.md#listpublicsubscriptions) | **GET** /public/subscriptions | List Public Subscriptions Handler
 *SectionsApi* | [**createSection**](docs/SectionsApi.md#createsectionoperation) | **POST** /v1/sections | Create Section Handler
 *SectionsApi* | [**deleteSection**](docs/SectionsApi.md#deletesection) | **DELETE** /v1/sections/{section_id} | Delete Section Handler
 *SectionsApi* | [**dissolveSection**](docs/SectionsApi.md#dissolvesection) | **POST** /v1/sections/{section_id}/dissolve | Dissolve Section Handler
@@ -296,8 +298,6 @@ All URIs are relative to *http://localhost:8000*
 *SkillsApi* | [**publishSkillVersion**](docs/SkillsApi.md#publishskillversion) | **POST** /v1/skills/{skill_id}/versions | Publish Skill Version Handler
 *SkillsApi* | [**searchSkills**](docs/SkillsApi.md#searchskillsoperation) | **POST** /v1/skills/search | Search Skills Handler
 *SkillsApi* | [**updateSkill**](docs/SkillsApi.md#updateskilloperation) | **PATCH** /v1/skills/{skill_id} | Update Skill Handler
-*SubscriptionsApi* | [**changeTenantSubscription**](docs/SubscriptionsApi.md#changetenantsubscription) | **POST** /v1/tenants/{tenant_id}/subscriptions | Change Tenant Subscription Handler
-*SubscriptionsApi* | [**getTenantSubscription**](docs/SubscriptionsApi.md#gettenantsubscription) | **GET** /v1/tenants/{tenant_id}/subscriptions | Get Tenant Subscription Handler
 *SystemJobsApi* | [**bulkRerunDvWorkflows**](docs/SystemJobsApi.md#bulkrerundvworkflows) | **POST** /v1/system-jobs/document_versions/bulk-rerun | Bulk Rerun Dv Workflows Handler
 *SystemJobsApi* | [**cancelTemporalWorkflow**](docs/SystemJobsApi.md#canceltemporalworkflow) | **DELETE** /v1/system-jobs/{workflow_id} | Cancel Temporal Workflow Handler
 *SystemJobsApi* | [**dvWorkflowRerun**](docs/SystemJobsApi.md#dvworkflowrerun) | **POST** /v1/system-jobs/document_versions/{workflow_id} | Dv Workflow Rerun Handler
@@ -330,6 +330,7 @@ All URIs are relative to *http://localhost:8000*
 *TenantsApi* | [**deleteTenantLogo**](docs/TenantsApi.md#deletetenantlogo) | **DELETE** /v1/tenants/{tenant_id}/branding/logo | Delete Tenant Logo
 *TenantsApi* | [**deleteTenantUser**](docs/TenantsApi.md#deletetenantuser) | **DELETE** /v1/tenants/{tenant_id}/users/{user_id} | Delete Tenant User Handler
 *TenantsApi* | [**getTenant**](docs/TenantsApi.md#gettenant) | **GET** /v1/tenants/{tenant_id} | Get Tenant
+*TenantsApi* | [**getTenantPlan**](docs/TenantsApi.md#gettenantplan) | **GET** /v1/tenants/{tenant_id}/plan | Get Tenant Plan Handler
 *TenantsApi* | [**getTenantQuotaState**](docs/TenantsApi.md#gettenantquotastate) | **GET** /v1/tenants/{tenant_id}/quota | Get Tenant Quota State Handler
 *TenantsApi* | [**listTenantUsers**](docs/TenantsApi.md#listtenantusers) | **GET** /v1/tenants/{tenant_id}/users | List Tenant Users
 *TenantsApi* | [**listTenants**](docs/TenantsApi.md#listtenants) | **GET** /v1/tenants | List Tenants
@@ -423,8 +424,7 @@ All URIs are relative to *http://localhost:8000*
 - [AskRequest](docs/AskRequest.md)
 - [AskResponse](docs/AskResponse.md)
 - [BillingInterval](docs/BillingInterval.md)
-- [BillingPaymentResponse](docs/BillingPaymentResponse.md)
-- [BillingSystem](docs/BillingSystem.md)
+- [BillingRedirectResponse](docs/BillingRedirectResponse.md)
 - [BlockChangeType](docs/BlockChangeType.md)
 - [BlockKind](docs/BlockKind.md)
 - [BrandingLogoType](docs/BrandingLogoType.md)
@@ -452,9 +452,6 @@ All URIs are relative to *http://localhost:8000*
 - [CellDiff](docs/CellDiff.md)
 - [ChangeClass](docs/ChangeClass.md)
 - [ChangePhoneNumberRequest](docs/ChangePhoneNumberRequest.md)
-- [ChangeSubscriptionRequest](docs/ChangeSubscriptionRequest.md)
-- [CheckoutAction](docs/CheckoutAction.md)
-- [CheckoutResponse](docs/CheckoutResponse.md)
 - [CheckpointDetails](docs/CheckpointDetails.md)
 - [ChunkBulkResponse](docs/ChunkBulkResponse.md)
 - [ChunkContentItem](docs/ChunkContentItem.md)
@@ -571,6 +568,11 @@ All URIs are relative to *http://localhost:8000*
 - [EmailVerificationRequest](docs/EmailVerificationRequest.md)
 - [EnrichedCitation](docs/EnrichedCitation.md)
 - [EnrichedThreadMessageContent](docs/EnrichedThreadMessageContent.md)
+- [EntitlementError](docs/EntitlementError.md)
+- [EntitlementKey](docs/EntitlementKey.md)
+- [EntitlementKind](docs/EntitlementKind.md)
+- [EntitlementQuotaStatus](docs/EntitlementQuotaStatus.md)
+- [EntitlementUsage](docs/EntitlementUsage.md)
 - [ErrorResponse](docs/ErrorResponse.md)
 - [EventResponse](docs/EventResponse.md)
 - [ExcludedCommonFile](docs/ExcludedCommonFile.md)
@@ -640,7 +642,6 @@ All URIs are relative to *http://localhost:8000*
 - [MemoryScope](docs/MemoryScope.md)
 - [MessageRole](docs/MessageRole.md)
 - [MessageUsage](docs/MessageUsage.md)
-- [MeteredQuotaStatus](docs/MeteredQuotaStatus.md)
 - [ModelTableRequest](docs/ModelTableRequest.md)
 - [ModelTableResult](docs/ModelTableResult.md)
 - [NetworkClass](docs/NetworkClass.md)
@@ -650,7 +651,6 @@ All URIs are relative to *http://localhost:8000*
 - [OnboardingStep](docs/OnboardingStep.md)
 - [PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat](docs/PaginatedResponseAnnotatedUnionFolderResponseDocumentResponseWorkflowDefinitionResponseWorkflowRunResponseDat.md)
 - [PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator](docs/PaginatedResponseAnnotatedUnionSectionContentItemChunkContentItemDiscriminator.md)
-- [PaginatedResponseBillingPaymentResponse](docs/PaginatedResponseBillingPaymentResponse.md)
 - [PaginatedResponseDocumentResponse](docs/PaginatedResponseDocumentResponse.md)
 - [PaginatedResponseDocumentVersionResponse](docs/PaginatedResponseDocumentVersionResponse.md)
 - [PaginatedResponseEmailMessageResponse](docs/PaginatedResponseEmailMessageResponse.md)
@@ -666,6 +666,7 @@ All URIs are relative to *http://localhost:8000*
 - [PaginatedResponsePathPartResponse](docs/PaginatedResponsePathPartResponse.md)
 - [PaginatedResponsePendingMemoryChunkResponse](docs/PaginatedResponsePendingMemoryChunkResponse.md)
 - [PaginatedResponsePermissionResponse](docs/PaginatedResponsePermissionResponse.md)
+- [PaginatedResponsePlanResponse](docs/PaginatedResponsePlanResponse.md)
 - [PaginatedResponseRepoVersionResponse](docs/PaginatedResponseRepoVersionResponse.md)
 - [PaginatedResponseSkillResponse](docs/PaginatedResponseSkillResponse.md)
 - [PaginatedResponseTagResponse](docs/PaginatedResponseTagResponse.md)
@@ -697,6 +698,10 @@ All URIs are relative to *http://localhost:8000*
 - [PipelineState](docs/PipelineState.md)
 - [PipelineStatus](docs/PipelineStatus.md)
 - [PixelRegion](docs/PixelRegion.md)
+- [PlanCheckoutRequest](docs/PlanCheckoutRequest.md)
+- [PlanEntitlementResponse](docs/PlanEntitlementResponse.md)
+- [PlanRef](docs/PlanRef.md)
+- [PlanResponse](docs/PlanResponse.md)
 - [Polygon](docs/Polygon.md)
 - [PolygonReference](docs/PolygonReference.md)
 - [ProposeMemoryChunkRequest](docs/ProposeMemoryChunkRequest.md)
@@ -712,6 +717,7 @@ All URIs are relative to *http://localhost:8000*
 - [RepoTreeResponse](docs/RepoTreeResponse.md)
 - [RepoVersionResponse](docs/RepoVersionResponse.md)
 - [RequestPhoneChangeRequest](docs/RequestPhoneChangeRequest.md)
+- [ResetPeriod](docs/ResetPeriod.md)
 - [ResolvedRef](docs/ResolvedRef.md)
 - [ResolvedReferenceInput](docs/ResolvedReferenceInput.md)
 - [ResolvedReferenceOutput](docs/ResolvedReferenceOutput.md)
@@ -764,7 +770,6 @@ All URIs are relative to *http://localhost:8000*
 - [StructuredChangeType](docs/StructuredChangeType.md)
 - [StructuredDiff](docs/StructuredDiff.md)
 - [SubmitFeedbackRequest](docs/SubmitFeedbackRequest.md)
-- [SubscriptionPlanResponse](docs/SubscriptionPlanResponse.md)
 - [SubtreeChunkGroup](docs/SubtreeChunkGroup.md)
 - [SubtreeChunksResponse](docs/SubtreeChunksResponse.md)
 - [SupportedIdP](docs/SupportedIdP.md)
@@ -776,11 +781,11 @@ All URIs are relative to *http://localhost:8000*
 - [TemporalWorkflowStatusResponse](docs/TemporalWorkflowStatusResponse.md)
 - [TenantBrandingResponse](docs/TenantBrandingResponse.md)
 - [TenantGroupOrder](docs/TenantGroupOrder.md)
-- [TenantQuotaStateResponse](docs/TenantQuotaStateResponse.md)
+- [TenantPlanResponse](docs/TenantPlanResponse.md)
+- [TenantQuotaResponse](docs/TenantQuotaResponse.md)
 - [TenantResponse](docs/TenantResponse.md)
 - [TenantSettingsResponse](docs/TenantSettingsResponse.md)
 - [TenantSettingsUpdate](docs/TenantSettingsUpdate.md)
-- [TenantSubscriptionResponse](docs/TenantSubscriptionResponse.md)
 - [TenantUserEditRequest](docs/TenantUserEditRequest.md)
 - [TenantUserJoinMethod](docs/TenantUserJoinMethod.md)
 - [TenantUserOrder](docs/TenantUserOrder.md)
@@ -801,6 +806,7 @@ All URIs are relative to *http://localhost:8000*
 - [ToolDisplayType](docs/ToolDisplayType.md)
 - [ToolPart](docs/ToolPart.md)
 - [ToolStatus](docs/ToolStatus.md)
+- [TopupCheckoutRequest](docs/TopupCheckoutRequest.md)
 - [TraceKind](docs/TraceKind.md)
 - [TranscriptionResponse](docs/TranscriptionResponse.md)
 - [TransferOwnerRequest](docs/TransferOwnerRequest.md)
@@ -834,7 +840,6 @@ All URIs are relative to *http://localhost:8000*
 - [UploadFormat](docs/UploadFormat.md)
 - [UploadPartResponse](docs/UploadPartResponse.md)
 - [UploadStatusResponse](docs/UploadStatusResponse.md)
-- [UsageMetric](docs/UsageMetric.md)
 - [UserInfo](docs/UserInfo.md)
 - [UserMessageRequest](docs/UserMessageRequest.md)
 - [UserMessageResponse](docs/UserMessageResponse.md)
@@ -897,7 +902,7 @@ and is automatically generated by the
 [OpenAPI Generator](https://openapi-generator.tech) project:
 
 - API version: `0.1.0`
-- Package version: `3.29.1`
+- Package version: `3.30.0`
 - Generator version: `7.26.0`
 - Build package: `org.openapitools.codegen.languages.TypeScriptFetchClientCodegen`
 

@@ -1,7 +1,7 @@
 
 # SearchablePartType
 
-Part types that can be searched.  The same members as ``BROWSEABLE_PART_TYPES``, spelled out rather than derived: FastAPI needs a real enum to put the choices in the contract, and a dynamically built one would come out of the SDK generator unordered. The two lists are pinned equal by ``tests/agent/tools/test_browse.py::test_listable_kinds_match_api_enum`` — adding a part type here without adding it there (or the reverse) fails that test rather than silently dropping a type from search, which is how API_CONNECTION was lost once.
+Part types that can be searched.  The same members as ``BROWSEABLE_PART_TYPES``, spelled out rather than derived: FastAPI needs a real enum to put the choices in the contract, and a dynamically built one would come out of the SDK generator unordered. The two lists are pinned equal by ``tests/unit/agent/tools/test_browse.py::test_listable_kinds_match_api_enum`` — adding a part type here without adding it there (or the reverse) fails that test rather than silently dropping a type from search, which is how API_CONNECTION was lost once.
 
 ## Properties
 

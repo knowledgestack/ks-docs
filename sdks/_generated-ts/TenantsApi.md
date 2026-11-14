@@ -182,7 +182,7 @@ example().catch(console.error);
 
 Delete Tenant
 
-Delete a tenant.  Requires OWNER role in the tenant. Refused (409) while a provider subscription is live; the OWNER cancels it in the billing portal first. Deletes the tenant\&#39;s LiteLLM team/keys and S3 bucket after the delete commits.
+Delete a tenant.  Requires OWNER role in the tenant. Refused (409) while a provider subscription is live; the OWNER cancels it in the billing portal first. After the delete commits, stops the tenant\&#39;s running workflows, removes its schedules, purges its search points and deletes its LiteLLM team/keys and S3 bucket.
 
 ### Example
 

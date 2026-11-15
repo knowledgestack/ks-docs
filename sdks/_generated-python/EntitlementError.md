@@ -1,6 +1,6 @@
 # EntitlementError
 
-The entitlement that refused a request, so a client can show or buy what it needs.  ``quota_exceeded`` (429) fills ``included``, ``additional`` and ``period_end``; ``feature_not_available`` (403) fills ``granted_by``.
+The entitlement that refused a request, so a client can show or buy what it needs.  ``quota_exceeded`` (429) fills ``included``, ``additional`` and ``period_end``, and ``rate_limit`` when a rate limit refused it; ``feature_not_available`` (403) fills ``granted_by``.
 
 ## Properties
 
@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **included** | [**EntitlementUsage**](EntitlementUsage.md) | The plan allowance this period. | [optional] 
 **additional** | [**EntitlementUsage**](EntitlementUsage.md) | Purchased top-up units: used this period and held. | [optional] 
 **period_end** | **datetime** | When the plan allowance resets. | [optional] 
+**rate_limit** | [**RateLimitUsage**](RateLimitUsage.md) | The rate limit that held back the plan allowance, when it, not the allowance or top-ups, refused; retryable at its resets_at. | [optional] 
 
 ## Example
 

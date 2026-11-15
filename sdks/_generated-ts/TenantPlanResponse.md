@@ -10,6 +10,7 @@ Name | Type
 `planId` | string
 `planName` | string
 `entitlements` | [Array&lt;PlanEntitlementResponse&gt;](PlanEntitlementResponse.md)
+`featuresNotIncluded` | [Array&lt;EntitlementDefinitionResponse&gt;](EntitlementDefinitionResponse.md)
 `numSeats` | number
 `validFrom` | Date
 `validUntil` | Date
@@ -25,6 +26,7 @@ const example = {
   "planId": null,
   "planName": null,
   "entitlements": null,
+  "featuresNotIncluded": null,
   "numSeats": null,
   "validFrom": null,
   "validUntil": null,

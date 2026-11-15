@@ -12,7 +12,8 @@ Name | Type
 `kind` | [EntitlementKind](EntitlementKind.md)
 `limit` | number
 `seatScaled` | boolean
-`resetPeriod` | [ResetPeriod](ResetPeriod.md)
+`resetInterval` | string
+`rateLimits` | [Array&lt;RateLimit&gt;](RateLimit.md)
 
 ## Example
 
@@ -26,7 +27,8 @@ const example = {
   "kind": null,
   "limit": null,
   "seatScaled": null,
-  "resetPeriod": null,
+  "resetInterval": P1M,
+  "rateLimits": null,
 } satisfies PlanEntitlementResponse
 
 console.log(example)

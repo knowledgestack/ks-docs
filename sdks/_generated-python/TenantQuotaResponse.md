@@ -1,6 +1,6 @@
 # TenantQuotaResponse
 
-The tenant's metered entitlements and seats under the plan in force.
+The tenant's metered entitlements, seats and runs in progress under the plan in force.
 
 ## Properties
 
@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **entitlements** | [**List[EntitlementQuotaStatus]**](EntitlementQuotaStatus.md) | One entry per metered entitlement key, ordered by key | 
 **seats** | [**SeatQuotaStatus**](SeatQuotaStatus.md) |  | 
+**runs_in_progress** | [**RunsInProgressStatus**](RunsInProgressStatus.md) |  | 
 
 ## Example
 

@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **additional_balance** | **int** | Purchased top-up units still held, spent after the allowance. | 
 **period_start** | **datetime** | Window start (UTC); null when not granted. | 
 **period_end** | **datetime** | Window end (UTC); null when not granted. | 
+**rate_limits** | [**List[RateLimitUsage]**](RateLimitUsage.md) | How fast the allowance may be spent, shortest interval first. A per-user limit reports the reader&#39;s own spend; read for no user, it is left out. | 
 
 ## Example
 

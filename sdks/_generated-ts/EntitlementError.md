@@ -1,7 +1,7 @@
 
 # EntitlementError
 
-The entitlement that refused a request, so a client can show or buy what it needs.  ``quota_exceeded`` (429) fills ``included``, ``additional`` and ``period_end``; ``feature_not_available`` (403) fills ``granted_by``.
+The entitlement that refused a request, so a client can show or buy what it needs.  ``quota_exceeded`` (429) fills ``included``, ``additional`` and ``period_end``, and ``rate_limit`` when a rate limit refused it; ``feature_not_available`` (403) fills ``granted_by``.
 
 ## Properties
 
@@ -14,6 +14,7 @@ Name | Type
 `included` | [EntitlementUsage](EntitlementUsage.md)
 `additional` | [EntitlementUsage](EntitlementUsage.md)
 `periodEnd` | Date
+`rateLimit` | [RateLimitUsage](RateLimitUsage.md)
 
 ## Example
 
@@ -29,6 +30,7 @@ const example = {
   "included": null,
   "additional": null,
   "periodEnd": null,
+  "rateLimit": null,
 } satisfies EntitlementError
 
 console.log(example)

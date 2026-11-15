@@ -15,6 +15,7 @@ Name | Type
 `additionalBalance` | number
 `periodStart` | Date
 `periodEnd` | Date
+`rateLimits` | [Array&lt;RateLimitUsage&gt;](RateLimitUsage.md)
 
 ## Example
 
@@ -31,6 +32,7 @@ const example = {
   "additionalBalance": null,
   "periodStart": null,
   "periodEnd": null,
+  "rateLimits": null,
 } satisfies EntitlementQuotaStatus
 
 console.log(example)

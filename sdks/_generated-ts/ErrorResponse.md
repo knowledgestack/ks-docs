@@ -11,6 +11,8 @@ Name | Type
 `code` | string
 `requestId` | string
 `entitlement` | [EntitlementError](EntitlementError.md)
+`seats` | [SeatsError](SeatsError.md)
+`scheduledChange` | [ScheduledChange](ScheduledChange.md)
 
 ## Example
 
@@ -23,6 +25,8 @@ const example = {
   "code": null,
   "requestId": null,
   "entitlement": null,
+  "seats": null,
+  "scheduledChange": null,
 } satisfies ErrorResponse
 
 console.log(example)

@@ -38,6 +38,8 @@ Natural key of ``knowledgestack.entitlement_definition``.  ``toggle.*`` is switc
 
 * `METER_DOT_WORKFLOWS_DOT_RUN` (value: `'meter.workflows.run'`)
 
+* `METER_DOT_WORKFLOWS_DOT_CONCURRENT_RUNS` (value: `'meter.workflows.concurrent_runs'`)
+
 * `METER_DOT_TENANT_DOT_SEATS` (value: `'meter.tenant.seats'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

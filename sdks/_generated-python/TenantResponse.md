@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **idp_config** | **Dict[str, object]** | External IdP configuration | [optional] 
 **settings** | [**TenantSettingsResponse**](TenantSettingsResponse.md) |  | 
 **branding** | [**TenantBrandingResponse**](TenantBrandingResponse.md) |  | [optional] 
-**num_seats** | **int** | Seats sold under the plan in force, one once a lapsed plan&#39;s grace ran out: the multiplier of seat-scaled allowances. The member cap is the plan&#39;s seat limit. | 
+**num_seats** | **int** | Seats held under the plan in force, one once a lapsed plan&#39;s grace ran out: the most active members, and the multiplier of seat-scaled allowances. Bounded by the plan&#39;s seat limit when bought; at most 10000. | 
 **plan_id** | **UUID** | The plan in force (a plan_definition id): free once a lapsed plan&#39;s renewal grace ran out. | 
 
 ## Example

@@ -1,21 +1,27 @@
 
-# ResetPeriod
+# SeatsError
 
-How often a plan\'s periodic allowance is re-granted (not the billing interval).  Every allowance resets monthly; ``daily`` and ``weekly`` stay only as labels of the database type, which the plan writers refuse.
+The seats a purchase or plan change asked for, and what refused them.
 
 ## Properties
 
 Name | Type
 ------------ | -------------
+`asked` | number
+`members` | number
+`planLimit` | number
 
 ## Example
 
 ```typescript
-import type { ResetPeriod } from '@knowledge-stack/ksapi'
+import type { SeatsError } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
-} satisfies ResetPeriod
+  "asked": null,
+  "members": null,
+  "planLimit": null,
+} satisfies SeatsError
 
 console.log(example)
 
@@ -24,7 +30,7 @@ const exampleJSON: string = JSON.stringify(example)
 console.log(exampleJSON)
 
 // Parse the JSON string back to an object
-const exampleParsed = JSON.parse(exampleJSON) as ResetPeriod
+const exampleParsed = JSON.parse(exampleJSON) as SeatsError
 console.log(exampleParsed)
 ```
 

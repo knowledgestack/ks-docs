@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **plan_id** | **UUID** | The current plan (a plan_definition id). | 
 **plan_name** | **str** | The current plan&#39;s name. | 
 **entitlements** | [**List[PlanEntitlementResponse]**](PlanEntitlementResponse.md) | What the plan grants, public or private; a key it does not grant is absent. | 
-**num_seats** | **int** | Seats sold under the plan in force, one once a lapsed plan&#39;s grace ran out: the multiplier of seat-scaled allowances. The member cap is the plan&#39;s seat limit. | 
+**features_not_included** | [**List[EntitlementDefinitionResponse]**](EntitlementDefinitionResponse.md) | The features (toggles) the plan does not grant, by key, so a user can see what to ask an operator for. | 
+**num_seats** | **int** | Seats held under the plan in force, one once a lapsed plan&#39;s grace ran out: the most active members, and the multiplier of seat-scaled allowances. Bounded by the plan&#39;s seat limit when bought; at most 10000. | 
 **valid_from** | **datetime** | When the current plan&#39;s window began. | 
 **valid_until** | **datetime** | When the current plan&#39;s window ends. | 
 **billed** | **bool** | True when a billing subscription sets this plan: change it with the provider, not here. | 

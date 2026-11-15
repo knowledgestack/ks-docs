@@ -1,7 +1,7 @@
 
 # TenantQuotaResponse
 
-The tenant\'s metered entitlements and seats under the plan in force.
+The tenant\'s metered entitlements, seats and runs in progress under the plan in force.
 
 ## Properties
 
@@ -9,6 +9,7 @@ Name | Type
 ------------ | -------------
 `entitlements` | [Array&lt;EntitlementQuotaStatus&gt;](EntitlementQuotaStatus.md)
 `seats` | [SeatQuotaStatus](SeatQuotaStatus.md)
+`runsInProgress` | [RunsInProgressStatus](RunsInProgressStatus.md)
 
 ## Example
 
@@ -19,6 +20,7 @@ import type { TenantQuotaResponse } from '@knowledge-stack/ksapi'
 const example = {
   "entitlements": null,
   "seats": null,
+  "runsInProgress": null,
 } satisfies TenantQuotaResponse
 
 console.log(example)

@@ -10,6 +10,8 @@ Why a single item in a bulk operation was not applied.  Every value is produced 
 
 * `SYSTEM_MANAGED` (value: `'system_managed'`)
 
+* `MANAGED_PATH` (value: `'managed_path'`)
+
 * `SUBSUMED` (value: `'subsumed'`)
 
 * `CYCLE` (value: `'cycle'`)

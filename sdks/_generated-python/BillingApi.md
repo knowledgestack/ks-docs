@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost:8000*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_billing_portal**](BillingApi.md#create_billing_portal) | **POST** /v1/tenants/{tenant_id}/billing/portal | Create Billing Portal Handler
+[**create_plan_change**](BillingApi.md#create_plan_change) | **POST** /v1/tenants/{tenant_id}/billing/plan-change | Create Plan Change Handler
 [**create_plan_checkout**](BillingApi.md#create_plan_checkout) | **POST** /v1/tenants/{tenant_id}/billing/checkout | Create Plan Checkout Handler
 [**create_topup_checkout**](BillingApi.md#create_topup_checkout) | **POST** /v1/tenants/{tenant_id}/billing/topups | Create Topup Checkout Handler
 [**list_plans**](BillingApi.md#list_plans) | **GET** /v1/plans | List Plans Handler
@@ -17,7 +18,7 @@ Method | HTTP request | Description
 
 Create Billing Portal Handler
 
-The provider's billing portal (OWNER): change plan or seats, cancel, invoices.
+The provider's billing portal (OWNER): payment method, invoices, cancellation.
 
 ### Example
 
@@ -99,6 +100,105 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **create_plan_change**
+> BillingRedirectResponse create_plan_change(tenant_id, plan_change_request)
+
+**Synchronous variant:** `create_plan_change_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
+Create Plan Change Handler
+
+The provider's page to confirm a new plan or seat count for a subscriber (OWNER).
+
+A decrease takes effect at the period end. Refused with 409 when the
+workspace has more active members than ``num_seats`` (remove or deactivate
+members first), no subscription (subscribe through checkout), one that
+already has this plan and seat count, or one with a change already
+scheduled (the refusal names it); 400 above the plan's seat limit; 404 for
+a plan that cannot be bought; 500 for a plan the provider has no price for.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.billing_redirect_response import BillingRedirectResponse
+from ksapi.models.plan_change_request import PlanChangeRequest
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.BillingApi(api_client)
+    tenant_id = UUID('38400000-8cf0-11bd-b23e-10b96e4ef00d') # UUID | 
+    plan_change_request = ksapi.PlanChangeRequest() # PlanChangeRequest | 
+
+    try:
+        # Create Plan Change Handler
+        api_response = await api_instance.create_plan_change(tenant_id, plan_change_request)
+        print("The response of BillingApi->create_plan_change:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling BillingApi->create_plan_change: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **tenant_id** | **UUID**|  | 
+ **plan_change_request** | [**PlanChangeRequest**](PlanChangeRequest.md)|  | 
+
+### Return type
+
+[**BillingRedirectResponse**](BillingRedirectResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **create_plan_checkout**
 > BillingRedirectResponse create_plan_checkout(tenant_id, plan_checkout_request)
 
@@ -106,7 +206,9 @@ Name | Type | Description  | Notes
 
 Create Plan Checkout Handler
 
-Hosted checkout for a public plan (OWNER). A subscriber uses the portal.
+Hosted checkout for a public plan (OWNER); a subscriber changes plan instead.
+
+Refused (409) for fewer seats than the workspace's active members.
 
 ### Example
 

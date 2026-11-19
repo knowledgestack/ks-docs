@@ -9,6 +9,7 @@ Name | Type
 ------------ | -------------
 `status` | string
 `error` | string
+`failureCode` | [RunFailureCode](RunFailureCode.md)
 
 ## Example
 
@@ -19,6 +20,7 @@ import type { WorkflowRunCallbackRequest } from '@knowledge-stack/ksapi'
 const example = {
   "status": null,
   "error": null,
+  "failureCode": null,
 } satisfies WorkflowRunCallbackRequest
 
 console.log(example)

@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **status** | **str** |  | 
 **error** | **str** |  | [optional] 
+**failure_code** | [**RunFailureCode**](RunFailureCode.md) |  | [optional] 
 
 ## Example
 

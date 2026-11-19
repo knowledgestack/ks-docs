@@ -48,6 +48,7 @@ Name | Type
 `completedAt` | Date
 `runSnapshot` | [WorkflowRunSnapshot](WorkflowRunSnapshot.md)
 `error` | string
+`failureCode` | [RunFailureCode](RunFailureCode.md)
 `autoStart` | boolean
 `autoStartUserMessage` | string
 `inputs` | [RunFolder](RunFolder.md)
@@ -151,6 +152,7 @@ const example = {
   "completedAt": null,
   "runSnapshot": null,
   "error": null,
+  "failureCode": null,
   "autoStart": null,
   "autoStartUserMessage": null,
   "inputs": null,

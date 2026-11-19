@@ -156,7 +156,7 @@ example().catch(console.error);
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **targetType** | `FeedbackTargetType` |  | [Optional] [Defaults to `undefined`] [Enum: THREAD, MESSAGE, DOCUMENT, DOCUMENT_VERSION, CHUNK] |
+| **targetType** | `FeedbackTargetType` |  | [Optional] [Defaults to `undefined`] [Enum: THREAD, MESSAGE, DOCUMENT, DOCUMENT_VERSION, CHUNK, WORKFLOW_RUN] |
 | **targetId** | `Array<string>` | Repeatable. Feedback on any of these targets, so a thread page reads every visible message\&#39;s feedback in one call; more than 200 ids is a 422 (send the page you render, not the thread). | [Optional] |
 | **rating** | `FeedbackRating` |  | [Optional] [Defaults to `undefined`] [Enum: UP, DOWN] |
 | **mine** | `boolean` | Only the caller\&#39;s own feedback, whatever their role, so an owner or admin reading a thread sees their own vote on each message. | [Optional] [Defaults to `false`] |

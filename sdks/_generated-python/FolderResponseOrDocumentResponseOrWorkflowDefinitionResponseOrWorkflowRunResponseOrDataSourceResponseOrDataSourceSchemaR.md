@@ -47,6 +47,7 @@ Name | Type | Description | Notes
 **completed_at** | **datetime** |  | 
 **run_snapshot** | [**WorkflowRunSnapshot**](WorkflowRunSnapshot.md) | Frozen workflow configuration captured at Start time. NULL while the run is NOT_STARTED. | 
 **error** | **str** |  | 
+**failure_code** | [**RunFailureCode**](RunFailureCode.md) |  | [optional] 
 **auto_start** | **bool** | Whether the run dispatches itself once its &#x60;&#x60;inputs/&#x60;&#x60; uploads finish ingesting, with no separate Start call. | 
 **auto_start_user_message** | **str** | The note applied when this run auto-starts (set via create / PATCH &#x60;&#x60;user_message&#x60;&#x60;); null when none was supplied. | [optional] 
 **inputs** | [**RunFolder**](RunFolder.md) |  | 

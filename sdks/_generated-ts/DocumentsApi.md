@@ -16,6 +16,7 @@ All URIs are relative to *http://localhost:8000*
 | [**ingestDocumentVersion**](DocumentsApi.md#ingestdocumentversion) | **POST** /v1/documents/{document_id}/ingest | Ingest Document Version Handler |
 | [**ingestZip**](DocumentsApi.md#ingestzip) | **POST** /v1/documents/ingest-zip | Ingest Zip Handler |
 | [**listDocuments**](DocumentsApi.md#listdocuments) | **GET** /v1/documents | List Documents Handler |
+| [**listRecentDocuments**](DocumentsApi.md#listrecentdocuments) | **GET** /v1/documents/recent | List Recent Documents Handler |
 | [**updateDocument**](DocumentsApi.md#updatedocumentoperation) | **PATCH** /v1/documents/{document_id} | Update Document Handler |
 | [**uploadDocumentPart**](DocumentsApi.md#uploaddocumentpart) | **PUT** /v1/documents/uploads/parts/{part_number} | Upload Document Part Handler |
 
@@ -1003,6 +1004,81 @@ example().catch(console.error);
 ### Return type
 
 [**PaginatedResponseDocumentResponse**](PaginatedResponseDocumentResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `application/json`
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#api-endpoints) [[Back to Model list]](../README.md#models) [[Back to README]](../README.md)
+
+
+## listRecentDocuments
+
+> Array&lt;RecentDocumentResponse&gt; listRecentDocuments(limit)
+
+List Recent Documents Handler
+
+Newest readable documents whose active version finished ingesting, with a section title.
+
+### Example
+
+```ts
+import {
+  Configuration,
+  DocumentsApi,
+} from '@knowledge-stack/ksapi';
+import type { ListRecentDocumentsRequest } from '@knowledge-stack/ksapi';
+
+async function example() {
+  console.log("🚀 Testing @knowledge-stack/ksapi SDK...");
+  const config = new Configuration({ 
+    // To configure API key authorization: cookieAuth
+    apiKey: "YOUR API KEY",
+    // Configure HTTP bearer authorization: bearerAuth
+    accessToken: "YOUR BEARER TOKEN",
+  });
+  const api = new DocumentsApi(config);
+
+  const body = {
+    // number | 1 to 10 (optional)
+    limit: 56,
+  } satisfies ListRecentDocumentsRequest;
+
+  try {
+    const data = await api.listRecentDocuments(body);
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Run the test
+example().catch(console.error);
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **limit** | `number` | 1 to 10 | [Optional] [Defaults to `3`] |
+
+### Return type
+
+[**Array&lt;RecentDocumentResponse&gt;**](RecentDocumentResponse.md)
 
 ### Authorization
 

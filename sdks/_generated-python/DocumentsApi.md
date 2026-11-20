@@ -16,6 +16,7 @@ Method | HTTP request | Description
 [**ingest_document_version**](DocumentsApi.md#ingest_document_version) | **POST** /v1/documents/{document_id}/ingest | Ingest Document Version Handler
 [**ingest_zip**](DocumentsApi.md#ingest_zip) | **POST** /v1/documents/ingest-zip | Ingest Zip Handler
 [**list_documents**](DocumentsApi.md#list_documents) | **GET** /v1/documents | List Documents Handler
+[**list_recent_documents**](DocumentsApi.md#list_recent_documents) | **GET** /v1/documents/recent | List Recent Documents Handler
 [**update_document**](DocumentsApi.md#update_document) | **PATCH** /v1/documents/{document_id} | Update Document Handler
 [**upload_document_part**](DocumentsApi.md#upload_document_part) | **PUT** /v1/documents/uploads/parts/{part_number} | Upload Document Part Handler
 
@@ -1202,6 +1203,95 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**PaginatedResponseDocumentResponse**](PaginatedResponseDocumentResponse.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**0** | Error response. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **list_recent_documents**
+> List[RecentDocumentResponse] list_recent_documents(limit=limit)
+
+**Synchronous variant:** `list_recent_documents_sync(...)` — same parameters and return type, but blocks until completion instead of requiring `await`.
+
+List Recent Documents Handler
+
+Newest readable documents whose active version finished ingesting, with a section title.
+
+### Example
+
+* Api Key Authentication (cookieAuth):
+* Bearer Authentication (bearerAuth):
+
+```python
+import ksapi
+from ksapi.models.recent_document_response import RecentDocumentResponse
+from ksapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost:8000
+# See configuration.py for a list of all supported configuration parameters.
+configuration = ksapi.Configuration(
+    host = "http://localhost:8000"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookieAuth
+configuration.api_key['cookieAuth'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookieAuth'] = 'Bearer'
+
+# Configure Bearer authorization: bearerAuth
+configuration = ksapi.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+async with ksapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = ksapi.DocumentsApi(api_client)
+    limit = 3 # int | 1 to 10 (optional) (default to 3)
+
+    try:
+        # List Recent Documents Handler
+        api_response = await api_instance.list_recent_documents(limit=limit)
+        print("The response of DocumentsApi->list_recent_documents:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling DocumentsApi->list_recent_documents: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **limit** | **int**| 1 to 10 | [optional] [default to 3]
+
+### Return type
+
+[**List[RecentDocumentResponse]**](RecentDocumentResponse.md)
 
 ### Authorization
 

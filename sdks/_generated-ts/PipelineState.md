@@ -7,6 +7,7 @@ Pipeline execution state tracking.
 
 Name | Type
 ------------ | -------------
+`contentReadyAt` | Date
 `lastStageRetryAttempt` | number
 `status` | [PipelineStatus](PipelineStatus.md)
 `lastRunTimestamp` | Date
@@ -27,6 +28,7 @@ import type { PipelineState } from '@knowledge-stack/ksapi'
 
 // TODO: Update the object below with actual values
 const example = {
+  "contentReadyAt": null,
   "lastStageRetryAttempt": null,
   "status": null,
   "lastRunTimestamp": null,

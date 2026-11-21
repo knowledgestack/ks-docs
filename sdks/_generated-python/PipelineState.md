@@ -6,6 +6,7 @@ Pipeline execution state tracking.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**content_ready_at** | **datetime** | When ingestion published fully enriched content for workflow use; indexing may still be running. Managed by ingestion. | [optional] [readonly] 
 **last_stage_retry_attempt** | **int** | Zero-based retry count for the current stage; maximum across fan-out activities. Managed by ingestion. | [optional] [readonly] [default to 0]
 **status** | [**PipelineStatus**](PipelineStatus.md) |  | 
 **last_run_timestamp** | **datetime** | Timestamp of the last pipeline execution attempt (set once when a run starts) | [optional] 

@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **service** | **str** |  | [optional] [default to 'Knowledge Stack API']
 **docs** | **str** |  | [optional] [default to '/api/docs']
+**version** | **str** | API build version. | [optional] [default to 'development']
+**git_sha** | **str** | Short Git commit SHA. | [optional] 
 
 ## Example
 

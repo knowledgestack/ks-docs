@@ -8,6 +8,8 @@ Name | Type
 ------------ | -------------
 `service` | string
 `docs` | string
+`version` | string
+`gitSha` | string
 
 ## Example
 
@@ -18,6 +20,8 @@ import type { RootResponse } from '@knowledge-stack/ksapi'
 const example = {
   "service": null,
   "docs": null,
+  "version": null,
+  "gitSha": null,
 } satisfies RootResponse
 
 console.log(example)

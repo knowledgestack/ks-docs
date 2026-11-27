@@ -10,6 +10,8 @@ Sortable fields for workflow-definition listings.
 
 * `NAME` (value: `'NAME'`)
 
+* `LAST_RUN` (value: `'LAST_RUN'`)
+
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
 

@@ -481,7 +481,7 @@ example().catch(console.error);
 |------------- | ------------- | ------------- | -------------|
 | **mine** | `boolean` | Only definitions the caller created (owner). | [Optional] [Defaults to `false`] |
 | **search** | `string` | Case-insensitive substring over name and description. | [Optional] [Defaults to `undefined`] |
-| **sortBy** | `WorkflowDefinitionOrder` | Field to sort definitions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, UPDATED_AT, NAME] |
+| **sortBy** | `WorkflowDefinitionOrder` | Field to sort definitions by (default: CREATED_AT) | [Optional] [Defaults to `undefined`] [Enum: CREATED_AT, UPDATED_AT, NAME, LAST_RUN] |
 | **isTemplate** | `boolean` |  | [Optional] [Defaults to `false`] |
 | **needsApproval** | `boolean` | Only definitions with a run awaiting approval. | [Optional] [Defaults to `false`] |
 | **limit** | `number` | Number of items per page | [Optional] [Defaults to `20`] |

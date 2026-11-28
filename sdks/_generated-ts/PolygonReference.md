@@ -9,6 +9,8 @@ Name | Type
 ------------ | -------------
 `page` | number
 `polygon` | [Polygon](Polygon.md)
+`startChar` | number
+`length` | number
 
 ## Example
 
@@ -19,6 +21,8 @@ import type { PolygonReference } from '@knowledge-stack/ksapi'
 const example = {
   "page": null,
   "polygon": null,
+  "startChar": null,
+  "length": null,
 } satisfies PolygonReference
 
 console.log(example)

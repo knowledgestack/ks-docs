@@ -1,6 +1,6 @@
 # DocumentVersionMetadataUpdate
 
-Partial update schema for document version metadata.  All fields are optional.  Only non-``None`` fields are merged into the existing metadata dict.
+Partial update schema for document version metadata.  All fields are optional. Only non-``None`` fields are merged into the existing metadata dict. An explicit null for searchable_preview_s3 clears the preview.
 
 ## Properties
 
@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **cleaned_source_s3** | **str** |  | [optional] 
 **preconversion_source_s3** | **str** |  | [optional] 
 **cited_source_s3** | **str** |  | [optional] 
+**searchable_preview_s3** | **str** |  | [optional] 
 **standard_pipeline_json_s3** | **str** |  | [optional] 
 **fast_plaintext_s3** | **str** |  | [optional] 
 **transcript_s3** | **str** |  | [optional] 

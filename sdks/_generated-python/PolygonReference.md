@@ -8,6 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **page** | **int** | The page number of the source document where the polygon is located. | 
 **polygon** | [**Polygon**](Polygon.md) |  | 
+**start_char** | **int** | Zero-based Unicode code-point start of this region&#39;s text in canonical chunk content | [optional] 
+**length** | **int** | Length of this region&#39;s text in Unicode code points. Absent with start_char for unmapped geometry | [optional] 
 
 ## Example
 

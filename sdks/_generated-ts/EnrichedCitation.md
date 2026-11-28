@@ -14,6 +14,11 @@ Name | Type
 `quote` | string
 `startChar` | number
 `length` | number
+`sourceMarker` | string
+`resolution` | string
+`endChunkId` | string
+`endChar` | number
+`selectionHash` | string
 `startMs` | number
 `endMs` | number
 `documentId` | string
@@ -36,6 +41,11 @@ const example = {
   "quote": null,
   "startChar": null,
   "length": null,
+  "sourceMarker": null,
+  "resolution": null,
+  "endChunkId": null,
+  "endChar": null,
+  "selectionHash": null,
   "startMs": null,
   "endMs": null,
   "documentId": null,

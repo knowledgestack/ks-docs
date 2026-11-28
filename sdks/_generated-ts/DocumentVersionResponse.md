@@ -19,6 +19,7 @@ Name | Type
 `createdAt` | Date
 `updatedAt` | Date
 `assetS3Url` | string
+`searchablePreviewUrl` | string
 `citedAssetS3Url` | string
 `fastPlaintextUrl` | string
 `transcriptUrl` | string
@@ -44,6 +45,7 @@ const example = {
   "createdAt": null,
   "updatedAt": null,
   "assetS3Url": null,
+  "searchablePreviewUrl": null,
   "citedAssetS3Url": null,
   "fastPlaintextUrl": null,
   "transcriptUrl": null,

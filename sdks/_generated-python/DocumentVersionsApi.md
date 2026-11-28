@@ -994,8 +994,9 @@ Update Document Version Metadata Handler
 
 Merge metadata fields into an existing document version's metadata.
 
-Only non-null fields in the request body are merged; existing metadata
-fields not present in the request are preserved.
+Non-null fields in the request body are merged. Existing metadata
+fields absent from the request are preserved. An explicit null for
+searchable_preview_s3 clears the preview.
 
 When this PATCH settles an ``inputs/`` upload's ingestion (an
 in-progress pipeline reaching a terminal state), it drives the parent
